@@ -5,6 +5,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import Layout from '../components/layout'
 import { Container } from 'sancho'
+import { withRouter } from 'next/router'
 
 const Content = styled.div`
   max-width: 720px;
@@ -107,7 +108,7 @@ const Post = props => {
   console.log(props)
   const post = props.post
   return (
-    <Layout tab={props.url.query.tab}>
+    <Layout tab={props.router.query.tab}>
       <Container>
         <Content>
           <h1>{post.title}</h1>
@@ -131,4 +132,4 @@ Post.getInitialProps = async props => {
   }
 }
 
-export default Post
+export default withRouter(Post)
