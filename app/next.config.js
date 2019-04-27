@@ -1,7 +1,13 @@
-module.exports = {
+const withTypescript = require('@zeit/next-typescript')
+
+module.exports = withTypescript({
   env: {
-    WP_HOST: process.env.WP_HOST
+    WP_HOST: process.env.WP_HOST,
+    API_KEY: process.env.API_KEY,
+    AUTH_DOMAIN: process.env.AUTH_DOMAIN,
+    DATABASE_URL: process.env.DATABASE_URL,
+    PROJECT_ID: process.env.PROJECT_ID
   },
   target: 'serverless',
   distDir: '../dist/functions/next'
-}
+})
