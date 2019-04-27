@@ -44,7 +44,7 @@ const Index = (props: any) => {
       <List>
         {books.map((book: any) => {
           return (
-            <Link href={`/post?id=${book.id}`} key={book.id} passHref>
+            <Link href={`/books/book?id=${book.id}`} key={book.id} passHref>
               <ListItem
                 wrap={false}
                 primary={book.title}

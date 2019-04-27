@@ -1,12 +1,7 @@
-import Link from 'next/link'
-
 import { firestore } from 'firebase'
 
 import {
-  List,
-  ListItem,
   Button,
-  IconChevronRight,
   InputGroup,
   Input,
   TextArea,
@@ -14,23 +9,20 @@ import {
 } from 'sancho'
 import Layout from '../../components/layout'
 import router, { withRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-interface Book {
-  id: string
-  title: string
-}
+// interface Book {
+//   id: string
+//   title: string
+// }
 
-const Index = (props: any) => {
-  const [posts, setPosts] = useState<Book[]>([])
-
+const BooksNew = (props: any) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
-
         <form onSubmit={(event) => {
           const db = firestore()
           db.collection("books").add({
@@ -61,4 +53,4 @@ const Index = (props: any) => {
   )
 }
 
-export default withRouter(Index)
+export default withRouter(BooksNew)
