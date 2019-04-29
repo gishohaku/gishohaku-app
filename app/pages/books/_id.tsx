@@ -109,30 +109,48 @@ interface Book {
 }
 
 const Post = (props: any) => {
-  const [post, setPost] = useState<Book>()
+  console.log(props)
+  const [post, setPost] = useState<Book>(props.book)
 
   useEffect(() => {
-    const db = firebase.firestore()
-    const docRef = db.collection('books').doc(props.router.query.id)
-    docRef.get().then(doc => {
-      setPost({ id: doc.id, ...doc.data() as Book })
-    })
-
-
+    console.log('userEffect')
+    // exportしたサイトではnext-routesがないためqueryが空になる。
+    // props.router.asPath が `/books/asdqwerasd` のようになっているので自分で取り出す
+    if (props.router.query.id) {
+      console.log('query', props.router)
+      const db = firebase.firestore()
+      const docRef = db.collection('books').doc(props.router.query.id)
+      docRef.get().then(doc => {
+        setPost({ id: doc.id, ...doc.data() as Book })
+      })
+    } else {
+      console.log('not')
+      setPost(props.book)
+    }
   }, [props.router.query])
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
         <Content>
           {post && <>
-            <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: post.description }} />
+            <h1 id='book-title'>{post.title}</h1>
+            <div id='book-description' dangerouslySetInnerHTML={{ __html: post.description }} />
           </>
           }
         </Content>
       </Container>
     </Layout>
   )
+}
+
+Post.getInitialProps = async ({ req, res }: any) => {
+  return {
+    book: {
+      id: '1',
+      title: 'aaaaa',
+      description: 'bbbbbbbbb'
+    }
+  }
 }
 
 export default withRouter(Post)

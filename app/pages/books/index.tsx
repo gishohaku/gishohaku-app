@@ -13,7 +13,7 @@ import {
   Container,
 } from 'sancho'
 import Layout from '../../components/layout'
-import router, { withRouter } from 'next/router'
+import { withRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 interface Book {
@@ -44,7 +44,7 @@ const Index = (props: any) => {
       <List>
         {books.map((book: any) => {
           return (
-            <Link href={`/books/${book.id}`} key={book.id} passHref>
+            <Link href={`/books/_id?id=${book.id}`} key={book.id} passHref as={`/books/${book.id}`}>
               <ListItem
                 wrap={false}
                 primary={book.title}

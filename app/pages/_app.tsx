@@ -5,11 +5,13 @@ import firebase from 'firebase'
 
 class MyApp extends App {
   componentDidMount() {
-    firebase.initializeApp({
-      apiKey: process.env.API_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      projectId: 'next-serverless-app' //process.env.PROJECT_ID
-    })
+    if (!firebase.apps.length) {
+      firebase.initializeApp({
+        apiKey: process.env.API_KEY,
+        authDomain: process.env.AUTH_DOMAIN,
+        projectId: 'next-serverless-app' //process.env.PROJECT_ID
+      })
+    }
   }
 
   public render() {
@@ -17,7 +19,7 @@ class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>Mercari Tech Conf 2018</title>
+          <title>Next Firebase App</title>
         </Head>
         <Component {...pageProps} />
       </Container>

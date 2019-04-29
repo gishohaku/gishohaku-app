@@ -13,10 +13,10 @@ exports.post = onRequest((req, res) => {
   res.send('aaaaaaaaaaaa')
 })
 
-exports.db = onRequest((req, res) => {
-  const firestore = new Firestore();
+// exports.db = onRequest((req, res) => {
+//   const firestore = new Firestore();
 
-  const document = firestore.doc('posts/intro-to-firestore');
-  console.log('Document created');
+//   const document = firestore.doc('posts/intro-to-firestore');
+//   console.log('Document created');
 
-})
+// })
