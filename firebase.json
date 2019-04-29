@@ -10,6 +10,10 @@
       "source": "/post",
       "function": "post"
     },
+    {
+      "source": "/book",
+      "function": "post"
+    },
       {
       "source": "/",
       "function": "index"
