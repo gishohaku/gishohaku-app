@@ -1,4 +1,5 @@
-import { firestore } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 import {
   Container,
@@ -18,7 +19,7 @@ const BooksNew = (props: any) => {
 
   useEffect(() => {
     const id = props.router.query.id
-    const db = firestore()
+    const db = firebase.firestore!()
     db.collection("books").doc(id).get()
       .then((docRef) => {
         console.log(docRef)
@@ -34,7 +35,7 @@ const BooksNew = (props: any) => {
       <Container>
         {book &&
           <BookForm book={book} onSubmit={(event, book) => {
-            const db = firestore()
+            const db = firebase.firestore!()
             const id = props.router.query.id
             db.collection("books").doc(id).update(book).then((docRef) => {
               console.log(docRef)

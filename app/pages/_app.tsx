@@ -1,7 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 class MyApp extends App {
   componentDidMount() {

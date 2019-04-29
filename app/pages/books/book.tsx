@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+// import { firestore } from "firebase-admin";
 import styled from '@emotion/styled'
 import Layout from '../../components/layout'
 import { Container } from 'sancho'
@@ -113,7 +114,7 @@ const Post = (props: any) => {
   const [post, setPost] = useState<Book>()
 
   useEffect(() => {
-    const db = firebase.firestore()
+    const db = firebase.firestore!()
     const docRef = db.collection('books').doc(props.router.query.id)
     docRef.get().then(doc => {
       setPost({ id: doc.id, ...doc.data() as Book })

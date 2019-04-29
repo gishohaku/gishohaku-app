@@ -1,7 +1,8 @@
 import axios from 'axios'
 import Link from 'next/link'
 
-import firebase, { firestore } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 import { jsx, css, Global } from '@emotion/core'
 import {

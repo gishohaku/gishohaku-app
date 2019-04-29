@@ -1,6 +1,9 @@
 import Link from 'next/link'
 
-import firebase, { firestore } from 'firebase'
+
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+// import firebase, { firestore } from 'firebase'
 
 import {
   List,
@@ -25,7 +28,7 @@ const Index = (props: any) => {
   const [books, setBooks] = useState<Book[]>([])
 
   useEffect(() => {
-    const db = firebase.firestore()
+    const db = firebase.firestore!()
     db.collection('books').get().then(bookSnapshots => {
       const books: Book[] = []
       bookSnapshots.forEach(book => {
