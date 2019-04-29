@@ -120,7 +120,7 @@ const Post = props => {
 }
 
 Post.getInitialProps = async props => {
-  if (props.res) {
+  if (props.res && props.res.setHeader) {
     props.res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate')
   }
   const data = {

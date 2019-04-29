@@ -52,7 +52,7 @@ const Index = props => {
 }
 
 Index.getInitialProps = async ({ req, res }) => {
-  if (res) {
+  if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
   const data = [

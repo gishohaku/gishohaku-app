@@ -8,6 +8,10 @@ module.exports = withTypescript({
     DATABASE_URL: process.env.DATABASE_URL,
     PROJECT_ID: process.env.PROJECT_ID
   },
-  target: 'serverless',
-  distDir: '../dist/functions/next'
+  exportPathMap: async function(defaultPathMap) {
+    return defaultPathMap
+  },
+  // target: 'serverless',
+  // distDir: '../dist/functions/next'
+  // distDir: '../dist/functions/next'
 })

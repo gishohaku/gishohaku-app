@@ -11,7 +11,8 @@
     "copy:deps": "cp package.json dist/functions; cp yarn.lock dist/functions",
     "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
     "deploy": "firebase deploy",
-    "start": "next start app"
+    "start": "next start app",
+    "export": "npm run build:app && next export app/"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
