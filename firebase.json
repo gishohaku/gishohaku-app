@@ -1,21 +1,25 @@
 {
   "hosting": {
-    "public": "dist/public",
+    "public": "app/out",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [ {
+      "source": "/blog/:post_id",
+      "destination": "https://mottox2.com/posts/:post_id",
+      "type": 301
+    }],
     "rewrites": [{
-      "source": "/post",
+      "source": "/books/**",
+      "destination": "/books/_id/index.html"
+    }, {
+      "source": "/post2",
       "function": "post"
-    },
-      {
-      "source": "/",
-      "function": "index"
     }]
   },
   "functions": {
-    "source": "dist/functions"
+    "source": "functions"
   }
 }

@@ -109,7 +109,6 @@ interface Book {
 }
 
 const Post = (props: any) => {
-  console.log(props)
   const [post, setPost] = useState<Book>()
 
   useEffect(() => {

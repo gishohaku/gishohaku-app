@@ -38,7 +38,7 @@ const Layout = props => {
         }}
       >
         <DarkMode>
-          <Link href="/">
+          <Link href="/books">
             <Button variant="ghost">Demo Blog with WP REST API</Button>
           </Link>
         </DarkMode>
