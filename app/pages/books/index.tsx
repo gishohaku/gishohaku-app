@@ -1,16 +1,11 @@
 import Link from 'next/link'
 
-import firebase, { firestore } from 'firebase'
+import firebase from 'firebase/app'
 
 import {
   List,
   ListItem,
-  Button,
   IconChevronRight,
-  InputGroup,
-  Input,
-  TextArea,
-  Container,
 } from 'sancho'
 import Layout from '../../components/layout'
 import { withRouter } from 'next/router'
@@ -25,17 +20,17 @@ const Index = (props: any) => {
   const [books, setBooks] = useState<Book[]>([])
 
   useEffect(() => {
-    const db = firebase.firestore()
-    db.collection('books').get().then(bookSnapshots => {
-      const books: Book[] = []
-      bookSnapshots.forEach(book => {
-        books.push({
-          id: book.id,
-          ...book.data()
-        } as Book)
-      })
-      setBooks(books)
-    })
+    // const db = firebase.firestore()
+    // db.collection('books').get().then(bookSnapshots => {
+    //   const books: Book[] = []
+    //   bookSnapshots.forEach(book => {
+    //     books.push({
+    //       id: book.id,
+    //       ...book.data()
+    //     } as Book)
+    //   })
+    //   setBooks(books)
+    // })
     return () => { }
   }, [''])
 

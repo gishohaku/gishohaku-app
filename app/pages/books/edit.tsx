@@ -1,4 +1,4 @@
-import { firestore } from 'firebase'
+import firebase from 'firebase'
 
 import {
   Container,
@@ -18,7 +18,7 @@ const BooksNew = (props: any) => {
 
   useEffect(() => {
     const id = props.router.query.id
-    const db = firestore()
+    const db = firebase.firestore()
     db.collection("books").doc(id).get()
       .then((docRef) => {
         console.log(docRef)
