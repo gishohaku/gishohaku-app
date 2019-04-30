@@ -18,7 +18,7 @@
       "source": "/post2",
       "function": "post"
     }, {
-      "source": "/books/",
+      "source": "/books",
       "function": "books"
     }, {
       "source": "/",

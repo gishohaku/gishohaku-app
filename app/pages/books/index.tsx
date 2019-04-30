@@ -18,20 +18,10 @@ interface Book {
 }
 
 const Index = (props: any) => {
-  const [books, setBooks] = useState<Book[]>([])
-
-  useEffect(() => {
-    const db = firebase.database()
-    db.ref(`/books`).once('value').then((snapshot) => {
-       setBooks(Object.values(snapshot.val()))
-    })
-    return () => { }
-  }, [''])
-
   return (
     <Layout tab={props.router.query.tab}>
       <List>
-        {books.map((book: any) => {
+        {props.books.map((book: any) => {
           return (
             <Link href={`/books/_id?id=${book.title}`} key={book.title} passHref as={`/books/${book.title}`}>
               <ListItem
@@ -47,6 +37,23 @@ const Index = (props: any) => {
       </List>
     </Layout>
   )
+}
+
+Index.getInitialProps = async () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp({
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: 'next-serverless-app', //process.env.PROJECT_ID,
+      databaseURL: 'https://next-serverless-app.firebaseio.com/'
+    })
+  }
+  const db = firebase.database()
+  const snapshot = await db.ref(`/books`).once('value')
+  return {
+    books: Object.values(snapshot.val())
+  }
+
 }
 
 export default withRouter(Index)
