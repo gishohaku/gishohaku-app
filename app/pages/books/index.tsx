@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import firebase from 'firebase/app'
+import 'firebase/database'
 
 import {
   List,
@@ -20,17 +21,10 @@ const Index = (props: any) => {
   const [books, setBooks] = useState<Book[]>([])
 
   useEffect(() => {
-    // const db = firebase.firestore()
-    // db.collection('books').get().then(bookSnapshots => {
-    //   const books: Book[] = []
-    //   bookSnapshots.forEach(book => {
-    //     books.push({
-    //       id: book.id,
-    //       ...book.data()
-    //     } as Book)
-    //   })
-    //   setBooks(books)
-    // })
+    const db = firebase.database()
+    db.ref(`/books`).once('value').then((snapshot) => {
+       setBooks(Object.values(snapshot.val()))
+    })
     return () => { }
   }, [''])
 
@@ -39,7 +33,7 @@ const Index = (props: any) => {
       <List>
         {books.map((book: any) => {
           return (
-            <Link href={`/books/_id?id=${book.id}`} key={book.id} passHref as={`/books/${book.id}`}>
+            <Link href={`/books/_id?id=${book.title}`} key={book.title} passHref as={`/books/${book.title}`}>
               <ListItem
                 wrap={false}
                 primary={book.title}
