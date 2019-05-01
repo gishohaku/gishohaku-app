@@ -33,19 +33,14 @@ const Index = props => {
   return (
     <Layout tab={props.router.query.tab}>
       <List>
-        {props.posts.map(post => {
-          return (
-            <Link href={`/post?id=${post.id}`} key={post.id} passHref>
-              <ListItem
-                wrap={false}
-                primary={post.title}
-                secondary={post.description}
-                key={post.id}
-                contentAfter={<IconChevronRight />}
-              />
-            </Link>
-          )
-        })}
+        <Link href={`/books`} passHref>
+          <ListItem
+            wrap={false}
+            primary={'Books'}
+            secondary={'book list'}
+            contentAfter={<IconChevronRight />}
+          />
+        </Link>
       </List>
     </Layout>
   )
@@ -55,21 +50,7 @@ Index.getInitialProps = async ({ req, res }) => {
   if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
-  const data = [
-    {
-      id: 1,
-      title: 'a',
-      description: 'a',
-    },
-    {
-      id: 2,
-      title: 'b',
-      description: 'b',
-    },
-  ]
-  return {
-    posts: data
-  }
+  return {}
 }
 
 export default withRouter(Index)

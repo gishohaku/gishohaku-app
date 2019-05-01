@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'
+
+import firebase from 'firebase/app'
 
 import { jsx, css, Global } from '@emotion/core'
 import {

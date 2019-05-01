@@ -12,7 +12,7 @@ module.exports = withTypescript({
   //   console.log(defaultPathMap)
   //   return defaultPathMap
   // },
-  target: 'serverless',
+  // target: 'serverless',
   distDir: '../dist/functions/next'
   // console.log(props)
   // distDir: '../dist/functions/next'

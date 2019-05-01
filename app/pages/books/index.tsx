@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/firestore'
 
 import {
   List,
@@ -44,12 +45,13 @@ Index.getInitialProps = async () => {
     firebase.initializeApp({
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
-      projectId: 'next-serverless-app', //process.env.PROJECT_ID,
-      databaseURL: 'https://next-serverless-app.firebaseio.com/'
+      projectId: process.env.PROJECT_ID,
+      databaseURL: process.env.DATABASE_URL
     })
   }
   const db = firebase.database()
   const snapshot = await db.ref(`/books`).once('value')
+
   return {
     books: Object.values(snapshot.val())
   }

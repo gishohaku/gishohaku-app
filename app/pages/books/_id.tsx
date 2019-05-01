@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/database'
+import 'firebase/auth'
 import styled from '@emotion/styled'
 import Layout from '../../components/layout'
 import { Container } from 'sancho'
@@ -126,6 +127,16 @@ const Post = (props: any) => {
     } else {
       console.log('not')
       setPost(props.book)
+    }
+
+    const currentUser = firebase.auth().currentUser
+    if (currentUser) {
+      console.log(currentUser)
+    } else {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result)
+      })
     }
   }, [props.router.query])
   return (
