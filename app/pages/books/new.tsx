@@ -7,6 +7,8 @@ import {
 import Layout from '../../components/layout'
 import BookForm from '../../components/BookForm'
 import router, { withRouter } from 'next/router'
+import { useEffect, useContext } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 // interface Book {
 //   id: string
@@ -32,4 +34,19 @@ const BooksNew = (props: any) => {
   )
 }
 
-export default withRouter(BooksNew)
+const withUser = (Component: any) => {
+  return (props: any) => {
+    const user = useContext(UserContext)
+    useEffect(() => {
+      if (!user) {
+        console.log('userNotFound')
+        router.push('/books')
+      }
+    })
+    return <Component {...props}>
+      pppp
+    </Component>
+  }
+}
+
+export default withUser(withRouter(BooksNew))

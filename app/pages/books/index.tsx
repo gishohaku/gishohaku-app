@@ -21,6 +21,7 @@ interface Book {
 const Index = (props: any) => {
   return (
     <Layout tab={props.router.query.tab}>
+      <Link href='/books/new'><span>new Book</span></Link>
       <List>
         {props.books.map((book: any) => {
           return (
@@ -55,7 +56,6 @@ Index.getInitialProps = async () => {
   return {
     books: Object.values(snapshot.val())
   }
-
 }
 
 export default withRouter(Index)
