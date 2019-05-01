@@ -108,6 +108,7 @@ interface Book {
   id: string
   title: string
   description: string
+  circleRef?: any
 }
 
 const Post = (props: any) => {
@@ -118,17 +119,6 @@ const Post = (props: any) => {
     console.log('userEffect')
     // exportしたサイトではnext-routesがないためqueryが空になる。
     // props.router.asPath が `/books/asdqwerasd` のようになっているので自分で取り出す
-    if (props.router.query.id) {
-      console.log('query', props.router)
-      const db = firebase.firestore()
-      const docRef = db.collection('books').doc(props.router.query.id)
-      docRef.get().then(doc => {
-        setPost(doc.data() as Book)
-      })
-    } else {
-      console.log('not')
-      setPost(props.book)
-    }
   }, [props.router.query])
   return (
     <Layout tab={props.router.query.tab}>
@@ -151,8 +141,20 @@ Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
   const book = await docRef.get()
 
   return {
-    book: book.data()
+    book: refToPath(book.data() as Book, 'circleRef')
   }
 }
+
+function refToPath<T, U extends keyof T> (docData: T, pathField: U ) {
+  const refField : any = docData[pathField]
+  if (!refField) { return docData }
+  const pathSegments = refField._key.path.segments
+  const fieldId = pathSegments[pathSegments.length - 1]
+  return {
+    ...docData,
+    [pathField]: fieldId
+  }
+}
+
 
 export default withRouter(Post)

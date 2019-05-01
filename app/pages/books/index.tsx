@@ -14,6 +14,7 @@ import { withRouter } from 'next/router'
 interface Book {
   id: string
   title: string
+  circleRef?: any
 }
 
 const Index = (props: any) => {
@@ -57,14 +58,26 @@ Index.getInitialProps = async ({res}: any) => {
   const bookSnapshots= await db.collection('books').get()
 
   bookSnapshots.forEach(book => {
+    const data = book.data() as Book
     books.push({
       id: book.id,
-      ...book.data()
-    } as Book)
+      ...refToPath(data, 'circleRef')
+    })
   })
 
   return {
     books
+  }
+}
+
+function refToPath<T, U extends keyof T> (docData: T, pathField: U ) {
+  const refField : any = docData[pathField]
+  if (!refField) { return docData }
+  const pathSegments = refField._key.path.segments
+  const fieldId = pathSegments[pathSegments.length - 1]
+  return {
+    ...docData,
+    [pathField]: fieldId
   }
 }
 
