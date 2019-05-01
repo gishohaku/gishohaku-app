@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 import {
   Container,
@@ -18,15 +19,15 @@ const BooksNew = (props: any) => {
 
   useEffect(() => {
     const id = props.router.query.id
-    // const db = firebase.firestore()
-    // db.collection("books").doc(id).get()
-    //   .then((docRef) => {
-    //     console.log(docRef)
-    //     setBook({
-    //       id: docRef.id,
-    //       ...docRef.data() as Book
-    //     })
-    //   })
+    const db = firebase.firestore()
+    db.collection("books").doc(id).get()
+      .then((docRef) => {
+        console.log(docRef)
+        setBook({
+          id: docRef.id,
+          ...docRef.data() as Book
+        })
+      })
   }, [props.router.query.id])
 
   return (

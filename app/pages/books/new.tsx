@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import 'firebase/database'
+import 'firebase/firestore'
 
 import {
   Container,
@@ -20,11 +20,9 @@ const BooksNew = (props: any) => {
     <Layout tab={props.router.query.tab}>
       <Container>
         <BookForm onSubmit={(event, book) => {
-          const db = firebase.database()
-          db.ref(`books/${book.title}`).set(book)
-          .then((docRef) => {
+          const db = firebase.firestore()
+          db.collection("books").add(book).then((docRef) => {
             console.log(docRef)
-            // debugger
             router.push('/books')
           })
           event.preventDefault()

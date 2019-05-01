@@ -21,15 +21,6 @@ import { withRouter } from 'next/router'
 import { useEffect } from 'react'
 
 const Index = props => {
-  // useEffect(() => {
-  //   const db = firebase.firestore()
-  //   db.collection('books').get().then(books => {
-  //     books.forEach(book => {
-  //       console.log(book.id, book.data())
-  //     })
-  //   })
-  //   return () => {}
-  // }, [''])
   return (
     <Layout tab={props.router.query.tab}>
       <List>

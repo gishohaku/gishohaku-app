@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase from 'firebase/app'
-import 'firebase/database'
+import 'firebase/firestore'
 import 'firebase/auth'
 import styled from '@emotion/styled'
 import Layout from '../../components/layout'
@@ -120,9 +120,10 @@ const Post = (props: any) => {
     // props.router.asPath が `/books/asdqwerasd` のようになっているので自分で取り出す
     if (props.router.query.id) {
       console.log('query', props.router)
-      const db = firebase.database()
-      db.ref(`books/${props.router.query.id}`).once('value').then(snapshot => {
-        setPost(snapshot.val())
+      const db = firebase.firestore()
+      const docRef = db.collection('books').doc(props.router.query.id)
+      docRef.get().then(doc => {
+        setPost(doc.data() as Book)
       })
     } else {
       console.log('not')
@@ -144,13 +145,13 @@ const Post = (props: any) => {
   )
 }
 
-Post.getInitialProps = async ({ req, res }: any) => {
+Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
+  const db = firebase.firestore()
+  const docRef = db.collection('books').doc(query.id)
+  const book = await docRef.get()
+
   return {
-    book: {
-      id: '1',
-      title: 'aaaaa',
-      description: 'bbbbbbbbb'
-    }
+    book: book.data()
   }
 }
 

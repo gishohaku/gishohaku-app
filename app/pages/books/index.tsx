@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import firebase from 'firebase/app'
-import 'firebase/database'
 import 'firebase/firestore'
 
 import {
@@ -11,7 +10,6 @@ import {
 } from 'sancho'
 import Layout from '../../components/layout'
 import { withRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
 interface Book {
   id: string
@@ -25,7 +23,7 @@ const Index = (props: any) => {
       <List>
         {props.books.map((book: any) => {
           return (
-            <Link href={`/books/_id?id=${book.title}`} key={book.title} passHref as={`/books/${book.title}`}>
+            <Link href={`/books/_id?id=${book.id}`} key={book.id} passHref as={`/books/${book.id}`}>
               <ListItem
                 wrap={false}
                 primary={book.title}
@@ -41,7 +39,11 @@ const Index = (props: any) => {
   )
 }
 
-Index.getInitialProps = async () => {
+Index.getInitialProps = async ({res}: any) => {
+  if (res && res.setHeader) {
+    res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
+  }
+
   if (!firebase.apps.length) {
     firebase.initializeApp({
       apiKey: process.env.API_KEY,
@@ -50,11 +52,19 @@ Index.getInitialProps = async () => {
       databaseURL: process.env.DATABASE_URL
     })
   }
-  const db = firebase.database()
-  const snapshot = await db.ref(`/books`).once('value')
+  const db = firebase.firestore()
+  const books : Book[] = []
+  const bookSnapshots= await db.collection('books').get()
+
+  bookSnapshots.forEach(book => {
+    books.push({
+      id: book.id,
+      ...book.data()
+    } as Book)
+  })
 
   return {
-    books: Object.values(snapshot.val())
+    books
   }
 }
 
