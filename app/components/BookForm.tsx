@@ -5,16 +5,11 @@ import {
   Input,
   TextArea,
 } from 'sancho'
+import { Book } from '../utils/firebase'
 
 interface Props {
   onSubmit: (event: FormEvent<HTMLFormElement>, book: Book) => void,
   book?: Book
-}
-
-interface Book {
-  id?: string
-  title: string
-  description: string
 }
 
 const BookForm = ({ onSubmit, book: initialBook }: Props) => {
@@ -23,18 +18,7 @@ const BookForm = ({ onSubmit, book: initialBook }: Props) => {
   const [description, setDescription] = useState(initialBook ? initialBook.description : '')
 
   return <form onSubmit={(event) => {
-    onSubmit(event, {
-      title, description
-    })
-    // const db = firestore()
-    // db.collection("books").add({
-    //   title, description
-    // }).then((docRef) => {
-    //   console.log(docRef)
-    //   // debugger
-    //   router.push('/books')
-    // })
-    // event.preventDefault()
+    onSubmit(event, { title, description })
     return false
   }} className="Form-basics">
     <InputGroup label="Title">
