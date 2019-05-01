@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'
 
+import UserContext from '../contexts/UserContext'
+
 import firebase from 'firebase/app'
+import 'firebase/auth'
 
 import { jsx, css, Global } from '@emotion/core'
 import {
@@ -22,6 +25,8 @@ import {
 
 const Layout = props => {
   const [activeTab, setActiveTab] = useState(props.tab ? Number(props.tab) : 0)
+  const user = useContext(UserContext)
+  console.log(user)
 
   return (
     <>
@@ -71,6 +76,22 @@ const Layout = props => {
           <Tab id="event">Event</Tab>
         </Tabs>
       </DarkMode>
+      { user ? <div onClick={() => {
+          firebase.auth().signOut()
+            .catch(function(error) {
+              console.log('ログアウトに失敗しました。')
+            });
+        }}>
+          {user.displayName} Logout
+        </div> : <div onClick={() => {
+          const provider = new firebase.auth.GoogleAuthProvider()
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+            console.log(result)
+          })
+        }}>
+          Login
+        </div>
+      }
       <div>{props.children}</div>
     </>
   )

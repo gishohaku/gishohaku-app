@@ -128,16 +128,6 @@ const Post = (props: any) => {
       console.log('not')
       setPost(props.book)
     }
-
-    const currentUser = firebase.auth().currentUser
-    if (currentUser) {
-      console.log(currentUser)
-    } else {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        console.log(result)
-      })
-    }
   }, [props.router.query])
   return (
     <Layout tab={props.router.query.tab}>
