@@ -1,22 +1,9 @@
 const onRequest = require('firebase-functions').https.onRequest
 
-// const index = require('./next/serverless/pages/index')
-// const post = require('./next/serverless/pages/post')
+const index = require('./next/serverless/pages/index')
+const books = require('./next/serverless/pages/books')
+const showBook = require('./next/serverless/pages/books/_id')
 
-// exports.index = onRequest((req, res) => index.render(req, res))
-// exports.post = onRequest((req, res) => post.render(req, res))
-
-const Firestore = require('@google-cloud/firestore');
-
-
-exports.post = onRequest((req, res) => {
-  res.send('aaaaaaaaaaaa')
-})
-
-// exports.db = onRequest((req, res) => {
-//   const firestore = new Firestore();
-
-//   const document = firestore.doc('posts/intro-to-firestore');
-//   console.log('Document created');
-
-// })
+exports.index = onRequest((req, res) => index.render(req, res))
+exports.books = onRequest((req, res) => books.render(req, res))
+exports.showBook = onRequest((req, res) => showBook.render(req, res))

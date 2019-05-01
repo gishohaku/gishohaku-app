@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "app/out",
+    "public": "dist/public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -13,13 +13,19 @@
     }],
     "rewrites": [{
       "source": "/books/**",
-      "destination": "/books/_id/index.html"
+      "function": "showBook"
     }, {
       "source": "/post2",
       "function": "post"
+    }, {
+      "source": "/books",
+      "function": "books"
+    }, {
+      "source": "/",
+      "function": "index"
     }]
   },
   "functions": {
-    "source": "functions"
+    "source": "dist/functions"
   }
 }
