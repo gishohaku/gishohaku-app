@@ -16,13 +16,13 @@ const BooksNew = (props: any) => {
   useEffect(() => {
     if (!user) {
       setCircleRef(null)
+    } else {
+      const db = firebase.firestore()
+      db.collection('users').doc(user.uid).get().then((doc) => {
+        const userCircleRef = doc.data().circleRef
+        setCircleRef(userCircleRef)
+      })
     }
-    const db = firebase.firestore()
-    db.collection('users').doc(user.uid).get().then((doc) => {
-      const userCircleRef = doc.data().circleRef
-      console.log(userCircleRef)
-      setCircleRef(userCircleRef)
-    })
   }, [user])
 
   return (
@@ -32,7 +32,8 @@ const BooksNew = (props: any) => {
           const db = firebase.firestore()
           db.collection("books").add({
             ...book,
-            circleRef
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            circleRef,
           }).then((docRef) => {
             console.log(docRef)
             router.push('/books')
