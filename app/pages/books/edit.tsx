@@ -34,7 +34,8 @@ const BooksNew = (props: any) => {
             const db = firebase.firestore()
             const id = props.router.query.id
             db.collection("books").doc(id).update(book).then((docRef) => {
-              router.push(`/books/book?id=${props.router.query.id}`)
+              const id = props.router.query.id
+              router.push(`/books/_id?id=${id}`, `/books/${id}`)
             })
             event.preventDefault()
           }} />

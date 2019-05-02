@@ -62,7 +62,7 @@ const Content = styled.div`
     margin-bottom: 30px;
   }
 
-  table tr:nth-child(odd) td {
+  table tr:nth-of-type(n + 1) td {
     background-color: #f9f9f9;
   }
 
@@ -105,22 +105,15 @@ const Content = styled.div`
   }
 `
 
-const Post = (props: any) => {
-  console.log(props)
-  const [post, setPost] = useState<Book>(props.book)
+const Post = ({ book, router }: any) => {
 
-  useEffect(() => {
-    console.log('userEffect')
-    // exportしたサイトではnext-routesがないためqueryが空になる。
-    // props.router.asPath が `/books/asdqwerasd` のようになっているので自分で取り出す
-  }, [props.router.query])
   return (
-    <Layout tab={props.router.query.tab}>
+    <Layout tab={router.query.tab}>
       <Container>
         <Content>
-          {post && <>
-            <h1 id='book-title'>{post.title}</h1>
-            <div id='book-description' dangerouslySetInnerHTML={{ __html: post.description }} />
+          {book && <>
+            <h1 id='book-title'>{book.title}</h1>
+            <div id='book-description' dangerouslySetInnerHTML={{ __html: book.description }} />
           </>
           }
         </Content>
@@ -133,6 +126,7 @@ Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
   const db = firebase.firestore()
   const docRef = db.collection('books').doc(query.id)
   const book = await docRef.get()
+  console.log(book.data())
 
   return {
     book: refToPath(book.data() as Book, 'circleRef')

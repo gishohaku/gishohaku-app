@@ -11,46 +11,56 @@ import {
 } from 'sancho'
 import Layout from '../components/layout'
 import { withRouter } from 'next/router'
-import { initFirebase, refToPath, Book } from '../utils/firebase'
+import { refToPath, Book } from '../utils/firebase'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 
 const Mypage = (props: any) => {
   const user: any = useContext(UserContext)
   const [books, setBooks] = useState<Book[]>([])
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!user) {
     } else {
       const db = firebase.firestore()
-      db.collection('users').doc(user.uid).get().then((doc) => {
-        const userCircleRef = doc.data().circleRef
-        db.collection('books').where("circleRef", "==", userCircleRef).get().then(snapshots => {
-          console.log(snapshots)
-          let bookResults = []
-          snapshots.forEach(book => {
-            const data = book.data()
-            bookResults.push({
-              id: book.id,
-              ...refToPath(data, 'circleRef')
-            })
-            console.log(bookResults)
+      db.collection('users').doc(user.uid).get().then(async (doc) => {
+        const circleRef = doc.data().circleRef
+        const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
+        let bookResults = []
+        snapshots.forEach(book => {
+          const data = book.data()
+          bookResults.push({
+            id: book.id,
+            ...refToPath(data, 'circleRef')
           })
-          console.log('setBooks', bookResults)
-          setBooks(bookResults)
         })
+        setBooks(bookResults)
+        setLoading(false)
       })
     }
   }, [user])
 
   return (
     <Layout tab={props.router.query.tab}>
-      <Link href='/books/new'><span>new Book</span></Link>
-      <p>This is mypage</p>
-      <Spinner label="Loading..." center />
-      {books.map(book => {
-        return <p>{book.title}</p>
-      })}
+      {isLoading ?
+        <Spinner label="Loading..." center /> :
+        <>
+          {
+            books.map(book => {
+              return <div key={book.id}>
+                {book.title}
+                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
+                  <span>
+                    Edit
+                  </span>
+                </Link>
+              </div>
+            })
+          }
+          <Link href='/books/new'><span>new Book</span></Link>
+        </>
+      }
     </Layout>
   )
 }

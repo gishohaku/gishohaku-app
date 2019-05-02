@@ -56,6 +56,7 @@ const Layout = props => {
           `}
           variant="evenly-spaced"
           // value={activeTab}
+          value={-1}
           onChange={i => {
             setActiveTab(i)
             const pathes = ['/', '/books', '/mypage']
