@@ -9,15 +9,15 @@
     "rewrites": [
       {
         "source": "/books/**",
-        "function": "showBook"
+        "function": "app"
       },
       {
         "source": "/books",
-        "function": "books"
+        "function": "app"
       },
       {
         "source": "/",
-        "function": "index"
+        "function": "app"
       }
     ]
   },

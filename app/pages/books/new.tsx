@@ -10,11 +10,6 @@ import router, { withRouter } from 'next/router'
 import { useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
 
-// interface Book {
-//   id: string
-//   title: string
-// }
-
 const BooksNew = (props: any) => {
   return (
     <Layout tab={props.router.query.tab}>

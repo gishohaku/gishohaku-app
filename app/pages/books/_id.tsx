@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import Layout from '../../components/layout'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
+import { refToPath, Book } from '../../utils/firebase'
 
 const Content = styled.div`
   max-width: 720px;
@@ -104,13 +105,6 @@ const Content = styled.div`
   }
 `
 
-interface Book {
-  id: string
-  title: string
-  description: string
-  circleRef?: any
-}
-
 const Post = (props: any) => {
   console.log(props)
   const [post, setPost] = useState<Book>(props.book)
@@ -144,17 +138,5 @@ Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
     book: refToPath(book.data() as Book, 'circleRef')
   }
 }
-
-function refToPath<T, U extends keyof T> (docData: T, pathField: U ) {
-  const refField : any = docData[pathField]
-  if (!refField) { return docData }
-  const pathSegments = refField._key.path.segments
-  const fieldId = pathSegments[pathSegments.length - 1]
-  return {
-    ...docData,
-    [pathField]: fieldId
-  }
-}
-
 
 export default withRouter(Post)

@@ -8,11 +8,7 @@ import Layout from '../../components/layout'
 import BookForm from '../../components/BookForm'
 import router, { withRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-
-interface Book {
-  id: string
-  title: string
-}
+import { Book } from '../../utils/firebase'
 
 const BooksNew = (props: any) => {
   const [book, setBook] = useState()

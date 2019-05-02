@@ -10,12 +10,7 @@ import {
 } from 'sancho'
 import Layout from '../../components/layout'
 import { withRouter } from 'next/router'
-
-interface Book {
-  id: string
-  title: string
-  circleRef?: any
-}
+import { initFirebase, refToPath, Book } from '../../utils/firebase'
 
 const Index = (props: any) => {
   return (
@@ -45,14 +40,7 @@ Index.getInitialProps = async ({res}: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp({
-      apiKey: process.env.API_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      projectId: process.env.PROJECT_ID,
-      databaseURL: process.env.DATABASE_URL
-    })
-  }
+  initFirebase()
   const db = firebase.firestore()
   const books : Book[] = []
   const bookSnapshots= await db.collection('books').get()
@@ -69,16 +57,4 @@ Index.getInitialProps = async ({res}: any) => {
     books
   }
 }
-
-function refToPath<T, U extends keyof T> (docData: T, pathField: U ) {
-  const refField : any = docData[pathField]
-  if (!refField) { return docData }
-  const pathSegments = refField._key.path.segments
-  const fieldId = pathSegments[pathSegments.length - 1]
-  return {
-    ...docData,
-    [pathField]: fieldId
-  }
-}
-
 export default withRouter(Index)
