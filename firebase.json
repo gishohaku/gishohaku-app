@@ -6,26 +6,26 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [ {
-      "source": "/blog/:post_id",
-      "destination": "https://mottox2.com/posts/:post_id",
-      "type": 301
-    }],
-    "rewrites": [{
-      "source": "/books/**",
-      "function": "showBook"
-    }, {
-      "source": "/post2",
-      "function": "post"
-    }, {
-      "source": "/books",
-      "function": "books"
-    }, {
-      "source": "/",
-      "function": "index"
-    }]
+    "rewrites": [
+      {
+        "source": "/books/**",
+        "function": "showBook"
+      },
+      {
+        "source": "/books",
+        "function": "books"
+      },
+      {
+        "source": "/",
+        "function": "index"
+      }
+    ]
   },
   "functions": {
     "source": "dist/functions"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }
