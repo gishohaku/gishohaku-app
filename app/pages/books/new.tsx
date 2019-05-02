@@ -7,16 +7,33 @@ import {
 import Layout from '../../components/layout'
 import BookForm from '../../components/BookForm'
 import router, { withRouter } from 'next/router'
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
+  const user: any = useContext(UserContext)
+  const [circleRef, setCircleRef] = useState(null)
+  useEffect(() => {
+    if (!user) {
+      setCircleRef(null)
+    }
+    const db = firebase.firestore()
+    db.collection('users').doc(user.uid).get().then((doc) => {
+      const userCircleRef = doc.data().circleRef
+      console.log(userCircleRef)
+      setCircleRef(userCircleRef)
+    })
+  }, [user])
+
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
         <BookForm onSubmit={(event, book) => {
           const db = firebase.firestore()
-          db.collection("books").add(book).then((docRef) => {
+          db.collection("books").add({
+            ...book,
+            circleRef
+          }).then((docRef) => {
             console.log(docRef)
             router.push('/books')
           })
@@ -42,4 +59,5 @@ const withUser = (Component: any) => {
   }
 }
 
-export default withUser(withRouter(BooksNew))
+export default withRouter(BooksNew)
+// export default withUser(withRouter(BooksNew))

@@ -8,13 +8,46 @@ service cloud.firestore {
       return request.auth.uid == userID;
     }
 
+    function getUser() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid))
+    }
+
+    function existingData() {
+      return resource.data;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    function isMemberOfCircle(userID, circleID) {
+      return false
+    }
+
     match /{document=**} {
       allow read;
       allow write: if false;
     }
 
-    match /user/{userID} {
-      allow read, write: if false
+    match /users/{userID} {
+      allow read: if isAuthenticated() && isUserAuthenticated(userID);
+      allow write: if false;
+    }
+
+    match /books/{bookID} {
+      allow read;
+      // サークルに所属している人のみ作成可能
+      allow create: if isAuthenticated() && getUser().data.circleRef != null && getUser().data.circleRef == incomingData().circleRef
+      // 既存データのCircleRefと一致すれば更新可能
+      allow update: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
+    }
+
+    match /circles/{circleID} {
+      allow read;
+      // サークルはWeb画面で作成する機能を提供しない
+      allow create: if false;
+      // TODO
+      allow update: if false;
     }
   }
 }
