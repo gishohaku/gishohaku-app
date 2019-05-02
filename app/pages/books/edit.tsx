@@ -34,8 +34,6 @@ const BooksNew = (props: any) => {
             const db = firebase.firestore()
             const id = props.router.query.id
             db.collection("books").doc(id).update(book).then((docRef) => {
-              console.log(docRef)
-              // debugger
               router.push(`/books/book?id=${props.router.query.id}`)
             })
             event.preventDefault()
@@ -45,10 +43,5 @@ const BooksNew = (props: any) => {
     </Layout >
   )
 }
-
-// BooksNew.getInitialProps = async (props: any) => {
-//   console.log(props)
-//   return {}
-// }
 
 export default withRouter(BooksNew)

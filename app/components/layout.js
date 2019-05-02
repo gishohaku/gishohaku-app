@@ -26,7 +26,6 @@ import {
 const Layout = props => {
   const [activeTab, setActiveTab] = useState(props.tab ? Number(props.tab) : 0)
   const user = useContext(UserContext)
-  console.log(user)
 
   return (
     <>
@@ -56,24 +55,16 @@ const Layout = props => {
             background-color: rgb(52, 58, 64);
           `}
           variant="evenly-spaced"
-          value={activeTab}
+          // value={activeTab}
           onChange={i => {
             setActiveTab(i)
-            const page = {
-              pathname: '/',
-              query: {
-                tab: i
-              }
-            }
-            Router.replace(page, page, {
-              shallow: true
-            })
+            const pathes = ['/', '/books', '/mypage']
+            Router.push(pathes[i])
           }}
         >
           <Tab id="all">All</Tab>
-          <Tab id="develop">Develop</Tab>
-          <Tab id="design">Design</Tab>
-          <Tab id="event">Event</Tab>
+          <Tab id="develop">Books</Tab>
+          <Tab id="mypage">Mypage</Tab>
         </Tabs>
       </DarkMode>
       { user ? <div onClick={() => {
