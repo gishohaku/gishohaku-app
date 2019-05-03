@@ -2,6 +2,7 @@ const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
 const onRequest = functions.https.onRequest
+const onCall = functions.https.onCall
 
 admin.initializeApp();
 
@@ -32,4 +33,24 @@ exports.saveUser = functions.auth.user().onCreate((user) => {
     console.log(result)
     return
   })
+})
+
+exports.receiveInvitation = onCall(async (data, context) => {
+  const token = data.token
+  const circleId = data.circleId
+  const auth = context.auth
+  console.log(data, context.auth)
+  if (!token || !circleId || !auth) {
+    return { message: '無効な招待リンクです。'}
+  }
+  const firestore = admin.firestore()
+  const snapshot = await firestore.collection(`circles/${circleId}/circleInvitations`).doc(token).get()
+  if (!snapshot) {
+    return { message: '無効な招待リンクです。'}
+  }
+  console.log(snapshot.data())
+  const result = await firestore.collection('users').doc(auth.uid).set({
+    circleRef: firestore.collection('circles').doc(circleId)
+  }, { merge: true })
+  return { message: 'サークルに参加しました。' }
 })
