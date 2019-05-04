@@ -5,16 +5,24 @@ import 'firebase/auth'
 
 export const UserProvider = (props: any) => {
   const [currentUser, setCurrentUser] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((currentUser) => {
       setCurrentUser(currentUser)
+      setIsLoading(false)
     })
   }, [])
 
-  return <UserContext.Provider value={currentUser}>
+  return <UserContext.Provider value={{
+    user: currentUser,
+    isUserLoading: isLoading
+  }}>
     {props.children}
-  </UserContext.Provider>
+  </UserContext.Provider >
 }
 
-export default React.createContext(null)
+export default React.createContext({
+  user: null,
+  isUserLoading: true
+})

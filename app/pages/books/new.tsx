@@ -11,7 +11,7 @@ import { useEffect, useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
-  const user: any = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const [circleRef, setCircleRef] = useState(null)
   useEffect(() => {
     if (!user) {
@@ -47,7 +47,7 @@ const BooksNew = (props: any) => {
 
 const withUser = (Component: any) => {
   return (props: any) => {
-    const user = useContext(UserContext)
+    const { user } = useContext(UserContext)
     useEffect(() => {
       if (!user) {
         console.log('userNotFound')

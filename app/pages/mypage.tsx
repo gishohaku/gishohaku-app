@@ -2,11 +2,9 @@ import Link from 'next/link'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/functions'
 
 import {
-  List,
-  ListItem,
-  IconChevronRight,
   Spinner
 } from 'sancho'
 import Layout from '../components/layout'
@@ -16,7 +14,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 
 const Mypage = (props: any) => {
-  const user: any = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const [books, setBooks] = useState<Book[]>([])
   const [isLoading, setLoading] = useState(true)
 
@@ -26,23 +24,35 @@ const Mypage = (props: any) => {
       const db = firebase.firestore()
       db.collection('users').doc(user.uid).get().then(async (doc) => {
         const circleRef = doc.data().circleRef
-        const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
-        let bookResults = []
-        snapshots.forEach(book => {
-          const data = book.data()
-          bookResults.push({
-            id: book.id,
-            ...refToPath(data, 'circleRef')
+        if (circleRef) {
+          const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
+          let bookResults = []
+          snapshots.forEach(book => {
+            const data = book.data()
+            bookResults.push({
+              id: book.id,
+              ...refToPath(data, 'circleRef')
+            })
           })
-        })
-        setBooks(bookResults)
-        setLoading(false)
+          setBooks(bookResults)
+          setLoading(false)
+        }
       })
     }
   }, [user])
 
+  const handleClick = async () => {
+    const receiveInvitation = firebase.functions().httpsCallable('receiveInvitation')
+    const result = await receiveInvitation({
+      circleId: '',
+      token: ''
+    })
+    console.log(result)
+  }
+
   return (
     <Layout tab={props.router.query.tab}>
+      <button onClick={handleClick}>aaaaa</button>
       {isLoading ?
         <Spinner label="Loading..." center /> :
         <>

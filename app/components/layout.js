@@ -25,7 +25,7 @@ import {
 
 const Layout = props => {
   const [activeTab, setActiveTab] = useState(props.tab ? Number(props.tab) : 0)
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <>
