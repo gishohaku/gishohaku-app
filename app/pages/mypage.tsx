@@ -7,7 +7,7 @@ import 'firebase/functions'
 import {
   Spinner
 } from 'sancho'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { refToPath, Book } from '../utils/firebase'
 import { useContext, useEffect, useState } from 'react'

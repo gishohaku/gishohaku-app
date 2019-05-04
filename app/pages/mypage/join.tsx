@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { Spinner, Button } from 'sancho'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import UserContext from '../../contexts/UserContext';

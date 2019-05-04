@@ -8,7 +8,7 @@ import {
   ListItem,
   IconChevronRight,
 } from 'sancho'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
 import { initFirebase, refToPath, Book } from '../../utils/firebase'
 
@@ -35,15 +35,15 @@ const Index = (props: any) => {
   )
 }
 
-Index.getInitialProps = async ({res}: any) => {
+Index.getInitialProps = async ({ res }: any) => {
   if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
   initFirebase()
   const db = firebase.firestore()
-  const books : Book[] = []
-  const bookSnapshots= await db.collection('books').get()
+  const books: Book[] = []
+  const bookSnapshots = await db.collection('books').get()
 
   bookSnapshots.forEach(book => {
     const data = book.data() as Book

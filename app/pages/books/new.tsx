@@ -4,7 +4,7 @@ import 'firebase/firestore'
 import {
   Container,
 } from 'sancho'
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
 import router, { withRouter } from 'next/router'
 import { useEffect, useContext, useState } from 'react';

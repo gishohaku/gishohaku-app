@@ -16,7 +16,7 @@ import {
   ListItem,
   IconChevronRight
 } from 'sancho'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { useEffect } from 'react'
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
+import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 
@@ -10,17 +9,11 @@ import 'firebase/auth'
 
 import { jsx, css, Global } from '@emotion/core'
 import {
-  Layer,
   Toolbar,
-  Text,
   Button,
-  Navbar,
   DarkMode,
   Tabs,
   Tab,
-  List,
-  ListItem,
-  IconChevronRight
 } from 'sancho'
 
 const Layout = props => {
@@ -68,16 +61,16 @@ const Layout = props => {
           <Tab id="mypage">Mypage</Tab>
         </Tabs>
       </DarkMode>
-      { user ? <div onClick={() => {
-          firebase.auth().signOut()
-            .catch(function(error) {
-              console.log('ログアウトに失敗しました。')
-            });
-        }}>
-          {user.displayName} Logout
+      {user ? <div onClick={() => {
+        firebase.auth().signOut()
+          .catch(function (error) {
+            console.log('ログアウトに失敗しました。')
+          });
+      }}>
+        {user.displayName} Logout
         </div> : <div onClick={() => {
           const provider = new firebase.auth.GoogleAuthProvider()
-          firebase.auth().signInWithPopup(provider).then(function(result) {
+          firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log(result)
           })
         }}>
