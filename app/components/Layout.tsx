@@ -38,20 +38,38 @@ const Layout = props => {
           min-height: 80px;
         `}
       >
-        <Link href="/">
-          <img
-            src={logo}
-            width={80}
-            height={80}
-            css={css`
-              display: block;
-            `}
-            alt="技術書同人誌博覧会"
-          />
+        <Link href="/" passHref>
+          <a>
+            <img
+              src={logo}
+              width={80}
+              height={80}
+              css={css`
+                display: block;
+              `}
+              alt="技術書同人誌博覧会"
+            />
+          </a>
         </Link>
-    </header>
+        <Tabs
+          variant="evenly-spaced"
+          // value={activeTab}
+          value={-1}
+          onChange={i => {
+            const pathes = ['/books', '/mypage']
+            Router.push(pathes[i])
+          }}
+        >
+          <Tab id="develop">Books</Tab>
+          <Tab id="mypage">Mypage</Tab>
+        </Tabs>
+      </header>
     }
+    <div css={css`
+      min-height: calc(100vh - 80px - 88px);
+    `}>
     {props.children}
+    </div>
     <Footer/>
   </>;
 
