@@ -1,6 +1,11 @@
 const withTypescript = require('@zeit/next-typescript')
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/
+})
 
-module.exports = withTypescript({
+module.exports = withMDX(withTypescript({
+  // pageExtensions: ['tsx', 'jsx', 'md', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   env: {
     WP_HOST: process.env.WP_HOST,
     API_KEY: process.env.API_KEY,
@@ -16,4 +21,4 @@ module.exports = withTypescript({
   distDir: '../dist/functions/next'
   // console.log(props)
   // distDir: '../dist/functions/next'
-})
+}))
