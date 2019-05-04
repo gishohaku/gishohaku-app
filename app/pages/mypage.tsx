@@ -5,7 +5,9 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/functions'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/core'
+
+import circleTumbnail from '../images/cirlceTumbnail.png'
 
 import {
   Spinner, Button
@@ -19,6 +21,7 @@ import UserContext from '../contexts/UserContext';
 const Mypage = (props: any) => {
   const { user, isUserLoading } = useContext(UserContext)
   const [books, setBooks] = useState<Book[]>([])
+  const [circle, setCircle] = useState()
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -28,6 +31,9 @@ const Mypage = (props: any) => {
       const db = firebase.firestore()
       db.collection('users').doc(user.uid).get().then(async (doc) => {
         const circleRef = doc.data()!.circleRef
+        // Promise.all
+        const circleSnapShot = await circleRef.get()
+        setCircle(circleSnapShot.data())
         if (circleRef) {
           const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
           let bookResults: Book[] = []
@@ -40,8 +46,8 @@ const Mypage = (props: any) => {
           })
           setBooks(bookResults)
         }
+        setLoading(false)
       })
-      setLoading(false)
     }
   }, [user])
 
@@ -56,7 +62,7 @@ const Mypage = (props: any) => {
   if (!user) {
     return <Layout>
       <p>ログインしてください</p>
-     <Button onClick={() => {
+      <Button onClick={() => {
         const provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(provider).then(function (result) {
           console.log(result)
@@ -69,23 +75,50 @@ const Mypage = (props: any) => {
 
   return (
     <Layout tab={props.router.query.tab}>
+      <Global styles={{
+        body: {
+          backgroundColor: "#F7F8FA"
+        }
+      }} />
       <div css={css`
-        max-width: 1080px;
-        margin: 0 auto;
+        max-width: ${1080 + 32}px;
+        padding: 0 16px;
+        margin: 32px auto;
+        display: flex;
       `}>
-      {
-        books.map(book => {
-          return <div key={book.id}>
-            {book.title}
-            <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
-              <span>
-                Edit
+        <div css={css`
+          width: 258px;
+          margin-right: 48px;
+        `}>
+          {circle &&
+            <>
+              <img src={circleTumbnail} />
+              {circle.name}
+            </>
+          }
+        </div>
+        <div css={css`
+          flex: 1;
+        `}>
+          {
+            books.map(book => {
+              return <div css={css`
+                background-color: white;
+                margin-bottom: 24px;
+                padding: 24px;
+
+              `} key={book.id}>
+                {book.title}
+                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
+                  <span>
+                    Edit
               </span>
-            </Link>
-          </div>
-        })
-      }
-      <Link href='/books/new'><span>new Book</span></Link>
+                </Link>
+              </div>
+            })
+          }
+          <Link href='/books/new'><span>new Book</span></Link>
+        </div>
       </div>
     </Layout>
   )

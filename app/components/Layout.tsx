@@ -26,9 +26,10 @@ const Layout = props => {
   const { user } = useContext(UserContext)
 
   return <>
-    { !props.hideHeader &&
+    {!props.hideHeader &&
       <header
         css={css`
+          background-color: white;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -51,7 +52,7 @@ const Layout = props => {
             />
           </a>
         </Link>
-        <Tabs
+        {/* <Tabs
           variant="evenly-spaced"
           // value={activeTab}
           value={-1}
@@ -62,15 +63,15 @@ const Layout = props => {
         >
           <Tab id="develop">Books</Tab>
           <Tab id="mypage">Mypage</Tab>
-        </Tabs>
+        </Tabs> */}
       </header>
     }
     <div css={css`
       min-height: calc(100vh - 80px - 88px);
     `}>
-    {props.children}
+      {props.children}
     </div>
-    <Footer/>
+    <Footer />
   </>;
 
   return (
