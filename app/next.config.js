@@ -2,9 +2,11 @@ const withTypescript = require('@zeit/next-typescript')
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 })
+const withCSS = require('@zeit/next-css')
+const withImages = require('next-images')
 
-module.exports = withMDX(withTypescript({
-  // pageExtensions: ['tsx', 'jsx', 'md', 'mdx'],
+// compose使う
+module.exports = withImages(withCSS(withMDX(withTypescript({
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   env: {
     WP_HOST: process.env.WP_HOST,
@@ -13,12 +15,6 @@ module.exports = withMDX(withTypescript({
     DATABASE_URL: process.env.DATABASE_URL,
     PROJECT_ID: process.env.PROJECT_ID
   },
-  // exportPathMap: async function(defaultPathMap) {
-  //   console.log(defaultPathMap)
-  //   return defaultPathMap
-  // },
   // target: 'serverless',
   distDir: '../dist/functions/next'
-  // console.log(props)
-  // distDir: '../dist/functions/next'
-}))
+}))))

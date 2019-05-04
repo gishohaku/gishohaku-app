@@ -4,8 +4,6 @@
     "@zeit/next-typescript/babel"
   ],
   "plugins": [
-    [
-      "emotion"
-    ]
+    "emotion"
   ]
 }

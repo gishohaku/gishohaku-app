@@ -7,6 +7,8 @@ import UserContext from '../contexts/UserContext'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
+import "minireset.css"
+
 import { jsx, css, Global } from '@emotion/core'
 import {
   Toolbar,
