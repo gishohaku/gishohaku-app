@@ -23,15 +23,15 @@ const Mypage = (props: any) => {
     } else {
       const db = firebase.firestore()
       db.collection('users').doc(user.uid).get().then(async (doc) => {
-        const circleRef = doc.data().circleRef
+        const circleRef = doc.data()!.circleRef
         if (circleRef) {
           const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
-          let bookResults = []
+          let bookResults: Book[] = []
           snapshots.forEach(book => {
             const data = book.data()
             bookResults.push({
               id: book.id,
-              ...refToPath(data, 'circleRef')
+              ...refToPath(data, 'circleRef') as Book
             })
           })
           setBooks(bookResults)

@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export const UserProvider = (props: any) => {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -22,7 +22,10 @@ export const UserProvider = (props: any) => {
   </UserContext.Provider >
 }
 
-export default React.createContext({
+export default React.createContext<{
+  user: firebase.User | null
+  isUserLoading: boolean
+}>({
   user: null,
   isUserLoading: true
 })

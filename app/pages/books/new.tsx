@@ -19,7 +19,7 @@ const BooksNew = (props: any) => {
     } else {
       const db = firebase.firestore()
       db.collection('users').doc(user.uid).get().then((doc) => {
-        const userCircleRef = doc.data().circleRef
+        const userCircleRef = doc.data()!.circleRef
         setCircleRef(userCircleRef)
       })
     }
