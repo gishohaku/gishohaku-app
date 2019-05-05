@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 export const initFirebase = () => {
   if (!firebase.apps.length) {
@@ -7,8 +8,10 @@ export const initFirebase = () => {
       apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
       projectId: process.env.PROJECT_ID,
-      databaseURL: process.env.DATABASE_URL
+      databaseURL: process.env.DATABASE_URL,
+      storageBucket: process.env.STORAGE_BUCKET
     })
+    console.log(firebase)
   }
 }
 

@@ -2,16 +2,18 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import {
-  Container,
+  Container, Spinner
 } from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
 import router, { withRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Book } from '../../utils/firebase'
+import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
   const [book, setBook] = useState()
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     const id = props.router.query.id
@@ -26,11 +28,15 @@ const BooksNew = (props: any) => {
       })
   }, [props.router.query.id])
 
+  if (!user) {
+    return <Spinner />
+  }
+
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
         {book &&
-          <BookForm book={book} onSubmit={(book) => {
+          <BookForm user={user} book={book} onSubmit={(book) => {
             const db = firebase.firestore()
             const id = props.router.query.id
             db.collection("books").doc(id).update(book).then((docRef) => {

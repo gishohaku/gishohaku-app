@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import {
-  Container,
+  Container, Spinner,
 } from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
@@ -25,10 +25,14 @@ const BooksNew = (props: any) => {
     }
   }, [user])
 
+  if (!user) {
+    return <Spinner />
+  }
+
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
-        <BookForm onSubmit={(book) => {
+        <BookForm user={user} onSubmit={(book) => {
           const db = firebase.firestore()
           db.collection("books").add({
             ...book,

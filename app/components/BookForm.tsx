@@ -9,9 +9,11 @@ import {
 } from 'sancho'
 import { Formik, Field, FieldProps } from 'formik'
 import { Book } from '../utils/firebase'
+import ImageUploader from './ImageUploader'
 
 interface Props {
   onSubmit: (book: Book) => void,
+  user: firebase.User,
   book?: Book
 }
 
@@ -29,7 +31,7 @@ const initialState: Book = {
   purchaseUrl: '',
 }
 
-const BookForm = ({ onSubmit, book: initialBook }: Props) => {
+const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
   return <Formik initialValues={initialBook || initialState} onSubmit={(values, actions) => {
     onSubmit(values)
   }} render={({ values, handleSubmit, handleChange, handleBlur }) => {
@@ -38,6 +40,7 @@ const BookForm = ({ onSubmit, book: initialBook }: Props) => {
       <InputGroup label="タイトル">
         <Field name="title" component={CustomInput} />
       </InputGroup>
+      <ImageUploader user={user} />
       <InputGroup label="価格">
         <Field name="price" type='number' component={CustomInput} />
       </InputGroup>
