@@ -6,3 +6,4 @@ dist/
 .envrc
 
 app/out
+.DS_Store
