@@ -1,8 +1,10 @@
+/** @jsx jsx */
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { jsx, css, Global } from '@emotion/core'
 
 import {
-  Container, Spinner,
+  Spinner,
 } from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
@@ -31,7 +33,18 @@ const BooksNew = (props: any) => {
 
   return (
     <Layout tab={props.router.query.tab}>
-      <Container>
+      <Global styles={{
+        body: {
+          backgroundColor: "#F7F8FA"
+        }
+      }} />
+      <div css={css`
+        max-width: 740px;
+        margin: 32px auto;
+        padding: 24px;
+        background-color: white;
+        border-radius: 8px;
+      `}>
         <BookForm user={user} onSubmit={(book) => {
           const db = firebase.firestore()
           db.collection("books").add({
@@ -43,7 +56,7 @@ const BooksNew = (props: any) => {
             router.push('/books')
           })
         }} />
-      </Container>
+      </div>
     </Layout >
   )
 }
