@@ -28,7 +28,7 @@ const BooksNew = (props: any) => {
   return (
     <Layout tab={props.router.query.tab}>
       <Container>
-        <BookForm onSubmit={(event, book) => {
+        <BookForm onSubmit={(book) => {
           const db = firebase.firestore()
           db.collection("books").add({
             ...book,
@@ -38,7 +38,6 @@ const BooksNew = (props: any) => {
             console.log(docRef)
             router.push('/books')
           })
-          event.preventDefault()
         }} />
       </Container>
     </Layout >

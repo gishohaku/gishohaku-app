@@ -30,6 +30,7 @@
     "firebase": "^5.10.1",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
+    "formik": "^1.5.4",
     "minireset.css": "^0.0.4",
     "next": "^8.1.0",
     "next-images": "^1.1.1",

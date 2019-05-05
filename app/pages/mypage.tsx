@@ -108,12 +108,32 @@ const Mypage = (props: any) => {
                 padding: 24px;
 
               `} key={book.id}>
-                {book.title}
-                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
-                  <span>
-                    Edit
-              </span>
-                </Link>
+                <div css={css`
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 20px;
+                `}>
+                  <div>
+                    {book.title}
+                    <div css={css`
+                      font-size: 13px;
+                      opacity: 0.6;
+                    `}>
+                      {book.type && `${book.type}`} /
+                      {book.pages && `${book.pages}ページ`} /
+                      {book.stock && `${book.stock}部頒布予定`} /
+                      {book.medium && `${book.medium}`} /
+                    </div>
+                  </div>
+                  <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
+                    <span css={css`
+                      margin-left: auto;
+                    `}>
+                      Edit
+                    </span>
+                  </Link>
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: book.description }} />
               </div>
             })
           }
