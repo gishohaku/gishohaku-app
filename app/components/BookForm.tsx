@@ -23,7 +23,7 @@ const initialState: Book = {
   price: 0,
   stock: 0,
   pages: 0,
-  images: [],
+  images: ['https://firebasestorage.googleapis.com/v0/b/next-serverless-app.appspot.com/o/uploads%2F6BMdSGv5d5erVsBNUmGZvGCGEqi1%2F1557043311352?alt=media&token=e4629f3d-9a10-433f-9f86-814475e85a81'],
   type: 'fanzine',
   isNew: false,
   medium: null,
@@ -40,6 +40,11 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
       <InputGroup label="タイトル">
         <Field name="title" component={CustomInput} />
       </InputGroup>
+      {
+        values.images && values.images.map(imageUrl => {
+          return <ImageUploader user={user} />
+        })
+      }
       <ImageUploader user={user} />
       <InputGroup label="価格">
         <Field name="price" type='number' component={CustomInput} />

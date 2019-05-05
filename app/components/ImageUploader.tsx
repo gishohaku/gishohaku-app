@@ -3,17 +3,22 @@ import { useDropzone } from 'react-dropzone';
 import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/storage'
+import { useState } from 'react';
+import { Spinner, IconUpload } from 'sancho';
 
 interface Props {
   user: firebase.User
 }
 
 const ImageUploader: React.FC<Props> = (props) => {
+  const [isUploading, setUploading] = useState(false)
+  const [url, setUrl] = useState('')
 
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: 'image/gif,image/jpeg,image/png,image/jpg',
     onDropAccepted: async (files) => {
+      setUploading(true)
       console.log('file is accepted')
       console.log(files)
       const storageRef = firebase.storage().ref()
@@ -23,21 +28,40 @@ const ImageUploader: React.FC<Props> = (props) => {
       console.log('Uploaded a blob or file!', snapshot);
       const url = await snapshot.ref.getDownloadURL()
       console.log(url)
+      setUrl(url)
+      setUploading(false)
     },
     onDropRejected: () => {
       console.log('file is rejected')
-
-    }
+    },
+    disabled: (isUploading || url.length > 0)
   });
 
   return (
-    <section className="container">
+    <section>
       <div {...getRootProps({
-        className: 'dropzone', css: css`
-          background-color: #ddd;
-      ` })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        css: css`
+            background-color: #e5e5e5;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ` })}>
+        {isUploading &&
+          <Spinner label="Uploading..."></Spinner>
+        }
+
+        {url &&
+          <img width='180' height='180' src={url} />
+        }
+
+        {(!isUploading && !url) &&
+          <>
+            <input {...getInputProps()} />
+            <IconUpload size="xl" />
+          </>
+        }
       </div>
     </section>
   );
