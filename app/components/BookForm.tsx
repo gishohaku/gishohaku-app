@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import {
   Button,
   InputGroup,
@@ -7,6 +8,7 @@ import {
   Select,
   Check
 } from 'sancho'
+import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import { Book } from '../utils/firebase'
 import ImageUploader from './ImageUploader'
@@ -23,7 +25,7 @@ const initialState: Book = {
   price: 0,
   stock: 0,
   pages: 0,
-  images: ['https://firebasestorage.googleapis.com/v0/b/next-serverless-app.appspot.com/o/uploads%2F6BMdSGv5d5erVsBNUmGZvGCGEqi1%2F1557043311352?alt=media&token=e4629f3d-9a10-433f-9f86-814475e85a81'],
+  images: [],
   type: 'fanzine',
   isNew: false,
   medium: null,
@@ -34,22 +36,54 @@ const initialState: Book = {
 const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
   return <Formik initialValues={initialBook || initialState} onSubmit={(values, actions) => {
     onSubmit(values)
-  }} render={({ values, handleSubmit, handleChange, handleBlur }) => {
+  }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
     console.log(values)
     return <form onSubmit={handleSubmit}>
-      <InputGroup label="タイトル">
+      <InputGroup label="タイトル *">
         <Field name="title" component={CustomInput} />
       </InputGroup>
-      {
-        values.images && values.images.map(imageUrl => {
-          return <ImageUploader user={user} />
-        })
-      }
-      <ImageUploader user={user} />
+      <InputGroup label="画像" helpText="画像は最大1MB/4枚まで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
+        <div css={css`
+        overflow-x: auto;
+        `}>
+          <div css={css`
+            display: flex;
+          `}>
+            {
+              values.images && values.images.map((imageUrl, index) => {
+                return <span css={css`
+                  min-width: 180px;
+                  width: 180px;
+                  height: 180px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 1px solid #ddd;
+                  margin-right: 8px;
+              `}
+                  onClick={() => {
+                    if (confirm('画像を削除しますか？')) {
+                      setFieldValue('images', values.images.filter((v, i) => i != index))
+                    }
+                  }}
+                  key={index}
+                >
+                  <img src={imageUrl} />
+                </span>
+              })
+            }
+            {values.images.length < 4 &&
+              <ImageUploader user={user} addUrl={(url: string) => {
+                setFieldValue('images', [...values.images, url])
+              }} />
+            }
+          </div>
+        </div>
+      </InputGroup>
       <InputGroup label="価格">
         <Field name="price" type='number' component={CustomInput} />
       </InputGroup>
-      <InputGroup label="種別">
+      <InputGroup label="種別 *">
         <>
           <Check onChange={handleChange} type="radio" name="type" label="同人誌" value='fanzine' checked={values.type === 'fanzine'} />
           <Check onChange={handleChange} type="radio" name="type" label="商業誌" value='commerce' checked={values.type === 'commerce'} />
@@ -70,7 +104,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
         </Select>
       </InputGroup>
       <InputGroup label="説明">
-        <Field name="description" component={CustomTextarea} />
+        <Field name="description" component={CustomTextarea} rows={5} />
       </InputGroup>
       <InputGroup label="見本誌URL">
         <Field name="sampleUrl" component={CustomInput} />
@@ -84,7 +118,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
         </>
       </InputGroup>
       <Divider />
-      <Button block intent="primary">
+      <Button block intent="primary" loading={isSubmitting}>
         保存する
       </Button>
     </form>

@@ -8,33 +8,31 @@ import { Spinner, IconUpload } from 'sancho';
 
 interface Props {
   user: firebase.User
+  addUrl: Function
 }
 
-const ImageUploader: React.FC<Props> = (props) => {
+const ImageUploader: React.FC<Props> = ({ user, addUrl }) => {
   const [isUploading, setUploading] = useState(false)
-  const [url, setUrl] = useState('')
 
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: 'image/gif,image/jpeg,image/png,image/jpg',
     onDropAccepted: async (files) => {
       setUploading(true)
-      console.log('file is accepted')
-      console.log(files)
       const storageRef = firebase.storage().ref()
-      const ref = storageRef.child(`/uploads/${props.user.uid}/${Date.now()}`)
+      const ref = storageRef.child(`/uploads/${user.uid}/${Date.now()}`)
       console.log('begin upload')
       const snapshot = await ref.put(files[0])
-      console.log('Uploaded a blob or file!', snapshot);
       const url = await snapshot.ref.getDownloadURL()
       console.log(url)
-      setUrl(url)
+      addUrl(url)
       setUploading(false)
     },
-    onDropRejected: () => {
-      console.log('file is rejected')
+    onDropRejected: (files, event) => {
+      alert('画像アップロードに失敗しました')
     },
-    disabled: (isUploading || url.length > 0)
+    maxSize: 1000 * 1000 * 1,
+    disabled: isUploading
   });
 
   return (
@@ -42,6 +40,7 @@ const ImageUploader: React.FC<Props> = (props) => {
       <div {...getRootProps({
         css: css`
             background-color: #e5e5e5;
+            min-width: 180px;
             width: 180px;
             height: 180px;
             display: flex;
@@ -52,11 +51,7 @@ const ImageUploader: React.FC<Props> = (props) => {
           <Spinner label="Uploading..."></Spinner>
         }
 
-        {url &&
-          <img width='180' height='180' src={url} />
-        }
-
-        {(!isUploading && !url) &&
+        {(!isUploading) &&
           <>
             <input {...getInputProps()} />
             <IconUpload size="xl" />

@@ -35,7 +35,7 @@ export interface Book {
   price: number
   stock: number
   pages: number
-  images?: string[]
+  images: string[]
   // 商業/同人
   type: 'commerce' | 'fanzine'
   // 新刊か？
