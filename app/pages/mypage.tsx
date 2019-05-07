@@ -19,43 +19,42 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 
 const Mypage = (props: any) => {
-  const { user, isUserLoading } = useContext(UserContext)
+  const { user, isUserLoading, userData } = useContext(UserContext)
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState()
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user) {
+    setLoading(true)
+    if (!user || !userData || !userData.circleRef) {
       setLoading(false)
-    } else {
-      const db = firebase.firestore()
-      db.collection('users').doc(user.uid).get().then(async (doc) => {
-        const circleRef = doc.data()!.circleRef
-        // Promise.all
+      console.log('Not circle member', user, userData)
+      return () => { }
+    }
+    const db = firebase.firestore()
+      ; (async () => {
+        const circleRef = userData.circleRef!
         const circleSnapShot = await circleRef.get()
         setCircle(circleSnapShot.data())
-        if (circleRef) {
-          const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
-          let bookResults: Book[] = []
-          snapshots.forEach(book => {
-            const data = book.data()
-            bookResults.push({
-              id: book.id,
-              ...refToPath(data, 'circleRef') as Book
-            })
+        const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
+        let bookResults: Book[] = []
+        snapshots.forEach(book => {
+          const data = book.data()
+          bookResults.push({
+            id: book.id,
+            ...refToPath(data, 'circleRef') as Book
           })
-          setBooks(bookResults)
-        }
+        })
+        setBooks(bookResults)
         setLoading(false)
-      })
-    }
-  }, [user])
+      })()
+  }, [userData])
 
   console.log(isLoading, isUserLoading, books)
 
   if (isLoading || isUserLoading) {
     return <Layout>
-      <Spinner label="Loading..." center />
+      <Spinner size="xl" label="Loading..." center style={{ position: 'absolute' }} />
     </Layout>
   }
 
@@ -71,6 +70,10 @@ const Mypage = (props: any) => {
         Login
       </Button>
     </Layout>
+  }
+
+  if (userData && !userData.circleRef) {
+    return <Layout><p>サークルメンバー用のページです</p></Layout>
   }
 
   return (
@@ -102,11 +105,18 @@ const Mypage = (props: any) => {
         `}>
           {
             books.map(book => {
+              const metadata = [
+                book.type && `${book.type}`,
+                book.pages > 0 && `${book.pages}ページ`,
+                book.stock > 0 && `${book.stock}部頒布予定`,
+                book.medium && `${book.medium}`,
+              ].filter(el => el)
               return <div css={css`
                 background-color: white;
                 margin-bottom: 24px;
-                padding: 24px;
-
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+                border-radius: 8px;
               `} key={book.id}>
                 <div css={css`
                   display: flex;
@@ -114,26 +124,37 @@ const Mypage = (props: any) => {
                   margin-bottom: 20px;
                 `}>
                   <div>
-                    {book.title}
+                    <div css={css`
+                      font-size: 20px;
+                      font-weight: bold;
+                    `}>
+                      {book.title}
+                    </div>
                     <div css={css`
                       font-size: 13px;
                       opacity: 0.6;
                     `}>
-                      {book.type && `${book.type}`} /
-                      {book.pages && `${book.pages}ページ`} /
-                      {book.stock && `${book.stock}部頒布予定`} /
-                      {book.medium && `${book.medium}`} /
+                      {metadata.join("・")}
                     </div>
                   </div>
-                  <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`}>
-                    <span css={css`
+                  <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+                    <a css={css`
                       margin-left: auto;
                     `}>
                       Edit
-                    </span>
+                    </a>
                   </Link>
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: book.description }} />
+                <div css={css`
+                  opacity: 0.8;
+                `}>
+                  {/* TODO: HTMLをエスケープしつついい感じに改行を反映する */}
+                  {book.description.split(/\r\n|\n/).map((paragraph, index) => {
+                    return paragraph.length > 0 ? <p key={index}>{paragraph}</p> : <div key={index} css={css`
+                    margin-top: 0.5em;
+                  `} />
+                  })}
+                </div>
               </div>
             })
           }

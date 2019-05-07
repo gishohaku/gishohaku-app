@@ -5,11 +5,14 @@ import 'firebase/functions'
 import { Spinner, Button } from 'sancho'
 import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import UserContext from '../../contexts/UserContext';
+import router from 'next/router'
 
-const Join = (props: any) => {
-  const { user, isUserLoading } = useContext(UserContext)
+const Join: React.FC<{
+  router: any
+}> = (props) => {
+  const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
   const { circleId, token } = props.router.query
 
@@ -19,19 +22,31 @@ const Join = (props: any) => {
     const result = await receiveInvitation({ circleId, token })
     // TODO: メッセージの表示
     console.log(result)
+    await reloadUser()
     setProcessing(false)
-  }
-
-  if (isUserLoading) {
-    return <Spinner label="Loading..." center />
-  }
-
-  if (!user) {
-    return <Layout><p>サークルへの参加にはログインしてください</p></Layout>
+    router.push('/mypage')
   }
 
   if (!circleId || !token) {
     return <Layout><p>無効な招待URLです</p></Layout>
+  }
+
+  if (isUserLoading || (user && !userData)) {
+    return <Spinner label="Loading..." center />
+  }
+
+  if (!user) {
+    return <Layout>
+      <p>サークルへの参加にはログインしてください</p>
+      <Button onClick={() => {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+          console.log(result)
+        })
+      }}>
+        Login
+      </Button>
+    </Layout>
   }
 
   return (
