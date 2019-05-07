@@ -6,6 +6,7 @@ import {
 } from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
+import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
 import { Book } from '../../utils/firebase'
@@ -34,7 +35,7 @@ const BooksNew = (props: any) => {
 
   return (
     <Layout tab={props.router.query.tab}>
-      <Container>
+      <FormContainer>
         {book &&
           <BookForm user={user} book={book} onSubmit={(book) => {
             const db = firebase.firestore()
@@ -45,7 +46,7 @@ const BooksNew = (props: any) => {
             })
           }} />
         }
-      </Container>
+      </FormContainer>
     </Layout >
   )
 }
