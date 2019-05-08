@@ -1,8 +1,8 @@
 import React from "react"
 
 import Link from 'next/link'
-import Layout from "../layout"
-import SEO from "../seo"
+import Layout from "../Layout"
+import SEO from "../SEO"
 
 import Hero from "./hero"
 import Sections from "./sections"

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react"
 
 import { jsx, css } from "@emotion/core"
-import Link from 'next/Link'
+import Link from 'next/link'
 
 import logo from "../../images/logo.png"
 

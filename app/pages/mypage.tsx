@@ -9,14 +9,13 @@ import { jsx, css, Global } from '@emotion/core'
 
 import circleTumbnail from '../images/cirlceTumbnail.png'
 
-import {
-  Spinner, Button
-} from 'sancho'
+import { Button } from 'sancho'
 import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { refToPath, Book } from '../utils/firebase'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
+import Loader from '../components/Loader';
 
 const Mypage = (props: any) => {
   const { user, isUserLoading, userData } = useContext(UserContext)
@@ -54,7 +53,7 @@ const Mypage = (props: any) => {
 
   if (isLoading || isUserLoading) {
     return <Layout>
-      <Spinner size="xl" label="Loading..." center style={{ position: 'absolute' }} />
+      <Loader label="Loading..." />
     </Layout>
   }
 
@@ -95,8 +94,15 @@ const Mypage = (props: any) => {
         `}>
           {circle &&
             <>
-              <img src={circleTumbnail} />
-              {circle.name}
+              <img src={circleTumbnail} css={css`
+                margin-bottom: 8px;
+              `} />
+              <h2 css={css`
+                font-size: 20px;
+                font-weight: bold;
+              `}>
+                {circle.name}
+              </h2>
             </>
           }
         </div>
