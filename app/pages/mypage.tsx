@@ -9,14 +9,13 @@ import { jsx, css, Global } from '@emotion/core'
 
 import circleTumbnail from '../images/cirlceTumbnail.png'
 
-import {
-  Spinner, Button
-} from 'sancho'
+import { Button } from 'sancho'
 import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { refToPath, Book } from '../utils/firebase'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
+import Loader from '../components/Loader';
 
 const Mypage = (props: any) => {
   const { user, isUserLoading, userData } = useContext(UserContext)
@@ -35,7 +34,7 @@ const Mypage = (props: any) => {
       ; (async () => {
         const circleRef = userData.circleRef!
         const circleSnapShot = await circleRef.get()
-        setCircle(circleSnapShot.data())
+        setCircle({ id: circleSnapShot.id, ...circleSnapShot.data() })
         const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
         let bookResults: Book[] = []
         snapshots.forEach(book => {
@@ -54,7 +53,7 @@ const Mypage = (props: any) => {
 
   if (isLoading || isUserLoading) {
     return <Layout>
-      <Spinner size="xl" label="Loading..." center style={{ position: 'absolute' }} />
+      <Loader label="Loading..." />
     </Layout>
   }
 
@@ -95,8 +94,18 @@ const Mypage = (props: any) => {
         `}>
           {circle &&
             <>
-              <img src={circleTumbnail} />
-              {circle.name}
+              <img src={circleTumbnail} css={css`
+                margin-bottom: 8px;
+              `} />
+              <h2 css={css`
+                font-size: 20px;
+                font-weight: bold;
+              `}>
+                {circle.name}
+              </h2>
+              <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
+                <a>編集</a>
+              </Link>
             </>
           }
         </div>

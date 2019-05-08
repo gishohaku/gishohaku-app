@@ -1,11 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import {
-  Container, Spinner
-} from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
+import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
@@ -14,7 +12,7 @@ import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
   const [book, setBook] = useState()
-  const { user } = useContext(UserContext)
+  const { user, isUserLoading, userData } = useContext(UserContext)
 
   useEffect(() => {
     const id = props.router.query.id
@@ -29,23 +27,25 @@ const BooksNew = (props: any) => {
       })
   }, [props.router.query.id])
 
-  if (!user) {
-    return <Spinner />
+  if (isUserLoading || !user || !book) {
+    return <Layout><Loader /></Layout>
+  }
+
+  if (!isUserLoading && (!userData || !userData.circleRef)) {
+    return <Layout><p>サークル専用ページです。</p></Layout>
   }
 
   return (
     <Layout tab={props.router.query.tab}>
       <FormContainer>
-        {book &&
-          <BookForm user={user} book={book} onSubmit={(book) => {
-            const db = firebase.firestore()
+        <BookForm user={user} book={book} onSubmit={(book) => {
+          const db = firebase.firestore()
+          const id = props.router.query.id
+          db.collection("books").doc(id).update(book).then((docRef) => {
             const id = props.router.query.id
-            db.collection("books").doc(id).update(book).then((docRef) => {
-              const id = props.router.query.id
-              router.push(`/books/_id?id=${id}`, `/books/${id}`)
-            })
-          }} />
-        }
+            router.push(`/books/_id?id=${id}`, `/books/${id}`)
+          })
+        }} />
       </FormContainer>
     </Layout >
   )

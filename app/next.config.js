@@ -16,5 +16,12 @@ module.exports = withImages(withCSS(withMDX(withTypescript({
     STORAGE_BUCKET: process.env.STORAGE_BUCKET
   },
   // target: 'serverless',
-  distDir: '../dist/functions/next'
+  distDir: '../dist/functions/next',
+  exportPathMap: () => {
+    return {
+      '/': { page: '/' },
+      '/mdx': { page: '/mdx' }
+    }
+
+  }
 }))))

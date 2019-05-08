@@ -3,33 +3,25 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx, css } from '@emotion/core'
 
-import {
-  Spinner,
-} from 'sancho'
 import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
+import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
-  const { user } = useContext(UserContext)
-  const [circleRef, setCircleRef] = useState(null)
-  useEffect(() => {
-    if (!user) {
-      setCircleRef(null)
-    } else {
-      const db = firebase.firestore()
-      db.collection('users').doc(user.uid).get().then((doc) => {
-        const userCircleRef = doc.data()!.circleRef
-        setCircleRef(userCircleRef)
-      })
-    }
-  }, [user])
+  const { user, isUserLoading, userData } = useContext(UserContext)
+  const circleRef = userData && userData.circleRef
+  console.log(user, userData)
 
-  if (!user) {
-    return <Spinner />
+  if (isUserLoading || !user ) {
+    return <Layout><Loader /></Layout>
+  }
+
+  if (!isUserLoading && (!userData || !userData.circleRef)) {
+    return <Layout><p>サークル専用ページです。</p></Layout>
   }
 
   return (
