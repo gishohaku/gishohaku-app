@@ -13,14 +13,33 @@ import { Button } from 'sancho'
 import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { refToPath, Book } from '../utils/firebase'
+import Circle, { categories } from '../utils/circle'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
 
+const Label: React.FC<{
+  text: string
+  color?: string
+  backgroundColor?: string
+}> = ({ text, color, backgroundColor }) => {
+
+  return <p css={css`
+    font-size: 12px;
+    padding: 4px 8px;
+    line-height: 1.2;
+    display: inline-block;
+    background-color: ${backgroundColor || '#e1e5ec'};
+    border-radius: 2px;
+    margin-right: 4px;
+    color: ${color || 'rgba(0, 0, 0, 0.8)'};
+  `}>{text}</p>
+}
+
 const Mypage = (props: any) => {
   const { user, isUserLoading, userData } = useContext(UserContext)
   const [books, setBooks] = useState<Book[]>([])
-  const [circle, setCircle] = useState()
+  const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -97,15 +116,32 @@ const Mypage = (props: any) => {
               <img src={circleTumbnail} css={css`
                 margin-bottom: 8px;
               `} />
+              {/* <p css={css`
+                font-size: 12px;
+                padding: 2px 8px;
+                display: inline-block;
+                background-color: #e1e5ec;
+                border-radius: 2px;
+                color: rgba(0, 0, 0, 0.6);
+              `}>{categories[circle.category]}</p> */}
+              <Label text={categories[circle.category]} />
               <h2 css={css`
                 font-size: 20px;
                 font-weight: bold;
+                margin-top: 2px;
               `}>
                 {circle.name}
               </h2>
-              <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
-                <a>編集</a>
-              </Link>
+              <a css={css`
+                font-size: 12px;
+              `} href={circle.website}>
+                {circle.website}
+              </a>
+              <div>
+                <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
+                  <a>編集</a>
+                </Link>
+              </div>
             </>
           }
         </div>
@@ -143,6 +179,7 @@ const Mypage = (props: any) => {
                       font-size: 13px;
                       opacity: 0.6;
                     `}>
+                      {book.isNew && <Label backgroundColor={'red'} color={'white'} text='新刊' />}
                       {metadata.join("・")}
                     </div>
                   </div>
