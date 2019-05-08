@@ -26,6 +26,15 @@ const Layout = props => {
   const { user } = useContext(UserContext)
 
   return <>
+    <Global styles={css`
+      @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700);
+      body {
+        /* TODO: 諸々指定 */
+        font-family: "Noto Sans JP";
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings : "palt";
+      }
+    `} />
     {!props.hideHeader &&
       <header
         css={css`
@@ -50,6 +59,11 @@ const Layout = props => {
               `}
               alt="技術書同人誌博覧会"
             />
+          </a>
+        </Link>
+        <Link href="/mypage">
+          <a>
+            マイページ
           </a>
         </Link>
         {/* <Tabs
