@@ -62,10 +62,10 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 }}
               >
                 <img src={values.image} />
-            </span> :
-            <ImageUploader user={user} addUrl={(url: string) => {
-              setFieldValue('images', url)
-            }} />
+              </span> :
+              <ImageUploader user={user} addUrl={(url: string) => {
+                setFieldValue('image', url)
+              }} />
           }
         </div>
       </InputGroup>

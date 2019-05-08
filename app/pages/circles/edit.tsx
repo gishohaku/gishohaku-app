@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import Layout from '../../components/Layout'
-import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
@@ -20,7 +19,7 @@ interface Circle {
   image: string
   category: CricleCategory
   // 通常サークル / 倍量サークル
-  type: 'normal' | 'premium'
+  plan: 'normal' | 'premium'
 }
 
 const BooksNew = (props: any) => {
@@ -51,14 +50,11 @@ const BooksNew = (props: any) => {
   return (
     <Layout tab={props.router.query.tab}>
       <FormContainer>
-        <CircleForm user={user} circle={circle} onSubmit={(circle) => {
+        <CircleForm user={user} circle={circle} onSubmit={async (circle) => {
           const db = firebase.firestore()
           const id = props.router.query.id
-          db.collection("circles").doc(id).update(circle).then((docRef) => {
-            const id = props.router.query.id
-            console.log(docRef)
-            // router.push(`/books/_id?id=${id}`, `/books/${id}`)
-          })
+          await db.collection("circles").doc(id).update(circle)
+          router.push(`/mypage`)
         }} />
       </FormContainer>
     </Layout >
