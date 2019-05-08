@@ -34,7 +34,7 @@ const Mypage = (props: any) => {
       ; (async () => {
         const circleRef = userData.circleRef!
         const circleSnapShot = await circleRef.get()
-        setCircle(circleSnapShot.data())
+        setCircle({ id: circleSnapShot.id, ...circleSnapShot.data() })
         const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
         let bookResults: Book[] = []
         snapshots.forEach(book => {
@@ -103,6 +103,9 @@ const Mypage = (props: any) => {
               `}>
                 {circle.name}
               </h2>
+              <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
+                <a>編集</a>
+              </Link>
             </>
           }
         </div>
