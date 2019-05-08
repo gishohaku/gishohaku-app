@@ -1,33 +1,14 @@
 /** @jsx jsx */
-import {
-  Button,
-  InputGroup,
-  Input,
-  TextArea,
-  Divider,
-  Select,
-  Check
-} from 'sancho'
+import { Button, InputGroup, Input, TextArea, Divider, Select, } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
-import { Book } from '../utils/firebase'
+import Circle, { categories, CricleCategory, plans, CriclePlan } from '../utils/circle'
 import ImageUploader from './ImageUploader'
 
 interface Props {
   onSubmit: (circle: Circle) => void,
   user: firebase.User,
   circle: Circle
-}
-
-type CricleCategory = 'software/frontend' | 'software/backend' | 'software/etc' | 'software/ml' | 'software/low-layer' | 'infra' | 'hardware' | 'etc'
-
-interface Circle {
-  name: string
-  nameKana: string
-  image: string
-  category: CricleCategory
-  // 通常サークル / 倍量サークル
-  plan: 'normal' | 'premium'
 }
 
 const CircleForm = ({ onSubmit, user, circle }: Props) => {
@@ -41,7 +22,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
       </InputGroup>
       <InputGroup label="画像" helpText="画像は最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
         <div css={css`
-        overflow-x: auto;
+          overflow-x: auto;
         `}>
           {
             values.image.length > 0 ?
@@ -72,14 +53,25 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
       <InputGroup label="プラン *">
         <Select name="plan" onChange={handleChange} onBlur={handleBlur} value={values.plan} disabled>
           <option>選択してください</option>
-          <option value="normal">通常プラン</option>
-          <option value="premium">倍量プラン</option>
+          {
+            Object.keys(plans).map((key) => {
+              const planKey = key as CriclePlan
+              const label = plans[planKey]
+              return <option value={key} key={key}>{label}</option>
+            })
+          }
         </Select>
       </InputGroup>
       <InputGroup label="ジャンル">
         <Select name="category" onChange={handleChange} onBlur={handleBlur} value={values.category}>
           <option>選択してください</option>
-          <option value="software/frontend">ソフトウェア/フロントエンド</option>
+          {
+            Object.keys(categories).map((key) => {
+              const categoryKey = key as CricleCategory
+              const label = categories[categoryKey]
+              return <option value={key} key={key}>{label}</option>
+            })
+          }
         </Select>
       </InputGroup>
       <Divider />
