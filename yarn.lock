@@ -753,19 +753,13 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
 "@babel/runtime@7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.2.tgz#81c89935f4647706fc54541145e6b4ecfef4b8e3"
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.2":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.2":
   version "7.4.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.3.tgz#79888e452034223ad9609187a0ad1fe0d2ad4bdc"
   dependencies:
@@ -898,9 +892,10 @@
     "@emotion/utils" "0.11.1"
     object-assign "^4.1.1"
 
-"@emotion/styled@^10.0.10":
-  version "10.0.10"
-  resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-10.0.10.tgz#ec241a9389a585b2c2638b709c262c28469ed92e"
+"@emotion/styled@^10.0.11":
+  version "10.0.11"
+  resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-10.0.11.tgz#f749ca95bfe398b3e511b65ea14b16984f049e6d"
+  integrity sha512-c/M/JJHTQuqdY9viSZD41ccCJDe07/VMrj+JgOcyb8uDnRAr+3cCQ03tyrgl72bQD0YWcjXHhpA7Ja9S3+vuRw==
   dependencies:
     "@emotion/styled-base" "^10.0.10"
     babel-plugin-emotion "^10.0.9"
@@ -1263,6 +1258,11 @@
   version "0.12.2"
   resolved "https://registry.yarnpkg.com/@types/caseless/-/caseless-0.12.2.tgz#f65d3d6389e01eeb458bd54dc8f52b95a9463bc8"
 
+"@types/classnames@^2.2.7":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.7.tgz#fb68cc9be8487e6ea5b13700e759bfbab7e0fefd"
+  integrity sha512-rzOhiQ55WzAiFgXRtitP/ZUT8iVNyllEpylJ5zHzR4vArUvMB39GTk+Zon/uAM0JxEFAWnwsxC2gH8s+tZ3Myg==
+
 "@types/color-convert@*":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@types/color-convert/-/color-convert-1.9.0.tgz#bfa8203e41e7c65471e9841d7e306a7cd8b5172d"
@@ -1374,9 +1374,14 @@
   version "8.10.47"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.47.tgz#e19b2f50f68697013db9e8abb5ad3ddc30faaa0b"
 
-"@types/prop-types@*", "@types/prop-types@^15.7.0":
+"@types/prop-types@*":
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
+
+"@types/prop-types@15.7.0":
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
+  integrity sha512-eItQyV43bj4rR3JPV0Skpl1SncRCdziTEK9/v8VwXmV6d/qOUO8/EuWeHBbCZcsfSHfzI5UyMJLCSXtxxznyZg==
 
 "@types/protobufjs@^5.0.31":
   version "5.0.31"
@@ -1730,10 +1735,6 @@ amphtml-validator@1.0.23:
     colors "1.1.2"
     commander "2.9.0"
     promise "7.1.1"
-
-animated-scroll-to@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/animated-scroll-to/-/animated-scroll-to-1.2.2.tgz#d6688e72f3ecec1a296fc2b36fe29290e7fff694"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -2507,9 +2508,10 @@ compressible@^2.0.12:
   dependencies:
     mime-db ">= 1.40.0 < 2"
 
-compute-scroll-into-view@1.0.11:
+compute-scroll-into-view@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.11.tgz#7ff0a57f9aeda6314132d8994cce7aeca794fecf"
+  integrity sha512-uUnglJowSe0IPmWOdDtrlHXof5CTIJitfJEyITHBW6zDVOGu9Pjk5puaLM73SLcwak0L4hEjO7Td88/a6P5i7A==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -2922,12 +2924,6 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-dom-helpers@^3.2.1:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-
 dom-storage@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dom-storage/-/dom-storage-2.1.0.tgz#00fb868bc9201357ea243c7bcfd3304c1e34ea39"
@@ -3239,7 +3235,7 @@ faye-websocket@0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.0, fbjs@^0.8.4:
+fbjs@^0.8.0:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -4373,10 +4369,6 @@ jws@^3.1.4, jws@^3.1.5, jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-keycode@^2.1.7:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
-
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -5493,7 +5485,7 @@ prop-types@15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -5665,18 +5657,30 @@ react-error-overlay@5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.4.tgz#88dfb88857c18ceb3b9f95076f850d7121776991"
 
-react-event-listener@^0.6.0:
-  version "0.6.6"
-  resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.6.tgz#758f7b991cad9086dd39fd29fad72127e1d8962a"
-  dependencies:
-    "@babel/runtime" "^7.2.0"
-    prop-types "^15.6.0"
-    warning "^4.0.1"
-
 react-fast-compare@^2.0.1, react-fast-compare@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
+react-gesture-responder@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-gesture-responder/-/react-gesture-responder-2.0.1.tgz#39ab40424bba5dc2216b6cc86cac1ba969cff4fb"
+  integrity sha512-m7rA9IKPtsmPtC94+Q+dpbVtun5yDbm9ayMP63VMRlOTqaqIdbKfyhG+uYqaooxKeFa60Bpjw4IyQm4gi/SIvw==
+  dependencies:
+    "@types/react" "^16.8.10"
+    "@types/react-dom" "^16.8.3"
+    tslib "^1.9.3"
+
+react-gesture-view@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-gesture-view/-/react-gesture-view-1.1.0.tgz#f7b0220861185efd4e6260d751f95de3baf4ec7f"
+  integrity sha512-EVUw4jdEy+a556Y2HmwWQCkw7a7o2r5ZoGpRGj/qD9cF4kONT4ICTUHjA0/HaYyL9MrjG6QIGIoo4CD1FTOVRQ==
+  dependencies:
+    "@types/react" "^16.8.10"
+    "@types/react-dom" "^16.8.3"
+    react-spring "^9.0.0-beta.5"
+    resize-observer-polyfill "^1.5.1"
+    tslib "^1.9.3"
 
 react-helmet@^5.2.1:
   version "5.2.1"
@@ -5731,6 +5735,14 @@ react-spring@^8.0.18:
   dependencies:
     "@babel/runtime" "^7.3.1"
 
+react-spring@^9.0.0-beta.5, react-spring@^9.0.0-beta.6:
+  version "9.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.0.0-beta.7.tgz#d0e3bee6b9af6183516bde78ba84512451df660d"
+  integrity sha512-oPv10GSiq13EDz7QFaqdIKouFbk5cz4NL+Tyzgjr9pZQUumZCWRKrUJdLKfpXIggaQMijLzwNyLJgdXtFe7QBA==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    prop-types "^15.5.8"
+
 react-ssr-prepass@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-ssr-prepass/-/react-ssr-prepass-1.0.2.tgz#f411414cbc043a90254cddcef0793b2aaf14b086"
@@ -5743,39 +5755,6 @@ react-style-singleton@^1.1.0:
   dependencies:
     invariant "^2.2.4"
     tslib "^1.0.0"
-
-react-swipeable-views-core@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views-core/-/react-swipeable-views-core-0.13.1.tgz#8829a922462a8bdd701709cd1b385393d38f1527"
-  dependencies:
-    "@babel/runtime" "7.0.0"
-    warning "^4.0.1"
-
-react-swipeable-views-utils@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views-utils/-/react-swipeable-views-utils-0.13.1.tgz#8e604af7316d409f22d8c47f841859dc150df30b"
-  dependencies:
-    "@babel/runtime" "7.0.0"
-    fbjs "^0.8.4"
-    keycode "^2.1.7"
-    prop-types "^15.6.0"
-    react-event-listener "^0.6.0"
-    react-swipeable-views-core "^0.13.1"
-
-react-swipeable-views@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/react-swipeable-views/-/react-swipeable-views-0.13.1.tgz#4f074280b09d2247d284a6e3831fd3763ee0ed39"
-  dependencies:
-    "@babel/runtime" "7.0.0"
-    dom-helpers "^3.2.1"
-    prop-types "^15.5.4"
-    react-swipeable-views-core "^0.13.1"
-    react-swipeable-views-utils "^0.13.1"
-    warning "^4.0.1"
-
-react-with-gesture@^4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/react-with-gesture/-/react-with-gesture-4.0.8.tgz#ce6db9e667ef13120797e641f1a00f934aed6c36"
 
 react@^16.8.6:
   version "16.8.6"
@@ -6077,34 +6056,37 @@ safe-regex@^1.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-sancho@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/sancho/-/sancho-1.2.3.tgz#f1246d2e40912505ba13b252a782dad36dac746c"
+sancho@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/sancho/-/sancho-3.1.0.tgz#7f16fb49a2b344f842ae627817174fd0e9c793e0"
+  integrity sha512-nHU4CfhCodMzudfSMoyNsrF1sFBv9gpygC0woE8Mn2CXbu3W3yVxcJJBtQJrnAwxvhFch0i6his3+e8CBH6jzg==
   dependencies:
     "@reach/alert" "^0.1.2"
     "@reach/skip-nav" "^0.1.2"
     "@reach/visually-hidden" "^0.1.2"
+    "@types/classnames" "^2.2.7"
     "@types/color" "^3.0.0"
     "@types/lodash.uniqueid" "^4.0.5"
-    "@types/prop-types" "^15.7.0"
+    "@types/prop-types" "15.7.0"
     "@types/react" "16.8.4"
     "@types/react-dom" "16.8.2"
     "@types/react-swipeable-views" "^0.12.2"
-    animated-scroll-to "^1.2.2"
+    classnames "^2.2.6"
     color "^3.1.0"
+    compute-scroll-into-view "^1.0.11"
     focus-trap "5"
     is-mobile "^2.0.0"
     open-color "^1.6.3"
     popper.js "^1.14.7"
     prop-types "^15.7.2"
+    react-gesture-responder "^2.0.1"
+    react-gesture-view "^1.1.0"
     react-popper "^1.3.3"
     react-remove-scroll "^1.0.4"
-    react-spring "^8.0.18"
-    react-swipeable-views "^0.13.1"
-    react-with-gesture "^4.0.8"
+    react-spring "^9.0.0-beta.6"
     resize-observer-polyfill "^1.5.1"
-    scroll-into-view-if-needed "^2.2.20"
     toasted-notes "^2.1.5"
+    touchable-hook "^1.2.1"
     tslib "^1.9.3"
     use-media "^1.2.0"
 
@@ -6133,12 +6115,6 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
-
-scroll-into-view-if-needed@^2.2.20:
-  version "2.2.20"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.20.tgz#3a46847a72233a3af9770e55df450f2a7f2e2a0e"
-  dependencies:
-    compute-scroll-into-view "1.0.11"
 
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
   version "5.7.0"
@@ -6723,6 +6699,15 @@ toasted-notes@^2.1.5:
     "@types/react-dom" "^16.8.3"
     react-spring "^8.0.18"
 
+touchable-hook@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/touchable-hook/-/touchable-hook-1.2.1.tgz#0791f3e05ff441827470bcd544cd44465344dd21"
+  integrity sha512-bXey/2YFuLtHDkoGoGigfXjUlnM0H5jUHNJUVrNZ5fCD6lNAb3Bkwz2prNUkowa99Ul48MlDOq0do+lQtgThmw==
+  dependencies:
+    "@types/react" "^16.8.10"
+    "@types/react-dom" "^16.8.3"
+    tslib "^1.9.3"
+
 tough-cookie@~2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.4.3.tgz#53f36da3f47783b0925afa06ff9f3b165280f781"
@@ -7087,7 +7072,7 @@ walkdir@^0.3.0, walkdir@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/walkdir/-/walkdir-0.3.2.tgz#ac8437a288c295656848ebc19981ebc677a5f590"
 
-warning@^4.0.1, warning@^4.0.2:
+warning@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
   dependencies:
