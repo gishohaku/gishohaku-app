@@ -18,6 +18,7 @@ import Book, { types, mediums } from '../utils/book'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
+import { media } from '../utils/style'
 
 const Label: React.FC<{
   text: string
@@ -108,10 +109,17 @@ const Mypage = (props: any) => {
         padding: 0 16px;
         margin: 32px auto;
         display: flex;
+        @media ${media.medium} {
+          flex-direction: column;
+          align-items: center;
+        }
       `}>
         <div css={css`
           width: 258px;
           margin-right: 48px;
+          @media ${media.medium} {
+            margin: 0 0 24px;
+          }
         `}>
           {circle &&
             <>

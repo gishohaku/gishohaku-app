@@ -13,4 +13,5 @@ const breakpoints = {
 
 export const media = {
   small: `screen and (max-width: ${(breakpoints.small - 1)}px)`,
+  medium: `screen and (max-width: ${(breakpoints.medium - 1)}px)`,
 };
