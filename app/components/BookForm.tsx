@@ -10,7 +10,7 @@ import {
 } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
-import { Book } from '../utils/firebase'
+import Book, { types, mediums, BookMedium, BookType } from '../utils/book'
 import ImageUploader from './ImageUploader'
 
 interface Props {
@@ -85,8 +85,13 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
       </InputGroup>
       <InputGroup label="種別 *">
         <>
-          <Check onChange={handleChange} type="radio" name="type" label="同人誌" value='fanzine' checked={values.type === 'fanzine'} />
-          <Check onChange={handleChange} type="radio" name="type" label="商業誌" value='commerce' checked={values.type === 'commerce'} />
+          {
+            Object.keys(types).map((key) => {
+              const typeKey = key as BookType
+              const label = types[typeKey]
+              return <Check onChange={handleChange} type="radio" name="type" label={label} value={key} key={key} checked={values.type === key} />
+            })
+          }
         </>
       </InputGroup>
       <InputGroup label="頒布予定数">
@@ -96,11 +101,15 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
         <Field name="pages" type='number' component={CustomInput} />
       </InputGroup>
       <InputGroup label="媒体">
-        <Select name="medium" onChange={handleChange} onBlur={handleBlur}>
+        <Select name="medium" onChange={handleChange} onBlur={handleBlur} value={values.medium}>
           <option>選択してください</option>
-          <option value="degital">電子媒体</option>
-          <option value="paper">紙媒体</option>
-          <option value="both">両方</option>
+          {
+            Object.keys(mediums).map((key) => {
+              const mediumKey = key as BookMedium
+              const label = mediums[mediumKey]
+              return <option value={key} key={key}>{label}</option>
+            })
+          }
         </Select>
       </InputGroup>
       <InputGroup label="説明">

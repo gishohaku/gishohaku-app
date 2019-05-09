@@ -6,7 +6,8 @@ import styled from '@emotion/styled'
 import Layout from '../../components/Layout'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
-import { refToPath, Book } from '../../utils/firebase'
+import { refToPath } from '../../utils/firebase'
+import Book from '../../utils/book'
 
 const Content = styled.div`
   max-width: 720px;

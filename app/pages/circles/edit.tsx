@@ -6,7 +6,7 @@ import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
-import { Book } from '../../utils/firebase'
+import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext';
 import CircleForm from '../../components/CircleForm';
 

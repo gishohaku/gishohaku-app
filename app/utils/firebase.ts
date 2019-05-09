@@ -27,23 +27,3 @@ export const refToPath = <T, U extends keyof T>(docData: T, pathField: U) => {
     [pathField]: fieldId
   }
 }
-
-export interface Book {
-  id?: string
-  title: string
-  description: string
-  price: number
-  stock: number
-  pages: number
-  images: string[]
-  // 商業/同人
-  type: 'commerce' | 'fanzine'
-  // 新刊か？
-  isNew: boolean
-  // 頒布形態
-  medium: 'degital' | 'paper' | 'both' | null
-
-  sampleUrl: string
-  purchaseUrl: string
-  circleRef?: any
-}

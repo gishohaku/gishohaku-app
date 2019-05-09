@@ -10,7 +10,8 @@ import {
 } from 'sancho'
 import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
-import { initFirebase, refToPath, Book } from '../../utils/firebase'
+import { initFirebase, refToPath } from '../../utils/firebase'
+import Book from '../../utils/book'
 
 const Index = (props: any) => {
   return (

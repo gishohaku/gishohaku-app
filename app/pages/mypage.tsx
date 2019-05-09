@@ -12,8 +12,9 @@ import circleTumbnail from '../images/cirlceTumbnail.png'
 import { Button } from 'sancho'
 import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
-import { refToPath, Book } from '../utils/firebase'
+import { refToPath } from '../utils/firebase'
 import Circle, { categories } from '../utils/circle'
+import Book, { types, mediums } from '../utils/book'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
@@ -25,14 +26,15 @@ const Label: React.FC<{
 }> = ({ text, color, backgroundColor }) => {
 
   return <p css={css`
-    font-size: 12px;
+    font-size: 12px ;
     padding: 4px 8px;
     line-height: 1.2;
     display: inline-block;
     background-color: ${backgroundColor || '#e1e5ec'};
     border-radius: 2px;
     margin-right: 4px;
-    color: ${color || 'rgba(0, 0, 0, 0.8)'};
+    color: ${color || 'rgba(0, 0, 0, 0.6)'};
+    font-weight: bold;
   `}>{text}</p>
 }
 
@@ -116,14 +118,8 @@ const Mypage = (props: any) => {
               <img src={circleTumbnail} css={css`
                 margin-bottom: 8px;
               `} />
-              {/* <p css={css`
-                font-size: 12px;
-                padding: 2px 8px;
-                display: inline-block;
-                background-color: #e1e5ec;
-                border-radius: 2px;
-                color: rgba(0, 0, 0, 0.6);
-              `}>{categories[circle.category]}</p> */}
+              {/* TODO: サークル名, firestoreのルールで編集不可にする */}
+              <Label backgroundColor={'#2A5773'} color={'white'} text='あ01' />
               <Label text={categories[circle.category]} />
               <h2 css={css`
                 font-size: 20px;
@@ -151,10 +147,10 @@ const Mypage = (props: any) => {
           {
             books.map(book => {
               const metadata = [
-                book.type && `${book.type}`,
+                book.type && `${types[book.type]}`,
                 book.pages > 0 && `${book.pages}ページ`,
                 book.stock > 0 && `${book.stock}部頒布予定`,
-                book.medium && `${book.medium}`,
+                book.medium && `${mediums[book.medium]}`,
               ].filter(el => el)
               return <div css={css`
                 background-color: white;
@@ -177,10 +173,13 @@ const Mypage = (props: any) => {
                     </div>
                     <div css={css`
                       font-size: 13px;
-                      opacity: 0.6;
                     `}>
-                      {book.isNew && <Label backgroundColor={'red'} color={'white'} text='新刊' />}
-                      {metadata.join("・")}
+                      {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text='新刊' />}
+                      <span css={css`
+                        opacity: 0.6;
+                      `}>
+                        {metadata.join("・")}
+                      </span>
                     </div>
                   </div>
                   <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
