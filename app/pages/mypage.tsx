@@ -7,7 +7,7 @@ import 'firebase/functions'
 
 import { jsx, css, Global } from '@emotion/core'
 
-import circleTumbnail from '../images/cirlceTumbnail.png'
+import circleTumbnail from '../images/circle.png'
 
 import { Button } from 'sancho'
 import Layout from '../components/Layout'
@@ -19,6 +19,7 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
 import { media } from '../utils/style'
+import ImageBox from '../components/ImageBox';
 
 const Label: React.FC<{
   text: string
@@ -56,7 +57,7 @@ const Mypage = (props: any) => {
       ; (async () => {
         const circleRef = userData.circleRef!
         const circleSnapShot = await circleRef.get()
-        setCircle({ id: circleSnapShot.id, ...circleSnapShot.data() })
+        setCircle({ id: circleSnapShot.id, ...circleSnapShot.data() as Circle })
         const snapshots = await db.collection('books').where("circleRef", "==", circleRef).get()
         let bookResults: Book[] = []
         snapshots.forEach(book => {
@@ -123,12 +124,17 @@ const Mypage = (props: any) => {
         `}>
           {circle &&
             <>
-              <img src={circleTumbnail} css={css`
+              {/* <img src={circleTumbnail} css={css`
                 margin-bottom: 8px;
-              `} />
+              `} /> */}
+              <ImageBox width={258} size='circlecut' imageUrl={circleTumbnail} />
               {/* TODO: サークル名, firestoreのルールで編集不可にする */}
-              <Label backgroundColor={'#2A5773'} color={'white'} text='あ01' />
-              <Label text={categories[circle.category]} />
+              <div css={css`
+                margin-top: 8px;
+              `}>
+                <Label backgroundColor={'#2A5773'} color={'white'} text='あ01' />
+                <Label text={categories[circle.category]} />
+              </div>
               <h2 css={css`
                 font-size: 20px;
                 font-weight: bold;
@@ -198,8 +204,16 @@ const Mypage = (props: any) => {
                     </a>
                   </Link>
                 </div>
+                <div>
+                  {
+                    book.images.map((image, index) => {
+                      return <ImageBox imageUrl={image} size='square' key={index} />
+                    })
+                  }
+                </div>
                 <div css={css`
                   opacity: 0.8;
+                  margin-top: 12px;
                 `}>
                   {/* TODO: HTMLをエスケープしつついい感じに改行を反映する */}
                   {book.description.split(/\r\n|\n/).map((paragraph, index) => {

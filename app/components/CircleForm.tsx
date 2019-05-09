@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categories, CricleCategory, plans, CriclePlan } from '../utils/circle'
 import ImageUploader from './ImageUploader'
+import ImageBox from './ImageBox';
 
 interface Props {
   onSubmit: (circle: Circle) => void,
@@ -26,25 +27,15 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
         `}>
           {
             values.image.length > 0 ?
-              <span css={css`
-                min-width: 180px;
-                width: 180px;
-                height: 180px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid #ddd;
-                margin-right: 8px;
-            `}
+              <ImageBox
+                imageUrl={values.image}
+                size='circlecut'
                 onClick={() => {
                   if (confirm('画像を削除しますか？')) {
                     setFieldValue('image', '')
                   }
                 }}
-              >
-                <img src={values.image} />
-              </span> :
-              <ImageUploader user={user} addUrl={(url: string) => {
+              /> : <ImageUploader user={user} addUrl={(url: string) => {
                 setFieldValue('image', url)
               }} />
           }

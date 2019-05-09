@@ -12,6 +12,7 @@ import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Book, { types, mediums, BookMedium, BookType } from '../utils/book'
 import ImageUploader from './ImageUploader'
+import ImageBox from './ImageBox';
 
 interface Props {
   onSubmit: (book: Book) => void,
@@ -51,25 +52,16 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
           `}>
             {
               values.images && values.images.map((imageUrl, index) => {
-                return <span css={css`
-                  min-width: 180px;
-                  width: 180px;
-                  height: 180px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  border: 1px solid #ddd;
-                  margin-right: 8px;
-              `}
+                return <ImageBox
+                  imageUrl={imageUrl}
+                  size='square'
                   onClick={() => {
                     if (confirm('画像を削除しますか？')) {
                       setFieldValue('images', values.images.filter((v, i) => i != index))
                     }
                   }}
                   key={index}
-                >
-                  <img src={imageUrl} />
-                </span>
+                />
               })
             }
             {values.images.length < 4 &&
