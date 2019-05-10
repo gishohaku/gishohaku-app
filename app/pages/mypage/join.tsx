@@ -37,7 +37,9 @@ const Join: React.FC<{
   }
 
   if (isUserLoading || (user && !userData)) {
-    return <Spinner label="Loading..." center />
+    return <Layout>
+      <Spinner label="Loading..." center />
+    </Layout>
   }
 
   if (!user) {

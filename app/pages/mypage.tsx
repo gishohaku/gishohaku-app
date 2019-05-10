@@ -133,7 +133,7 @@ const Mypage = (props: any) => {
               {/* <img src={circleTumbnail} css={css`
                 margin-bottom: 8px;
               `} /> */}
-              <ImageBox width={258} size='circlecut' imageUrl={circleTumbnail} />
+              <ImageBox width={258} size='circlecut' imageUrl={circle.image || circleTumbnail} />
               {/* TODO: サークル名, firestoreのルールで編集不可にする */}
               <div css={css`
                 margin-top: 8px;

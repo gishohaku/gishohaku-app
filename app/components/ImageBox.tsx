@@ -19,17 +19,27 @@ const ImageBox: React.FC<ImageBoxProps> = (props) => {
     justify-content: center;
     border: 1px solid #ddd;
     margin-right: 8px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+
     &:last-child {
       margin-right: 0;
     }
-    &:after {
+    &:before {
       display: inline-block;
       content: " ";
       padding-bottom: ${size === 'square' ? '100%' : '142%'};
       position: relative;
+      width: 100%;
+      background-color: white;
+      z-index: -1;
     }
-`} {...otherProps}>
-    <img src={props.imageUrl} />
+`} style={{
+      backgroundImage: `url(${props.imageUrl})`
+    }} {...otherProps}>
+    {/* <img src={props.imageUrl} /> */}
   </span>
 }
 
