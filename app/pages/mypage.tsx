@@ -6,6 +6,7 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css, Global } from '@emotion/core'
+import marked from 'marked'
 
 import circleTumbnail from '../images/circle.png'
 
@@ -18,6 +19,7 @@ import Book, { types, mediums } from '../utils/book'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
+import TextBlock from '../components/atoms/TextBlock';
 import { media } from '../utils/style'
 import ImageBox from '../components/ImageBox';
 
@@ -114,6 +116,10 @@ const Mypage = (props: any) => {
           flex-direction: column;
           align-items: center;
         }
+        @media ${media.small} {
+          padding-left: 0;
+          padding-right: 0;
+        }
       `}>
         <div css={css`
           width: 258px;
@@ -157,6 +163,7 @@ const Mypage = (props: any) => {
         </div>
         <div css={css`
           flex: 1;
+          width: 100%;
         `}>
           {
             books.map(book => {
@@ -204,24 +211,43 @@ const Mypage = (props: any) => {
                     </a>
                   </Link>
                 </div>
-                <div>
-                  {
-                    book.images.map((image, index) => {
-                      return <ImageBox imageUrl={image} size='square' key={index} />
-                    })
-                  }
+                <div css={css`
+                  overflow-x: auto;
+                  margin: 0 -16px;
+                  padding: 0 16px;
+                `}>
+                  <div css={css`
+                    display: flex;
+                  `}>
+                    {
+                      book.images.map((image, index) => {
+                        return <ImageBox imageUrl={image} size='square' key={index} />
+                      })
+                    }
+                  </div>
                 </div>
                 <div css={css`
                   opacity: 0.8;
                   margin-top: 12px;
-                `}>
-                  {/* TODO: HTMLをエスケープしつついい感じに改行を反映する */}
-                  {book.description.split(/\r\n|\n/).map((paragraph, index) => {
-                    return paragraph.length > 0 ? <p key={index}>{paragraph}</p> : <div key={index} css={css`
-                    margin-top: 0.5em;
-                  `} />
-                  })}
-                </div>
+
+                  p, ul, ol {
+                    margin-bottom: 12px;
+                    &:last-child {
+                      margin-bottom: 0;
+                    }
+                  }
+
+                  h1, h2, h3, h4, h5, h6 {
+                    font-weight: bold;
+                  }
+                `}
+                  dangerouslySetInnerHTML={{
+                    __html: marked(book.description, {
+                      gfm: true,
+                      breaks: true,
+                      sanitize: true
+                    })
+                  }} />
               </div>
             })
           }
