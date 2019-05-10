@@ -14,10 +14,6 @@
       {
         "source": "/books",
         "function": "app"
-      },
-      {
-        "source": "/",
-        "function": "app"
       }
     ]
   },

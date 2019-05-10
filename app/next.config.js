@@ -17,11 +17,13 @@ module.exports = withImages(withCSS(withMDX(withTypescript({
   },
   // target: 'serverless',
   distDir: '../dist/functions/next',
-  exportPathMap: () => {
-    return {
-      '/': { page: '/' },
-      '/mdx': { page: '/mdx' }
-    }
-
+  outDir: '../dist/public',
+  exportPathMap: (defaultPathMap) => {
+    delete defaultPathMap["/books/_id"]
+    delete defaultPathMap["/books"]
+    delete defaultPathMap["/circles/_id"]
+    delete defaultPathMap["/circles"]
+    console.log(defaultPathMap)
+    return defaultPathMap
   }
 }))))

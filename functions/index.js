@@ -15,12 +15,13 @@ admin.initializeApp();
 // exports.showBook = onRequest((req, res) => showBook.render(req, res))
 
 const next = require('next')
+const routes = require('./routes')
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev, conf: { distDir: "next" } })
-const handle = app.getRequestHandler()
+const handler = routes.getRequestHandler(app)
 
 exports.app = onRequest((req, res) => (app.prepare().then(
-  () => handle(req, res)
+  () => handler(req, res)
 )))
 
 exports.saveUser = functions.auth.user().onCreate((user) => {
