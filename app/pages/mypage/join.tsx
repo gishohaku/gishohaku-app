@@ -5,16 +5,21 @@ import 'firebase/functions'
 import { Spinner, Button } from 'sancho'
 import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useCallback } from 'react'
 import UserContext from '../../contexts/UserContext';
 import router from 'next/router'
+import qs from 'qs'
 
 const Join: React.FC<{
   router: any
 }> = (props) => {
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
-  const { circleId, token } = props.router.query
+
+  // Static Site Exportではprops.router.queryが固定されており、自前でqueryを取得する必要がある
+  // https://github.com/zeit/next.js/issues/4804
+  const { circleId, token } = qs.parse(props.router.asPath.split('?')[1])
+  console.log(circleId, token)
 
   const handleClick = async () => {
     setProcessing(true)
