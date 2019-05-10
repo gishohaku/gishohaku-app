@@ -9,6 +9,7 @@ import { jsx, css, Global } from '@emotion/core'
 import marked from 'marked'
 
 import circleTumbnail from '../images/circle.png'
+import editIcon from '../images/edit.svg'
 
 import { Button } from 'sancho'
 import Layout from '../components/Layout'
@@ -19,7 +20,6 @@ import Book, { types, mediums } from '../utils/book'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import Loader from '../components/Loader';
-import TextBlock from '../components/atoms/TextBlock';
 import { media } from '../utils/style'
 import ImageBox from '../components/ImageBox';
 
@@ -148,14 +148,36 @@ const Mypage = (props: any) => {
               `}>
                 {circle.name}
               </h2>
-              <a css={css`
+              {/* <a css={css`
                 font-size: 12px;
               `} href={circle.website}>
                 {circle.website}
-              </a>
+              </a> */}
               <div>
                 <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
-                  <a>編集</a>
+                  <a css={css`
+                      margin-left: auto;
+                      border: 1px solid #2A5773;
+                      text-decoration: none;
+                      padding: 6px 20px;
+                      border-radius: 4px;
+                      font-size: 15px;
+                      font-weight: 600;
+                      color: #2A5773;
+                      transition: all .2s ease;
+                      white-space: nowrap;
+
+                      display: inline-block;
+                      margin-top: 8px;
+                      cursor: pointer;
+
+                      &:hover {
+                        background-color: #2A5773;
+                        color: white;
+                      }
+                  `}>
+                    編集
+                  </a>
                 </Link>
               </div>
             </>
@@ -175,7 +197,7 @@ const Mypage = (props: any) => {
               ].filter(el => el)
               return <div css={css`
                 background-color: white;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
                 padding: 20px;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
                 border-radius: 8px;
@@ -206,15 +228,28 @@ const Mypage = (props: any) => {
                   <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
                     <a css={css`
                       margin-left: auto;
+                      border: 1px solid #2A5773;
+                      text-decoration: none;
+                      padding: 6px 20px;
+                      border-radius: 4px;
+                      font-size: 15px;
+                      font-weight: 600;
+                      color: #2A5773;
+                      transition: all .2s ease;
+                      white-space: nowrap;
+                      &:hover {
+                        background-color: #2A5773;
+                        color: white;
+                      }
                     `}>
-                      Edit
+                      編集
                     </a>
                   </Link>
                 </div>
                 <div css={css`
                   overflow-x: auto;
-                  margin: 0 -16px;
-                  padding: 0 16px;
+                  margin: 0 -20px;
+                  padding: 0 20px;
                 `}>
                   <div css={css`
                     display: flex;
@@ -229,6 +264,7 @@ const Mypage = (props: any) => {
                 <div css={css`
                   opacity: 0.8;
                   margin-top: 12px;
+                  color: #444;
 
                   p, ul, ol {
                     margin-bottom: 12px;
@@ -237,8 +273,9 @@ const Mypage = (props: any) => {
                     }
                   }
 
-                  h1, h2, h3, h4, h5, h6 {
+                  h1, h2, h3, h4, h5, h6, strong {
                     font-weight: bold;
+                    color: #222;
                   }
                 `}
                   dangerouslySetInnerHTML={{
@@ -251,7 +288,32 @@ const Mypage = (props: any) => {
               </div>
             })
           }
-          <Link href='/books/new'><span>new Book</span></Link>
+          <Link href='/books/new'>
+            <a css={css`
+              display: block;
+              background-color: white;
+              margin-bottom: 24px;
+              padding: 20px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+              border-radius: 8px;
+              cursor: pointer;
+              text-align: center;
+              color: #444;
+              vertical-align: center;
+              display: flex;
+              justify-content: center;
+              transition: box-shadow .15s ease-out;
+              &:hover {
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+              }
+              img {
+                margin-right: 4px;
+                opacity: 0.6;
+              }
+          `}>
+              <img src={editIcon} />
+              頒布物を追加
+          </a></Link>
         </div>
       </div>
     </Layout>
