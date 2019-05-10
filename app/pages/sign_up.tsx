@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import Layout from '../components/Layout'
+import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
 import { Spinner, Button, InputGroup, Input, Divider, Text, useToast } from 'sancho'
@@ -22,37 +23,29 @@ const SignIn = ({ book, router }: any) => {
     <Layout tab={router.query.tab}>
       <Container style={{
         maxWidth: 380,
-        marginTop: 60
+        paddingTop: 60
       }}>
-        <Link href="/sign_in">
-          <a>ログイン</a>
-        </Link>
-        <Text variant="h4" style={{
-          textAlign: 'center'
-        }}>新規登録</Text>
+        <SectionHeader text="SIGNUP">会員登録</SectionHeader>
         <Formik initialValues={loginData} onSubmit={(values, actions) => {
           const { email, password } = values
           firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(res => {
+              router.push('/')
               toast({
                 title: '会員登録が完了しました',
                 intent: 'success'
               })
-              console.log(res)
-              router.push('/')
             })
-            .catch(function (error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
+            .catch((error) => {
               switch(error.code) {
                 case 'auth/invalid-email':
+                  actions.setFieldError('email', '不正なメールアドレスです。')
                   break;
                 case 'auth/email-already-in-use':
-                  actions.setFieldError('email', '既に登録済みのアドレスです')
+                  actions.setFieldError('email', '既に登録済みのアドレスです。')
                   break;
                 case 'auth/weak-password':
-                  actions.setFieldError('email', '既に登録済みのアドレスです')
+                  actions.setFieldError('password', 'パスワードは6文字以上に設定してください')
                   break;
                 default:
                   // 不明のエラー的な
@@ -63,17 +56,19 @@ const SignIn = ({ book, router }: any) => {
         }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
           console.log(values)
           return <Form>
+            {/* SSR時のfirst-child対応 */}
+            <div/>
             <InputGroup label="メールアドレス *">
               <Field type="email" name="email" component={CustomInput} />
             </InputGroup>
-            <InputGroup label="パスワード *">
+            <InputGroup label="パスワード *" helpText="6文字以上を入力してください">
               <Field type="password" name="password" component={CustomInput} />
             </InputGroup>
             <p css={css`
               font-size: 12px;
               margin-top: 24px;
             `}>登録することで、利用規約/プライバシーポリシーに同意するものとします</p>
-            <Button component="button" loading={isSubmitting} style={{
+            <Button intent="primary" component="button" loading={isSubmitting} style={{
               marginTop: 8,
               width: '100%'
             }}>登録する</Button>
@@ -88,6 +83,9 @@ const SignIn = ({ book, router }: any) => {
           font-size: 12px;
           margin-top: 2px;
         `}>登録することで、利用規約/プライバシーポリシーに同意するものとします</p>
+        <Link href="/sign_in">
+          <a>ログイン</a>
+        </Link>
       </Container>
     </Layout>
   )

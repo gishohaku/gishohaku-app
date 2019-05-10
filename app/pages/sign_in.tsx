@@ -1,13 +1,15 @@
 /** @jsx jsx */
 import Link from 'next/link'
+import { useState } from 'react'
 import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import Layout from '../components/Layout'
+import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
-import { Spinner, Button, InputGroup, Input, Divider, Text, Tabs, Tab } from 'sancho'
+import { Spinner, Button, InputGroup, Input, Divider, Text, Tabs, Tab, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 
 const loginData = {
@@ -16,22 +18,43 @@ const loginData = {
 }
 
 const SignIn = ({ book, router }: any) => {
+  const toast = useToast()
+  const [error, setError] = useState('')
   return (
     <Layout tab={router.query.tab}>
       <Container style={{
         maxWidth: 380,
-        marginTop: 60
+        paddingTop: 60
       }}>
-        <Link href="/sign_up">
-          <a>新規登録</a>
-        </Link>
-        <Text variant="h4" style={{
-          textAlign: 'center'
-        }}>ログイン</Text>
+        <SectionHeader text="LOGIN">ログイン</SectionHeader>
         <Formik initialValues={loginData} onSubmit={(values, actions) => {
-        }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
+          const { email, password } = values
+          firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+              router.push('/')
+              toast({
+                title: 'ログインしました',
+                intent: 'success'
+              })
+            })
+            .catch((error) => {
+              switch(error.code) {
+                case 'auth/wrong-password':
+                case 'auth/user-not-found':
+                  setError('メールアドレスまたはパスワードが違います')
+                  break;
+                default:
+                  setError('エラーが発生しました。運営事務局までご連絡ください。')
+              }
+              console.log(error)
+              actions.setSubmitting(false)
+            });
+        }} render={({ values, errors, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
           console.log(values)
           return <Form>
+            {error && <Alert intent="danger" title={error} />}
+            {/* SSR時のfirst-child対応 */}
+            <div/>
             <InputGroup label="メールアドレス *">
               <Field type="email" name="email" component={CustomInput} />
             </InputGroup>
@@ -45,7 +68,7 @@ const SignIn = ({ book, router }: any) => {
                 `}>パスワードをお忘れの方はこちら</p>
               </>
             </InputGroup>
-            <Button component="button" style={{
+            <Button intent="primary" component="button" style={{
               marginTop: 24,
               width: '100%'
             }}>ログイン</Button>
@@ -60,6 +83,9 @@ const SignIn = ({ book, router }: any) => {
           font-size: 12px;
           margin-top: 2px;
         `}>登録することで、利用規約/プライバシーポリシーに同意するものとします</p>
+        <Link href="/sign_up">
+          <a>新規登録</a>
+        </Link>
       </Container>
     </Layout>
   )
