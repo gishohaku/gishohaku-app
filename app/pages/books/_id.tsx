@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import Layout from '../../components/Layout'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
-import { refToPath } from '../../utils/firebase'
+import { initFirebase, refToPath } from '../../utils/firebase'
 import Book from '../../utils/book'
 
 const Content = styled.div`
@@ -124,6 +124,7 @@ const Post = ({ book, router }: any) => {
 }
 
 Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
+  initFirebase()
   const db = firebase.firestore()
   const docRef = db.collection('books').doc(query.id)
   const book = await docRef.get()

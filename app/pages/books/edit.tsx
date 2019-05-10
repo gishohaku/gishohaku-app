@@ -43,7 +43,7 @@ const BooksNew = (props: any) => {
           const id = props.router.query.id
           db.collection("books").doc(id).update(book).then((docRef) => {
             const id = props.router.query.id
-            router.push(`/books/_id?id=${id}`, `/books/${id}`)
+            router.push('/mypage')
           })
         }} />
       </FormContainer>

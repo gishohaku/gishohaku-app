@@ -119,7 +119,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
         </>
       </InputGroup>
       <Divider />
-      <Button block intent="primary" loading={isSubmitting}>
+      <Button component="button" block intent="primary" loading={isSubmitting}>
         保存する
       </Button>
     </form>

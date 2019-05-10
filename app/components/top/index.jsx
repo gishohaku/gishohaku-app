@@ -9,7 +9,7 @@ import Sections from "./sections"
 // import Share from "./share"
 
 const Top = () => (
-  <Layout hideHeader>
+  <Layout>
     <SEO keywords={[`同人誌即売会`, `技術同人誌`, `技書博`]} />
     {/* <Share /> */}
     <Link href='/mypage'>Mypage</Link>

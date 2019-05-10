@@ -66,7 +66,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
         </Select>
       </InputGroup>
       <Divider />
-      <Button block intent="primary" loading={isSubmitting}>
+      <Button component="button" block intent="primary" loading={isSubmitting}>
         保存する
       </Button>
     </form>
