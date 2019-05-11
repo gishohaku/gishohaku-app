@@ -16,8 +16,9 @@ const loginData = {
   password: ''
 }
 
-const SignIn = ({ book, router }: any) => {
+const SignUp = ({ book, router }: any) => {
   const toast = useToast()
+  const [error, setError] = useState('')
 
   return (
     <Layout tab={router.query.tab}>
@@ -48,6 +49,7 @@ const SignIn = ({ book, router }: any) => {
                   actions.setFieldError('password', 'パスワードは6文字以上に設定してください')
                   break;
                 default:
+                  setError(`エラーが発生しました。運営事務局までご連絡ください。: ${error.message}`)
                   // 不明のエラー的な
               }
               console.log(error)
@@ -56,6 +58,7 @@ const SignIn = ({ book, router }: any) => {
         }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
           console.log(values)
           return <Form>
+            {error && <Alert intent="danger" title={error} />}
             {/* SSR時のfirst-child対応 */}
             <div/>
             <InputGroup label="メールアドレス *">
@@ -103,4 +106,4 @@ const CustomInput = ({
     </div>
   )
 
-export default withRouter(SignIn)
+export default withRouter(SignUp)

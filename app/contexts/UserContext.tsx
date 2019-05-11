@@ -14,7 +14,8 @@ const fetchUserData = async (db: firebase.firestore.Firestore, uid: string) => {
   return new Promise((resolve, reject) => {
     console.log('fetchUser', uid)
     db.collection('users').doc(uid).get().then((snapshot) => {
-      snapshot.exists ? resolve(snapshot.data()) : setTimeout(() => reject('Error'), 2000)
+      console.log(snapshot.exists ? 'success' : 'failed')
+      snapshot.exists ? resolve(snapshot.data()) : setTimeout(() => reject('Error'), 3000)
     })
   })
 }
@@ -38,6 +39,7 @@ export const UserProvider = (props: any) => {
           .catch(() => fetchUserData(db, user.uid))
         setUserData(userData as User)
       }
+      // TODO: 会員登録直後isLoadingがfalseにならないケースがある
       setIsLoading(false)
     })
   }, [])

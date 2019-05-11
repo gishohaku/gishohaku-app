@@ -44,7 +44,7 @@ const SignIn = ({ book, router }: any) => {
                   setError('メールアドレスまたはパスワードが違います')
                   break;
                 default:
-                  setError('エラーが発生しました。運営事務局までご連絡ください。')
+                  setError(`エラーが発生しました。運営事務局までご連絡ください。: ${error.message}`)
               }
               console.log(error)
               actions.setSubmitting(false)
@@ -86,8 +86,11 @@ const SignIn = ({ book, router }: any) => {
             console.log(result)
           })
         }}>Google</Button>
-        <Button component="button">GitHub</Button>
-        <Button component="button">Twitter</Button>
+        <Button component="button" onClick={() => {
+          firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).then(function (result) {
+            console.log(result)
+          })
+        }}>GitHub</Button>
         <p css={css`
           font-size: 12px;
           margin-top: 2px;
