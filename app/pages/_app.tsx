@@ -12,14 +12,14 @@ class MyApp extends App {
   }
 
   public render() {
-    const { Component, pageProps } = this.props as any;
+    const { Component, pageProps, router } = this.props as any;
     return (
       <Container>
         <UserProvider>
           <Head>
             <title>Next Firebase App</title>
           </Head>
-          <Layout>
+          <Layout router={router}>
             <Component {...pageProps} />
           </Layout>
         </UserProvider>

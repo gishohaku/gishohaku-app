@@ -12,13 +12,14 @@ import "minireset.css"
 
 import logo from "../images/logo.png"
 import { colors, media } from "../utils/style"
-import { IconButton, IconMenu, Sheet, MenuList, MenuItem, MenuDivider, IconUser, IconLogIn, IconLogOut } from 'sancho'
+import { useToast, IconButton, IconMenu, Sheet, MenuList, MenuItem, MenuDivider, IconUser, IconLogIn, IconLogOut } from 'sancho'
 
 import { jsx, css, Global } from '@emotion/core'
 
 const Layout = props => {
+  const toast = useToast()
   const { user } = useContext(UserContext)
-  const [ isOpen, setOpen ] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
   return <>
     <Global styles={css`
@@ -67,34 +68,40 @@ const Layout = props => {
       right: 16px;
       top: 22px;
     `}>
-    <IconButton onClick={() => setOpen(true)} icon={<IconMenu/>} component="button" label="Menu" variant="ghost"/>
+      <IconButton onClick={() => setOpen(true)} icon={<IconMenu />} component="button" label="Menu" variant="ghost" />
     </div>
     <Sheet
-        onRequestClose={() => setOpen(false)}
-        position="right"
-        isOpen={isOpen}
-      >
-        <MenuList>
-          <Link href="/mypage" passHref>
-            <MenuItem contentBefore={<IconUser />} component='a'>
-              マイページ
+      onRequestClose={() => setOpen(false)}
+      position="right"
+      isOpen={isOpen}
+    >
+      <MenuList>
+        <Link href="/mypage" passHref>
+          <MenuItem contentBefore={<IconUser />} component='a'>
+            マイページ
             </MenuItem>
-          </Link>
-          <MenuDivider />
-          {
-            user ?
-              <MenuItem contentBefore={<IconLogOut />} onClick={() => {
-                firebase.auth().signOut()
-              }}>
-                ログアウト
+        </Link>
+        <MenuDivider />
+        {
+          user ?
+            <MenuItem contentBefore={<IconLogOut />} onClick={() => {
+              firebase.auth().signOut()
+              toast({
+                title: 'ログアウトしました',
+                intent: 'success'
+              })
+              props.router.push('/')
+
+            }}>
+              ログアウト
               </MenuItem> :
-              <Link href="/sign_in" passHref>
-                <MenuItem contentBefore={<IconLogIn />}>
-                  ログイン
+            <Link href="/sign_in" passHref>
+              <MenuItem contentBefore={<IconLogIn />}>
+                ログイン
                 </MenuItem>
-              </Link>
-          }
-        </MenuList>
+            </Link>
+        }
+      </MenuList>
     </Sheet>
     {/* <Link href='/mypage' passHref>
       <a css={css`
