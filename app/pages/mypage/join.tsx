@@ -3,7 +3,6 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { Spinner, Button } from 'sancho'
-import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
 import { useContext, useState, useEffect, useCallback } from 'react'
 import UserContext from '../../contexts/UserContext';
@@ -33,17 +32,15 @@ const Join: React.FC<{
   }
 
   if (!circleId || !token) {
-    return <Layout><p>無効な招待URLです</p></Layout>
+    return <p>無効な招待URLです</p>
   }
 
   if (isUserLoading || (user && !userData)) {
-    return <Layout>
-      <Spinner label="Loading..." center />
-    </Layout>
+    return <Spinner label="Loading..." center />
   }
 
   if (!user) {
-    return <Layout>
+    return <>
       <p>サークルへの参加にはログインしてください</p>
       <Button onClick={() => {
         const provider = new firebase.auth.GoogleAuthProvider()
@@ -53,13 +50,13 @@ const Join: React.FC<{
       }}>
         Login
       </Button>
-    </Layout>
+    </>
   }
 
   return (
-    <Layout tab={props.router.query.tab}>
+    <>
       <Button loading={isProcessing} onClick={handleClick}>サークルに参加する</Button>
-    </Layout >
+    </>
   )
 }
 

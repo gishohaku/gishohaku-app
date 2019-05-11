@@ -8,14 +8,13 @@ import {
   ListItem,
   IconChevronRight,
 } from 'sancho'
-import Layout from '../../components/Layout'
 import { withRouter } from 'next/router'
 import { initFirebase, refToPath } from '../../utils/firebase'
 import Book from '../../utils/book'
 
 const Index = (props: any) => {
   return (
-    <Layout tab={props.router.query.tab}>
+    <>
       <Link href='/books/new'><span>new Book</span></Link>
       <List>
         {props.books.map((book: any) => {
@@ -32,7 +31,7 @@ const Index = (props: any) => {
           )
         })}
       </List>
-    </Layout>
+    </>
   )
 }
 

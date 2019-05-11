@@ -3,7 +3,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import styled from '@emotion/styled'
-import Layout from '../../components/Layout'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
 import { initFirebase, refToPath } from '../../utils/firebase'
@@ -109,17 +108,15 @@ const Content = styled.div`
 const Post = ({ book, router }: any) => {
 
   return (
-    <Layout tab={router.query.tab}>
-      <Container>
-        <Content>
-          {book && <>
-            <h1 id='book-title'>{book.title}</h1>
-            <div id='book-description' dangerouslySetInnerHTML={{ __html: book.description }} />
-          </>
-          }
-        </Content>
-      </Container>
-    </Layout>
+    <Container>
+      <Content>
+        {book && <>
+          <h1 id='book-title'>{book.title}</h1>
+          <div id='book-description' dangerouslySetInnerHTML={{ __html: book.description }} />
+        </>
+        }
+      </Content>
+    </Container>
   )
 }
 

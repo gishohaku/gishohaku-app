@@ -12,18 +12,13 @@ import "minireset.css"
 
 import logo from "../images/logo.png"
 import { colors, media } from "../utils/style"
+import { IconButton, IconMenu, Sheet, MenuList, MenuItem, MenuDivider, IconUser, IconLogIn, IconLogOut } from 'sancho'
 
 import { jsx, css, Global } from '@emotion/core'
-import {
-  Toolbar,
-  Button,
-  DarkMode,
-  Tabs,
-  Tab,
-} from 'sancho'
 
 const Layout = props => {
   const { user } = useContext(UserContext)
+  const [ isOpen, setOpen ] = useState(false)
 
   return <>
     <Global styles={css`
@@ -67,7 +62,41 @@ const Layout = props => {
         </Link>
       </header>
     }
-    <Link href='/mypage' passHref>
+    <div css={css`
+      position: absolute;
+      right: 16px;
+      top: 22px;
+    `}>
+    <IconButton onClick={() => setOpen(true)} icon={<IconMenu/>} component="button" label="Menu" variant="ghost"/>
+    </div>
+    <Sheet
+        onRequestClose={() => setOpen(false)}
+        position="right"
+        isOpen={isOpen}
+      >
+        <MenuList>
+          <Link href="/mypage" passHref>
+            <MenuItem contentBefore={<IconUser />} component='a'>
+              マイページ
+            </MenuItem>
+          </Link>
+          <MenuDivider />
+          {
+            user ?
+              <MenuItem contentBefore={<IconLogOut />} onClick={() => {
+                firebase.auth().signOut()
+              }}>
+                ログアウト
+              </MenuItem> :
+              <Link href="/sign_in" passHref>
+                <MenuItem contentBefore={<IconLogIn />}>
+                  ログイン
+                </MenuItem>
+              </Link>
+          }
+        </MenuList>
+    </Sheet>
+    {/* <Link href='/mypage' passHref>
       <a css={css`
         margin-left: auto;
         border: 1px solid #2A5773;
@@ -89,7 +118,7 @@ const Layout = props => {
       `}>
         マイページ
       </a>
-    </Link>
+    </Link> */}
     <div css={css`
       min-height: calc(100vh - 80px - 88px);
       position: relative;
@@ -98,68 +127,7 @@ const Layout = props => {
     </div>
     <Footer />
   </>;
-
-  return (
-    <>
-      <Global
-        styles={{
-          body: {
-            padding: 0,
-            margin: 0
-          }
-        }}
-      />
-      <Toolbar
-        style={{
-          backgroundColor: 'rgb(52, 58, 64)',
-          justifyContent: 'center'
-        }}
-      >
-        <DarkMode>
-          <Link href="/books">
-            <Button variant="ghost">Demo Blog with WP REST API</Button>
-          </Link>
-        </DarkMode>
-      </Toolbar>
-      <DarkMode>
-        <Tabs
-          css={css`
-            background-color: rgb(52, 58, 64);
-          `}
-          variant="evenly-spaced"
-          // value={activeTab}
-          value={-1}
-          onChange={i => {
-            const pathes = ['/', '/books', '/mypage']
-            Router.push(pathes[i])
-          }}
-        >
-          <Tab id="all">All</Tab>
-          <Tab id="develop">Books</Tab>
-          <Tab id="mypage">Mypage</Tab>
-        </Tabs>
-      </DarkMode>
-      {user ? <div onClick={() => {
-        firebase.auth().signOut()
-          .catch(function (error) {
-            console.log('ログアウトに失敗しました。')
-          });
-      }}>
-        {user.displayName} Logout
-        </div> : <div onClick={() => {
-          const provider = new firebase.auth.GoogleAuthProvider()
-          firebase.auth().signInWithPopup(provider).then(function (result) {
-            console.log(result)
-          })
-        }}>
-          Login
-        </div>
-      }
-      <div>{props.children}</div>
-    </>
-  )
 }
-
 
 const Footer = () => (
   <footer

@@ -3,7 +3,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx, css } from '@emotion/core'
 
-import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
@@ -25,21 +24,19 @@ const BooksNew = (props: any) => {
   }
 
   return (
-    <Layout tab={props.router.query.tab}>
-      <FormContainer>
-        <BookForm user={user} onSubmit={(book) => {
-          const db = firebase.firestore()
-          db.collection("books").add({
-            ...book,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            circleRef,
-          }).then((docRef) => {
-            console.log(docRef)
-            router.push('/books')
-          })
-        }} />
-      </FormContainer>
-    </Layout >
+    <FormContainer>
+      <BookForm user={user} onSubmit={(book) => {
+        const db = firebase.firestore()
+        db.collection("books").add({
+          ...book,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          circleRef,
+        }).then((docRef) => {
+          console.log(docRef)
+          router.push('/books')
+        })
+      }} />
+    </FormContainer>
   )
 }
 

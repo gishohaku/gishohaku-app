@@ -4,6 +4,7 @@ import Head from 'next/head';
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { initFirebase } from '../utils/firebase'
+import Layout from '../components/Layout'
 
 class MyApp extends App {
   componentDidMount() {
@@ -18,7 +19,9 @@ class MyApp extends App {
           <Head>
             <title>Next Firebase App</title>
           </Head>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </UserProvider>
       </Container>
     );

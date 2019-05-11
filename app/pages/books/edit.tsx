@@ -1,7 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import Layout from '../../components/Layout'
 import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
@@ -36,18 +35,16 @@ const BooksNew = (props: any) => {
   }
 
   return (
-    <Layout tab={props.router.query.tab}>
-      <FormContainer>
-        <BookForm user={user} book={book} onSubmit={(book) => {
-          const db = firebase.firestore()
+    <FormContainer>
+      <BookForm user={user} book={book} onSubmit={(book) => {
+        const db = firebase.firestore()
+        const id = props.router.query.id
+        db.collection("books").doc(id).update(book).then((docRef) => {
           const id = props.router.query.id
-          db.collection("books").doc(id).update(book).then((docRef) => {
-            const id = props.router.query.id
-            router.push('/mypage')
-          })
-        }} />
-      </FormContainer>
-    </Layout >
+          router.push('/mypage')
+        })
+      }} />
+    </FormContainer>
   )
 }
 

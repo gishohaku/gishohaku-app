@@ -5,7 +5,6 @@ import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import Layout from '../components/Layout'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
@@ -21,7 +20,7 @@ const SignIn = ({ book, router }: any) => {
   const toast = useToast()
   const [error, setError] = useState('')
   return (
-    <Layout tab={router.query.tab}>
+    <>
       <Container style={{
         maxWidth: 380,
         paddingTop: 60
@@ -99,7 +98,7 @@ const SignIn = ({ book, router }: any) => {
           <a>新規登録</a>
         </Link>
       </Container>
-    </Layout>
+    </>
   )
 }
 

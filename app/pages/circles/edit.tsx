@@ -1,12 +1,10 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import Layout from '../../components/Layout'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
-import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext';
 import CircleForm from '../../components/CircleForm';
 
@@ -48,7 +46,7 @@ const BooksNew = (props: any) => {
   }
 
   return (
-    <Layout tab={props.router.query.tab}>
+    <>
       <FormContainer>
         <CircleForm user={user} circle={circle} onSubmit={async (circle) => {
           const db = firebase.firestore()
@@ -57,7 +55,7 @@ const BooksNew = (props: any) => {
           router.push(`/mypage`)
         }} />
       </FormContainer>
-    </Layout >
+    </>
   )
 }
 

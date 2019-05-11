@@ -1,10 +1,10 @@
 /** @jsx jsx */
+import { useState } from 'react'
 import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import Layout from '../components/Layout'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
@@ -21,7 +21,7 @@ const SignUp = ({ book, router }: any) => {
   const [error, setError] = useState('')
 
   return (
-    <Layout tab={router.query.tab}>
+    <>
       <Container style={{
         maxWidth: 380,
         paddingTop: 60
@@ -90,7 +90,7 @@ const SignUp = ({ book, router }: any) => {
           <a>ログイン</a>
         </Link>
       </Container>
-    </Layout>
+    </>
   )
 }
 

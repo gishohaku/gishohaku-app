@@ -12,7 +12,6 @@ import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
 
 import { Button } from 'sancho'
-import Layout from '../components/Layout'
 import { withRouter } from 'next/router'
 import { refToPath } from '../utils/firebase'
 import Circle, { categories } from '../utils/circle'
@@ -76,14 +75,17 @@ const Mypage = (props: any) => {
 
   console.log(isLoading, isUserLoading, books)
 
+  if (userData && !userData.circleRef) {
+    return <p>サークルメンバー用のページです</p>
+  }
+
+
   if (isLoading || isUserLoading) {
-    return <Layout>
-      <Loader label="Loading..." />
-    </Layout>
+    return <Loader label="Loading..." />
   }
 
   if (!user) {
-    return <Layout>
+    return <>
       <p>ログインしてください</p>
       <Button onClick={() => {
         const provider = new firebase.auth.GoogleAuthProvider()
@@ -93,15 +95,10 @@ const Mypage = (props: any) => {
       }}>
         Login
       </Button>
-    </Layout>
+    </>
   }
-
-  if (userData && !userData.circleRef) {
-    return <Layout><p>サークルメンバー用のページです</p></Layout>
-  }
-
   return (
-    <Layout tab={props.router.query.tab}>
+    <>
       <Global styles={{
         body: {
           backgroundColor: "#F7F8FA"
@@ -316,7 +313,7 @@ const Mypage = (props: any) => {
           </a></Link>
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 
