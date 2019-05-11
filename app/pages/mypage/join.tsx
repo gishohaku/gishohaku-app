@@ -1,17 +1,23 @@
+/** @jsx jsx */
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/functions'
 
-import { Spinner, Button } from 'sancho'
+import Link from 'next/link'
+import { jsx, css } from '@emotion/core'
+import { Spinner, Button, useToast } from 'sancho'
 import { withRouter } from 'next/router'
 import { useContext, useState, useEffect, useCallback } from 'react'
 import UserContext from '../../contexts/UserContext';
+import MessageBox from '../../components/MessageBox';
+import Loader from '../../components/Loader';
 import router from 'next/router'
 import qs from 'qs'
 
 const Join: React.FC<{
   router: any
 }> = (props) => {
+  const toast = useToast()
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
 
@@ -28,36 +34,53 @@ const Join: React.FC<{
     console.log(result)
     await reloadUser()
     setProcessing(false)
+    toast({
+      title: 'サークルに参加しました',
+      intent: 'success'
+    })
     router.push('/mypage')
   }
 
   if (!circleId || !token) {
-    return <p>無効な招待URLです</p>
+    return <MessageBox
+      title="無効なURLです。"
+      description="URLを確認してください。"
+    />
   }
 
   if (isUserLoading || (user && !userData)) {
-    return <Spinner label="Loading..." center />
+    return <Loader label="loading..." />
   }
 
   if (!user) {
-    return <>
-      <p>サークルへの参加にはログインしてください</p>
-      <Button onClick={() => {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-          console.log(result)
-        })
-      }}>
-        Login
-      </Button>
-    </>
+    return <MessageBox
+      title="ログインが必要です。"
+      description="このページを利用するにはログインが必要です。"
+    >
+      <Link href="/sign_in" passHref>
+        <Button component="a" css={css`
+            margin-top: 12px;
+            width: 100%;
+          `}>
+          ログイン
+          </Button>
+      </Link>
+    </MessageBox>
   }
 
-  return (
-    <>
-      <Button loading={isProcessing} onClick={handleClick}>サークルに参加する</Button>
-    </>
-  )
+  return <MessageBox
+    title="サークルへの参加する"
+    description="招待を受け取りました。サークルへ参加できます。"
+  >
+    <Button component="button" css={css`
+        margin-top: 12px;
+        width: 100%;
+      `}
+      onPress={handleClick}
+    >
+      サークルに参加する
+      </Button>
+  </MessageBox>
 }
 
 export default withRouter(Join)

@@ -18,6 +18,7 @@ import Circle, { categories } from '../utils/circle'
 import Book, { types, mediums } from '../utils/book'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
+import MessageBox from '../components/MessageBox';
 import Loader from '../components/Loader';
 import { media } from '../utils/style'
 import ImageBox from '../components/ImageBox';
@@ -76,27 +77,32 @@ const Mypage = (props: any) => {
   console.log(isLoading, isUserLoading, books)
 
   if (userData && !userData.circleRef) {
-    return <p>サークルメンバー用のページです</p>
+    return <MessageBox
+      title="サークル向けページです。"
+      description="このページを利用するにはサークル主から招待URLを受け取ってください。"
+    />
   }
-
 
   if (isLoading || isUserLoading) {
     return <Loader label="Loading..." />
   }
 
   if (!user) {
-    return <>
-      <p>ログインしてください</p>
-      <Button onClick={() => {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-          console.log(result)
-        })
-      }}>
-        Login
-      </Button>
-    </>
+    return <MessageBox
+      title="ログインが必要です。"
+      description="このページを利用するにはログインが必要です。"
+    >
+      <Link href="/sign_in" passHref>
+        <Button component="a" css={css`
+            margin-top: 12px;
+            width: 100%;
+          `}>
+          ログイン
+          </Button>
+      </Link>
+    </MessageBox>
   }
+
   return (
     <>
       <Global styles={{
