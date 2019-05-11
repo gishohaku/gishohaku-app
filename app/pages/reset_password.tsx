@@ -14,10 +14,9 @@ import { Formik, Field, Form, FieldProps } from 'formik'
 
 const loginData = {
   email: '',
-  password: ''
 }
 
-const SignIn = ({ book, router }: any) => {
+const ResetPassword = ({ book, router }: any) => {
   const toast = useToast()
   const [error, setError] = useState('')
   return (
@@ -26,22 +25,24 @@ const SignIn = ({ book, router }: any) => {
         maxWidth: 380,
         paddingTop: 60
       }}>
-        <SectionHeader text="LOGIN">ログイン</SectionHeader>
+        <SectionHeader text="">パスワードの再設定</SectionHeader>
         <Formik initialValues={loginData} onSubmit={(values, actions) => {
-          const { email, password } = values
-          firebase.auth().signInWithEmailAndPassword(email, password)
+          const { email } = values
+          firebase.auth().sendPasswordResetEmail(email)
             .then(() => {
               router.push('/')
               toast({
-                title: 'ログインしました',
+                title: 'パスワード再設定メールを送信しました',
                 intent: 'success'
               })
             })
             .catch((error) => {
               switch(error.code) {
-                case 'auth/wrong-password':
+                case 'auth/invalid-email':
+                  setError('不正なメールアドレスです。')
+                  break;
                 case 'auth/user-not-found':
-                  setError('メールアドレスまたはパスワードが違います')
+                  setError('ユーザーが見つかりませんでした。')
                   break;
                 default:
                   setError('エラーが発生しました。運営事務局までご連絡ください。')
@@ -50,7 +51,6 @@ const SignIn = ({ book, router }: any) => {
               actions.setSubmitting(false)
             });
         }} render={({ values, errors, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
-          console.log(values)
           return <Form>
             {error && <Alert intent="danger" title={error} />}
             {/* SSR時のfirst-child対応 */}
@@ -58,43 +58,12 @@ const SignIn = ({ book, router }: any) => {
             <InputGroup label="メールアドレス *">
               <Field type="email" name="email" component={CustomInput} />
             </InputGroup>
-            <InputGroup label="パスワード *">
-              <>
-                <Field type="password" name="password" component={CustomInput} />
-                <div css={css`
-                  text-align: right;
-                `}>
-                  <Link href="/reset_password" passHref>
-                    <a css={css`
-                      font-size: 12px;
-                      margin-top: 2px;
-                    `}>パスワードをお忘れの方はこちら</a>
-                  </Link>
-                </div>
-              </>
-            </InputGroup>
             <Button intent="primary" component="button" style={{
               marginTop: 24,
               width: '100%'
-            }}>ログイン</Button>
+            }}>メールを送信</Button>
           </Form>
         }} />
-        <Divider />
-        <Text variant="h6" muted>ソーシャルアカウントで登録・ログイン</Text>
-        <Button component="button" onClick={() => {
-          firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {
-            console.log(result)
-          })
-        }}>Google</Button>
-        <Button component="button">GitHub</Button>
-        <Button component="button">Twitter</Button>
-        <p css={css`
-          font-size: 12px;
-          margin-top: 2px;
-        `}>登録することで、利用規約/プライバシーポリシーに同意するものとします</p>
-        <Link href="/sign_up">
-          <a>新規登録</a>
-        </Link>
       </Container>
     </Layout>
   )
@@ -112,4 +81,4 @@ const CustomInput = ({
     </div>
   )
 
-export default withRouter(SignIn)
+export default withRouter(ResetPassword)
