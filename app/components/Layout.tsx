@@ -70,6 +70,12 @@ const Layout = props => {
     `}>
       <IconButton onClick={() => setOpen(true)} icon={<IconMenu />} component="button" label="Menu" variant="ghost" />
     </div>
+    <div css={css`
+      min-height: calc(100vh - 80px - 88px);
+      position: relative;
+    `}>
+      {props.children}
+    </div>
     <Sheet
       onRequestClose={() => setOpen(false)}
       position="right"
@@ -126,12 +132,6 @@ const Layout = props => {
         マイページ
       </a>
     </Link> */}
-    <div css={css`
-      min-height: calc(100vh - 80px - 88px);
-      position: relative;
-    `}>
-      {props.children}
-    </div>
     <Footer />
   </>;
 }
