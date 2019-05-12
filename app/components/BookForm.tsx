@@ -29,7 +29,7 @@ const initialState: Book = {
   images: [],
   type: 'fanzine',
   isNew: false,
-  medium: null,
+  medium: '',
   sampleUrl: '',
   purchaseUrl: '',
 }

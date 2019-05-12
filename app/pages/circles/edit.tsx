@@ -7,18 +7,7 @@ import router, { withRouter } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
 import UserContext from '../../contexts/UserContext';
 import CircleForm from '../../components/CircleForm';
-
-type CricleCategory = 'software/frontend' | 'software/backend' | 'software/etc' | 'software/ml' | 'software/low-layer' | 'infra' | 'hardware' | 'etc'
-
-interface Circle {
-  id?: string
-  name: string
-  nameKana: string
-  image: string
-  category: CricleCategory
-  // 通常サークル / 倍量サークル
-  plan: 'normal' | 'premium'
-}
+import Circle from '../../utils/circle'
 
 const BooksNew = (props: any) => {
   const [circle, setCircle] = useState<Circle>()

@@ -32,16 +32,14 @@ const BooksNew = (props: any) => {
   return (
     <>
       <FormContainer>
-        <BookForm user={user} onSubmit={(book) => {
+        <BookForm user={user} onSubmit={async (book) => {
           const db = firebase.firestore()
-          db.collection("books").add({
+          await db.collection("books").add({
             ...book,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             circleRef,
-          }).then((docRef) => {
-            console.log(docRef)
-            router.push('/books')
           })
+          props.router.push('/mypage')
         }} />
       </FormContainer>
     </>

@@ -47,7 +47,7 @@ service cloud.firestore {
       // サークルはWeb画面で作成する機能を提供しない
       allow create: if false;
       // TODO
-      allow update: if isAuthenticated() && getUser().data.circleRef == resource.__name__;
+      allow update: if isAuthenticated() && getUser().data.circleRef == resource.__name__ && existingData().space == incomingData().space;
     }
   }
 }

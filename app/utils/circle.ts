@@ -22,6 +22,7 @@ export type CriclePlan = keyof typeof plans
 
 export default interface Circle {
   id?: string
+  space: string
   name: string
   nameKana: string
   image: string

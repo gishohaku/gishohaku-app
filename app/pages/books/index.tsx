@@ -1,39 +1,31 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { jsx, css } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/core'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import {
-  List,
-  ListItem,
-  IconChevronRight,
+  Container
 } from 'sancho'
 import { withRouter } from 'next/router'
 import { initFirebase, refToPath } from '../../utils/firebase'
 import Book from '../../utils/book'
+import BookCell from '../../components/BookCell'
 
 const Index = (props: any) => {
   return (
-    <>
-      <Link href='/books/new'><span>new Book</span></Link>
-      <List>
-        {props.books.map((book: any) => {
-          return (
-            <Link href={`/books/_id?id=${book.id}`} key={book.id} passHref as={`/books/${book.id}`}>
-              <ListItem
-                wrap={false}
-                primary={book.title}
-                secondary={book.description}
-                key={book.id}
-                contentAfter={<IconChevronRight />}
-              />
-            </Link>
-          )
-        })}
-      </List>
-    </>
+    <Container css={css`
+      max-width: 720px;
+      margin-top: 32px;
+    `}>
+      <Global styles={{
+        body: {
+          backgroundColor: "#F7F8FA"
+        }
+      }} />
+      {props.books.map((book: Book) => (<BookCell book={book} key={book.id} />))}
+    </Container>
   )
 }
 

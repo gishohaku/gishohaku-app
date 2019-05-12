@@ -58,9 +58,8 @@ const Join: React.FC<{
       description="このページを利用するにはログインが必要です。"
     >
       <Link href="/sign_in" passHref>
-        <Button component="a" css={css`
+        <Button component="a" block css={css`
             margin-top: 12px;
-            width: 100%;
           `}>
           ログイン
           </Button>
@@ -72,9 +71,8 @@ const Join: React.FC<{
     title="サークルへの参加する"
     description="招待を受け取りました。サークルへ参加できます。"
   >
-    <Button component="button" css={css`
+    <Button component="button" block css={css`
         margin-top: 12px;
-        width: 100%;
       `}
       onPress={handleClick}
     >
