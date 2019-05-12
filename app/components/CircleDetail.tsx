@@ -71,33 +71,35 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
               `} href={circle.website}>
                 {circle.website}
               </a> */}
-              <div>
-                <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
-                  <a css={css`
-                      margin-left: auto;
-                      border: 1px solid #2A5773;
-                      text-decoration: none;
-                      padding: 6px 20px;
-                      border-radius: 4px;
-                      font-size: 15px;
-                      font-weight: 600;
-                      color: #2A5773;
-                      transition: all .2s ease;
-                      white-space: nowrap;
+              {editable &&
+                <div>
+                  <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
+                    <a css={css`
+                        margin-left: auto;
+                        border: 1px solid #2A5773;
+                        text-decoration: none;
+                        padding: 6px 20px;
+                        border-radius: 4px;
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: #2A5773;
+                        transition: all .2s ease;
+                        white-space: nowrap;
 
-                      display: inline-block;
-                      margin-top: 8px;
-                      cursor: pointer;
+                        display: inline-block;
+                        margin-top: 8px;
+                        cursor: pointer;
 
-                      &:hover {
-                        background-color: #2A5773;
-                        color: white;
-                      }
-                  `}>
-                    編集
-                  </a>
-                </Link>
-              </div>
+                        &:hover {
+                          background-color: #2A5773;
+                          color: white;
+                        }
+                    `}>
+                      編集
+                    </a>
+                  </Link>
+                </div>
+              }
             </>
           }
         </div>
