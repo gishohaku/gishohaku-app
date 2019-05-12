@@ -7,36 +7,44 @@ import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
-  const { user, isUserLoading, userData } = useContext(UserContext)
-  const circleRef = userData && userData.circleRef
-  console.log(user, userData)
+  const { user } = useContext(UserContext)
+  const [circleRef, setCircleRef] = useState(null)
+  useEffect(() => {
+    if (!user) {
+      setCircleRef(null)
+    } else {
+      const db = firebase.firestore()
+      db.collection('users').doc(user.uid).get().then((doc) => {
+        const userCircleRef = doc.data()!.circleRef
+        setCircleRef(userCircleRef)
+      })
+    }
+  }, [user])
 
-  if (isUserLoading || !user ) {
-    return <Layout><Loader /></Layout>
-  }
-
-  if (!isUserLoading && (!userData || !userData.circleRef)) {
-    return <Layout><p>サークル専用ページです。</p></Layout>
+  if (!user) {
+    return <Loader />
   }
 
   return (
-    <FormContainer>
-      <BookForm user={user} onSubmit={(book) => {
-        const db = firebase.firestore()
-        db.collection("books").add({
-          ...book,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          circleRef,
-        }).then((docRef) => {
-          console.log(docRef)
-          router.push('/books')
-        })
-      }} />
-    </FormContainer>
+    <>
+      <FormContainer>
+        <BookForm user={user} onSubmit={(book) => {
+          const db = firebase.firestore()
+          db.collection("books").add({
+            ...book,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            circleRef,
+          }).then((docRef) => {
+            console.log(docRef)
+            router.push('/books')
+          })
+        }} />
+      </FormContainer>
+    </>
   )
 }
 

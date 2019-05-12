@@ -37,7 +37,7 @@ const SignIn = ({ book, router }: any) => {
               })
             })
             .catch((error) => {
-              switch(error.code) {
+              switch (error.code) {
                 case 'auth/wrong-password':
                 case 'auth/user-not-found':
                   setError('メールアドレスまたはパスワードが違います')
@@ -53,7 +53,7 @@ const SignIn = ({ book, router }: any) => {
           return <Form>
             {error && <Alert intent="danger" title={error} />}
             {/* SSR時のfirst-child対応 */}
-            <div/>
+            <div />
             <InputGroup label="メールアドレス *">
               <Field type="email" name="email" component={CustomInput} />
             </InputGroup>
@@ -82,12 +82,20 @@ const SignIn = ({ book, router }: any) => {
         <Text variant="h6" muted>ソーシャルアカウントで登録・ログイン</Text>
         <Button component="button" onClick={() => {
           firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {
-            console.log(result)
+            router.push('/')
+            toast({
+              title: 'ログインしました',
+              intent: 'success'
+            })
           })
         }}>Google</Button>
         <Button component="button" onClick={() => {
           firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).then(function (result) {
-            console.log(result)
+            router.push('/')
+            toast({
+              title: 'ログインしました',
+              intent: 'success'
+            })
           })
         }}>GitHub</Button>
         <p css={css`

@@ -38,11 +38,11 @@ const BooksNew = (props: any) => {
   }, [props.router.query.id])
 
   if (isUserLoading || !user || !circle) {
-    return <Layout><Loader /></Layout>
+    return <Loader />
   }
 
   if (!isUserLoading && (!userData || !userData.circleRef)) {
-    return <Layout><p>サークル専用ページです。</p></Layout>
+    return <p>サークル専用ページです。</p>
   }
 
   return (

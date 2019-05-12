@@ -36,8 +36,9 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
   const metadata = [
     book.type && `${types[book.type]}`,
     book.pages > 0 && `${book.pages}ページ`,
-    book.stock > 0 && `${book.stock}部頒布予定`,
+    book.stock > 0 && `${book.stock}部頒布`,
     book.medium && `${mediums[book.medium]}`,
+    book.price > 0 && `${String(book.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}円`
   ].filter(el => el)
   return <div css={css`
       background-color: white;
