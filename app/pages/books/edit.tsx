@@ -1,15 +1,17 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { useToast, Button, Divider } from 'sancho'
 
 import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
+  const toast = useToast()
   const [book, setBook] = useState()
   const { user, isUserLoading, userData } = useContext(UserContext)
 
@@ -26,6 +28,20 @@ const BooksNew = (props: any) => {
       })
   }, [props.router.query.id])
 
+  const deleteBook = useCallback(async () => {
+    if (!confirm('頒布物を削除しますか？')) {
+      return
+    }
+    const id = props.router.query.id
+    const db = firebase.firestore()
+    await db.collection("books").doc(id).delete()
+    toast({
+      title: '頒布物を削除しました',
+      intent: 'success'
+    })
+    props.router.push('/mypage')
+  }, [props.router.query.id])
+
   if (isUserLoading || !user || !book) {
     return <Loader />
   }
@@ -35,16 +51,22 @@ const BooksNew = (props: any) => {
   }
 
   return (
-    <FormContainer>
-      <BookForm user={user} book={book} onSubmit={(book) => {
-        const db = firebase.firestore()
-        const id = props.router.query.id
-        db.collection("books").doc(id).update(book).then((docRef) => {
+    <>
+      <FormContainer>
+        <BookForm user={user} book={book} onSubmit={(book) => {
+          const db = firebase.firestore()
           const id = props.router.query.id
-          router.push('/mypage')
-        })
-      }} />
-    </FormContainer>
+          db.collection("books").doc(id).update(book).then((docRef) => {
+            const id = props.router.query.id
+            router.push('/mypage')
+          })
+        }} />
+        <Divider />
+      </FormContainer>
+      <FormContainer>
+        <Button intent="danger" onPress={deleteBook} block>削除する</Button>
+      </FormContainer>
+    </>
   )
 }
 

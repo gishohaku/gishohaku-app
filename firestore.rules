@@ -38,8 +38,8 @@ service cloud.firestore {
       allow read;
       // サークルに所属している人のみ作成可能
       allow create: if isAuthenticated() && getUser().data.circleRef != null && getUser().data.circleRef == incomingData().circleRef
-      // 既存データのCircleRefと一致すれば更新可能
-      allow update: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
+      // 既存データのCircleRefと一致すれば更新・削除可能
+      allow update, delete: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
     }
 
     match /circles/{circleID} {

@@ -32,7 +32,6 @@ interface Props {
 }
 
 const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
-
   const metadata = [
     book.type && `${types[book.type]}`,
     book.pages > 0 && `${book.pages}ページ`,
