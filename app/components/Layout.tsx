@@ -54,7 +54,14 @@ const Layout = props => {
         `}
       >
         <Link href="/" passHref>
-          <a>
+          <a css={css`
+            &:hover {
+              background-color: #EFF0F0
+            }
+            &:active {
+              background-color: #DEDEDF
+            }
+          `}>
             <img
               src={logo}
               width={80}

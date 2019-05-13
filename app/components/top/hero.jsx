@@ -128,8 +128,8 @@ const Hero = () => {
         2019.07.27(Sat.) 10:00 <br />
         @大田区産業プラザPiO
       </p>
-      <Link href="/circles">
-        <span
+      <Link href="/circles" passHref>
+        <a
           css={css`
             background-color: ${colors.accent};
             font-size: 16px;
@@ -154,7 +154,7 @@ const Hero = () => {
           `}
         >
         サークルリスト
-        </span>
+        </a>
       </Link>
     </section>
   )

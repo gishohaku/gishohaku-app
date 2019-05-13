@@ -100,7 +100,13 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
           }
         }
 
-        h1, h2, h3, h4, h5, h6, strong {
+        h1, h2, h3, h4, h5, h6 {
+          font-weight: bold;
+          color: #222;
+          margin-bottom: 4px;
+        }
+
+        strong {
           font-weight: bold;
           color: #222;
         }
