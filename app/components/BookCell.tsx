@@ -45,7 +45,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
           `}>
           {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text='新刊' />}
           <span css={css`
-              opacity: 0.6;
+              opacity: 0.8;
             `}>
             {metadata.join("・")}
           </span>
@@ -90,7 +90,6 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
       </div>
     </div>
     <div css={css`
-        opacity: 0.8;
         margin-top: 12px;
         color: #444;
 

@@ -29,6 +29,11 @@ const Layout = props => {
         font-family: "Noto Sans JP";
         -webkit-font-smoothing: antialiased;
         font-feature-settings : "palt";
+        font-size: 15px;
+        color: #444;
+      }
+      p, li {
+        line-height: 1.8;
       }
     `} />
     {!props.hideHeader &&

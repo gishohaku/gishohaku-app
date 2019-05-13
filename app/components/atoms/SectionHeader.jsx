@@ -32,4 +32,6 @@ const sectionHeader = css`
   }
 `
 
-export default ({ children, text }) => <h2 css={sectionHeader} data-text={text}>{children}</h2>
+export default ({ children, text, pageHeader }) => <h2 css={sectionHeader} style={{
+  marginTop: pageHeader ? 60: 16
+}} data-text={text}>{children}</h2>
