@@ -37,4 +37,4 @@ jobs:
       - run: cp -a functions/ dist/functions/
       - run: yarn build:app
       - run: yarn export:app
-      - run: yarn firebase deploy
+      - run: yarn firebase deploy --token=$FIREBASE_TOKEN
