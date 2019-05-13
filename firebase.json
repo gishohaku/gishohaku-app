@@ -14,6 +14,14 @@
       {
         "source": "/books",
         "function": "app"
+      },
+      {
+        "source": "/circles/**",
+        "function": "app"
+      },
+      {
+        "source": "/circles",
+        "function": "app"
       }
     ]
   },
