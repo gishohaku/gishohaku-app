@@ -12,6 +12,7 @@ const sectionHeader = css`
   font-weight: 400;
   color: #1d272d;
   letter-spacing: 3px;
+  z-index: 1;
 
   &:after {
     content: attr(data-text);
@@ -27,6 +28,7 @@ const sectionHeader = css`
     transform: translateY(-50%);
     text-align: center;
     letter-spacing: 4px;
+    z-index: 0;
   }
 `
 

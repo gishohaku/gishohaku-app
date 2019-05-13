@@ -28,13 +28,18 @@ const Index = (props: any) => {
       }} />
       <List>
         {props.circles.map((circle: Circle) => {
-          return <ListItem
-            contentBefore={<ImageBox size='circlecut' width={80} imageUrl={circle.image || circleTumbnail} />}
-            primary={circle.name}
-            secondary={[circle.name, categories[circle.category]].join(' | ')}
-            contentAfter={<IconChevronRight />}
-            key={circle.id}
-          />
+          return <Link href={`/circles/_id?id=${circle.id}`} as={`/circles/${circle.id}`} key={circle.id} passHref>
+            <a css={css`
+              text-decoration: none;
+            `}>
+              <ListItem
+                contentBefore={<ImageBox size='circlecut' width={80} imageUrl={circle.image || circleTumbnail} />}
+                primary={circle.name}
+                secondary={[circle.space, categories[circle.category]].filter(o => o).join(' | ')}
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
         })}
       </List>
     </Container>

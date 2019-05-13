@@ -11,7 +11,6 @@ interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
 const ImageBox: React.FC<ImageBoxProps> = (props) => {
   const { imageUrl, size, width, ...otherProps } = props
   return <span css={css`
-    min-width: 180px;
     width: ${width || '180'}px;
     height: auto;
     display: flex;
