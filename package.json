@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node app/server.js",
     "build:app": "next build app",
+    "export:app": "next export app",
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "cp -a functions dist",
     "copy:deps": "cp package.json dist/functions; cp yarn.lock dist/functions",
