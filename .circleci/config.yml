@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
 
+      - run: rm yarn.lock
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -32,9 +33,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: yarn test
 
       - run: cp -a functions/ dist/functions/
       - run: yarn build:app
