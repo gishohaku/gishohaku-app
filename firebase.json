@@ -23,7 +23,8 @@
         "source": "/circles",
         "function": "app"
       }
-    ]
+    ],
+    "trailingSlash": false
   },
   "functions": {
     "source": "dist/functions"
