@@ -32,6 +32,7 @@
     "firebase": "^5.10.1",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0",
+    "firebase-tools": "^6.9.2",
     "formik": "^1.5.4",
     "marked": "^0.6.2",
     "minireset.css": "^0.0.4",
