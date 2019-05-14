@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/functions'
 
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 import { Button } from 'sancho'
 import { withRouter, WithRouterProps } from 'next/router'

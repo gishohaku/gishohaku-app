@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -19,11 +19,6 @@ const Index = (props: any) => {
       max-width: 720px;
       margin-top: 32px;
     `}>
-      <Global styles={{
-        body: {
-          backgroundColor: "#F7F8FA"
-        }
-      }} />
       {props.books.map((book: Book) => (<BookCell book={book} key={book.id} />))}
     </Container>
   )

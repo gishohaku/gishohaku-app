@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
@@ -22,11 +22,6 @@ interface Props {
 const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
   return (
     <>
-      <Global styles={{
-        body: {
-          backgroundColor: "#F7F8FA"
-        }
-      }} />
       <div css={css`
         max-width: ${1080 + 32}px;
         padding: 0 16px;

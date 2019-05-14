@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 import { useState } from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -21,6 +21,11 @@ const SignIn = ({ book, router }: any) => {
   const [error, setError] = useState('')
   return (
     <>
+      <Global styles={{
+        body: {
+          backgroundColor: 'white'
+        }
+      }} />
       <Container style={{
         maxWidth: 380,
         paddingTop: 60

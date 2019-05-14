@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 export default (props) => {
   return <div css={css`
@@ -15,11 +15,6 @@ export default (props) => {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
   `}>
-    <Global styles={{
-      body: {
-        backgroundColor: "#F7F8FA"
-      }
-    }} />
     <div css={css`
       font-weight: 600;
       font-size: 18px;

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 const FormContainer: React.FC = (props) => {
   return <div css={css`
@@ -9,11 +9,6 @@ const FormContainer: React.FC = (props) => {
     background-color: white;
     border-radius: 8px;
   `}>
-    <Global styles={{
-      body: {
-        backgroundColor: "#F7F8FA"
-      }
-    }} />
     {props.children}
   </div>
 }

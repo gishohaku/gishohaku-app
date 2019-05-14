@@ -30,6 +30,7 @@ const Layout = props => {
         font-feature-settings : "palt";
         font-size: 15px;
         color: #444;
+        background-color: #F7F8FA;
       }
       p, li {
         line-height: 1.8;

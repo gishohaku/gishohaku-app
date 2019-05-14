@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useState } from 'react'
 import Link from 'next/link'
-import { jsx, css } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -22,6 +22,11 @@ const SignUp = ({ book, router }: any) => {
 
   return (
     <>
+      <Global styles={{
+        body: {
+          backgroundColor: 'white'
+        }
+      }} />
       <Container style={{
         maxWidth: 380,
         paddingTop: 60
