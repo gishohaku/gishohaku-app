@@ -6,6 +6,18 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      {
+        "source": "/books/",
+        "destination": "/books",
+        "type": 301
+      },
+      {
+        "source": "/circles/",
+        "destination": "/circles",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "/books/**",

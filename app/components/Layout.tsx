@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useContext } from 'react'
 import Link from 'next/link'
-import Router from 'next/router'
 
 import UserContext from '../contexts/UserContext'
 
@@ -95,14 +94,17 @@ const Layout = props => {
     >
       <MenuList>
         <Link href="/mypage" passHref>
-          <MenuItem contentBefore={<IconUser />} component='a'>
+          <MenuItem contentBefore={<IconUser />} component='a' onPress={() => {
+            // FIXME
+            props.router.push('/mypage')
+          }}>
             マイページ
-            </MenuItem>
+          </MenuItem>
         </Link>
         <MenuDivider />
         {
           user ?
-            <MenuItem contentBefore={<IconLogOut />} onClick={() => {
+            <MenuItem contentBefore={<IconLogOut />} onPress={() => {
               firebase.auth().signOut()
               toast({
                 title: 'ログアウトしました',
@@ -114,7 +116,10 @@ const Layout = props => {
               ログアウト
               </MenuItem> :
             <Link href="/sign_in" passHref>
-              <MenuItem contentBefore={<IconLogIn />}>
+              <MenuItem contentBefore={<IconLogIn />} component="a" onPress={() => {
+                // FIXME
+                props.router.push('/sign_in')
+              }}>
                 ログイン
                 </MenuItem>
             </Link>

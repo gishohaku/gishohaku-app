@@ -59,7 +59,7 @@ const Mypage: React.FC = () => {
     />
   }
 
-  if (isLoading || isUserLoading || !circle) {
+  if (isLoading || isUserLoading) {
     return <Loader label="Loading..." />
   }
 
@@ -77,6 +77,10 @@ const Mypage: React.FC = () => {
           </Button>
       </Link>
     </MessageBox>
+  }
+
+  if (!circle) {
+    return <Loader label="Loading..." />
   }
 
   return <CircleDetail circle={circle} books={books} editable={true} />
