@@ -14,6 +14,9 @@ import Loader from '../../components/Loader';
 import router from 'next/router'
 import qs from 'qs'
 
+// FIXME: 影響範囲が大きく汚い
+export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
+
 const Join: React.FC<{
   router: any
 }> = (props) => {
@@ -64,7 +67,7 @@ const Join: React.FC<{
           margin-top: 12px;
           `}
           onClick={() => {
-            localStorage.setItem("LOGIN_PATH", props.router.asPath)
+            localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
           }}
         >
           ログイン

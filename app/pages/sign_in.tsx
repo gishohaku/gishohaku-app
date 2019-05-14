@@ -10,10 +10,17 @@ import { Container } from 'sancho'
 import { withRouter } from 'next/router'
 import { Spinner, Button, InputGroup, Input, Divider, Text, Tabs, Tab, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
+import { INVITE_STORAGE_KEY } from './mypage/join'
 
 const loginData = {
   email: '',
   password: ''
+}
+
+export const redirectAfterLogin = (router: any) => {
+  const afterLoginPath = localStorage.getItem(INVITE_STORAGE_KEY)
+  localStorage.removeItem(INVITE_STORAGE_KEY)
+  router.push(afterLoginPath || '/')
 }
 
 const SignIn = ({ book, router }: any) => {
@@ -35,7 +42,7 @@ const SignIn = ({ book, router }: any) => {
           const { email, password } = values
           firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
-              router.push('/')
+              redirectAfterLogin(router)
               toast({
                 title: 'ログインしました',
                 intent: 'success'
@@ -85,30 +92,32 @@ const SignIn = ({ book, router }: any) => {
         }} />
         <Divider />
         <Text variant="h6" muted>ソーシャルアカウントで登録・ログイン</Text>
-        <Button component="button" onClick={() => {
-          firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {
-            router.push('/')
-            toast({
-              title: 'ログインしました',
-              intent: 'success'
-            })
+        <Button component="button" onClick={async () => {
+          await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+          redirectAfterLogin(router)
+          toast({
+            title: 'ログインしました',
+            intent: 'success'
           })
         }}>Google</Button>
-        <Button component="button" onClick={() => {
-          firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).then(function (result) {
-            router.push('/')
-            toast({
-              title: 'ログインしました',
-              intent: 'success'
-            })
+        <Button component="button" onClick={async () => {
+          await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+          redirectAfterLogin(router)
+          toast({
+            title: 'ログインしました',
+            intent: 'success'
           })
         }}>GitHub</Button>
         <p css={css`
           font-size: 12px;
           margin-top: 2px;
-        `}>登録することで、利用規約/プライバシーポリシーに同意するものとします</p>
+          line-height: 1.5;
+        `}>登録することで、<Link href="/privacy" passHref><a>利用規約/プライバシーポリシー</a></Link>に同意するものとします</p>
+        <Divider/>
         <Link href="/sign_up">
-          <a>新規登録</a>
+          <Button component="a" block variant="outline">
+            会員登録はこちら
+          </Button>
         </Link>
       </Container>
     </>

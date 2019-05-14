@@ -5,6 +5,7 @@ import { Container } from 'sancho'
 
 const MdxContainer = ({children}) => {
   return <Container css={css`
+    margin: 32px auto;
     max-width: ${48 + 740}px;
   `}>
     <Global styles={{
