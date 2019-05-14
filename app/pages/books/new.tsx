@@ -8,24 +8,24 @@ import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
 import { useEffect, useContext, useState } from 'react';
+import Circle from '../../utils/circle'
 import UserContext from '../../contexts/UserContext';
 
 const BooksNew = (props: any) => {
-  const { user } = useContext(UserContext)
+  const { user, isUserLoading, userData } = useContext(UserContext)
   const [circleRef, setCircleRef] = useState(null)
+  const [circle, setCircle] = useState<Circle | null>(null)
   useEffect(() => {
-    if (!user) {
-      setCircleRef(null)
+    if (!userData || !userData.circleRef) {
+      setCircle(null)
     } else {
-      const db = firebase.firestore()
-      db.collection('users').doc(user.uid).get().then((doc) => {
-        const userCircleRef = doc.data()!.circleRef
-        setCircleRef(userCircleRef)
+      userData.circleRef.get().then(snapshot => {
+        setCircle(snapshot.data() as Circle)
       })
     }
-  }, [user])
+  }, [userData])
 
-  if (!user) {
+  if (isUserLoading || !user || !userData || !circle) {
     return <Loader />
   }
 
@@ -37,7 +37,8 @@ const BooksNew = (props: any) => {
           await db.collection("books").add({
             ...book,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            circleRef,
+            circleRef: userData.circleRef,
+            circleName: circle.name,
           })
           props.router.push('/mypage')
         }} />

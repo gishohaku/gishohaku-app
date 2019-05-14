@@ -11,7 +11,6 @@ export const initFirebase = () => {
       databaseURL: process.env.DATABASE_URL,
       storageBucket: process.env.STORAGE_BUCKET
     })
-    console.log(firebase)
   }
 }
 
