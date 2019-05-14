@@ -16,6 +16,7 @@
     "export": "npm run build:app && next export app/"
   },
   "dependencies": {
+    "@babel/node": "^7.2.2",
     "@emotion/core": "^10.0.10",
     "@emotion/css": "^10.0.9",
     "@emotion/styled": "^10.0.11",
@@ -43,6 +44,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.4",
+    "react-ga": "^2.5.7",
     "react-helmet": "^5.2.1",
     "request": "^2.88.0",
     "sancho": "^3.1.0"
