@@ -27,18 +27,20 @@ const Join: React.FC<{
   console.log(circleId, token)
 
   const handleClick = async () => {
+    if (isProcessing) {
+      return
+    }
     setProcessing(true)
     const receiveInvitation = firebase.functions().httpsCallable('receiveInvitation')
     const result = await receiveInvitation({ circleId, token })
     // TODO: メッセージの表示
     console.log(result)
     await reloadUser()
-    setProcessing(false)
     toast({
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    router.push('/mypage')
+    props.router.push('/mypage')
   }
 
   if (!circleId || !token) {
@@ -59,8 +61,12 @@ const Join: React.FC<{
     >
       <Link href="/sign_in" passHref>
         <Button component="a" block css={css`
-            margin-top: 12px;
-          `}>
+          margin-top: 12px;
+          `}
+          onClick={() => {
+            localStorage.setItem("LOGIN_PATH", props.router.asPath)
+          }}
+        >
           ログイン
           </Button>
       </Link>
@@ -71,7 +77,7 @@ const Join: React.FC<{
     title="サークルへの参加する"
     description="招待を受け取りました。サークルへ参加できます。"
   >
-    <Button component="button" block css={css`
+    <Button loading={isProcessing} component="button" block css={css`
         margin-top: 12px;
       `}
       onPress={handleClick}
