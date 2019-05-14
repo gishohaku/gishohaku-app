@@ -96,10 +96,10 @@ const Layout = props => {
       <MenuList>
         <Link href="/mypage" passHref>
           <MenuItem contentBefore={<IconUser />} component='a' onPress={() => {
-            // FIXME
+            // FIXME: この記述がないとスマホでリンクにならない
             props.router.push('/mypage')
           }}>
-            マイページ
+            サークルページ
           </MenuItem>
         </Link>
         <MenuDivider />
@@ -118,7 +118,7 @@ const Layout = props => {
               </MenuItem> :
             <Link href="/sign_in" passHref>
               <MenuItem contentBefore={<IconLogIn />} component="a" onPress={() => {
-                // FIXME
+                // FIXME: この記述がないとスマホでリンクにならない
                 props.router.push('/sign_in')
               }}>
                 ログイン
@@ -127,29 +127,6 @@ const Layout = props => {
         }
       </MenuList>
     </Sheet>
-    {/* <Link href='/mypage' passHref>
-      <a css={css`
-        margin-left: auto;
-        border: 1px solid #2A5773;
-        text-decoration: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #2A5773;
-        transition: all .2s ease;
-        white-space: nowrap;
-        &:hover {
-          background-color: #2A5773;
-          color: white;
-        }
-        position: absolute;
-        right: 16px;
-        top: 22px;
-      `}>
-        マイページ
-      </a>
-    </Link> */}
     <Footer />
   </>;
 }

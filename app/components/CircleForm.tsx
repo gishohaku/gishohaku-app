@@ -21,7 +21,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
       <InputGroup label="サークル名 *">
         <Field name="name" component={CustomInput} disabled />
       </InputGroup>
-      <InputGroup label="画像" helpText="画像は最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
+      <InputGroup label="画像" helpText="推奨サイズ: 横635px 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
         <div css={css`
           overflow-x: auto;
         `}>

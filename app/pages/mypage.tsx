@@ -50,7 +50,7 @@ const Mypage: React.FC = () => {
       })()
   }, [userData])
 
-  console.log(isLoading, isUserLoading, books)
+  // console.log(isLoading, isUserLoading, books)
 
   if (userData && !userData.circleRef) {
     return <MessageBox
