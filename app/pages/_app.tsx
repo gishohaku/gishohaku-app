@@ -6,6 +6,7 @@ import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { initFirebase } from '../utils/firebase'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 import ReactGA from 'react-ga';
 
 const TRACKING_ID = "UA-129667923-2"
@@ -23,10 +24,8 @@ class MyApp extends App {
     const { Component, pageProps, router } = this.props as any;
     return (
       <Container>
+        <SEO/>
         <UserProvider>
-          <Head>
-            <title>Next Firebase App</title>
-          </Head>
           <Layout router={router}>
             <Component {...pageProps} />
           </Layout>

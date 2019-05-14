@@ -1,72 +1,26 @@
 import React from "react"
-import Helmet from "react-helmet"
+import Head from 'next/head';
 
-function SEO({ description, meta, keywords, title }) {
-  const metaTitle = title
-  const metaDescription = description
+function SEO({ description, title }: any) {
+  const metaTitle = [title, '技術書同人誌博覧会'].filter(o => o).join(' | ')
+  const metaDescription = [
+    description,
+    'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。'
+  ].filter(o => o).join(' | ')
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang: 'ja',
-      }}
-      title={metaTitle}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: metaTitle,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        // TODO:
-        {
-          property: "og:image",
-          content: '',
-        },
-        {
-          name: `twitter:card`,
-          content: `summary_large_image`,
-        },
-        // TODO
-        {
-          name: `twitter:creator`,
-          content: '',
-        },
-        {
-          name: `twitter:title`,
-          content: metaTitle,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-              name: `keywords`,
-              content: keywords.join(`, `),
-            }
-            : []
-        )
-        .concat(meta)}
-    />
+    <Head>
+      <title>{metaTitle}</title>
+      <meta property="og:description" content={metaDescription}/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:image" content="https://gishohaku.dev/ogp.jpg"/>
+      <meta name="twitter:card" content="summary_large_image"/>
+      <meta name="twitter:creator" content="@gishohaku"/>
+      <meta name="twitter:title" content={metaTitle}/>
+      <meta name="twitter:description" content={metaDescription}/>
+      <meta name="keywords" content="同人誌即売会, 技術同人誌, 技書博"/>
+    </Head>
   )
-}
-
-SEO.defaultProps = {
-  meta: [],
-  keywords: [],
 }
 
 export default SEO
