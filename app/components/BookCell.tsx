@@ -110,6 +110,42 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
           font-weight: bold;
           color: #222;
         }
+
+        ul, ol {
+          padding-left: 24px;
+        }
+
+        ul li {
+          list-style-type: disc;
+        }
+
+        ol li {
+          list-style-type: decimal;
+        }
+
+        table {
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          width: 100%;
+          border-collapse: collapse;
+          border-spacing: 0;
+          margin: 12px 0;
+        }
+
+        table tr:nth-child(odd) td {
+          background-color: #f9f9f9;
+        }
+
+        table tr th,
+        table tr td {
+          padding: 8px;
+          line-height: 1.6;
+          vertical-align: top;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        table tr th {
+          white-space: nowrap;
+        }
       `}
       dangerouslySetInnerHTML={{
         __html: marked(book.description, {

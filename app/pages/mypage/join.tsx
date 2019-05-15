@@ -23,11 +23,20 @@ const Join: React.FC<{
   const toast = useToast()
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
+  const [circle, setCircle] = useState()
 
   // Static Site Exportではprops.router.queryが固定されており、自前でqueryを取得する必要がある
   // https://github.com/zeit/next.js/issues/4804
   const { circleId, token } = qs.parse(props.router.asPath.split('?')[1])
   console.log(circleId, token)
+
+  useEffect(() => {
+    const db = firebase.firestore()
+    const circleRef = db.collection('circles').doc(circleId)
+    circleRef.get().then((circleSnapshot) => {
+      setCircle(circleSnapshot.data())
+    })
+  }, [circleId])
 
   const handleClick = async () => {
     if (isProcessing) {
@@ -53,14 +62,14 @@ const Join: React.FC<{
     />
   }
 
-  if (isUserLoading || (user && !userData)) {
+  if (isUserLoading || (user && !userData) || !circle) {
     return <Loader label="loading..." />
   }
 
   if (!user) {
     return <MessageBox
-      title="ログインが必要です。"
-      description="このページを利用するにはログインが必要です。"
+      title="サークルに参加する"
+      description={`「${circle.name}」に参加できます。サークルに参加するにはログインが必要です。`}
     >
       <Link href="/sign_in" passHref>
         <Button component="a" block css={css`
@@ -71,14 +80,25 @@ const Join: React.FC<{
           }}
         >
           ログイン
-          </Button>
+        </Button>
+      </Link>
+      <Link href="/sign_up" passHref>
+        <Button component="a" block css={css`
+          margin-top: 12px;
+          `}
+          onClick={() => {
+            localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
+          }}
+        >
+          会員登録
+        </Button>
       </Link>
     </MessageBox>
   }
 
   return <MessageBox
-    title="サークルへの参加する"
-    description="招待を受け取りました。サークルへ参加できます。"
+    title="サークルに参加する"
+    description={`「${circle.name}」に参加できます。サークルに参加するにはログインが必要です。`}
   >
     <Button loading={isProcessing} component="button" block css={css`
         margin-top: 12px;

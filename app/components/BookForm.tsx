@@ -107,10 +107,10 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
       <InputGroup label="説明">
         <Field name="description" component={CustomTextarea} rows={5} />
       </InputGroup>
-      <InputGroup label="見本誌URL">
+      <InputGroup label="立ち読みURL">
         <Field name="sampleUrl" component={CustomInput} />
       </InputGroup>
-      <InputGroup label="購入URL">
+      <InputGroup label="電子版購入URL">
         <Field name="purchaseUrl" component={CustomInput} />
       </InputGroup>
       <InputGroup label="新刊">

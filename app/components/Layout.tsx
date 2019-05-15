@@ -22,7 +22,7 @@ const Layout = props => {
 
   return <>
     <Global styles={css`
-      @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&font-display=swap);
+      @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap);
       body {
         /* TODO: 諸々指定 */
         font-family: "Noto Sans JP";
