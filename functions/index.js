@@ -9,6 +9,7 @@ const auth = functions.region('asia-northeast1').auth
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
 const onRequest = functions.https.onRequest
+const onRequestAsia = functions.region('asia-northeast1').https.onRequest
 
 admin.initializeApp();
 
@@ -54,7 +55,7 @@ exports.receiveInvitation = onCall(async (data, context) => {
   return { message: 'サークルに参加しました。' }
 })
 
-exports.apiCircles = onCall(async (data, context) => {
+exports.apiCircles = onRequest(async (req, res) => {
   const snapshots = await admin.firestore().collection('circles').get()
   const circles = []
   snapshots.forEach(circle => {
@@ -64,19 +65,21 @@ exports.apiCircles = onCall(async (data, context) => {
       ...data
     })
   })
-  return circles
+  res.set('Content-Type', 'application/json');
+  res.set('Cache-Control', 'public, s-maxage=300')
+  res.status(200).send(JSON.stringify(circles))
 })
 
-
-exports.apiBooks = onCall(async (data, context) => {
+exports.apiBooks = onRequest(async (req, res) => {
   const snapshots = await admin.firestore().collection('books').get()
   const books = []
   snapshots.forEach(book => {
-    const data = book.data()
     books.push({
       id: book.id,
-      ...data
+      ...book.data()
     })
   })
-  return books
+  res.set('Content-Type', 'application/json');
+  res.set('Cache-Control', 'public, s-maxage=300')
+  res.status(200).send(JSON.stringify(books))
 })
