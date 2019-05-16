@@ -1,15 +1,12 @@
 /** @jsx jsx */
 import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
-
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import { getBooks } from '../../utils/functions'
 
 import {
   Container
 } from 'sancho'
 import { withRouter } from 'next/router'
-import { initFirebase, refToPath } from '../../utils/firebase'
 import Book from '../../utils/book'
 import BookCell from '../../components/BookCell'
 
@@ -29,19 +26,7 @@ Index.getInitialProps = async ({ res }: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
-  initFirebase()
-  const db = firebase.firestore()
-  const books: Book[] = []
-  const bookSnapshots = await db.collection('books').get()
-
-  bookSnapshots.forEach(book => {
-    const data = book.data() as Book
-    books.push({
-      id: book.id,
-      ...refToPath(data, 'circleRef')
-    })
-  })
-
+  const books = await getBooks()
   return {
     books
   }

@@ -67,6 +67,7 @@ exports.apiCircles = onRequest(async (req, res) => {
   })
   res.set('Content-Type', 'application/json');
   res.set('Cache-Control', 'public, s-maxage=300')
+  res.set('Access-Control-Allow-Origin', "*")
   res.status(200).send(JSON.stringify(circles))
 })
 
@@ -81,5 +82,6 @@ exports.apiBooks = onRequest(async (req, res) => {
   })
   res.set('Content-Type', 'application/json');
   res.set('Cache-Control', 'public, s-maxage=300')
+  res.set('Access-Control-Allow-Origin', "*")
   res.status(200).send(JSON.stringify(books))
 })

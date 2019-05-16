@@ -2,15 +2,12 @@
 import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
 import { Container, List, ListItem, IconChevronRight } from 'sancho'
 import { withRouter } from 'next/router'
 
 import circleTumbnail from '../../images/circle.png'
 
-import { initFirebase, refToPath } from '../../utils/firebase'
+import { getCircles } from '../../utils/functions'
 import Circle, { categories } from '../../utils/circle'
 import ImageBox from '../../components/ImageBox'
 
@@ -51,21 +48,7 @@ Index.getInitialProps = async ({ res }: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
-  initFirebase()
-  const db = firebase.firestore()
-  const circles: Circle[] = []
-  const circleSnapshots = await db.collection('circles').get()
-
-  circleSnapshots.forEach(circle => {
-    const data = circle.data() as Circle
-    circles.push({
-      id: circle.id,
-      ...data
-    })
-  })
-
-  return {
-    circles
-  }
+  const circles = await getCircles()
+  return { circles }
 }
 export default withRouter(Index)
