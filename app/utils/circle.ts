@@ -27,6 +27,7 @@ export default interface Circle {
   name: string
   nameKana: string
   image: string
+  imageMonochro: string
   category: CricleCategory
   plan: CriclePlan
   twitter: string

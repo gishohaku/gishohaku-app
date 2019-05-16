@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Button, InputGroup, Input, TextArea, Divider, Select, } from 'sancho'
+import { Button, InputGroup, Input, TextArea, Divider, Select, useTheme, Text } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categories, CricleCategory, plans, CriclePlan } from '../utils/circle'
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const CircleForm = ({ onSubmit, user, circle }: Props) => {
+  const theme = useTheme()
   return <Formik initialValues={circle} onSubmit={(values, actions) => {
     onSubmit(values)
   }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
@@ -21,12 +22,17 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
       <InputGroup label="サークル名 *">
         <Field name="name" component={CustomInput} disabled />
       </InputGroup>
-      <InputGroup label="画像" helpText="推奨サイズ: 横635px 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
+      <InputGroup label="画像">
+        <Text css={{
+          display: 'block',
+          marginTop: theme.spaces.xs,
+          marginBottom: theme.spaces.xs
+        }}>カラー</Text>
         <div css={css`
           overflow-x: auto;
         `}>
           {
-            values.image.length > 0 ?
+            values.image ?
               <ImageBox
                 imageUrl={values.image}
                 size='circlecut'
@@ -35,11 +41,46 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                     setFieldValue('image', '')
                   }
                 }}
-              /> : <ImageUploader user={user} addUrl={(url: string) => {
+              /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
                 setFieldValue('image', url)
               }} />
           }
         </div>
+        <Text css={{
+          display: 'block',
+          marginTop: theme.spaces.xs,
+          marginBottom: theme.spaces.xs
+        }}>グレースケール</Text>
+        <div css={css`
+          overflow-x: auto;
+        `}>
+          {
+            values.imageMonochro ?
+              <ImageBox
+                imageUrl={values.imageMonochro}
+                size='circlecut'
+                onClick={() => {
+                  if (confirm('画像を削除しますか？')) {
+                    setFieldValue('imageMonochro', '')
+                  }
+                }}
+              /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
+                setFieldValue('imageMonochro', url)
+              }} />
+          }
+        </div>
+        <Text css={{
+          display: 'block',
+          marginTop: theme.spaces.xs,
+          color: theme.colors.text.muted,
+          fontSize: theme.fontSizes[0]
+        }}
+          variant="body">
+          ※推奨サイズ: 横635px 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。<br/>
+          ※この画像はWebサイトのサークル一覧として表示されるほか、公式パンフレットのサークルカットとして印刷されます。<br/>
+          ※グレースケール版を登録されていない場合は、運営事務局にて自動変換いたします。<br/>
+          ※サークルカットのテンプレートは<a target="_blank" rel="noopener" href="https://docs.circle.ms/howto/circlecut.html">こちら</a>をお使い下さい。
+        </Text>
       </InputGroup>
       <InputGroup label="プラン *">
         <Select name="plan" onChange={handleChange} onBlur={handleBlur} value={values.plan} disabled>
@@ -97,4 +138,4 @@ const CustomTextarea = ({
     </div>
   )
 
-export default CircleForm
+  export default CircleForm

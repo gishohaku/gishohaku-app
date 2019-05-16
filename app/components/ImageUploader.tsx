@@ -9,9 +9,10 @@ import { Spinner, IconUpload } from 'sancho';
 interface Props {
   user: firebase.User
   addUrl: Function
+  size?: 'square' | 'circlecut'
 }
 
-const ImageUploader: React.FC<Props> = ({ user, addUrl }) => {
+const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
   const [isUploading, setUploading] = useState(false)
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -42,7 +43,7 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl }) => {
             background-color: #e5e5e5;
             min-width: 180px;
             width: 180px;
-            height: 180px;
+            height: ${size == 'circlecut' ? '255px' : '180px'};
             display: flex;
             align-items: center;
             justify-content: center;
