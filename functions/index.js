@@ -1,3 +1,5 @@
+// import admin from 'firebase-admin'
+// import functions from 'firebase-functions'
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
@@ -5,14 +7,6 @@ const onRequest = functions.https.onRequest
 const onCall = functions.https.onCall
 
 admin.initializeApp();
-
-// const index = require('./next/serverless/pages/index')
-// const books = require('./next/serverless/pages/books')
-// const showBook = require('./next/serverless/pages/books/_id')
-
-// exports.index = onRequest((req, res) => index.render(req, res))
-// exports.books = onRequest((req, res) => books.render(req, res))
-// exports.showBook = onRequest((req, res) => showBook.render(req, res))
 
 const next = require('next')
 const routes = require('./routes')
@@ -26,7 +20,7 @@ exports.app = onRequest((req, res) => (app.prepare().then(
 
 exports.saveUser = functions.auth.user().onCreate((user) => {
   console.log(user)
-  userDoc = {
+  const userDoc = {
     email: user.email,
     displayName: user.displayName
   }
@@ -54,4 +48,31 @@ exports.receiveInvitation = onCall(async (data, context) => {
     circleRef: firestore.collection('circles').doc(circleId)
   }, { merge: true })
   return { message: 'サークルに参加しました。' }
+})
+
+exports.apiCircles = onCall(async (data, context) => {
+  const snapshots = await admin.firestore().collection('circles').get()
+  const circles = []
+  snapshots.forEach(circle => {
+    const data = circle.data()
+    circles.push({
+      id: circle.id,
+      ...data
+    })
+  })
+  return circles
+})
+
+
+exports.apiBooks = onCall(async (data, context) => {
+  const snapshots = await admin.firestore().collection('books').get()
+  const books = []
+  snapshots.forEach(book => {
+    const data = book.data()
+    books.push({
+      id: book.id,
+      ...data
+    })
+  })
+  return books
 })
