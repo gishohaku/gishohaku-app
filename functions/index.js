@@ -3,8 +3,9 @@
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
-const onRequest = functions.https.onRequest
-const onCall = functions.https.onCall
+const onRequest = functions.region('asia-northeast1').https.onRequest
+const onCall = functions.region('asia-northeast1').https.onCall
+const auth = functions.region('asia-northeast1').auth
 
 admin.initializeApp();
 
@@ -18,7 +19,7 @@ exports.app = onRequest((req, res) => (app.prepare().then(
   () => handler(req, res)
 )))
 
-exports.saveUser = functions.auth.user().onCreate((user) => {
+exports.saveUser = auth.user().onCreate((user) => {
   console.log(user)
   const userDoc = {
     email: user.email,
