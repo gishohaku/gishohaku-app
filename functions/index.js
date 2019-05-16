@@ -3,9 +3,12 @@
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
-const onRequest = functions.region('asia-northeast1').https.onRequest
 const onCall = functions.region('asia-northeast1').https.onCall
 const auth = functions.region('asia-northeast1').auth
+
+// https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
+// HostingでRewriteできる関数はus-central1を利用する必要がある
+const onRequest = functions.https.onRequest
 
 admin.initializeApp();
 
