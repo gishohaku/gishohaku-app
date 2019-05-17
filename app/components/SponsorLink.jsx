@@ -1,9 +1,9 @@
+/** @jsx jsx */
 import React from "react"
-import { css } from "@emotion/core"
-import { media, colors } from "src/utils/style"
+import { jsx, css } from "@emotion/core"
+import { media, colors } from "../utils/style"
 
 export default props => {
-  console.log(props)
   return (
     <div
       className={props.className}

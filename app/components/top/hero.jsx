@@ -100,7 +100,7 @@ const Hero = () => {
           }
         `}
       >
-        <img src={logo} alt="技術書同人誌博覧会" />
+        <img with="100%" src={logo} alt="技術書同人誌博覧会" />
       </div>
       <h1
         css={css`

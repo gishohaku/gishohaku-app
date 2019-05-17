@@ -10,6 +10,11 @@ import { media } from "../../utils/style"
 import SectionHeader from "../atoms/SectionHeader"
 import TextBlock from "../atoms/TextBlock"
 
+import Sponsor from './sponsor'
+import SponsorLink from '../SponsorLink'
+
+import { Container } from 'sancho'
+
 const section = css`
   padding: 32px 0 48px;
   background-color: white;
@@ -89,7 +94,7 @@ const Sections = () => (
       )}
     >
       <SectionHeader text="ACCESS">アクセス</SectionHeader>
-      <div
+      {/* <div
         css={css`
           height: 450px;
           margin-top: 32px;
@@ -106,7 +111,7 @@ const Sections = () => (
           `}
           allowFullScreen
         />
-      </div>
+      </div> */}
       <TextBlock>
         <p
           css={css`
@@ -184,6 +189,45 @@ const Sections = () => (
       >
         読み込んでいます...
       </iframe> */}
+    </section>
+    <section
+      css={css(
+        section,
+        `
+        background-color: #f7f8fa;
+      `
+      )}
+    >
+      <SectionHeader text="SPONSOR">スポンサー</SectionHeader>
+      <Container css={css`
+        max-width: 740px;
+      `}>
+      <div css={css`
+      margin-top: 36px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        > div {
+          width: 160px;
+          @media ${media.small} {
+            width: 150px;
+          }
+          text-align: center;
+          margin: 0 10px;
+        }
+      `}>
+        <Sponsor name="募集中" role="トートバッグサポーター"/>
+        <Sponsor name="募集中" role="パブリシティサポーター"/>
+        <Sponsor name="募集中" role="セキュリティサポーター"/>
+        <Sponsor name="募集中" role="オフィシャルサポーター"/>
+        <Sponsor name="募集中" role="懇親会サポーター"/>
+        <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="https://gishohaku.dev/sponsors/mediado.png" />
+      </div>
+      <SponsorLink css={css`
+        margin-top: 24px;
+        background-color: white;
+      `} />
+      </Container>
     </section>
   </>
 )
