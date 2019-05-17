@@ -27,7 +27,9 @@ exports.saveUser = auth.user().onCreate((user) => {
   console.log(user)
   const userDoc = {
     email: user.email,
-    displayName: user.displayName
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    metadata: user.metadata
   }
   admin.firestore().collection('users').doc(user.uid).set(userDoc).then(result => {
     console.log(result)
