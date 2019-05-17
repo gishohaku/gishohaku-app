@@ -1,23 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import UserContext from './UserContext'
-import firebase from 'firebase/app'
+import firebase, { FirebaseError } from 'firebase/app'
 import 'firebase/auth'
 
 interface User {
   email: string
   displayName: string
+  photoURL: string
   circleRef?: firebase.firestore.DocumentReference
-}
-
-
-const fetchUserData = async (db: firebase.firestore.Firestore, uid: string) => {
-  return new Promise((resolve, reject) => {
-    console.log('fetchUser', uid)
-    db.collection('users').doc(uid).get().then((snapshot) => {
-      console.log(snapshot.exists ? 'success' : 'failed')
-      snapshot.exists ? resolve(snapshot.data()) : setTimeout(() => reject('Error'), 3000)
-    })
-  })
+  createdAt: firebase.firestore.FieldValue
 }
 
 export const UserProvider = (props: any) => {
@@ -31,25 +22,30 @@ export const UserProvider = (props: any) => {
       setCurrentUser(user)
       if (user) {
         const db = firebase.firestore()
-        const userData = await Promise.reject()
-          .catch(() => fetchUserData(db, user.uid))
-          .catch(() => fetchUserData(db, user.uid))
-          .catch(() => fetchUserData(db, user.uid))
-          .catch(() => fetchUserData(db, user.uid))
-          .catch(() => fetchUserData(db, user.uid))
-        setUserData(userData as User)
+        const userSnapshot = await db.collection('users').doc(user.uid).get()
+        if (userSnapshot.exists) {
+          setUserData(userSnapshot.data() as User)
+        } else {
+          const userDoc = {
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          }
+          await db.collection('users').doc(user.uid).set(userDoc)
+          console.log('Create user document')
+          setUserData(userDoc as User)
+        }
       }
-      // TODO: 会員登録直後isLoadingがfalseにならないケースがある
       setIsLoading(false)
     })
   }, [])
 
-  const reloadUser = useCallback(() => {
+  const reloadUser = useCallback(async () => {
     if (currentUser) {
       const db = firebase.firestore()
-      return fetchUserData(db, currentUser.uid).then((_userData) => {
-        setUserData(_userData as User)
-      })
+      const userSnapshot = await db.collection('users').doc(currentUser.uid).get()
+      setUserData(userSnapshot.data() as User)
     }
   }, [currentUser])
 
@@ -67,8 +63,10 @@ export default React.createContext<{
   user: firebase.User | null
   isUserLoading: boolean,
   userData: User | null,
+  reloadUser: () => void
 }>({
   user: null,
   isUserLoading: true,
-  userData: null
+  userData: null,
+  reloadUser: () => {}
 })

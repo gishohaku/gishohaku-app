@@ -31,7 +31,8 @@ service cloud.firestore {
 
     match /users/{userID} {
       allow read: if isAuthenticated() && isUserAuthenticated(userID);
-      allow write: if false;
+      allow write: if isAuthenticated() && isUserAuthenticated(userID);
+      allow update: if false;
     }
 
     match /books/{bookID} {

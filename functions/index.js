@@ -4,7 +4,6 @@ const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
 const onCall = functions.region('asia-northeast1').https.onCall
-const auth = functions.region('asia-northeast1').auth
 
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
@@ -22,20 +21,6 @@ const handler = routes.getRequestHandler(app)
 exports.app = onRequest((req, res) => (app.prepare().then(
   () => handler(req, res)
 )))
-
-exports.saveUser = auth.user().onCreate((user) => {
-  console.log(user)
-  const userDoc = {
-    email: user.email,
-    displayName: user.displayName,
-    photoURL: user.photoURL,
-    metadata: user.metadata
-  }
-  admin.firestore().collection('users').doc(user.uid).set(userDoc).then(result => {
-    console.log(result)
-    return
-  })
-})
 
 exports.receiveInvitation = onCall(async (data, context) => {
   const token = data.token
