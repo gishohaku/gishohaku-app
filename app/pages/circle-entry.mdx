@@ -1,0 +1,65 @@
+import MdxContainer from '../components/MdxContainer'
+import SectionHeader from '../components/atoms/SectionHeader'
+import SEO from '../components/SEO'
+
+
+<SEO title="サークル決済"/>
+
+<SectionHeader text="ENTRY" pageHeader>
+サークル決済
+</SectionHeader>
+
+<MdxContainer>
+
+## サークル決済について
+
+本ページは、当会より別途「サークル参加仮確定」のご連絡を差し上げたサークルさまを対象にしています。<br/>
+以下の手順に従い、**2019年5月31日（金）まで**に決済手続きを完了して頂くよう、お願いいたします。<br/>
+
+## 決裁方法
+
+以下のボタンより**必ず1度のみ**決済を行ってください。<br/>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="shift_jis">
+    <input type="hidden" name="cmd" value="_s-xclick"/>
+    <input type="hidden" name="hosted_button_id" value="V3QFKMH7S45ZQ"/>
+    <div style={{margin: '12px 0'}}>
+    <h4>サークルプラン</h4>
+        事前申し込み時のサークルプランをご選択ください。<br/>
+        <input type="hidden" name="on0" value="出展種別"/>
+        <select name="os0">
+            <option value="NORMALPLAN">通常プラン ¥3,000 JPY</option>
+            <option value="DOUBLEPLAN">倍量プラン ¥6,000 JPY</option>
+        </select><br/>
+        <small>
+            ※本フォームからの参加プラン変更は受け付けられません<br/>
+        </small>
+    </div>
+    <div style={{margin: '12px 0'}}>
+        <h4>メールアドレス</h4>
+        <input type="hidden" name="on1" value="申込時のメールアドレス"/>
+        事前申し込み時のメールアドレスを入力してください。<br/>
+        <input type="text" name="os1" maxlength="200"/><br/>
+        <input type="hidden" name="currency_code" value="JPY"/>
+    </div>
+    <div>
+        <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - オンラインでより安全・簡単にお支払い"/>
+        <img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1"/>
+    </div>
+</form>
+
+## 注意事項
+
+- サークル参加に際しては [サークル参加規約](/terms/) にご同意ください
+- 決済後の返金および参加キャンセルは一切受け付けません
+- 期限までの入金が確認できない場合、キャンセルとさせていただく場合があります
+
+## 運営団体
+
+- 運営者：[エンジニアの登壇を応援する会](https://portal.engineers-lt.info/)
+- 代表者：森川晃
+- 問合先：[gishohaku@engineers-lt.info](mailto:gishohaku@engineers-lt.info)
+
+</MdxContainer>
+
+
