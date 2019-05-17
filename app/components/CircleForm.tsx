@@ -23,51 +23,57 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
         <Field name="name" component={CustomInput} disabled />
       </InputGroup>
       <InputGroup label="画像">
-        <Text css={{
-          display: 'block',
-          marginTop: theme.spaces.xs,
-          marginBottom: theme.spaces.xs
-        }}>カラー</Text>
         <div css={css`
           overflow-x: auto;
-        `}>
-          {
-            values.image ?
-              <ImageBox
-                imageUrl={values.image}
-                size='circlecut'
-                onClick={() => {
-                  if (confirm('画像を削除しますか？')) {
-                    setFieldValue('image', '')
-                  }
-                }}
-              /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
-                setFieldValue('image', url)
-              }} />
+          display: flex;
+          > div {
+            margin-right: 12px;
           }
-        </div>
-        <Text css={{
-          display: 'block',
-          marginTop: theme.spaces.xs,
-          marginBottom: theme.spaces.xs
-        }}>グレースケール</Text>
-        <div css={css`
-          overflow-x: auto;
         `}>
-          {
-            values.imageMonochro ?
-              <ImageBox
-                imageUrl={values.imageMonochro}
-                size='circlecut'
-                onClick={() => {
-                  if (confirm('画像を削除しますか？')) {
-                    setFieldValue('imageMonochro', '')
-                  }
-                }}
-              /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
-                setFieldValue('imageMonochro', url)
-              }} />
-          }
+        <div>
+          <Text css={{
+            display: 'block',
+            color: theme.colors.text.muted,
+            marginTop: theme.spaces.xs,
+            marginBottom: theme.spaces.xs
+          }}>カラー</Text>
+            {
+              values.image ?
+                <ImageBox
+                  imageUrl={values.image}
+                  size='circlecut'
+                  onClick={() => {
+                    if (confirm('画像を削除しますか？')) {
+                      setFieldValue('image', '')
+                    }
+                  }}
+                /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
+                  setFieldValue('image', url)
+                }} />
+            }
+          </div>
+          <div>
+            <Text css={{
+              display: 'block',
+              color: theme.colors.text.muted,
+              marginTop: theme.spaces.xs,
+              marginBottom: theme.spaces.xs
+            }}>グレースケール</Text>
+            {
+              values.imageMonochro ?
+                <ImageBox
+                  imageUrl={values.imageMonochro}
+                  size='circlecut'
+                  onClick={() => {
+                    if (confirm('画像を削除しますか？')) {
+                      setFieldValue('imageMonochro', '')
+                    }
+                  }}
+                /> : <ImageUploader user={user} size="circlecut" addUrl={(url: string) => {
+                  setFieldValue('imageMonochro', url)
+                }} />
+            }
+          </div>
         </div>
         <Text css={{
           display: 'block',

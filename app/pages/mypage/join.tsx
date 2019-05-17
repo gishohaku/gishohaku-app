@@ -5,13 +5,12 @@ import 'firebase/functions'
 
 import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
-import { Spinner, Button, useToast } from 'sancho'
+import { Button, useToast } from 'sancho'
 import { withRouter } from 'next/router'
-import { useContext, useState, useEffect, useCallback } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import UserContext from '../../contexts/UserContext';
 import MessageBox from '../../components/MessageBox';
 import Loader from '../../components/Loader';
-import router from 'next/router'
 import qs from 'qs'
 
 // FIXME: 影響範囲が大きく汚い
@@ -98,7 +97,7 @@ const Join: React.FC<{
 
   return <MessageBox
     title="サークルに参加する"
-    description={`「${circle.name}」に参加できます。サークルに参加するにはログインが必要です。`}
+    description={`「${circle.name}」から招待を受け取りました。`}
   >
     <Button loading={isProcessing} component="button" block css={css`
         margin-top: 12px;
