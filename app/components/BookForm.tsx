@@ -38,7 +38,6 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
   return <Formik initialValues={initialBook || initialState} onSubmit={(values, actions) => {
     onSubmit(values)
   }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
-    console.log(values)
     return <form onSubmit={handleSubmit}>
       <InputGroup label="タイトル *">
         <Field name="title" component={CustomInput} />
@@ -107,15 +106,15 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
       <InputGroup label="説明">
         <Field name="description" component={CustomTextarea} rows={5} />
       </InputGroup>
-      <InputGroup label="立ち読みURL">
+      <InputGroup label="立ち読みURL" helpText="外部サイトで読者向けに用意している場合入力してください。">
         <Field name="sampleUrl" component={CustomInput} />
       </InputGroup>
-      <InputGroup label="電子版購入URL">
+      <InputGroup label="電子版購入URL" helpText="電子版のダウンロードURLが決まっている場合入力してください。">
         <Field name="purchaseUrl" component={CustomInput} />
       </InputGroup>
       <InputGroup label="新刊">
         <>
-          <Check onChange={handleChange} name="isNew" label="新刊の場合チェック" value='true' checked={values.isNew} />
+          <Check onChange={handleChange} name="isNew" label="新刊の場合チェックしてください" value='true' checked={values.isNew} />
         </>
       </InputGroup>
       <Divider />
