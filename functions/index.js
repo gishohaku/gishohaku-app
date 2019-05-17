@@ -3,7 +3,7 @@
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
-const onCall = functions.region('asia-northeast1').https.onCall
+const onCall = functions.https.onCall
 
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
