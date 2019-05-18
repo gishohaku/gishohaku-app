@@ -202,32 +202,35 @@ const Sections = () => (
       <Container css={css`
         max-width: 740px;
       `}>
-      <div css={css`
-      margin-top: 36px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        > div {
-          width: 160px;
-          @media ${media.small} {
-            width: 150px;
+        <div css={css`
+          margin-top: 36px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          > div {
+            width: 160px;
+            @media ${media.small} {
+              width: 150px;
+            }
+            text-align: center;
+            margin: 0 10px;
           }
-          text-align: center;
-          margin: 0 10px;
-        }
-      `}>
-        <Sponsor name="募集中" role="トートバッグサポーター"/>
-        <Sponsor name="募集中" role="パブリシティサポーター"/>
-        <Sponsor name="募集中" role="セキュリティサポーター"/>
-        <Sponsor name="募集中" role="オフィシャルサポーター"/>
-        <Sponsor name="募集中" role="懇親会サポーター"/>
-        <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="https://gishohaku.dev/sponsors/mediado.png" />
-      </div>
-      <SponsorLink css={css`
-        margin-top: 24px;
-        background-color: white;
-      `} />
+        `}>
+          <Sponsor name="募集中" role="トートバッグサポーター"/>
+          <Sponsor name="募集中" role="パブリシティサポーター"/>
+          <Sponsor name="募集中" role="セキュリティサポーター"/>
+          <Sponsor name="募集中" role="オフィシャルサポーター"/>
+          <Sponsor name="募集中" role="懇親会サポーター"/>
+          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" />
+        </div>
+        <SponsorLink css={css`
+          margin-top: 24px;
+          background-color: white;
+        `} />
       </Container>
+    </section>
+    <section css={section}>
+      <SectionHeader text="PRINTING">バックアップ印刷所</SectionHeader>
     </section>
   </>
 )
