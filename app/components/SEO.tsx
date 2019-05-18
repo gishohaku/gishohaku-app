@@ -18,6 +18,7 @@ function SEO({ description, title }: any) {
       <meta name="twitter:creator" content="@gishohaku"/>
       <meta name="twitter:title" content={metaTitle}/>
       <meta name="twitter:description" content={metaDescription}/>
+      <meta name="description" content={metaDescription}/>
       <meta name="keywords" content="同人誌即売会, 技術同人誌, 技書博"/>
     </Head>
   )
