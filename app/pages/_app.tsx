@@ -1,6 +1,5 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import Head from 'next/head';
 import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
@@ -15,8 +14,8 @@ class MyApp extends App {
   componentDidMount() {
     initFirebase()
     ReactGA.initialize(TRACKING_ID, {
-      debug: true,
-      testMode: true
+      debug: process.env.NODE_ENV !== 'production',
+      testMode: process.env.NODE_ENV !== 'production'
     })
   }
 
