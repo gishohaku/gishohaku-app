@@ -7,8 +7,6 @@ import UserContext from '../contexts/UserContext'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-import "minireset.css"
-
 import logo from "../images/logo.png"
 import { colors, media } from "../utils/style"
 import { useToast, IconButton, IconMenu, Sheet, MenuList, MenuItem, MenuDivider, IconUser, IconLogIn, IconLogOut } from 'sancho'
