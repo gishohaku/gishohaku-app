@@ -61,7 +61,7 @@ const Sections = () => (
 
           dt {
             width: 112px;
-            color: #787878;
+            color: #666660;
             text-align: right;
             padding-right: 24px;
           }
