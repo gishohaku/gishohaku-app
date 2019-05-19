@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core"
 import { Embed } from 'sancho'
 import defaultImage from '../../images/sponsor.png'
+import LazyLoad from 'react-lazyload'
 
 interface Props {
   image?: string
@@ -15,11 +16,13 @@ const sponsor : React.FC<Props> = ({image, name, role}) => {
     border: 1px solid #eee;
     background-color: white;
   `}>
-    <img src={image || defaultImage} css={css`
-      object-fit: contain;
-      display: block;
-      padding: 12px;
-    `} />
+    <LazyLoad>
+      <img src={image || defaultImage} css={css`
+        object-fit: contain;
+        display: block;
+        padding: 12px;
+      `} />
+    </LazyLoad>
   </Embed>
   <p css={css`
     font-size: 12px;
