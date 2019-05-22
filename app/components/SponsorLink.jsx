@@ -43,7 +43,7 @@ export default props => {
             background-color: #dbae29;
           }
         `}
-        href="/sponsor_2019.pdf"
+        href="/static/sponsor_2019.pdf"
       >
         スポンサー向け資料
       </a>
