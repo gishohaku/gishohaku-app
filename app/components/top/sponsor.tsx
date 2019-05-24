@@ -18,12 +18,13 @@ const sponsor : React.FC<Props> = ({image, name, role, href}) => {
     background-color: white;
   `}>
     <LazyLoad>
-      <a href={href || '#'} target="_blank">
-        <img src={image || defaultImage} css={css`
-          object-fit: contain;
-          display: block;
-          padding: 12px;
-        `} />
+      <a href={href || 'javascript:void(0);'} css={css`
+        align-items: center;
+        display: flex;
+        padding: 12px;
+        text-align: center;
+      `}>
+        <img src={image || defaultImage} />
       </a>
     </LazyLoad>
   </Embed>
@@ -36,7 +37,7 @@ const sponsor : React.FC<Props> = ({image, name, role, href}) => {
   <p css={css`
     font-size: 15px;
     font-weight: bold;
-  `}><a href={href || '#'} target="_blank">{name || '募集中'}</a></p>
+  `}><a href={href || 'javascript:void(0);'}>{name || '募集中'}</a></p>
   </div>
 }
 
