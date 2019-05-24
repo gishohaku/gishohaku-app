@@ -13,7 +13,7 @@ const ImageBox: React.FC<ImageBoxProps> = (props) => {
   return <span css={css`
     width: ${width || '180'}px;
     height: auto;
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     border: 1px solid #ddd;

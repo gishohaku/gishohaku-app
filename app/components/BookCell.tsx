@@ -75,12 +75,12 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
       }
     </div>
     <div css={css`
-        overflow-x: auto;
         margin: 0 -20px;
-        padding: 0 20px;
       `}>
       <div css={css`
-          display: flex;
+          white-space: nowrap;
+          overflow-x: auto;
+          padding: 0 20px;
         `}>
         {
           book.images.map((image, index) => {
