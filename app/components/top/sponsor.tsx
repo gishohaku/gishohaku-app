@@ -18,12 +18,13 @@ const sponsor : React.FC<Props> = ({image, name, role, href}) => {
     background-color: white;
   `}>
     <LazyLoad>
-      <a href={href || 'javascript:void(0);'}>
-        <img src={image || defaultImage} css={css`
-          object-fit: contain;
-          display: block;
-          padding: 12px;
-        `} />
+      <a href={href || 'javascript:void(0);'} css={css`
+        align-items: center;
+        display: flex;
+        padding: 12px;
+        text-align: center;
+      `}>
+        <img src={image || defaultImage} />
       </a>
     </LazyLoad>
   </Embed>
