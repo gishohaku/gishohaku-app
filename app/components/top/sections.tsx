@@ -12,6 +12,7 @@ import TextBlock from "../atoms/TextBlock"
 
 import Sponsor from './sponsor'
 import SponsorLink from '../SponsorLink'
+import Printing from './printing'
 
 import { Container } from 'sancho'
 
@@ -187,6 +188,16 @@ const Sections = () => (
     </section>
     <section css={section}>
       <SectionHeader text="PRINTING">バックアップ印刷所</SectionHeader>
+      <Container css={css`
+        max-width: 760px;
+        margin-top: 36px;
+      `}>
+        <Printing name='ねこのしっぽ' url='https://www.shippo.co.jp/' image='https://www.shippo.co.jp/neko/img/neko_banner.gif'/>
+        <Printing name='日光企画' url='http://www.nikko-pc.com' image='http://www.nikko-pc.com/start/logo.gif'/>
+        <Printing name='ポプルス' url='http://www.inv.co.jp/~popls'/>
+        <Printing name='ケーナイン' url='https://www.k-k9.jp/' image='https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif'/>
+        <Printing name='栄光' url='https://www.eikou.com/'/>
+      </Container>
     </section>
   </>
 )
