@@ -8,7 +8,7 @@ import Book, { types, mediums } from '../utils/book'
 import ImageBox from '../components/ImageBox';
 import Label from '../components/Label';
 import Lightbox from 'react-image-lightbox'
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface Props {
   book: Book
@@ -27,6 +27,13 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
   const [isOpenLightbox, updateOpenLightBox] = useState(false)
   const [lightBoxIndex, updateLightboxIndex] = useState(0)
   const { images } = book
+  const descriptionHTML = useMemo(() => {
+    return marked(book.description, {
+      gfm: true,
+      breaks: true,
+      sanitize: true
+    })
+  }, [book.description])
 
   return <div css={css`
       background-color: white;
@@ -38,7 +45,6 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
     <div css={css`
         display: flex;
         align-items: center;
-        margin-bottom: 20px;
       `}>
       <div>
         <div css={css`
@@ -49,6 +55,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
         </div>
         <div css={css`
             font-size: 13px;
+            margin-top: 2px;
           `}>
           {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text='新刊' />}
           <span css={css`
@@ -81,89 +88,90 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
         </Link>
       }
     </div>
-    <div css={css`
-        margin: 0 -20px;
-      `}>
+    { images.length > 0 &&
       <div css={css`
-          white-space: nowrap;
-          overflow-x: auto;
-          padding: 0 20px;
+          margin: 20px -20px 0;
         `}>
-        {
-          images.map((image, index) => {
-            return <ImageBox imageUrl={image} size='square' onClick={() => {
-              updateOpenLightBox(true)
-              updateLightboxIndex(index)
-            }} key={index}/>
-          })
-        }
-      </div>
-    </div>
-    <div css={css`
-        margin-top: 12px;
-        color: #444;
-
-        p, ul, ol {
-          margin-bottom: 12px;
-          &:last-child {
-            margin-bottom: 0;
+        <div css={css`
+            white-space: nowrap;
+            overflow-x: auto;
+            padding: 0 20px;
+          `}>
+          {
+            images.map((image, index) => {
+              return <ImageBox imageUrl={image} size='square' onClick={() => {
+                updateOpenLightBox(true)
+                updateLightboxIndex(index)
+              }} key={index}/>
+            })
           }
-        }
+        </div>
+      </div>
+    }
+    {
+      descriptionHTML.length > 0 &&
+      <div css={css`
+          margin-top: 12px;
+          color: #444;
 
-        h1, h2, h3, h4, h5, h6 {
-          font-weight: bold;
-          color: #222;
-          margin-bottom: 4px;
-        }
+          p, ul, ol {
+            margin-bottom: 12px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
 
-        strong {
-          font-weight: bold;
-          color: #222;
-        }
+          h1, h2, h3, h4, h5, h6 {
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 4px;
+          }
 
-        ul, ol {
-          padding-left: 24px;
-        }
+          strong {
+            font-weight: bold;
+            color: #222;
+          }
 
-        ul li {
-          list-style-type: disc;
-        }
+          ul, ol {
+            padding-left: 24px;
+          }
 
-        ol li {
-          list-style-type: decimal;
-        }
+          ul li {
+            list-style-type: disc;
+          }
 
-        table {
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          width: 100%;
-          border-collapse: collapse;
-          border-spacing: 0;
-          margin: 12px 0;
-        }
+          ol li {
+            list-style-type: decimal;
+          }
 
-        table tr:nth-child(odd) td {
-          background-color: #f9f9f9;
-        }
+          table {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 12px 0;
+          }
 
-        table tr th,
-        table tr td {
-          padding: 8px;
-          line-height: 1.6;
-          vertical-align: top;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-        }
+          table tr:nth-child(odd) td {
+            background-color: #f9f9f9;
+          }
 
-        table tr th {
-          white-space: nowrap;
-        }
-      `}
-      dangerouslySetInnerHTML={{
-        __html: marked(book.description, {
-          gfm: true,
-          breaks: true,
-          sanitize: true
-        })
-      }} />
+          table tr th,
+          table tr td {
+            padding: 8px;
+            line-height: 1.6;
+            vertical-align: top;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+          }
+
+          table tr th {
+            white-space: nowrap;
+          }
+        `}
+        dangerouslySetInnerHTML={{
+          __html: descriptionHTML
+        }} />
+      }
       { isOpenLightbox && <>
         <Global styles={css`
           @keyframes closeWindow {
