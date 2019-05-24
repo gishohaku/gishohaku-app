@@ -8,9 +8,10 @@ interface Props {
   image?: string
   role: string
   name?: string
+  href?: string
 }
 
-const sponsor : React.FC<Props> = ({image, name, role}) => {
+const sponsor : React.FC<Props> = ({image, name, role, href}) => {
   return <div style={{marginTop: 12}}>
   <Embed width={140} height={140} css={css`
     border: 1px solid #eee;
