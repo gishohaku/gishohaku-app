@@ -7,13 +7,13 @@ import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
 
-import { Button } from 'sancho'
-import { withRouter, WithRouterProps, DefaultQuery } from 'next/router'
+import { withRouter } from 'next/router'
 import { refToPath } from '../../utils/firebase'
 import { initFirebase } from '../../utils/firebase'
 import Circle, { categories } from '../../utils/circle'
 import Book, { types, mediums } from '../../utils/book'
 import CircleDetail from '../../components/CircleDetail';
+import SEO from '../../components/SEO';
 import { NextFunctionComponent, NextContext } from 'next';
 
 interface Props {
@@ -26,7 +26,10 @@ const CirclePage: NextFunctionComponent<Props> = (props) => {
   // const [circle, setCircle] = useState<Circle>()
   const { circle, books } = props
 
-  return <CircleDetail circle={circle} books={books} editable={false} />
+  return <>
+    <SEO title={circle.name} />
+    <CircleDetail circle={circle} books={books} editable={false} />
+  </>
 }
 
 CirclePage.getInitialProps = async (context: NextContext<{
