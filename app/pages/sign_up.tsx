@@ -62,7 +62,6 @@ const SignUp = ({ book, router }: any) => {
               actions.setSubmitting(false)
             })
         }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
-          console.log(values)
           return <Form>
             {error && <Alert intent="danger" title={error} />}
             {/* SSR時のfirst-child対応 */}
