@@ -17,7 +17,7 @@ const sponsor : React.FC<Props> = ({image, name, role}) => {
     background-color: white;
   `}>
     <LazyLoad>
-      <a href="{href || 'javascript:void(0);'}" target="_blank">
+      <a href={href || '#'} target="_blank">
         <img src={image || defaultImage} css={css`
           object-fit: contain;
           display: block;
@@ -35,7 +35,7 @@ const sponsor : React.FC<Props> = ({image, name, role}) => {
   <p css={css`
     font-size: 15px;
     font-weight: bold;
-  `}><a href="{href || 'javascript:void(0);'}" target="_blank">{name || '募集中'}</a></p>
+  `}><a href={href || '#'} target="_blank">{name || '募集中'}</a></p>
   </div>
 }
 
