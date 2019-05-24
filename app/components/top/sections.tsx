@@ -221,7 +221,7 @@ const Sections = () => (
           <Sponsor name="募集中" role="セキュリティサポーター"/>
           <Sponsor name="募集中" role="オフィシャルサポーター"/>
           <Sponsor name="募集中" role="懇親会サポーター"/>
-          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" />
+          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" href="https://mediado.jp/" />
         </div>
         <SponsorLink css={css`
           margin-top: 24px;
