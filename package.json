@@ -47,6 +47,7 @@
     "react-dropzone": "^10.1.4",
     "react-ga": "^2.5.7",
     "react-helmet": "^5.2.1",
+    "react-image-lightbox": "^5.1.0",
     "react-lazyload": "^2.5.0",
     "request": "^2.88.0",
     "sancho": "^3.1.0"

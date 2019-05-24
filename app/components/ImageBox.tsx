@@ -6,6 +6,7 @@ interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   // TODO
   size: 'square' | 'circlecut'
   width?: number
+  onClick?: () => void
 }
 
 const ImageBox: React.FC<ImageBoxProps> = (props) => {
@@ -22,6 +23,8 @@ const ImageBox: React.FC<ImageBoxProps> = (props) => {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+
+    cursor: ${props.onClick ? 'pointer' : 'inherit'};
 
     &:last-child {
       margin-right: 0;
