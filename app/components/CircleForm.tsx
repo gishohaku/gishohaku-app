@@ -17,7 +17,6 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
   return <Formik initialValues={circle} onSubmit={(values, actions) => {
     onSubmit(values)
   }} render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
-    console.log(values)
     return <form onSubmit={handleSubmit}>
       <InputGroup label="サークル名 *">
         <Field name="name" component={CustomInput} disabled />

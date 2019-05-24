@@ -85,7 +85,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
           }
         </>
       </InputGroup>
-      <InputGroup label="頒布予定数">
+      <InputGroup label="頒布予定数" helpText="頒布数は公開されますが、空欄でも問題ありません。">
         <Field name="stock" type='number' component={CustomInput} />
       </InputGroup>
       <InputGroup label="ページ数">
