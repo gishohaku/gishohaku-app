@@ -147,50 +147,6 @@ const Sections = () => (
         </div>
       </TextBlock>
     </section>
-    <section id="entry" css={section}>
-      <SectionHeader text="ENTRY">サークル参加申し込み</SectionHeader>
-      <TextBlock>
-        <p
-          css={css`
-            text-align: center;
-            @media ${media.small} {
-              text-align: left;
-            }
-          `}
-        >
-          <a href="/terms">サークル参加規約</a>
-          を必ずご覧のうえ、お申し込みください。
-
-          </p>
-          <p
-            css={css`
-              text-align: center;
-              font-weight: bold;
-              @media ${media.small} {
-                text-align: left;
-              }
-            `}
-          >
-          サークル募集は締め切りました。多数の申し込みをいただきありがとうございました。<br/>
-          キャンセル枠の再募集は5月以降に<a href="https://twitter.com/gishohaku">公式Twitter</a>よりご案内させていただきます。
-        </p>
-      </TextBlock>
-      {/* <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLScvx2_Y6tWgZ2zpV_wGuMBRHMLlCRLoVWJyr6Fc0FO9aS0rpw/viewform?embedded=true"
-        width="640"
-        frameBorder="0"
-        marginHeight="0"
-        marginWidth="0"
-        title="参加申し込みフォーム"
-        css={css`
-          height: 500px;
-          margin: 0 auto;
-          display: block;
-        `}
-      >
-        読み込んでいます...
-      </iframe> */}
-    </section>
     <section
       css={css(
         section,
@@ -222,7 +178,7 @@ const Sections = () => (
           <Sponsor name="募集中" role="セキュリティサポーター"/>
           <Sponsor name="募集中" role="オフィシャルサポーター"/>
           <Sponsor name="募集中" role="懇親会サポーター"/>
-          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" />
+          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" href="https://mediado.jp/" />
         </div>
         <SponsorLink css={css`
           margin-top: 24px;
