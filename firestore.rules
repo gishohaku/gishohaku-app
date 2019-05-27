@@ -33,6 +33,14 @@ service cloud.firestore {
       allow read: if isAuthenticated() && isUserAuthenticated(userID);
       allow write: if isAuthenticated() && isUserAuthenticated(userID);
       allow update: if false;
+
+      match /bookStars {
+        allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
+      }
+
+      match /circleStars {
+        allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
+      }
     }
 
     match /books/{bookID} {
