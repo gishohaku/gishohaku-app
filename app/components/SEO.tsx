@@ -13,7 +13,7 @@ function SEO({ description, title }: any) {
       <title>{metaTitle}</title>
       <meta property="og:description" content={metaDescription}/>
       <meta property="og:type" content="website"/>
-      <meta property="og:image" content="https://gishohaku.dev/ogp.jpg"/>
+      <meta property="og:image" content="https://gishohaku.dev/static/ogp.jpg"/>
       <meta name="twitter:card" content="summary_large_image"/>
       <meta name="twitter:creator" content="@gishohaku"/>
       <meta name="twitter:title" content={metaTitle}/>

@@ -100,7 +100,10 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
         </div>
         <div css={css`
           flex: 1;
-          width: 100%;
+          width: calc(100% - 250px - 32px - 48px);
+          @media ${media.medium} {
+            width: 100%;
+          }
         `}>
           {books.map(book => <BookCell book={book} editable={editable} key={book.id} />)}
           {editable &&
