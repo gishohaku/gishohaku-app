@@ -34,11 +34,11 @@ service cloud.firestore {
       allow write: if isAuthenticated() && isUserAuthenticated(userID);
       allow update: if false;
 
-      match /bookStars {
+      match /bookStars/{starId} {
         allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
       }
 
-      match /circleStars {
+      match /circleStars/{starId} {
         allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
       }
     }
