@@ -7,8 +7,11 @@ import marked from 'marked'
 import Book, { types, mediums } from '../utils/book'
 import ImageBox from '../components/ImageBox';
 import Label from '../components/Label';
+import CheckButton from '../components/CheckButton';
 import Lightbox from 'react-image-lightbox'
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
+import UserContext from '../contexts/UserContext';
+import { useToast } from 'sancho';
 
 interface Props {
   book: Book
@@ -16,6 +19,10 @@ interface Props {
 }
 
 const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
+  // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
+  const {addBookStar, removeBookStar, bookStars} = useContext(UserContext)
+  const toast = useToast()
+
   const metadata = [
     book.type && `${types[book.type]}`,
     book.pages > 0 && `${book.pages}ページ`,
@@ -65,6 +72,28 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
           </span>
         </div>
       </div>
+
+    <CheckButton
+      isChecked={book.id && bookStars.includes(book.id) || false}
+      onClick={() => {
+        if (!book.id) { return }
+        if (bookStars.includes(book.id)) {
+          console.log('remove book start')
+          removeBookStar(book.id)
+          toast({
+            title: `「${book.title}」のチェックを外しました`,
+            intent: 'success'
+          })
+        } else {
+          console.log('create book start')
+          addBookStar(book.id)
+          toast({
+            title: `「${book.title}」をチェックしました`,
+            intent: 'success'
+          })
+        }
+      }}
+    />
       {editable &&
         <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
           <a css={css`
@@ -84,7 +113,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
               }
             `}>
             編集
-            </a>
+          </a>
         </Link>
       }
     </div>
