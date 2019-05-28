@@ -72,37 +72,12 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                   font-size: 20px;
                   font-weight: bold;
                   margin-top: 2px;
+                  margin-bottom: 8px;
                 `}
               >
                 {circle.name}
               </h2>
-              <CheckButton
-                isChecked={(circle.id && circleStars.includes(circle.id)) || false}
-                onClick={() => {
-                  if (!circle.id) {
-                    return
-                  }
-                  if (circleStars.includes(circle.id)) {
-                    removeCircleStar(circle.id)
-                    toast({
-                      title: `サークルのチェックを外しました`,
-                      intent: 'success'
-                    })
-                  } else {
-                    addCircleStar(circle.id)
-                    toast({
-                      title: `サークルをチェックしました`,
-                      intent: 'success'
-                    })
-                  }
-                }}
-              />
-              {/* <a css={css`
-                font-size: 12px;
-              `} href={circle.website}>
-                {circle.website}
-              </a> */}
-              {editable && (
+              {editable ? (
                 <div>
                   <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
                     <a
@@ -117,10 +92,9 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                         color: #2a5773;
                         transition: all 0.2s ease;
                         white-space: nowrap;
-
-                        display: inline-block;
-                        margin-top: 8px;
+                        display: block;
                         cursor: pointer;
+                        text-align: center;
 
                         &:hover {
                           background-color: #2a5773;
@@ -132,6 +106,28 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                     </a>
                   </Link>
                 </div>
+              ) : (
+                <CheckButton
+                  isChecked={(circle.id && circleStars.includes(circle.id)) || false}
+                  onClick={() => {
+                    if (!circle.id) {
+                      return
+                    }
+                    if (circleStars.includes(circle.id)) {
+                      removeCircleStar(circle.id)
+                      toast({
+                        title: `サークルのチェックを外しました`,
+                        intent: 'success'
+                      })
+                    } else {
+                      addCircleStar(circle.id)
+                      toast({
+                        title: `サークルをチェックしました`,
+                        intent: 'success'
+                      })
+                    }
+                  }}
+                />
               )}
             </>
           )}
