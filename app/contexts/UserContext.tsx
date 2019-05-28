@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 interface User {
+  uid: string
   email: string
   displayName: string
   photoURL: string
@@ -37,7 +38,7 @@ export const UserProvider = (props: any) => {
       const { circleRef } = snapshot.data()
       starIds.push(circleRef.id)
     })
-    setBookStars(starIds)
+    setCircleStars(starIds)
   }
 
   useEffect(() => {
@@ -52,7 +53,10 @@ export const UserProvider = (props: any) => {
           .doc(user.uid)
           .get()
         if (userSnapshot.exists) {
-          setUserData(userSnapshot.data() as User)
+          setUserData({
+            uid: user.uid,
+            ...(userSnapshot.data() as User)
+          })
         } else {
           const userDoc = {
             email: user.email,

@@ -1,19 +1,18 @@
 /** @jsx jsx */
-import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
-import { Container, List, ListItem, IconChevronRight } from 'sancho'
+import { Container } from 'sancho'
 import { withRouter } from 'next/router'
 
-import circleTumbnail from '../../images/circle.png'
-
 import { getCircles } from '../../utils/functions'
-import Circle, { categories } from '../../utils/circle'
-import ImageBox from '../../components/ImageBox'
+import Circle from '../../utils/circle'
 import CircleCell from '../../components/CircleCell'
+import { useContext } from 'react'
+import UserContext from '../../contexts/UserContext'
 
-// TODO: ちゃんと作る
 const Index = (props: any) => {
+  const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
+
   return (
     <Container
       css={css`
@@ -22,13 +21,6 @@ const Index = (props: any) => {
         padding: 0 !important;
       `}
     >
-      <Global
-        styles={{
-          body: {
-            backgroundColor: '#F7F8FA'
-          }
-        }}
-      />
       <div
         css={css`
           display: flex;
@@ -37,33 +29,14 @@ const Index = (props: any) => {
         `}
       >
         {props.circles.map((circle: Circle) => {
-          return <CircleCell circle={circle} key={circle.id} />
           return (
-            <Link
-              href={`/circles/_id?id=${circle.id}`}
-              as={`/circles/${circle.id}`}
+            <CircleCell
+              circle={circle}
               key={circle.id}
-              passHref
-            >
-              <a
-                css={css`
-                  text-decoration: none;
-                `}
-              >
-                <ListItem
-                  contentBefore={
-                    <ImageBox
-                      size="circlecut"
-                      width={80}
-                      imageUrl={circle.image || circleTumbnail}
-                    />
-                  }
-                  primary={circle.name}
-                  secondary={[circle.space, categories[circle.category]].filter(o => o).join(' | ')}
-                  contentAfter={<IconChevronRight />}
-                />
-              </a>
-            </Link>
+              addCircleStar={addCircleStar}
+              removeCircleStar={removeCircleStar}
+              circleStars={circleStars}
+            />
           )
         })}
       </div>
