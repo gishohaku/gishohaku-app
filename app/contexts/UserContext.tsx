@@ -12,6 +12,21 @@ interface User {
   createdAt: firebase.firestore.FieldValue
 }
 
+const incrementStarCount = async (ref: any, diff: number) => {
+  const db = firebase.firestore()
+  const documentId = ref.path.replace('/', '-')
+  return db
+    .collection('starCounts')
+    .doc(documentId)
+    .set(
+      {
+        ref,
+        count: firebase.firestore.FieldValue.increment(diff)
+      },
+      { merge: true }
+    )
+}
+
 export const UserProvider = (props: any) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -95,6 +110,8 @@ export const UserProvider = (props: any) => {
     }
     const db = firebase.firestore()
     setBookStars([...bookStars, bookId])
+    const bookRef = db.collection('books').doc(bookId)
+    incrementStarCount(bookRef, 1)
     return await db.collection(`users/${currentUser.uid}/bookStars`).add({
       bookRef: db.collection('books').doc(bookId),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -107,6 +124,8 @@ export const UserProvider = (props: any) => {
     }
     const db = firebase.firestore()
     setCircleStars([...circleStars, circleId])
+    const circleRef = db.collection('circles').doc(circleId)
+    incrementStarCount(circleRef, 1)
     return await db.collection(`users/${currentUser.uid}/circleStars`).add({
       circleRef: db.collection('circles').doc(circleId),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -120,6 +139,7 @@ export const UserProvider = (props: any) => {
     const db = firebase.firestore()
     setBookStars(bookStars.filter(staredBookId => staredBookId !== bookId))
     const bookRef = db.collection('books').doc(bookId)
+    incrementStarCount(bookRef, -1)
     const snapshots = await db
       .collection(`users/${currentUser.uid}/bookStars`)
       .where('bookRef', '==', bookRef)
@@ -134,6 +154,7 @@ export const UserProvider = (props: any) => {
     const db = firebase.firestore()
     setCircleStars(circleStars.filter(staredCircleId => staredCircleId !== circleId))
     const circleRef = db.collection('circles').doc(circleId)
+    incrementStarCount(circleRef, -1)
     const snapshots = await db
       .collection(`users/${currentUser.uid}/circleStars`)
       .where('circleRef', '==', circleRef)
