@@ -58,5 +58,13 @@ service cloud.firestore {
       // TODO
       allow update: if isAuthenticated() && getUser().data.circleRef == resource.__name__ && existingData().space == incomingData().space;
     }
+
+    match /starCounts/{countId} {
+      allow read, create, update;
+    }
+
+     match /starDailyCounts/{countId} {
+      allow read, create, update;
+    }
   }
 }

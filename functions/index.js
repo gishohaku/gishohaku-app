@@ -28,12 +28,12 @@ exports.receiveInvitation = onCall(async (data, context) => {
   const auth = context.auth
   console.log(data, context.auth)
   if (!token || !circleId || !auth) {
-    return { message: '無効な招待リンクです。'}
+    return { message: '無効な招待リンクです。' }
   }
   const firestore = admin.firestore()
   const snapshot = await firestore.collection(`circles/${circleId}/circleInvitations`).doc(token).get()
   if (!snapshot) {
-    return { message: '無効な招待リンクです。'}
+    return { message: '無効な招待リンクです。' }
   }
   console.log(snapshot.data())
   const result = await firestore.collection('users').doc(auth.uid).set({
@@ -73,10 +73,20 @@ exports.apiBooks = onRequest(async (req, res) => {
   res.status(200).send(JSON.stringify(books))
 })
 
-exports.addCircleRefToStarCounts = functions.firestore.document('starCounts/{countId}').onCreate((snap) => {
+exports.addCircleRefToStarCounts = functions.firestore.document('starCounts/{countId}').onCreate(async (snap) => {
   const data = snap.data()
-  console.log('data:', data, data.ref)
-  snap.ref.set({
-    circleRef: data.ref.data().circleRef
-  }, {merge: true})
+  const collectionName = data.ref.parent.id
+  console.log('starred:', data.ref.path)
+  switch (collectionName) {
+    case 'books':
+      const bookSnapshot = await data.ref.get()
+      const circleRef = bookSnapshot.data().circleRef
+      snap.ref.set({ circleRef }, { merge: true })
+      break;
+    case 'circles':
+      snap.ref.set({ circleRef: data.ref }, { merge: true })
+      break;
+    default:
+      console.error('Unexpected document:', collectionName, data.ref)
+  }
 })
