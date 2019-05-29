@@ -112,7 +112,7 @@ export const UserProvider = (props: any) => {
     setBookStars([...bookStars, bookId])
     const bookRef = db.collection('books').doc(bookId)
     incrementStarCount(bookRef, 1)
-    return await db.collection(`users/${currentUser.uid}/bookStars`).add({
+    return await db.collection(`users/${currentUser.uid}/bookStars`).doc(bookId).set({
       bookRef: db.collection('books').doc(bookId),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
@@ -126,7 +126,7 @@ export const UserProvider = (props: any) => {
     setCircleStars([...circleStars, circleId])
     const circleRef = db.collection('circles').doc(circleId)
     incrementStarCount(circleRef, 1)
-    return await db.collection(`users/${currentUser.uid}/circleStars`).add({
+    return await db.collection(`users/${currentUser.uid}/circleStars`).doc(circleId).set({
       circleRef: db.collection('circles').doc(circleId),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     })
@@ -138,13 +138,11 @@ export const UserProvider = (props: any) => {
     }
     const db = firebase.firestore()
     setBookStars(bookStars.filter(staredBookId => staredBookId !== bookId))
-    const bookRef = db.collection('books').doc(bookId)
+    const bookRef = await db.collection('books').doc(bookId)
     incrementStarCount(bookRef, -1)
-    const snapshots = await db
+    return db
       .collection(`users/${currentUser.uid}/bookStars`)
-      .where('bookRef', '==', bookRef)
-      .get()
-    return snapshots.forEach(star => star.ref.delete())
+      .doc(bookId).delete()
   }
 
   const removeCircleStar = async (circleId: string) => {
@@ -153,13 +151,11 @@ export const UserProvider = (props: any) => {
     }
     const db = firebase.firestore()
     setCircleStars(circleStars.filter(staredCircleId => staredCircleId !== circleId))
-    const circleRef = db.collection('circles').doc(circleId)
+    const circleRef = await db.collection('circles').doc(circleId)
     incrementStarCount(circleRef, -1)
-    const snapshots = await db
+    return db
       .collection(`users/${currentUser.uid}/circleStars`)
-      .where('circleRef', '==', circleRef)
-      .get()
-    return snapshots.forEach(star => star.ref.delete())
+      .doc(circleId).delete()
   }
 
   return (
