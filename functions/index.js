@@ -4,6 +4,7 @@ const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 
 const onCall = functions.https.onCall
+const firestore = functions.firestore
 
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
@@ -71,4 +72,11 @@ exports.apiBooks = onRequest(async (req, res) => {
   res.set('Cache-Control', 'public, s-maxage=300')
   res.set('Access-Control-Allow-Origin', "*")
   res.status(200).send(JSON.stringify(books))
+})
+
+export.addCircleRefToStarCounts = firestore.document('starCounts').onCreate((snap) => {
+  const data = snap.data()
+  snap.ref.set({
+    circleRef: data.ref.data().circleRef
+  }, {merge: true})
 })
