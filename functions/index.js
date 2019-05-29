@@ -74,7 +74,7 @@ exports.apiBooks = onRequest(async (req, res) => {
   res.status(200).send(JSON.stringify(books))
 })
 
-export.addCircleRefToStarCounts = firestore.document('starCounts').onCreate((snap) => {
+exports.addCircleRefToStarCounts = firestore.document('starCounts').onCreate((snap) => {
   const data = snap.data()
   snap.ref.set({
     circleRef: data.ref.data().circleRef
