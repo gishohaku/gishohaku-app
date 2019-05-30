@@ -193,7 +193,7 @@ const Footer = () => (
         <a href="https://portal.engineers-lt.info/guideline">コミュニティ・ガイドライン</a>
       </li>
       <li>
-        <a href="mailto:gishohaku@engineers-lt.info">お問い合わせ</a>
+        <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
       </li>
     </ul>
     <p
@@ -202,7 +202,7 @@ const Footer = () => (
         opacity: 0.8;
       `}
     >
-      © エンジニアの登壇を応援する会
+      © 技術書同人誌博覧会 運営事務局
     </p>
   </footer>
 )
