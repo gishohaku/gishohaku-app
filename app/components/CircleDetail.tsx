@@ -24,7 +24,7 @@ interface Props {
 }
 
 const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
-  const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
+  const { user, circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const toast = useToast()
 
   return (
@@ -110,6 +110,12 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                 <CheckButton
                   isChecked={(circle.id && circleStars.includes(circle.id)) || false}
                   onClick={() => {
+                    if (!user) {
+                      return toast({
+                        title: `この機能を利用するにはログインしてください。`,
+                        intent: 'danger'
+                      })
+                    }
                     if (!circle.id) {
                       return
                     }

@@ -9,6 +9,8 @@ import { colors } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
 import { useToast } from 'sancho'
+import { useContext } from 'react';
+import UserContext from '../contexts/UserContext';
 
 interface Props {
   circle: Circle
@@ -20,6 +22,7 @@ interface Props {
 const width = 252
 
 const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, removeCircleStar }) => {
+  const { user } = useContext(UserContext)
   const toast = useToast()
   if (!circle.id) {
     return null
@@ -73,6 +76,12 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
       <CheckButton
         isChecked={(circle.id && circleStars.includes(circle.id)) || false}
         onClick={() => {
+          if (!user) {
+            return toast({
+              title: `この機能を利用するにはログインしてください。`,
+              intent: 'danger'
+            })
+          }
           if (!circle.id) {
             return
           }

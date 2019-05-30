@@ -20,7 +20,7 @@ interface Props {
 
 const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
-  const { addBookStar, removeBookStar, bookStars } = useContext(UserContext)
+  const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
   const toast = useToast()
 
   const metadata = [
@@ -112,6 +112,12 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
           <CheckButton
             isChecked={(book.id && bookStars.includes(book.id)) || false}
             onClick={() => {
+              if (!user) {
+                return toast({
+                  title: `この機能を利用するにはログインしてください。`,
+                  intent: 'danger'
+                })
+              }
               if (!book.id) {
                 return
               }
