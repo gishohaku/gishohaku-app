@@ -37,7 +37,7 @@ const Layout = props => {
           @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
           body {
             /* TODO: 諸々指定 */
-            font-family: 'Noto Sans JP';
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, Roboto, "游ゴシック体", YuGothic, "Yu Gothic Medium", sans-serif;;
             -webkit-font-smoothing: antialiased;
             font-feature-settings: 'palt';
             font-size: 15px;
