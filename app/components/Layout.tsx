@@ -23,6 +23,7 @@ import {
 } from 'sancho'
 
 import { jsx, css, Global } from '@emotion/core'
+import BottomBar from './BottomBar'
 
 const Layout = props => {
   const toast = useToast()
@@ -36,7 +37,7 @@ const Layout = props => {
           @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
           body {
             /* TODO: 諸々指定 */
-            /* font-family: "Noto Sans JP"; */
+            font-family: 'Noto Sans JP';
             -webkit-font-smoothing: antialiased;
             font-feature-settings: 'palt';
             font-size: 15px;
@@ -158,6 +159,7 @@ const Layout = props => {
           )}
         </MenuList>
       </Sheet>
+      <BottomBar />
       <Footer />
     </>
   )
