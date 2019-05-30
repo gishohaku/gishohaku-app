@@ -12,7 +12,7 @@ interface User {
   createdAt: firebase.firestore.FieldValue
 }
 
-const incrementStarCount = async (ref: any, diff: number) => {
+const incrementStarCount = async (ref: firebase.firestore.DocumentReference, diff: number) => {
   const db = firebase.firestore()
   const documentId = ref.path.replace('/', '-')
   return db
@@ -195,9 +195,9 @@ export default React.createContext<{
   userData: null,
   reloadUser: () => {},
   bookStars: [],
-  addBookStar: bookId => Promise.resolve(),
-  removeBookStar: bookId => Promise.resolve(),
+  addBookStar: () => Promise.resolve(),
+  removeBookStar: () => Promise.resolve(),
   circleStars: [],
-  addCircleStar: bookId => Promise.resolve(),
-  removeCircleStar: bookId => Promise.resolve()
+  addCircleStar: () => Promise.resolve(),
+  removeCircleStar: () => Promise.resolve()
 })
