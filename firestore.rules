@@ -20,10 +20,6 @@ service cloud.firestore {
       return request.resource.data;
     }
 
-    function isMemberOfCircle(userID, circleID) {
-      return false
-    }
-
     match /{document=**} {
       allow read;
       allow write: if false;
@@ -60,11 +56,15 @@ service cloud.firestore {
     }
 
     match /starCounts/{countId} {
-      allow read, create, update;
+      allow create, update;
+      // 現在のチェック数を見れるのはサークル所属者のみ
+      allow read: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
     }
 
     match /starDailyCounts/{countId} {
-      allow read, create, update;
+      allow create, update;
+      // 現在のチェック数を見れるのはサークル所属者のみ
+      allow read: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
     }
   }
 }
