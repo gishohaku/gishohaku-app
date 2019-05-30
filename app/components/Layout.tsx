@@ -7,9 +7,20 @@ import UserContext from '../contexts/UserContext'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-import logo from "../images/logo.png"
-import { colors, media } from "../utils/style"
-import { useToast, IconButton, IconMenu, Sheet, MenuList, MenuItem, MenuDivider, IconUser, IconLogIn, IconLogOut } from 'sancho'
+import logo from '../images/logo.png'
+import { colors, media } from '../utils/style'
+import {
+  useToast,
+  IconButton,
+  IconMenu,
+  Sheet,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  IconUser,
+  IconLogIn,
+  IconLogOut
+} from 'sancho'
 
 import { jsx, css, Global } from '@emotion/core'
 
@@ -18,115 +29,138 @@ const Layout = props => {
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
 
-  return <>
-    <Global styles={css`
-      @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap);
-      body {
-        /* TODO: 諸々指定 */
-        font-family: "Noto Sans JP";
-        -webkit-font-smoothing: antialiased;
-        font-feature-settings : "palt";
-        font-size: 15px;
-        color: #444;
-        background-color: #F7F8FA;
-      }
-      p, li {
-        line-height: 1.8;
-      }
-    `} />
-    {!props.hideHeader &&
-      <header
-        css={css`
-          background-color: white;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          font-size: 12px;
-          padding: 0 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-          min-height: 80px;
-          @media ${media.small} {
-            align-items: start;
-            padding: 0;
+  return (
+    <>
+      <Global
+        styles={css`
+          @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
+          body {
+            /* TODO: 諸々指定 */
+            /* font-family: "Noto Sans JP"; */
+            -webkit-font-smoothing: antialiased;
+            font-feature-settings: 'palt';
+            font-size: 15px;
+            color: #444;
+            background-color: #f7f8fa;
+          }
+          p,
+          li {
+            line-height: 1.8;
           }
         `}
-      >
-        <Link href="/" passHref>
-          <a css={css`
-            &:hover {
-              background-color: #EFF0F0
+      />
+      {!props.hideHeader && (
+        <header
+          css={css`
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            padding: 0 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 80px;
+            @media ${media.small} {
+              align-items: start;
+              padding: 0;
             }
-            &:active {
-              background-color: #DEDEDF
-            }
-          `}>
-            <img
-              src={logo}
-              width={80}
-              height={80}
+          `}
+        >
+          <Link href="/" passHref>
+            <a
               css={css`
-                display: block;
+                &:hover {
+                  background-color: #eff0f0;
+                }
+                &:active {
+                  background-color: #dededf;
+                }
               `}
-              alt="技術書同人誌博覧会"
-            />
-          </a>
-        </Link>
-      </header>
-    }
-    <div css={css`
-      position: absolute;
-      right: 16px;
-      top: 22px;
-    `}>
-      <IconButton onClick={() => setOpen(true)} icon={<IconMenu />} component="button" label="Menu" variant="ghost" />
-    </div>
-    <div css={css`
-      min-height: calc(100vh - 80px - 88px);
-      position: relative;
-    `}>
-      {props.children}
-    </div>
-    <Sheet
-      onRequestClose={() => setOpen(false)}
-      position="right"
-      isOpen={isOpen}
-    >
-      <MenuList>
-        <Link href="/mypage" passHref>
-          <MenuItem contentBefore={<IconUser />} component='a' onPress={() => {
-            // FIXME: この記述がないとスマホでリンクにならない
-            props.router.push('/mypage')
-          }}>
-            サークルページ
-          </MenuItem>
-        </Link>
-        <MenuDivider />
-        {
-          user ?
-            <MenuItem contentBefore={<IconLogOut />} onPress={() => {
-              firebase.auth().signOut()
-              toast({
-                title: 'ログアウトしました',
-                intent: 'success'
-              })
-              props.router.push('/')
-
-            }}>
-              ログアウト
-              </MenuItem> :
-            <Link href="/sign_in" passHref>
-              <MenuItem contentBefore={<IconLogIn />} component="a" onPress={() => {
+            >
+              <img
+                src={logo}
+                width={80}
+                height={80}
+                css={css`
+                  display: block;
+                `}
+                alt="技術書同人誌博覧会"
+              />
+            </a>
+          </Link>
+        </header>
+      )}
+      <div
+        css={css`
+          position: absolute;
+          right: 16px;
+          top: 22px;
+        `}
+      >
+        <IconButton
+          onClick={() => setOpen(true)}
+          icon={<IconMenu />}
+          component="button"
+          label="Menu"
+          variant="ghost"
+        />
+      </div>
+      <div
+        css={css`
+          min-height: calc(100vh - 80px - 88px);
+          position: relative;
+        `}
+      >
+        {props.children}
+      </div>
+      <Sheet onRequestClose={() => setOpen(false)} position="right" isOpen={isOpen}>
+        <MenuList>
+          <Link href="/mypage" passHref>
+            <MenuItem
+              contentBefore={<IconUser />}
+              component="a"
+              onPress={() => {
                 // FIXME: この記述がないとスマホでリンクにならない
-                props.router.push('/sign_in')
-              }}>
+                props.router.push('/mypage')
+              }}
+            >
+              サークルページ
+            </MenuItem>
+          </Link>
+          <MenuDivider />
+          {user ? (
+            <MenuItem
+              contentBefore={<IconLogOut />}
+              onPress={() => {
+                firebase.auth().signOut()
+                toast({
+                  title: 'ログアウトしました',
+                  intent: 'success'
+                })
+                props.router.push('/')
+              }}
+            >
+              ログアウト
+            </MenuItem>
+          ) : (
+            <Link href="/sign_in" passHref>
+              <MenuItem
+                contentBefore={<IconLogIn />}
+                component="a"
+                onPress={() => {
+                  // FIXME: この記述がないとスマホでリンクにならない
+                  props.router.push('/sign_in')
+                }}
+              >
                 ログイン
-                </MenuItem>
+              </MenuItem>
             </Link>
-        }
-      </MenuList>
-    </Sheet>
-    <Footer />
-  </>;
+          )}
+        </MenuList>
+      </Sheet>
+      <Footer />
+    </>
+  )
 }
 
 const Footer = () => (
@@ -156,9 +190,7 @@ const Footer = () => (
         <a href="https://portal.engineers-lt.info/">運営</a>
       </li>
       <li>
-        <a href="https://portal.engineers-lt.info/guideline">
-          コミュニティ・ガイドライン
-        </a>
+        <a href="https://portal.engineers-lt.info/guideline">コミュニティ・ガイドライン</a>
       </li>
       <li>
         <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
