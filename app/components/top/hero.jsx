@@ -139,7 +139,7 @@ const Hero = () => {
             min-width: 270px;
             display: inline-block;
             border-radius: 30px;
-            margin-top: 24px;
+            margin: 24px 12px 0 12px;
             text-decoration: none;
             transition: transform 0.15s ease-out;
             transform: translateY(0);
@@ -167,7 +167,7 @@ const Hero = () => {
             min-width: 270px;
             display: inline-block;
             border-radius: 30px;
-            margin-top: 24px;
+            margin: 24px 12px 0 12px;
             text-decoration: none;
             transition: transform 0.15s ease-out;
             transform: translateY(0);
