@@ -195,6 +195,9 @@ const Sections = () => (
       <Container css={css`
         max-width: 760px;
         margin-top: 36px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
       `}>
         <Printing name='ねこのしっぽ' url='https://www.shippo.co.jp/' image='https://www.shippo.co.jp/neko/img/neko_banner.gif'/>
         <Printing name='日光企画' url='http://www.nikko-pc.com' image='http://www.nikko-pc.com/start/logo.gif'/>

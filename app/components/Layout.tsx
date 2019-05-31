@@ -62,7 +62,6 @@ const Layout = props => {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             min-height: 80px;
             @media ${media.small} {
-              align-items: start;
               padding: 0;
             }
           `}
@@ -169,19 +168,25 @@ const Footer = () => (
   <footer
     css={css`
       background-color: ${colors.gray100};
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       font-size: 12px;
-      padding: 8px;
+      padding: 8px 12px ${72+ 16}px;
+      text-align: center;
     `}
   >
     <ul
       css={css`
         li {
           display: inline-block;
-          margin: 6px 0px;
-          padding: 6px;
+          margin-top: 6px;
+          @media ${media.small} {
+            display: block;
+            text-align: left;
+            margin-top: 0;
+          }
+          > a {
+            display: block;
+            padding: 6px;
+          }
         }
       `}
     >

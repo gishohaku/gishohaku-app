@@ -13,6 +13,7 @@ const sectionHeader = css`
   color: #1d272d;
   letter-spacing: 3px;
   z-index: 1;
+  overflow-x: hidden;
 
   &:after {
     content: attr(data-text);

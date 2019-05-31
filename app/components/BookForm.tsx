@@ -54,6 +54,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                 return <ImageBox
                   imageUrl={imageUrl}
                   size='square'
+                  width={180}
                   onClick={() => {
                     if (confirm('画像を削除しますか？')) {
                       setFieldValue('images', values.images.filter((v, i) => i != index))

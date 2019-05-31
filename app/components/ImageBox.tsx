@@ -14,8 +14,7 @@ const ImageBox: React.FC<ImageBoxProps> = props => {
   return (
     <span
       css={css`
-        width: ${width || '180'}px;
-        height: auto;
+        width: ${width ? `${width}px` : '100%'};
         display: inline-block;
         align-items: center;
         justify-content: center;
@@ -32,7 +31,7 @@ const ImageBox: React.FC<ImageBoxProps> = props => {
           margin-right: 0;
         }
         &:before {
-          display: inline-block;
+          display: block;
           content: ' ';
           padding-bottom: ${size === 'square' ? '100%' : '141%'};
           position: relative;
