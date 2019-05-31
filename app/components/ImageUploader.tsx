@@ -23,7 +23,9 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
       const storageRef = firebase.storage().ref()
       const ref = storageRef.child(`/uploads/${user.uid}/${Date.now()}`)
       console.log('begin upload')
-      const snapshot = await ref.put(files[0])
+      const snapshot = await ref.put(files[0], {
+        cacheControl: 'public, max-age=3600, s-maxage=31536000'
+      })
       const url = await snapshot.ref.getDownloadURL()
       console.log(url)
       addUrl(url)
