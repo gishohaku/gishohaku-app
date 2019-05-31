@@ -1,69 +1,72 @@
 /** @jsx jsx */
-import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
-import { Container, List, ListItem, IconChevronRight } from 'sancho'
+import { Container, Button } from 'sancho'
 import { withRouter } from 'next/router'
 
-import circleTumbnail from '../../images/circle.png'
-
 import { getCircles } from '../../utils/functions'
-import Circle, { categories } from '../../utils/circle'
-import ImageBox from '../../components/ImageBox'
+import Circle from '../../utils/circle'
 import CircleCell from '../../components/CircleCell'
+import { useContext, useState, useMemo } from 'react'
+import UserContext from '../../contexts/UserContext'
+import SectionHeader from '../../components/atoms/SectionHeader'
 
-// TODO: ちゃんと作る
 const Index = (props: any) => {
+  const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
+  const [isCheckOnly, setCheckOnly] = useState(false)
+
+  const filteredCircles = useMemo(() => {
+    if (isCheckOnly) {
+      return props.circles.filter((circle: Circle) => circleStars.includes(circle.id))
+    }
+    return props.circles
+  }, [props.circles, isCheckOnly])
+
   return (
     <Container
       css={css`
         max-width: ${1080 + 12 * 2}px;
-        margin-top: 32px;
+        margin-top: 48px;
         padding: 0 !important;
       `}
     >
-      <Global
-        styles={{
-          body: {
-            backgroundColor: '#F7F8FA'
-          }
-        }}
-      />
+      <SectionHeader text="CIRCLES" pageHeader>
+        サークル一覧
+      </SectionHeader>
+      <div
+        css={css`
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 24px;
+        `}
+      >
+        <Button
+          onClick={() => {
+            setCheckOnly(!isCheckOnly)
+          }}
+          intent={isCheckOnly ? 'primary' : undefined}
+        >
+          チェック済みのみ表示
+        </Button>
+      </div>
       <div
         css={css`
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
+          margin-top: 24px;
         `}
       >
-        {props.circles.map((circle: Circle) => {
-          return <CircleCell circle={circle} key={circle.id} />
+        {filteredCircles.map((circle: Circle) => {
           return (
-            <Link
-              href={`/circles/_id?id=${circle.id}`}
-              as={`/circles/${circle.id}`}
+            <CircleCell
+              circle={circle}
               key={circle.id}
-              passHref
-            >
-              <a
-                css={css`
-                  text-decoration: none;
-                `}
-              >
-                <ListItem
-                  contentBefore={
-                    <ImageBox
-                      size="circlecut"
-                      width={80}
-                      imageUrl={circle.image || circleTumbnail}
-                    />
-                  }
-                  primary={circle.name}
-                  secondary={[circle.space, categories[circle.category]].filter(o => o).join(' | ')}
-                  contentAfter={<IconChevronRight />}
-                />
-              </a>
-            </Link>
+              addCircleStar={addCircleStar}
+              removeCircleStar={removeCircleStar}
+              circleStars={circleStars}
+            />
           )
         })}
       </div>
