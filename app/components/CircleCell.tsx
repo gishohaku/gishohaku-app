@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/core'
 import circleTumbnail from '../images/circle.png'
 
 import Circle, { categories } from '../utils/circle'
-import { colors } from '../utils/style'
+import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
 import { useToast } from 'sancho'
@@ -32,6 +32,11 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
     <div
       css={css`
         margin: 0 12px 24px;
+        width: 252px;
+        @media ${media.small} {
+          width: 46%;
+          margin: 0 1% 24px;
+        }
       `}
     >
       <Link
@@ -53,7 +58,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
             }
           `}
         >
-          <ImageBox size="circlecut" width={width} imageUrl={circle.image || circleTumbnail} />
+          <ImageBox size="circlecut" imageUrl={circle.image || circleTumbnail} />
           <h2
             css={css`
               font-size: 16px;

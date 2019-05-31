@@ -162,6 +162,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
                     updateOpenLightBox(true)
                     updateLightboxIndex(index)
                   }}
+                  width={180}
                   key={index}
                 />
               )

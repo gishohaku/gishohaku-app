@@ -41,6 +41,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 <ImageBox
                   imageUrl={values.image}
                   size='circlecut'
+                  width={180}
                   onClick={() => {
                     if (confirm('画像を削除しますか？')) {
                       setFieldValue('image', '')
@@ -63,6 +64,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 <ImageBox
                   imageUrl={values.imageMonochro}
                   size='circlecut'
+                  width={180}
                   onClick={() => {
                     if (confirm('画像を削除しますか？')) {
                       setFieldValue('imageMonochro', '')
