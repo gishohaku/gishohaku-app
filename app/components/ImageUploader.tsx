@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone'
 import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/storage'
-import { useState } from 'react';
-import { Spinner, IconUpload } from 'sancho';
+import { useState } from 'react'
+import { Spinner, IconUpload } from 'sancho'
 
 interface Props {
   user: firebase.User
@@ -18,13 +18,13 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: 'image/gif,image/jpeg,image/png,image/jpg',
-    onDropAccepted: async (files) => {
+    onDropAccepted: async files => {
       setUploading(true)
       const storageRef = firebase.storage().ref()
       const ref = storageRef.child(`/uploads/${user.uid}/${Date.now()}`)
       console.log('begin upload')
       const snapshot = await ref.put(files[0], {
-        cacheControl: 'public, max-age=3600, s-maxage=31536000'
+        cacheControl: 'public, max-age=31536000'
       })
       const url = await snapshot.ref.getDownloadURL()
       console.log(url)
@@ -36,12 +36,13 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
     },
     maxSize: 1000 * 1000 * 1,
     disabled: isUploading
-  });
+  })
 
   return (
     <section>
-      <div {...getRootProps({
-        css: css`
+      <div
+        {...getRootProps({
+          css: css`
             background-color: #e5e5e5;
             min-width: 180px;
             width: 180px;
@@ -49,20 +50,20 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
             display: flex;
             align-items: center;
             justify-content: center;
-        ` })}>
-        {isUploading &&
-          <Spinner label="Uploading..."></Spinner>
-        }
+          `
+        })}
+      >
+        {isUploading && <Spinner label="Uploading..." />}
 
-        {(!isUploading) &&
+        {!isUploading && (
           <>
             <input {...getInputProps()} />
             <IconUpload size="xl" />
           </>
-        }
+        )}
       </div>
     </section>
-  );
+  )
 }
 
 export default ImageUploader
