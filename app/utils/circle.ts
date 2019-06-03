@@ -7,10 +7,14 @@ export const categories = {
   'infra/etc': 'インフラストラクチャ／その他',
   'hardware/iot': 'ハードウェア／ＩｏＴ',
   'hardware/etc': 'ハードウェア／その他',
-  'etc/technology': 'その他／科学技術',
-  'etc/theory': 'その他／経営論・組織論・生存戦略',
-  'etc/joint-book': 'その他／ノンジャンル技術合同誌',
-  'etc/etc': 'その他／その他',
+  // 'etc/technology': 'その他／科学技術',
+  'etc/technology': '科学技術',
+  // 'etc/theory': 'その他／経営論・組織論・生存戦略',
+  'etc/theory': '経営論・組織論・生存戦略',
+  // 'etc/joint-book': 'その他／ノンジャンル技術合同誌',
+  'etc/joint-book': 'ノンジャンル技術合同誌',
+  // 'etc/etc': 'その他／その他',
+  'etc/etc': 'その他',
 }
 
 export const plans = {

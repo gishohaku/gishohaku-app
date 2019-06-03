@@ -1,12 +1,12 @@
 export const mediums = {
   degital: '電子',
   paper: '紙',
-  both: '紙/電子',
+  both: '紙/電子'
 }
 
 export const types = {
-  fanzine: '同人',
-  commerce: '商業'
+  fanzine: '同人誌',
+  commerce: '商業誌'
 }
 
 export type BookType = keyof typeof types
