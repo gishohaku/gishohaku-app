@@ -28,4 +28,5 @@ export default interface Book {
   sampleUrl: string
   purchaseUrl: string
   circleRef?: any
+  circleName: string
 }

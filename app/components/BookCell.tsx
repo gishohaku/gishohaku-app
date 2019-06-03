@@ -12,13 +12,15 @@ import Lightbox from 'react-image-lightbox'
 import { useState, useMemo, useContext } from 'react'
 import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
+import { media } from '../utils/style'
 
 interface Props {
   book: Book
   editable?: boolean
+  isShowCircle?: boolean
 }
 
-const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
+const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = false }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
   const toast = useToast()
@@ -42,6 +44,10 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
     })
   }, [book.description])
 
+  // FIXME:
+  const circleId =
+    typeof book.circleRef === 'string' ? book.circleRef : book.circleRef._path.segments[1]
+
   return (
     <div
       css={css`
@@ -53,13 +59,32 @@ const BookCell: React.SFC<Props> = ({ book, editable = false }) => {
       `}
       key={book.id}
     >
+      {isShowCircle && (
+        <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
+          <a>
+            {/* <Button variant="ghost">{book.circleName}</Button> */}
+            {book.circleName}
+          </a>
+        </Link>
+      )}
       <div
         css={css`
           display: flex;
           align-items: center;
+
+          @media ${media.small} {
+            flex-direction: column;
+            align-items: initial;
+          }
         `}
       >
-        <div>
+        <div
+          css={css`
+            @media ${media.small} {
+              margin-bottom: 12px;
+            }
+          `}
+        >
           <div
             css={css`
               font-size: 20px;
