@@ -27,6 +27,7 @@
     "@types/marked": "^0.6.5",
     "@types/next": "^8.0.4",
     "@types/qs": "^6.5.3",
+    "@types/react-lazyload": "^2.5.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
