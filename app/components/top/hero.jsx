@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 
-import { jsx, css } from "@emotion/core"
+import { jsx, css } from '@emotion/core'
 import Link from 'next/link'
 
-import logo from "../../images/logo.png"
+import logo from '../../images/logo.png'
 
-import { media, colors } from "../../utils/style"
+import { media, colors } from '../../utils/style'
 
 // break for smartphone
 const Br4Sm = () => (
@@ -30,8 +30,8 @@ const ParallaxBackground = () => {
         updateTranslateY(yOffset * -0.2)
       })
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
@@ -62,7 +62,7 @@ const Hero = () => {
         text-align: center;
         padding: 60px 0 100px;
         @media ${media.small} {
-          padding: 20px 0 60px 0;
+          padding: 20px 0 80px 0;
         }
       `}
     >
@@ -128,34 +128,6 @@ const Hero = () => {
         2019.07.27(Sat.) 10:00 <br />
         @大田区産業プラザPiO
       </p>
-      <Link href="/circles" passHref>
-        <a
-          css={css`
-            background-color: ${colors.accent};
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            padding: 11px 36px 13px;
-            min-width: 270px;
-            display: inline-block;
-            border-radius: 30px;
-            margin: 24px 12px 0 12px;
-            text-decoration: none;
-            transition: transform 0.15s ease-out;
-            transform: translateY(0);
-            &:hover {
-              transform: translateY(-1px);
-              background-color: #dbae29;
-            }
-            // background-color: #aaaaaa;
-            // &:hover {
-            //   background-color: #aaaaaa;
-            // }
-          `}
-        >
-        サークルリスト
-        </a>
-      </Link>
       <Link href="/staffs" passHref>
         <a
           css={css`
