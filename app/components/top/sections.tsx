@@ -362,7 +362,11 @@ const Sections = () => (
           url="http://www.nikko-pc.com"
           image="http://www.nikko-pc.com/start/logo.gif"
         />
-        <Printing name="ポプルス" url="http://www.inv.co.jp/~popls" />
+        <Printing
+          name="ポプルス"
+          url="http://www.inv.co.jp/~popls"
+          image="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
+        />
         <Printing
           name="ケーナイン"
           url="https://www.k-k9.jp/"
