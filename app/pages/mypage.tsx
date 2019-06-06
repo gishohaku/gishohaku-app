@@ -50,14 +50,14 @@ const Mypage: React.FC = () => {
         `}
       >
         <List>
-          <Link href="/">
+          <Link href="/circles?starred">
             <ListItem
               primary="チェックしたサークル"
               secondary="チェックをつけたサークルを確認できます"
               contentAfter={<IconChevronRight />}
             />
           </Link>
-          <Link href="/">
+          <Link href="/books?starred">
             <ListItem
               primary="チェックした頒布物"
               secondary="チェックをつけた頒布物が確認できます"
