@@ -10,16 +10,17 @@ import BookCell from '../../components/BookCell'
 import { useState, useMemo, useContext } from 'react'
 import UserContext from '../../contexts/UserContext'
 
-const Index = (props: { books: Book[] }) => {
+const Index = (props: { books: Book[]; router: any }) => {
+  const { books, router } = props
   const { bookStars } = useContext(UserContext)
-  const [isCheckOnly, setCheckOnly] = useState(false)
+  const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)
 
   const filteredBooks = useMemo(() => {
     if (isCheckOnly) {
       return props.books.filter((book: Book) => bookStars.includes(book.id))
     }
-    return props.books
-  }, [props.books, isCheckOnly])
+    return books
+  }, [books, isCheckOnly, router.query])
 
   return (
     <Container

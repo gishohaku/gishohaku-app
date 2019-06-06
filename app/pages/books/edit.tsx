@@ -44,7 +44,7 @@ const BooksNew = (props: any) => {
       title: '頒布物を削除しました',
       intent: 'success'
     })
-    props.router.push('/mypage')
+    props.router.push('/mypage/circle')
   }, [props.router.query.id])
 
   if (isUserLoading || !user || !book) {
@@ -72,7 +72,7 @@ const BooksNew = (props: any) => {
               })
               .then(docRef => {
                 const id = props.router.query.id
-                router.push('/mypage')
+                router.push('/mypage/circle')
               })
           }}
         />

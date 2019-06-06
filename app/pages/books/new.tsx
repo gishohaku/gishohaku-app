@@ -42,7 +42,7 @@ const BooksNew = (props: any) => {
               circleRef: userData.circleRef,
               circleName: circle.name
             })
-            props.router.push('/mypage')
+            props.router.push('/mypage/circle')
           }}
         />
       </FormContainer>

@@ -8,9 +8,9 @@ import { jsx, css } from '@emotion/core'
 import { Button, useToast } from 'sancho'
 import { withRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
-import UserContext from '../../contexts/UserContext';
-import MessageBox from '../../components/MessageBox';
-import Loader from '../../components/Loader';
+import UserContext from '../../contexts/UserContext'
+import MessageBox from '../../components/MessageBox'
+import Loader from '../../components/Loader'
 import qs from 'qs'
 
 // FIXME: 影響範囲が大きく汚い
@@ -18,7 +18,7 @@ export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
 
 const Join: React.FC<{
   router: any
-}> = (props) => {
+}> = props => {
   const toast = useToast()
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
@@ -32,7 +32,7 @@ const Join: React.FC<{
   useEffect(() => {
     const db = firebase.firestore()
     const circleRef = db.collection('circles').doc(circleId)
-    circleRef.get().then((circleSnapshot) => {
+    circleRef.get().then(circleSnapshot => {
       setCircle(circleSnapshot.data())
     })
   }, [circleId])
@@ -51,14 +51,11 @@ const Join: React.FC<{
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    props.router.push('/mypage')
+    props.router.push('/mypage/circle')
   }
 
   if (!circleId || !token) {
-    return <MessageBox
-      title="無効なURLです。"
-      description="URLを確認してください。"
-    />
+    return <MessageBox title="無効なURLです。" description="URLを確認してください。" />
   }
 
   if (isUserLoading || (user && !userData) || !circle) {
@@ -66,47 +63,61 @@ const Join: React.FC<{
   }
 
   if (!user) {
-    return <MessageBox
-      title="サークルに参加する"
-      description={`「${circle.name}」に参加できます。サークルに参加するにはログインが必要です。`}
-    >
-      <Link href="/sign_in" passHref>
-        <Button component="a" block css={css`
-          margin-top: 12px;
-          `}
-          onClick={() => {
-            localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
-          }}
-        >
-          ログイン
-        </Button>
-      </Link>
-      <Link href="/sign_up" passHref>
-        <Button component="a" block css={css`
-          margin-top: 12px;
-          `}
-          onClick={() => {
-            localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
-          }}
-        >
-          会員登録
-        </Button>
-      </Link>
-    </MessageBox>
+    return (
+      <MessageBox
+        title="サークルに参加する"
+        description={`「${circle.name}」に参加できます。サークルに参加するにはログインが必要です。`}
+      >
+        <Link href="/sign_in" passHref>
+          <Button
+            component="a"
+            block
+            css={css`
+              margin-top: 12px;
+            `}
+            onClick={() => {
+              localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
+            }}
+          >
+            ログイン
+          </Button>
+        </Link>
+        <Link href="/sign_up" passHref>
+          <Button
+            component="a"
+            block
+            css={css`
+              margin-top: 12px;
+            `}
+            onClick={() => {
+              localStorage.setItem(INVITE_STORAGE_KEY, props.router.asPath)
+            }}
+          >
+            会員登録
+          </Button>
+        </Link>
+      </MessageBox>
+    )
   }
 
-  return <MessageBox
-    title="サークルに参加する"
-    description={`「${circle.name}」から招待を受け取りました。`}
-  >
-    <Button loading={isProcessing} component="button" block css={css`
-        margin-top: 12px;
-      `}
-      onPress={handleClick}
+  return (
+    <MessageBox
+      title="サークルに参加する"
+      description={`「${circle.name}」から招待を受け取りました。`}
     >
-      サークルに参加する
+      <Button
+        loading={isProcessing}
+        component="button"
+        block
+        css={css`
+          margin-top: 12px;
+        `}
+        onPress={handleClick}
+      >
+        サークルに参加する
       </Button>
-  </MessageBox>
+    </MessageBox>
+  )
 }
 
 export default withRouter(Join)
