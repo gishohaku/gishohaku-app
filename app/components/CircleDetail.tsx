@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/core'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
+import { jsx, css } from '@emotion/core'
 import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
 
@@ -13,9 +15,11 @@ import CheckButton from './CheckButton'
 import { media } from '../utils/style'
 import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
+
+import check from '../images/check.svg'
 
 interface Props {
   circle: Circle
@@ -23,9 +27,28 @@ interface Props {
   editable?: boolean
 }
 
+interface StarCount {
+  count: number
+}
+
 const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
   const { user, circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const toast = useToast()
+  const [starCount, setStarCount] = useState(0)
+
+  useEffect(() => {
+    if (editable) {
+      const db = firebase.firestore()
+      db.collection('starCounts')
+        .doc(`circles-${circle.id}`)
+        .get()
+        .then(res => {
+          const count = res.exists ? (res.data() as StarCount).count : 0
+          console.log(circle.id, count)
+          setStarCount(count)
+        })
+    }
+  }, [])
 
   return (
     <>
@@ -78,10 +101,38 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                 {circle.name}
               </h2>
               {editable ? (
-                <div>
+                <div
+                  css={css`
+                    display: flex;
+                  `}
+                >
+                  <div
+                    css={css`
+                      border: 1px solid #eee;
+                      background-color: #eee;
+                      text-decoration: none;
+                      padding: 6px 12px;
+                      border-radius: 4px;
+                      margin-right: 6px;
+                      min-width: 72px;
+                      text-align: center;
+                      font-weight: bold;
+                      display: flex;
+                      justify-content: center;
+                      > img {
+                        margin-right: 4px;
+                        opacity: 0.4;
+                        width: 22px;
+                      }
+                    `}
+                  >
+                    <img src={check} />
+                    <span>{starCount}</span>
+                  </div>
                   <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
                     <a
                       css={css`
+                        flex: 1;
                         margin-left: auto;
                         border: 1px solid #2a5773;
                         text-decoration: none;

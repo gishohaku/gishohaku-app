@@ -1,20 +1,22 @@
 /** @jsx jsx */
 
-import React from "react"
-import { jsx, css } from "@emotion/core"
+import React from 'react'
+import { jsx, css } from '@emotion/core'
 
-import placeIcon from "./round-place.svg"
-import directionsIcon from "./round-directions_run.svg"
+import placeIcon from './round-place.svg'
+import directionsIcon from './round-directions_run.svg'
 
-import { media } from "../../utils/style"
-import SectionHeader from "../atoms/SectionHeader"
-import TextBlock from "../atoms/TextBlock"
+import { media } from '../../utils/style'
+import SectionHeader from '../atoms/SectionHeader'
+import TextBlock from '../atoms/TextBlock'
 
 import Sponsor from './sponsor'
 import SponsorLink from '../SponsorLink'
 import Printing from './printing'
 
 import { Container } from 'sancho'
+
+import sponsorImage from '../../images/sponsor.png'
 
 const section = css`
   padding: 32px 0 48px;
@@ -32,6 +34,60 @@ const withIcon = css`
   }
 `
 
+// NOTE: 本来はこちらでリサイズした画像を用意して、そこから配信するとよい
+const members = [
+  {
+    name: 'ariaki',
+    twitter: 'ariaki4dev',
+    imageUrl: 'https://portal.engineers-lt.info/elt_logo_w.png'
+  },
+  {
+    name: '水殿',
+    twitter: 'midono_ap1',
+    imageUrl: 'https://pbs.twimg.com/profile_images/1071222075501629442/bAQUfeke_400x400.jpg'
+  },
+  {
+    name: 'おやかた',
+    twitter: 'oyakata2438',
+    imageUrl: sponsorImage
+  },
+  {
+    name: 'kurakake',
+    twitter: 'kurakake',
+    imageUrl: 'https://i.gyazo.com/0ef049e049c0b0587db07c79c0c373ff.jpg'
+  },
+  {
+    name: 'かめねこ',
+    twitter: 'kameneko1004',
+    imageUrl: 'https://storage.googleapis.com/jump/kameneko_icon.jpg'
+  },
+  {
+    name: 'kazto',
+    twitter: 'bainarian',
+    imageUrl: 'https://pbs.twimg.com/profile_images/998919655359107072/WZplgK9h_400x400.jpg'
+  },
+  {
+    name: 'なつお',
+    twitter: 'KazuyaNakahara',
+    imageUrl: 'https://pbs.twimg.com/profile_images/1086995556600209410/7yUdS_qB_400x400.jpg'
+  },
+  {
+    name: 'mottox2',
+    twitter: 'mottox2',
+    imageUrl: 'https://avatars1.githubusercontent.com/u/7007253?s=460&v=4'
+  },
+  {
+    name: 'Alice_You',
+    twitter: 'Alice_You',
+    imageUrl: 'https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg'
+  },
+  {
+    name: 'なのなの',
+    twitter: 'nano2_aloerina',
+    imageUrl: 'https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg'
+  }
+]
+
 const Sections = () => (
   <>
     <section css={section}>
@@ -48,40 +104,54 @@ const Sections = () => (
           たとえば、体験談や考察、開発効率をあげるテクニック、生存戦略や成長戦略の描き方など、あなたにしか書けないことを本にしてみませんか。
           誰もがカジュアルに知識を共有できる場所を提供することが私たちの目的です。
         </p>
-        <dl css={css`
-          margin-top: 24px;
-          dt, dd {
-            display:inline-block;
-            zoom:1;
-            vertical-align:top;
-            width: 50%;
-            padding: 12px 0;
-            margin:0;
-            border-top:1px solid #eee;
-          }
+        <dl
+          css={css`
+            margin-top: 24px;
+            dt,
+            dd {
+                display: inline-block;
+                zoom: 1;
+                vertical-align: top;
+                width: 50%;
+                padding: 12px 0;
+                margin: 0;
+                border-top: 1px solid #eee;
+            }
 
-          dt {
-            width: 112px;
-            color: #666660;
-            text-align: right;
-            padding-right: 24px;
-          }
+            dt {
+              width: 112px;
+              color: #666660;
+              text-align: right;
+              padding-right: 24px;
+            }
 
-          dd {
-            width: calc(100% - 112px);
-          }
-        `}>
+            dd {
+              width: calc(100% - 112px);
+            }
+          `}
+        >
           <dt>日時</dt>
           <dd>
-            2019.07.27(Sat.) 11:00-17:00<br/>
-            ※ サークル入場 10:00
+            2019.07.27(Sat.) 11:00-17:00
+            <br />※ サークル入場 10:00
           </dd>
           <dt>場所</dt>
           <dd>大田区産業プラザPiO</dd>
           <dt>Twitter</dt>
           <dd>
-            公式アカウント: <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/gishohaku">@gishohaku</a><br/>
-            ハッシュタグ: <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/hashtag/%E6%8A%80%E6%9B%B8%E5%8D%9A">#技書博</a>
+            公式アカウント:{' '}
+            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/gishohaku">
+              @gishohaku
+            </a>
+            <br />
+            ハッシュタグ:{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://twitter.com/hashtag/%E6%8A%80%E6%9B%B8%E5%8D%9A"
+            >
+              #技書博
+            </a>
           </dd>
         </dl>
       </TextBlock>
@@ -136,7 +206,11 @@ const Sections = () => (
         >
           <p css={withIcon}>
             <img src={placeIcon} alt="住所" />
-            東京都大田区南蒲田1丁目20-20
+            東京都大田区南蒲田1丁目20-20（
+            <a href="https://www.google.com/maps?ll=35.55876,139.724151&z=16&t=m&hl=ja-JP&gl=JP&mapclient=embed&cid=9945236205239848880">
+              Google マップ
+            </a>
+            ）
           </p>
           <p css={withIcon}>
             <img src={directionsIcon} alt="アクセス" />
@@ -151,59 +225,154 @@ const Sections = () => (
       css={css(
         section,
         `
+        background-color: fff;
+      `
+      )}
+    >
+      <SectionHeader text="TEAM">チーム</SectionHeader>
+
+      <Container
+        css={css`
+          max-width: 740px;
+        `}
+      >
+        <div
+          css={css`
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          `}
+        >
+          {members.map(profile => {
+            return (
+              <a
+                href={`https://twitter.com/${profile.twitter}`}
+                key={profile.name}
+                target="_blank"
+                rel="noopener"
+                css={css`
+                  margin: 24px 12px 12px;
+                  color: inherit;
+                  text-decoration: none;
+                `}
+              >
+                <img
+                  src={profile.imageUrl}
+                  css={css`
+                    border-radius: 60px;
+                    border: 1px solid #eee;
+                    width: 100px;
+                    height: 100px;
+                    object-fit: contain;
+                    @media ${media.small} {
+                      width: 80px;
+                      height: 80px;
+                    }
+                  `}
+                  height={100}
+                  width={100}
+                />
+                <p
+                  css={css`
+                    text-align: center;
+                    font-size: 15px;
+                    font-weight: bold;
+                  `}
+                >
+                  {profile.name}
+                </p>
+              </a>
+            )
+          })}
+        </div>
+      </Container>
+    </section>
+    <section
+      css={css(
+        section,
+        `
         background-color: #f7f8fa;
       `
       )}
     >
       <SectionHeader text="SPONSOR">スポンサー</SectionHeader>
-      <Container css={css`
-        max-width: 740px;
-      `}>
-        <div css={css`
-          margin-top: 36px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          > div {
-            width: 160px;
-            @media ${media.small} {
-              width: 150px;
+      <Container
+        css={css`
+          max-width: 740px;
+        `}
+      >
+        <div
+          css={css`
+            margin-top: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            > div {
+              width: 160px;
+              @media ${media.small} {
+                width: 150px;
+              }
+              text-align: center;
+              margin: 0 10px;
             }
-            text-align: center;
-            margin: 0 10px;
-          }
-          a {
-            text-decoration:none;
-            color:#1d272d;
-          }
-        `}>
-          <Sponsor name="募集中" role="トートバッグサポーター"/>
-          <Sponsor name="募集中" role="パブリシティサポーター"/>
-          <Sponsor name="募集中" role="セキュリティサポーター"/>
-          <Sponsor name="募集中" role="オフィシャルサポーター"/>
-          <Sponsor name="募集中" role="懇親会サポーター"/>
-          <Sponsor name="株式会社メディアドゥ" role="デザイン協力" image="/static/sponsors/mediado.png" href="https://mediado.jp/" />
+            a {
+                text-decoration: none;
+                color: #1d272d;
+            }
+          `}
+        >
+          <Sponsor name="募集中" role="トートバッグサポーター" />
+          <Sponsor name="募集中" role="パブリシティサポーター" />
+          <Sponsor name="募集中" role="セキュリティサポーター" />
+          <Sponsor name="募集中" role="オフィシャルサポーター" />
+          <Sponsor name="募集中" role="懇親会サポーター" />
+          <Sponsor
+            name="株式会社メディアドゥ"
+            role="デザイン協力"
+            image="/static/sponsors/mediado.png"
+            href="https://mediado.jp/"
+          />
         </div>
-        <SponsorLink css={css`
-          margin-top: 24px;
-          background-color: white;
-        `} />
+        <SponsorLink
+          css={css`
+            margin-top: 24px;
+            background-color: white;
+          `}
+        />
       </Container>
     </section>
     <section css={section}>
       <SectionHeader text="PRINTING">バックアップ印刷所</SectionHeader>
-      <Container css={css`
-        max-width: 760px;
-        margin-top: 36px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      `}>
-        <Printing name='ねこのしっぽ' url='https://www.shippo.co.jp/' image='https://www.shippo.co.jp/neko/img/neko_banner.gif'/>
-        <Printing name='日光企画' url='http://www.nikko-pc.com' image='http://www.nikko-pc.com/start/logo.gif'/>
-        <Printing name='ポプルス' url='http://www.inv.co.jp/~popls' image='http://www.inv.co.jp/~popls/sozai/poplsbn2.gif'/>
-        <Printing name='ケーナイン' url='https://www.k-k9.jp/' image='https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif'/>
-        <Printing name='栄光' url='https://www.eikou.com/'/>
+      <Container
+        css={css`
+          max-width: 760px;
+          margin-top: 36px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        `}
+      >
+        <Printing
+          name="ねこのしっぽ"
+          url="https://www.shippo.co.jp/"
+          image="https://www.shippo.co.jp/neko/img/neko_banner.gif"
+        />
+        <Printing
+          name="日光企画"
+          url="http://www.nikko-pc.com"
+          image="http://www.nikko-pc.com/start/logo.gif"
+        />
+        <Printing
+          name="ポプルス"
+          url="http://www.inv.co.jp/~popls"
+          image="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
+        />
+        <Printing
+          name="ケーナイン"
+          url="https://www.k-k9.jp/"
+          image="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
+        />
+        <Printing name="栄光" url="https://www.eikou.com/" />
       </Container>
     </section>
   </>

@@ -7,13 +7,12 @@ import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import router, { withRouter } from 'next/router'
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState } from 'react'
 import Circle from '../../utils/circle'
-import UserContext from '../../contexts/UserContext';
+import UserContext from '../../contexts/UserContext'
 
 const BooksNew = (props: any) => {
   const { user, isUserLoading, userData } = useContext(UserContext)
-  const [circleRef, setCircleRef] = useState(null)
   const [circle, setCircle] = useState<Circle | null>(null)
   useEffect(() => {
     if (!userData || !userData.circleRef) {
@@ -32,16 +31,20 @@ const BooksNew = (props: any) => {
   return (
     <>
       <FormContainer>
-        <BookForm user={user} onSubmit={async (book) => {
-          const db = firebase.firestore()
-          await db.collection("books").add({
-            ...book,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            circleRef: userData.circleRef,
-            circleName: circle.name,
-          })
-          props.router.push('/mypage')
-        }} />
+        <BookForm
+          user={user}
+          onSubmit={async book => {
+            const db = firebase.firestore()
+            await db.collection('books').add({
+              ...book,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+              circleRef: userData.circleRef,
+              circleName: circle.name
+            })
+            props.router.push('/mypage/circle')
+          }}
+        />
       </FormContainer>
     </>
   )
@@ -56,9 +59,7 @@ const withUser = (Component: any) => {
         router.push('/books')
       }
     })
-    return <Component {...props}>
-      pppp
-    </Component>
+    return <Component {...props}>pppp</Component>
   }
 }
 

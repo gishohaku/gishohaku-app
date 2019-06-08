@@ -1,6 +1,9 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
 import { jsx, css, Global } from '@emotion/core'
 import marked from 'marked'
 
@@ -9,15 +12,21 @@ import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
 import CheckButton from '../components/CheckButton'
 import Lightbox from 'react-image-lightbox'
-import { useState, useMemo, useContext } from 'react'
+import { useState, useMemo, useContext, useEffect } from 'react'
 import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
 import { media } from '../utils/style'
+
+import check from '../images/check.svg'
 
 interface Props {
   book: Book
   editable?: boolean
   isShowCircle?: boolean
+}
+
+interface StarCount {
+  count: number
 }
 
 const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = false }) => {
@@ -35,6 +44,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
   // できれば分けたい
   const [isOpenLightbox, updateOpenLightBox] = useState(false)
   const [lightBoxIndex, updateLightboxIndex] = useState(0)
+  const [starCount, setStarCount] = useState(0)
   const { images } = book
   const descriptionHTML = useMemo(() => {
     return marked(book.description, {
@@ -47,6 +57,20 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
   // FIXME:
   const circleId =
     typeof book.circleRef === 'string' ? book.circleRef : book.circleRef._path.segments[1]
+
+  useEffect(() => {
+    if (editable) {
+      const db = firebase.firestore()
+      db.collection('starCounts')
+        .doc(`books-${book.id}`)
+        .get()
+        .then(res => {
+          const count = res.exists ? (res.data() as StarCount).count : 0
+          console.log(book.id, count)
+          setStarCount(count)
+        })
+    }
+  }, [])
 
   return (
     <div
@@ -61,10 +85,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
     >
       {isShowCircle && (
         <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
-          <a>
-            {/* <Button variant="ghost">{book.circleName}</Button> */}
-            {book.circleName}
-          </a>
+          <a>{book.circleName}</a>
         </Link>
       )}
       <div
@@ -111,28 +132,58 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
         </div>
 
         {editable ? (
-          <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-            <a
+          <div
+            css={css`
+              margin-left: auto;
+              display: flex;
+            `}
+          >
+            <div
               css={css`
-                margin-left: auto;
-                border: 1px solid #2a5773;
+                border: 1px solid #eee;
+                background-color: #eee;
                 text-decoration: none;
-                padding: 6px 20px;
+                padding: 6px 12px;
                 border-radius: 4px;
-                font-size: 15px;
-                font-weight: 600;
-                color: #2a5773;
-                transition: all 0.2s ease;
-                white-space: nowrap;
-                &:hover {
-                  background-color: #2a5773;
-                  color: white;
+                margin-right: 6px;
+                min-width: 72px;
+                text-align: center;
+                font-weight: bold;
+                display: flex;
+                justify-content: center;
+                > img {
+                  margin-right: 4px;
+                  opacity: 0.4;
+                  width: 22px;
                 }
               `}
             >
-              編集
-            </a>
-          </Link>
+              <img src={check} />
+              <span>{starCount}</span>
+            </div>
+
+            <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+              <a
+                css={css`
+                  border: 1px solid #2a5773;
+                  text-decoration: none;
+                  padding: 6px 20px;
+                  border-radius: 4px;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #2a5773;
+                  transition: all 0.2s ease;
+                  white-space: nowrap;
+                  &:hover {
+                    background-color: #2a5773;
+                    color: white;
+                  }
+                `}
+              >
+                編集
+              </a>
+            </Link>
+          </div>
         ) : (
           <CheckButton
             isChecked={(book.id && bookStars.includes(book.id)) || false}

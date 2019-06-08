@@ -12,15 +12,16 @@ import UserContext from '../../contexts/UserContext'
 import SectionHeader from '../../components/atoms/SectionHeader'
 
 const Index = (props: any) => {
+  const { circles, router } = props
   const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
-  const [isCheckOnly, setCheckOnly] = useState(false)
+  const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)
 
   const filteredCircles = useMemo(() => {
     if (isCheckOnly) {
       return props.circles.filter((circle: Circle) => circleStars.includes(circle.id))
     }
-    return props.circles
-  }, [props.circles, isCheckOnly])
+    return circles
+  }, [circles, isCheckOnly])
 
   return (
     <Container
