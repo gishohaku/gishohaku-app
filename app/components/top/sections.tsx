@@ -383,6 +383,29 @@ const Sections = () => (
       `
       )}
     >
+      <SectionHeader text="HOTEL">宿泊のご案内</SectionHeader>
+      <Container
+        css={css`
+          max-width: 760px;
+          margin-top: 36px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        `}
+      >
+        <p>
+          会場至近のホテル『[ホテル オリエンタルエクスプレス 東京蒲田](https://tokyokamata.hotelorientalexpress.com/)』を公式応援ホテルとし、遠方より技書博に参加される方を対象に、通常より大幅に値下げした宿泊料でイベント参加者にサービスを提供いただくことになりました。<br>
+          予約方法についてはあらためて6月中旬より当サイトにてご案内いたします。<br>
+          予約は先着順で受け付ける予定です。<br>
+        </p>
+        <strong>公式応援宿泊プランの内容</strong><br>
+        <ul>
+          <li>期間：7月26日および27日</li>
+          <li>宿泊料：シングル1泊7,500円（朝食込/税込）</li>
+        </ul>
+      </Container>
+    </section>
+    <section css={section}>
       <SectionHeader text="RELEASE">リリース</SectionHeader>
       <Container
         css={css`
