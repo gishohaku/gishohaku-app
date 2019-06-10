@@ -7,12 +7,12 @@
     "dev": "node app/server.js",
     "build:app": "next build app",
     "export:app": "next export app --outdir dist/public",
+    "start": "next start app",
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "cp -a functions dist",
     "copy:deps": "cp package.json dist/functions; cp yarn.lock dist/functions",
     "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
     "deploy": "firebase deploy",
-    "start": "next start app",
     "functions:shell": "firebase experimental:functions:shell"
   },
   "dependencies": {
