@@ -24,6 +24,8 @@ const item = css`
   text-align: center;
   cursor: pointer;
   user-select: none;
+  color: inherit;
+  text-decoration: none;
   &:hover {
     background-color: #f7f8fa;
   }
@@ -67,29 +69,29 @@ export default () => {
         `}
       >
         <div css={spacer} />
-        <Link href="/">
-          <div css={item}>
+        <Link href="/" passHref>
+          <a css={item}>
             <img src={home} width={30} css={icon} />
             <div css={label}>ホーム</div>
-          </div>
+          </a>
         </Link>
-        <Link href="/circles">
-          <div css={item}>
+        <Link href="/circles" passHref>
+          <a css={item}>
             <img src={groupWork} width={30} css={icon} />
             <div css={label}>サークル</div>
-          </div>
+          </a>
         </Link>
-        <Link href="/books">
-          <div css={item}>
+        <Link href="/books" passHref>
+          <a css={item}>
             <img src={book} width={30} css={icon} />
             <div css={label}>頒布物</div>
-          </div>
+          </a>
         </Link>
-        <Link href="/mypage">
-          <div css={item}>
+        <Link href="/mypage" passHref>
+          <a css={item}>
             <img src={person} width={30} css={icon} />
             <div css={label}>マイページ</div>
-          </div>
+          </a>
         </Link>
         <div css={spacer} />
       </div>
