@@ -93,59 +93,12 @@ const Layout = props => {
       )}
       <div
         css={css`
-          position: absolute;
-          right: 16px;
-          top: 22px;
-        `}
-      >
-        <IconButton
-          onClick={() => setOpen(true)}
-          icon={<IconMenu />}
-          component="button"
-          label="Menu"
-          variant="ghost"
-        />
-      </div>
-      <div
-        css={css`
           min-height: calc(100vh - 80px - 88px);
           position: relative;
         `}
       >
         {props.children}
       </div>
-      <Sheet onRequestClose={() => setOpen(false)} position="right" isOpen={isOpen}>
-        <MenuList>
-          {user ? (
-            <MenuItem
-              contentBefore={<IconLogOut />}
-              onPress={() => {
-                firebase.auth().signOut()
-                toast({
-                  title: 'ログアウトしました',
-                  intent: 'success'
-                })
-                props.router.push('/')
-              }}
-            >
-              ログアウト
-            </MenuItem>
-          ) : (
-            <Link href="/sign_in" passHref>
-              <MenuItem
-                contentBefore={<IconLogIn />}
-                component="a"
-                onPress={() => {
-                  // FIXME: この記述がないとスマホでリンクにならない
-                  props.router.push('/sign_in')
-                }}
-              >
-                ログイン
-              </MenuItem>
-            </Link>
-          )}
-        </MenuList>
-      </Sheet>
       <BottomBar />
       <Footer />
     </>
