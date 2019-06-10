@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, css } from '@emotion/core'
+import { media, colors } from "../../utils/style"
 
 import placeIcon from './round-place.svg'
 import directionsIcon from './round-directions_run.svg'
