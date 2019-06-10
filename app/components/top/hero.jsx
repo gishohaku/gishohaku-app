@@ -157,8 +157,7 @@ const Hero = () => {
             当日スタッフ募集中！
           </a>
         </Link>
-      </p>
-      <p>
+
         <Link href="/guest-info" passHref>
           <a
             css={css`
@@ -185,35 +184,6 @@ const Hero = () => {
             `}
           >
             一般参加者へのご案内
-          </a>
-        </Link>
-
-        <Link passHref>
-          <a
-            css={css`
-              background-color: ${colors.accent};
-              font-size: 16px;
-              font-weight: bold;
-              color: white;
-              padding: 11px 36px 13px;
-              min-width: 270px;
-              display: inline-block;
-              border-radius: 30px;
-              margin: 24px 12px 0 12px;
-              text-decoration: none;
-              transition: transform 0.15s ease-out;
-              transform: translateY(0);
-              &:hover {
-                transform: translateY(-1px);
-                background-color: #dbae29;
-              }
-              // background-color: #aaaaaa;
-              // &:hover {
-              //   background-color: #aaaaaa;
-              // }
-            `}
-          >
-            サークル参加者へのご案内
           </a>
         </Link>
       </p>

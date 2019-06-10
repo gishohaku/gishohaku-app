@@ -393,7 +393,7 @@ const Sections = () => (
       <SectionHeader text="HOTEL">宿泊のご案内</SectionHeader>
       <Container
         css={css`
-          max-width: 760px;
+          max-width: 740px;
           margin-top: 36px;
         `}
       >
@@ -425,7 +425,7 @@ const Sections = () => (
       <SectionHeader text="RELEASE">リリース</SectionHeader>
       <Container
         css={css`
-          max-width: 760px;
+          max-width: 740px;
           margin-top: 36px;
           display: flex;
           flex-wrap: wrap;
