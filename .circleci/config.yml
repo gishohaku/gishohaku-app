@@ -39,6 +39,8 @@ jobs:
       - run: yarn export:app -o dist/public/
       - run: cp package.json dist/functions && cp yarn.lock dist/functions
       - run: yarn firebase deploy --token=$FIREBASE_TOKEN -f
+      - store_artifacts:
+        path: ~/repo/yarn.lock
 
 workflows:
   version: 2
