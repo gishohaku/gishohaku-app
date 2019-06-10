@@ -393,16 +393,11 @@ const Sections = () => (
           justify-content: center;
         `}
       >
-        <p>
-          会場至近のホテル『[ホテル オリエンタルエクスプレス 東京蒲田](https://tokyokamata.hotelorientalexpress.com/)』を公式応援ホテルとし、遠方より技書博に参加される方を対象に、通常より大幅に値下げした宿泊料でイベント参加者にサービスを提供いただくことになりました。<br>
-          予約方法についてはあらためて6月中旬より当サイトにてご案内いたします。<br>
-          予約は先着順で受け付ける予定です。<br>
-        </p>
-        <strong>公式応援宿泊プランの内容</strong><br>
-        <ul>
-          <li>期間：7月26日および27日</li>
-          <li>宿泊料：シングル1泊7,500円（朝食込/税込）</li>
-        </ul>
+        技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」との提携を行います。<br>
+        <br>
+        <a target="_blank" rel="noopener noreferrer" href="/hotel">
+          →詳細はこちら
+        </a>
       </Container>
     </section>
     <section css={section}>
@@ -416,7 +411,16 @@ const Sections = () => (
           justify-content: center;
         `}
       >
-        <iframe src="https://www.value-press.com/pressrelease/latest_lists/61565" width="640px" height="200px" SCROLLING="auto" frameborder="0" style="margin:0; padding:0;"></iframe>
+        <iframe
+          src="https://www.value-press.com/pressrelease/latest_lists/61565"
+          frameBorder="0"
+          title="リリース"
+          css={css`
+            border: 0;
+            height: 100%;
+            width: 100%;
+          `}
+        ></iframe>
       </Container>
     </section>
   </>
