@@ -393,8 +393,9 @@ const Sections = () => (
           justify-content: center;
         `}
       >
-        技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」との提携を行います。<br>
-        <br>
+        <p>
+          技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」との提携を行います。
+        </p>
         <a target="_blank" rel="noopener noreferrer" href="/hotel">
           →詳細はこちら
         </a>
