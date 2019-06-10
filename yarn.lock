@@ -8081,7 +8081,7 @@ toasted-notes@^2.1.5:
     "@types/react-dom" "^16.8.3"
     react-spring "^8.0.18"
 
-touchable-hook@^1.2.1:
+touchable-hook@1.2.1, touchable-hook@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/touchable-hook/-/touchable-hook-1.2.1.tgz#0791f3e05ff441827470bcd544cd44465344dd21"
   integrity sha512-bXey/2YFuLtHDkoGoGigfXjUlnM0H5jUHNJUVrNZ5fCD6lNAb3Bkwz2prNUkowa99Ul48MlDOq0do+lQtgThmw==
