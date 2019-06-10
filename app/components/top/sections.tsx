@@ -9,7 +9,7 @@ import directionsIcon from './round-directions_run.svg'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../atoms/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
-
+	
 import Sponsor from './sponsor'
 import SponsorLink from '../SponsorLink'
 import Printing from './printing'
@@ -395,9 +395,6 @@ const Sections = () => (
         css={css`
           max-width: 760px;
           margin-top: 36px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
         `}
       >
         <p>
