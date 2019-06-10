@@ -375,6 +375,27 @@ const Sections = () => (
         <Printing name="栄光" url="https://www.eikou.com/" />
       </Container>
     </section>
+    <section
+      css={css(
+        section,
+        `
+        background-color: #f7f8fa;
+      `
+      )}
+    >
+      <SectionHeader text="RELEASE">リリース</SectionHeader>
+      <Container
+        css={css`
+          max-width: 760px;
+          margin-top: 36px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        `}
+      >
+        <iframe src="https://www.value-press.com/pressrelease/latest_lists/61565" width="640px" height="200px" SCROLLING="auto" frameborder="0" style="margin:0; padding:0;"></iframe>
+      </Container>
+    </section>
   </>
 )
 
