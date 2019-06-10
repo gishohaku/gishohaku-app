@@ -114,7 +114,7 @@ const Layout = props => {
       >
         {props.children}
       </div>
-      <Sheet onRequestClose={() => setOpen(false)} position="right" isOpen={isOpen}>
+      {/* <Sheet onRequestClose={() => setOpen(false)} position="right" isOpen={isOpen}>
         <MenuList>
           {user ? (
             <MenuItem
@@ -146,7 +146,7 @@ const Layout = props => {
           )}
         </MenuList>
       </Sheet>
-      <BottomBar />
+      <BottomBar /> */}
       <Footer />
     </>
   )

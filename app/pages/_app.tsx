@@ -4,6 +4,7 @@ import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { initFirebase } from '../utils/firebase'
+import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import ReactGA from 'react-ga'
 
@@ -24,7 +25,9 @@ class MyApp extends App {
       <Container>
         <SEO />
         <UserProvider>
-          <Component {...pageProps} />
+          <Layout router={router}>
+            <Component {...pageProps} />
+          </Layout>
         </UserProvider>
       </Container>
     )
