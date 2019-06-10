@@ -2,12 +2,11 @@
 
 import React from 'react'
 import { jsx, css } from '@emotion/core'
-import { media, colors } from "../../utils/style"
 
 import placeIcon from './round-place.svg'
 import directionsIcon from './round-directions_run.svg'
 
-import { media } from '../../utils/style'
+import { media, colors } from '../../utils/style'
 import SectionHeader from '../atoms/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
 
