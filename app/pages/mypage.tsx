@@ -48,36 +48,7 @@ const Mypage: React.FC = () => {
           overflow: hidden;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
         `}
-      >
-        <List>
-          <Link href="/circles?starred">
-            <ListItem
-              primary="チェックしたサークル"
-              secondary="チェックをつけたサークルを確認できます"
-              contentAfter={<IconChevronRight />}
-            />
-          </Link>
-          <Link href="/books?starred">
-            <ListItem
-              primary="チェックした頒布物"
-              secondary="チェックをつけた頒布物が確認できます"
-              contentAfter={<IconChevronRight />}
-            />
-          </Link>
-          {userData && userData.circleRef && (
-            <>
-              <Divider />
-              <Link href="/mypage/circle">
-                <ListItem
-                  primary="サークル情報編集"
-                  secondary="サークル情報の編集、頒布物の登録、チェック数の確認を行えます"
-                  contentAfter={<IconChevronRight />}
-                />
-              </Link>
-            </>
-          )}
-        </List>
-      </div>
+      />
     </Container>
   )
 }
