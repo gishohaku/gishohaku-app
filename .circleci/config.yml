@@ -38,7 +38,7 @@ jobs:
       - run: yarn build:app
       - run: yarn export:app -o dist/public/
       - run: cp package.json dist/functions && cp yarn.lock dist/functions
-      - run: yarn firebase deploy --token=$FIREBASE_TOKEN
+      - run: yarn firebase deploy --token=$FIREBASE_TOKEN -f
 
 workflows:
   version: 2
