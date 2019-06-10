@@ -91,7 +91,7 @@ const Layout = props => {
           </Link>
         </header>
       )}
-      <div
+      {/* <div
         css={css`
           position: absolute;
           right: 16px;
@@ -105,7 +105,7 @@ const Layout = props => {
           label="Menu"
           variant="ghost"
         />
-      </div>
+      </div> */}
       <div
         css={css`
           min-height: calc(100vh - 80px - 88px);
@@ -145,8 +145,8 @@ const Layout = props => {
             </Link>
           )}
         </MenuList>
-      </Sheet>
-      <BottomBar /> */}
+      </Sheet> */}
+      <BottomBar />
       <Footer />
     </>
   )
