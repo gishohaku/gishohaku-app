@@ -398,27 +398,30 @@ const Sections = () => (
         `}
       >
         <p>
-          技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」との提携を行います。
+          技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」として提携しました。
+          技書博参加者限定で、通常プランと比べ格安に宿泊できるプランを準備していますので、ぜひご検討下さい。
         </p>
-        <a
-          css={css`
-            background-color: ${colors.accent};
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            padding: 6px 24px;
-            display: inline-block;
-            border-radius: 30px;
-            text-decoration: none;
-            &:hover {
-              transform: translateY(-1px);
-              background-color: #dbae29;
-            }
-          `}
-          href="/hotel"
-        >
-          宿泊の詳細はこちら
-        </a>
+        <p>
+          <a
+            css={css`
+              background-color: ${colors.accent};
+              font-size: 14px;
+              font-weight: bold;
+              color: white;
+              padding: 6px 24px;
+              display: inline-block;
+              border-radius: 30px;
+              text-decoration: none;
+              &:hover {
+                transform: translateY(-1px);
+                background-color: #dbae29;
+              }
+            `}
+            href="/hotel"
+          >
+            宿泊の詳細はこちら
+          </a>
+        </p>
       </Container>
     </section>
     <section css={section}>
