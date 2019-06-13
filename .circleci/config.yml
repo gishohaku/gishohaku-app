@@ -19,7 +19,6 @@ jobs:
     steps:
       - checkout
 
-      - run: rm yarn.lock
       # Download and cache dependencies
       # - restore_cache:
       #     keys:
@@ -27,6 +26,7 @@ jobs:
       #       # fallback to using the latest cache if no exact match is found
       #       - v1-dependencies-
 
+      - run: cp yarn.linux.lock yarn.lock
       - run: yarn install
 
       - save_cache:
