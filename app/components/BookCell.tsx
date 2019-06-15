@@ -19,17 +19,30 @@ import { media } from '../utils/style'
 
 import check from '../images/check.svg'
 
+// TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
   book: Book
   editable?: boolean
   isShowCircle?: boolean
+  isLast?: boolean
+  isFirst?: boolean
+  movePrev?: Function
+  moveNext?: Function
 }
 
 interface StarCount {
   count: number
 }
 
-const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = false }) => {
+const BookCell: React.SFC<Props> = ({
+  book,
+  editable = false,
+  isShowCircle = false,
+  moveNext,
+  movePrev,
+  isLast = true,
+  isFirst = true
+}) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
   const toast = useToast()
@@ -319,6 +332,9 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
           }}
         />
       )}
+
+      {!isFirst && movePrev && <div onClick={movePrev}>Prev</div>}
+      {!isLast && moveNext && <div onClick={moveNext}>Next</div>}
       {isOpenLightbox && (
         <>
           <Global
