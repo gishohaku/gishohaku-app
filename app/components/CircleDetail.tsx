@@ -87,8 +87,8 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                   margin-top: 8px;
                 `}
               >
-                {circle.space && (
-                  <Label backgroundColor={'#2A5773'} color={'white'} text={circle.space} />
+                {circle.booth && (
+                  <Label backgroundColor={'#2A5773'} color={'white'} text={circle.booth} />
                 )}
                 <Label text={categories[circle.category]} />
               </div>

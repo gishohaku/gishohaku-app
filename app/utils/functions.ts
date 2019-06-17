@@ -28,7 +28,10 @@ export const getBooks = async () => {
 
 export const getCircles = async () => {
   const db: firebase.firestore.Firestore = firebase.firestore()
-  const snapshots = await db.collection('circles').get()
+  const snapshots = await db
+    .collection('circles')
+    .orderBy('boothNumber', 'asc')
+    .get()
   const results: Circle[] = []
   snapshots.forEach(snapshot => {
     results.push({
