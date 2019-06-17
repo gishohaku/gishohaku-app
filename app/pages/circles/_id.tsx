@@ -44,12 +44,13 @@ CirclePage.getInitialProps = async (
   if (!id) {
     // TODO: リダイレクトの処理
   }
-  const db = firebase.firestore()
+  const db: firebase.firestore.Firestore = firebase.firestore()
   const circleRef = db.collection('circles').doc(id)
   const circle = await circleRef.get()
   const snapshots = await db
     .collection('books')
     .where('circleRef', '==', circleRef)
+    .orderBy('order', 'asc')
     .get()
   let books: Book[] = []
   snapshots.forEach(book => {
