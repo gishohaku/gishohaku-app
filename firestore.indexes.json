@@ -1,4 +1,16 @@
 {
-  "indexes": [],
+  "indexes": [{
+    "collectionGroup": "books",
+    "queryScope": "COLLECTION",
+    "fields": [{
+        "fieldPath": "circleRef",
+        "order": "ASCENDING"
+      },
+      {
+        "fieldPath": "order",
+        "order": "ASCENDING"
+      }
+    ]
+  }],
   "fieldOverrides": []
 }

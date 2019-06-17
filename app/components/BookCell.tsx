@@ -12,24 +12,48 @@ import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
 import CheckButton from '../components/CheckButton'
 import Lightbox from 'react-image-lightbox'
-import { useState, useMemo, useContext, useEffect } from 'react'
+import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import UserContext from '../contexts/UserContext'
-import { useToast } from 'sancho'
+import {
+  useToast,
+  ResponsivePopover,
+  MenuList,
+  MenuItem,
+  IconEdit,
+  IconButton,
+  IconMoreVertical,
+  MenuDivider,
+  IconArrowUp,
+  IconArrowDown
+} from 'sancho'
 import { media } from '../utils/style'
 
 import check from '../images/check.svg'
 
+// TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
   book: Book
   editable?: boolean
   isShowCircle?: boolean
+  isLast?: boolean
+  isFirst?: boolean
+  movePrev?: (e: Event) => void
+  moveNext?: (e: Event) => void
 }
 
 interface StarCount {
   count: number
 }
 
-const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = false }) => {
+const BookCell: React.SFC<Props> = ({
+  book,
+  editable = false,
+  isShowCircle = false,
+  moveNext,
+  movePrev,
+  isLast = true,
+  isFirst = true
+}) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
   const toast = useToast()
@@ -53,6 +77,8 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
       sanitize: true
     })
   }, [book.description])
+  // 順番を並び替えたときにPopoverを閉じるために利用するRef
+  const docRef = useRef<HTMLDivElement>()
 
   // FIXME:
   const circleId =
@@ -82,6 +108,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
         border-radius: 8px;
       `}
       key={book.id}
+      ref={docRef}
     >
       {isShowCircle && (
         <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
@@ -151,6 +178,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
                 font-weight: bold;
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 > img {
                   margin-right: 4px;
                   opacity: 0.4;
@@ -161,28 +189,43 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
               <img src={check} />
               <span>{starCount}</span>
             </div>
-
-            <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-              <a
-                css={css`
-                  border: 1px solid #2a5773;
-                  text-decoration: none;
-                  padding: 6px 20px;
-                  border-radius: 4px;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #2a5773;
-                  transition: all 0.2s ease;
-                  white-space: nowrap;
-                  &:hover {
-                    background-color: #2a5773;
-                    color: white;
-                  }
-                `}
-              >
-                編集
-              </a>
-            </Link>
+            <ResponsivePopover
+              placement="bottom-end"
+              content={
+                <MenuList>
+                  {!isFirst && movePrev && (
+                    <MenuItem
+                      contentBefore={<IconArrowUp />}
+                      onPress={e => {
+                        docRef.current && docRef.current.click()
+                        movePrev(e as any)
+                      }}
+                    >
+                      上に移動
+                    </MenuItem>
+                  )}
+                  {!isLast && moveNext && (
+                    <MenuItem
+                      contentBefore={<IconArrowDown />}
+                      onPress={e => {
+                        docRef.current && docRef.current.click()
+                        moveNext(e as any)
+                      }}
+                    >
+                      下に移動
+                    </MenuItem>
+                  )}
+                  {(!isFirst || !isLast) && <MenuDivider />}
+                  <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+                    <MenuItem contentBefore={<IconEdit />} component="a">
+                      編集する
+                    </MenuItem>
+                  </Link>
+                </MenuList>
+              }
+            >
+              <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+            </ResponsivePopover>
           </div>
         ) : (
           <CheckButton
@@ -319,6 +362,7 @@ const BookCell: React.SFC<Props> = ({ book, editable = false, isShowCircle = fal
           }}
         />
       )}
+
       {isOpenLightbox && (
         <>
           <Global
