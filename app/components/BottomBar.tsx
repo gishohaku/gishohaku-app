@@ -26,11 +26,11 @@ const item = css`
   user-select: none;
   color: inherit;
   text-decoration: none;
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #f7f8fa;
   }
-  &:active,
-  &:focus {
+  &:active {
     background-color: #dbdfe6;
   }
 `
