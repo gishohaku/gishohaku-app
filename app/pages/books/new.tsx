@@ -34,13 +34,18 @@ const BooksNew = (props: any) => {
         <BookForm
           user={user}
           onSubmit={async book => {
-            const db = firebase.firestore()
+            const db: firebase.firestore.Firestore = firebase.firestore()
+            const bookSnapshots = await db
+              .collection('books')
+              .where('circleRef', '==', userData.circleRef)
+              .get()
             await db.collection('books').add({
               ...book,
               createdAt: firebase.firestore.FieldValue.serverTimestamp(),
               updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
               circleRef: userData.circleRef,
-              circleName: circle.name
+              circleName: circle.name,
+              order: bookSnapshots.size
             })
             props.router.push('/mypage/circle')
           }}

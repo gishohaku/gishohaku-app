@@ -2,16 +2,21 @@ import axios from 'axios'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { refToPath } from './firebase'
+import Book from './book'
+import Circle from './circle'
 
 export const getBooks = async () => {
-  const db = firebase.firestore()
-  const snapshots = await db.collection('books').get()
-  const results = []
+  const db: firebase.firestore.Firestore = firebase.firestore()
+  const snapshots = await db
+    .collection('books')
+    .orderBy('updatedAt', 'desc')
+    .get()
+  const results: Book[] = []
   snapshots.forEach(snapshot => {
     const data = refToPath(snapshot.data(), 'circleRef')
     results.push({
       id: snapshot.id,
-      ...data
+      ...(data as Book)
     })
   })
   return results
@@ -22,13 +27,13 @@ export const getBooks = async () => {
 }
 
 export const getCircles = async () => {
-  const db = firebase.firestore()
+  const db: firebase.firestore.Firestore = firebase.firestore()
   const snapshots = await db.collection('circles').get()
-  const results = []
+  const results: Circle[] = []
   snapshots.forEach(snapshot => {
     results.push({
       id: snapshot.id,
-      ...snapshot.data()
+      ...(snapshot.data() as Circle)
     })
   })
   return results
