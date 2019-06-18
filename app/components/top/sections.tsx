@@ -9,7 +9,7 @@ import directionsIcon from './round-directions_run.svg'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../atoms/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
-	
+
 import Sponsor from './sponsor'
 import SponsorLink from '../SponsorLink'
 import Printing from './printing'
@@ -314,25 +314,39 @@ const Sections = () => (
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            > div {
-              width: 160px;
-              @media ${media.small} {
-                width: 150px;
-              }
-              text-align: center;
-              margin: 0 10px;
-            }
-            a {
-                text-decoration: none;
-                color: #1d272d;
-            }
           `}
         >
-          <Sponsor name="募集中" role="トートバッグサポーター" />
-          <Sponsor name="募集中" role="パブリシティサポーター" />
-          <Sponsor name="募集中" role="セキュリティサポーター" />
-          <Sponsor name="募集中" role="オフィシャルサポーター" />
-          <Sponsor name="募集中" role="懇親会サポーター" />
+          <Sponsor
+            name="株式会社grasys"
+            role="トートバッグサポーター・運営サポーター"
+            href="https://www.grasys.io/"
+            image="/static/sponsors/grasys.gif"
+            block
+          />
+          <Sponsor
+            name="さくらインターネット株式会社"
+            role="オフィシャルサポーター"
+            href="https://www.sakura.ad.jp/"
+            image="/static/sponsors/sakura.png"
+          />
+          <Sponsor
+            name="株式会社grooves"
+            role="オフィシャルサポーター"
+            href="https://portfolio.forkwell.com/"
+            image="/static/sponsors/forkwell.png"
+          />
+          <Sponsor
+            name="テクノブレーン株式会社"
+            role="オフィシャルサポーター"
+            href="https://www.techno-brain.co.jp/"
+            image="/static/sponsors/tbc.gif"
+          />
+          <Sponsor
+            name="株式会社インプレスR&D"
+            role="懇親会サポーター"
+            href="https://nextpublishing.jp/"
+            image="/static/sponsors/impress.png"
+          />
           <Sponsor
             name="株式会社メディアドゥ"
             role="デザイン協力"
@@ -444,7 +458,7 @@ const Sections = () => (
             height: 100%;
             width: 100%;
           `}
-        ></iframe>
+        />
       </Container>
     </section>
   </>
