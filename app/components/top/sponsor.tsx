@@ -8,8 +8,8 @@ import { media } from '../../utils/style'
 interface Props {
   image?: string
   role: string
-  name?: string
-  href?: string
+  name: string
+  href: string
   block?: boolean
 }
 
@@ -18,11 +18,13 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
     <div
       css={css`
         width: ${block ? '100%' : '210px'};
+        text-align: center;
+        margin: 12px 0;
         @media ${media.small} {
           width: 150px;
+          margin-right: 10px;
+          margin-left: 10px;
         }
-        text-align: center;
-        margin: 12px 10px;
       `}
     >
       <Embed
@@ -44,6 +46,8 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
               padding: 12px;
               text-align: center;
             `}
+            target="_blank"
+            rel="noopener"
           >
             <img
               css={css`
@@ -77,7 +81,9 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
             text-decoration: none;
             color: #1d272d;
           `}
-          href={href || 'javascript:void(0);'}
+          href={href}
+          target="_blank"
+          rel="noopener"
         >
           {name || '募集中'}
         </a>
