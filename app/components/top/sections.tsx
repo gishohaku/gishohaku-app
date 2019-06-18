@@ -11,7 +11,6 @@ import SectionHeader from '../atoms/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
 
 import Sponsor from './sponsor'
-import SponsorLink from '../SponsorLink'
 import Printing from './printing'
 
 import { Container } from 'sancho'
@@ -354,12 +353,6 @@ const Sections = () => (
             href="https://mediado.jp/"
           />
         </div>
-        <SponsorLink
-          css={css`
-            margin-top: 24px;
-            background-color: white;
-          `}
-        />
       </Container>
     </section>
     <section css={section}>
