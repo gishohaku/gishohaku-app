@@ -60,7 +60,7 @@ const Index = (props: { books: Book[]; router: any }) => {
 
 Index.getInitialProps = async ({ res }: any) => {
   if (res && res.setHeader) {
-    res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
+    res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }
 
   initFirebase()

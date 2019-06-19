@@ -6,8 +6,7 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
+    "redirects": [{
         "source": "/books/",
         "destination": "/books",
         "type": 301
@@ -18,8 +17,7 @@
         "type": 301
       }
     ],
-    "rewrites": [
-      {
+    "rewrites": [{
         "source": "/books/**",
         "function": "app"
       },
@@ -36,6 +34,25 @@
         "function": "app"
       }
     ],
+    "headers": [{
+      "source": "/**",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "no-cache, no-store, must-revalidate"
+      }]
+    }, {
+      "source": "/_next/static/**/*",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "max-age=3600"
+      }]
+    }, {
+      "source": "_next/static/images/*",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "max-age=86400"
+      }]
+    }],
     "trailingSlash": false
   },
   "functions": {
