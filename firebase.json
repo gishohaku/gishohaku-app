@@ -52,6 +52,18 @@
         "key": "Cache-Control",
         "value": "max-age=86400"
       }]
+    }, {
+      "source": "/books",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "max-age=600"
+      }]
+    }, {
+      "source": "/circles",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "max-age=600"
+      }]
     }],
     "trailingSlash": false
   },
