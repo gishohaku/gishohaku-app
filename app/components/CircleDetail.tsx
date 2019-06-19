@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import produce from 'immer'
 
 import { jsx, css } from '@emotion/core'
 import circleTumbnail from '../images/circle.png'
@@ -25,13 +26,14 @@ interface Props {
   circle: Circle
   books: Book[]
   editable?: boolean
+  setBooks?: (books: Book[]) => void
 }
 
 interface StarCount {
   count: number
 }
 
-const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
+const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) => {
   const { user, circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const toast = useToast()
   const [starCount, setStarCount] = useState(0)
@@ -85,8 +87,8 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
                   margin-top: 8px;
                 `}
               >
-                {circle.space && (
-                  <Label backgroundColor={'#2A5773'} color={'white'} text={circle.space} />
+                {circle.booth && (
+                  <Label backgroundColor={'#2A5773'} color={'white'} text={circle.booth} />
                 )}
                 <Label text={categories[circle.category]} />
               </div>
@@ -198,8 +200,56 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable }) => {
             }
           `}
         >
-          {books.map(book => (
-            <BookCell book={book} editable={editable} key={book.id} />
+          {books.map((book, index) => (
+            <BookCell
+              book={book}
+              editable={editable}
+              key={book.id}
+              isLast={index === books.length - 1}
+              isFirst={index === 0}
+              movePrev={() => {
+                const db = firebase.firestore()
+                const newBooks = produce(books, drafts => {
+                  drafts[index] = books[index - 1]
+                  drafts[index - 1] = books[index]
+                })
+                console.log(newBooks)
+                setBooks && setBooks(newBooks)
+                const merge = true
+                newBooks
+                  .map(b => b.id)
+                  .forEach((bookId, order) => {
+                    db.collection('books')
+                      .doc(bookId)
+                      .set({ order }, { merge })
+                  })
+                toast({
+                  title: `頒布物を並び替えました`,
+                  intent: 'success'
+                })
+              }}
+              moveNext={() => {
+                const db = firebase.firestore()
+                const newBooks = produce(books, drafts => {
+                  drafts[index] = books[index + 1]
+                  drafts[index + 1] = books[index]
+                })
+                console.log(newBooks)
+                setBooks && setBooks(newBooks)
+                const merge = true
+                newBooks
+                  .map(b => b.id)
+                  .forEach((bookId, order) => {
+                    db.collection('books')
+                      .doc(bookId)
+                      .set({ order }, { merge })
+                  })
+                toast({
+                  title: `頒布物を並び替えました`,
+                  intent: 'success'
+                })
+              }}
+            />
           ))}
           {editable && (
             <Link href="/books/new">

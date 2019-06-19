@@ -10,6 +10,7 @@ import CircleCell from '../../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
 import UserContext from '../../contexts/UserContext'
 import SectionHeader from '../../components/atoms/SectionHeader'
+import { initFirebase } from '../../utils/firebase'
 
 const Index = (props: any) => {
   const { circles, router } = props
@@ -80,6 +81,7 @@ Index.getInitialProps = async ({ res }: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
+  initFirebase()
   const circles = await getCircles()
   return { circles }
 }

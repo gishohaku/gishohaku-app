@@ -8,7 +8,7 @@ import 'firebase/functions'
 import { jsx, css } from '@emotion/core'
 import { useContext, useEffect, useState } from 'react'
 
-import { Button, List, ListItem, Divider, Container, IconChevronRight } from 'sancho'
+import { Button, Container, IconChevronRight } from 'sancho'
 import { withRouter, WithRouterProps } from 'next/router'
 import { refToPath } from '../../utils/firebase'
 import Circle, { categories } from '../../utils/circle'
@@ -39,6 +39,7 @@ const Mypage: React.FC = () => {
       const snapshots = await db
         .collection('books')
         .where('circleRef', '==', circleRef)
+        .orderBy('order', 'asc')
         .get()
       let bookResults: Book[] = []
       snapshots.forEach(book => {
@@ -92,7 +93,7 @@ const Mypage: React.FC = () => {
   if (!circle) {
     return <Loader label="Loading..." />
   }
-  return <CircleDetail circle={circle} books={books} editable={true} />
+  return <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
 }
 
 export default withRouter(Mypage)

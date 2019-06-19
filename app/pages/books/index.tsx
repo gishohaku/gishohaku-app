@@ -9,6 +9,7 @@ import Book from '../../utils/book'
 import BookCell from '../../components/BookCell'
 import { useState, useMemo, useContext } from 'react'
 import UserContext from '../../contexts/UserContext'
+import { initFirebase } from '../../utils/firebase'
 
 const Index = (props: { books: Book[]; router: any }) => {
   const { books, router } = props
@@ -62,6 +63,7 @@ Index.getInitialProps = async ({ res }: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=120, stale-while-revalidate')
   }
 
+  initFirebase()
   const books = await getBooks()
   return {
     books

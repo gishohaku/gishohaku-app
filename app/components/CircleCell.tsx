@@ -9,8 +9,8 @@ import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
 import { useToast } from 'sancho'
-import { useContext } from 'react';
-import UserContext from '../contexts/UserContext';
+import { useContext } from 'react'
+import UserContext from '../contexts/UserContext'
 
 interface Props {
   circle: Circle
@@ -66,7 +66,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
               margin-top: 2px;
             `}
           >
-            {circle.name}
+            {circle.booth} {circle.name}
           </h2>
           <p
             css={css`
