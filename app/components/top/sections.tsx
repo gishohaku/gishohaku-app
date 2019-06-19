@@ -387,6 +387,11 @@ const Sections = () => (
           image="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
         />
         <Printing name="栄光" url="https://www.eikou.com/" />
+        <Printing
+          name="しまや出版"
+          url="https://www.shimaya.net/"
+          image="/static/printings/shimaya.png"
+        />
       </Container>
     </section>
     <section
