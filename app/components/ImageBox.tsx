@@ -43,7 +43,7 @@ const ImageBox: React.FC<ImageBoxProps> = props => {
       `}
       {...otherProps}
     >
-      <LazyLoad>
+      <LazyLoad offset={400}>
         <img
           src={props.imageUrl}
           css={css`

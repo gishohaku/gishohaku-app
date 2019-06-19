@@ -37,7 +37,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           margin: 0 auto;
         `}
       >
-        <LazyLoad>
+        <LazyLoad offset={400}>
           <a
             href={href || 'javascript:void(0);'}
             css={css`
