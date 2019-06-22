@@ -8,11 +8,11 @@ import 'firebase/functions'
 import { jsx, css } from '@emotion/core'
 import { useContext, useEffect, useState } from 'react'
 
-import { Button, Container, IconChevronRight } from 'sancho'
-import { withRouter, WithRouterProps } from 'next/router'
+import { Button } from 'sancho'
+import { withRouter } from 'next/router'
 import { refToPath } from '../../utils/firebase'
-import Circle, { categories } from '../../utils/circle'
-import Book, { types, mediums } from '../../utils/book'
+import Circle from '../../utils/circle'
+import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext'
 import MessageBox from '../../components/MessageBox'
 import Loader from '../../components/Loader'
@@ -93,7 +93,42 @@ const Mypage: React.FC = () => {
   if (!circle) {
     return <Loader label="Loading..." />
   }
-  return <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
+  return (
+    <>
+      <div
+        css={css`
+          max-width: ${1080 + 32}px;
+          padding: 0 16px;
+          margin: 32px auto;
+        `}
+      >
+        <div
+          css={css`
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #2a5773;
+            color: white;
+            a {
+              color: inherit;
+              font-weight: bold;
+            }
+            border-radius: 8px;
+          `}
+        >
+          <p>
+            このページはサークル参加者専用のページです。シェア用のページは
+            <Link href={`/circles/_id?id=${circle.id}`} as={`/circles/${circle.id}`}>
+              <a>こちら</a>
+            </Link>
+            。
+          </p>
+          {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
+        </div>
+      </div>
+      <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
+    </>
+  )
 }
 
 export default withRouter(Mypage)
