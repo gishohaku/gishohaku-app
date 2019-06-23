@@ -10,6 +10,8 @@ import BookCell from '../../components/BookCell'
 import { useState, useMemo, useContext } from 'react'
 import UserContext from '../../contexts/UserContext'
 import { initFirebase } from '../../utils/firebase'
+import { media } from '../../utils/style'
+import SectionHeader from '../../components/atoms/SectionHeader'
 
 const Index = (props: { books: Book[]; router: any }) => {
   const { books, router } = props
@@ -24,22 +26,39 @@ const Index = (props: { books: Book[]; router: any }) => {
   }, [books, isCheckOnly, router.query])
 
   return (
-    <Container
+    <div
       css={css`
         max-width: 720px;
-        margin-top: 32px;
+        margin: 32px auto;
+        padding: 0 16px;
+        @media ${media.small} {
+          padding-left: 0;
+          padding-right: 0;
+        }
       `}
     >
-      <Button
+      <SectionHeader text="BOOKS" pageHeader>
+        頒布物一覧
+      </SectionHeader>
+      <div
         css={css`
-          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 24px;
         `}
-        onClick={() => {
-          setCheckOnly(!isCheckOnly)
-        }}
       >
-        チェックリスト
-      </Button>
+        <Button
+          css={css`
+            margin-bottom: 12px;
+          `}
+          onClick={() => {
+            setCheckOnly(!isCheckOnly)
+          }}
+        >
+          チェックリスト
+        </Button>
+      </div>
       {isCheckOnly && (
         <h1
           css={css`
@@ -54,7 +73,7 @@ const Index = (props: { books: Book[]; router: any }) => {
       {filteredBooks.map((book: Book) => (
         <BookCell book={book} key={book.id} isShowCircle={true} />
       ))}
-    </Container>
+    </div>
   )
 }
 
