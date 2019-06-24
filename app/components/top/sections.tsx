@@ -364,7 +364,7 @@ const Sections = () => (
             href="https://codezine.jp/"
           />
           <Sponsor
-            name="ThinIT"
+            name="ThinkIT"
             role="メディアスポンサー"
             image="/static/sponsors/thinkit.png"
             href="https://thinkit.co.jp/"
