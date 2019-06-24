@@ -352,6 +352,29 @@ const Sections = () => (
             image="/static/sponsors/mediado.png"
             href="https://mediado.jp/"
           />
+          <div
+            css={css`
+              width: 100%;
+            `}
+          />
+          <Sponsor
+            name="CodeZine"
+            role="メディアスポンサー"
+            image="/static/sponsors/codezine.png"
+            href="https://codezine.jp/"
+          />
+          <Sponsor
+            name="ThinIT"
+            role="メディアスポンサー"
+            image="/static/sponsors/thinkit.png"
+            href="https://thinkit.co.jp/"
+          />
+          <Sponsor
+            name="日経ソフトウェア"
+            role="メディアスポンサー"
+            image="/static/sponsors/nikkei.png"
+            href="https://trendy.nikkeibp.co.jp/nsw/"
+          />
         </div>
       </Container>
     </section>

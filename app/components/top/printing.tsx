@@ -15,18 +15,18 @@ const printing: React.FC<Props> = ({ image, name, url }) => {
     <a href={url} target="_blank" rel="noopner">
       <Embed
         width={200}
-        height={40}
+        height={42}
         css={css`
           border: 1px solid #eee;
           background-color: white;
           display: inline-block;
           width: 200px;
-          height: 40px;
+          height: 42px;
           margin: 16px 16px;
           text-align: center;
           vertical-align: middle;
           p {
-            line-height: 40px;
+            line-height: 42px;
             font-weight: 600;
             color: inherit;
           }
