@@ -20,11 +20,6 @@ service cloud.firestore {
       return request.resource.data;
     }
 
-    match /{document=**} {
-      allow read;
-      allow write: if false;
-    }
-
     match /users/{userID} {
       allow read: if isAuthenticated() && isUserAuthenticated(userID);
       allow write: if isAuthenticated() && isUserAuthenticated(userID);
