@@ -341,6 +341,12 @@ const Sections = () => (
             image="/static/sponsors/tbc.gif"
           />
           <Sponsor
+            name="株式会社虎の穴"
+            role="オフィシャルサポーター"
+            href="https://yumenosora.co.jp/tora-lab"
+            image="/static/sponsors/tora.png"
+          />
+          <Sponsor
             name="株式会社インプレスR&D"
             role="懇親会サポーター"
             href="https://nextpublishing.jp/"
