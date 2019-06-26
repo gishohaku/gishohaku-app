@@ -365,19 +365,19 @@ const Sections = () => (
           />
           <Sponsor
             name="CodeZine"
-            role="メディアスポンサー"
+            role="メディアサポーター"
             image="/static/sponsors/codezine.png"
             href="https://codezine.jp/"
           />
           <Sponsor
-            name="ThinIT"
-            role="メディアスポンサー"
+            name="ThinkIT"
+            role="メディアサポーター"
             image="/static/sponsors/thinkit.png"
             href="https://thinkit.co.jp/"
           />
           <Sponsor
             name="日経ソフトウェア"
-            role="メディアスポンサー"
+            role="メディアサポーター"
             image="/static/sponsors/nikkei.png"
             href="https://trendy.nikkeibp.co.jp/nsw/"
           />
