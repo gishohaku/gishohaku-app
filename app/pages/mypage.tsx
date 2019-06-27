@@ -4,38 +4,10 @@ import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
 
 import { Button, Divider, Container, IconChevronRight, List, ListItem } from 'sancho'
-import { withRouter } from 'next/router'
 import { useContext } from 'react'
 import UserContext from '../contexts/UserContext'
 import MessageBox from '../components/MessageBox'
 import Loader from '../components/Loader'
-
-// const Item = ({ primary, secondary, ...other }) => {
-//   return (
-//     <a
-//       css={css`
-//         padding: 12px;
-//         display: block;
-//         text-decoration: none;
-//         color: inherit;
-//         &:hover {
-//           background-color: #eee;
-//         }
-//       `}
-//       {...other}
-//     >
-//       {primary}
-//       <div
-//         css={css`
-//           font-size: 12px;
-//           opacity: 0.6;
-//         `}
-//       >
-//         {secondary}
-//       </div>
-//     </a>
-//   )
-// }
 
 const Mypage: React.FC = () => {
   const { user, isUserLoading, userData } = useContext(UserContext)
@@ -109,4 +81,4 @@ const Mypage: React.FC = () => {
   )
 }
 
-export default withRouter(Mypage)
+export default Mypage

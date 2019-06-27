@@ -9,7 +9,6 @@ import { jsx, css } from '@emotion/core'
 import { useContext, useEffect, useState } from 'react'
 
 import { Button } from 'sancho'
-import { withRouter } from 'next/router'
 import { refToPath } from '../../utils/firebase'
 import Circle from '../../utils/circle'
 import Book from '../../utils/book'
@@ -31,7 +30,7 @@ const Mypage: React.FC = () => {
       console.log('Not circle member', user, userData)
       return () => {}
     }
-    const db = firebase.firestore()
+    const db: firebase.firestore.Firestore = firebase.firestore()
     ;(async () => {
       const circleRef = userData.circleRef!
       const circleSnapShot = await circleRef.get()
@@ -131,4 +130,4 @@ const Mypage: React.FC = () => {
   )
 }
 
-export default withRouter(Mypage)
+export default Mypage

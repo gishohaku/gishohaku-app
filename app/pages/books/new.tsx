@@ -1,17 +1,19 @@
 /** @jsx jsx */
+import { useEffect, useContext, useState } from 'react'
+import router, { withRouter } from 'next/router'
+
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 
 import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
-import router, { withRouter } from 'next/router'
-import { useEffect, useContext, useState } from 'react'
 import Circle from '../../utils/circle'
 import UserContext from '../../contexts/UserContext'
+import { NextPage } from 'next'
 
-const BooksNew = (props: any) => {
+const BooksNew: NextPage<any> = props => {
   const { user, isUserLoading, userData } = useContext(UserContext)
   const [circle, setCircle] = useState<Circle | null>(null)
   useEffect(() => {

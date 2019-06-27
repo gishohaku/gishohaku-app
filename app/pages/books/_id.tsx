@@ -4,9 +4,9 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import styled from '@emotion/styled'
 import { Container } from 'sancho'
-import { withRouter } from 'next/router'
 import { initFirebase, refToPath } from '../../utils/firebase'
 import Book from '../../utils/book'
+import { NextPage } from 'next'
 
 const Content = styled.div`
   max-width: 720px;
@@ -105,22 +105,22 @@ const Content = styled.div`
   }
 `
 
-const Post = ({ book, router }: any) => {
+interface Props {
+  book: Book
+}
 
+const Post: NextPage<Props> = ({ book }) => {
   return (
     <Container>
       <Content>
-        {book && <>
-          <h1 id='book-title'>{book.title}</h1>
-          <div id='book-description' dangerouslySetInnerHTML={{ __html: book.description }} />
-        </>
-        }
+        <h1>{book.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: book.description }} />
       </Content>
     </Container>
   )
 }
 
-Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
+Post.getInitialProps = async ({ query }) => {
   initFirebase()
   const db = firebase.firestore()
   const docRef = db.collection('books').doc(query.id)
@@ -132,4 +132,4 @@ Post.getInitialProps = async ({ req, res, query, pathname, asPath }: any) => {
   }
 }
 
-export default withRouter(Post)
+export default Post

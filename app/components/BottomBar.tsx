@@ -1,16 +1,10 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import Link from 'next/link'
-import { media, colors } from '../utils/style'
 import book from '../images/icons/book.svg'
 import groupWork from '../images/icons/groupWork.svg'
 import home from '../images/icons/home.svg'
 import person from '../images/icons/person.svg'
-
-interface Props {
-  name: string
-  icon: any
-}
 
 const spacer = css`
   width: 8px;

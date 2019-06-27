@@ -40,7 +40,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
 
   useEffect(() => {
     if (editable) {
-      const db = firebase.firestore()
+      const db: firebase.firestore.Firestore = firebase.firestore()
       db.collection('starCounts')
         .doc(`circles-${circle.id}`)
         .get()

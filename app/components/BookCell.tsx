@@ -86,7 +86,7 @@ const BookCell: React.SFC<Props> = ({
 
   useEffect(() => {
     if (editable) {
-      const db = firebase.firestore()
+      const db: firebase.firestore.Firestore = firebase.firestore()
       db.collection('starCounts')
         .doc(`books-${book.id}`)
         .get()

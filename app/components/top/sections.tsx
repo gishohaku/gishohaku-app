@@ -115,13 +115,13 @@ const Sections = () => (
             margin-top: 24px;
             dt,
             dd {
-                display: inline-block;
-                zoom: 1;
-                vertical-align: top;
-                width: 50%;
-                padding: 12px 0;
-                margin: 0;
-                border-top: 1px solid #eee;
+              display: inline-block;
+              zoom: 1;
+              vertical-align: top;
+              width: 50%;
+              padding: 12px 0;
+              margin: 0;
+              border-top: 1px solid #eee;
             }
 
             dt {
