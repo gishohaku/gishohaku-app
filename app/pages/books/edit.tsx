@@ -40,7 +40,7 @@ const BooksNew: NextPage<Props> = props => {
     if (!confirm('頒布物を削除しますか？')) {
       return
     }
-    const id = props.router.query.id
+    const id = props.router.query.id as string
     const db = firebase.firestore()
     await db
       .collection('books')

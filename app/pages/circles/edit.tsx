@@ -50,7 +50,7 @@ const BooksNew: NextPage<Props> = props => {
           circle={circle}
           onSubmit={async circle => {
             const db = firebase.firestore()
-            const id = props.router.query.id
+            const id = props.router.query.id as string
             await db
               .collection('circles')
               .doc(id)

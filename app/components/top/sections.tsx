@@ -1,6 +1,4 @@
 /** @jsx jsx */
-
-import React from 'react'
 import { jsx, css } from '@emotion/core'
 
 import placeIcon from './round-place.svg'

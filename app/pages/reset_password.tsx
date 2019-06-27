@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { NextPage } from 'next'
 
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
@@ -46,7 +46,7 @@ const ResetPassword: NextPage<Props> = ({ router }) => {
                   intent: 'success'
                 })
               })
-              .catch(error => {
+              .catch((error: any) => {
                 switch (error.code) {
                   case 'auth/invalid-email':
                     setError('不正なメールアドレスです。')

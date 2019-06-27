@@ -123,7 +123,8 @@ const Post: NextPage<Props> = ({ book }) => {
 Post.getInitialProps = async ({ query }) => {
   initFirebase()
   const db = firebase.firestore()
-  const docRef = db.collection('books').doc(query.id)
+  const id = query.id as string
+  const docRef = db.collection('books').doc(id)
   const book = await docRef.get()
   console.log(book.data())
 

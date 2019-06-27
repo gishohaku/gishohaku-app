@@ -78,7 +78,7 @@ const BookCell: React.SFC<Props> = ({
     })
   }, [book.description])
   // 順番を並び替えたときにPopoverを閉じるために利用するRef
-  const docRef = useRef<HTMLDivElement>()
+  const docRef = useRef<HTMLDivElement>(null)
 
   // FIXME:
   const circleId =
@@ -192,6 +192,7 @@ const BookCell: React.SFC<Props> = ({
             <ResponsivePopover
               placement="bottom-end"
               content={
+                // @ts-ignore
                 <MenuList>
                   {!isFirst && movePrev && (
                     <MenuItem

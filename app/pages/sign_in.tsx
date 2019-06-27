@@ -56,7 +56,7 @@ const SignIn = ({ router }: any) => {
                   intent: 'success'
                 })
               })
-              .catch(error => {
+              .catch((error: any) => {
                 switch (error.code) {
                   case 'auth/wrong-password':
                   case 'auth/user-not-found':
@@ -71,7 +71,7 @@ const SignIn = ({ router }: any) => {
                 actions.setSubmitting(false)
               })
           }}
-          render={props => {
+          render={() => {
             return (
               <Form>
                 {error && <Alert intent="danger" title={error} />}

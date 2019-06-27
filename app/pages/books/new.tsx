@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { useEffect, useContext, useState } from 'react'
-import router, { withRouter } from 'next/router'
+import { withRouter } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -57,18 +57,4 @@ const BooksNew: NextPage<any> = props => {
   )
 }
 
-const withUser = (Component: any) => {
-  return (props: any) => {
-    const { user } = useContext(UserContext)
-    useEffect(() => {
-      if (!user) {
-        console.log('userNotFound')
-        router.push('/books')
-      }
-    })
-    return <Component {...props}>pppp</Component>
-  }
-}
-
 export default withRouter(BooksNew)
-// export default withUser(withRouter(BooksNew))
