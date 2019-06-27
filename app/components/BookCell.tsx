@@ -292,6 +292,7 @@ const BookCell: React.SFC<Props> = ({
           css={css`
             margin-top: 12px;
             color: #444;
+            word-break: break-all;
 
             p,
             ul,
