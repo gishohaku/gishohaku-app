@@ -7,23 +7,25 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
-import { withRouter } from 'next/router'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { INVITE_STORAGE_KEY } from './mypage/join'
+import { NextPage } from 'next'
+import { WithRouterProps } from 'next/dist/client/with-router'
 
 const loginData = {
   email: '',
   password: ''
 }
 
-export const redirectAfterLogin = (router: any) => {
+export const redirectAfterLogin = (router: PublicRouterInstance) => {
   const afterLoginPath = localStorage.getItem(INVITE_STORAGE_KEY)
   localStorage.removeItem(INVITE_STORAGE_KEY)
   router.push(afterLoginPath || '/')
 }
 
-const SignIn = ({ router }: any) => {
+const SignIn: NextPage<WithRouterProps> = ({ router }) => {
   const toast = useToast()
   const [error, setError] = useState('')
   return (

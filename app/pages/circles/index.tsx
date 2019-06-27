@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/core'
 import { NextPage } from 'next'
 
 import { Container, Button } from 'sancho'
-import { withRouter, PublicRouterInstance } from 'next/router'
+import { withRouter } from 'next/router'
 
 import { getCircles } from '../../utils/functions'
 import Circle from '../../utils/circle'
@@ -12,16 +12,13 @@ import { useContext, useState, useMemo } from 'react'
 import UserContext from '../../contexts/UserContext'
 import SectionHeader from '../../components/atoms/SectionHeader'
 import { initFirebase } from '../../utils/firebase'
+import { WithRouterProps } from 'next/dist/client/with-router'
 
 interface InitialProps {
   circles: Circle[]
 }
 
-interface Props {
-  router: PublicRouterInstance
-}
-
-const Index: NextPage<Props & InitialProps, InitialProps> = props => {
+const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { circles, router } = props
   const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)

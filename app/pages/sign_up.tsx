@@ -11,13 +11,15 @@ import { withRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, useToast, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { redirectAfterLogin } from './sign_in'
+import { NextPage } from 'next'
+import { WithRouterProps } from 'next/dist/client/with-router'
 
 const loginData = {
   email: '',
   password: ''
 }
 
-const SignUp = ({ router }: any) => {
+const SignUp: NextPage<WithRouterProps> = ({ router }) => {
   const toast = useToast()
   const [error, setError] = useState('')
 
