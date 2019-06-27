@@ -62,7 +62,7 @@ export default () => {
           border-radius: 8px;
         `}
       >
-        <div css={spacer} />
+        <span css={spacer} />
         <Link href="/" passHref>
           <a css={item}>
             <img src={home} width={30} css={icon} />
@@ -87,7 +87,7 @@ export default () => {
             <div css={label}>マイページ</div>
           </a>
         </Link>
-        <div css={spacer} />
+        <span css={spacer} />
       </div>
     </div>
   )

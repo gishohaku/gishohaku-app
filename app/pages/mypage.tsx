@@ -1,15 +1,22 @@
 /** @jsx jsx */
+import { useContext } from 'react'
 import Link from 'next/link'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 
-import { Button, Divider, Container, IconChevronRight, List, ListItem } from 'sancho'
-import { useContext } from 'react'
+import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
 import UserContext from '../contexts/UserContext'
 import MessageBox from '../components/MessageBox'
 import Loader from '../components/Loader'
+import { withRouter, PublicRouterInstance } from 'next/router'
 
-const Mypage: React.FC = () => {
+interface Props {
+  router: PublicRouterInstance
+}
+
+const Mypage: React.FC<Props> = props => {
   const { user, isUserLoading, userData } = useContext(UserContext)
 
   if (isUserLoading) {
@@ -77,8 +84,25 @@ const Mypage: React.FC = () => {
           )}
         </List>
       </div>
+
+      <List
+        css={css`
+          margin-top: 20px;
+        `}
+      >
+        <ListItem
+          primary="ログアウト"
+          contentBefore={<IconLogOut />}
+          contentAfter={<IconChevronRight />}
+          onClick={() => {
+            const auth: firebase.auth.Auth = firebase.auth()
+            auth.signOut()
+            props.router.push('/')
+          }}
+        />
+      </List>
     </Container>
   )
 }
 
-export default Mypage
+export default withRouter(Mypage)

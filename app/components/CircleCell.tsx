@@ -22,7 +22,7 @@ interface Props {
 const width = 252
 
 const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, removeCircleStar }) => {
-  const { user } = useContext(UserContext)
+  const { user, openLoginModal } = useContext(UserContext)
   const toast = useToast()
   if (!circle.id) {
     return null
@@ -82,10 +82,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
         isChecked={(circle.id && circleStars.includes(circle.id)) || false}
         onClick={() => {
           if (!user) {
-            return toast({
-              title: `この機能を利用するにはログインしてください。`,
-              intent: 'danger'
-            })
+            return openLoginModal()
           }
           if (!circle.id) {
             return

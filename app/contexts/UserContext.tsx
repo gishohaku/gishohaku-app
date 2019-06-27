@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import UserContext from './UserContext'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import LoginSheet from '../components/LoginSheet'
 
 interface User {
   uid: string
@@ -33,6 +34,7 @@ export const UserProvider = (props: any) => {
   const [userData, setUserData] = useState<User | null>(null)
   const [bookStars, setBookStars] = useState<string[]>([])
   const [circleStars, setCircleStars] = useState<string[]>([])
+  const [isOpenModal, setModal] = useState<boolean>(false)
 
   const fetchBookStars = async (user: firebase.User) => {
     const db: firebase.firestore.Firestore = firebase.firestore()
@@ -167,6 +169,8 @@ export const UserProvider = (props: any) => {
       .delete()
   }
 
+  const openLoginModal = () => setModal(true)
+
   return (
     <UserContext.Provider
       value={{
@@ -179,9 +183,11 @@ export const UserProvider = (props: any) => {
         bookStars,
         addCircleStar,
         removeCircleStar,
-        circleStars
+        circleStars,
+        openLoginModal
       }}
     >
+      <LoginSheet onRequestClose={() => setModal(false)} isOpen={isOpenModal} />
       {props.children}
     </UserContext.Provider>
   )
@@ -198,6 +204,7 @@ export default React.createContext<{
   circleStars: string[]
   addCircleStar: (bookId: string) => Promise<any>
   removeCircleStar: (bookId: string) => Promise<any>
+  openLoginModal: () => void
 }>({
   user: null,
   isUserLoading: true,
@@ -208,5 +215,6 @@ export default React.createContext<{
   removeBookStar: () => Promise.resolve(),
   circleStars: [],
   addCircleStar: () => Promise.resolve(),
-  removeCircleStar: () => Promise.resolve()
+  removeCircleStar: () => Promise.resolve(),
+  openLoginModal: () => {}
 })

@@ -55,7 +55,7 @@ const BookCell: React.SFC<Props> = ({
   isFirst = true
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
-  const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
+  const { user, addBookStar, removeBookStar, bookStars, openLoginModal } = useContext(UserContext)
   const toast = useToast()
 
   const metadata = [
@@ -232,10 +232,7 @@ const BookCell: React.SFC<Props> = ({
             isChecked={(book.id && bookStars.includes(book.id)) || false}
             onClick={() => {
               if (!user) {
-                return toast({
-                  title: `この機能を利用するにはログインしてください。`,
-                  intent: 'danger'
-                })
+                return openLoginModal()
               }
               if (!book.id) {
                 return

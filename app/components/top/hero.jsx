@@ -119,7 +119,8 @@ const Hero = () => {
         css={css`
           font-size: 20px;
           font-weight: bold;
-          margin-top: 4px;
+          margin-top: 8px;
+          line-height: 1.6;
           @media ${media.small} {
             font-size: 16px;
           }
