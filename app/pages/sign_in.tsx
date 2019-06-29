@@ -137,7 +137,7 @@ const SignIn: NextPage<WithRouterProps> = ({ router }) => {
         <Button
           component="button"
           onClick={async () => {
-            await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())
             redirectAfterLogin(router)
             toast({
               title: 'ログインしました',
