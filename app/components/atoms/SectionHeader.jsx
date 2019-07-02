@@ -1,14 +1,14 @@
 /** @jsx jsx */
-import React from "react"
-import { jsx, css } from "@emotion/core"
+import React from 'react'
+import { jsx, css } from '@emotion/core'
 
 const sectionHeader = css`
   font-size: 32px;
   position: relative;
   text-align: center;
   margin-top: 16px;
-  font-family: 游明朝, "Yu Mincho", YuMincho, "Hiragino Mincho ProN",
-    "Hiragino Mincho Pro", HGS明朝E;
+  font-family: 游明朝, 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Hiragino Mincho Pro',
+    HGS明朝E;
   font-weight: 400;
   color: #1d272d;
   letter-spacing: 3px;
@@ -18,7 +18,7 @@ const sectionHeader = css`
 
   &:after {
     content: attr(data-text);
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     color: #2b5773;
     opacity: 0.1;
@@ -34,6 +34,14 @@ const sectionHeader = css`
   }
 `
 
-export default ({ children, text, pageHeader }) => <h2 css={sectionHeader} style={{
-  marginTop: pageHeader ? 60: 16
-}} data-text={text}>{children}</h2>
+export default ({ children, text, pageHeader = false }) => (
+  <h2
+    css={sectionHeader}
+    style={{
+      marginTop: pageHeader ? 60 : 16
+    }}
+    data-text={text}
+  >
+    {children}
+  </h2>
+)

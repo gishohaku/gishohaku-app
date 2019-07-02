@@ -1,42 +1,21 @@
 /** @jsx jsx */
-import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 
-import UserContext from '../contexts/UserContext'
-
-import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import logo from '../images/logo.png'
 import { colors, media } from '../utils/style'
-import {
-  useToast,
-  IconButton,
-  IconMenu,
-  Sheet,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  IconUser,
-  IconLogIn,
-  IconLogOut
-} from 'sancho'
 
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
 
-const Layout = props => {
-  const toast = useToast()
-  const { user } = useContext(UserContext)
-  const [isOpen, setOpen] = useState(false)
-
+const Layout: React.FC<any> = props => {
   return (
     <>
       <Global
         styles={css`
           @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
           body {
-            /* TODO: 諸々指定 */
             font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, Roboto, '游ゴシック体',
               YuGothic, 'Yu Gothic Medium', sans-serif;
             -webkit-font-smoothing: antialiased;

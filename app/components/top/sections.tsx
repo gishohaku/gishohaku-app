@@ -1,6 +1,4 @@
 /** @jsx jsx */
-
-import React from 'react'
 import { jsx, css } from '@emotion/core'
 
 import placeIcon from './round-place.svg'
@@ -115,13 +113,13 @@ const Sections = () => (
             margin-top: 24px;
             dt,
             dd {
-                display: inline-block;
-                zoom: 1;
-                vertical-align: top;
-                width: 50%;
-                padding: 12px 0;
-                margin: 0;
-                border-top: 1px solid #eee;
+              display: inline-block;
+              zoom: 1;
+              vertical-align: top;
+              width: 50%;
+              padding: 12px 0;
+              margin: 0;
+              border-top: 1px solid #eee;
             }
 
             dt {
@@ -339,6 +337,12 @@ const Sections = () => (
             role="オフィシャルサポーター"
             href="https://www.techno-brain.co.jp/"
             image="/static/sponsors/tbc.gif"
+          />
+          <Sponsor
+            name="株式会社虎の穴"
+            role="オフィシャルサポーター"
+            href="https://yumenosora.co.jp/tora-lab"
+            image="/static/sponsors/tora.png"
           />
           <Sponsor
             name="株式会社インプレスR&D"

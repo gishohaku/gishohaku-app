@@ -34,13 +34,15 @@ interface StarCount {
 }
 
 const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) => {
-  const { user, circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
+  const { user, circleStars, addCircleStar, removeCircleStar, openLoginModal } = useContext(
+    UserContext
+  )
   const toast = useToast()
   const [starCount, setStarCount] = useState(0)
 
   useEffect(() => {
     if (editable) {
-      const db = firebase.firestore()
+      const db: firebase.firestore.Firestore = firebase.firestore()
       db.collection('starCounts')
         .doc(`circles-${circle.id}`)
         .get()
@@ -164,10 +166,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                   isChecked={(circle.id && circleStars.includes(circle.id)) || false}
                   onClick={() => {
                     if (!user) {
-                      return toast({
-                        title: `この機能を利用するにはログインしてください。`,
-                        intent: 'danger'
-                      })
+                      return openLoginModal()
                     }
                     if (!circle.id) {
                       return

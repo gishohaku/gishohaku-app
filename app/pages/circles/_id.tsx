@@ -1,31 +1,25 @@
 /** @jsx jsx */
-import Link from 'next/link'
-
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/functions'
 
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 
-import { withRouter } from 'next/router'
 import { refToPath } from '../../utils/firebase'
 import { initFirebase } from '../../utils/firebase'
-import Circle, { categories } from '../../utils/circle'
-import Book, { types, mediums } from '../../utils/book'
+import Circle from '../../utils/circle'
+import Book from '../../utils/book'
 import CircleDetail from '../../components/CircleDetail'
 import SEO from '../../components/SEO'
-import { NextFunctionComponent, NextContext } from 'next'
+import { NextPage } from 'next'
 
 interface Props {
   circle: Circle
   books: Book[]
 }
 
-const CirclePage: NextFunctionComponent<Props> = props => {
-  // const [books, setBooks] = useState<Book[]>([])
-  // const [circle, setCircle] = useState<Circle>()
+const CirclePage: NextPage<Props> = props => {
   const { circle, books } = props
-
   return (
     <>
       <SEO title={circle.name} />
@@ -34,13 +28,9 @@ const CirclePage: NextFunctionComponent<Props> = props => {
   )
 }
 
-CirclePage.getInitialProps = async (
-  context: NextContext<{
-    id: string
-  }>
-) => {
+CirclePage.getInitialProps = async context => {
   initFirebase()
-  const id: string = context.query.id
+  const id = context.query.id as string
   if (!id) {
     // TODO: リダイレクトの処理
   }
@@ -60,15 +50,14 @@ CirclePage.getInitialProps = async (
       ...(refToPath(data, 'circleRef') as Book)
     })
   })
-  console.log(circle)
 
   return {
     circle: {
       id: circle.id,
       ...circle.data()
-    },
+    } as Circle,
     books
   }
 }
 
-export default withRouter(CirclePage)
+export default CirclePage

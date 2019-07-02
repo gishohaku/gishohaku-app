@@ -55,7 +55,7 @@ const BookCell: React.SFC<Props> = ({
   isFirst = true
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
-  const { user, addBookStar, removeBookStar, bookStars } = useContext(UserContext)
+  const { user, addBookStar, removeBookStar, bookStars, openLoginModal } = useContext(UserContext)
   const toast = useToast()
 
   const metadata = [
@@ -78,7 +78,7 @@ const BookCell: React.SFC<Props> = ({
     })
   }, [book.description])
   // 順番を並び替えたときにPopoverを閉じるために利用するRef
-  const docRef = useRef<HTMLDivElement>()
+  const docRef = useRef<HTMLDivElement>(null)
 
   // FIXME:
   const circleId =
@@ -86,7 +86,7 @@ const BookCell: React.SFC<Props> = ({
 
   useEffect(() => {
     if (editable) {
-      const db = firebase.firestore()
+      const db: firebase.firestore.Firestore = firebase.firestore()
       db.collection('starCounts')
         .doc(`books-${book.id}`)
         .get()
@@ -192,6 +192,7 @@ const BookCell: React.SFC<Props> = ({
             <ResponsivePopover
               placement="bottom-end"
               content={
+                // @ts-ignore
                 <MenuList>
                   {!isFirst && movePrev && (
                     <MenuItem
@@ -232,10 +233,7 @@ const BookCell: React.SFC<Props> = ({
             isChecked={(book.id && bookStars.includes(book.id)) || false}
             onClick={() => {
               if (!user) {
-                return toast({
-                  title: `この機能を利用するにはログインしてください。`,
-                  intent: 'danger'
-                })
+                return openLoginModal()
               }
               if (!book.id) {
                 return
@@ -294,6 +292,7 @@ const BookCell: React.SFC<Props> = ({
           css={css`
             margin-top: 12px;
             color: #444;
+            word-break: break-all;
 
             p,
             ul,

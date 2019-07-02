@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import { NextPage } from 'next'
 
 import { Container, Button } from 'sancho'
 import { withRouter } from 'next/router'
@@ -11,15 +12,20 @@ import { useContext, useState, useMemo } from 'react'
 import UserContext from '../../contexts/UserContext'
 import SectionHeader from '../../components/atoms/SectionHeader'
 import { initFirebase } from '../../utils/firebase'
+import { WithRouterProps } from 'next/dist/client/with-router'
 
-const Index = (props: any) => {
+interface InitialProps {
+  circles: Circle[]
+}
+
+const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { circles, router } = props
   const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)
 
   const filteredCircles = useMemo(() => {
     if (isCheckOnly) {
-      return props.circles.filter((circle: Circle) => circleStars.includes(circle.id))
+      return props.circles.filter(circle => circle.id && circleStars.includes(circle.id))
     }
     return circles
   }, [circles, isCheckOnly])
@@ -76,7 +82,7 @@ const Index = (props: any) => {
   )
 }
 
-Index.getInitialProps = async ({ res }: any) => {
+Index.getInitialProps = async ({ res }) => {
   if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }

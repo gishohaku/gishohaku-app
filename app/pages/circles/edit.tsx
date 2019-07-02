@@ -1,21 +1,27 @@
+import { NextPage } from 'next'
+
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
-import router, { withRouter } from 'next/router'
+import router, { withRouter, PublicRouterInstance } from 'next/router'
 import { useState, useEffect, useContext } from 'react'
 import UserContext from '../../contexts/UserContext'
 import CircleForm from '../../components/CircleForm'
 import Circle from '../../utils/circle'
 
-const BooksNew = (props: any) => {
+interface Props {
+  router: PublicRouterInstance
+}
+
+const BooksNew: NextPage<Props> = props => {
   const [circle, setCircle] = useState<Circle>()
   const { user, isUserLoading, userData } = useContext(UserContext)
 
   useEffect(() => {
-    const id = props.router.query.id
-    const db = firebase.firestore()
+    const id = props.router.query.id as string
+    const db: firebase.firestore.Firestore = firebase.firestore()
     db.collection('circles')
       .doc(id)
       .get()
@@ -44,7 +50,7 @@ const BooksNew = (props: any) => {
           circle={circle}
           onSubmit={async circle => {
             const db = firebase.firestore()
-            const id = props.router.query.id
+            const id = props.router.query.id as string
             await db
               .collection('circles')
               .doc(id)

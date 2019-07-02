@@ -1,3 +1,7 @@
+import { useState, useEffect, useContext, useCallback } from 'react'
+import { NextPage } from 'next'
+import router, { withRouter, PublicRouterInstance } from 'next/router'
+
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useToast, Button, Divider } from 'sancho'
@@ -5,19 +9,21 @@ import { useToast, Button, Divider } from 'sancho'
 import BookForm from '../../components/BookForm'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
-import router, { withRouter } from 'next/router'
-import { useState, useEffect, useContext, useCallback } from 'react'
 import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext'
 
-const BooksNew = (props: any) => {
+interface Props {
+  router: PublicRouterInstance
+}
+
+const BooksNew: NextPage<Props> = props => {
   const toast = useToast()
   const [book, setBook] = useState()
   const { user, isUserLoading, userData } = useContext(UserContext)
 
   useEffect(() => {
-    const id = props.router.query.id
-    const db = firebase.firestore()
+    const id = props.router.query.id as string
+    const db: firebase.firestore.Firestore = firebase.firestore()
     db.collection('books')
       .doc(id)
       .get()
@@ -34,7 +40,7 @@ const BooksNew = (props: any) => {
     if (!confirm('頒布物を削除しますか？')) {
       return
     }
-    const id = props.router.query.id
+    const id = props.router.query.id as string
     const db = firebase.firestore()
     await db
       .collection('books')
@@ -62,16 +68,15 @@ const BooksNew = (props: any) => {
           user={user}
           book={book}
           onSubmit={book => {
-            const db = firebase.firestore()
-            const id = props.router.query.id
+            const db: firebase.firestore.Firestore = firebase.firestore()
+            const id = props.router.query.id as string
             db.collection('books')
               .doc(id)
               .update({
                 ...book,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
               })
-              .then(docRef => {
-                const id = props.router.query.id
+              .then(_ => {
                 router.push('/mypage/circle')
               })
           }}

@@ -1,43 +1,22 @@
 /** @jsx jsx */
+import { useContext } from 'react'
 import Link from 'next/link'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 
-import { Button, Divider, Container, IconChevronRight, List, ListItem } from 'sancho'
-import { withRouter } from 'next/router'
-import { useContext } from 'react'
+import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
 import UserContext from '../contexts/UserContext'
 import MessageBox from '../components/MessageBox'
 import Loader from '../components/Loader'
+import { withRouter, PublicRouterInstance } from 'next/router'
 
-// const Item = ({ primary, secondary, ...other }) => {
-//   return (
-//     <a
-//       css={css`
-//         padding: 12px;
-//         display: block;
-//         text-decoration: none;
-//         color: inherit;
-//         &:hover {
-//           background-color: #eee;
-//         }
-//       `}
-//       {...other}
-//     >
-//       {primary}
-//       <div
-//         css={css`
-//           font-size: 12px;
-//           opacity: 0.6;
-//         `}
-//       >
-//         {secondary}
-//       </div>
-//     </a>
-//   )
-// }
+interface Props {
+  router: PublicRouterInstance
+}
 
-const Mypage: React.FC = () => {
+const Mypage: React.FC<Props> = props => {
   const { user, isUserLoading, userData } = useContext(UserContext)
 
   if (isUserLoading) {
@@ -105,6 +84,23 @@ const Mypage: React.FC = () => {
           )}
         </List>
       </div>
+
+      <List
+        css={css`
+          margin-top: 20px;
+        `}
+      >
+        <ListItem
+          primary="ログアウト"
+          contentBefore={<IconLogOut />}
+          contentAfter={<IconChevronRight />}
+          onClick={() => {
+            const auth: firebase.auth.Auth = firebase.auth()
+            auth.signOut()
+            props.router.push('/')
+          }}
+        />
+      </List>
     </Container>
   )
 }
