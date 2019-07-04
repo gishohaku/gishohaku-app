@@ -63,7 +63,7 @@ const Mypage: React.FC<Props> = props => {
               contentAfter={<IconChevronRight />}
             />
           </Link>
-          <Link href="/books?starred" passHref>
+          <Link href="/mypage/book_stars" passHref>
             <ListItem
               primary="チェックした頒布物"
               secondary="チェックをつけた頒布物が確認できます"
