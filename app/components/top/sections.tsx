@@ -464,6 +464,59 @@ const Sections = () => (
       </Container>
     </section>
     <section css={section}>
+      <SectionHeader text="BANNER">リンク用バナー</SectionHeader>
+      <Container
+        css={css`
+          max-width: 740px;
+          margin-top: 36px;
+        `}
+      >
+       <p>
+         <img
+           src="/static/banner_1.png"
+           css={css`
+             border-radius: 60px;
+             border: 1px solid #eee;
+             width: 200px;
+             height: 40px;
+             margin: 8px;
+             object-fit: contain;
+             @media ${media.small} {
+               width: 200px;
+               height: 40px;
+             }
+           `}
+           height={40}
+           width={200}
+         />
+         <img
+           src="/static/banner_2.png"
+           css={css`
+             border-radius: 60px;
+             border: 1px solid #eee;
+             width: 200px;
+             height: 40px;
+             margin: 8px;
+             object-fit: contain;
+             @media ${media.small} {
+               width: 200px;
+               height: 40px;
+             }
+           `}
+           height={40}
+           width={200}
+         />
+       </p>
+      </Container>
+    </section>
+    <section
+      css={css(
+        section,
+        `
+        background-color: #f7f8fa;
+      `
+      )}
+    >
       <SectionHeader text="RELEASE">リリース</SectionHeader>
       <Container
         css={css`
