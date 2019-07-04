@@ -111,9 +111,12 @@ const BookCell: React.SFC<Props> = ({
       ref={docRef}
     >
       {isShowCircle && (
-        <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
-          <a>{book.circleName}</a>
-        </Link>
+        <a target="_blank" href={`/circles/${circleId}`}>
+          {book.circleName}
+        </a>
+        // <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
+        //   <a>{book.circleName}</a>
+        // </Link>
       )}
       <div
         css={css`

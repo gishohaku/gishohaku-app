@@ -1,38 +1,28 @@
 /** @jsx jsx */
-import { useState, useMemo, useContext } from 'react'
+import { useState } from 'react'
 import { NextPage } from 'next'
-import { withRouter, PublicRouterInstance } from 'next/router'
 
 import { jsx, css } from '@emotion/core'
-import { getBooks } from '../../utils/functions'
+import { getBooks, perBookCount } from '../../utils/functions'
 
-import { Button } from 'sancho'
 import Book from '../../utils/book'
 import BookCell from '../../components/BookCell'
-import UserContext from '../../contexts/UserContext'
 import { initFirebase } from '../../utils/firebase'
 import { media } from '../../utils/style'
 import SectionHeader from '../../components/atoms/SectionHeader'
+import InfiniteScroll from 'react-infinite-scroller'
+
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 interface InitialProps {
   books: Book[]
 }
 
-interface Props {
-  router: PublicRouterInstance
-}
-
-const Index: NextPage<Props & InitialProps, InitialProps> = props => {
-  const { books, router } = props
-  const { bookStars } = useContext(UserContext)
-  const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)
-
-  const filteredBooks = useMemo(() => {
-    if (isCheckOnly) {
-      return props.books.filter((book: Book) => book.id && bookStars.includes(book.id))
-    }
-    return books
-  }, [books, isCheckOnly, router.query])
+const Index: NextPage<InitialProps> = props => {
+  const { books: initialBooks } = props
+  const [hasMore, setHasMore] = useState(true)
+  const [books, setBooks] = useState<Book[]>(initialBooks)
 
   return (
     <div
@@ -49,39 +39,32 @@ const Index: NextPage<Props & InitialProps, InitialProps> = props => {
       <SectionHeader text="BOOKS" pageHeader>
         頒布物一覧
       </SectionHeader>
-      <div
-        css={css`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 24px;
-        `}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={async () => {
+          setHasMore(false)
+          const lastBook = books[books.length - 1]
+          const updatedAt = lastBook.updatedAt
+          const nextBooks = await getBooks({
+            startAfter: new firebase.firestore.Timestamp(updatedAt!.seconds, updatedAt!.nanoseconds)
+          })
+          setBooks([...books, ...nextBooks])
+
+          if (nextBooks.length == perBookCount) {
+            setHasMore(true)
+          }
+        }}
+        hasMore={hasMore}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
       >
-        <Button
-          css={css`
-            margin-bottom: 12px;
-          `}
-          onClick={() => {
-            setCheckOnly(!isCheckOnly)
-          }}
-        >
-          チェックリスト
-        </Button>
-      </div>
-      {isCheckOnly && (
-        <h1
-          css={css`
-            font-size: 24px;
-            font-weight: bold;
-            margin: 12px 0 24px;
-          `}
-        >
-          チェック中の頒布物
-        </h1>
-      )}
-      {filteredBooks.map((book: Book) => (
-        <BookCell book={book} key={book.id} isShowCircle={true} />
-      ))}
+        {books.map((book: Book) => (
+          <BookCell book={book} key={book.id} isShowCircle={true} />
+        ))}
+      </InfiniteScroll>
     </div>
   )
 }
@@ -92,9 +75,9 @@ Index.getInitialProps = async ({ res }: any) => {
   }
 
   initFirebase()
-  const books = await getBooks()
+  const books = await getBooks({})
   return {
     books
   }
 }
-export default withRouter(Index)
+export default Index

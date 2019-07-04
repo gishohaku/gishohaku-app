@@ -5,12 +5,18 @@ import { refToPath } from './firebase'
 import Book from './book'
 import Circle from './circle'
 
-export const getBooks = async () => {
+export const perBookCount = 5
+
+export const getBooks = async (options: { startAfter?: any }) => {
   const db: firebase.firestore.Firestore = firebase.firestore()
-  const snapshots = await db
+  let query = db
     .collection('books')
     .orderBy('updatedAt', 'desc')
-    .get()
+    .limit(perBookCount)
+  if (options.startAfter) {
+    query = query.startAfter(options.startAfter)
+  }
+  const snapshots = await query.get()
   const results: Book[] = []
   snapshots.forEach(snapshot => {
     const data = refToPath(snapshot.data(), 'circleRef')
