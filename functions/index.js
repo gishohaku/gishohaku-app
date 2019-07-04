@@ -53,6 +53,7 @@ exports.apiCircles = onRequest(async (req, res) => {
   const snapshots = await admin
     .firestore()
     .collection('circles')
+    .orderBy('boothNumber', 'asc')
     .get()
   const circles = []
   snapshots.forEach(circle => {

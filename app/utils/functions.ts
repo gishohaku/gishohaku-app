@@ -27,21 +27,21 @@ export const getBooks = async () => {
 }
 
 export const getCircles = async () => {
-  const db: firebase.firestore.Firestore = firebase.firestore()
-  const snapshots = await db
-    .collection('circles')
-    .orderBy('boothNumber', 'asc')
-    .get()
-  const results: Circle[] = []
-  snapshots.forEach(snapshot => {
-    results.push({
-      id: snapshot.id,
-      ...(snapshot.data() as Circle)
-    })
-  })
-  return results
+  // const db: firebase.firestore.Firestore = firebase.firestore()
+  // const snapshots = await db
+  //   .collection('circles')
+  //   .orderBy('boothNumber', 'asc')
+  //   .get()
+  // const results: Circle[] = []
+  // snapshots.forEach(snapshot => {
+  //   results.push({
+  //     id: snapshot.id,
+  //     ...(snapshot.data() as Circle)
+  //   })
+  // })
+  // return results
 
   // TODO: ある程度データが入力されたらキャッシュを利用したFunctionsに差し替える
   const result = await axios.get('https://us-central1-gishohaku.cloudfunctions.net/apiCircles')
-  return result.data
+  return result.data as Circle[]
 }
