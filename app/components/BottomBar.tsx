@@ -27,6 +27,11 @@ const item = css`
   &:active {
     background-color: #dbdfe6;
   }
+  img {
+    user-select: none;
+    /* iPhoneでタップしたときのハイライトを削除 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
 `
 
 const label = css`

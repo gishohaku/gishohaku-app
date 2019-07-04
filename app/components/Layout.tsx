@@ -15,6 +15,10 @@ const Layout: React.FC<any> = props => {
       <Global
         styles={css`
           @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
+          html {
+            /* iPhoneのダブルタップによるズームを抑制 */
+            touch-action: manipulation;
+          }
           body {
             font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, Roboto, '游ゴシック体',
               YuGothic, 'Yu Gothic Medium', sans-serif;

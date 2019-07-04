@@ -271,6 +271,8 @@ const BookCell: React.SFC<Props> = ({
               white-space: nowrap;
               overflow-x: auto;
               padding: 0 20px;
+              -webkit-overflow-scrolling: touch;
+              overflow-scrolling: touch;
             `}
           >
             {images.map((image, index) => {
