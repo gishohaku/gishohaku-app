@@ -4,6 +4,8 @@ dist/
 .firebase
 .firebaserc
 .envrc
+functions/package.json
+functions/yarn.lock
 
 app/out
 .DS_Store
