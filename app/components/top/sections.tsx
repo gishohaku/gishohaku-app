@@ -10,6 +10,7 @@ import TextBlock from '../atoms/TextBlock'
 
 import Sponsor from './sponsor'
 import Printing from './printing'
+import Banner from './banner
 
 import { Container } from 'sancho'
 
@@ -472,39 +473,13 @@ const Sections = () => (
         `}
       >
        <p>
-         <img
-           src="/static/banner_1.png"
-           css={css`
-             border-radius: 60px;
-             border: 1px solid #eee;
-             width: 200px;
-             height: 40px;
-             margin: 8px;
-             object-fit: contain;
-             @media ${media.small} {
-               width: 200px;
-               height: 40px;
-             }
-           `}
-           height={40}
-           width={200}
+         <Banner
+           name="バナー1"
+           image="/static/banner_1.png"
          />
-         <img
-           src="/static/banner_2.png"
-           css={css`
-             border-radius: 60px;
-             border: 1px solid #eee;
-             width: 200px;
-             height: 40px;
-             margin: 8px;
-             object-fit: contain;
-             @media ${media.small} {
-               width: 200px;
-               height: 40px;
-             }
-           `}
-           height={40}
-           width={200}
+         <Banner
+           name="バナー2"
+           image="/static/banner_2.png"
          />
        </p>
       </Container>
