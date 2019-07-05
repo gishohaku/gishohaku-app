@@ -13,7 +13,7 @@ const TRACKING_ID = 'UA-129667923-2'
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
-    dsn: 'https://412535deaeb941069ab40f696fdd9484@sentry.io/1492076'
+    dsn: process.env.SENTRY_DSN
   })
 }
 
