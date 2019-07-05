@@ -374,10 +374,10 @@ const Sections = () => (
             href="https://thinkit.co.jp/"
           />
           <Sponsor
-            name="日経ソフトウェア"
+            name="日経ソフトウエア"
             role="メディアサポーター"
             image="/static/sponsors/nikkei.png"
-            href="https://trendy.nikkeibp.co.jp/nsw/"
+            href="https://nkbp.jp/nsoft"
           />
         </div>
       </Container>
