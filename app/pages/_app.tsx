@@ -9,6 +9,8 @@ import SEO from '../components/SEO'
 import ReactGA from 'react-ga'
 import * as Sentry from '@sentry/browser'
 
+import '../lightbox.css'
+
 const TRACKING_ID = 'UA-129667923-2'
 
 if (process.env.NODE_ENV === 'production') {

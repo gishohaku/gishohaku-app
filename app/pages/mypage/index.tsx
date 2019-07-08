@@ -1,16 +1,16 @@
 /** @jsx jsx */
 import { useContext } from 'react'
 import Link from 'next/link'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 
 import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
-import UserContext from '../contexts/UserContext'
-import MessageBox from '../components/MessageBox'
-import Loader from '../components/Loader'
-import { withRouter, PublicRouterInstance } from 'next/router'
+import UserContext from '../../contexts/UserContext'
+import MessageBox from '../../components/MessageBox'
+import Loader from '../../components/Loader'
 
 interface Props {
   router: PublicRouterInstance

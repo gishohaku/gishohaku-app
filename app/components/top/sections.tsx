@@ -480,10 +480,8 @@ const Sections = () => (
           margin-top: 36px;
         `}
       >
-        <p>
-          <Banner name="バナー1" image="/static/banner_1.png" />
-          <Banner name="バナー2" image="/static/banner_2.png" />
-        </p>
+        <Banner name="バナー1" image="/static/banner_1.png" />
+        <Banner name="バナー2" image="/static/banner_2.png" />
       </Container>
     </section>
     <section
