@@ -7,10 +7,9 @@ import { colors } from '../../utils/style'
 interface Props {
   image?: string
   name: string
-  url: string
 }
 
-const banner: React.FC<Props> = ({ image, name, url }) => {
+const banner: React.FC<Props> = ({ image, name }) => {
   return (
     <Embed
       width={200}
