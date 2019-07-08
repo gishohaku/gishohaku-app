@@ -14,8 +14,6 @@ import Banner from './banner'
 
 import { Container } from 'sancho'
 
-import sponsorImage from '../../images/sponsor.png'
-
 const section = css`
   padding: 32px 0 48px;
   background-color: white;
