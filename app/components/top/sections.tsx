@@ -47,7 +47,7 @@ const members = [
   {
     name: 'おやかた',
     twitter: 'oyakata2438',
-    imageUrl: sponsorImage
+    imageUrl: 'https://pbs.twimg.com/profile_images/893588120666480640/i-kZmS-f_400x400.jpg'
   },
   {
     name: 'kurakake',
@@ -83,6 +83,16 @@ const members = [
     name: 'なのなの',
     twitter: 'nano2_aloerina',
     imageUrl: 'https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg'
+  },
+  {
+    name: 'akazunoma',
+    twitter: 'akazunoma',
+    imageUrl: 'https://pbs.twimg.com/profile_images/1076979292460859395/RKmEjFKW_400x400.jpg'
+  },
+  {
+    name: 'ざき',
+    twitter: 'zucky_zakizaki',
+    imageUrl: 'https://pbs.twimg.com/profile_images/1077006051533189120/nm5Zz0Qy_400x400.jpg'
   }
 ]
 
