@@ -10,7 +10,7 @@ import TextBlock from '../atoms/TextBlock'
 
 import Sponsor from './sponsor'
 import Printing from './printing'
-import Banner from './banner
+import Banner from './banner'
 
 import { Container } from 'sancho'
 
@@ -482,16 +482,10 @@ const Sections = () => (
           margin-top: 36px;
         `}
       >
-       <p>
-         <Banner
-           name="バナー1"
-           image="/static/banner_1.png"
-         />
-         <Banner
-           name="バナー2"
-           image="/static/banner_2.png"
-         />
-       </p>
+        <p>
+          <Banner name="バナー1" image="/static/banner_1.png" />
+          <Banner name="バナー2" image="/static/banner_2.png" />
+        </p>
       </Container>
     </section>
     <section
