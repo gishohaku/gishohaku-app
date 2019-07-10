@@ -125,6 +125,68 @@ const BookCell: React.SFC<Props> = ({
         //   <a>{book.circleName}</a>
         // </Link>
       )}
+      {editable && (
+        <div
+          css={css`
+            margin-bottom: 12px;
+            margin-left: auto;
+            display: flex;
+            > * {
+              margin-left: 6px;
+            }
+            > *:first-child {
+              margin-left: auto;
+            }
+          `}
+        >
+          <Button intent="danger" variant="outline">
+            見本誌の提出
+          </Button>
+          <Button variant="outline">情報の編集</Button>
+          <ResponsivePopover
+            placement="bottom-end"
+            content={
+              // @ts-ignore
+              <MenuList>
+                {!isFirst && movePrev && (
+                  <MenuItem
+                    contentBefore={<IconArrowUp />}
+                    onPress={e => {
+                      docRef.current && docRef.current.click()
+                      movePrev(e as any)
+                    }}
+                  >
+                    上に移動
+                  </MenuItem>
+                )}
+                {!isLast && moveNext && (
+                  <MenuItem
+                    contentBefore={<IconArrowDown />}
+                    onPress={e => {
+                      docRef.current && docRef.current.click()
+                      moveNext(e as any)
+                    }}
+                  >
+                    下に移動
+                  </MenuItem>
+                )}
+                {(!isFirst || !isLast) && <MenuDivider />}
+                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+                  <a
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
+                  </a>
+                </Link>
+              </MenuList>
+            }
+          >
+            <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+          </ResponsivePopover>
+        </div>
+      )}
       <div
         css={css`
           display: flex;
@@ -171,76 +233,28 @@ const BookCell: React.SFC<Props> = ({
         {editable ? (
           <div
             css={css`
-              margin-left: auto;
+              border: 1px solid #eee;
+              background-color: #eee;
+              text-decoration: none;
+              padding: 6px 12px;
+              border-radius: 4px;
+              /* margin-right: 6px; */
+              min-width: 72px;
+              text-align: center;
+              font-weight: bold;
               display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: auto !important;
+              > img {
+                margin-right: 4px;
+                opacity: 0.4;
+                width: 22px;
+              }
             `}
           >
-            <div
-              css={css`
-                border: 1px solid #eee;
-                background-color: #eee;
-                text-decoration: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                margin-right: 6px;
-                min-width: 72px;
-                text-align: center;
-                font-weight: bold;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                > img {
-                  margin-right: 4px;
-                  opacity: 0.4;
-                  width: 22px;
-                }
-              `}
-            >
-              <img src={check} />
-              <span>{starCount}</span>
-            </div>
-            <ResponsivePopover
-              placement="bottom-end"
-              content={
-                // @ts-ignore
-                <MenuList>
-                  {!isFirst && movePrev && (
-                    <MenuItem
-                      contentBefore={<IconArrowUp />}
-                      onPress={e => {
-                        docRef.current && docRef.current.click()
-                        movePrev(e as any)
-                      }}
-                    >
-                      上に移動
-                    </MenuItem>
-                  )}
-                  {!isLast && moveNext && (
-                    <MenuItem
-                      contentBefore={<IconArrowDown />}
-                      onPress={e => {
-                        docRef.current && docRef.current.click()
-                        moveNext(e as any)
-                      }}
-                    >
-                      下に移動
-                    </MenuItem>
-                  )}
-                  {(!isFirst || !isLast) && <MenuDivider />}
-                  <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-                    <a
-                      css={css`
-                        text-decoration: none;
-                      `}
-                    >
-                      <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
-                    </a>
-                  </Link>
-                </MenuList>
-              }
-            >
-              <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
-            </ResponsivePopover>
+            <img src={check} />
+            <span>{starCount}</span>
           </div>
         ) : (
           <CheckButton
