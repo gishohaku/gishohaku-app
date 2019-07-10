@@ -203,7 +203,18 @@ const BookCell: React.SFC<Props> = ({
               placement="bottom-end"
               content={
                 // @ts-ignore
-                <MenuList>
+                <MenuList
+                  css={css`
+                    & > *:last-child {
+                      display: none;
+                    }
+                    @media ${media.small} {
+                      & > *:last-child {
+                        display: flex;
+                      }
+                    }
+                  `}
+                >
                   {!isFirst && movePrev && (
                     <MenuItem
                       contentBefore={<IconArrowUp />}
@@ -236,6 +247,8 @@ const BookCell: React.SFC<Props> = ({
                       <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
                     </a>
                   </Link>
+                  {/* FIXME: iPhoneでイベントが突き抜けてしまう問題のworkaround */}
+                  <MenuItem>　</MenuItem>
                 </MenuList>
               }
             >
