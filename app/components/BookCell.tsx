@@ -24,7 +24,9 @@ import {
   IconMoreVertical,
   MenuDivider,
   IconArrowUp,
-  IconArrowDown
+  IconArrowDown,
+  Divider,
+  Button
 } from 'sancho'
 import { media } from '../utils/style'
 import Contents from './Contents'
@@ -45,6 +47,10 @@ interface Props {
 interface StarCount {
   count: number
 }
+
+const flexChildLink = css`
+  flex: 1;
+`
 
 const BookCell: React.SFC<Props> = ({
   book,
@@ -222,9 +228,13 @@ const BookCell: React.SFC<Props> = ({
                   )}
                   {(!isFirst || !isLast) && <MenuDivider />}
                   <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-                    <MenuItem contentBefore={<IconEdit />} component="a">
-                      編集する
-                    </MenuItem>
+                    <a
+                      css={css`
+                        text-decoration: none;
+                      `}
+                    >
+                      <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
+                    </a>
                   </Link>
                 </MenuList>
               }
@@ -300,6 +310,36 @@ const BookCell: React.SFC<Props> = ({
           }}
         />
       )}
+      {(book.sampleUrl || book.purchaseUrl) && <Divider />}
+      <div
+        css={css`
+          display: flex;
+        `}
+      >
+        {book.sampleUrl && (
+          <Button
+            component="a"
+            href={book.sampleUrl}
+            target="_blank"
+            rel="noopner"
+            variant={'ghost'}
+            css={flexChildLink}
+          >
+            サンプルページ
+          </Button>
+        )}
+        {book.purchaseUrl && (
+          <Button
+            component="a"
+            href={book.purchaseUrl}
+            target="_blank"
+            rel="noopner"
+            css={flexChildLink}
+          >
+            購入ページ
+          </Button>
+        )}
+      </div>
 
       {isOpenLightbox && (
         <Lightbox
