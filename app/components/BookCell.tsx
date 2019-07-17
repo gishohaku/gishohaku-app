@@ -19,10 +19,8 @@ import {
   ResponsivePopover,
   MenuList,
   MenuItem,
-  IconEdit,
   IconButton,
   IconMoreVertical,
-  MenuDivider,
   IconArrowUp,
   IconArrowDown,
   Divider,
@@ -238,52 +236,66 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
-          <Button intent="danger" variant="outline">
-            見本誌の提出
-          </Button>
-          <Button variant="outline">情報の編集</Button>
-          <ResponsivePopover
-            placement="bottom-end"
-            content={
-              // @ts-ignore
-              <MenuList>
-                {!isFirst && movePrev && (
-                  <MenuItem
-                    contentBefore={<IconArrowUp />}
-                    onPress={e => {
-                      docRef.current && docRef.current.click()
-                      movePrev(e as any)
-                    }}
-                  >
-                    上に移動
-                  </MenuItem>
-                )}
-                {!isLast && moveNext && (
-                  <MenuItem
-                    contentBefore={<IconArrowDown />}
-                    onPress={e => {
-                      docRef.current && docRef.current.click()
-                      moveNext(e as any)
-                    }}
-                  >
-                    下に移動
-                  </MenuItem>
-                )}
-                {(!isFirst || !isLast) && <MenuDivider />}
-                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-                  <a
-                    css={css`
-                      text-decoration: none;
-                    `}
-                  >
-                    <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
-                  </a>
-                </Link>
-              </MenuList>
-            }
-          >
-            <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
-          </ResponsivePopover>
+          <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+            <a
+              css={css`
+                margin-left: auto;
+                border: 1px solid #2a5773;
+                text-decoration: none;
+                padding: 8px 20px;
+                border-radius: 4px;
+                font-size: 15px;
+                font-weight: 600;
+                color: #2a5773;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                display: block;
+                cursor: pointer;
+                text-align: center;
+
+                &:hover {
+                  background-color: #2a5773;
+                  color: white;
+                }
+              `}
+            >
+              編集
+            </a>
+          </Link>
+          {(movePrev || moveNext) && (
+            <ResponsivePopover
+              placement="bottom-end"
+              content={
+                // @ts-ignore
+                <MenuList>
+                  {!isFirst && movePrev && (
+                    <MenuItem
+                      contentBefore={<IconArrowUp />}
+                      onPress={e => {
+                        docRef.current && docRef.current.click()
+                        movePrev(e as any)
+                      }}
+                    >
+                      上に移動
+                    </MenuItem>
+                  )}
+                  {!isLast && moveNext && (
+                    <MenuItem
+                      contentBefore={<IconArrowDown />}
+                      onPress={e => {
+                        docRef.current && docRef.current.click()
+                        moveNext(e as any)
+                      }}
+                    >
+                      下に移動
+                    </MenuItem>
+                  )}
+                </MenuList>
+              }
+            >
+              <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+            </ResponsivePopover>
+          )}
         </div>
       )}
       {images.length > 0 && (
