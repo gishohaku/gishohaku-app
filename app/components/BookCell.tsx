@@ -125,68 +125,6 @@ const BookCell: React.SFC<Props> = ({
         //   <a>{book.circleName}</a>
         // </Link>
       )}
-      {editable && (
-        <div
-          css={css`
-            margin-bottom: 12px;
-            margin-left: auto;
-            display: flex;
-            > * {
-              margin-left: 6px;
-            }
-            > *:first-child {
-              margin-left: auto;
-            }
-          `}
-        >
-          <Button intent="danger" variant="outline">
-            見本誌の提出
-          </Button>
-          <Button variant="outline">情報の編集</Button>
-          <ResponsivePopover
-            placement="bottom-end"
-            content={
-              // @ts-ignore
-              <MenuList>
-                {!isFirst && movePrev && (
-                  <MenuItem
-                    contentBefore={<IconArrowUp />}
-                    onPress={e => {
-                      docRef.current && docRef.current.click()
-                      movePrev(e as any)
-                    }}
-                  >
-                    上に移動
-                  </MenuItem>
-                )}
-                {!isLast && moveNext && (
-                  <MenuItem
-                    contentBefore={<IconArrowDown />}
-                    onPress={e => {
-                      docRef.current && docRef.current.click()
-                      moveNext(e as any)
-                    }}
-                  >
-                    下に移動
-                  </MenuItem>
-                )}
-                {(!isFirst || !isLast) && <MenuDivider />}
-                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-                  <a
-                    css={css`
-                      text-decoration: none;
-                    `}
-                  >
-                    <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
-                  </a>
-                </Link>
-              </MenuList>
-            }
-          >
-            <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
-          </ResponsivePopover>
-        </div>
-      )}
       <div
         css={css`
           display: flex;
@@ -285,6 +223,69 @@ const BookCell: React.SFC<Props> = ({
           />
         )}
       </div>
+      {editable && (
+        <div
+          css={css`
+            margin-top: 12px;
+            margin-bottom: 12px;
+            margin-left: auto;
+            display: flex;
+            > * {
+              margin-left: 6px;
+            }
+            > *:first-child {
+              margin-left: auto;
+            }
+          `}
+        >
+          <Button intent="danger" variant="outline">
+            見本誌の提出
+          </Button>
+          <Button variant="outline">情報の編集</Button>
+          <ResponsivePopover
+            placement="bottom-end"
+            content={
+              // @ts-ignore
+              <MenuList>
+                {!isFirst && movePrev && (
+                  <MenuItem
+                    contentBefore={<IconArrowUp />}
+                    onPress={e => {
+                      docRef.current && docRef.current.click()
+                      movePrev(e as any)
+                    }}
+                  >
+                    上に移動
+                  </MenuItem>
+                )}
+                {!isLast && moveNext && (
+                  <MenuItem
+                    contentBefore={<IconArrowDown />}
+                    onPress={e => {
+                      docRef.current && docRef.current.click()
+                      moveNext(e as any)
+                    }}
+                  >
+                    下に移動
+                  </MenuItem>
+                )}
+                {(!isFirst || !isLast) && <MenuDivider />}
+                <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+                  <a
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    <MenuItem contentBefore={<IconEdit />}>編集する</MenuItem>
+                  </a>
+                </Link>
+              </MenuList>
+            }
+          >
+            <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+          </ResponsivePopover>
+        </div>
+      )}
       {images.length > 0 && (
         <div
           css={css`
