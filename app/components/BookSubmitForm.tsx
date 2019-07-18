@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { IconUpload } from 'sancho'
+import { IconUpload, useToast } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'
 import { useState, useEffect } from 'react'
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const BookSubmitForm = ({ book }: Props) => {
+  const toast = useToast()
   const [isLoading, setLoading] = useState(true)
   const [isUploading, setUploading] = useState(false)
   const [submission, setSubmission] = useState()
@@ -35,6 +36,12 @@ const BookSubmitForm = ({ book }: Props) => {
         customMetadata: { originalName }
       })
       setUploading(false)
+
+      setSubmission({ ...submission, originalName })
+      toast({
+        title: '見本誌をアップロードしました',
+        intent: 'success'
+      })
     },
     onDropRejected: () => {
       alert('画像アップロードに失敗しました')
@@ -63,7 +70,15 @@ const BookSubmitForm = ({ book }: Props) => {
     <Loader />
   ) : (
     <section>
-      {submission && <p>アップロード済み {submission.originalName}</p>}
+      {submission ? (
+        <p>
+          <b>アップロード済み</b> {submission.originalName}
+        </p>
+      ) : (
+        <p>
+          <b>未アップロード</b>
+        </p>
+      )}
       <div
         {...getRootProps({
           css: css`

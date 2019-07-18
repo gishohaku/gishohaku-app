@@ -49,11 +49,21 @@ const BooksSubmit: NextPage<any> = props => {
       <h2
         css={css`
           font-weight: 600;
+          font-size: 16px;
         `}
       >
         見本誌の提出
       </h2>
-      見本誌の提出を行います。
+      <p
+        css={css`
+          margin-top: 4px;
+          margin-bottom: 12px;
+        `}
+      >
+        「{book.title}」の見本誌の提出を行います。
+        <br />
+        ファイルはzipにまとめてアップロードしてください。
+      </p>
       <BookSubmitForm user={user!} book={book} onSubmit={() => {}} />
     </FormContainer>
   ) : (

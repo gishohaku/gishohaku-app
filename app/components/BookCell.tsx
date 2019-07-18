@@ -50,6 +50,26 @@ const flexChildLink = css`
   flex: 1;
 `
 
+const button = css`
+  border: 1px solid #2a5773;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2a5773;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    background-color: #2a5773;
+    color: white;
+  }
+`
+
 const BookCell: React.SFC<Props> = ({
   book,
   editable = false,
@@ -174,7 +194,6 @@ const BookCell: React.SFC<Props> = ({
               text-decoration: none;
               padding: 6px 12px;
               border-radius: 4px;
-              /* margin-right: 6px; */
               min-width: 72px;
               text-align: center;
               font-weight: bold;
@@ -236,31 +255,13 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
+          {book.type == 'fanzine' && (
+            <Link href={`/books/submit?id=${book.id}`} as={`/books/${book.id}/submit`} passHref>
+              <a css={css(button)}>見本誌の提出</a>
+            </Link>
+          )}
           <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
-            <a
-              css={css`
-                margin-left: auto;
-                border: 1px solid #2a5773;
-                text-decoration: none;
-                padding: 8px 20px;
-                border-radius: 4px;
-                font-size: 15px;
-                font-weight: 600;
-                color: #2a5773;
-                transition: all 0.2s ease;
-                white-space: nowrap;
-                display: block;
-                cursor: pointer;
-                text-align: center;
-
-                &:hover {
-                  background-color: #2a5773;
-                  color: white;
-                }
-              `}
-            >
-              編集
-            </a>
+            <a css={button}>編集</a>
           </Link>
           {(movePrev || moveNext) && (
             <ResponsivePopover
