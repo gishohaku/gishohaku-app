@@ -76,7 +76,7 @@ const Mypage: React.FC<Props> = props => {
               <Link href="/mypage/circle" passHref>
                 <ListItem
                   primary="サークル情報編集"
-                  secondary="サークル情報の編集、頒布物の登録、チェック数の確認を行えます"
+                  secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
                   contentAfter={<IconChevronRight />}
                 />
               </Link>

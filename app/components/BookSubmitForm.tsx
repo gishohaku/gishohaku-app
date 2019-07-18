@@ -10,12 +10,10 @@ import Loader from './Loader'
 import { useDropzone } from 'react-dropzone'
 
 interface Props {
-  onSubmit: (book: Book) => void
-  user: firebase.User
-  book?: Book
+  book: Book
 }
 
-const BookSubmitForm = ({ book }: Props) => {
+const BookSubmitForm: React.FC<Props> = ({ book }) => {
   const toast = useToast()
   const [isLoading, setLoading] = useState(true)
   const [isUploading, setUploading] = useState(false)
@@ -23,14 +21,12 @@ const BookSubmitForm = ({ book }: Props) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    accept: 'image/gif,image/jpeg,image/png,image/jpg',
     onDropAccepted: async files => {
       setUploading(true)
       const storageRef = firebase.storage().ref()
       const ref = storageRef.child(`/submissions/${book!.id}/${Date.now()}`)
-      console.log('begin upload', files[0])
       const originalName = files[0].name
-      console.log(originalName)
+      console.log('begin upload', originalName, files[0])
 
       await ref.put(files[0], {
         customMetadata: { originalName }
@@ -53,7 +49,6 @@ const BookSubmitForm = ({ book }: Props) => {
   useEffect(() => {
     const id = book!.id
     const db: firebase.firestore.Firestore = firebase.firestore()
-    setLoading(false)
     db.collection('bookSubmissions')
       .doc(id)
       .get()
@@ -66,9 +61,11 @@ const BookSubmitForm = ({ book }: Props) => {
       })
   }, [])
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  if (isLoading) {
+    return <Loader />
+  }
+
+  return (
     <section>
       {submission ? (
         <p>
