@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from 'react'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 
 import FormContainer from '../../components/FormContainer'
 import Circle from '../../utils/circle'
@@ -46,7 +46,14 @@ const BooksSubmit: NextPage<any> = props => {
 
   return circle && book ? (
     <FormContainer>
-      見本誌の提出 見本誌の提出を行います。
+      <h2
+        css={css`
+          font-weight: 600;
+        `}
+      >
+        見本誌の提出
+      </h2>
+      見本誌の提出を行います。
       <BookSubmitForm user={user!} book={book} onSubmit={() => {}} />
     </FormContainer>
   ) : (

@@ -20,9 +20,6 @@ const BookSubmitForm = ({ book }: Props) => {
   const [isUploading, setUploading] = useState(false)
   const [submission, setSubmission] = useState()
 
-  // path
-  // url
-
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: 'image/gif,image/jpeg,image/png,image/jpg',
@@ -37,8 +34,6 @@ const BookSubmitForm = ({ book }: Props) => {
       await ref.put(files[0], {
         customMetadata: { originalName }
       })
-      // const url = await snapshot.ref.getDownloadURL()
-      // console.log(url)
       setUploading(false)
     },
     onDropRejected: () => {
@@ -63,15 +58,6 @@ const BookSubmitForm = ({ book }: Props) => {
         }
       })
   }, [])
-
-  // const submitBook = useCallback(async () => {
-  //   const files : any = null
-  //   const storageRef = firebase.storage().ref()
-  //   const ref = storageRef.child(`/uploads/${user.uid}/${Date.now()}`)
-  //   await ref.put(files[0], {
-  //     cacheControl: 'public, max-age=31536000'
-  //   })
-  // }, [])
 
   return isLoading ? (
     <Loader />
