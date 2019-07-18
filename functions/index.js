@@ -107,3 +107,30 @@ exports.addCircleRefToStarCounts = functions.firestore
         console.error('Unexpected document:', collectionName, data.ref)
     }
   })
+
+const storage = functions.storage
+
+exports.onCreateFile = storage.object().onFinalize(async (object, context) => {
+  console.log(object, context)
+  const filePath = object.name
+  if (!filePath.startsWith('submissions/')) {
+    console.log('check submissions')
+    return
+  }
+
+  const [_directory, bookId, _timestamp] = object.name.split('/')
+
+  const submission = {
+    originalName: object.metadata.originalName,
+    path: object.name,
+    contentType: object.contentType,
+    createdAt: admin.firestore.FieldValue.serverTimestamp()
+  }
+
+  await admin
+    .firestore()
+    .collection('bookSubmissions')
+    .doc(bookId)
+    .set(submission)
+  console.log(filePath, bookId, submission)
+})
