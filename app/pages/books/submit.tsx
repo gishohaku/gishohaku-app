@@ -63,6 +63,8 @@ const BooksSubmit: NextPage<any> = props => {
         「{book.title}」の見本誌の提出を行います。
         <br />
         ファイルはzipにまとめてアップロードしてください。
+        <br />
+        ボードゲームやストラップなどのグッズの場合はアップロードは不要です。
       </p>
       <BookSubmitForm user={user!} book={book} onSubmit={() => {}} />
     </FormContainer>
