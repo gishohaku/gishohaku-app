@@ -2,6 +2,7 @@
 // import functions from 'firebase-functions'
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
+const { Storage } = require('@google-cloud/storage')
 
 const onCall = functions.https.onCall
 
@@ -108,9 +109,7 @@ exports.addCircleRefToStarCounts = functions.firestore
     }
   })
 
-const storage = functions.storage
-
-exports.onCreateFile = storage.object().onFinalize(async (object, context) => {
+exports.onCreateFile = functions.storage.object().onFinalize(async (object, context) => {
   console.log(object, context)
   const filePath = object.name
   if (!filePath.startsWith('submissions/')) {
@@ -118,13 +117,22 @@ exports.onCreateFile = storage.object().onFinalize(async (object, context) => {
     return
   }
 
+  const fileBucket = object.bucket
+  const storage = new Storage()
+  const bucket = storage.bucket(fileBucket)
+  const urls = await bucket.file(filePath).getSignedUrl({
+    action: 'read',
+    expires: '03-09-2491'
+  })
   const [_directory, bookId, _timestamp] = object.name.split('/')
 
   const submission = {
     originalName: object.metadata.originalName,
     path: object.name,
     contentType: object.contentType,
-    createdAt: admin.firestore.FieldValue.serverTimestamp()
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    isChecked: false,
+    url: urls[0]
   }
 
   await admin
