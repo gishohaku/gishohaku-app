@@ -54,7 +54,7 @@ const BooksSubmit: NextPage<any> = ({ router }) => {
       <p css={description}>
         <b>「{book.title}」</b>の見本誌の提出を行います。
         <br />
-        ファイルはzipにまとめてアップロードしてください。
+        ファイルはzipにまとめてアップロードしてください。（50MBまで）
         <br />
         ボードゲームやストラップなどのグッズの場合はアップロードは不要です。
       </p>
