@@ -330,6 +330,18 @@ const Sections = () => (
             block
           />
           <Sponsor
+            name="ギリア株式会社"
+            role="セキュリティサポーター"
+            image="/static/sponsors/ghelia.png"
+            href="https://ghelia.com/"
+          />
+          <Sponsor
+            name="株式会社メディアドゥ"
+            role="パブリシティサポーター"
+            image="/static/sponsors/mediado.png"
+            href="https://mediado.jp/"
+          />
+          <Sponsor
             name="さくらインターネット株式会社"
             role="オフィシャルサポーター"
             href="https://www.sakura.ad.jp/"
