@@ -163,7 +163,7 @@ const Hero = () => {
                 font-size: 20px;
               `}
             >
-              info
+              chat
             </span>
             <span
               css={css`
@@ -208,7 +208,7 @@ const Hero = () => {
                 font-size: 20px;
               `}
             >
-              info
+              chat
             </span>
             <span
               css={css`
