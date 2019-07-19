@@ -1,25 +1,18 @@
-// import admin from 'firebase-admin'
-// import functions from 'firebase-functions'
 const admin = require('firebase-admin')
 const functions = require('firebase-functions')
 const { Storage } = require('@google-cloud/storage')
 
-const onCall = functions.https.onCall
+const app = require('./app')
+exports.app = app
 
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
 const onRequest = functions.https.onRequest
 const onRequestAsia = functions.region('asia-northeast1').https.onRequest
 
+const onCall = functions.https.onCall
+
 admin.initializeApp()
-
-const next = require('next')
-const routes = require('./routes')
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev, conf: { distDir: 'next' } })
-const handler = routes.getRequestHandler(app)
-
-exports.app = onRequest((req, res) => app.prepare().then(() => handler(req, res)))
 
 exports.receiveInvitation = onCall(async (data, context) => {
   const token = data.token
