@@ -35,12 +35,12 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
                 css={css`
                   vertical-align: middle;
                   margin-right: 2px;
+                  font-size: 20px;
                 `}
               >
                 favorite_border
               </span>
               <span
-                className="material-icons"
                 css={css`
                   vertical-align: middle;
                 `}
@@ -57,12 +57,12 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
               css={css`
                 vertical-align: middle;
                 margin-right: 2px;
+                font-size: 20px;
               `}
             >
               favorite
             </span>
             <span
-              className="material-icons"
               css={css`
                 vertical-align: middle;
               `}
