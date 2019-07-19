@@ -67,7 +67,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
                       font-size: 20px;
                     `}
                   >
-                    check_circle_outline
+                    filter_list
                   </span>
                   <span
                     css={css`
