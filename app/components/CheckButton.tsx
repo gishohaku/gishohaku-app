@@ -34,7 +34,7 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
                 className="material-icons"
                 css={css`
                   vertical-align: middle;
-                  margin-right: 2px;
+                  margin-right: 4px;
                   font-size: 20px;
                 `}
               >
@@ -56,7 +56,7 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
               className="material-icons"
               css={css`
                 vertical-align: middle;
-                margin-right: 2px;
+                margin-right: 4px;
                 font-size: 20px;
               `}
             >

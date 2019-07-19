@@ -479,7 +479,23 @@ const Sections = () => (
             `}
             href="/hotel"
           >
-            宿泊の詳細はこちら
+            <span
+              className="material-icons"
+              css={css`
+                vertical-align: middle;
+                margin-right: 4px;
+                font-size: 20px;
+              `}
+            >
+              hotel
+            </span>
+            <span
+              css={css`
+                vertical-align: middle;
+              `}
+            >
+              宿泊の詳細はこちら
+            </span>
           </a>
         </p>
       </Container>
