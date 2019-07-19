@@ -55,7 +55,23 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
           }}
           intent={isCheckOnly ? 'primary' : undefined}
         >
-          チェック済みのみ表示
+          <span
+            className="material-icons"
+            css={css`
+              vertical-align: middle;
+              margin-right: 4px;
+              font-size: 20px;
+            `}
+          >
+            check_circle
+          </span>
+          <span
+            css={css`
+              vertical-align: middle;
+            `}
+          >
+            チェック済みのみ表示
+          </span>
         </Button>
       </div>
       <div
