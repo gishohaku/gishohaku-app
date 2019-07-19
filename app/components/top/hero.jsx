@@ -155,7 +155,23 @@ const Hero = () => {
               // }
             `}
           >
-            サークル参加者へのご案内
+            <span
+              className="material-icons"
+              css={css`
+                vertical-align: middle;
+                margin-right: 4px;
+                font-size: 20px;
+              `}
+            >
+              info
+            </span>
+            <span
+              css={css`
+                vertical-align: middle;
+              `}
+            >
+              サークル参加者へのご案内
+            </span>
           </a>
         </Link>
 
@@ -184,7 +200,23 @@ const Hero = () => {
               // }
             `}
           >
-            一般参加者へのご案内
+            <span
+              className="material-icons"
+              css={css`
+                vertical-align: middle;
+                margin-right: 4px;
+                font-size: 20px;
+              `}
+            >
+              info
+            </span>
+            <span
+              css={css`
+                vertical-align: middle;
+              `}
+            >
+              一般参加者へのご案内
+            </span>
           </a>
         </Link>
       </p>
