@@ -6,7 +6,8 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [{
+    "redirects": [
+      {
         "source": "/books/",
         "destination": "/books",
         "type": 301
@@ -17,7 +18,8 @@
         "type": 301
       }
     ],
-    "rewrites": [{
+    "rewrites": [
+      {
         "source": "/books/**",
         "function": "app"
       },
@@ -34,37 +36,53 @@
         "function": "app"
       }
     ],
-    "headers": [{
-      "source": "/**",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "no-cache, no-store, must-revalidate"
-      }]
-    }, {
-      "source": "/_next/static/**/*",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=3600"
-      }]
-    }, {
-      "source": "_next/static/images/*",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=86400"
-      }]
-    }, {
-      "source": "/books",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=600"
-      }]
-    }, {
-      "source": "/circles",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=600"
-      }]
-    }],
+    "headers": [
+      {
+        "source": "/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "/_next/static/**/*",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "_next/static/images/*",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "/books",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=600"
+          }
+        ]
+      },
+      {
+        "source": "/circles",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=600"
+          }
+        ]
+      }
+    ],
     "trailingSlash": false
   },
   "functions": {
@@ -73,5 +91,8 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
