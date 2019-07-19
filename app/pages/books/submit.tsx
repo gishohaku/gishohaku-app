@@ -56,7 +56,9 @@ const BooksSubmit: NextPage<any> = ({ router }) => {
         <br />
         ファイルはzipにまとめてアップロードしてください。
         <br />
-        ボードゲームやストラップなどのグッズの場合はアップロードは不要です。
+        ボードゲームや缶バッチなどのグッズ（書籍以外）はアップロード不要です。
+        <br />
+        ※当日サークルブースにて確認させていただきます。
       </p>
       <BookSubmitForm book={book} />
     </FormContainer>
