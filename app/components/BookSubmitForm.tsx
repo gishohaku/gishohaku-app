@@ -24,8 +24,8 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
     onDropAccepted: async files => {
       setUploading(true)
       const storageRef = firebase.storage().ref()
-      const ref = storageRef.child(`/submissions/${book!.id}/${Date.now()}`)
       const originalName = files[0].name
+      const ref = storageRef.child(`/submissions/${book!.id}/${Date.now()}-${originalName}`)
       console.log('begin upload', originalName, files[0])
 
       await ref.put(files[0], {
