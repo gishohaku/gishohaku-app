@@ -353,7 +353,7 @@ const BookCell: React.SFC<Props> = ({
             variant={'ghost'}
             css={flexChildLink}
           >
-            サンプルページ
+            立ち読み
           </Button>
         )}
         {book.purchaseUrl && (
@@ -364,7 +364,7 @@ const BookCell: React.SFC<Props> = ({
             rel="noopner"
             css={flexChildLink}
           >
-            購入ページ
+            電子版を購入
           </Button>
         )}
       </div>

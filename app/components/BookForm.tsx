@@ -142,7 +142,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
             </InputGroup>
             <InputGroup
               label="電子版購入URL"
-              helpText="電子版のダウンロードURLが決まっている場合入力してください。"
+              helpText="電子版の購入/ダウンロードURLが決まっている場合入力してください。"
             >
               <Field name="purchaseUrl" component={CustomInput} />
             </InputGroup>
