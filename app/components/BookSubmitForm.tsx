@@ -42,7 +42,7 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
     onDropRejected: () => {
       alert('アップロードに失敗しました')
     },
-    maxSize: 1000 * 1000 * 50,
+    maxSize: 1000 * 1000 * 100,
     disabled: isUploading
   })
 
