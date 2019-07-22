@@ -22,7 +22,7 @@ const CirclePage: NextPage<Props> = props => {
   const { circle, books } = props
   return (
     <>
-      <SEO title={circle.name} />
+      <SEO title={circle.name} imageUrl={circle.image} />
       <CircleDetail circle={circle} books={books} editable={false} />
     </>
   )

@@ -5,7 +5,6 @@ import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { initFirebase } from '../utils/firebase'
 import Layout from '../components/Layout'
-import SEO from '../components/SEO'
 import ReactGA from 'react-ga'
 import * as Sentry from '@sentry/browser'
 
@@ -46,7 +45,6 @@ class MyApp extends App {
     const { Component, pageProps, router } = this.props as any
     return (
       <Container>
-        <SEO />
         <UserProvider>
           <Layout router={router}>
             <Component {...pageProps} />
