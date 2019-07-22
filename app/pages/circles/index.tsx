@@ -13,6 +13,7 @@ import UserContext from '../../contexts/UserContext'
 import SectionHeader from '../../components/atoms/SectionHeader'
 import { initFirebase } from '../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
+import SEO from '../../components/SEO'
 
 interface InitialProps {
   circles: Circle[]
@@ -38,6 +39,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
         padding: 0 !important;
       `}
     >
+      <SEO title="サークル一覧" />
       <SectionHeader text="CIRCLES" pageHeader>
         サークル一覧
       </SectionHeader>
@@ -56,7 +58,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
           intent={isCheckOnly ? 'primary' : undefined}
         >
           {(() => {
-            if(isCheckOnly){
+            if (isCheckOnly) {
               return (
                 <div>
                   <span

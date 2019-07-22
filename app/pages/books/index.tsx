@@ -14,6 +14,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import SEO from '../../components/SEO'
 
 interface InitialProps {
   books: Book[]
@@ -36,6 +37,7 @@ const Index: NextPage<InitialProps> = props => {
         }
       `}
     >
+      <SEO title="頒布物一覧" />
       <SectionHeader text="BOOKS" pageHeader>
         頒布物一覧
       </SectionHeader>
