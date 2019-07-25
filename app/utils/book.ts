@@ -29,5 +29,6 @@ export default interface Book {
   purchaseUrl: string
   circleRef?: any
   circleName?: string
+  circleSpace?: string
   updatedAt?: firebase.firestore.Timestamp
 }
