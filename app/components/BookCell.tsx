@@ -24,7 +24,8 @@ import {
   IconArrowUp,
   IconArrowDown,
   Divider,
-  Button
+  Button,
+  IconChevronRight
 } from 'sancho'
 import { media } from '../utils/style'
 import Contents from './Contents'
@@ -136,8 +137,40 @@ const BookCell: React.SFC<Props> = ({
       ref={docRef}
     >
       {isShowCircle && (
-        <a target="_blank" href={`/circles/${circleId}`}>
+        <a
+          target="_blank"
+          href={`/circles/${circleId}`}
+          css={css`
+            align-items: center;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 4px 8px;
+            margin: 0 -8px;
+            display: inline-flex;
+            border-radius: 4px;
+            color: inherit;
+            svg {
+              margin-left: 4px;
+            }
+            &:hover {
+              background-color: #eee;
+            }
+          `}
+        >
+          <div
+            css={css`
+              display: inline-block;
+              background-color: #2a5773;
+              color: white;
+              padding: 2px 8px;
+              border-radius: 2px;
+              margin-right: 6px;
+            `}
+          >
+            {book.circleBooth}
+          </div>{' '}
           {book.circleName}
+          <IconChevronRight />
         </a>
         // <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
         //   <a>{book.circleName}</a>

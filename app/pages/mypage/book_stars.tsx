@@ -30,7 +30,7 @@ const AsnycBookCell = ({ bookId }: any) => {
       })
   }, [bookId])
 
-  return book ? <BookCell book={book} /> : null
+  return book ? <BookCell isShowCircle={true} book={book} /> : null
 }
 
 const BookStars: React.FC = () => {
