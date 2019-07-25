@@ -26,7 +26,9 @@ const AsnycBookCell = ({ bookId }: any) => {
       .get()
       .then(snapshot => {
         const book = { id: snapshot.id, ...(snapshot.data() as Book) }
-        setBook(refToPath(book, 'circleRef'))
+        if (snapshot.exists) {
+          setBook(refToPath(book, 'circleRef'))
+        }
       })
   }, [bookId])
 
