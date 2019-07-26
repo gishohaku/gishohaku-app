@@ -14,6 +14,8 @@ import SEO from '../../components/SEO'
 import { NextPage } from 'next'
 import { withRouter, PublicRouterInstance } from 'next/router';
 import CircleSelect from '../../components/CircleSelect';
+import { useContext } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 interface Props {
   circle: Circle
@@ -21,11 +23,12 @@ interface Props {
 }
 
 const CirclePage: NextPage<Props & { router: PublicRouterInstance }, Props> = props => {
+  const { circleStars } = useContext(UserContext)
   const { circle, books, router } = props
   return (
     <>
       <SEO title={circle.name} imageUrl={circle.image} />
-      <CircleSelect circleId={circle.id!} router={router} />
+      <CircleSelect circleId={circle.id!} router={router} starIds={circleStars} />
       <CircleDetail circle={circle} books={books} editable={false} />
     </>
   )

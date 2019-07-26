@@ -3,9 +3,11 @@ import { Select, IconButton, IconChevronLeft, IconChevronRight } from "sancho";
 import { PublicRouterInstance } from "next/router";
 import { jsx, css } from '@emotion/core'
 import { media } from "../utils/style";
+import { useCallback } from "react";
 
 interface Props {
   circleId: string
+  starIds: string[]
   router: PublicRouterInstance
 }
 
@@ -153,14 +155,14 @@ const container = css`
   }
 `
 
-const CircleSelect: React.FC<Props> = ({ circleId, router }) => {
+const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
   console.log('circleSelect')
   const index = circles.findIndex(c => c.id === circleId)
   const nextCircle = circles[index + 1]
   const prevCircle = circles[index - 1]
-  const pushCircle = (id: string) => {
+  const pushCircle = useCallback((id: string) => {
     router.push(`/circles/_id?id=${id}`, `/circles/${id}`)
-  }
+  }, [])
 
   return <div css={container}>
     {prevCircle ?
@@ -173,7 +175,7 @@ const CircleSelect: React.FC<Props> = ({ circleId, router }) => {
       pushCircle(id)
     }}>
       {circles.map(option => {
-        return <option key={option.id} value={option.id}>{option.booth} {option.name}</option>
+        return <option key={option.id} value={option.id}>{starIds.includes(option.id) && "★ "} {option.booth} {option.name}</option>
 
       })}
     </Select>
