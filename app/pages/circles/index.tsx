@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/core'
 import { NextPage } from 'next'
 
-import { Container, Button } from 'sancho'
+import { Container, Button, IconMap } from 'sancho'
 import { withRouter } from 'next/router'
 
 import { getCircles } from '../../utils/functions'
@@ -13,6 +13,8 @@ import UserContext from '../../contexts/UserContext'
 import { initFirebase } from '../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../../components/SEO'
+import Lightbox from 'react-image-lightbox';
+import CircleSelect from '../../components/CircleSelect';
 
 interface InitialProps {
   circles: Circle[]
@@ -21,7 +23,8 @@ interface InitialProps {
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { circles, router } = props
   const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
-  const [isCheckOnly, setCheckOnly] = useState(router.query.starred !== undefined)
+  const [isCheckOnly] = useState(router.query.starred !== undefined)
+  const [isOpenMap, setOpenMap] = useState(false)
 
   const filteredCircles = useMemo(() => {
     if (isCheckOnly) {
@@ -31,102 +34,58 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   }, [circles, isCheckOnly])
 
   return (
-    <Container
-      css={css`
+    <>
+      <CircleSelect circleId="" starIds={circleStars} router={router} />
+      <Container
+        css={css`
         max-width: ${1080 + 12 * 2}px;
-        margin-top: 48px;
+        margin-top: px;
         padding: 0 !important;
       `}
-    >
-      <SEO title="サークル一覧" />
-      <div
-        css={css`
+      >
+        <SEO title="サークル一覧" />
+        <div
+          css={css`
           display: flex;
           align-items: center;
           justify-content: center;
           margin-top: 24px;
         `}
-      >
-        <Button
-          onClick={() => {
-            setCheckOnly(!isCheckOnly)
-          }}
-          intent={isCheckOnly ? 'primary' : undefined}
         >
-          {(() => {
-            if (isCheckOnly) {
-              return (
-                <div>
-                  <span
-                    className="material-icons"
-                    css={css`
-                      vertical-align: middle;
-                      margin-right: 4px;
-                      font-size: 20px;
-                    `}
-                  >
-                    filter_list
-                  </span>
-                  <span
-                    css={css`
-                      vertical-align: middle;
-                    `}
-                  >
-                    チェック済みのみ表示中
-                  </span>
-                </div>
-              )
-            }
-            return (
-              <div>
-                <span
-                  className="material-icons"
-                  css={css`
-                    vertical-align: middle;
-                    margin-right: 4px;
-                    font-size: 20px;
-                  `}
-                >
-                  check_circle
-                </span>
-                <span
-                  css={css`
-                    vertical-align: middle;
-                  `}
-                >
-                  チェック済みのみ表示
-                </span>
-              </div>
-            )
-          })()}
-        </Button>
-        <Button css={css`
+          <Button iconBefore={<IconMap />} css={css`
           margin-left: 8px;
-        `} component="a" href="/static/map.png" target="_blank">
-          会場マップ
+        `} onClick={() => {
+              setOpenMap(true)
+            }}>
+            会場マップ
         </Button>
-      </div>
-      <div
-        css={css`
+          {isOpenMap && <Lightbox
+            mainSrc="/static/map.png"
+            onCloseRequest={() => setOpenMap(false)}
+          />}
+        </div>
+        <div
+          css={css`
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           margin-top: 24px;
         `}
-      >
-        {filteredCircles.map((circle: Circle) => {
-          return (
-            <CircleCell
-              circle={circle}
-              key={circle.id}
-              addCircleStar={addCircleStar}
-              removeCircleStar={removeCircleStar}
-              circleStars={circleStars}
-            />
-          )
-        })}
-      </div>
-    </Container>
+        >
+          {filteredCircles.map((circle: Circle) => {
+            return (
+              <CircleCell
+                circle={circle}
+                key={circle.id}
+                addCircleStar={addCircleStar}
+                removeCircleStar={removeCircleStar}
+                circleStars={circleStars}
+              />
+            )
+          })}
+        </div>
+      </Container>
+    </>
   )
 }
 
