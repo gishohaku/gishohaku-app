@@ -10,7 +10,6 @@ import Circle from '../../utils/circle'
 import CircleCell from '../../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
 import UserContext from '../../contexts/UserContext'
-import SectionHeader from '../../components/atoms/SectionHeader'
 import { initFirebase } from '../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../../components/SEO'
@@ -40,9 +39,6 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
       `}
     >
       <SEO title="サークル一覧" />
-      <SectionHeader text="CIRCLES" pageHeader>
-        サークル一覧
-      </SectionHeader>
       <div
         css={css`
           display: flex;
@@ -103,6 +99,11 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
               </div>
             )
           })()}
+        </Button>
+        <Button css={css`
+          margin-left: 8px;
+        `} component="a" href="/static/map.png" target="_blank">
+          会場マップ
         </Button>
       </div>
       <div
