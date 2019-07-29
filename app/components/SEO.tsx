@@ -19,15 +19,15 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   return (
     <Head>
       <title>{metaTitle}</title>
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
-      <meta property="og:image" content={imageUrl || 'https://gishohaku.dev/static/ogp.jpg'} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content="@gishohaku" />
-      <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={metaDescription} />
-      <meta name="description" content={metaDescription} />
-      <meta name="keywords" content="同人誌即売会, 技術同人誌, 技書博" />
+      <meta property="og:description" content={metaDescription} key="description" />
+      <meta property="og:type" content="website" key="type" />
+      <meta property="og:image" content={imageUrl || 'https://gishohaku.dev/static/ogp.jpg'} key="image" />
+      <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+      <meta name="twitter:creator" content="@gishohaku" key="twitter:creater" />
+      <meta name="twitter:title" content={metaTitle} key="twitter:title" />
+      <meta name="twitter:description" content={metaDescription} key="twitter:description" />
+      <meta name="description" content={metaDescription} key="description" />
+      <meta name="keywords" content="同人誌即売会, 技術同人誌, 技書博" key="keywords" />
     </Head>
   )
 }

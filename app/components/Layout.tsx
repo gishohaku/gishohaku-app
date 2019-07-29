@@ -8,10 +8,12 @@ import { colors, media } from '../utils/style'
 
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
+import SEO from './SEO';
 
 const Layout: React.FC<any> = props => {
   return (
     <>
+      <SEO/>
       <Global
         styles={css`
           @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
