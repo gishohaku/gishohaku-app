@@ -81,10 +81,10 @@ const Header: React.FC<any> = () => {
     </div>
     <Sheet position="right" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
       <List>
-        <Link href="/" passHref>
+        <Link href="/gishohaku1" passHref>
           <ListItem primary="第1回 技術書同人誌博覧会" secondary="2019年7月27日 開催" contentAfter={<IconChevronRight />} component="a" onClick={() => setOpen(false)} />
         </Link>
-        <Link href="/gishohaku2" passHref>
+        <Link href="/" passHref>
           <ListItem primary="第2回 技術書同人誌博覧会" secondary="2019年12月14日 開催予定" contentAfter={<IconChevronRight />} component="a" onClick={() => setOpen(false)} />
         </Link>
       </List>
