@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useContext } from 'react'
 import Link from 'next/link'
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -13,7 +13,7 @@ import MessageBox from '../../components/MessageBox'
 import Loader from '../../components/Loader'
 
 interface Props {
-  router: NextRouter
+  router: PublicRouterInstance
 }
 
 const Mypage: React.FC<Props> = props => {

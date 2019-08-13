@@ -6,7 +6,7 @@ import 'firebase/functions'
 import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
 import { Button, useToast } from 'sancho'
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
 import UserContext from '../../contexts/UserContext'
 import MessageBox from '../../components/MessageBox'
@@ -17,7 +17,7 @@ import qs from 'qs'
 export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
 
 const Join: React.FC<{
-  router: NextRouter
+  router: PublicRouterInstance
 }> = props => {
   const toast = useToast()
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)

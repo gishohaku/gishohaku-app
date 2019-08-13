@@ -8,7 +8,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import { Button, InputGroup, Input, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 
@@ -17,7 +17,7 @@ const loginData = {
 }
 
 interface Props {
-  router: NextRouter
+  router: PublicRouterInstance
 }
 
 const ResetPassword: NextPage<Props> = ({ router }) => {
