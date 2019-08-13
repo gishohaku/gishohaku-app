@@ -12,7 +12,7 @@ import Book from '../../utils/book'
 import CircleDetail from '../../components/CircleDetail'
 import SEO from '../../components/SEO'
 import { NextPage } from 'next'
-import { withRouter, PublicRouterInstance } from 'next/router';
+import { withRouter, NextRouter } from 'next/router';
 import CircleSelect from '../../components/CircleSelect';
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
@@ -22,7 +22,7 @@ interface Props {
   books: Book[]
 }
 
-const CirclePage: NextPage<Props & { router: PublicRouterInstance }, Props> = props => {
+const CirclePage: NextPage<Props & { router: NextRouter }, Props> = props => {
   const { circleStars } = useContext(UserContext)
   const { circle, books, router } = props
   return (
