@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useCallback } from 'react'
 import { NextPage } from 'next'
-import router, { withRouter, NextRouter } from 'next/router'
+import router, { withRouter, PublicRouterInstance } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -13,7 +13,7 @@ import Book from '../../utils/book'
 import UserContext from '../../contexts/UserContext'
 
 interface Props {
-  router: NextRouter
+  router: PublicRouterInstance
 }
 
 const BooksNew: NextPage<Props> = props => {

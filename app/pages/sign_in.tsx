@@ -7,7 +7,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
-import { withRouter, NextRouter } from 'next/router'
+import { withRouter, PublicRouterInstance } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { INVITE_STORAGE_KEY } from './mypage/join'
@@ -19,7 +19,7 @@ const loginData = {
   password: ''
 }
 
-export const redirectAfterLogin = (router: NextRouter) => {
+export const redirectAfterLogin = (router: PublicRouterInstance) => {
   const afterLoginPath = localStorage.getItem(INVITE_STORAGE_KEY)
   localStorage.removeItem(INVITE_STORAGE_KEY)
   router.push(afterLoginPath || '/')
