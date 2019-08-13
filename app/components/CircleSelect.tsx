@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Select, IconButton, IconChevronLeft, IconChevronRight } from "sancho";
-import { PublicRouterInstance } from "next/router";
+import { NextRouter } from "next/router";
 import { jsx, css } from '@emotion/core'
 import { media } from "../utils/style";
 import { useCallback } from "react";
@@ -8,7 +8,7 @@ import { useCallback } from "react";
 interface Props {
   circleId: string
   starIds: string[]
-  router: PublicRouterInstance
+  router: NextRouter
 }
 
 // TODO: イベント終わったら静的ファイル化して外に出す
