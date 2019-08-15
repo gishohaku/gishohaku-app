@@ -86,7 +86,7 @@ export default () => {
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href="/mypage" passHref>
+        <Link href="/mypage/list" passHref>
           <a css={item}>
             <img src={person} width={30} css={icon} />
             <div css={label}>マイページ</div>

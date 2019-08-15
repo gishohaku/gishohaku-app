@@ -39,7 +39,7 @@ const BooksSubmit: NextPage<any> = ({ router }) => {
       .then(docRef => {
         const data = docRef.data() as Book
         if (userData!.circleRef!.id !== data.circleRef.id) {
-          router.push('/mypage')
+          router.push('/mypage/list')
         }
         setBook({ id, ...data })
       })
