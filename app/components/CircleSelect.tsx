@@ -161,7 +161,7 @@ const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
   const nextCircle = circles[index + 1]
   const prevCircle = circles[index - 1]
   const pushCircle = useCallback((id: string) => {
-    router.push(`/circles/_id?id=${id}`, `/circles/${id}`)
+    router.push('/circles/[id]', `/circles/${id}`)
   }, [])
 
   return <div css={container}>

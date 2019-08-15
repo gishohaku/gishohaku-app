@@ -8,12 +8,12 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx, css } from '@emotion/core'
 
-import withCircleUser from '../../withCircleUser'
-import Book from '../../utils/book'
-import FormContainer from '../../components/FormContainer'
-import UserContext from '../../contexts/UserContext'
-import Loader from '../../components/Loader'
-import BookSubmitForm from '../../components/BookSubmitForm'
+import withCircleUser from '../../../withCircleUser'
+import Book from '../../../utils/book'
+import FormContainer from '../../../components/FormContainer'
+import UserContext from '../../../contexts/UserContext'
+import Loader from '../../../components/Loader'
+import BookSubmitForm from '../../../components/BookSubmitForm'
 
 const title = css`
   font-weight: 600;
@@ -31,6 +31,7 @@ const BooksSubmit: NextPage<any> = ({ router }) => {
 
   useEffect(() => {
     const id = router.query.id as string
+    console.log(id)
     const db: firebase.firestore.Firestore = firebase.firestore()
     db.collection('books')
       .doc(id)
