@@ -4,25 +4,25 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx } from '@emotion/core'
-
-import { refToPath } from '../../utils/firebase'
-import { initFirebase } from '../../utils/firebase'
-import Circle from '../../utils/circle'
-import Book from '../../utils/book'
-import CircleDetail from '../../components/CircleDetail'
-import SEO from '../../components/SEO'
-import { NextPage } from 'next'
-import { withRouter, PublicRouterInstance } from 'next/router';
-import CircleSelect from '../../components/CircleSelect';
 import { useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
+import { withRouter, NextRouter } from 'next/router';
+
+import { refToPath } from '../../../utils/firebase'
+import { initFirebase } from '../../../utils/firebase'
+import Circle from '../../../utils/circle'
+import Book from '../../../utils/book'
+import CircleDetail from '../../../components/CircleDetail'
+import SEO from '../../../components/SEO'
+import { NextPage } from 'next'
+import CircleSelect from '../../../components/CircleSelect';
+import UserContext from '../../../contexts/UserContext';
 
 interface Props {
   circle: Circle
   books: Book[]
 }
 
-const CirclePage: NextPage<Props & { router: PublicRouterInstance }, Props> = props => {
+const CirclePage: NextPage<Props & { router: NextRouter }, Props> = props => {
   const { circleStars } = useContext(UserContext)
   const { circle, books, router } = props
   return (

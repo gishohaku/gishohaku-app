@@ -1,5 +1,5 @@
 import React, { ErrorInfo as _ErrorInfo } from 'react'
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
@@ -44,13 +44,11 @@ class MyApp extends App {
   public render() {
     const { Component, pageProps, router } = this.props as any
     return (
-      <Container>
-        <UserProvider>
-          <Layout router={router}>
-            <Component {...pageProps} />
-          </Layout>
-        </UserProvider>
-      </Container>
+      <UserProvider>
+        <Layout router={router}>
+          <Component {...pageProps} />
+        </Layout>
+      </UserProvider>
     )
   }
 }

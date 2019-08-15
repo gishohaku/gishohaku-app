@@ -1,19 +1,19 @@
 import { useState, useEffect, useContext, useCallback } from 'react'
 import { NextPage } from 'next'
-import router, { withRouter, PublicRouterInstance } from 'next/router'
+import router, { withRouter, NextRouter } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useToast, Button, Divider } from 'sancho'
 
-import BookForm from '../../components/BookForm'
-import Loader from '../../components/Loader'
-import FormContainer from '../../components/FormContainer'
-import Book from '../../utils/book'
-import UserContext from '../../contexts/UserContext'
+import BookForm from '../../../components/BookForm'
+import Loader from '../../../components/Loader'
+import FormContainer from '../../../components/FormContainer'
+import Book from '../../../utils/book'
+import UserContext from '../../../contexts/UserContext'
 
 interface Props {
-  router: PublicRouterInstance
+  router: NextRouter
 }
 
 const BooksNew: NextPage<Props> = props => {
@@ -23,17 +23,20 @@ const BooksNew: NextPage<Props> = props => {
 
   useEffect(() => {
     const id = props.router.query.id as string
-    const db: firebase.firestore.Firestore = firebase.firestore()
-    db.collection('books')
-      .doc(id)
-      .get()
-      .then(docRef => {
-        console.log(docRef)
-        setBook({
-          id: docRef.id,
-          ...(docRef.data() as Book)
+    // FIXME: idが取得できないケースがある
+    if (id) {
+      const db: firebase.firestore.Firestore = firebase.firestore()
+      db.collection('books')
+        .doc(id)
+        .get()
+        .then(docRef => {
+          console.log(docRef)
+          setBook({
+            id: docRef.id,
+            ...(docRef.data() as Book)
+          })
         })
-      })
+    }
   }, [props.router.query.id])
 
   const deleteBook = useCallback(async () => {

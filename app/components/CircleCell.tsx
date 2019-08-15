@@ -40,7 +40,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
       `}
     >
       <Link
-        href={`/circles/_id?id=${circle.id}`}
+        href='/circles/[id]'
         as={`/circles/${circle.id}`}
         key={circle.id}
         passHref

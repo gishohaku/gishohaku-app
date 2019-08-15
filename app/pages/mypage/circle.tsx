@@ -117,7 +117,7 @@ const Mypage: React.FC = () => {
         >
           <p>
             このページはサークル参加者専用のページです。シェア用のページは
-            <Link href={`/circles/_id?id=${circle.id}`} as={`/circles/${circle.id}`}>
+            <Link href='/circles/[id]' as={`/circles/${circle.id}`}>
               <a>こちら</a>
             </Link>
             。

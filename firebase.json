@@ -83,7 +83,8 @@
         ]
       }
     ],
-    "trailingSlash": false
+    "trailingSlash": false,
+    "cleanUrls": true
   },
   "functions": {
     "source": "dist/functions"

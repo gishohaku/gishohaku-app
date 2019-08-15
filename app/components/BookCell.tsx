@@ -289,11 +289,11 @@ const BookCell: React.SFC<Props> = ({
           `}
         >
           {book.type == 'fanzine' && (
-            <Link href={`/books/submit?id=${book.id}`} as={`/books/${book.id}/submit`} passHref>
+            <Link href='/books/[id]/submit' as={`/books/${book.id}/submit`} passHref>
               <a css={css(button)}>見本誌の提出</a>
             </Link>
           )}
-          <Link href={`/books/edit?id=${book.id}`} as={`/books/${book.id}/edit`} passHref>
+          <Link href='/books/[id]/edit' as={`/books/${book.id}/edit`} passHref>
             <a css={button}>編集</a>
           </Link>
           {(movePrev || moveNext) && (
