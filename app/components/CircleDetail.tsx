@@ -133,7 +133,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                     <img src={check} />
                     <span>{starCount}</span>
                   </div>
-                  <Link href={`/circles/edit?id=${circle.id}`} as={`/circles/${circle.id}/edit`}>
+                  <Link href='/circles/[id]/edit' as={`/circles/${circle.id}/edit`}>
                     <a
                       css={css`
                         flex: 1;

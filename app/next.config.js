@@ -1,4 +1,3 @@
-const withTypescript = require('@zeit/next-typescript')
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/
 })
@@ -18,14 +17,10 @@ module.exports = withImages(
         STORAGE_BUCKET: process.env.STORAGE_BUCKET,
         SENTRY_DSN: process.env.SENTRY_DSN
       },
-      // target: 'serverless',
       distDir: '../dist/functions/next',
       outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
-        delete defaultPathMap['/books/_id']
-        delete defaultPathMap['/books']
-        delete defaultPathMap['/circles/_id']
-        delete defaultPathMap['/circles']
+        delete defaultPathMap['/circles/[id]']
         console.log(defaultPathMap)
         return defaultPathMap
       }
