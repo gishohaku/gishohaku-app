@@ -434,7 +434,10 @@ const Sections = () => (
           url="https://www.k-k9.jp/"
           image="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
         />
-        <Printing name="栄光" url="https://www.eikou.com/" />
+        <Printing
+          name="栄光"
+          url="http://www.eikou.com/event_support/index.html"
+          image="http://www.eikou.com/link/eikoubanner.gif" />
         <Printing
           name="しまや出版"
           url="https://www.shimaya.net/"
