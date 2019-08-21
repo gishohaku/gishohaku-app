@@ -5,9 +5,11 @@ import { colors, media } from '../utils/style'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
 import Header from './Header'
-import SEO from './SEO';
+import SEO from './SEO'
+import useEventId from '../useEventId'
 
 const Layout: React.FC<any> = props => {
+  const { eventId } = useEventId()
   return (
     <>
       <SEO />
@@ -42,7 +44,7 @@ const Layout: React.FC<any> = props => {
       >
         {props.children}
       </div>
-      <BottomBar />
+      {eventId === 'gishohaku1' && <BottomBar />}
       <Footer />
     </>
   )
@@ -75,7 +77,7 @@ const Footer = () => (
       `}
     >
       <li>
-        <a href="/terms">サークル参加規約</a>
+        <a href="/gishohaku1/terms">サークル参加規約</a>
       </li>
       <li>
         <a href="https://portal.engineers-lt.info/">運営</a>

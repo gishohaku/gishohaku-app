@@ -6,11 +6,11 @@ import 'firebase/firestore'
 import { useState, useEffect, useContext } from 'react'
 import router, { withRouter, NextRouter } from 'next/router'
 
-import Loader from '../../../components/Loader'
-import FormContainer from '../../../components/FormContainer'
-import UserContext from '../../../contexts/UserContext'
-import CircleForm from '../../../components/CircleForm'
-import Circle from '../../../utils/circle'
+import Loader from '../../../../components/Loader'
+import FormContainer from '../../../../components/FormContainer'
+import UserContext from '../../../../contexts/UserContext'
+import CircleForm from '../../../../components/CircleForm'
+import Circle from '../../../../utils/circle'
 
 interface Props {
   router: NextRouter
@@ -56,7 +56,7 @@ const BooksNew: NextPage<Props> = props => {
               .collection('circles')
               .doc(id)
               .update(circle)
-            router.push(`/mypage/circle`)
+            router.push(`/gishohaku1/mypage/circle`)
           }}
         />
       </FormContainer>

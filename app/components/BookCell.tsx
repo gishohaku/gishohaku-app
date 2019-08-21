@@ -139,7 +139,7 @@ const BookCell: React.SFC<Props> = ({
       {isShowCircle && (
         <a
           target="_blank"
-          href={`/circles/${circleId}`}
+          href={`/gishohaku1/circles/${circleId}`}
           css={css`
             align-items: center;
             text-decoration: none;
@@ -289,11 +289,11 @@ const BookCell: React.SFC<Props> = ({
           `}
         >
           {book.type == 'fanzine' && (
-            <Link href='/books/[id]/submit' as={`/books/${book.id}/submit`} passHref>
+            <Link href='/gishohaku1/books/[id]/submit' as={`/gishohaku1/books/${book.id}/submit`} passHref>
               <a css={css(button)}>見本誌の提出</a>
             </Link>
           )}
-          <Link href='/books/[id]/edit' as={`/books/${book.id}/edit`} passHref>
+          <Link href='/gishohaku1/books/[id]/edit' as={`/gishohaku1/books/${book.id}/edit`} passHref>
             <a css={button}>編集</a>
           </Link>
           {(movePrev || moveNext) && (

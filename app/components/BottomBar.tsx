@@ -68,25 +68,25 @@ export default () => {
         `}
       >
         <span css={spacer} />
-        <Link href="/" passHref>
+        <Link href="/gishohaku1" passHref>
           <a css={item}>
             <img src={home} width={30} css={icon} />
             <div css={label}>ホーム</div>
           </a>
         </Link>
-        <Link href="/circles" passHref>
+        <Link href="/gishohaku1/circles" passHref>
           <a css={item}>
             <img src={groupWork} width={30} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
-        <Link href="/books" passHref>
+        <Link href="/gishohaku1/books" passHref>
           <a css={item}>
             <img src={book} width={30} css={icon} />
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href="/mypage" passHref>
+        <Link href="/gishohaku1/mypage" passHref>
           <a css={item}>
             <img src={person} width={30} css={icon} />
             <div css={label}>マイページ</div>

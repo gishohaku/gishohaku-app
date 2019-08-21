@@ -156,12 +156,11 @@ const container = css`
 `
 
 const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
-  console.log('circleSelect')
   const index = circles.findIndex(c => c.id === circleId)
   const nextCircle = circles[index + 1]
   const prevCircle = circles[index - 1]
   const pushCircle = useCallback((id: string) => {
-    router.push('/circles/[id]', `/circles/${id}`)
+    router.push('/gishohaku1/circles/[id]', `/gishohaku1/circles/${id}`)
   }, [])
 
   return <div css={container}>

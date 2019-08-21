@@ -6,11 +6,11 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx } from '@emotion/core'
 
-import BookForm from '../../components/BookForm'
-import Loader from '../../components/Loader'
-import FormContainer from '../../components/FormContainer'
-import Circle from '../../utils/circle'
-import UserContext from '../../contexts/UserContext'
+import BookForm from '../../../components/BookForm'
+import Loader from '../../../components/Loader'
+import FormContainer from '../../../components/FormContainer'
+import Circle from '../../../utils/circle'
+import UserContext from '../../../contexts/UserContext'
 import { NextPage } from 'next'
 
 const BooksNew: NextPage<any> = props => {
@@ -50,7 +50,7 @@ const BooksNew: NextPage<any> = props => {
               circleBooth: circle.booth,
               order: bookSnapshots.size
             })
-            props.router.push('/mypage/circle')
+            props.router.push('/gishohaku1/mypage/circle')
           }}
         />
       </FormContainer>

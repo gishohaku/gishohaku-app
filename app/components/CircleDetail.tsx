@@ -133,7 +133,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                     <img src={check} />
                     <span>{starCount}</span>
                   </div>
-                  <Link href='/circles/[id]/edit' as={`/circles/${circle.id}/edit`}>
+                  <Link href='/gishohaku1/circles/[id]/edit' as={`/gishohaku1/circles/${circle.id}/edit`}>
                     <a
                       css={css`
                         flex: 1;
@@ -251,7 +251,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
             />
           ))}
           {editable && (
-            <Link href="/books/new">
+            <Link href="/gishohaku1/books/new">
               <a
                 css={css`
                   display: block;

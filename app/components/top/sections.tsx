@@ -480,7 +480,7 @@ const Sections = () => (
                 background-color: #dbae29;
               }
             `}
-            href="/hotel"
+            href="/gishohaku1/hotel"
           >
             <span
               className="material-icons"

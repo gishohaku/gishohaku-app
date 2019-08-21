@@ -9,13 +9,13 @@ import { jsx, css } from '@emotion/core'
 import { useContext, useEffect, useState } from 'react'
 
 import { Button } from 'sancho'
-import { refToPath } from '../../utils/firebase'
-import Circle from '../../utils/circle'
-import Book from '../../utils/book'
-import UserContext from '../../contexts/UserContext'
-import MessageBox from '../../components/MessageBox'
-import Loader from '../../components/Loader'
-import CircleDetail from '../../components/CircleDetail'
+import { refToPath } from '../../../utils/firebase'
+import Circle from '../../../utils/circle'
+import Book from '../../../utils/book'
+import UserContext from '../../../contexts/UserContext'
+import MessageBox from '../../../components/MessageBox'
+import Loader from '../../../components/Loader'
+import CircleDetail from '../../../components/CircleDetail'
 
 const Mypage: React.FC = () => {
   const { user, isUserLoading, userData } = useContext(UserContext)
@@ -117,7 +117,7 @@ const Mypage: React.FC = () => {
         >
           <p>
             このページはサークル参加者専用のページです。シェア用のページは
-            <Link href='/circles/[id]' as={`/circles/${circle.id}`}>
+            <Link href='/gishohaku1/circles/[id]' as={`/gishohaku1/circles/${circle.id}`}>
               <a>こちら</a>
             </Link>
             。

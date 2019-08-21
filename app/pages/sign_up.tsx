@@ -94,7 +94,7 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
                   `}
                 >
                   登録することで、
-                  <Link href="/privacy" passHref>
+                  <Link href="/gishohaku1/privacy" passHref>
                     <a>利用規約/プライバシーポリシー</a>
                   </Link>
                   に同意するものとします
@@ -152,7 +152,7 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
           `}
         >
           登録することで、
-          <Link href="/privacy" passHref>
+          <Link href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
           </Link>
           に同意するものとします
