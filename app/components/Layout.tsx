@@ -75,7 +75,7 @@ const Footer = () => (
       `}
     >
       <li>
-        <a href="/terms">サークル参加規約</a>
+        <a href="/gishohaku1/terms">サークル参加規約</a>
       </li>
       <li>
         <a href="https://portal.engineers-lt.info/">運営</a>

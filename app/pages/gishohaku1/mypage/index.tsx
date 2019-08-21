@@ -8,9 +8,9 @@ import 'firebase/auth'
 import { jsx, css } from '@emotion/core'
 
 import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
-import UserContext from '../../contexts/UserContext'
-import MessageBox from '../../components/MessageBox'
-import Loader from '../../components/Loader'
+import UserContext from '../../../contexts/UserContext'
+import MessageBox from '../../../components/MessageBox'
+import Loader from '../../../components/Loader'
 
 interface Props {
   router: NextRouter
@@ -56,14 +56,14 @@ const Mypage: React.FC<Props> = props => {
         `}
       >
         <List>
-          <Link href="/circles?starred" passHref>
+          <Link href="/gishohaku1/circles?starred" passHref>
             <ListItem
               primary="チェックしたサークル"
               secondary="チェックをつけたサークルを確認できます"
               contentAfter={<IconChevronRight />}
             />
           </Link>
-          <Link href="/mypage/book_stars" passHref>
+          <Link href="/gishohaku1/mypage/book_stars" passHref>
             <ListItem
               primary="チェックした頒布物"
               secondary="チェックをつけた頒布物が確認できます"
@@ -73,7 +73,7 @@ const Mypage: React.FC<Props> = props => {
           {userData && userData.circleRef && (
             <>
               <Divider />
-              <Link href="/mypage/circle" passHref>
+              <Link href="/gishohaku1/mypage/circle" passHref>
                 <ListItem
                   primary="サークル情報編集"
                   secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"

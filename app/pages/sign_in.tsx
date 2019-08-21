@@ -10,7 +10,7 @@ import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
-import { INVITE_STORAGE_KEY } from './mypage/join'
+import { INVITE_STORAGE_KEY } from './gishohaku1/mypage/join'
 import { NextPage } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 
@@ -155,7 +155,7 @@ const SignIn: NextPage<WithRouterProps> = ({ router }) => {
           `}
         >
           登録することで、
-          <Link href="/privacy" passHref>
+          <Link href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
           </Link>
           に同意するものとします

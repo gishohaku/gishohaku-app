@@ -20,7 +20,7 @@ module.exports = withImages(
       distDir: '../dist/functions/next',
       outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
-        delete defaultPathMap['/circles/[id]']
+        delete defaultPathMap['/gishohaku1/circles/[id]']
         console.log(defaultPathMap)
         return defaultPathMap
       }

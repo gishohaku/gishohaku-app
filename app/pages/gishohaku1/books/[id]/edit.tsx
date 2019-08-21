@@ -6,11 +6,11 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useToast, Button, Divider } from 'sancho'
 
-import BookForm from '../../../components/BookForm'
-import Loader from '../../../components/Loader'
-import FormContainer from '../../../components/FormContainer'
-import Book from '../../../utils/book'
-import UserContext from '../../../contexts/UserContext'
+import BookForm from '../../../../components/BookForm'
+import Loader from '../../../../components/Loader'
+import FormContainer from '../../../../components/FormContainer'
+import Book from '../../../../utils/book'
+import UserContext from '../../../../contexts/UserContext'
 
 interface Props {
   router: NextRouter
@@ -53,7 +53,7 @@ const BooksNew: NextPage<Props> = props => {
       title: '頒布物を削除しました',
       intent: 'success'
     })
-    props.router.push('/mypage/circle')
+    props.router.push('/gishohaku1/mypage/circle')
   }, [props.router.query.id])
 
   if (isUserLoading || !user || !book) {
@@ -80,7 +80,7 @@ const BooksNew: NextPage<Props> = props => {
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
               })
               .then(_ => {
-                router.push('/mypage/circle')
+                router.push('/gishohaku1/mypage/circle')
               })
           }}
         />

@@ -5,16 +5,16 @@ import { NextPage } from 'next'
 import { Container, Button, IconMap } from 'sancho'
 import { withRouter } from 'next/router'
 
-import { getCircles } from '../../utils/functions'
-import Circle from '../../utils/circle'
-import CircleCell from '../../components/CircleCell'
+import { getCircles } from '../../../utils/functions'
+import Circle from '../../../utils/circle'
+import CircleCell from '../../../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
-import UserContext from '../../contexts/UserContext'
-import { initFirebase } from '../../utils/firebase'
+import UserContext from '../../../contexts/UserContext'
+import { initFirebase } from '../../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
-import SEO from '../../components/SEO'
+import SEO from '../../../components/SEO'
 import Lightbox from 'react-image-lightbox';
-import CircleSelect from '../../components/CircleSelect';
+import CircleSelect from '../../../components/CircleSelect';
 
 interface InitialProps {
   circles: Circle[]

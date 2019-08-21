@@ -8,9 +8,9 @@ import { jsx, css } from '@emotion/core'
 import { Button, useToast } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
-import UserContext from '../../contexts/UserContext'
-import MessageBox from '../../components/MessageBox'
-import Loader from '../../components/Loader'
+import UserContext from '../../../contexts/UserContext'
+import MessageBox from '../../../components/MessageBox'
+import Loader from '../../../components/Loader'
 import qs from 'qs'
 
 // FIXME: 影響範囲が大きく汚い
@@ -51,7 +51,7 @@ const Join: React.FC<{
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    props.router.push('/mypage/circle')
+    props.router.push('/gishohaku1/mypage/circle')
   }
 
   if (!circleId || !token) {
