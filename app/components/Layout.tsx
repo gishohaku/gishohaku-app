@@ -5,9 +5,11 @@ import { colors, media } from '../utils/style'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
 import Header from './Header'
-import SEO from './SEO';
+import SEO from './SEO'
+import useEventId from '../useEventId'
 
 const Layout: React.FC<any> = props => {
+  const { eventId } = useEventId()
   return (
     <>
       <SEO />
@@ -42,7 +44,7 @@ const Layout: React.FC<any> = props => {
       >
         {props.children}
       </div>
-      <BottomBar />
+      {eventId === 'gishohaku1' && <BottomBar />}
       <Footer />
     </>
   )

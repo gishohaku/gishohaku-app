@@ -156,7 +156,6 @@ const container = css`
 `
 
 const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
-  console.log('circleSelect')
   const index = circles.findIndex(c => c.id === circleId)
   const nextCircle = circles[index + 1]
   const prevCircle = circles[index - 1]
