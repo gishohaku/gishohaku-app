@@ -8,31 +8,27 @@
     ],
     "redirects": [
       {
-        "source": "/books/",
-        "destination": "/books",
+        "source": "/books",
+        "destination": "/gishohaku1/books",
         "type": 301
       },
       {
-        "source": "/circles/",
-        "destination": "/circles",
+        "source": "/circles",
+        "destination": "/gishohaku1/circles",
         "type": 301
       }
     ],
     "rewrites": [
       {
-        "source": "/books/**",
+        "source": "/gishohaku1/books",
         "function": "app"
       },
       {
-        "source": "/books",
+        "source": "/gishohaku1/circles/**",
         "function": "app"
       },
       {
-        "source": "/circles/**",
-        "function": "app"
-      },
-      {
-        "source": "/circles",
+        "source": "/gishohaku1/circles",
         "function": "app"
       }
     ],
