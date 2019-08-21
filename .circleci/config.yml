@@ -49,4 +49,4 @@ workflows:
             branches:
               only:
                 - master
-                - next9
+                - gishohaku2
