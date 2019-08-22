@@ -61,7 +61,7 @@
         ]
       },
       {
-        "source": "/books",
+        "source": "/gishohaku1/books",
         "headers": [
           {
             "key": "Cache-Control",
@@ -70,7 +70,7 @@
         ]
       },
       {
-        "source": "/circles",
+        "source": "/gishohaku1/circles",
         "headers": [
           {
             "key": "Cache-Control",
