@@ -5,7 +5,7 @@ import logo from '../images/logo.png'
 import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
-import { IconMenu, Sheet, List, ListItem, IconChevronRight } from 'sancho'
+import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink } from 'sancho'
 import { useState } from 'react'
 import useEventId from '../useEventId'
 
@@ -107,6 +107,16 @@ const Header: React.FC<any> = () => {
               onClick={() => setOpen(false)}
             />
           </Link>
+          <Divider/>
+          <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={css`
+            text-decoration: none;
+          `}>
+            <ListItem
+              primary="公式ブログ"
+              secondary="コアスタッフによる情報発信ブログ"
+              contentAfter={<IconExternalLink />}
+            />
+          </a>
         </List>
       </Sheet>
     </header>
