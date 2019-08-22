@@ -50,3 +50,4 @@ workflows:
               only:
                 - master
                 - gishohaku2
+                - dependencies
