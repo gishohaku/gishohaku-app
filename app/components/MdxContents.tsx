@@ -17,6 +17,7 @@ const contents = css`
 
   h4 {
     font-weight: 600;
+    margin: 16px 0 8px;
   }
 
   h2 + h3 {
