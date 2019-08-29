@@ -1,12 +1,16 @@
 # gishohaku-app
 
+## 環境
+
+* Node.js 10
+* Next.js 9
+
 ## 開発
 
-Cloud Functions for Firebaseの制約でNode.js v10を使う。
-
 ```shell
-$ cd app/
-$ node server.js
+$ npm install
+$ npm run dev
+$ open http://localhost:3000
 ```
 
 ## デプロイ
