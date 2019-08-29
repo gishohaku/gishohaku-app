@@ -1,6 +1,5 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import 'firebase/storage'
 
 export const initFirebase = () => {
   if (!firebase.apps.length) {

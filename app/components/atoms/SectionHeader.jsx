@@ -13,7 +13,6 @@ const sectionHeader = css`
   color: #1d272d;
   letter-spacing: 3px;
   z-index: 1;
-  overflow-x: hidden;
   padding: 20px 0;
 
   &:after {

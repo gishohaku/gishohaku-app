@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import 'firebase/auth'
 import { colors, media } from '../utils/style'
 
 import { jsx, css, Global } from '@emotion/core'
