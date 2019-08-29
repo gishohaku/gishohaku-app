@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.15
+      - image: circleci/node:10.15
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -36,7 +36,7 @@ jobs:
       - run: cp -a functions/ dist/
       - run: yarn build:app
       - run: yarn export:app
-      - run: cp package.json dist/functions && cp yarn.lock dist/functions
+      - run: cp package.json dist/functions && cp package-lock.json dist/functions
       - run: yarn firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
@@ -49,5 +49,4 @@ workflows:
             branches:
               only:
                 - master
-                - gishohaku2
-                - dependencies
+                - node10

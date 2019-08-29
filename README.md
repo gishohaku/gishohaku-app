@@ -2,9 +2,7 @@
 
 ## 開発
 
-Cloud Functionsの制約でNode.js v8を使う。
-
-また、開発中はappディレクトリ内で作業する必要がある
+Cloud Functions for Firebaseの制約でNode.js v10を使う。
 
 ```shell
 $ cd app/

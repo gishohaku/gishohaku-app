@@ -10,7 +10,7 @@
     "start": "next start app",
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "cp -a functions dist",
-    "copy:deps": "cp package.json dist/functions; cp yarn.lock dist/functions",
+    "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
     "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell"
@@ -65,6 +65,6 @@
     "typescript": "^3.4.5"
   },
   "engines": {
-    "node": "8"
+    "node": "10"
   }
 }
