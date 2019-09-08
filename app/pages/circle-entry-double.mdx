@@ -26,12 +26,12 @@ import SEO from '../components/SEO'
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="shift_jis">
     <input type="hidden" name="cmd" value="_s-xclick"/>
-    <input type="hidden" name="hosted_button_id" value="2S4JD77FS782C"/>
+    <input type="hidden" name="hosted_button_id" value="KBPCXTA6BE7SJ"/>
     <div style={{margin: '12px 0'}}>
         <h4>メールアドレス</h4>
         <input type="hidden" name="on0" value="申込時のメールアドレス"/>
         事前申し込み時のメールアドレスを入力してください。<br/>
-        <input type="text" name="os0" maxlength="200"/><br/>
+        <input type="email" name="os0" maxlength="200" required/><br/>
         <input type="hidden" name="currency_code" value="JPY"/>
     </div>
     <div>
