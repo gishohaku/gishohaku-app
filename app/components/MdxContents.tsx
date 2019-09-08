@@ -66,7 +66,8 @@ const contents = css`
     white-space: nowrap;
   }
 
-  input[type='text'] {
+  input[type='text'],
+  input[type='email'] {
     appearance: none;
     background-color: transparent;
     background-image: none;
