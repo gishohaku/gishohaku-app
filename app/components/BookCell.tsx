@@ -106,9 +106,7 @@ const BookCell: React.SFC<Props> = ({
   // 順番を並び替えたときにPopoverを閉じるために利用するRef
   const docRef = useRef<HTMLDivElement>(null)
 
-  // FIXME:
-  const circleId =
-    typeof book.circleRef === 'string' ? book.circleRef : book.circleRef._path.segments[1]
+  const circleId = book.circle!.ref
 
   useEffect(() => {
     if (editable) {

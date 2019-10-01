@@ -50,11 +50,14 @@ CirclePage.getInitialProps = async context => {
     .get()
   let books: Book[] = []
   snapshots.forEach(book => {
-    const data = book.data()
+    const { circleRef, ...data } = book.data() as Book
     books.push({
       id: book.id,
-      ...(refToPath(data, 'circleRef') as Book)
-    })
+      ...data,
+      circle: {
+        ...refToPath(data.circle!, 'ref')
+      }
+    } as Book)
   })
 
   return {
