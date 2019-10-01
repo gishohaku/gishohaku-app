@@ -106,7 +106,7 @@ const BookCell: React.SFC<Props> = ({
   // 順番を並び替えたときにPopoverを閉じるために利用するRef
   const docRef = useRef<HTMLDivElement>(null)
 
-  const circleId = book.circle!.ref
+  const circleId = book.circle!.id
 
   useEffect(() => {
     if (editable) {
@@ -243,33 +243,33 @@ const BookCell: React.SFC<Props> = ({
             <span>{starCount}</span>
           </div>
         ) : (
-          <CheckButton
-            isChecked={(book.id && bookStars.includes(book.id)) || false}
-            onClick={() => {
-              if (!user) {
-                return openLoginModal()
-              }
-              if (!book.id) {
-                return
-              }
-              if (bookStars.includes(book.id)) {
-                console.log('remove book start')
-                removeBookStar(book.id)
-                toast({
-                  title: `「${book.title}」のチェックを外しました`,
-                  intent: 'success'
-                })
-              } else {
-                console.log('create book start')
-                addBookStar(book.id)
-                toast({
-                  title: `「${book.title}」をチェックしました`,
-                  intent: 'success'
-                })
-              }
-            }}
-          />
-        )}
+            <CheckButton
+              isChecked={(book.id && bookStars.includes(book.id)) || false}
+              onClick={() => {
+                if (!user) {
+                  return openLoginModal()
+                }
+                if (!book.id) {
+                  return
+                }
+                if (bookStars.includes(book.id)) {
+                  console.log('remove book start')
+                  removeBookStar(book.id)
+                  toast({
+                    title: `「${book.title}」のチェックを外しました`,
+                    intent: 'success'
+                  })
+                } else {
+                  console.log('create book start')
+                  addBookStar(book.id)
+                  toast({
+                    title: `「${book.title}」をチェックしました`,
+                    intent: 'success'
+                  })
+                }
+              }}
+            />
+          )}
       </div>
       {editable && (
         <div
