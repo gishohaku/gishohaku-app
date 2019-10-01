@@ -7,10 +7,9 @@ import { jsx } from '@emotion/core'
 import { useContext } from 'react';
 import { withRouter, NextRouter } from 'next/router';
 
-import { refToPath } from '../../../../utils/firebase'
 import { initFirebase } from '../../../../utils/firebase'
 import Circle from '../../../../utils/circle'
-import Book from '../../../../utils/book'
+import Book, { refToId } from '../../../../utils/book'
 import CircleDetail from '../../../../components/CircleDetail'
 import SEO from '../../../../components/SEO'
 import { NextPage } from 'next'
@@ -50,14 +49,8 @@ CirclePage.getInitialProps = async context => {
     .get()
   let books: Book[] = []
   snapshots.forEach(book => {
-    const { circleRef, ...data } = book.data() as Book
-    books.push({
-      id: book.id,
-      ...data,
-      circle: {
-        ...refToPath(data.circle!, 'ref')
-      }
-    } as Book)
+    const data = book.data() as Book
+    books.push(refToId(data))
   })
 
   return {

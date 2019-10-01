@@ -11,9 +11,8 @@ import { Button, Container } from 'sancho'
 import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
-import Book from '../../../utils/book'
+import Book, { refToId } from '../../../utils/book'
 import BookCell from '../../../components/BookCell'
-import { refToPath } from '../../../utils/firebase'
 import { media } from '../../../utils/style'
 
 const AsnycBookCell = ({ bookId }: any) => {
@@ -25,15 +24,10 @@ const AsnycBookCell = ({ bookId }: any) => {
       .doc(bookId)
       .get()
       .then(snapshot => {
-        // FIXME
-        // const { circleRef, ...data } = snapshot.data() as Book
         const data = snapshot.data() as Book
         const book = { id: snapshot.id, ...data }
         if (snapshot.exists) {
-          setBook({
-            ...refToPath(book, 'circleRef'),
-            circle: refToPath(book.circle!, 'ref')
-          })
+          setBook(refToId(book))
         }
       })
   }, [bookId])

@@ -36,6 +36,24 @@ export default interface Book {
     ref: firestore.DocumentReference
     name: string
     booth: string
+    id: string
   }
   updatedAt?: firebase.firestore.Timestamp
+}
+
+export const refToId = (book: Book) => {
+  if (!book.circle) return book
+
+  const results: Book = {
+    ...book,
+    circle: {
+      ...book.circle,
+      id: book.circle!.ref.id
+    }
+  }
+
+  delete results.circleRef
+  delete results.circle!.ref
+
+  return results
 }

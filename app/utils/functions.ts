@@ -1,8 +1,7 @@
 import axios from 'axios'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { refToPath } from './firebase'
-import Book from './book'
+import Book, { refToId } from './book'
 import Circle from './circle'
 
 export const perBookCount = 5
@@ -19,14 +18,11 @@ export const getBooks = async (options: { startAfter?: any }) => {
   const snapshots = await query.get()
   const results: Book[] = []
   snapshots.forEach(snapshot => {
-    const { circleRef, ...original } = snapshot.data()
-    const data = {
-      ...original,
-      circle: refToPath(original.circle, 'ref')
-    }
+    const data = snapshot.data() as Book
+    const book = refToId(data)
     results.push({
       id: snapshot.id,
-      ...(data as Book)
+      ...book,
     })
   })
   return results

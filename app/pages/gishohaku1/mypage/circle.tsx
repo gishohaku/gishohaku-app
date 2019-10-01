@@ -9,9 +9,8 @@ import { jsx, css } from '@emotion/core'
 import { useContext, useEffect, useState } from 'react'
 
 import { Button } from 'sancho'
-import { refToPath } from '../../../utils/firebase'
 import Circle from '../../../utils/circle'
-import Book from '../../../utils/book'
+import Book, { refToId } from '../../../utils/book'
 import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
@@ -42,12 +41,8 @@ const Mypage: React.FC = () => {
           .get()
         let bookResults: Book[] = []
         snapshots.forEach(book => {
-          const { circleRef, ...data } = book.data() as Book
-          bookResults.push({
-            id: book.id,
-            ...data,
-            circle: refToPath(data.circle!, 'ref')
-          })
+          const data = book.data() as Book
+          bookResults.push(refToId(data))
         })
         setBooks(bookResults)
         setLoading(false)
