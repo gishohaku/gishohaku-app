@@ -19,7 +19,11 @@ export const getBooks = async (options: { startAfter?: any }) => {
   const snapshots = await query.get()
   const results: Book[] = []
   snapshots.forEach(snapshot => {
-    const data = refToPath(snapshot.data(), 'circleRef')
+    const { circleRef, ...original } = snapshot.data()
+    const data = {
+      ...original,
+      circle: refToPath(original.circle, 'ref')
+    }
     results.push({
       id: snapshot.id,
       ...(data as Book)

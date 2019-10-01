@@ -28,29 +28,30 @@ const Mypage: React.FC = () => {
     if (!user || !userData || !userData.circleRef) {
       setLoading(false)
       console.log('Not circle member', user, userData)
-      return () => {}
+      return () => { }
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
-    ;(async () => {
-      const circleRef = userData.circleRef!
-      const circleSnapShot = await circleRef.get()
-      setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-      const snapshots = await db
-        .collection('books')
-        .where('circleRef', '==', circleRef)
-        .orderBy('order', 'asc')
-        .get()
-      let bookResults: Book[] = []
-      snapshots.forEach(book => {
-        const data = book.data()
-        bookResults.push({
-          id: book.id,
-          ...(refToPath(data, 'circleRef') as Book)
+      ; (async () => {
+        const circleRef = userData.circleRef!
+        const circleSnapShot = await circleRef.get()
+        setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
+        const snapshots = await db
+          .collection('books')
+          .where('circleRef', '==', circleRef)
+          .orderBy('order', 'asc')
+          .get()
+        let bookResults: Book[] = []
+        snapshots.forEach(book => {
+          const { circleRef, ...data } = book.data() as Book
+          bookResults.push({
+            id: book.id,
+            ...data,
+            circle: refToPath(data.circle!, 'ref')
+          })
         })
-      })
-      setBooks(bookResults)
-      setLoading(false)
-    })()
+        setBooks(bookResults)
+        setLoading(false)
+      })()
   }, [userData])
 
   // console.log(isLoading, isUserLoading, books)

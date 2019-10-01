@@ -1,3 +1,5 @@
+import { firestore } from "firebase"
+
 export const mediums = {
   degital: '電子',
   paper: '紙',
@@ -30,5 +32,10 @@ export default interface Book {
   circleRef?: any
   circleName?: string
   circleBooth?: string
+  circle?: {
+    ref: firestore.DocumentReference
+    name: string
+    booth: string
+  }
   updatedAt?: firebase.firestore.Timestamp
 }
