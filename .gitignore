@@ -9,3 +9,4 @@ functions/yarn.lock
 
 app/out
 .DS_Store
+*.csv

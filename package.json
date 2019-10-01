@@ -13,7 +13,8 @@
     "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
     "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
     "deploy": "firebase deploy",
-    "functions:shell": "firebase experimental:functions:shell"
+    "functions:shell": "firebase experimental:functions:shell",
+    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
