@@ -6,9 +6,13 @@ import MessageBox from './components/MessageBox'
 import Link from 'next/link'
 import { Button } from 'sancho'
 import { jsx, css } from '@emotion/core'
+import { useRouter } from 'next/router'
+
+export const REDIRECT_TO_AFTER_LOGIN = 'REDIRECT_TO_AFTER_LOGIN'
 
 const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
   const { isUserLoading, user, userData } = useContext(UserContext)
+  const router = useRouter()
 
   if (isUserLoading) {
     return <Loader />
@@ -22,6 +26,9 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
       <Link href="/sign_in" passHref>
         <Button
           component="a"
+          onClick={() => {
+            localStorage.setItem(REDIRECT_TO_AFTER_LOGIN, router.asPath)
+          }}
           css={css`
           margin-top: 12px;
           width: 100%;
