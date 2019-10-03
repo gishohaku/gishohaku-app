@@ -42,7 +42,10 @@ const Mypage: React.FC = () => {
         let bookResults: Book[] = []
         snapshots.forEach(book => {
           const data = book.data() as Book
-          bookResults.push(refToId(data))
+          bookResults.push({
+            ...refToId(data),
+            id: book.id
+          })
         })
         setBooks(bookResults)
         setLoading(false)

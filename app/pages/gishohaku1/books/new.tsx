@@ -45,10 +45,16 @@ const BooksNew: NextPage<any> = props => {
               ...book,
               createdAt: firebase.firestore.FieldValue.serverTimestamp(),
               updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+              circle: {
+                ref: userData.circleRef,
+                name: circle.name,
+                booth: circle.booth
+              },
               circleRef: userData.circleRef,
               circleName: circle.name,
               circleBooth: circle.booth,
-              order: bookSnapshots.size
+              order: bookSnapshots.size,
+              eventId: 'gishohaku1'
             })
             props.router.push('/gishohaku1/mypage/circle')
           }}
