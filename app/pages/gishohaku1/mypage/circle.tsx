@@ -6,18 +6,20 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Button } from 'sancho'
 import Circle from '../../../utils/circle'
 import Book, { refToId } from '../../../utils/book'
-import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import CircleDetail from '../../../components/CircleDetail'
+import withUser from '../../../withUser'
+import { User } from '../../../contexts/UserContext'
 
-const Mypage: React.FC = () => {
-  const { user, isUserLoading, userData } = useContext(UserContext)
+const Mypage: React.FC<{
+  user: firebase.User,
+  userData: User
+}> = ({ user, userData }) => {
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
@@ -42,16 +44,14 @@ const Mypage: React.FC = () => {
         let bookResults: Book[] = []
         snapshots.forEach(book => {
           const data = book.data() as Book
-          bookResults.push(refToId(data))
+          bookResults.push({ ...refToId(data), id: book.id })
         })
         setBooks(bookResults)
         setLoading(false)
       })()
   }, [userData])
 
-  // console.log(isLoading, isUserLoading, books)
-
-  if (userData && !userData.circleRef) {
+  if (!userData.circleRef) {
     return (
       <MessageBox
         title="サークル向けページです。"
@@ -60,34 +60,8 @@ const Mypage: React.FC = () => {
     )
   }
 
-  if (isLoading || isUserLoading) {
-    return <Loader label="Loading..." />
-  }
+  if (isLoading || !circle) { return <Loader label="Loading..." /> }
 
-  if (!user) {
-    return (
-      <MessageBox
-        title="ログインが必要です。"
-        description="このページを利用するにはログインが必要です。"
-      >
-        <Link href="/sign_in" passHref>
-          <Button
-            component="a"
-            css={css`
-              margin-top: 12px;
-              width: 100%;
-            `}
-          >
-            ログイン
-          </Button>
-        </Link>
-      </MessageBox>
-    )
-  }
-
-  if (!circle) {
-    return <Loader label="Loading..." />
-  }
   return (
     <>
       <div
@@ -126,4 +100,4 @@ const Mypage: React.FC = () => {
   )
 }
 
-export default Mypage
+export default withUser(Mypage)
