@@ -1,14 +1,26 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter, NextRouter } from 'next/router'
 
 type EventId = 'gishohaku1' | 'gishohaku2'
 
+const getEventId = (router: NextRouter): EventId => {
+  const { query } = router
+  if (query.eventId) return query.eventId as EventId
+  const pathname = process.browser ? location.pathname : router.pathname
+  console.log(query, pathname)
+  const [_, eventId] = pathname.split('/')
+  if (eventId) return eventId as EventId
+  return 'gishohaku2'
+}
+
 const useEventId = () => {
-  const { query } = useRouter()
-  const [eventId, setEventId] = useState<EventId>(query.eventId as EventId || 'gishohaku2')
+  const router = useRouter()
+  return { eventId: getEventId(router) }
+  const [eventId, setEventId] = useState<EventId>()
   useEffect(() => {
-    setEventId(query.eventId as EventId || 'gishohaku2')
-  }, [query.eventId])
+    const eventId = getEventId(router)
+    setEventId(eventId)
+  }, [router.pathname])
   return { eventId }
 }
 

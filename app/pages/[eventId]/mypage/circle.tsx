@@ -15,12 +15,15 @@ import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import CircleDetail from '../../../components/CircleDetail'
+import useEventId from '../../../useEventId'
 
 const Mypage: React.FC = () => {
   const { user, isUserLoading, userData } = useContext(UserContext)
+  const { eventId } = useEventId()
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
+  console.log(eventId)
 
   useEffect(() => {
     setLoading(true)
@@ -31,23 +34,26 @@ const Mypage: React.FC = () => {
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
       ; (async () => {
-        const circleRef = userData.circleRef!
-        const circleSnapShot = await circleRef.get()
-        setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-        const snapshots = await db
-          .collection('books')
-          .where('circleRef', '==', circleRef)
-          .orderBy('order', 'asc')
-          .get()
-        let bookResults: Book[] = []
-        snapshots.forEach(book => {
-          const data = book.data() as Book
-          bookResults.push({
-            ...refToId(data),
-            id: book.id
+        const circleRef = userData.event && userData.event[eventId!]
+        if (circleRef) {
+          // const circleRef = userData.circleRef!
+          const circleSnapShot = await circleRef.get()
+          setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
+          const snapshots = await db
+            .collection('books')
+            .where('circleRef', '==', circleRef)
+            .orderBy('order', 'asc')
+            .get()
+          let bookResults: Book[] = []
+          snapshots.forEach(book => {
+            const data = book.data() as Book
+            bookResults.push({
+              ...refToId(data),
+              id: book.id
+            })
           })
-        })
-        setBooks(bookResults)
+          setBooks(bookResults)
+        }
         setLoading(false)
       })()
   }, [userData])
