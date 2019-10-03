@@ -33,20 +33,19 @@ const Mypage: React.FC<{
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
       ; (async () => {
-        const circleRef = userData.circleRef!
+        const circleRef = userData.circleRef
+        if (!circleRef) { return }
         const circleSnapShot = await circleRef.get()
         setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-        const snapshots = await db
-          .collection('books')
+        const query = db.collection('books')
           .where('circleRef', '==', circleRef)
           .orderBy('order', 'asc')
-          .get()
-        let bookResults: Book[] = []
-        snapshots.forEach(book => {
+        const snapshots = await query.get()
+        const books = snapshots.docs.map(book => {
           const data = book.data() as Book
-          bookResults.push({ ...refToId(data), id: book.id })
+          return { ...refToId(data), id: book.id }
         })
-        setBooks(bookResults)
+        setBooks(books)
         setLoading(false)
       })()
   }, [userData])
