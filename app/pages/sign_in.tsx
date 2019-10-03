@@ -10,9 +10,9 @@ import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
-import { INVITE_STORAGE_KEY } from './gishohaku1/mypage/join'
 import { NextPage } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
+import { REDIRECT_TO_AFTER_LOGIN } from '../withUser'
 
 const loginData = {
   email: '',
@@ -20,8 +20,8 @@ const loginData = {
 }
 
 export const redirectAfterLogin = (router: NextRouter) => {
-  const afterLoginPath = localStorage.getItem(INVITE_STORAGE_KEY)
-  localStorage.removeItem(INVITE_STORAGE_KEY)
+  const afterLoginPath = localStorage.getItem(REDIRECT_TO_AFTER_LOGIN)
+  localStorage.removeItem(REDIRECT_TO_AFTER_LOGIN)
   router.push(afterLoginPath || '/')
 }
 

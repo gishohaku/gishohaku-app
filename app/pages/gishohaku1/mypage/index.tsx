@@ -1,48 +1,24 @@
 /** @jsx jsx */
-import { useContext } from 'react'
 import Link from 'next/link'
-import { withRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 
-import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
-import UserContext from '../../../contexts/UserContext'
-import MessageBox from '../../../components/MessageBox'
-import Loader from '../../../components/Loader'
+import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
+import withUser from '../../../withUser'
+import { User } from '../../../contexts/UserContext'
 
 interface Props {
-  router: NextRouter
+  user: firebase.User
+  userData: User
 }
 
-const Mypage: React.FC<Props> = props => {
-  const { user, isUserLoading, userData } = useContext(UserContext)
-
-  if (isUserLoading) {
-    return <Loader label="Loading..." />
-  }
-
-  if (!user) {
-    return (
-      <MessageBox
-        title="ログインが必要です。"
-        description="このページを利用するにはログインが必要です。"
-      >
-        <Link href="/sign_in" passHref>
-          <Button
-            component="a"
-            css={css`
-              margin-top: 12px;
-              width: 100%;
-            `}
-          >
-            ログイン
-          </Button>
-        </Link>
-      </MessageBox>
-    )
-  }
+const Mypage: React.FC<Props> = ({ userData }) => {
+  const router = useRouter()
+  // const { eventId } = useEventId()
+  const eventId = 'gishohaku1'
 
   return (
     <Container>
@@ -56,24 +32,27 @@ const Mypage: React.FC<Props> = props => {
         `}
       >
         <List>
-          <Link href="/gishohaku1/circles?starred" passHref>
-            <ListItem
-              primary="チェックしたサークル"
-              secondary="チェックをつけたサークルを確認できます"
-              contentAfter={<IconChevronRight />}
-            />
-          </Link>
-          <Link href="/gishohaku1/mypage/book_stars" passHref>
-            <ListItem
-              primary="チェックした頒布物"
-              secondary="チェックをつけた頒布物が確認できます"
-              contentAfter={<IconChevronRight />}
-            />
-          </Link>
+          {/* TODO */}
+          {(true || eventId === 'gishohaku1') && <>
+            <Link href={`/${eventId}/circles?starred`} passHref>
+              <ListItem
+                primary="チェックしたサークル"
+                secondary="チェックをつけたサークルを確認できます"
+                contentAfter={<IconChevronRight />}
+              />
+            </Link>
+            <Link href={`/${eventId}/mypage/book_stars`} passHref>
+              <ListItem
+                primary="チェックした頒布物"
+                secondary="チェックをつけた頒布物が確認できます"
+                contentAfter={<IconChevronRight />}
+              />
+            </Link>
+          </>
+          }
           {userData && userData.circleRef && (
             <>
-              <Divider />
-              <Link href="/gishohaku1/mypage/circle" passHref>
+              <Link href={`/${eventId}/mypage/circle`} passHref>
                 <ListItem
                   primary="サークル情報編集"
                   secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
@@ -94,10 +73,10 @@ const Mypage: React.FC<Props> = props => {
           primary="ログアウト"
           contentBefore={<IconLogOut />}
           contentAfter={<IconChevronRight />}
-          onClick={() => {
+          onClick={async () => {
             const auth: firebase.auth.Auth = firebase.auth()
+            await router.push('/gishohaku1')
             auth.signOut()
-            props.router.push('/')
           }}
         />
       </List>
@@ -105,4 +84,4 @@ const Mypage: React.FC<Props> = props => {
   )
 }
 
-export default withRouter(Mypage)
+export default withUser(Mypage)

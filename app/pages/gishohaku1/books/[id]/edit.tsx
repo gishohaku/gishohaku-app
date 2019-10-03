@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { NextPage } from 'next'
-import router, { withRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -10,59 +10,49 @@ import BookForm from '../../../../components/BookForm'
 import Loader from '../../../../components/Loader'
 import FormContainer from '../../../../components/FormContainer'
 import Book from '../../../../utils/book'
-import UserContext from '../../../../contexts/UserContext'
+import { User } from '../../../../contexts/UserContext'
+import withUser from '../../../../withUser'
 
 interface Props {
-  router: NextRouter
+  user: firebase.User
+  userData: User
 }
 
-const BooksNew: NextPage<Props> = props => {
+const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const toast = useToast()
+  const router = useRouter()
   const [book, setBook] = useState()
-  const { user, isUserLoading, userData } = useContext(UserContext)
 
   useEffect(() => {
-    const id = props.router.query.id as string
-    // FIXME: idが取得できないケースがある
-    if (id) {
-      const db: firebase.firestore.Firestore = firebase.firestore()
-      db.collection('books')
-        .doc(id)
-        .get()
-        .then(docRef => {
-          console.log(docRef)
-          setBook({
-            id: docRef.id,
-            ...(docRef.data() as Book)
-          })
-        })
-    }
-  }, [props.router.query.id])
+    const id = router.query.id as string
+    if (!id) { return }
+    const db: firebase.firestore.Firestore = firebase.firestore()
+    const query = db.collection('books').doc(id)
+    query.get().then(docRef => {
+      setBook({
+        id: docRef.id,
+        ...(docRef.data() as Book)
+      })
+    })
+  }, [router.query.id])
 
   const deleteBook = useCallback(async () => {
     if (!confirm('頒布物を削除しますか？')) {
       return
     }
-    const id = props.router.query.id as string
+    const id = router.query.id as string
     const db = firebase.firestore()
-    await db
-      .collection('books')
-      .doc(id)
-      .delete()
+    const query = db.collection('books').doc(id)
+    await query.delete()
     toast({
       title: '頒布物を削除しました',
       intent: 'success'
     })
-    props.router.push('/gishohaku1/mypage/circle')
-  }, [props.router.query.id])
+    router.push('/gishohaku1/mypage/circle')
+  }, [router.query.id])
 
-  if (isUserLoading || !user || !book) {
-    return <Loader />
-  }
-
-  if (!isUserLoading && (!userData || !userData.circleRef)) {
-    return <p>サークル専用ページです。</p>
-  }
+  if (!book) { return <Loader /> }
+  if (!userData.circleRef) { return <p>サークル専用ページです。</p> }
 
   return (
     <>
@@ -72,16 +62,16 @@ const BooksNew: NextPage<Props> = props => {
           book={book}
           onSubmit={book => {
             const db: firebase.firestore.Firestore = firebase.firestore()
-            const id = props.router.query.id as string
-            db.collection('books')
+            const id = router.query.id as string
+            const query = db.collection('books')
               .doc(id)
               .update({
                 ...book,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
               })
-              .then(_ => {
-                router.push('/gishohaku1/mypage/circle')
-              })
+            query.then(_ => {
+              router.push('/gishohaku1/mypage/circle')
+            })
           }}
         />
         <Divider />
@@ -95,4 +85,4 @@ const BooksNew: NextPage<Props> = props => {
   )
 }
 
-export default withRouter(BooksNew)
+export default withUser(BooksNew)

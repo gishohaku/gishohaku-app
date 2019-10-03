@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import LoginSheet from '../components/LoginSheet'
 
-interface User {
+export interface User {
   uid: string
   email: string
   displayName: string
@@ -209,12 +209,12 @@ export default React.createContext<{
   user: null,
   isUserLoading: true,
   userData: null,
-  reloadUser: () => {},
+  reloadUser: () => { },
   bookStars: [],
   addBookStar: () => Promise.resolve(),
   removeBookStar: () => Promise.resolve(),
   circleStars: [],
   addCircleStar: () => Promise.resolve(),
   removeCircleStar: () => Promise.resolve(),
-  openLoginModal: () => {}
+  openLoginModal: () => { }
 })
