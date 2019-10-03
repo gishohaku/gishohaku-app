@@ -12,6 +12,7 @@ import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import qs from 'qs'
+import useEventId from '../../../useEventId'
 
 // FIXME: 影響範囲が大きく汚い
 export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
@@ -19,6 +20,7 @@ export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
 const Join: React.FC<{
   router: NextRouter
 }> = props => {
+  const eventId = useEventId()
   const toast = useToast()
   const { user, isUserLoading, userData, reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
@@ -27,9 +29,10 @@ const Join: React.FC<{
   // Static Site Exportではprops.router.queryが固定されており、自前でqueryを取得する必要がある
   // https://github.com/zeit/next.js/issues/4804
   const { circleId, token } = qs.parse(props.router.asPath.split('?')[1])
-  console.log(circleId, token)
+  console.log(eventId, circleId, token)
 
   useEffect(() => {
+    if (!circleId) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
     const circleRef = db.collection('circles').doc(circleId)
     circleRef.get().then(circleSnapshot => {
@@ -51,7 +54,7 @@ const Join: React.FC<{
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    props.router.push('/gishohaku1/mypage/circle')
+    props.router.push(`/${eventId}/mypage/circle`)
   }
 
   if (!circleId || !token) {
