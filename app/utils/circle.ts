@@ -1,3 +1,5 @@
+import { EventId } from './event'
+
 export const categories = {
   'software/frontend': 'ソフトウェア／フロントエンド',
   'software/backend': 'ソフトウェア／バックエンド',
@@ -37,4 +39,5 @@ export default interface Circle {
   twitter: string
   booth: string
   website: string
+  eventId: EventId
 }

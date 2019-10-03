@@ -1,4 +1,5 @@
 import { firestore } from "firebase"
+import { EventId } from './event'
 
 export const mediums = {
   degital: '電子',
@@ -38,6 +39,7 @@ export default interface Book {
     booth: string
     id: string
   }
+  eventId: EventId
   updatedAt?: firebase.firestore.Timestamp
 }
 

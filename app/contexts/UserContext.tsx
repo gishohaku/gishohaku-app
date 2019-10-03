@@ -3,6 +3,7 @@ import UserContext from './UserContext'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import LoginSheet from '../components/LoginSheet'
+import { EventId } from '../utils/event'
 
 interface User {
   uid: string
@@ -11,6 +12,9 @@ interface User {
   photoURL: string
   circleRef?: firebase.firestore.DocumentReference
   createdAt: firebase.firestore.FieldValue
+  event?: {
+    [eventId in EventId]: firebase.firestore.DocumentReference
+  }
 }
 
 const incrementStarCount = async (ref: firebase.firestore.DocumentReference, diff: number) => {
@@ -209,12 +213,12 @@ export default React.createContext<{
   user: null,
   isUserLoading: true,
   userData: null,
-  reloadUser: () => {},
+  reloadUser: () => { },
   bookStars: [],
   addBookStar: () => Promise.resolve(),
   removeBookStar: () => Promise.resolve(),
   circleStars: [],
   addCircleStar: () => Promise.resolve(),
   removeCircleStar: () => Promise.resolve(),
-  openLoginModal: () => {}
+  openLoginModal: () => { }
 })
