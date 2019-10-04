@@ -26,6 +26,7 @@ const Mypage: React.FC<{
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
   const { eventId } = useEventId()
+  const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {
     setLoading(true)
@@ -53,7 +54,7 @@ const Mypage: React.FC<{
       })()
   }, [userData])
 
-  if (!userData.circleRef) {
+  if (!circleRef) {
     return (
       <MessageBox
         title="サークル向けページです。"
@@ -89,7 +90,7 @@ const Mypage: React.FC<{
         >
           <p>
             このページはサークル参加者専用のページです。シェア用のページは
-            <Link href='/gishohaku1/circles/[id]' as={`/gishohaku1/circles/${circle.id}`}>
+            <Link href={`/${eventId}/circles/[id]`} as={`/${eventId}/circles/${circle.id}`}>
               <a>こちら</a>
             </Link>
             。

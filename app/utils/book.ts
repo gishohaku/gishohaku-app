@@ -27,7 +27,7 @@ export default interface Book {
   // 新刊か？
   isNew: boolean
   // 頒布形態
-  medium: BookMedium | '' | null
+  medium: BookMedium | ''
   sampleUrl: string
   purchaseUrl: string
   circleRef?: any

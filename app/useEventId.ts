@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, NextRouter } from 'next/router'
 
-type EventId = 'gishohaku1' | 'gishohaku2'
+import { EventId } from './utils/event'
 
 const getEventId = (router: NextRouter): EventId => {
   const { query } = router
@@ -13,7 +13,9 @@ const getEventId = (router: NextRouter): EventId => {
   return 'gishohaku2'
 }
 
-const useEventId = () => {
+const useEventId = (): {
+  eventId: EventId
+} => {
   const router = useRouter()
   return { eventId: getEventId(router) }
   const [eventId, setEventId] = useState<EventId>()
@@ -21,7 +23,6 @@ const useEventId = () => {
     const eventId = getEventId(router)
     setEventId(eventId)
   }, [router.pathname])
-  return { eventId }
 }
 
 export default useEventId
