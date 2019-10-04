@@ -20,6 +20,14 @@
     ],
     "rewrites": [
       {
+        "source": "/:eventId/circles/:id/edit",
+        "destination": "/gishohaku1/circles/[id]/edit.html"
+      },
+      {
+        "source": "/gishohaku1/books/**/submit",
+        "destination": "/gishohaku1/books/[id]/submit.html"
+      },
+      {
         "source": "/gishohaku1/books",
         "function": "app"
       },
