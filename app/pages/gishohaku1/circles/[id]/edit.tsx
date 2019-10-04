@@ -3,45 +3,36 @@ import { NextPage } from 'next'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-import { useState, useEffect, useContext } from 'react'
-import router, { withRouter, NextRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import Loader from '../../../../components/Loader'
 import FormContainer from '../../../../components/FormContainer'
-import UserContext from '../../../../contexts/UserContext'
+import { User } from '../../../../contexts/UserContext'
 import CircleForm from '../../../../components/CircleForm'
 import Circle from '../../../../utils/circle'
+import withUser from '../../../../withUser'
 
-interface Props {
-  router: NextRouter
-}
 
-const BooksNew: NextPage<Props> = props => {
+const BooksNew: NextPage<{
+  user: firebase.User
+  userData: User
+}> = ({ user }) => {
+  const router = useRouter()
   const [circle, setCircle] = useState<Circle>()
-  const { user, isUserLoading, userData } = useContext(UserContext)
 
   useEffect(() => {
-    const id = props.router.query.id as string
+    const id = router.query.id as string
+    if (!id) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
-    db.collection('circles')
-      .doc(id)
-      .get()
-      .then(docRef => {
-        console.log(docRef)
-        setCircle({
-          id: docRef.id,
-          ...(docRef.data() as Circle)
-        })
-      })
-  }, [props.router.query.id])
+    const query = db.collection('circles').doc(id)
+    query.get().then(docRef => {
+      console.log(docRef)
+      setCircle({ id: docRef.id, ...(docRef.data() as Circle) })
+    })
+  }, [router.query.id])
 
-  if (isUserLoading || !user || !circle) {
-    return <Loader />
-  }
-
-  if (!isUserLoading && (!userData || !userData.circleRef)) {
-    return <p>サークル専用ページです。</p>
-  }
+  if (!circle) { return <Loader /> }
 
   return (
     <>
@@ -51,11 +42,9 @@ const BooksNew: NextPage<Props> = props => {
           circle={circle}
           onSubmit={async circle => {
             const db = firebase.firestore()
-            const id = props.router.query.id as string
-            await db
-              .collection('circles')
-              .doc(id)
-              .update(circle)
+            const id = router.query.id as string
+            const query = db.collection('circles').doc(id)
+            await query.update(circle)
             router.push(`/gishohaku1/mypage/circle`)
           }}
         />
@@ -64,4 +53,4 @@ const BooksNew: NextPage<Props> = props => {
   )
 }
 
-export default withRouter(BooksNew)
+export default withUser(BooksNew)

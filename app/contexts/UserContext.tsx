@@ -5,7 +5,7 @@ import 'firebase/auth'
 import LoginSheet from '../components/LoginSheet'
 import { EventId } from '../utils/event'
 
-interface User {
+export interface User {
   uid: string
   email: string
   displayName: string

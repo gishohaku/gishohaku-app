@@ -47,6 +47,7 @@ exports.apiCircles = onRequest(async (req, res) => {
   const snapshots = await admin
     .firestore()
     .collection('circles')
+    .where("eventId", "==", "gishohaku1")
     .orderBy('boothNumber', 'asc')
     .get()
   const circles = []
@@ -67,6 +68,7 @@ exports.apiBooks = onRequest(async (req, res) => {
   const snapshots = await admin
     .firestore()
     .collection('books')
+    .where("eventId", "==", "gishohaku1")
     .get()
   const books = []
   snapshots.forEach(book => {

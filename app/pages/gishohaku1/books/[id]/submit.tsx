@@ -1,19 +1,18 @@
 /** @jsx jsx */
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { NextPage } from 'next'
-import { withRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx, css } from '@emotion/core'
 
-import withCircleUser from '../../../../withCircleUser'
 import Book from '../../../../utils/book'
 import FormContainer from '../../../../components/FormContainer'
-import UserContext from '../../../../contexts/UserContext'
 import Loader from '../../../../components/Loader'
 import BookSubmitForm from '../../../../components/BookSubmitForm'
+import withUser from '../../../../withUser'
 
 const title = css`
   font-weight: 600;
@@ -25,24 +24,21 @@ const description = css`
   margin-bottom: 12px;
 `
 
-const BooksSubmit: NextPage<any> = ({ router }) => {
-  const { userData } = useContext(UserContext)
+const BooksSubmit: NextPage<any> = ({ userData }) => {
+  const router = useRouter()
   const [book, setBook] = useState()
 
   useEffect(() => {
     const id = router.query.id as string
-    console.log(id)
     const db: firebase.firestore.Firestore = firebase.firestore()
-    db.collection('books')
-      .doc(id)
-      .get()
-      .then(docRef => {
-        const data = docRef.data() as Book
-        if (userData!.circleRef!.id !== data.circleRef.id) {
-          router.push('/gishohaku1/mypage')
-        }
-        setBook({ id, ...data })
-      })
+    const query = db.collection('books').doc(id)
+    query.get().then(docRef => {
+      const data = docRef.data() as Book
+      if (userData.circleRef!.id !== data.circleRef.id) {
+        router.push('/gishohaku1/mypage')
+      }
+      setBook({ id, ...data })
+    })
   }, [userData, router.query.id])
 
   if (!book) {
@@ -66,4 +62,4 @@ const BooksSubmit: NextPage<any> = ({ router }) => {
   )
 }
 
-export default withCircleUser(withRouter(BooksSubmit))
+export default withUser(BooksSubmit)

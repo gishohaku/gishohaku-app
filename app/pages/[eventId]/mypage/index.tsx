@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { useContext } from 'react'
 import Link from 'next/link'
-import { withRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -12,39 +11,18 @@ import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import useEventId from '../../../useEventId'
+import withUser from '../../../withUser'
+import { User } from '../../../contexts/UserContext'
 
 interface Props {
-  router: NextRouter
+  user: firebase.User
+  userData: User
 }
 
-const Mypage: React.FC<Props> = props => {
-  const { eventId } = useEventId()
-  const { user, isUserLoading, userData } = useContext(UserContext)
-
-  if (isUserLoading || !eventId) {
-    return <Loader label="Loading..." />
-  }
-
-  if (!user) {
-    return (
-      <MessageBox
-        title="ログインが必要です。"
-        description="このページを利用するにはログインが必要です。"
-      >
-        <Link href="/sign_in" passHref>
-          <Button
-            component="a"
-            css={css`
-              margin-top: 12px;
-              width: 100%;
-            `}
-          >
-            ログイン
-          </Button>
-        </Link>
-      </MessageBox>
-    )
-  }
+const Mypage: React.FC<Props> = ({ userData }) => {
+  const router = useRouter()
+  // const { eventId } = useEventId()
+  const eventId = 'gishohaku1'
 
   console.log(eventId)
 
@@ -100,10 +78,10 @@ const Mypage: React.FC<Props> = props => {
           primary="ログアウト"
           contentBefore={<IconLogOut />}
           contentAfter={<IconChevronRight />}
-          onClick={() => {
+          onClick={async () => {
             const auth: firebase.auth.Auth = firebase.auth()
+            await router.push('/gishohaku1')
             auth.signOut()
-            props.router.push('/')
           }}
         />
       </List>
@@ -111,4 +89,4 @@ const Mypage: React.FC<Props> = props => {
   )
 }
 
-export default withRouter(Mypage)
+export default withUser(Mypage)

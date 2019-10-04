@@ -10,6 +10,7 @@ export const getBooks = async (options: { startAfter?: any }) => {
   const db: firebase.firestore.Firestore = firebase.firestore()
   let query = db
     .collection('books')
+    .where('eventId', '==', 'gishohaku1')
     .orderBy('updatedAt', 'desc')
     .limit(perBookCount)
   if (options.startAfter) {

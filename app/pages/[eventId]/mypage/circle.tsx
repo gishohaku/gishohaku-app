@@ -6,24 +6,26 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Button } from 'sancho'
 import Circle from '../../../utils/circle'
 import Book, { refToId } from '../../../utils/book'
-import UserContext from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import CircleDetail from '../../../components/CircleDetail'
 import useEventId from '../../../useEventId'
 
-const Mypage: React.FC = () => {
-  const { user, isUserLoading, userData } = useContext(UserContext)
-  const { eventId } = useEventId()
+import withUser from '../../../withUser'
+import { User } from '../../../contexts/UserContext'
+
+const Mypage: React.FC<{
+  user: firebase.User,
+  userData: User
+}> = ({ user, userData }) => {
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
-  console.log(eventId)
+  const { eventId } = useEventId()
 
   useEffect(() => {
     setLoading(true)
@@ -34,33 +36,24 @@ const Mypage: React.FC = () => {
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
       ; (async () => {
-        const circleRef = userData.event && userData.event[eventId!]
-        if (circleRef) {
-          // const circleRef = userData.circleRef!
-          const circleSnapShot = await circleRef.get()
-          setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-          const snapshots = await db
-            .collection('books')
-            .where('circleRef', '==', circleRef)
-            .orderBy('order', 'asc')
-            .get()
-          let bookResults: Book[] = []
-          snapshots.forEach(book => {
-            const data = book.data() as Book
-            bookResults.push({
-              ...refToId(data),
-              id: book.id
-            })
-          })
-          setBooks(bookResults)
-        }
+        const circleRef = userData.event && userData.event[eventId]
+        if (!circleRef) { return }
+        const circleSnapShot = await circleRef.get()
+        setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
+        const query = db.collection('books')
+          .where('circleRef', '==', circleRef)
+          .orderBy('order', 'asc')
+        const snapshots = await query.get()
+        const books = snapshots.docs.map(book => {
+          const data = book.data() as Book
+          return { ...refToId(data), id: book.id }
+        })
+        setBooks(books)
         setLoading(false)
       })()
   }, [userData])
 
-  // console.log(isLoading, isUserLoading, books)
-
-  if (userData && !userData.circleRef) {
+  if (!userData.circleRef) {
     return (
       <MessageBox
         title="サークル向けページです。"
@@ -69,34 +62,8 @@ const Mypage: React.FC = () => {
     )
   }
 
-  if (isLoading || isUserLoading) {
-    return <Loader label="Loading..." />
-  }
+  if (isLoading || !circle) { return <Loader label="Loading..." /> }
 
-  if (!user) {
-    return (
-      <MessageBox
-        title="ログインが必要です。"
-        description="このページを利用するにはログインが必要です。"
-      >
-        <Link href="/sign_in" passHref>
-          <Button
-            component="a"
-            css={css`
-              margin-top: 12px;
-              width: 100%;
-            `}
-          >
-            ログイン
-          </Button>
-        </Link>
-      </MessageBox>
-    )
-  }
-
-  if (!circle) {
-    return <Loader label="Loading..." />
-  }
   return (
     <>
       <div
@@ -135,4 +102,4 @@ const Mypage: React.FC = () => {
   )
 }
 
-export default Mypage
+export default withUser(Mypage)
