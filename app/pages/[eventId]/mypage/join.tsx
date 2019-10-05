@@ -14,11 +14,8 @@ import qs from 'qs'
 import withUser from '../../../withUser'
 import EventContext from '../../../contexts/EventContext'
 
-// FIXME: 影響範囲が大きく汚い
-export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
-
 const Join: React.FC = () => {
-  // const { eventId } = useContext(EventContext)
+  const { eventId } = useContext(EventContext)
   const toast = useToast()
   const router = useRouter()
   const { reloadUser } = useContext(UserContext)
@@ -52,7 +49,7 @@ const Join: React.FC = () => {
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    router.push('/gishohaku1/mypage/circle')
+    router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }
 
   if (!circleId || !token) {

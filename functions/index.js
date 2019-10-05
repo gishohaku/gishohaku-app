@@ -15,31 +15,22 @@ const onCall = functions.https.onCall
 admin.initializeApp()
 
 exports.receiveInvitation = onCall(async (data, context) => {
-  const token = data.token
-  const circleId = data.circleId
+  const { token, circleId } = data
   const auth = context.auth
   console.log(data, context.auth)
   if (!token || !circleId || !auth) {
     return { message: '無効な招待リンクです。' }
   }
-  const firestore = admin.firestore()
-  const snapshot = await firestore
-    .collection(`circles/${circleId}/circleInvitations`)
-    .doc(token)
-    .get()
-  if (!snapshot) {
-    return { message: '無効な招待リンクです。' }
-  }
-  console.log(snapshot.data())
-  const result = await firestore
-    .collection('users')
-    .doc(auth.uid)
-    .set(
-      {
-        circleRef: firestore.collection('circles').doc(circleId)
-      },
-      { merge: true }
-    )
+  const db = admin.firestore()
+  const invitationRef = db.collection(`circles/${circleId}/circleInvitations`).doc(token)
+  const snapshot = await invitationRef.get()
+  if (!snapshot || !snapshot.exists) { return { message: '無効な招待リンクです。' } }
+  const eventId = snapshot.data().eventId
+  if (!eventId) { return { message: '無効なイベントです。' } }
+  const targetRef = db.collection('users').doc(auth.uid)
+  await targetRef.update({
+    [`event.${eventId}`]: db.collection('circles').doc(circleId)
+  })
   return { message: 'サークルに参加しました。' }
 })
 
