@@ -1,8 +1,9 @@
 import React, { ErrorInfo as _ErrorInfo } from 'react'
-import App from 'next/app'
+import App, { AppContext } from 'next/app'
 import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
+import { EventProvider } from '../contexts/EventContext'
 import { initFirebase } from '../utils/firebase'
 import Layout from '../components/Layout'
 import ReactGA from 'react-ga'
@@ -45,9 +46,11 @@ class MyApp extends App {
     const { Component, pageProps, router } = this.props as any
     return (
       <UserProvider>
-        <Layout router={router}>
-          <Component {...pageProps} />
-        </Layout>
+        <EventProvider>
+          <Layout router={router}>
+            <Component {...pageProps} />
+          </Layout>
+        </EventProvider>
       </UserProvider>
     )
   }

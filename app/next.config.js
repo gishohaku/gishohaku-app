@@ -21,8 +21,18 @@ module.exports = withImages(
       outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
         delete defaultPathMap['/gishohaku1/circles/[id]']
+        // console.log(defaultPathMap['/[eventId]/mypage'])
+        // delete defaultPathMap['/[eventId]/mypage']
         console.log(defaultPathMap)
-        return defaultPathMap
+        const pathMap = {
+          ...defaultPathMap,
+          '/gishohaku1/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku1' } },
+          '/gishohaku2/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku2' } },
+          '/gishohaku1/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku1' } },
+          '/gishohaku2/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku2' } }
+        }
+        console.log(pathMap)
+        return pathMap
       }
     })
   )

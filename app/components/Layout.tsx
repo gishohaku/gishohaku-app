@@ -5,10 +5,12 @@ import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
 import Header from './Header'
 import SEO from './SEO'
-import useEventId from '../useEventId'
+import { useContext } from 'react'
+import EventContext from '../contexts/EventContext'
+import { useRouter } from 'next/router'
 
 const Layout: React.FC<any> = props => {
-  const { eventId } = useEventId()
+  const { eventId } = useContext(EventContext)
   return (
     <>
       <SEO />

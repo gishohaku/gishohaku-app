@@ -21,6 +21,7 @@ interface Props {
 
 const Mypage: React.FC<Props> = ({ userData }) => {
   const router = useRouter()
+  console.log(router)
   // const { eventId } = useEventId()
   const eventId = 'gishohaku1'
 
