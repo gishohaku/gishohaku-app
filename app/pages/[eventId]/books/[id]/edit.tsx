@@ -24,6 +24,7 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const { eventId } = useContext(EventContext)
   const router = useRouter()
   const [book, setBook] = useState()
+  const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {
     const id = router.query.id as string
@@ -50,11 +51,11 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
       title: '頒布物を削除しました',
       intent: 'success'
     })
-    router.push(`/${eventId}/mypage/circle`)
+    router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }, [router.query.id])
 
   if (!book) { return <Loader /> }
-  if (!userData.circleRef) { return <p>サークル専用ページです。</p> }
+  if (!circleRef) { return <p>サークル専用ページです。</p> }
 
   return (
     <>

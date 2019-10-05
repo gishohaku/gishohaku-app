@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -13,6 +13,7 @@ import FormContainer from '../../../../components/FormContainer'
 import Loader from '../../../../components/Loader'
 import BookSubmitForm from '../../../../components/BookSubmitForm'
 import withUser from '../../../../withUser'
+import EventContext from '../../../../contexts/EventContext'
 
 const title = css`
   font-weight: 600;
@@ -27,14 +28,17 @@ const description = css`
 const BooksSubmit: NextPage<any> = ({ userData }) => {
   const router = useRouter()
   const [book, setBook] = useState()
+  const { eventId } = useContext(EventContext)
+  const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {
+    if (!circleRef) return
     const id = router.query.id as string
     const db: firebase.firestore.Firestore = firebase.firestore()
     const query = db.collection('books').doc(id)
     query.get().then(docRef => {
       const data = docRef.data() as Book
-      if (userData.circleRef!.id !== data.circleRef.id) {
+      if (circleRef!.id !== data.circle!.ref.id) {
         router.push('/gishohaku1/mypage')
       }
       setBook({ id, ...data })

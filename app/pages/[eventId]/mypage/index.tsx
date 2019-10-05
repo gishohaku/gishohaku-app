@@ -21,6 +21,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
   const router = useRouter()
   console.log(router)
   const { eventId } = useContext(EventContext)
+  const circleRef = userData.event && userData.event[eventId]
 
   console.log(eventId)
 
@@ -53,7 +54,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
             </Link>
           </>
           }
-          {userData && userData.circleRef && (
+          {circleRef && (
             <>
               <Link href={`/${eventId}/mypage/circle`} passHref>
                 <ListItem
