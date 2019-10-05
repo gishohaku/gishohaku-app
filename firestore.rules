@@ -51,8 +51,8 @@ service cloud.firestore {
       // 既存データのCircleRefと一致すれば更新・削除可能
       allow update, delete: if isAuthenticated()
         && getUserCircle(resource.data.eventId) != null
-        && getUserCircle(resource.data.eventId) == existingData().circle.ref
-        && existingData().circle.ref == incomingData().circle.ref;
+        && getUserCircle(resource.data.eventId) == existingData().circle.ref;
+        // && existingData().circle.ref == incomingData().circle.ref;
     }
 
     match /bookSubmissions/{bookID} {
