@@ -21,19 +21,15 @@ export const EventProvider: React.FC<{
     setEventId(getEventId(router))
   }, [router])
 
-  // let serverEventId: EventId | undefined = undefined
-  // if (!process.browser) {
-  //   serverEventId = getEventId(router)
-  // }
-
   return <EventContext.Provider value={{ eventId }}>
-    {eventId}
     {children}
   </EventContext.Provider>
 }
 
 const EventContext = createContext<{
-  eventId?: EventId
-}>({})
+  eventId: EventId
+}>({} as any as {
+  eventId: EventId
+})
 
 export default EventContext

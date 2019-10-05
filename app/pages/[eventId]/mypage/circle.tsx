@@ -6,17 +6,17 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../../../utils/circle'
 import Book, { refToId } from '../../../utils/book'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import CircleDetail from '../../../components/CircleDetail'
-import useEventId from '../../../useEventId'
 
 import withUser from '../../../withUser'
 import { User } from '../../../contexts/UserContext'
+import EventContext from '../../../contexts/EventContext'
 
 const Mypage: React.FC<{
   user: firebase.User,
@@ -25,7 +25,7 @@ const Mypage: React.FC<{
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
-  const { eventId } = useEventId()
+  const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {

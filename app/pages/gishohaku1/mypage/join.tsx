@@ -11,14 +11,14 @@ import UserContext, { User } from '../../../contexts/UserContext'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import qs from 'qs'
-import useEventId from '../../../useEventId'
 import withUser from '../../../withUser'
+import EventContext from '../../../contexts/EventContext'
 
 // FIXME: 影響範囲が大きく汚い
 export const INVITE_STORAGE_KEY = 'INVITE_STORAGE_KEY'
 
 const Join: React.FC = () => {
-  const eventId = useEventId()
+  // const { eventId } = useContext(EventContext)
   const toast = useToast()
   const router = useRouter()
   const { reloadUser } = useContext(UserContext)

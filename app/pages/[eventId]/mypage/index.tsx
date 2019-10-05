@@ -6,12 +6,10 @@ import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 
-import { Button, Divider, Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
-import UserContext from '../../../contexts/UserContext'
-import MessageBox from '../../../components/MessageBox'
-import Loader from '../../../components/Loader'
-import useEventId from '../../../useEventId'
+import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
 import withUser from '../../../withUser'
+import EventContext from '../../../contexts/EventContext'
+import { useContext } from 'react'
 import { User } from '../../../contexts/UserContext'
 
 interface Props {
@@ -22,8 +20,7 @@ interface Props {
 const Mypage: React.FC<Props> = ({ userData }) => {
   const router = useRouter()
   console.log(router)
-  // const { eventId } = useEventId()
-  const eventId = 'gishohaku1'
+  const { eventId } = useContext(EventContext)
 
   console.log(eventId)
 
