@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -12,6 +12,7 @@ import FormContainer from '../../../../components/FormContainer'
 import Book from '../../../../utils/book'
 import { User } from '../../../../contexts/UserContext'
 import withUser from '../../../../withUser'
+import EventContext from '../../../../contexts/EventContext'
 
 interface Props {
   user: firebase.User
@@ -20,6 +21,7 @@ interface Props {
 
 const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const toast = useToast()
+  const { eventId } = useContext(EventContext)
   const router = useRouter()
   const [book, setBook] = useState()
 
@@ -48,7 +50,7 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
       title: '頒布物を削除しました',
       intent: 'success'
     })
-    router.push('/gishohaku1/mypage/circle')
+    router.push(`/${eventId}/mypage/circle`)
   }, [router.query.id])
 
   if (!book) { return <Loader /> }
@@ -70,7 +72,7 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
               })
             query.then(_ => {
-              router.push('/gishohaku1/mypage/circle')
+              router.push(`/${eventId}/mypage/circle`)
             })
           }}
         />

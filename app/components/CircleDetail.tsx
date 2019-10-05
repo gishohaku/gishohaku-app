@@ -21,6 +21,7 @@ import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
 
 import check from '../images/check.svg'
+import EventContext from '../contexts/EventContext'
 
 interface Props {
   circle: Circle
@@ -38,6 +39,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
     UserContext
   )
   const toast = useToast()
+  const { eventId } = useContext(EventContext)
   const [starCount, setStarCount] = useState(0)
 
   useEffect(() => {
@@ -133,7 +135,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                     <img src={check} />
                     <span>{starCount}</span>
                   </div>
-                  <Link href='/gishohaku1/circles/[id]/edit' as={`/gishohaku1/circles/${circle.id}/edit`}>
+                  <Link href={`/[eventId]/circles/[id]/edit`} as={`/${eventId}/circles/${circle.id}/edit`}>
                     <a
                       css={css`
                         flex: 1;
@@ -251,7 +253,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
             />
           ))}
           {editable && (
-            <Link href="/gishohaku1/books/new">
+            <Link href="/[eventId]/books/new" as={`/${eventId}/books/new`}>
               <a
                 css={css`
                   display: block;

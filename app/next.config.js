@@ -22,14 +22,20 @@ module.exports = withImages(
       exportPathMap: defaultPathMap => {
         delete defaultPathMap['/gishohaku1/circles/[id]']
         // console.log(defaultPathMap['/[eventId]/mypage'])
-        // delete defaultPathMap['/[eventId]/mypage']
+        delete defaultPathMap['/[eventId]/mypage']
+        delete defaultPathMap['/[eventId]/mypage/circle']
+        delete defaultPathMap['/[eventId]/mypage/join']
         console.log(defaultPathMap)
         const pathMap = {
           ...defaultPathMap,
           '/gishohaku1/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku1' } },
           '/gishohaku2/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku2' } },
           '/gishohaku1/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku1' } },
-          '/gishohaku2/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku2' } }
+          '/gishohaku2/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku2' } },
+          '/gishohaku1/mypage/join': { page: '/[eventId]/mypage/join', query: { eventId: 'gishohaku1' } },
+          '/gishohaku2/mypage/join': { page: '/[eventId]/mypage/join', query: { eventId: 'gishohaku2' } },
+          '/gishohaku1/mypage/book_stars': { page: '/[eventId]/mypage/book_stars', query: { eventId: 'gishohaku1' } },
+          '/gishohaku2/mypage/book_stars': { page: '/[eventId]/mypage/book_stars', query: { eventId: 'gishohaku2' } }
         }
         console.log(pathMap)
         return pathMap

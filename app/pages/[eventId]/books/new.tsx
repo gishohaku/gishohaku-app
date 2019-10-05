@@ -10,15 +10,17 @@ import BookForm from '../../../components/BookForm'
 import Loader from '../../../components/Loader'
 import FormContainer from '../../../components/FormContainer'
 import Circle from '../../../utils/circle'
-import UserContext, { User } from '../../../contexts/UserContext'
+import { User } from '../../../contexts/UserContext'
 import { NextPage } from 'next'
 import withUser from '../../../withUser'
+import EventContext from '../../../contexts/EventContext'
 
 const BooksNew: NextPage<{
   user: firebase.User
   userData: User
 }> = ({ user, userData }) => {
   const router = useRouter()
+  const { eventId } = useContext(EventContext)
   const [circle, setCircle] = useState<Circle>()
   useEffect(() => {
     const { circleRef } = userData
@@ -52,9 +54,9 @@ const BooksNew: NextPage<{
               circleName: circle.name,
               circleBooth: circle.booth,
               order: bookSnapshots.size,
-              eventId: 'gishohaku1'
+              eventId
             })
-            router.push('/gishohaku1/mypage/circle')
+            router.push(`/${eventId}/mypage/circle`)
           }}
         />
       </FormContainer>
