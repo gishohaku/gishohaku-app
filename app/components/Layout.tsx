@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { colors, media } from '../utils/style'
 
+import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
 import Header from './Header'
@@ -46,9 +47,36 @@ const Layout: React.FC<any> = props => {
         {props.children}
       </div>
       {eventId === 'gishohaku1' && <BottomBar />}
+      {eventId === 'gishohaku2' && <MypageButton />}
       <Footer />
     </>
   )
+}
+
+const MypageButton = () => {
+  const { eventId } = useContext(EventContext)
+  return <Link href="/[eventId]/mypage/circle" as={`/${eventId}/mypage/circle`}>
+    <a css={css`
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background-color: #ECB40D;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+      &:hover {
+        background-color: #dbae29;
+      }
+    `}>
+      サークルマイページ
+    </a>
+  </Link>
 }
 
 const Footer = () => (

@@ -107,7 +107,7 @@ const Header: React.FC<any> = () => {
               onClick={() => setOpen(false)}
             />
           </Link>
-          <Divider/>
+          <Divider />
           <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={css`
             text-decoration: none;
           `}>

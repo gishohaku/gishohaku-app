@@ -288,7 +288,7 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
-          {book.type == 'fanzine' && (
+          {eventId === 'gishohaku1' && book.type == 'fanzine' && (
             <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
               <a css={css(button)}>見本誌の提出</a>
             </Link>
@@ -296,7 +296,7 @@ const BookCell: React.SFC<Props> = ({
           <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
             <a css={button}>編集</a>
           </Link>
-          {(movePrev || moveNext) && (
+          {(!isFirst || !isLast) && (
             <ResponsivePopover
               placement="bottom-end"
               content={
