@@ -8,6 +8,8 @@ import { jsx, css } from '@emotion/core'
 
 import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
 import withUser from '../../../withUser'
+import EventContext from '../../../contexts/EventContext'
+import { useContext } from 'react'
 import { User } from '../../../contexts/UserContext'
 
 interface Props {
@@ -17,8 +19,8 @@ interface Props {
 
 const Mypage: React.FC<Props> = ({ userData }) => {
   const router = useRouter()
-  // const { eventId } = useEventId()
-  const eventId = 'gishohaku1'
+  const { eventId } = useContext(EventContext)
+  const circleRef = userData.event && userData.event[eventId]
 
   return (
     <Container>
@@ -32,8 +34,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         `}
       >
         <List>
-          {/* TODO */}
-          {(true || eventId === 'gishohaku1') && <>
+          {eventId === 'gishohaku1' && <>
             <Link href={`/${eventId}/circles?starred`} passHref>
               <ListItem
                 primary="チェックしたサークル"
@@ -50,7 +51,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
             </Link>
           </>
           }
-          {userData && userData.circleRef && (
+          {circleRef && (
             <>
               <Link href={`/${eventId}/mypage/circle`} passHref>
                 <ListItem

@@ -6,15 +6,17 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../../../utils/circle'
 import Book, { refToId } from '../../../utils/book'
 import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import CircleDetail from '../../../components/CircleDetail'
+
 import withUser from '../../../withUser'
 import { User } from '../../../contexts/UserContext'
+import EventContext from '../../../contexts/EventContext'
 
 const Mypage: React.FC<{
   user: firebase.User,
@@ -23,22 +25,23 @@ const Mypage: React.FC<{
   const [books, setBooks] = useState<Book[]>([])
   const [circle, setCircle] = useState<Circle>()
   const [isLoading, setLoading] = useState(true)
+  const { eventId } = useContext(EventContext)
+  const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {
     setLoading(true)
-    if (!user || !userData || !userData.circleRef) {
+    if (!circleRef) {
       setLoading(false)
       console.log('Not circle member', user, userData)
       return () => { }
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
       ; (async () => {
-        const circleRef = userData.circleRef
         if (!circleRef) { return }
         const circleSnapShot = await circleRef.get()
         setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
         const query = db.collection('books')
-          .where('circleRef', '==', circleRef)
+          .where('circle.ref', '==', circleRef)
           .orderBy('order', 'asc')
         const snapshots = await query.get()
         const books = snapshots.docs.map(book => {
@@ -50,7 +53,7 @@ const Mypage: React.FC<{
       })()
   }, [userData])
 
-  if (!userData.circleRef) {
+  if (!circleRef) {
     return (
       <MessageBox
         title="サークル向けページです。"
@@ -70,8 +73,9 @@ const Mypage: React.FC<{
           margin: 32px auto;
         `}
       >
-        <div
-          css={css`
+        {eventId === 'gishohaku1' &&
+          <div
+            css={css`
             background-color: white;
             padding: 20px;
             margin-top: 20px;
@@ -83,16 +87,17 @@ const Mypage: React.FC<{
             }
             border-radius: 8px;
           `}
-        >
-          <p>
-            このページはサークル参加者専用のページです。シェア用のページは
-            <Link href='/gishohaku1/circles/[id]' as={`/gishohaku1/circles/${circle.id}`}>
-              <a>こちら</a>
-            </Link>
-            。
+          >
+            <p>
+              このページはサークル参加者専用のページです。シェア用のページは
+            <Link href={`/${eventId}/circles/[id]`} as={`/${eventId}/circles/${circle.id}`}>
+                <a>こちら</a>
+              </Link>
+              。
           </p>
-          {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
-        </div>
+            {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
+          </div>
+        }
       </div>
       <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
     </>

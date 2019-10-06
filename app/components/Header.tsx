@@ -6,8 +6,8 @@ import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
 import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink } from 'sancho'
-import { useState } from 'react'
-import useEventId from '../useEventId'
+import { useState, useContext } from 'react'
+import EventContext from '../contexts/EventContext'
 
 const buttonSize = 48
 
@@ -37,7 +37,7 @@ const hamburgerButton = css`
 `
 
 const Header: React.FC<any> = () => {
-  const { eventId } = useEventId()
+  const { eventId } = useContext(EventContext)
   const [isOpen, setOpen] = useState(false)
   return (
     <header
@@ -107,7 +107,7 @@ const Header: React.FC<any> = () => {
               onClick={() => setOpen(false)}
             />
           </Link>
-          <Divider/>
+          <Divider />
           <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={css`
             text-decoration: none;
           `}>

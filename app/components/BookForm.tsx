@@ -23,7 +23,8 @@ const initialState: Book = {
   isNew: false,
   medium: '',
   sampleUrl: '',
-  purchaseUrl: ''
+  purchaseUrl: '',
+  eventId: 'gishohaku1'
 }
 
 const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {

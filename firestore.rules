@@ -12,6 +12,10 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(request.auth.uid))
     }
 
+    function getUserCircle(eventId) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.event[eventId]
+    }
+
     function getBook(bookID) {
       return get(/databases/$(database)/documents/books/$(bookID))
     }
@@ -41,13 +45,19 @@ service cloud.firestore {
     match /books/{bookID} {
       allow read;
       // サークルに所属している人のみ作成可能
-      allow create: if isAuthenticated() && getUser().data.circleRef != null && getUser().data.circleRef == incomingData().circleRef
+      allow create: if isAuthenticated()
+        && getUserCircle(incomingData().eventId) != null
+        && getUserCircle(incomingData().eventId) == incomingData().circle.ref;
       // 既存データのCircleRefと一致すれば更新・削除可能
-      allow update, delete: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
+      allow update, delete: if isAuthenticated()
+        && getUserCircle(resource.data.eventId) != null
+        && getUserCircle(resource.data.eventId) == existingData().circle.ref;
+        // && existingData().circle.ref == incomingData().circle.ref;
     }
 
     match /bookSubmissions/{bookID} {
-      allow read: if isAuthenticated() && getUser().data.circleRef == getBook(bookID).data.circleRef;
+      allow read: if isAuthenticated()
+        && getUserCircle(getBook(bookID).data.eventId) == getBook(bookID).data.circleRef;
       allow write: if false;
     }
 
@@ -56,19 +66,17 @@ service cloud.firestore {
       // サークルはWeb画面で作成する機能を提供しない
       allow create: if false;
       // TODO
-      allow update: if isAuthenticated() && getUser().data.circleRef == resource.__name__ && existingData().space == incomingData().space;
+      allow update: if isAuthenticated()
+        && getUserCircle(existingData().eventId) == resource.__name__
+        && existingData().booth == incomingData().booth;
     }
 
+    // TODO: startCountsにeventIDも入れること
     match /starCounts/{countId} {
       allow create, update;
       // 現在のチェック数を見れるのはサークル所属者のみ
-      allow read: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
-    }
-
-    match /starDailyCounts/{countId} {
-      allow create, update;
-      // 現在のチェック数を見れるのはサークル所属者のみ
-      allow read: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
+      allow read: if isAuthenticated()
+        && getUserCircle(existingData().eventId) == existingData().circleRef;
     }
   }
 }

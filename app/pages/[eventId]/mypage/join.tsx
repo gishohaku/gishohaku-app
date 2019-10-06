@@ -12,8 +12,10 @@ import MessageBox from '../../../components/MessageBox'
 import Loader from '../../../components/Loader'
 import qs from 'qs'
 import withUser from '../../../withUser'
+import EventContext from '../../../contexts/EventContext'
 
 const Join: React.FC = () => {
+  const { eventId } = useContext(EventContext)
   const toast = useToast()
   const router = useRouter()
   const { reloadUser } = useContext(UserContext)
@@ -26,6 +28,7 @@ const Join: React.FC = () => {
   console.log(circleId, token)
 
   useEffect(() => {
+    if (!circleId) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
     if (!circleId || !token) { return }
     const circleRef = db.collection('circles').doc(circleId)
@@ -46,7 +49,7 @@ const Join: React.FC = () => {
       title: 'サークルに参加しました',
       intent: 'success'
     })
-    router.push('/gishohaku1/mypage/circle')
+    router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }
 
   if (!circleId || !token) {

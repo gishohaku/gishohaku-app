@@ -1,8 +1,9 @@
 import React, { ErrorInfo as _ErrorInfo } from 'react'
-import App from 'next/app'
+import App, { AppContext } from 'next/app'
 import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
+import { EventProvider } from '../contexts/EventContext'
 import { initFirebase } from '../utils/firebase'
 import Layout from '../components/Layout'
 import ReactGA from 'react-ga'
@@ -23,6 +24,18 @@ const TRACKING_ID = 'UA-129667923-2'
 // }
 
 class MyApp extends App {
+  static async getInitialProps({ Component, ctx }: AppContext) {
+    let pageProps = {}
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+    return {
+      pageProps,
+      // query from next config pathmap
+      eventId: ctx.query.eventId || 'gishohaku2'
+    }
+  }
+
   componentDidMount() {
     initFirebase()
     ReactGA.initialize(TRACKING_ID, {
@@ -42,12 +55,14 @@ class MyApp extends App {
   // }
 
   public render() {
-    const { Component, pageProps, router } = this.props as any
+    const { Component, pageProps, router, eventId } = this.props as any
     return (
       <UserProvider>
-        <Layout router={router}>
-          <Component {...pageProps} />
-        </Layout>
+        <EventProvider initialId={eventId}>
+          <Layout router={router}>
+            <Component {...pageProps} />
+          </Layout>
+        </EventProvider>
       </UserProvider>
     )
   }

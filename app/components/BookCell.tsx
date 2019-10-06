@@ -31,6 +31,7 @@ import { media } from '../utils/style'
 import Contents from './Contents'
 
 import check from '../images/check.svg'
+import EventContext from '../contexts/EventContext'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -82,6 +83,7 @@ const BookCell: React.SFC<Props> = ({
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, addBookStar, removeBookStar, bookStars, openLoginModal } = useContext(UserContext)
+  const { eventId } = useContext(EventContext)
   const toast = useToast()
 
   const metadata = [
@@ -111,14 +113,12 @@ const BookCell: React.SFC<Props> = ({
   useEffect(() => {
     if (editable) {
       const db: firebase.firestore.Firestore = firebase.firestore()
-      db.collection('starCounts')
-        .doc(`books-${book.id}`)
-        .get()
-        .then(res => {
-          const count = res.exists ? (res.data() as StarCount).count : 0
-          console.log(book.id, count)
-          setStarCount(count)
-        })
+      const query = db.collection('starCounts').doc(`books-${book.id}`)
+      query.get().then(res => {
+        const count = res.exists ? (res.data() as StarCount).count : 0
+        console.log(book.id, count)
+        setStarCount(count)
+      })
     }
   }, [])
 
@@ -137,7 +137,7 @@ const BookCell: React.SFC<Props> = ({
       {isShowCircle && (
         <a
           target="_blank"
-          href={`/gishohaku1/circles/${circleId}`}
+          href={`/${eventId}/circles/${circleId}`}
           css={css`
             align-items: center;
             text-decoration: none;
@@ -286,15 +286,15 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
-          {book.type == 'fanzine' && (
-            <Link href='/gishohaku1/books/[id]/submit' as={`/gishohaku1/books/${book.id}/submit`} passHref>
+          {eventId === 'gishohaku1' && book.type == 'fanzine' && (
+            <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
               <a css={css(button)}>見本誌の提出</a>
             </Link>
           )}
-          <Link href='/gishohaku1/books/[id]/edit' as={`/gishohaku1/books/${book.id}/edit`} passHref>
+          <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
             <a css={button}>編集</a>
           </Link>
-          {(movePrev || moveNext) && (
+          {(!isFirst || !isLast) && (
             <ResponsivePopover
               placement="bottom-end"
               content={

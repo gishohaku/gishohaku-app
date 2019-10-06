@@ -21,6 +21,7 @@ import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
 
 import check from '../images/check.svg'
+import EventContext from '../contexts/EventContext'
 
 interface Props {
   circle: Circle
@@ -38,19 +39,18 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
     UserContext
   )
   const toast = useToast()
+  const { eventId } = useContext(EventContext)
   const [starCount, setStarCount] = useState(0)
 
   useEffect(() => {
     if (editable) {
       const db: firebase.firestore.Firestore = firebase.firestore()
-      db.collection('starCounts')
-        .doc(`circles-${circle.id}`)
-        .get()
-        .then(res => {
-          const count = res.exists ? (res.data() as StarCount).count : 0
-          console.log(circle.id, count)
-          setStarCount(count)
-        })
+      const query = db.collection('starCounts').doc(`circles-${circle.id}`)
+      query.get().then(res => {
+        const count = res.exists ? (res.data() as StarCount).count : 0
+        console.log(circle.id, count)
+        setStarCount(count)
+      })
     }
   }, [])
 
@@ -133,7 +133,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                     <img src={check} />
                     <span>{starCount}</span>
                   </div>
-                  <Link href='/gishohaku1/circles/[id]/edit' as={`/gishohaku1/circles/${circle.id}/edit`}>
+                  <Link href={`/[eventId]/circles/[id]/edit`} as={`/${eventId}/circles/${circle.id}/edit`}>
                     <a
                       css={css`
                         flex: 1;
@@ -162,31 +162,31 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                   </Link>
                 </div>
               ) : (
-                <CheckButton
-                  isChecked={(circle.id && circleStars.includes(circle.id)) || false}
-                  onClick={() => {
-                    if (!user) {
-                      return openLoginModal()
-                    }
-                    if (!circle.id) {
-                      return
-                    }
-                    if (circleStars.includes(circle.id)) {
-                      removeCircleStar(circle.id)
-                      toast({
-                        title: `サークルのチェックを外しました`,
-                        intent: 'success'
-                      })
-                    } else {
-                      addCircleStar(circle.id)
-                      toast({
-                        title: `サークルをチェックしました`,
-                        intent: 'success'
-                      })
-                    }
-                  }}
-                />
-              )}
+                  <CheckButton
+                    isChecked={(circle.id && circleStars.includes(circle.id)) || false}
+                    onClick={() => {
+                      if (!user) {
+                        return openLoginModal()
+                      }
+                      if (!circle.id) {
+                        return
+                      }
+                      if (circleStars.includes(circle.id)) {
+                        removeCircleStar(circle.id)
+                        toast({
+                          title: `サークルのチェックを外しました`,
+                          intent: 'success'
+                        })
+                      } else {
+                        addCircleStar(circle.id)
+                        toast({
+                          title: `サークルをチェックしました`,
+                          intent: 'success'
+                        })
+                      }
+                    }}
+                  />
+                )}
             </>
           )}
         </div>
@@ -251,7 +251,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
             />
           ))}
           {editable && (
-            <Link href="/gishohaku1/books/new">
+            <Link href="/[eventId]/books/new" as={`/${eventId}/books/new`}>
               <a
                 css={css`
                   display: block;
