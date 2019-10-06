@@ -17,6 +17,10 @@ interface Props {
   userData: User
 }
 
+const noDecoration = css`
+  text-decoration: none;
+`
+
 const Mypage: React.FC<Props> = ({ userData }) => {
   const router = useRouter()
   const { eventId } = useContext(EventContext)
@@ -36,29 +40,35 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         <List>
           {eventId === 'gishohaku1' && <>
             <Link href={`/${eventId}/circles?starred`} passHref>
-              <ListItem
-                primary="チェックしたサークル"
-                secondary="チェックをつけたサークルを確認できます"
-                contentAfter={<IconChevronRight />}
-              />
+              <a css={noDecoration}>
+                <ListItem
+                  primary="チェックしたサークル"
+                  secondary="チェックをつけたサークルを確認できます"
+                  contentAfter={<IconChevronRight />}
+                />
+              </a>
             </Link>
             <Link href={`/${eventId}/mypage/book_stars`} passHref>
-              <ListItem
-                primary="チェックした頒布物"
-                secondary="チェックをつけた頒布物が確認できます"
-                contentAfter={<IconChevronRight />}
-              />
+              <a css={noDecoration}>
+                <ListItem
+                  primary="チェックした頒布物"
+                  secondary="チェックをつけた頒布物が確認できます"
+                  contentAfter={<IconChevronRight />}
+                />
+              </a>
             </Link>
           </>
           }
           {circleRef && (
             <>
               <Link href={`/${eventId}/mypage/circle`} passHref>
-                <ListItem
-                  primary="サークル情報編集"
-                  secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
-                  contentAfter={<IconChevronRight />}
-                />
+                <a css={noDecoration}>
+                  <ListItem
+                    primary="サークル情報編集"
+                    secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
+                    contentAfter={<IconChevronRight />}
+                  />
+                </a>
               </Link>
             </>
           )}

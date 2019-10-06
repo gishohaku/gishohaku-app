@@ -8,8 +8,13 @@ import { jsx, css } from '@emotion/core'
 import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink } from 'sancho'
 import { useState, useContext } from 'react'
 import EventContext from '../contexts/EventContext'
+// import { ListItem } from '../components/List'
 
 const buttonSize = 48
+
+const noDecoration = css`
+  text-decoration: none;
+`
 
 const hamburgerButton = css`
   margin-left: auto;
@@ -90,27 +95,27 @@ const Header: React.FC<any> = () => {
       <Sheet position="right" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
         <List>
           <Link href="/gishohaku1" passHref>
-            <ListItem
-              primary="第1回 技術書同人誌博覧会"
-              secondary="2019年7月27日 開催"
-              contentAfter={<IconChevronRight />}
-              component="a"
-              onClick={() => setOpen(false)}
-            />
+            <a css={noDecoration}>
+              <ListItem
+                primary="第1回 技術書同人誌博覧会"
+                secondary="2019年7月27日 開催"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
           </Link>
           <Link href="/" passHref>
-            <ListItem
-              primary="第2回 技術書同人誌博覧会"
-              secondary="2019年12月14日 開催予定"
-              contentAfter={<IconChevronRight />}
-              component="a"
-              onClick={() => setOpen(false)}
-            />
+            <a css={noDecoration}>
+              <ListItem
+                primary="第2回 技術書同人誌博覧会"
+                secondary="2019年12月14日 開催予定"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
           </Link>
           <Divider />
-          <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={css`
-            text-decoration: none;
-          `}>
+          <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={noDecoration}>
             <ListItem
               primary="公式ブログ"
               secondary="コアスタッフによる情報発信ブログ"

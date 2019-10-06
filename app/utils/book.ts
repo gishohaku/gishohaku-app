@@ -43,6 +43,8 @@ export default interface Book {
   updatedAt?: firebase.firestore.Timestamp
 }
 
+// SSRでpropsの初期値を決定する際、循環参照では動かない。
+// このメソッドでは循環参照を避けるためDocumentReferenceをid形式に変換する
 export const refToId = (book: Book) => {
   if (!book.circle) return book
 

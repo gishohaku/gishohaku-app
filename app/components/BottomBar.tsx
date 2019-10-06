@@ -52,9 +52,8 @@ export default () => {
     <div
       css={css`
         position: fixed;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: -4px;
+        width: 100%;
         z-index: 10;
         white-space: nowrap;
       `}
@@ -64,7 +63,9 @@ export default () => {
           border: 1px solid #eee;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
           background-color: white;
-          border-radius: 8px;
+          display: flex;
+          justify-content: center;
+          padding-bottom: 4px;
         `}
       >
         <span css={spacer} />
