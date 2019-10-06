@@ -113,14 +113,12 @@ const BookCell: React.SFC<Props> = ({
   useEffect(() => {
     if (editable) {
       const db: firebase.firestore.Firestore = firebase.firestore()
-      db.collection('starCounts')
-        .doc(`books-${book.id}`)
-        .get()
-        .then(res => {
-          const count = res.exists ? (res.data() as StarCount).count : 0
-          console.log(book.id, count)
-          setStarCount(count)
-        })
+      const query = db.collection('starCounts').doc(`books-${book.id}`)
+      query.get().then(res => {
+        const count = res.exists ? (res.data() as StarCount).count : 0
+        console.log(book.id, count)
+        setStarCount(count)
+      })
     }
   }, [])
 

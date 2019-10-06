@@ -35,5 +35,12 @@ admin.initializeApp({
         eventId: 'gishohaku1'
       })
     })
+
+    const counts = await db.collection('starCounts').get()
+    counts.docs.forEach(doc => {
+      doc.ref.update({
+        eventId: 'gishohaku1'
+      })
+    })
   }
 })()

@@ -45,14 +45,12 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
   useEffect(() => {
     if (editable) {
       const db: firebase.firestore.Firestore = firebase.firestore()
-      db.collection('starCounts')
-        .doc(`circles-${circle.id}`)
-        .get()
-        .then(res => {
-          const count = res.exists ? (res.data() as StarCount).count : 0
-          console.log(circle.id, count)
-          setStarCount(count)
-        })
+      const query = db.collection('starCounts').doc(`circles-${circle.id}`)
+      query.get().then(res => {
+        const count = res.exists ? (res.data() as StarCount).count : 0
+        console.log(circle.id, count)
+        setStarCount(count)
+      })
     }
   }, [])
 
@@ -164,31 +162,31 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                   </Link>
                 </div>
               ) : (
-                <CheckButton
-                  isChecked={(circle.id && circleStars.includes(circle.id)) || false}
-                  onClick={() => {
-                    if (!user) {
-                      return openLoginModal()
-                    }
-                    if (!circle.id) {
-                      return
-                    }
-                    if (circleStars.includes(circle.id)) {
-                      removeCircleStar(circle.id)
-                      toast({
-                        title: `サークルのチェックを外しました`,
-                        intent: 'success'
-                      })
-                    } else {
-                      addCircleStar(circle.id)
-                      toast({
-                        title: `サークルをチェックしました`,
-                        intent: 'success'
-                      })
-                    }
-                  }}
-                />
-              )}
+                  <CheckButton
+                    isChecked={(circle.id && circleStars.includes(circle.id)) || false}
+                    onClick={() => {
+                      if (!user) {
+                        return openLoginModal()
+                      }
+                      if (!circle.id) {
+                        return
+                      }
+                      if (circleStars.includes(circle.id)) {
+                        removeCircleStar(circle.id)
+                        toast({
+                          title: `サークルのチェックを外しました`,
+                          intent: 'success'
+                        })
+                      } else {
+                        addCircleStar(circle.id)
+                        toast({
+                          title: `サークルをチェックしました`,
+                          intent: 'success'
+                        })
+                      }
+                    }}
+                  />
+                )}
             </>
           )}
         </div>

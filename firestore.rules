@@ -75,7 +75,8 @@ service cloud.firestore {
     match /starCounts/{countId} {
       allow create, update;
       // 現在のチェック数を見れるのはサークル所属者のみ
-      allow read: if isAuthenticated() && getUser().data.circleRef == existingData().circleRef;
+      allow read: if isAuthenticated()
+        && getUserCircle(existingData().eventId) == existingData().circleRef;
     }
   }
 }
