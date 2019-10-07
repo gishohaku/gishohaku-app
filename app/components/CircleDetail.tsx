@@ -10,7 +10,7 @@ import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
 
 import Book from '../utils/book'
-import Circle, { categories } from '../utils/circle'
+import Circle, { categories, allCategories } from '../utils/circle'
 import BookCell from '../components/BookCell'
 import CheckButton from './CheckButton'
 import { media } from '../utils/style'
@@ -92,7 +92,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                 {circle.booth && (
                   <Label backgroundColor={'#2A5773'} color={'white'} text={circle.booth} />
                 )}
-                <Label text={categories[circle.category]} />
+                <Label text={allCategories[circle.category]} />
               </div>
               <h2
                 css={css`

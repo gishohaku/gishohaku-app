@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/core'
 
 import circleTumbnail from '../images/circle.png'
 
-import Circle, { categories } from '../utils/circle'
+import Circle, { allCategories } from '../utils/circle'
 import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
@@ -74,7 +74,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
               opacity: 0.6;
             `}
           >
-            {categories[circle.category]}
+            {allCategories[circle.category]}
           </p>
         </a>
       </Link>

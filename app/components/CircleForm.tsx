@@ -2,7 +2,7 @@
 import { Button, InputGroup, Input, Divider, Select, useTheme, Text } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
-import Circle, { categories, CricleCategory, plans, CriclePlan } from '../utils/circle'
+import Circle, { categories, CricleCategory, plans, CriclePlan, allCategories } from '../utils/circle'
 import ImageUploader from './ImageUploader'
 import ImageBox from './ImageBox'
 
@@ -59,14 +59,14 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                       }}
                     />
                   ) : (
-                    <ImageUploader
-                      user={user}
-                      size="circlecut"
-                      addUrl={(url: string) => {
-                        setFieldValue('image', url)
-                      }}
-                    />
-                  )}
+                      <ImageUploader
+                        user={user}
+                        size="circlecut"
+                        addUrl={(url: string) => {
+                          setFieldValue('image', url)
+                        }}
+                      />
+                    )}
                 </div>
                 <div>
                   <Text
@@ -91,14 +91,14 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                       }}
                     />
                   ) : (
-                    <ImageUploader
-                      user={user}
-                      size="circlecut"
-                      addUrl={(url: string) => {
-                        setFieldValue('imageMonochro', url)
-                      }}
-                    />
-                  )}
+                      <ImageUploader
+                        user={user}
+                        size="circlecut"
+                        addUrl={(url: string) => {
+                          setFieldValue('imageMonochro', url)
+                        }}
+                      />
+                    )}
                 </div>
               </div>
               <Text
@@ -156,9 +156,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 value={values.category}
               >
                 <option>選択してください</option>
-                {Object.keys(categories).map(key => {
+                {Object.keys(allCategories).map(key => {
                   const categoryKey = key as CricleCategory
-                  const label = categories[categoryKey]
+                  const label = allCategories[categoryKey]
                   return (
                     <option value={key} key={key}>
                       {label}
