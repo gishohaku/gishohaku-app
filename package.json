@@ -1,8 +1,9 @@
 {
-  "name": "next-spr-wordpress",
+  "name": "gishohaku-app",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "next app",
     "build:app": "next build app",
