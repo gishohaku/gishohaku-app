@@ -1,6 +1,6 @@
 import { EventId } from './event'
 
-export const categories = {
+const categories1 = {
   'software/frontend': 'ソフトウェア／フロントエンド',
   'software/backend': 'ソフトウェア／バックエンド',
   'software/ml': 'ソフトウェア／機械学習・統計分析',
@@ -55,9 +55,9 @@ const categories2 = {
   "IT-インフラ/サービス構築": "IT-インフラ/サービス構築"
 }
 
-export const allCategories = {
-  ...categories,
-  ...categories2
+export const categoriesByEvent = {
+  gishohaku1: categories1,
+  gishohaku2: categories2
 }
 
 export const plans = {
@@ -65,8 +65,15 @@ export const plans = {
   'premium': '倍量プラン'
 }
 
-export type CricleCategory = keyof typeof categories | keyof typeof categories2
+export type CricleCategory = keyof typeof categories1 | keyof typeof categories2
 export type CriclePlan = keyof typeof plans
+
+export const allCategories: {
+  [key in CricleCategory]: string
+} = {
+  ...categories1,
+  ...categories2
+}
 
 export default interface Circle {
   id?: string

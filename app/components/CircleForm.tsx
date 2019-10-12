@@ -2,9 +2,11 @@
 import { Button, InputGroup, Input, Divider, Select, useTheme, Text } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
-import Circle, { categories, CricleCategory, plans, CriclePlan, allCategories } from '../utils/circle'
+import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'
 import ImageUploader from './ImageUploader'
 import ImageBox from './ImageBox'
+import { useContext } from 'react'
+import EventContext from '../contexts/EventContext'
 
 interface Props {
   onSubmit: (circle: Circle) => void
@@ -14,6 +16,8 @@ interface Props {
 
 const CircleForm = ({ onSubmit, user, circle }: Props) => {
   const theme = useTheme()
+  const { eventId } = useContext(EventContext)
+  const categoryOptions = categoriesByEvent[eventId]
   return (
     <Formik
       initialValues={circle}
@@ -156,9 +160,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 value={values.category}
               >
                 <option>選択してください</option>
-                {Object.keys(allCategories).map(key => {
-                  const categoryKey = key as CricleCategory
-                  const label = allCategories[categoryKey]
+                {Object.keys(categoryOptions).map(key => {
+                  const categoryKey = key as keyof typeof categoryOptions
+                  const label = categoryOptions[categoryKey]
                   return (
                     <option value={key} key={key}>
                       {label}
@@ -183,10 +187,10 @@ const CustomInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }: FieldProps<any>) => (
-  <div>
-    <Input type="text" {...field} {...props} />
-    {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
-  </div>
-)
+    <div>
+      <Input type="text" {...field} {...props} />
+      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
+    </div>
+  )
 
 export default CircleForm

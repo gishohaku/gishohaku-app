@@ -10,7 +10,7 @@ import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
 
 import Book from '../utils/book'
-import Circle, { categories, allCategories } from '../utils/circle'
+import Circle, { allCategories } from '../utils/circle'
 import BookCell from '../components/BookCell'
 import CheckButton from './CheckButton'
 import { media } from '../utils/style'
