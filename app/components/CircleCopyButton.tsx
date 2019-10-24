@@ -10,12 +10,18 @@ import { useState, useCallback, useContext } from 'react'
 
 import UserContext from '../contexts/UserContext'
 import EventContext from '../contexts/EventContext'
+import { Button } from 'sancho'
 
 const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
   const [processing, setProcessing] = useState(false)
 
   const start = useCallback(async () => {
     setProcessing(true)
+
+    if (!confirm('頒布物のインポートを行います。この操作は取り消せません。')) {
+      setProcessing(false)
+      return
+    }
     const db = firebase.firestore()
 
     console.log('1')
@@ -45,8 +51,9 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
       }
       db.collection('books').add(newBook)
     })
+
+    location.reload()
     setProcessing(false)
-    console.log('DONE')
   }, [fromCircleId, toCircleId])
 
   return {
@@ -63,9 +70,18 @@ const CircleCopyButton: React.FC = () => {
   const toCircleRef = userData!.event && userData!.event[eventId]
   if (!fromCircleRef || !toCircleRef) return null
   const { processing, start } = useCircleCopy(fromCircleRef.id, toCircleRef.id)
-  return <div>
-    {fromCircleRef.path} => {toCircleRef.path}
-    <button onClick={start}>copy</button>
+  return <div css={css`
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    background-color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+  `}>
+    技書博1からの頒布物のインポートを行えます。
+    <Button loading={processing} onClick={start} css={css`
+      margin-left: auto;
+    `}>インポート</Button>
   </div>
 }
 

@@ -123,7 +123,9 @@ const Mypage: React.FC<{
             {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
           </div>
         }
-        <CircleCopyButton />
+        {eventId === 'gishohaku2' &&
+          <CircleCopyButton />
+        }
       </div>
       <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
     </>
