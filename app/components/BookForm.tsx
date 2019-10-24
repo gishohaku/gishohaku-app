@@ -132,7 +132,10 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                 })}
               </Select>
             </InputGroup>
-            <InputGroup label="説明">
+            <InputGroup
+              label="説明"
+              helpText="Markdownが使用可能です。"
+            >
               <Field name="description" component={CustomTextarea} rows={5} />
             </InputGroup>
             <InputGroup
