@@ -49,4 +49,4 @@ workflows:
             branches:
               only:
                 - master
-                - node10
+                - next9.1
