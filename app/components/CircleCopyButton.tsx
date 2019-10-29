@@ -78,7 +78,7 @@ const CircleCopyButton: React.FC = () => {
     display: flex;
     align-items: center;
   `}>
-    技書博1からの頒布物のインポートを行えます。
+    技書博1で登録した頒布物のインポートを行えます。
     <Button loading={processing} onClick={start} css={css`
       margin-left: auto;
     `}>インポート</Button>
