@@ -6,7 +6,7 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import { jsx, css } from '@emotion/core'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useCallback } from 'react'
 
 import Circle from '../../../utils/circle'
 import Book, { refToId } from '../../../utils/book'
@@ -17,6 +17,31 @@ import CircleDetail from '../../../components/CircleDetail'
 import withUser from '../../../withUser'
 import { User } from '../../../contexts/UserContext'
 import EventContext from '../../../contexts/EventContext'
+import CircleCopyButton from '../../../components/CircleCopyButton'
+
+const useCircleCopy = (circleId: string) => {
+  const [processing, setProcessing] = useState(false)
+
+  const start = useCallback(async () => {
+    setProcessing(true)
+    const db = firebase.firestore()
+    const getQuery = db.collection('circles').where('circleId', '==', circleId)
+    const circles = await getQuery.get()
+    circles.docs.forEach(async (circle) => {
+      const { id, eventId, ...data } = circle.data()
+      db.collection('circles').add({
+        ...circle,
+        eventId: 'gishohaku2'
+      })
+    })
+    setProcessing(false)
+  }, [circleId])
+
+  return {
+    processing,
+    start
+  }
+}
 
 const Mypage: React.FC<{
   user: firebase.User,
@@ -97,6 +122,9 @@ const Mypage: React.FC<{
           </p>
             {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
           </div>
+        }
+        {eventId === 'gishohaku2' &&
+          <CircleCopyButton />
         }
       </div>
       <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
