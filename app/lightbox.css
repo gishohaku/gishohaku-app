@@ -384,12 +384,12 @@
 }
 
 .button.primary {
-  border: 1px solid #64bcfc;
+  border: 1px solid #516c9d;
   background-color: #ffffff;
-  color: #64bcfc;
+  color: #516c9d;
 }
 .button.primary:active, .button.primary:focus, .button.primary:hover {
-  border: 1px solid #64bcfc;
-  background-color: #64bcfc;
+  border: 1px solid #516c9d;
+  background-color: #516c9d;
   color: #ffffff;
 }
