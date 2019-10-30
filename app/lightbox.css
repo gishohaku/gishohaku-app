@@ -369,27 +369,3 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
-
-.button {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  color: #444444;
-  line-height: 4rem;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-.button:active, .button:focus, .button:hover {
-  background-color: #e7e7e7;
-}
-
-.button.primary {
-  border: 1px solid #516c9d;
-  background-color: #ffffff;
-  color: #516c9d;
-}
-.button.primary:active, .button.primary:focus, .button.primary:hover {
-  border: 1px solid #516c9d;
-  background-color: #516c9d;
-  color: #ffffff;
-}

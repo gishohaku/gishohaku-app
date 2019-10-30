@@ -50,7 +50,7 @@
     "react-lazyload": "^2.5.0",
     "react-virtualized": "^9.21.1",
     "request": "^2.88.0",
-    "sancho": "^3.5.4"
+    "sancho": "^3.5.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
