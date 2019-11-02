@@ -54,8 +54,6 @@ const BooksNew: NextPage<{
                 booth: circle.booth
               },
               circleRef: circleRef,
-              circleName: circle.name,
-              circleBooth: circle.booth,
               order: bookSnapshots.size,
               eventId
             })

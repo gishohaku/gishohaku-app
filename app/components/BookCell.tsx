@@ -165,9 +165,9 @@ const BookCell: React.SFC<Props> = ({
               margin-right: 6px;
             `}
           >
-            {book.circleBooth}
+            {book.circle!.booth}
           </div>{' '}
-          {book.circleName}
+          {book.circle!.name}
           <IconChevronRight />
         </a>
         // <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>

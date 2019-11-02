@@ -31,8 +31,6 @@ export default interface Book {
   sampleUrl: string
   purchaseUrl: string
   circleRef?: any
-  circleName?: string
-  circleBooth?: string
   circle?: {
     ref: firestore.DocumentReference
     name: string
