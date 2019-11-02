@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -9,10 +9,10 @@ import { useToast, Button, Divider } from 'sancho'
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import Book from '../utils/book'
 import { User } from '../contexts/UserContext'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
+import useBook from '../hooks/useBook'
 
 interface Props {
   user: firebase.User
@@ -23,22 +23,11 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const toast = useToast()
   const { eventId } = useContext(EventContext)
   const router = useRouter()
-  const [book, setBook] = useState()
   const id = router.query.id as string
+  const { book } = useBook(id)
   // Redirect
   if (!id) { return null }
   const circleRef = userData.event && userData.event[eventId]
-
-  useEffect(() => {
-    const db: firebase.firestore.Firestore = firebase.firestore()
-    const query = db.collection('books').doc(id)
-    query.get().then(docRef => {
-      setBook({
-        id: docRef.id,
-        ...(docRef.data() as Book)
-      })
-    })
-  }, [id])
 
   const deleteBook = useCallback(async () => {
     if (!confirm('頒布物を削除しますか？')) {

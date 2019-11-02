@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import firebase from 'firebase/app'
@@ -9,7 +9,6 @@ import { jsx } from '@emotion/core'
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import Circle from '../utils/circle'
 import { User } from '../contexts/UserContext'
 import { NextPage } from 'next'
 import withUser from '../withUser'
@@ -23,7 +22,7 @@ const BooksNew: NextPage<{
   const router = useRouter()
   const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
-  const { circle } = useCircle(circleRef)
+  const { circle } = useCircle(circleRef && circleRef.id)
 
   if (!circleRef) { return <p>権限ないっす</p> }
   if (!circle) { return <Loader /> }

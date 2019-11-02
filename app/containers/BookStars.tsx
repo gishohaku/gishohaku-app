@@ -12,24 +12,10 @@ import Book, { refToId } from '../utils/book'
 import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
 import withUser from '../withUser'
+import useBook from '../hooks/useBook'
 
 const AsnycBookCell = ({ bookId }: any) => {
-  const [book, setBook] = useState<Book | null>(null)
-
-  useEffect(() => {
-    const db = firebase.firestore()
-    db.collection('books')
-      .doc(bookId)
-      .get()
-      .then(snapshot => {
-        const data = snapshot.data() as Book
-        const book = { id: snapshot.id, ...data }
-        if (snapshot.exists) {
-          setBook(refToId(book))
-        }
-      })
-  }, [bookId])
-
+  const { book } = useBook(bookId)
   return book ? <BookCell isShowCircle={true} book={book} /> : null
 }
 

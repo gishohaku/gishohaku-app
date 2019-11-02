@@ -22,10 +22,8 @@ const CircleEdit: NextPage<{
   const router = useRouter()
   const { eventId } = useContext(EventContext)
 
-  const db: firebase.firestore.Firestore = firebase.firestore()
   const id = router.query.id as string
-  const docRef = db.collection('circles').doc(id)
-  const { circle } = useCircle(docRef)
+  const { circle } = useCircle(id)
 
   if (!circle) { return <Loader /> }
 
