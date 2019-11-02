@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 import { jsx, css } from '@emotion/core'
+import styled from '@emotion/styled'
 
 import circleTumbnail from '../images/circle.png'
 
@@ -9,7 +10,7 @@ import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
 import { useToast } from 'sancho'
-import { useContext } from 'react'
+import { useContext, useCallback } from 'react'
 import UserContext from '../contexts/UserContext'
 
 interface Props {
@@ -24,83 +25,69 @@ const width = 252
 const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, removeCircleStar }) => {
   const { user, openLoginModal } = useContext(UserContext)
   const toast = useToast()
-  if (!circle.id) {
-    return null
-  }
+
+  const onCheckClick = useCallback(() => {
+    if (!user) {
+      return openLoginModal()
+    }
+    if (!circle.id) return
+    if (circleStars.includes(circle.id)) {
+      removeCircleStar(circle.id)
+      toast({ title: `サークルのチェックを外しました` })
+    } else {
+      addCircleStar(circle.id)
+      toast({ title: `サークルをチェックしました` })
+    }
+  }, [user, circle, circleStars])
+
+  if (!circle.id) return null
 
   return (
-    <div
-      css={css`
-        margin: 0 12px 24px;
-        width: 252px;
-        @media ${media.small} {
-          width: 46%;
-          margin: 0 1% 24px;
-        }
-      `}
-    >
-      <Link
-        href='/gishohaku1/circles/[id]'
-        as={`/gishohaku1/circles/${circle.id}`}
-        key={circle.id}
-        passHref
-      >
-        <a
-          css={css`
-            text-decoration: none;
-            display: inline-block;
-            max-width: ${width}px;
-            width: 100%;
-            margin-bottom: 4px;
-            color: inherit;
-            &:hover h2 {
-              color: ${colors.primary};
-            }
-          `}
-        >
+    <Container>
+      <Link href='/gishohaku1/circles/[id]' as={`/gishohaku1/circles/${circle.id}`} key={circle.id} passHref>
+        <CircleLink>
           <ImageBox size="circlecut" imageUrl={circle.image || circleTumbnail} />
-          <h2
-            css={css`
-              font-size: 16px;
-              font-weight: bold;
-              margin-top: 2px;
-            `}
-          >
-            {circle.booth} {circle.name}
-          </h2>
-          <p
-            css={css`
-              font-size: 12px;
-              opacity: 0.6;
-            `}
-          >
-            {allCategories[circle.category]}
-          </p>
-        </a>
+          <CircleName>{circle.booth} {circle.name}</CircleName>
+          <CircleCategory>{allCategories[circle.category]}</CircleCategory>
+        </CircleLink>
       </Link>
       <CheckButton
         isChecked={(circle.id && circleStars.includes(circle.id)) || false}
-        onClick={() => {
-          if (!user) {
-            return openLoginModal()
-          }
-          if (!circle.id) {
-            return
-          }
-          if (circleStars.includes(circle.id)) {
-            removeCircleStar(circle.id)
-            toast({
-              title: `サークルのチェックを外しました`
-            })
-          } else {
-            addCircleStar(circle.id)
-            toast({
-              title: `サークルをチェックしました`
-            })
-          }
-        }}
+        onClick={onCheckClick}
       />
-    </div>
+    </Container>
   )
 }
 export default CircleCell
+
+const Container = styled.div`
+  margin: 0 12px 24px;
+  width: 252px;
+  @media ${media.small} {
+    width: 46%;
+    margin: 0 1% 24px;
+  }
+`
+
+const CircleLink = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  max-width: ${width}px;
+  width: 100%;
+  margin-bottom: 4px;
+  color: inherit;
+  &:hover h2 {
+    color: ${colors.primary};
+  }
+`
+
+const CircleName = styled.h2`
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 2px;
+`
+
+const CircleCategory = styled.div`
+  font-size: 12px;
+  opacity: 0.6;
+`
