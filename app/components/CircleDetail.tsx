@@ -172,14 +172,9 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
               })
               console.log(newBooks)
               setBooks && setBooks(newBooks)
-              const merge = true
-              newBooks
-                .map(b => b.id)
-                .forEach((bookId, order) => {
-                  db.collection('books')
-                    .doc(bookId)
-                    .set({ order }, { merge })
-                })
+              newBooks.map(b => b.id).forEach((bookId, order) => {
+                db.collection('books').doc(bookId).update({ order })
+              })
               toast({
                 title: `頒布物を並び替えました`,
                 intent: 'success'
@@ -193,14 +188,9 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
               })
               console.log(newBooks)
               setBooks && setBooks(newBooks)
-              const merge = true
-              newBooks
-                .map(b => b.id)
-                .forEach((bookId, order) => {
-                  db.collection('books')
-                    .doc(bookId)
-                    .set({ order }, { merge })
-                })
+              newBooks.map(b => b.id).forEach((bookId, order) => {
+                db.collection('books').doc(bookId).update({ order })
+              })
               toast({
                 title: `頒布物を並び替えました`,
                 intent: 'success'
