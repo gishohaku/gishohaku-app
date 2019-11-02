@@ -23,6 +23,7 @@ import { useToast } from 'sancho'
 
 import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
+import CheckCount from './CheckCount'
 
 interface Props {
   circle: Circle
@@ -61,12 +62,12 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
     <Container>
       <div
         css={css`
-            width: 258px;
-            margin-right: 48px;
-            @media ${media.medium} {
-              margin: 0 0 24px;
-            }
-          `}
+          width: 258px;
+          margin-right: 48px;
+          @media ${media.medium} {
+            margin: 0 0 24px;
+          }
+        `}
       >
         <ImageBox width={258} size="circlecut" imageUrl={circle.image || circleTumbnail} />
         <div style={{ marginTop: 8 }}>
@@ -78,29 +79,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
         <CircleName>{circle.name}</CircleName>
         {editable ? (
           <div style={{ display: 'flex' }}>
-            <div
-              css={css`
-                border: 1px solid #eee;
-                background-color: #eee;
-                text-decoration: none;
-                padding: 6px 12px;
-                border-radius: 4px;
-                margin-right: 6px;
-                min-width: 72px;
-                text-align: center;
-                font-weight: bold;
-                display: flex;
-                justify-content: center;
-                > img {
-                  margin-right: 4px;
-                  opacity: 0.4;
-                  width: 22px;
-                }
-              `}
-            >
-              <img src={check} />
-              <span>{starCount}</span>
-            </div>
+            <CheckCount count={starCount} />
             <Link href={`/[eventId]/circles/[id]/edit`} as={`/${eventId}/circles/${circle.id}/edit`}>
               <a
                 css={css`
@@ -118,6 +97,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                   display: block;
                   cursor: pointer;
                   text-align: center;
+                  margin-left: 8px;
 
                   &:hover {
                     background-color: #2a5773;
