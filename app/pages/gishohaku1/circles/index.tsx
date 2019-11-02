@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
 import { Container, Button, IconMap } from 'sancho'
@@ -38,40 +39,24 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
       <CircleSelect circleId="" starIds={circleStars} router={router} />
       <Container
         css={css`
-        max-width: ${1080 + 12 * 2}px;
-        margin-top: px;
-        padding: 0 !important;
-      `}
+          max-width: ${1080 + 12 * 2}px;
+          margin-top: px;
+          padding: 0 !important;
+        `}
       >
         <SEO title="サークル一覧" />
-        <div
-          css={css`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 24px;
-        `}
-        >
-          <Button iconBefore={<IconMap />} css={css`
-          margin-left: 8px;
-        `} onClick={() => {
-              setOpenMap(true)
-            }}>
+        <MapContainer>
+          <Button iconBefore={<IconMap />} css={css` margin-left: 8px; `} onClick={() => {
+            setOpenMap(true)
+          }}>
             会場マップ
-        </Button>
+          </Button>
           {isOpenMap && <Lightbox
             mainSrc="/static/map.png"
             onCloseRequest={() => setOpenMap(false)}
           />}
-        </div>
-        <div
-          css={css`
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          margin-top: 24px;
-        `}
-        >
+        </MapContainer>
+        <CirclesList>
           {filteredCircles.map((circle: Circle) => {
             return (
               <CircleCell
@@ -83,7 +68,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
               />
             )
           })}
-        </div>
+        </CirclesList>
       </Container>
     </>
   )
@@ -99,3 +84,17 @@ Index.getInitialProps = async ({ res }) => {
   return { circles }
 }
 export default withRouter(Index)
+
+const CirclesList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+`
+
+const MapContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+`
