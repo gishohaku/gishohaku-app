@@ -6,13 +6,13 @@ import 'firebase/firestore'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import Loader from '../../../../components/Loader'
-import FormContainer from '../../../../components/FormContainer'
-import { User } from '../../../../contexts/UserContext'
-import EventContext from '../../../../contexts/EventContext'
-import CircleForm from '../../../../components/CircleForm'
-import withUser from '../../../../withUser'
-import useCircle from '../../../../hooks/useCircle'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
+import { User } from '../contexts/UserContext'
+import EventContext from '../contexts/EventContext'
+import CircleForm from '../components/CircleForm'
+import withUser from '../withUser'
+import useCircle from '../hooks/useCircle'
 
 
 const CircleEdit: NextPage<{

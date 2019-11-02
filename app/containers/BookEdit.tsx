@@ -6,13 +6,13 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useToast, Button, Divider } from 'sancho'
 
-import BookForm from '../../../../components/BookForm'
-import Loader from '../../../../components/Loader'
-import FormContainer from '../../../../components/FormContainer'
-import Book from '../../../../utils/book'
-import { User } from '../../../../contexts/UserContext'
-import withUser from '../../../../withUser'
-import EventContext from '../../../../contexts/EventContext'
+import BookForm from '../components/BookForm'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
+import Book from '../utils/book'
+import { User } from '../contexts/UserContext'
+import withUser from '../withUser'
+import EventContext from '../contexts/EventContext'
 
 interface Props {
   user: firebase.User

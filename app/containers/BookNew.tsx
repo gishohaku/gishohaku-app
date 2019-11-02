@@ -6,15 +6,15 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx } from '@emotion/core'
 
-import BookForm from '../../../components/BookForm'
-import Loader from '../../../components/Loader'
-import FormContainer from '../../../components/FormContainer'
-import Circle from '../../../utils/circle'
-import { User } from '../../../contexts/UserContext'
+import BookForm from '../components/BookForm'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
+import Circle from '../utils/circle'
+import { User } from '../contexts/UserContext'
 import { NextPage } from 'next'
-import withUser from '../../../withUser'
-import EventContext from '../../../contexts/EventContext'
-import useCircle from '../../../hooks/useCircle'
+import withUser from '../withUser'
+import EventContext from '../contexts/EventContext'
+import useCircle from '../hooks/useCircle'
 
 const BooksNew: NextPage<{
   user: firebase.User
