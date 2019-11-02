@@ -45,8 +45,6 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
           booth
         },
         circleRef: toCircleRef,
-        circleName: name,
-        circleBooth: booth,
         eventId: 'gishohaku2'
       }
       db.collection('books').add(newBook)
