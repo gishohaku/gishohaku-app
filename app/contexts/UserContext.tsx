@@ -40,29 +40,29 @@ export const UserProvider = (props: any) => {
   const [circleStars, setCircleStars] = useState<string[]>([])
   const [isOpenModal, setModal] = useState<boolean>(false)
 
-  const fetchBookStars = async (user: firebase.User) => {
-    const db: firebase.firestore.Firestore = firebase.firestore()
-    const snapshots = await db.collection(`users/${user.uid}/bookStars`).get()
-    const starIds: string[] = []
-    snapshots.forEach(snapshot => {
-      const { bookRef } = snapshot.data()
-      starIds.push(bookRef.id)
-    })
-    setBookStars(starIds)
-  }
-
-  const fetchCircleStars = async (user: firebase.User) => {
-    const db: firebase.firestore.Firestore = firebase.firestore()
-    const snapshots = await db.collection(`users/${user.uid}/circleStars`).get()
-    const starIds: string[] = []
-    snapshots.forEach(snapshot => {
-      const { circleRef } = snapshot.data()
-      starIds.push(circleRef.id)
-    })
-    setCircleStars(starIds)
-  }
-
   useEffect(() => {
+    const fetchBookStars = async (user: firebase.User) => {
+      const db: firebase.firestore.Firestore = firebase.firestore()
+      const snapshots = await db.collection(`users/${user.uid}/bookStars`).get()
+      const starIds: string[] = []
+      snapshots.forEach(snapshot => {
+        const { bookRef } = snapshot.data()
+        starIds.push(bookRef.id)
+      })
+      setBookStars(starIds)
+    }
+
+    const fetchCircleStars = async (user: firebase.User) => {
+      const db: firebase.firestore.Firestore = firebase.firestore()
+      const snapshots = await db.collection(`users/${user.uid}/circleStars`).get()
+      const starIds: string[] = []
+      snapshots.forEach(snapshot => {
+        const { circleRef } = snapshot.data()
+        starIds.push(circleRef.id)
+      })
+      setCircleStars(starIds)
+    }
+
     const auth: firebase.auth.Auth = firebase.auth()
     auth.onAuthStateChanged(async user => {
       setIsLoading(true)
@@ -116,42 +116,36 @@ export const UserProvider = (props: any) => {
       return
     }
     const db: firebase.firestore.Firestore = firebase.firestore()
-    setBookStars([...bookStars, bookId])
     const bookRef = db.collection('books').doc(bookId)
+    setBookStars([...bookStars, bookId])
     incrementStarCount(bookRef, 1)
     return await db
       .collection(`users/${currentUser.uid}/bookStars`)
       .doc(bookId)
       .set({
-        bookRef: db.collection('books').doc(bookId),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        bookRef, createdAt: firebase.firestore.FieldValue.serverTimestamp()
       })
   }
 
   const addCircleStar = async (circleId: string) => {
-    if (!currentUser) {
-      return
-    }
+    if (!currentUser) { return }
     const db = firebase.firestore()
-    setCircleStars([...circleStars, circleId])
     const circleRef = db.collection('circles').doc(circleId)
+    setCircleStars([...circleStars, circleId])
     incrementStarCount(circleRef, 1)
     return await db
       .collection(`users/${currentUser.uid}/circleStars`)
       .doc(circleId)
       .set({
-        circleRef: db.collection('circles').doc(circleId),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        circleRef, createdAt: firebase.firestore.FieldValue.serverTimestamp()
       })
   }
 
   const removeBookStar = async (bookId: string) => {
-    if (!currentUser) {
-      return
-    }
+    if (!currentUser) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
+    const bookRef = db.collection('books').doc(bookId)
     setBookStars(bookStars.filter(staredBookId => staredBookId !== bookId))
-    const bookRef = await db.collection('books').doc(bookId)
     incrementStarCount(bookRef, -1)
     return db
       .collection(`users/${currentUser.uid}/bookStars`)
@@ -160,12 +154,10 @@ export const UserProvider = (props: any) => {
   }
 
   const removeCircleStar = async (circleId: string) => {
-    if (!currentUser) {
-      return
-    }
+    if (!currentUser) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
+    const circleRef = db.collection('circles').doc(circleId)
     setCircleStars(circleStars.filter(staredCircleId => staredCircleId !== circleId))
-    const circleRef = await db.collection('circles').doc(circleId)
     incrementStarCount(circleRef, -1)
     return db
       .collection(`users/${currentUser.uid}/circleStars`)
