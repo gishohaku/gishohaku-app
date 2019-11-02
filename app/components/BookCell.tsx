@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 import { jsx, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import marked from 'marked'
 
 import Book, { types, mediums } from '../utils/book'
@@ -32,6 +33,7 @@ import Contents from './Contents'
 
 import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
+import CheckCount from './CheckCount'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -123,17 +125,7 @@ const BookCell: React.SFC<Props> = ({
   }, [])
 
   return (
-    <div
-      css={css`
-        background-color: white;
-        margin-bottom: 20px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-        border-radius: 8px;
-      `}
-      key={book.id}
-      ref={docRef}
-    >
+    <Container ref={docRef}>
       {isShowCircle && (
         <a
           target="_blank"
@@ -170,9 +162,6 @@ const BookCell: React.SFC<Props> = ({
           {book.circle!.name}
           <IconChevronRight />
         </a>
-        // <Link href={`/circles/_id?id=${circleId}`} as={`/circles/${circleId}`} passHref>
-        //   <a>{book.circleName}</a>
-        // </Link>
       )}
       <div
         css={css`
@@ -192,14 +181,7 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
-          <div
-            css={css`
-              font-size: 20px;
-              font-weight: bold;
-            `}
-          >
-            {book.title}
-          </div>
+          <BookTitle>{book.title}</BookTitle>
           <div
             css={css`
               font-size: 13px;
@@ -217,59 +199,32 @@ const BookCell: React.SFC<Props> = ({
           </div>
         </div>
 
-        {editable ? (
-          <div
-            css={css`
-              border: 1px solid #eee;
-              background-color: #eee;
-              text-decoration: none;
-              padding: 6px 12px;
-              border-radius: 4px;
-              min-width: 72px;
-              text-align: center;
-              font-weight: bold;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              margin-left: auto !important;
-              > img {
-                margin-right: 4px;
-                opacity: 0.4;
-                width: 22px;
+        {editable ? <CheckCount count={starCount} /> : (
+          <CheckButton
+            isChecked={(book.id && bookStars.includes(book.id)) || false}
+            onClick={() => {
+              if (!user) {
+                return openLoginModal()
               }
-            `}
-          >
-            <img src={check} />
-            <span>{starCount}</span>
-          </div>
-        ) : (
-            <CheckButton
-              isChecked={(book.id && bookStars.includes(book.id)) || false}
-              onClick={() => {
-                if (!user) {
-                  return openLoginModal()
-                }
-                if (!book.id) {
-                  return
-                }
-                if (bookStars.includes(book.id)) {
-                  console.log('remove book start')
-                  removeBookStar(book.id)
-                  toast({
-                    title: `「${book.title}」のチェックを外しました`,
-                    intent: 'success'
-                  })
-                } else {
-                  console.log('create book start')
-                  addBookStar(book.id)
-                  toast({
-                    title: `「${book.title}」をチェックしました`,
-                    intent: 'success'
-                  })
-                }
-              }}
-            />
-          )}
+              if (!book.id) return
+              if (bookStars.includes(book.id)) {
+                console.log('remove book start')
+                removeBookStar(book.id)
+                toast({
+                  title: `「${book.title}」のチェックを外しました`,
+                  intent: 'success'
+                })
+              } else {
+                console.log('create book start')
+                addBookStar(book.id)
+                toast({
+                  title: `「${book.title}」をチェックしました`,
+                  intent: 'success'
+                })
+              }
+            }}
+          />
+        )}
       </div>
       {editable && (
         <div
@@ -331,20 +286,8 @@ const BookCell: React.SFC<Props> = ({
         </div>
       )}
       {images.length > 0 && (
-        <div
-          css={css`
-            margin: 20px -20px 0;
-          `}
-        >
-          <div
-            css={css`
-              white-space: nowrap;
-              overflow-x: auto;
-              padding: 0 20px;
-              -webkit-overflow-scrolling: touch;
-              overflow-scrolling: touch;
-            `}
-          >
+        <div css={css` margin: 20px -20px 0; `}>
+          <ImagesContainer>
             {images.map((image, index) => {
               return (
                 <ImageBox
@@ -359,22 +302,14 @@ const BookCell: React.SFC<Props> = ({
                 />
               )
             })}
-          </div>
+          </ImagesContainer>
         </div>
       )}
       {descriptionHTML.length > 0 && (
-        <Contents
-          dangerouslySetInnerHTML={{
-            __html: descriptionHTML
-          }}
-        />
+        <Contents dangerouslySetInnerHTML={{ __html: descriptionHTML }} />
       )}
       {(book.sampleUrl || book.purchaseUrl) && <Divider />}
-      <div
-        css={css`
-          display: flex;
-        `}
-      >
+      <div css={css`display: flex;`}>
         {book.sampleUrl && (
           <Button
             component="a"
@@ -413,8 +348,29 @@ const BookCell: React.SFC<Props> = ({
           onMoveNextRequest={() => updateLightboxIndex((lightBoxIndex + +1) % images.length)}
         />
       )}
-    </div>
+    </Container>
   )
 }
 
 export default BookCell
+
+const Container = styled.div`
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+`
+
+const ImagesContainer = styled.div`
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 0 20px;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+`
+
+const BookTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+`

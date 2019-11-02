@@ -26,52 +26,23 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
       `}
       onClick={onClick}
     >
-      {(() => {
-        if(isChecked){
-          return (
-            <div>
-              <span
-                className="material-icons"
-                css={css`
-                  vertical-align: middle;
-                  margin-right: 4px;
-                  font-size: 20px;
-                `}
-              >
-                favorite_border
-              </span>
-              <span
-                css={css`
-                  vertical-align: middle;
-                `}
-              >
-                チェック済み
-              </span>
-            </div>
-          )
-        }
-        return (
-          <div>
-            <span
-              className="material-icons"
-              css={css`
-                vertical-align: middle;
-                margin-right: 4px;
-                font-size: 20px;
-              `}
-            >
-              favorite
-            </span>
-            <span
-              css={css`
-                vertical-align: middle;
-              `}
-            >
-              チェックする
-            </span>
-          </div>
-        )
-      })()}
+      <span
+        className="material-icons"
+        css={css`
+          vertical-align: middle;
+          margin-right: 4px;
+          font-size: 20px;
+        `}
+      >
+        {isChecked ? 'favorite_border' : 'favorite'}
+      </span>
+      <span
+        css={css`
+          vertical-align: middle;
+        `}
+      >
+        {isChecked ? 'チェック済み' : 'チェックする'}
+      </span>
     </div>
   )
 }
