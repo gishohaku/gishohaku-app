@@ -14,6 +14,7 @@ import { User } from '../../../contexts/UserContext'
 import { NextPage } from 'next'
 import withUser from '../../../withUser'
 import EventContext from '../../../contexts/EventContext'
+import useCircle from '../../../hooks/useCircle'
 
 const BooksNew: NextPage<{
   user: firebase.User
@@ -21,18 +22,10 @@ const BooksNew: NextPage<{
 }> = ({ user, userData }) => {
   const router = useRouter()
   const { eventId } = useContext(EventContext)
-  const [circle, setCircle] = useState<Circle>()
   const circleRef = userData.event && userData.event[eventId]
-
-  useEffect(() => {
-    if (!circleRef) { return }
-    circleRef.get().then(snapshot => {
-      setCircle(snapshot.data() as Circle)
-    })
-  }, [userData])
+  const { circle } = useCircle(circleRef)
 
   if (!circleRef) { return <p>権限ないっす</p> }
-
   if (!circle) { return <Loader /> }
 
   return (

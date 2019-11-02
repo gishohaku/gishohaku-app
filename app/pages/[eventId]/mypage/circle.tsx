@@ -19,30 +19,6 @@ import { User } from '../../../contexts/UserContext'
 import EventContext from '../../../contexts/EventContext'
 import CircleCopyButton from '../../../components/CircleCopyButton'
 
-const useCircleCopy = (circleId: string) => {
-  const [processing, setProcessing] = useState(false)
-
-  const start = useCallback(async () => {
-    setProcessing(true)
-    const db = firebase.firestore()
-    const getQuery = db.collection('circles').where('circleId', '==', circleId)
-    const circles = await getQuery.get()
-    circles.docs.forEach(async (circle) => {
-      const { id, eventId, ...data } = circle.data()
-      db.collection('circles').add({
-        ...circle,
-        eventId: 'gishohaku2'
-      })
-    })
-    setProcessing(false)
-  }, [circleId])
-
-  return {
-    processing,
-    start
-  }
-}
-
 const Mypage: React.FC<{
   user: firebase.User,
   userData: User

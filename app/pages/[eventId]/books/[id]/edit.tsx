@@ -24,11 +24,12 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const { eventId } = useContext(EventContext)
   const router = useRouter()
   const [book, setBook] = useState()
+  const id = router.query.id as string
+  // Redirect
+  if (!id) { return null }
   const circleRef = userData.event && userData.event[eventId]
 
   useEffect(() => {
-    const id = router.query.id as string
-    if (!id) { return }
     const db: firebase.firestore.Firestore = firebase.firestore()
     const query = db.collection('books').doc(id)
     query.get().then(docRef => {
@@ -37,13 +38,12 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
         ...(docRef.data() as Book)
       })
     })
-  }, [router.query.id])
+  }, [id])
 
   const deleteBook = useCallback(async () => {
     if (!confirm('頒布物を削除しますか？')) {
       return
     }
-    const id = router.query.id as string
     const db = firebase.firestore()
     const query = db.collection('books').doc(id)
     await query.delete()
@@ -52,7 +52,7 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
       intent: 'success'
     })
     router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
-  }, [router.query.id])
+  }, [id])
 
   if (!book) { return <Loader /> }
   if (!circleRef) { return <p>サークル専用ページです。</p> }
