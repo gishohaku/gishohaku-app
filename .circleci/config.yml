@@ -20,13 +20,13 @@ jobs:
       - run: cp -a functions/ dist/
       - run: yarn build:app
       - run: yarn export:app
-  deploy:
-    docker:
-      - image: circleci/node:10.15
-    working_directory: ~/repo
       - run: cp package.json dist/functions && cp package-lock.json dist/functions
       - run: mkdir pages
-      - run: yarn firebase deploy --token=$FIREBASE_TOKEN
+      - run:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ] || [ "${CIRCLE_BRANCH}" == "ci" ]; then
+              yarn firebase deploy --token=$FIREBASE_TOKEN
+            fi
 
 workflows:
   version: 2
@@ -34,10 +34,3 @@ workflows:
     triggers:
     jobs:
       - build
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - build
