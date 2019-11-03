@@ -1,19 +1,19 @@
 /** @jsx jsx */
-import { useEffect, useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { jsx } from '@emotion/core'
 
-import BookForm from '../../../components/BookForm'
-import Loader from '../../../components/Loader'
-import FormContainer from '../../../components/FormContainer'
-import Circle from '../../../utils/circle'
-import { User } from '../../../contexts/UserContext'
+import BookForm from '../components/BookForm'
+import Loader from '../components/Loader'
+import FormContainer from '../components/FormContainer'
+import { User } from '../contexts/UserContext'
 import { NextPage } from 'next'
-import withUser from '../../../withUser'
-import EventContext from '../../../contexts/EventContext'
+import withUser from '../withUser'
+import EventContext from '../contexts/EventContext'
+import useCircle from '../hooks/useCircle'
 
 const BooksNew: NextPage<{
   user: firebase.User
@@ -21,18 +21,10 @@ const BooksNew: NextPage<{
 }> = ({ user, userData }) => {
   const router = useRouter()
   const { eventId } = useContext(EventContext)
-  const [circle, setCircle] = useState<Circle>()
   const circleRef = userData.event && userData.event[eventId]
-
-  useEffect(() => {
-    if (!circleRef) { return }
-    circleRef.get().then(snapshot => {
-      setCircle(snapshot.data() as Circle)
-    })
-  }, [userData])
+  const { circle } = useCircle(circleRef && circleRef.id)
 
   if (!circleRef) { return <p>権限ないっす</p> }
-
   if (!circle) { return <Loader /> }
 
   return (
