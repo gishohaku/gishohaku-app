@@ -33,6 +33,7 @@ const CircleEdit: NextPage<{
         user={user}
         circle={circle}
         onSubmit={async circle => {
+          const db = firebase.firestore()
           const query = db.collection('circles').doc(id)
           await query.update(circle)
           router.push(`/${eventId}/mypage/circle`)
