@@ -24,6 +24,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     "endDate": "2019-12-14",
     "image": "https://gishohaku.dev/static/ogp.jpg",
     "url": "https://gishohaku.dev/",
+    "offers": {
+      "@type": "Offer",
+      "availability":"InStock",
+      "description": "来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。",
+      "price": "0",
+      "priceCurrency": "JPY",
+      "url": "https://gishohaku.dev/"
+    },
+    "performer": {
+      "@type": "PerformingGroup",
+      "name": "技術書同人誌博覧会 運営事務局"
+    },
     "location" : {
       "@type" : "Place",
       "name" : "プラザマーム",
