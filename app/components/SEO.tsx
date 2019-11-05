@@ -29,7 +29,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <meta name="description" content={metaDescription} key="description" />
       <meta name="keywords" content="同人誌即売会, 技術同人誌, 技書博" key="keywords" />
       <script type="application/ld+json">
-      {
+      \\{
         "@context": "http://schema.org",
         "@type": "Event",
         "name": {metaTitle},
@@ -38,18 +38,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         "endDate": "2019-12-14",
         "image": "https://gishohaku.dev/static/ogp.jpg",
         "url": "https://gishohaku.dev/",
-        "location" : {
+        "location" : \\{
           "@type" : "Place",
           "name" : "プラザマーム",
-          "address": {
+          "address": \\{
             @type": "PostalAddress",
             "addressLocality": "東京都",
             "addressRegion": "JP",
             "postalCode": "103-0007",
             "streetAddress": "東京都中央区日本橋浜町1丁目1-12（プラザANSビル2F,3F）"
-          }
-        }
-      }
+          \\}
+        \\}
+      \\}
       </script>
     </Head>
   )
