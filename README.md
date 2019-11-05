@@ -7,11 +7,25 @@
 
 ## 開発
 
+### ローカル環境
+
+Node.js環境を準備した上で次のコマンドを実行
+
 ```shell
 $ npm install
 $ npm run dev
 $ open http://localhost:3000
 ```
+
+### Docker環境
+
+docker-composeを準備した状態で次のコマンドを実行
+
+```shell
+$ docker-compose up
+```
+
+ただし、ライブラリが更新される度に `docker-compose exec app npm install` を行うこと。
 
 ## デプロイ
 
