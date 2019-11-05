@@ -1,0 +1,16 @@
+version: '2'
+services:
+  app:
+    image: node:10-alpine
+    command: yarn dev
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "8000:3000"
+    environment:
+      API_KEY: ''
+      AUTH_DOMAIN: ''
+      PROJECT_ID: ''
+      DATABASE_URL: ''
+      STORAGE_BUCKET: ''
