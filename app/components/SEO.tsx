@@ -20,7 +20,7 @@ const jsonLdTags = {
     "@type" : "Place",
     "name" : "プラザマーム",
     "address": {
-      @type": "PostalAddress",
+      "@type": "PostalAddress",
       "addressLocality": "東京都",
       "addressRegion": "JP",
       "postalCode": "103-0007",
