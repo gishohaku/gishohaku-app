@@ -1,13 +1,9 @@
 /** @jsx jsx */
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/functions'
-
 import { jsx } from '@emotion/core'
 import { useContext } from 'react';
 import { withRouter, NextRouter } from 'next/router';
 
-import { initFirebase } from '../../../../utils/firebase'
+import { db } from '../../../../utils/firebase'
 import Circle from '../../../../utils/circle'
 import Book, { refToId } from '../../../../utils/book'
 import CircleDetail from '../../../../components/CircleDetail'
@@ -36,12 +32,10 @@ const CirclePage: NextPage<Props & { router: NextRouter }, Props> = props => {
 }
 
 CirclePage.getInitialProps = async context => {
-  initFirebase()
   const id = context.query.id as string
   if (!id) {
     // TODO: リダイレクトの処理
   }
-  const db: firebase.firestore.Firestore = firebase.firestore()
   const circleRef = db.collection('circles').doc(id)
   const circle = await circleRef.get()
   const snapshots = await db

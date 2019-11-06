@@ -13,6 +13,7 @@ import Loader from '../components/Loader'
 import qs from 'qs'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
+import { db } from '../utils/firebase'
 
 const Join: React.FC = () => {
   const { eventId } = useContext(EventContext)
@@ -29,7 +30,6 @@ const Join: React.FC = () => {
 
   useEffect(() => {
     if (!circleId) { return }
-    const db: firebase.firestore.Firestore = firebase.firestore()
     if (!circleId || !token) { return }
     const circleRef = db.collection('circles').doc(circleId)
     circleRef.get().then(snapshot => {

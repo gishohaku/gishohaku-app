@@ -4,7 +4,7 @@ import Router from 'next/router'
 import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { EventProvider } from '../contexts/EventContext'
-import { initFirebase } from '../utils/firebase'
+import '../utils/firebase'
 import Layout from '../components/Layout'
 import ReactGA from 'react-ga'
 // import * as Sentry from '@sentry/browser'
@@ -38,7 +38,6 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    initFirebase()
     ReactGA.initialize(TRACKING_ID, {
       debug: process.env.NODE_ENV !== 'production',
       testMode: process.env.NODE_ENV !== 'production'

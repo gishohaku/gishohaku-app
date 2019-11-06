@@ -2,8 +2,8 @@ import React, { useEffect, useState, useCallback, useContext } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { EventId } from '../utils/event'
-import produce from 'immer'
 import UserContext from './UserContext'
+import { db } from '../utils/firebase'
 
 type Stars = {
   bookStars: string[]
@@ -24,7 +24,6 @@ const starTypeToKey: {
 
 const incrementStarCount = async (ref: firebase.firestore.DocumentReference, diff: number) => {
   const documentId = ref.path.replace('/', '-')
-  const db = firebase.firestore()
   return db
     .collection('starCounts')
     .doc(documentId)
@@ -47,7 +46,6 @@ export const StarsProvider: React.FC = ({ children }) => {
     if (!userId) return
     const fetchStars = async (userId: string): Promise<UserStars> => {
       // promise all
-      const db = firebase.firestore()
       const stars1 = await db.doc(`users/${userId}/stars/gishohaku1`).get()
       const stars2 = await db.doc(`users/${userId}/stars/gishohaku2`).get()
 
@@ -69,7 +67,6 @@ export const StarsProvider: React.FC = ({ children }) => {
     newState[eventId][starKey] = [...newState[eventId][starKey], targetId]
     setUserStars(newState)
 
-    const db = firebase.firestore()
     const targetRef = db.collection(starType).doc(targetId)
     incrementStarCount(targetRef, 1)
 
@@ -85,7 +82,6 @@ export const StarsProvider: React.FC = ({ children }) => {
     newState[eventId][starKey] = newState[eventId][starKey].filter(id => id !== targetId)
     setUserStars(newState)
 
-    const db = firebase.firestore()
     const targetRef = db.collection(starType).doc(targetId)
     incrementStarCount(targetRef, -1)
 

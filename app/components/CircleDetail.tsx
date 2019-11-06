@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import produce from 'immer'
 
 import { jsx, css } from '@emotion/core'
@@ -24,6 +22,7 @@ import { useToast } from 'sancho'
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
 import StarsContext from '../contexts/StarsContext'
+import { db } from '../utils/firebase'
 
 interface Props {
   circle: Circle
@@ -45,7 +44,6 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
 
   useEffect(() => {
     if (editable) {
-      const db: firebase.firestore.Firestore = firebase.firestore()
       const query = db.collection('starCounts').doc(`circles-${circle.id}`)
       query.get().then(res => {
         const count = res.exists ? (res.data() as StarCount).count : 0
@@ -138,7 +136,6 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
             isLast={index === books.length - 1}
             isFirst={index === 0}
             movePrev={() => {
-              const db = firebase.firestore()
               const newBooks = produce(books, drafts => {
                 drafts[index] = books[index - 1]
                 drafts[index - 1] = books[index]
@@ -154,7 +151,6 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
               })
             }}
             moveNext={() => {
-              const db = firebase.firestore()
               const newBooks = produce(books, drafts => {
                 drafts[index] = books[index + 1]
                 drafts[index + 1] = books[index]

@@ -1,9 +1,6 @@
 /** @jsx jsx */
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
-
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import { jsx } from '@emotion/core'
 
 import BookForm from '../components/BookForm'
@@ -14,6 +11,7 @@ import { NextPage } from 'next'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import useCircle from '../hooks/useCircle'
+import { db } from '../utils/firebase'
 
 const BooksNew: NextPage<{
   user: firebase.User
@@ -33,7 +31,6 @@ const BooksNew: NextPage<{
         <BookForm
           user={user}
           onSubmit={async book => {
-            const db: firebase.firestore.Firestore = firebase.firestore()
             const query = db.collection('books').where('circle.ref', '==', circleRef)
             const bookSnapshots = await query.get()
             await db.collection('books').add({

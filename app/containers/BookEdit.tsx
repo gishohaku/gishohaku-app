@@ -2,8 +2,6 @@ import { useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import { useToast, Button, Divider } from 'sancho'
 
 import BookForm from '../components/BookForm'
@@ -13,6 +11,7 @@ import { User } from '../contexts/UserContext'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import useBook from '../hooks/useBook'
+import { db } from '../utils/firebase'
 
 interface Props {
   user: firebase.User
@@ -33,7 +32,6 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
     if (!confirm('頒布物を削除しますか？')) {
       return
     }
-    const db = firebase.firestore()
     const query = db.collection('books').doc(id)
     await query.delete()
     toast({
@@ -53,7 +51,6 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
           user={user}
           book={book}
           onSubmit={book => {
-            const db: firebase.firestore.Firestore = firebase.firestore()
             const id = router.query.id as string
             const query = db.collection('books')
               .doc(id)
