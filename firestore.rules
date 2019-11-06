@@ -40,6 +40,10 @@ service cloud.firestore {
       match /circleStars/{starId} {
         allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
       }
+
+      match /stars/{eventId} {
+        allow read, write: if isAuthenticated() && isUserAuthenticated(userID);
+      }
     }
 
     match /books/{bookID} {
