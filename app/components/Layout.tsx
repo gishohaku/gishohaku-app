@@ -8,16 +8,19 @@ import Header from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
-import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const Layout: React.FC<any> = props => {
   const { eventId } = useContext(EventContext)
   return (
     <>
       <SEO />
+      <Head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+      </Head>
       <Global
         styles={css`
-          @import url(https://fonts.googleapis.com/css?family=Noto+Sans+JP:400, 700&display=swap);
           html {
             /* iPhoneのダブルタップによるズームを抑制 */
             touch-action: manipulation;
