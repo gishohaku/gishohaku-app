@@ -87,7 +87,7 @@ export default () => {
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href="/gishohaku1/mypage" passHref>
+        <Link href="/[eventId]/mypage" as="/gishohaku1/mypage" passHref>
           <a css={item}>
             <img src={person} width={30} css={icon} />
             <div css={label}>マイページ</div>
