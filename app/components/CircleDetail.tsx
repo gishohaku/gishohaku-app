@@ -38,9 +38,7 @@ interface StarCount {
 }
 
 const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) => {
-  const { user, circleStars, addCircleStar, removeCircleStar, openLoginModal } = useContext(
-    UserContext
-  )
+  const { user, openLoginModal } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const toast = useToast()
   const { eventId } = useContext(EventContext)

@@ -17,6 +17,7 @@ import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../../../components/SEO'
 import Lightbox from 'react-image-lightbox';
 import CircleSelect from '../../../components/CircleSelect';
+import EventContext from '../../../contexts/EventContext'
 
 interface InitialProps {
   circles: Circle[]
@@ -24,10 +25,11 @@ interface InitialProps {
 
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { circles, router } = props
-  const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
+  const { eventId } = useContext(EventContext)
   const [isCheckOnly] = useState(router.query.starred !== undefined)
   const [isOpenMap, setOpenMap] = useState(false)
+  const circleStars = userStars[eventId].circleStars
 
   const filteredCircles = useMemo(() => {
     if (isCheckOnly) {

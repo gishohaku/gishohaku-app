@@ -85,7 +85,7 @@ const BookCell: React.SFC<Props> = ({
   isFirst = true
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
-  const { user, addBookStar, removeBookStar, bookStars, openLoginModal } = useContext(UserContext)
+  const { user, openLoginModal } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
   const toast = useToast()
