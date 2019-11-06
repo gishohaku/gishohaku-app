@@ -43,8 +43,6 @@ export const StarsProvider: React.FC = ({ children }) => {
     gishohaku2: { bookStars: [], circleStars: [] }
   })
 
-  console.log(userStars.gishohaku1)
-
   useEffect(() => {
     if (!userId) return
     const fetchStars = async (userId: string): Promise<UserStars> => {
@@ -60,7 +58,6 @@ export const StarsProvider: React.FC = ({ children }) => {
     }
 
     fetchStars(userId).then(res => {
-      console.log(res)
       setUserStars(res)
     })
   }, [userId])
@@ -68,10 +65,8 @@ export const StarsProvider: React.FC = ({ children }) => {
   const addStar = (eventId: EventId, starType: StarType, targetId: string) => {
     if (!userId) return
     const starKey = starTypeToKey[starType]
-    console.log('before', userStars.gishohaku1)
     const newState = { ...userStars }
     newState[eventId][starKey] = [...newState[eventId][starKey], targetId]
-    console.log('after', newState.gishohaku1)
     setUserStars(newState)
 
     const db = firebase.firestore()
@@ -86,15 +81,8 @@ export const StarsProvider: React.FC = ({ children }) => {
   const removeStar = async (eventId: EventId, starType: StarType, targetId: string) => {
     if (!userId) return
     const starKey = starTypeToKey[starType]
-    const newStars = produce(userStars, (draft) => {
-      const stars = draft[eventId][starKey]
-      stars.splice(stars.findIndex(s => s === targetId), 1)
-    })
-    console.log('newStars(remove)', newStars)
-
     const newState = { ...userStars }
     newState[eventId][starKey] = newState[eventId][starKey].filter(id => id !== targetId)
-    console.log('after', newState.gishohaku1)
     setUserStars(newState)
 
     const db = firebase.firestore()

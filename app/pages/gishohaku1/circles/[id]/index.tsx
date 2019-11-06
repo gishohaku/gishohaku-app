@@ -14,7 +14,6 @@ import CircleDetail from '../../../../components/CircleDetail'
 import SEO from '../../../../components/SEO'
 import { NextPage } from 'next'
 import CircleSelect from '../../../../components/CircleSelect';
-import UserContext from '../../../../contexts/UserContext';
 import EventContext from '../../../../contexts/EventContext';
 import StarsContext from '../../../../contexts/StarsContext';
 

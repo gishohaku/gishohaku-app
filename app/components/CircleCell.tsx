@@ -34,7 +34,6 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
       return openLoginModal()
     }
     if (!circle.id) return
-    console.log('compoennt', userStars[eventId])
     if (userStars[eventId].circleStars.includes(circle.id)) {
       removeStar(eventId, 'circles', circle.id)
       toast({ title: `サークルのチェックを外しました` })
@@ -42,12 +41,6 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
       addStar(eventId, 'circles', circle.id)
       toast({ title: `サークルをチェックしました` })
     }
-
-    // if (circleStars.includes(circle.id)) {
-    //   removeCircleStar(circle.id)
-    // } else {
-    //   addCircleStar(circle.id)
-    // }
   }, [user, eventId, userStars])
 
   if (!circle.id) return null

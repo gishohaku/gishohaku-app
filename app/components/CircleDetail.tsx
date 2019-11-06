@@ -21,7 +21,6 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
 
-import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
 import StarsContext from '../contexts/StarsContext'

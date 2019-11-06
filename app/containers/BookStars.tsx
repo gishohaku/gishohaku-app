@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useContext, useState, useEffect } from 'react'
+import { useContext } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -7,12 +7,12 @@ import { jsx, css } from '@emotion/core'
 
 import { Container } from 'sancho'
 
-import UserContext from '../contexts/UserContext'
-import Book, { refToId } from '../utils/book'
 import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
 import withUser from '../withUser'
 import useBook from '../hooks/useBook'
+import EventContext from '../contexts/EventContext'
+import StarsContext from '../contexts/StarsContext'
 
 const AsnycBookCell = ({ bookId }: any) => {
   const { book } = useBook(bookId)
@@ -20,7 +20,9 @@ const AsnycBookCell = ({ bookId }: any) => {
 }
 
 const BookStars: React.FC = () => {
-  const { bookStars } = useContext(UserContext)
+  const { eventId } = useContext(EventContext)
+  const { userStars } = useContext(StarsContext)
+  const bookStars = userStars[eventId].bookStars
 
   return (
     <Container
