@@ -1,9 +1,7 @@
 /** @jsx jsx */
 import React from 'react'
-import 'firebase/auth'
 import { jsx, css } from '@emotion/core'
 import { Sheet, Button } from 'sancho'
-// import Link from 'next/link'
 
 interface Props {
   onRequestClose: () => void

@@ -11,7 +11,6 @@ import Circle from '../../../utils/circle'
 import CircleCell from '../../../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
 import StarsContext from '../../../contexts/StarsContext'
-import { initFirebase } from '../../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../../../components/SEO'
 import Lightbox from 'react-image-lightbox';
@@ -82,7 +81,6 @@ Index.getInitialProps = async ({ res }) => {
     res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }
 
-  initFirebase()
   const circles = await getCircles()
   return { circles }
 }

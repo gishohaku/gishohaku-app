@@ -7,13 +7,11 @@ import { getBooks, perBookCount } from '../../../utils/functions'
 
 import Book from '../../../utils/book'
 import BookCell from '../../../components/BookCell'
-import { initFirebase } from '../../../utils/firebase'
 import { media } from '../../../utils/style'
 import SectionHeader from '../../../components/atoms/SectionHeader'
 import InfiniteScroll from 'react-infinite-scroller'
 
 import firebase from 'firebase/app'
-import 'firebase/firestore'
 import SEO from '../../../components/SEO'
 
 interface InitialProps {
@@ -76,7 +74,6 @@ Index.getInitialProps = async ({ res }: any) => {
     res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }
 
-  initFirebase()
   const books = await getBooks({})
   return {
     books

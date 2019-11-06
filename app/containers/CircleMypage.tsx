@@ -1,12 +1,8 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/functions'
-
 import { jsx, css } from '@emotion/core'
-import { useEffect, useState, useContext, useCallback } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../utils/circle'
 import Book, { refToId } from '../utils/book'
@@ -18,6 +14,7 @@ import withUser from '../withUser'
 import { User } from '../contexts/UserContext'
 import EventContext from '../contexts/EventContext'
 import CircleCopyButton from '../components/CircleCopyButton'
+import { db } from '../utils/firebase'
 
 const Mypage: React.FC<{
   user: firebase.User,
@@ -36,22 +33,21 @@ const Mypage: React.FC<{
       console.log('Not circle member', user, userData)
       return () => { }
     }
-    const db: firebase.firestore.Firestore = firebase.firestore()
-      ; (async () => {
-        if (!circleRef) { return }
-        const circleSnapShot = await circleRef.get()
-        setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-        const query = db.collection('books')
-          .where('circle.ref', '==', circleRef)
-          .orderBy('order', 'asc')
-        const snapshots = await query.get()
-        const books = snapshots.docs.map(book => {
-          const data = book.data() as Book
-          return { ...refToId(data), id: book.id }
-        })
-        setBooks(books)
-        setLoading(false)
-      })()
+    ; (async () => {
+      if (!circleRef) { return }
+      const circleSnapShot = await circleRef.get()
+      setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
+      const query = db.collection('books')
+        .where('circle.ref', '==', circleRef)
+        .orderBy('order', 'asc')
+      const snapshots = await query.get()
+      const books = snapshots.docs.map(book => {
+        const data = book.data() as Book
+        return { ...refToId(data), id: book.id }
+      })
+      setBooks(books)
+      setLoading(false)
+    })()
   }, [userData])
 
   if (!circleRef) {

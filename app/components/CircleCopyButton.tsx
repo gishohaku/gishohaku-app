@@ -1,16 +1,11 @@
 /** @jsx jsx */
-import Link from 'next/link'
-
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/functions'
-
 import { jsx, css } from '@emotion/core'
 import { useState, useCallback, useContext } from 'react'
 
 import UserContext from '../contexts/UserContext'
 import EventContext from '../contexts/EventContext'
 import { Button } from 'sancho'
+import { db } from '../utils/firebase'
 
 const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
   const [processing, setProcessing] = useState(false)
@@ -22,14 +17,10 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
       setProcessing(false)
       return
     }
-    const db = firebase.firestore()
 
-    console.log('1')
     const fromCircleRef = db.collection('circles').doc(fromCircleId)
     const toCircleRef = db.collection('circles').doc(toCircleId)
-    console.log('2')
     const toCricle = await toCircleRef.get()
-    console.log('3')
 
     const getQuery = db.collection('books').where('circle.ref', '==', fromCircleRef)
     const books = await getQuery.get()

@@ -4,8 +4,6 @@ import { NextPage } from 'next'
 
 import { jsx } from '@emotion/core'
 import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
 import SectionHeader from '../components/atoms/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
@@ -94,10 +92,10 @@ const CustomInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }: FieldProps<any>) => (
-  <div>
-    <Input type="text" {...field} {...props} />
-    {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
-  </div>
-)
+    <div>
+      <Input type="text" {...field} {...props} />
+      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
+    </div>
+  )
 
 export default withRouter(ResetPassword)

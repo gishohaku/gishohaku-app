@@ -1,13 +1,11 @@
 import axios from 'axios'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import Book, { refToId } from './book'
 import Circle from './circle'
+import { db } from './firebase'
 
 export const perBookCount = 5
 
 export const getBooks = async (options: { startAfter?: any }) => {
-  const db: firebase.firestore.Firestore = firebase.firestore()
   let query = db
     .collection('books')
     .where('eventId', '==', 'gishohaku1')
@@ -34,7 +32,6 @@ export const getBooks = async (options: { startAfter?: any }) => {
 }
 
 export const getCircles = async () => {
-  // const db: firebase.firestore.Firestore = firebase.firestore()
   // const snapshots = await db
   //   .collection('circles')
   //   .orderBy('boothNumber', 'asc')

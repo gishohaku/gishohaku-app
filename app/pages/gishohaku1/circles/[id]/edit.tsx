@@ -1,8 +1,6 @@
 import { NextPage } from 'next'
 
 import firebase from 'firebase/app'
-import 'firebase/firestore'
-
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -12,6 +10,7 @@ import { User } from '../../../../contexts/UserContext'
 import CircleForm from '../../../../components/CircleForm'
 import Circle from '../../../../utils/circle'
 import withUser from '../../../../withUser'
+import { db } from '../../../../utils/firebase'
 
 
 const BooksNew: NextPage<{
@@ -24,7 +23,6 @@ const BooksNew: NextPage<{
   useEffect(() => {
     const id = router.query.id as string
     if (!id) { return }
-    const db: firebase.firestore.Firestore = firebase.firestore()
     const query = db.collection('circles').doc(id)
     query.get().then(docRef => {
       console.log(docRef)
@@ -41,7 +39,6 @@ const BooksNew: NextPage<{
           user={user}
           circle={circle}
           onSubmit={async circle => {
-            const db = firebase.firestore()
             const id = router.query.id as string
             const query = db.collection('circles').doc(id)
             await query.update(circle)

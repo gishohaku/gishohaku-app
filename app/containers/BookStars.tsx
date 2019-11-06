@@ -1,12 +1,8 @@
 /** @jsx jsx */
 import { useContext } from 'react'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 
 import { jsx, css } from '@emotion/core'
-
 import { Container } from 'sancho'
-
 import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
 import withUser from '../withUser'

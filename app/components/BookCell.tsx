@@ -1,9 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import marked from 'marked'
@@ -35,6 +32,7 @@ import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
 import StarsContext from '../contexts/StarsContext'
+import { db } from '../utils/firebase'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -116,7 +114,6 @@ const BookCell: React.SFC<Props> = ({
 
   useEffect(() => {
     if (editable) {
-      const db: firebase.firestore.Firestore = firebase.firestore()
       const query = db.collection('starCounts').doc(`books-${book.id}`)
       query.get().then(res => {
         const count = res.exists ? (res.data() as StarCount).count : 0

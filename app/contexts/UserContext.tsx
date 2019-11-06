@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import UserContext from './UserContext'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import LoginSheet from '../components/LoginSheet'
 import { EventId } from '../utils/event'
+import { firebase, db } from '../utils/firebase'
 
 export interface User {
   uid: string
@@ -30,7 +29,6 @@ export const UserProvider = (props: any) => {
       setCurrentUser(user)
       if (user) {
         console.log(user.uid)
-        const db = firebase.firestore()
         const userSnapshot = await db
           .collection('users')
           .doc(user.uid)
@@ -61,7 +59,6 @@ export const UserProvider = (props: any) => {
 
   const reloadUser = useCallback(async () => {
     if (currentUser) {
-      const db: firebase.firestore.Firestore = firebase.firestore()
       const userSnapshot = await db
         .collection('users')
         .doc(currentUser.uid)

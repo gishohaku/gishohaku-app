@@ -3,11 +3,9 @@ import { IconUpload, useToast } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'
 import { useState, useEffect } from 'react'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/storage'
 import Loader from './Loader'
 import { useDropzone } from 'react-dropzone'
+import { firebase } from '../utils/firebase'
 
 interface Props {
   book: Book
@@ -72,10 +70,10 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
           <b>アップロード済み</b> {submission.originalName}
         </p>
       ) : (
-        <p>
-          <b>未アップロード</b>
-        </p>
-      )}
+          <p>
+            <b>未アップロード</b>
+          </p>
+        )}
       <div
         {...getRootProps({
           css: css`
