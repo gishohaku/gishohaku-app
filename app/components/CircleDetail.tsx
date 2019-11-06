@@ -21,9 +21,9 @@ import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext'
 import { useToast } from 'sancho'
 
-import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
+import StarsContext from '../contexts/StarsContext'
 
 interface Props {
   circle: Circle
@@ -37,9 +37,8 @@ interface StarCount {
 }
 
 const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) => {
-  const { user, circleStars, addCircleStar, removeCircleStar, openLoginModal } = useContext(
-    UserContext
-  )
+  const { user, openLoginModal } = useContext(UserContext)
+  const { userStars, addStar, removeStar } = useContext(StarsContext)
   const toast = useToast()
   const { eventId } = useContext(EventContext)
   const [starCount, setStarCount] = useState(0)
@@ -111,7 +110,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
           </div>
         ) : (
             <CheckButton
-              isChecked={(circle.id && circleStars.includes(circle.id)) || false}
+              isChecked={(circle.id && userStars[eventId].circleStars.includes(circle.id)) || false}
               onClick={() => {
                 if (!user) {
                   return openLoginModal()
@@ -119,18 +118,12 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                 if (!circle.id) {
                   return
                 }
-                if (circleStars.includes(circle.id)) {
-                  removeCircleStar(circle.id)
-                  toast({
-                    title: `サークルのチェックを外しました`,
-                    intent: 'success'
-                  })
+                if (userStars[eventId].circleStars.includes(circle.id)) {
+                  removeStar(eventId, 'circles', circle.id)
+                  toast({ title: `サークルのチェックを外しました` })
                 } else {
-                  addCircleStar(circle.id)
-                  toast({
-                    title: `サークルをチェックしました`,
-                    intent: 'success'
-                  })
+                  addStar(eventId, 'circles', circle.id)
+                  toast({ title: `サークルをチェックしました` })
                 }
               }}
             />

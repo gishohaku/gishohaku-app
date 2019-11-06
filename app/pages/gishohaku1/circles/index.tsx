@@ -10,12 +10,13 @@ import { getCircles } from '../../../utils/functions'
 import Circle from '../../../utils/circle'
 import CircleCell from '../../../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
-import UserContext from '../../../contexts/UserContext'
+import StarsContext from '../../../contexts/StarsContext'
 import { initFirebase } from '../../../utils/firebase'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../../../components/SEO'
 import Lightbox from 'react-image-lightbox';
 import CircleSelect from '../../../components/CircleSelect';
+import EventContext from '../../../contexts/EventContext'
 
 interface InitialProps {
   circles: Circle[]
@@ -23,9 +24,11 @@ interface InitialProps {
 
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { circles, router } = props
-  const { circleStars, addCircleStar, removeCircleStar } = useContext(UserContext)
+  const { userStars, addStar, removeStar } = useContext(StarsContext)
+  const { eventId } = useContext(EventContext)
   const [isCheckOnly] = useState(router.query.starred !== undefined)
   const [isOpenMap, setOpenMap] = useState(false)
+  const circleStars = userStars[eventId].circleStars
 
   const filteredCircles = useMemo(() => {
     if (isCheckOnly) {
@@ -62,9 +65,9 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
               <CircleCell
                 circle={circle}
                 key={circle.id}
-                addCircleStar={addCircleStar}
-                removeCircleStar={removeCircleStar}
-                circleStars={circleStars}
+                userStars={userStars}
+                addStar={addStar}
+                removeStar={removeStar}
               />
             )
           })}

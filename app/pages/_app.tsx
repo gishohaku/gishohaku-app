@@ -10,6 +10,7 @@ import ReactGA from 'react-ga'
 // import * as Sentry from '@sentry/browser'
 
 import '../lightbox.css'
+import { StarsProvider } from '../contexts/StarsContext'
 
 const TRACKING_ID = 'UA-129667923-2'
 
@@ -59,9 +60,11 @@ class MyApp extends App {
     return (
       <UserProvider>
         <EventProvider initialId={eventId}>
-          <Layout router={router}>
-            <Component {...pageProps} />
-          </Layout>
+          <StarsProvider>
+            <Layout router={router}>
+              <Component {...pageProps} />
+            </Layout>
+          </StarsProvider>
         </EventProvider>
       </UserProvider>
     )
