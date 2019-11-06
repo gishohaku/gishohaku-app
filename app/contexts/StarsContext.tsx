@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import { EventId } from '../utils/event'
 import UserContext from './UserContext'
-import { db } from '../utils/firebase'
+import { firebase, db } from '../utils/firebase'
 
 type Stars = {
   bookStars: string[]

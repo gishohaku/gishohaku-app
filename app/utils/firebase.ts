@@ -1,5 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
+import 'firebase/functions'
+import 'firebase/auth'
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -11,4 +14,6 @@ if (!firebase.apps.length) {
   })
 }
 
+export { firebase }
 export const db = firebase.firestore()
+export const functions = firebase.functions()

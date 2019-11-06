@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import firebase from 'firebase/app'
-import 'firebase/auth'
 
 import { jsx, css } from '@emotion/core'
 

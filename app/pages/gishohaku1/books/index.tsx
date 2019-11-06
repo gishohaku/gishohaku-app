@@ -12,7 +12,6 @@ import SectionHeader from '../../../components/atoms/SectionHeader'
 import InfiniteScroll from 'react-infinite-scroller'
 
 import firebase from 'firebase/app'
-import 'firebase/firestore'
 import SEO from '../../../components/SEO'
 
 interface InitialProps {

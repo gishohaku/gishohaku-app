@@ -1,10 +1,9 @@
 /** @jsx jsx */
 import { useDropzone } from 'react-dropzone'
 import { jsx, css } from '@emotion/core'
-import firebase from 'firebase/app'
-import 'firebase/storage'
 import { useState } from 'react'
 import { Spinner, IconUpload } from 'sancho'
+import { firebase } from '../utils/firebase'
 
 interface Props {
   user: firebase.User

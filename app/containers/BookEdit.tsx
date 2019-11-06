@@ -11,7 +11,7 @@ import { User } from '../contexts/UserContext'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import useBook from '../hooks/useBook'
-import { db } from '../utils/firebase'
+import { firebase, db } from '../utils/firebase'
 
 interface Props {
   user: firebase.User

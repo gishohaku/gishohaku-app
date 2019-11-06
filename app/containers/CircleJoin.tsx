@@ -1,8 +1,4 @@
 /** @jsx jsx */
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/functions'
-
 import { jsx, css } from '@emotion/core'
 import { Button, useToast } from 'sancho'
 import { useRouter } from 'next/router'
@@ -13,7 +9,7 @@ import Loader from '../components/Loader'
 import qs from 'qs'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
-import { db } from '../utils/firebase'
+import { db, functions } from '../utils/firebase'
 
 const Join: React.FC = () => {
   const { eventId } = useContext(EventContext)
@@ -40,7 +36,7 @@ const Join: React.FC = () => {
   const handleClick = async () => {
     if (isProcessing) { return }
     setProcessing(true)
-    const receiveInvitation = firebase.functions().httpsCallable('receiveInvitation')
+    const receiveInvitation = functions.httpsCallable('receiveInvitation')
     const result = await receiveInvitation({ circleId, token })
     // TODO: メッセージの表示
     console.log(result)

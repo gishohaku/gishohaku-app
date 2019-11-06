@@ -11,7 +11,7 @@ import { NextPage } from 'next'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import useCircle from '../hooks/useCircle'
-import { db } from '../utils/firebase'
+import { firebase, db } from '../utils/firebase'
 
 const BooksNew: NextPage<{
   user: firebase.User

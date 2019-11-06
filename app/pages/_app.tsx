@@ -1,7 +1,6 @@
 import React, { ErrorInfo as _ErrorInfo } from 'react'
 import App, { AppContext } from 'next/app'
 import Router from 'next/router'
-import 'firebase/auth'
 import { UserProvider } from '../contexts/UserContext'
 import { EventProvider } from '../contexts/EventContext'
 import '../utils/firebase'

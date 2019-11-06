@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import UserContext from './UserContext'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import LoginSheet from '../components/LoginSheet'
 import { EventId } from '../utils/event'
-import { db } from '../utils/firebase'
+import { firebase, db } from '../utils/firebase'
 
 export interface User {
   uid: string
