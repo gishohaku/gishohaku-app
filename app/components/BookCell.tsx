@@ -209,7 +209,7 @@ const BookCell: React.SFC<Props> = ({
                 return openLoginModal()
               }
               if (!book.id) return
-              if (userStars[eventId].circleStars.includes(book.id)) {
+              if (userStars[eventId].bookStars.includes(book.id)) {
                 removeStar(eventId, 'books', book.id)
                 toast({
                   title: `「${book.title}」のチェックを外しました`,
