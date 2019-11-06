@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import firebase from 'firebase/app'
+import { firebase } from '../utils/firebase'
 
 import { jsx, css } from '@emotion/core'
 
@@ -83,8 +83,10 @@ const Mypage: React.FC<Props> = ({ userData }) => {
           contentAfter={<IconChevronRight />}
           onClick={async () => {
             const auth: firebase.auth.Auth = firebase.auth()
-            await router.push('/gishohaku1')
-            auth.signOut()
+            await auth.signOut()
+            // TODO: auth.onAuthStateChangedのハンドリングをちゃんとやる
+            location.href = '/gishohaku1'
+            // await router.push('/gishohaku1')
           }}
         />
       </List>
