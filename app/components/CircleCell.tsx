@@ -12,18 +12,21 @@ import CheckButton from './CheckButton'
 import { useToast } from 'sancho'
 import { useContext, useCallback } from 'react'
 import UserContext from '../contexts/UserContext'
+import StarsContext, { UserStars } from '../contexts/StarsContext'
+import EventContext from '../contexts/EventContext'
 
 interface Props {
   circle: Circle
-  circleStars: string[]
-  addCircleStar: any
-  removeCircleStar: any
+  userStars: UserStars
+  addStar: any
+  removeStar: any
 }
 
 const width = 252
 
-const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, removeCircleStar }) => {
+const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar }) => {
   const { user, openLoginModal } = useContext(UserContext)
+  const { eventId } = useContext(EventContext)
   const toast = useToast()
 
   const onCheckClick = useCallback(() => {
@@ -31,14 +34,21 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
       return openLoginModal()
     }
     if (!circle.id) return
-    if (circleStars.includes(circle.id)) {
-      removeCircleStar(circle.id)
+    console.log('compoennt', userStars[eventId])
+    if (userStars[eventId].circleStars.includes(circle.id)) {
+      removeStar(eventId, 'circles', circle.id)
       toast({ title: `サークルのチェックを外しました` })
     } else {
-      addCircleStar(circle.id)
+      addStar(eventId, 'circles', circle.id)
       toast({ title: `サークルをチェックしました` })
     }
-  }, [user, circle, circleStars])
+
+    // if (circleStars.includes(circle.id)) {
+    //   removeCircleStar(circle.id)
+    // } else {
+    //   addCircleStar(circle.id)
+    // }
+  }, [user, eventId, userStars])
 
   if (!circle.id) return null
 
@@ -52,7 +62,7 @@ const CircleCell: React.FC<Props> = ({ circle, circleStars, addCircleStar, remov
         </CircleLink>
       </Link>
       <CheckButton
-        isChecked={(circle.id && circleStars.includes(circle.id)) || false}
+        isChecked={(circle.id && userStars[eventId].circleStars.includes(circle.id)) || false}
         onClick={onCheckClick}
       />
     </Container>

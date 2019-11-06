@@ -34,6 +34,7 @@ import Contents from './Contents'
 import check from '../images/check.svg'
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
+import StarsContext from '../contexts/StarsContext'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -85,6 +86,7 @@ const BookCell: React.SFC<Props> = ({
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, addBookStar, removeBookStar, bookStars, openLoginModal } = useContext(UserContext)
+  const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
   const toast = useToast()
 
@@ -201,22 +203,20 @@ const BookCell: React.SFC<Props> = ({
 
         {editable ? <CheckCount count={starCount} /> : (
           <CheckButton
-            isChecked={(book.id && bookStars.includes(book.id)) || false}
+            isChecked={(book.id && userStars[eventId].bookStars.includes(book.id)) || false}
             onClick={() => {
               if (!user) {
                 return openLoginModal()
               }
               if (!book.id) return
-              if (bookStars.includes(book.id)) {
-                console.log('remove book start')
-                removeBookStar(book.id)
+              if (userStars[eventId].circleStars.includes(book.id)) {
+                removeStar(eventId, 'books', book.id)
                 toast({
                   title: `「${book.title}」のチェックを外しました`,
                   intent: 'success'
                 })
               } else {
-                console.log('create book start')
-                addBookStar(book.id)
+                addStar(eventId, 'books', book.id)
                 toast({
                   title: `「${book.title}」をチェックしました`,
                   intent: 'success'
