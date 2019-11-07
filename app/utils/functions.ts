@@ -2,13 +2,14 @@ import axios from 'axios'
 import Book, { refToId } from './book'
 import Circle from './circle'
 import { db } from './firebase'
+import { EventId } from './event'
 
 export const perBookCount = 5
 
-export const getBooks = async (options: { startAfter?: any }) => {
+export const getBooks = async (eventId: EventId, options: { startAfter?: any }) => {
   let query = db
     .collection('books')
-    .where('eventId', '==', 'gishohaku1')
+    .where('eventId', '==', eventId)
     .orderBy('updatedAt', 'desc')
     .limit(perBookCount)
   if (options.startAfter) {
