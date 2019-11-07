@@ -47,7 +47,7 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
 
   return (
     <Container>
-      <Link href='/gishohaku1/circles/[id]' as={`/gishohaku1/circles/${circle.id}`} key={circle.id} passHref>
+      <Link href='/[eventId]/circles/[id]' as={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
         <CircleLink>
           <ImageBox size="circlecut" imageUrl={circle.image || circleTumbnail} />
           <CircleName>{circle.booth} {circle.name}</CircleName>

@@ -40,7 +40,15 @@
         "function": "app"
       },
       {
+        "source": "/gishohaku2/circles/**",
+        "function": "app"
+      },
+      {
         "source": "/gishohaku1/circles",
+        "function": "app"
+      },
+      {
+        "source": "/gishohaku2/circles",
         "function": "app"
       }
     ],
