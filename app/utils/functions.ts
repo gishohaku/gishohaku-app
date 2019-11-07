@@ -32,19 +32,20 @@ export const getBooks = async (eventId: EventId, options: { startAfter?: any }) 
   return result.data
 }
 
-export const getCircles = async () => {
-  // const snapshots = await db
-  //   .collection('circles')
-  //   .orderBy('boothNumber', 'asc')
-  //   .get()
-  // const results: Circle[] = []
-  // snapshots.forEach(snapshot => {
-  //   results.push({
-  //     id: snapshot.id,
-  //     ...(snapshot.data() as Circle)
-  //   })
-  // })
-  // return results
+export const getCircles = async (eventId: EventId) => {
+  const snapshots = await db
+    .collection('circles')
+    .where('eventId', '==', eventId)
+    // .orderBy('boothNumber', 'asc') // TODO
+    .get()
+  const results: Circle[] = []
+  snapshots.forEach(snapshot => {
+    results.push({
+      id: snapshot.id,
+      ...(snapshot.data() as Circle)
+    })
+  })
+  return results
 
   // TODO: ある程度データが入力されたらキャッシュを利用したFunctionsに差し替える
   const result = await axios.get('https://us-central1-gishohaku.cloudfunctions.net/apiCircles')
