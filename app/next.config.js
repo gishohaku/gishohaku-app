@@ -20,8 +20,9 @@ module.exports = withImages(
       distDir: '../dist/functions/next',
       outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
-        delete defaultPathMap['/gishohaku1/circles/[id]']
-        // console.log(defaultPathMap['/[eventId]/mypage'])
+        delete defaultPathMap['/[eventId]/books']
+        delete defaultPathMap['/[eventId]/circles']
+        delete defaultPathMap['/[eventId]/circles/[id]']
         delete defaultPathMap['/[eventId]/mypage']
         delete defaultPathMap['/[eventId]/mypage/circle']
         delete defaultPathMap['/[eventId]/mypage/join']
@@ -37,6 +38,8 @@ module.exports = withImages(
           '/gishohaku1/mypage/book_stars': { page: '/[eventId]/mypage/book_stars', query: { eventId: 'gishohaku1' } },
           '/gishohaku2/mypage/book_stars': { page: '/[eventId]/mypage/book_stars', query: { eventId: 'gishohaku2' } }
         }
+
+        console.log('== Result')
         console.log(pathMap)
         return pathMap
       }
