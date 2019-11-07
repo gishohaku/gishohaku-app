@@ -36,7 +36,7 @@ export const getCircles = async (eventId: EventId) => {
   const snapshots = await db
     .collection('circles')
     .where('eventId', '==', eventId)
-    // .orderBy('boothNumber', 'asc') // TODO
+    .orderBy('boothNumber', 'asc')
     .get()
   const results: Circle[] = []
   snapshots.forEach(snapshot => {
