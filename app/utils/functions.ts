@@ -2,13 +2,14 @@ import axios from 'axios'
 import Book, { refToId } from './book'
 import Circle from './circle'
 import { db } from './firebase'
+import { EventId } from './event'
 
 export const perBookCount = 5
 
-export const getBooks = async (options: { startAfter?: any }) => {
+export const getBooks = async (eventId: EventId, options: { startAfter?: any }) => {
   let query = db
     .collection('books')
-    .where('eventId', '==', 'gishohaku1')
+    .where('eventId', '==', eventId)
     .orderBy('updatedAt', 'desc')
     .limit(perBookCount)
   if (options.startAfter) {
@@ -31,19 +32,20 @@ export const getBooks = async (options: { startAfter?: any }) => {
   return result.data
 }
 
-export const getCircles = async () => {
-  // const snapshots = await db
-  //   .collection('circles')
-  //   .orderBy('boothNumber', 'asc')
-  //   .get()
-  // const results: Circle[] = []
-  // snapshots.forEach(snapshot => {
-  //   results.push({
-  //     id: snapshot.id,
-  //     ...(snapshot.data() as Circle)
-  //   })
-  // })
-  // return results
+export const getCircles = async (eventId: EventId) => {
+  const snapshots = await db
+    .collection('circles')
+    .where('eventId', '==', eventId)
+    .orderBy('boothNumber', 'asc')
+    .get()
+  const results: Circle[] = []
+  snapshots.forEach(snapshot => {
+    results.push({
+      id: snapshot.id,
+      ...(snapshot.data() as Circle)
+    })
+  })
+  return results
 
   // TODO: ある程度データが入力されたらキャッシュを利用したFunctionsに差し替える
   const result = await axios.get('https://us-central1-gishohaku.cloudfunctions.net/apiCircles')

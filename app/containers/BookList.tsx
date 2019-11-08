@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { NextPage } from 'next'
-
 import { jsx, css } from '@emotion/core'
-import { getBooks, perBookCount } from '../../../utils/functions'
-
-import Book from '../../../utils/book'
-import BookCell from '../../../components/BookCell'
-import { media } from '../../../utils/style'
-import SectionHeader from '../../../components/atoms/SectionHeader'
-import InfiniteScroll from 'react-infinite-scroller'
-
 import firebase from 'firebase/app'
-import SEO from '../../../components/SEO'
+
+import { getBooks, perBookCount } from '../utils/functions'
+import Book from '../utils/book'
+import BookCell from '../components/BookCell'
+import { media } from '../utils/style'
+import SectionHeader from '../components/atoms/SectionHeader'
+import InfiniteScroll from 'react-infinite-scroller'
+import SEO from '../components/SEO'
+import EventContext from '../contexts/EventContext'
+import { EventId } from '../utils/event'
 
 interface InitialProps {
   books: Book[]
@@ -22,6 +22,7 @@ const Index: NextPage<InitialProps> = props => {
   const { books: initialBooks } = props
   const [hasMore, setHasMore] = useState(true)
   const [books, setBooks] = useState<Book[]>(initialBooks)
+  const { eventId } = useContext(EventContext)
 
   return (
     <div
@@ -45,7 +46,7 @@ const Index: NextPage<InitialProps> = props => {
           setHasMore(false)
           const lastBook = books[books.length - 1]
           const updatedAt = lastBook.updatedAt
-          const nextBooks = await getBooks({
+          const nextBooks = await getBooks(eventId, {
             startAfter: new firebase.firestore.Timestamp(updatedAt!.seconds, updatedAt!.nanoseconds)
           })
           setBooks([...books, ...nextBooks])
@@ -69,12 +70,13 @@ const Index: NextPage<InitialProps> = props => {
   )
 }
 
-Index.getInitialProps = async ({ res }: any) => {
+Index.getInitialProps = async ({ res, query }) => {
   if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }
 
-  const books = await getBooks({})
+  const eventId = query.eventId as EventId
+  const books = await getBooks(eventId, {})
   return {
     books
   }

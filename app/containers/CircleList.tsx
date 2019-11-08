@@ -6,16 +6,17 @@ import { NextPage } from 'next'
 import { Container, Button, IconMap } from 'sancho'
 import { withRouter } from 'next/router'
 
-import { getCircles } from '../../../utils/functions'
-import Circle from '../../../utils/circle'
-import CircleCell from '../../../components/CircleCell'
+import { getCircles } from '../utils/functions'
+import Circle from '../utils/circle'
+import CircleCell from '../components/CircleCell'
 import { useContext, useState, useMemo } from 'react'
-import StarsContext from '../../../contexts/StarsContext'
+import StarsContext from '../contexts/StarsContext'
 import { WithRouterProps } from 'next/dist/client/with-router'
-import SEO from '../../../components/SEO'
+import SEO from '../components/SEO'
 import Lightbox from 'react-image-lightbox';
-import CircleSelect from '../../../components/CircleSelect';
-import EventContext from '../../../contexts/EventContext'
+import CircleSelect from '../components/CircleSelect';
+import EventContext from '../contexts/EventContext'
+import { EventId } from '../utils/event'
 
 interface InitialProps {
   circles: Circle[]
@@ -76,12 +77,13 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   )
 }
 
-Index.getInitialProps = async ({ res }) => {
+Index.getInitialProps = async ({ res, query }) => {
   if (res && res.setHeader) {
     res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
   }
 
-  const circles = await getCircles()
+  const eventId = query.eventId as EventId
+  const circles = await getCircles(eventId)
   return { circles }
 }
 export default withRouter(Index)
