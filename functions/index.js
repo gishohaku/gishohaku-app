@@ -12,7 +12,7 @@ const onRequestAsia = functions.region('asia-northeast1').https.onRequest
 
 const onCall = functions.https.onCall
 
-admin.initializeApp()
+admin.initializeApp(functions.config().firebase)
 
 exports.receiveInvitation = onCall(async (data, context) => {
   const { token, circleId } = data
