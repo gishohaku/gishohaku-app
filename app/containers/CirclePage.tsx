@@ -25,7 +25,10 @@ const CirclePage: NextPage<Props & { router: NextRouter }, Props> = props => {
   return (
     <>
       <SEO title={circle.name} imageUrl={circle.image} />
-      <CircleSelect circleId={circle.id!} router={router} starIds={userStars[eventId].circleStars} />
+      {
+        eventId === 'gishohaku1' &&
+        <CircleSelect circleId={circle.id!} router={router} starIds={userStars[eventId].circleStars} />
+      }
       <CircleDetail circle={circle} books={books} editable={false} />
     </>
   )

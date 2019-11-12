@@ -39,7 +39,9 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
 
   return (
     <>
-      <CircleSelect circleId="" starIds={circleStars} router={router} />
+      {eventId === 'gishohaku1' &&
+        <CircleSelect circleId="" starIds={circleStars} router={router} />
+      }
       <Container
         css={css`
           max-width: ${1080 + 12 * 2}px;
