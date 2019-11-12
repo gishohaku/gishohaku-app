@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import logo from '../images/logo.png'
+import logo from '../images/shortLogo.svg'
 import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
@@ -20,7 +20,6 @@ const hamburgerButton = css`
   margin-left: auto;
   width: ${buttonSize}px;
   height: ${buttonSize}px;
-  background-color: #eee;
   border-radius: ${buttonSize / 2}px;
   position: relative;
   cursor: pointer;
@@ -51,25 +50,18 @@ const Header: React.FC<any> = () => {
         display: flex;
         align-items: center;
         font-size: 12px;
-        padding: 0 16px;
+        padding: 0 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        min-height: 80px;
-        @media ${media.small} {
-          padding: 0;
-        }
+        min-height: 66px;
       `}
     >
       <div
-        css={css(
-          hamburgerButton,
-          `
-      visibility: hidden;
-    `
-        )}
+        css={[hamburgerButton, css` visibility: hidden; `]}
       />
       <Link href={`/${eventId == 'gishohaku2' ? '' : eventId}`} passHref>
         <a
           css={css`
+          padding: 13px;
             &:hover {
               background-color: #eff0f0;
             }
@@ -81,7 +73,6 @@ const Header: React.FC<any> = () => {
           <img
             src={logo}
             width={80}
-            height={80}
             css={css`
               display: block;
             `}
