@@ -197,7 +197,7 @@ const withIcon = css`
   }
 `
 
-const SectionHeader: React.FC<{
+export const SectionHeader: React.FC<{
   en: string
 }> = ({ children, en }) => {
   return <h2 css={css`
