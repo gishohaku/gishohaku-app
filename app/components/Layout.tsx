@@ -34,6 +34,8 @@ const Layout: React.FC<any> = props => {
             font-size: 15px;
             color: #444;
             background-color: #f7f8fa;
+            /* For BottomBar */
+            margin-bottom: 76px;
           }
           p,
           li {
@@ -52,7 +54,6 @@ const Layout: React.FC<any> = props => {
       </div>
       {eventId === 'gishohaku1' && <BottomBar />}
       {eventId === 'gishohaku2' && <MypageButton />}
-      <Footer />
     </>
   )
 }

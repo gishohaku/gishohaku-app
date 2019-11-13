@@ -113,7 +113,40 @@ const Header: React.FC<any> = () => {
               contentAfter={<IconExternalLink />}
             />
           </a>
+          <Divider />
         </List>
+        <ul css={css`
+          li a {
+            display: block;
+            text-decoration: none;
+            padding: 0.2rem 1.5rem;
+            color: inherit;
+            &:hover {
+              background-color: #f1f3f5;
+            }
+          }
+        `}>
+          <li>
+            <a href="/gishohaku1/terms">サークル参加規約</a>
+          </li>
+          <li>
+            <a href="https://portal.engineers-lt.info/">運営</a>
+          </li>
+          <li>
+            <a href="https://portal.engineers-lt.info/guideline">コミュニティ・ガイドライン</a>
+          </li>
+          <li>
+            <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
+          </li>
+        </ul>
+        <Divider />
+        <div css={css`
+          padding: 0 1.5rem;
+          opacity: 0.6;
+          font-size: 12px;
+        `}>
+          © 技術書同人誌博覧会 運営事務局
+        </div>
       </Sheet>
     </header>
   )
