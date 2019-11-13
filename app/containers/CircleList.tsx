@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
-import { Container, Button, IconMap } from 'sancho'
+import { Container } from 'sancho'
 import { withRouter } from 'next/router'
 
 import { getCircles } from '../utils/functions'
@@ -13,13 +13,19 @@ import { useContext, useState, useMemo } from 'react'
 import StarsContext from '../contexts/StarsContext'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../components/SEO'
-import Lightbox from 'react-image-lightbox';
-import CircleSelect from '../components/CircleSelect';
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
+import { SectionHeader } from '../pages'
 
 interface InitialProps {
   circles: Circle[]
+}
+
+const mapUrl: {
+  [key in EventId]: string
+} = {
+  gishohaku1: 'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/a27e64dc-082c-4d24-afa6-a0083664f885.png',
+  gishohaku2: 'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/610417f2-c379-49e4-8dd9-d4b7f502a9bb.png'
 }
 
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
@@ -27,7 +33,6 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
   const [isCheckOnly] = useState(router.query.starred !== undefined)
-  const [isOpenMap, setOpenMap] = useState(false)
   const circleStars = userStars[eventId].circleStars
 
   const filteredCircles = useMemo(() => {
@@ -38,44 +43,53 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
   }, [circles, isCheckOnly])
 
   return (
-    <>
-      {eventId === 'gishohaku1' &&
-        <CircleSelect circleId="" starIds={circleStars} router={router} />
-      }
-      <Container
-        css={css`
-          max-width: ${1080 + 12 * 2}px;
-          margin-top: px;
-          padding: 0 !important;
-        `}
-      >
-        <SEO title="サークル一覧" />
-        <MapContainer>
-          <Button iconBefore={<IconMap />} css={css` margin-left: 8px; `} onClick={() => {
-            setOpenMap(true)
-          }}>
-            会場マップ
-          </Button>
-          {isOpenMap && <Lightbox
-            mainSrc="/static/map.png"
-            onCloseRequest={() => setOpenMap(false)}
-          />}
-        </MapContainer>
-        <CirclesList>
-          {filteredCircles.map((circle: Circle) => {
-            return (
-              <CircleCell
-                circle={circle}
-                key={circle.id}
-                userStars={userStars}
-                addStar={addStar}
-                removeStar={removeStar}
-              />
-            )
-          })}
-        </CirclesList>
-      </Container>
-    </>
+    <Container
+      css={css`
+        max-width: ${1080 + 12 * 2}px;
+        margin-top: px;
+        padding: 0 !important;
+      `}
+    >
+      <SEO title="サークル一覧" />
+      <div css={css`
+        position: relative;
+        margin-top: 48px;
+      `}>
+        <SectionHeader en="CIRCLES">サークル一覧</SectionHeader>
+        <a
+          target="_blank"
+          rel="noopener"
+          href={mapUrl[eventId]}
+          css={css`
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #2a5773;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+            padding: 8px 24px;
+            text-decoration: none;
+          `}
+        >
+          会場マップ
+        </a>
+      </div>
+      <CirclesList>
+        {filteredCircles.map((circle: Circle) => {
+          return (
+            <CircleCell
+              circle={circle}
+              key={circle.id}
+              userStars={userStars}
+              addStar={addStar}
+              removeStar={removeStar}
+            />
+          )
+        })}
+      </CirclesList>
+    </Container>
   )
 }
 
@@ -93,13 +107,6 @@ export default withRouter(Index)
 const CirclesList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 24px;
-`
-
-const MapContainer = styled.div`
-  display: flex;
-  align-items: center;
   justify-content: center;
   margin-top: 24px;
 `
