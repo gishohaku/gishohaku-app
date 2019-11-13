@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import { IconHeart } from 'sancho'
 
 interface Props {
   isChecked: boolean
@@ -23,26 +24,19 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
         cursor: pointer;
         background-color: ${isChecked ? 'transparent' : '#2A5773'};
         color: ${isChecked ? '#2A5773' : 'white'};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          margin-right: 6px;
+        }
       `}
       onClick={onClick}
     >
-      <span
-        className="material-icons"
-        css={css`
-          vertical-align: middle;
-          margin-right: 4px;
-          font-size: 20px;
-        `}
-      >
-        {isChecked ? 'favorite_border' : 'favorite'}
-      </span>
-      <span
-        css={css`
-          vertical-align: middle;
-        `}
-      >
-        {isChecked ? 'チェック済み' : 'チェックする'}
-      </span>
+      <IconHeart fill='white' stroke="none" />
+
+      {isChecked ? 'チェック済み' : 'チェックする'}
     </div>
   )
 }

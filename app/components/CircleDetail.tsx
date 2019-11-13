@@ -167,6 +167,7 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
             }}
           />
         ))}
+        {books.length === 0 && <BlankMessage circleName={circle.name} />}
         {editable && (
           <Link href="/[eventId]/books/new" as={`/${eventId}/books/new`}>
             <NewBookButton>
@@ -179,6 +180,28 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
     </Container>
   )
 }
+
+const BlankMessage: React.FC<{
+  circleName: string
+}> = ({ circleName }) => (
+  <div css={css`
+    padding: 0 16px;
+  `}>
+    <img css={css`
+      max-width: 100%;
+      width: 400px;
+      display: block;
+      margin: 0 auto;
+    `} src="/static/blank.png" />
+    <h2 css={css`
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 8px;
+    `}>頒布物が登録されていません</h2>
+    <p>「{circleName}」には頒布物が登録されていないようです。<br />読みたい本がありそうなら筆者に気持ちを伝えてみましょう。</p>
+  </div>
+)
 
 export default CircleDetail
 
