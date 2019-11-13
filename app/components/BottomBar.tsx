@@ -75,13 +75,13 @@ export default () => {
             <div css={label}>ホーム</div>
           </a>
         </Link>
-        <Link href="/gishohaku1/circles" passHref>
+        <Link href="/[eventId]/circles" as="/gishohaku1/circles" passHref>
           <a css={item}>
             <img src={groupWork} width={30} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
-        <Link href="/gishohaku1/books" passHref>
+        <Link href="/[eventId]/books" as="/gishohaku1/books" passHref>
           <a css={item}>
             <img src={book} width={30} css={icon} />
             <div css={label}>頒布物</div>
