@@ -9,6 +9,7 @@ import EventContext from '../contexts/EventContext'
 import StarsContext from '../contexts/StarsContext'
 import useCircle from '../hooks/useCircle'
 import CircleCell from '../components/CircleCell'
+import StarTab from '../components/StarTab'
 
 const AsnycBookCell = ({ circleId }: any) => {
   const { circle } = useCircle(circleId)
@@ -26,8 +27,10 @@ const BookStars: React.FC = () => {
   console.log(eventId, userStars, circleStars)
 
   return (
-    <Container
-      css={css`
+    <>
+      <StarTab />
+      <Container
+        css={css`
         margin: 32px auto;
         padding: 0 16px;
         @media ${media.small} {
@@ -35,14 +38,15 @@ const BookStars: React.FC = () => {
           padding-right: 0;
         }
       `}
-    >
-      {circleStars.map(circleId => (
-        <AsnycBookCell circleId={circleId} key={circleId} />
-      ))}
-      {
-        circleStars.length === 0 && <p>チェックしたサークルがありません。</p>
-      }
-    </Container>
+      >
+        {circleStars.map(circleId => (
+          <AsnycBookCell circleId={circleId} key={circleId} />
+        ))}
+        {
+          circleStars.length === 0 && <p>チェックしたサークルがありません。</p>
+        }
+      </Container>
+    </>
   )
 }
 
