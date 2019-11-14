@@ -143,16 +143,9 @@ const circles = [{ id: 'GZbC0MSg0OKK9S4FcplO', name: 'aNo研', booth: 'A-1' },
 
 const container = css`
   margin: 0 auto;
-  max-width: 1112px;
-  padding: 12px 12px 0;
-  margin-top: 24px;
-  display: flex;
-  @media ${media.small} {
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 12px;
-    margin-top: 0;
-  }
+  padding: 12px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
 `
 
 const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
@@ -160,29 +153,39 @@ const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
   const nextCircle = circles[index + 1]
   const prevCircle = circles[index - 1]
   const pushCircle = useCallback((id: string) => {
-    router.push('/gishohaku1/circles/[id]', `/gishohaku1/circles/${id}`)
+    router.push('/[eventId]/circles/[id]', `/gishohaku1/circles/${id}`)
   }, [])
 
   return <div css={container}>
-    {prevCircle ?
-      <IconButton variant="outline" icon={<IconChevronLeft />} label={prevCircle.name} onPress={() => {
-        pushCircle(prevCircle.id)
-      }} /> :
-      <IconButton variant="ghost" icon={<IconChevronLeft />} label="prev circle is none" disabled={true} />}
-    <Select value={circleId} onChange={(e) => {
-      const id = e.target.value
-      pushCircle(id)
-    }}>
-      {circles.map(option => {
-        return <option key={option.id} value={option.id}>{starIds.includes(option.id) && "★ "} {option.booth} {option.name}</option>
+    <div css={css`
+      display: flex;
+      max-width: 1112px;
+      margin: 0 auto;
+      justify-content: center;
+      button {
+        min-width: 40px;
+      }
+    `}>
+      {prevCircle ?
+        <IconButton component="button" variant="outline" icon={<IconChevronLeft />} label={prevCircle.name} onPress={() => {
+          pushCircle(prevCircle.id)
+        }} /> :
+        <IconButton component="button" variant="ghost" icon={<IconChevronLeft />} label="prev circle is none" disabled={true} />}
+      <Select value={circleId} onChange={(e) => {
+        const id = e.target.value
+        pushCircle(id)
+      }}>
+        {circles.map(option => {
+          return <option key={option.id} value={option.id}>{starIds.includes(option.id) && "★ "} {option.booth} {option.name}</option>
 
-      })}
-    </Select>
-    {nextCircle ?
-      <IconButton variant="outline" icon={<IconChevronRight />} label={nextCircle.name} onPress={() => {
-        pushCircle(nextCircle.id)
-      }} /> :
-      <IconButton variant="ghost" icon={<IconChevronRight />} label="next circle is none" disabled={true} />}
+        })}
+      </Select>
+      {nextCircle ?
+        <IconButton component="button" variant="outline" icon={<IconChevronRight />} label={nextCircle.name} onPress={() => {
+          pushCircle(nextCircle.id)
+        }} /> :
+        <IconButton component="button" variant="ghost" icon={<IconChevronRight />} label="next circle is none" disabled={true} />}
+    </div>
   </div>
 }
 
