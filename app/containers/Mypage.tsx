@@ -81,7 +81,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
             const auth: firebase.auth.Auth = firebase.auth()
             await auth.signOut()
             // TODO: auth.onAuthStateChangedのハンドリングをちゃんとやる
-            location.href = '/gishohaku1'
+            location.href = '/'
             // await router.push('/gishohaku1')
           }}
         />
