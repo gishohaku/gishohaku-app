@@ -39,6 +39,7 @@ const Hero = () => (
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('/static/bg.png');
     @media ${media.small} {
       flex-direction: column;
       padding: 16px;

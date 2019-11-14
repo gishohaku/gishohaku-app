@@ -14,7 +14,7 @@ const spacer = css`
 `
 
 const item = css`
-  padding: 10px 0;
+  padding: 10px 0 8px;
   width: 80px;
   display: inline-block;
   text-align: center;
@@ -37,10 +37,10 @@ const item = css`
 `
 
 const label = css`
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   opacity: 0.8;
-  margin-top: 2px;
+  margin-top: 1px;
 `
 
 const icon = css`
@@ -77,25 +77,25 @@ export default () => {
         <span css={spacer} />
         <Link href={eventId === 'gishohaku2' ? "/" : `/${eventId}`} passHref>
           <a css={item}>
-            <img src={home} width={30} css={icon} />
+            <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>
           </a>
         </Link>
         <Link href="/[eventId]/circles" as={`/${eventId}/circles`} passHref>
           <a css={item}>
-            <img src={groupWork} width={30} css={icon} />
+            <img src={groupWork} width={28} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
         <Link href="/[eventId]/books" as={`/${eventId}/books`} passHref>
           <a css={item}>
-            <img src={book} width={30} css={icon} />
+            <img src={book} width={28} css={icon} />
             <div css={label}>頒布物</div>
           </a>
         </Link>
         <Link href="/[eventId]/mypage" as={`/${eventId}/mypage`} passHref>
           <a css={item}>
-            <img src={person} width={30} css={icon} />
+            <img src={person} width={28} css={icon} />
             <div css={label}>マイページ</div>
           </a>
         </Link>

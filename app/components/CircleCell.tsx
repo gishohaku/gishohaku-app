@@ -80,7 +80,17 @@ export const CircleBooth: React.FC<{
     border-top-right-radius: 4px;
     margin-right: 8px;
   `}>{children}</div>
-  {name} {name && <IconChevronRight />}
+  {name && <div css={css`
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    margin-right: 12px;
+  `}>
+    {name} <IconChevronRight />
+  </div>}
 </div>
 
 export default CircleCell

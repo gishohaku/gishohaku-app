@@ -130,9 +130,10 @@ const BookCell: React.SFC<Props> = ({
           target="_blank"
           href={`/${eventId}/circles/${circleId}`}
           css={css`
+            margin-top: 24px;
+            display: block;
             text-decoration: none;
             border-top-right-radius: 4px;
-            display: inline-block;
             color: inherit;
             svg {
               margin-left: 4px;
