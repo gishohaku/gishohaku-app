@@ -29,18 +29,9 @@ const mapUrl: {
 }
 
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
-  const { circles, router } = props
+  const { circles } = props
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
-  const [isCheckOnly] = useState(router.query.starred !== undefined)
-  const circleStars = userStars[eventId].circleStars
-
-  const filteredCircles = useMemo(() => {
-    if (isCheckOnly) {
-      return props.circles.filter(circle => circle.id && circleStars.includes(circle.id))
-    }
-    return circles
-  }, [circles, isCheckOnly])
 
   return (
     <Container
@@ -77,7 +68,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
         </a>
       </div>
       <CirclesList>
-        {filteredCircles.map((circle: Circle) => {
+        {circles.map((circle: Circle) => {
           return (
             <CircleCell
               circle={circle}

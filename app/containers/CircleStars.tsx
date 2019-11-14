@@ -3,27 +3,31 @@ import { useContext } from 'react'
 
 import { jsx, css } from '@emotion/core'
 import { Container } from 'sancho'
-import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
 import withUser from '../withUser'
-import useBook from '../hooks/useBook'
 import EventContext from '../contexts/EventContext'
 import StarsContext from '../contexts/StarsContext'
+import useCircle from '../hooks/useCircle'
+import CircleCell from '../components/CircleCell'
 
-const AsnycBookCell = ({ bookId }: any) => {
-  const { book } = useBook(bookId)
-  return book ? <BookCell isShowCircle={true} book={book} /> : null
+const AsnycBookCell = ({ circleId }: any) => {
+  const { circle } = useCircle(circleId)
+  const { userStars, addStar, removeStar } = useContext(StarsContext)
+  return circle
+    ? <CircleCell circle={circle} userStars={userStars} addStar={addStar} removeStar={removeStar} />
+    : null
 }
 
 const BookStars: React.FC = () => {
   const { eventId } = useContext(EventContext)
   const { userStars } = useContext(StarsContext)
-  const bookStars = userStars[eventId].bookStars
+  const circleStars = userStars[eventId].circleStars
+
+  console.log(eventId, userStars, circleStars)
 
   return (
     <Container
       css={css`
-        max-width: 720px;
         margin: 32px auto;
         padding: 0 16px;
         @media ${media.small} {
@@ -32,11 +36,11 @@ const BookStars: React.FC = () => {
         }
       `}
     >
-      {bookStars.map(bookId => (
-        <AsnycBookCell bookId={bookId} key={bookId} />
+      {circleStars.map(circleId => (
+        <AsnycBookCell circleId={circleId} key={circleId} />
       ))}
       {
-        bookStars.length === 0 && <p>チェックされた頒布物がありません。</p>
+        circleStars.length === 0 && <p>チェックしたサークルがありません。</p>
       }
     </Container>
   )

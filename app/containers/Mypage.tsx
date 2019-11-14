@@ -21,7 +21,6 @@ const noDecoration = css`
 `
 
 const Mypage: React.FC<Props> = ({ userData }) => {
-  const router = useRouter()
   const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
 
@@ -37,27 +36,24 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         `}
       >
         <List>
-          {eventId === 'gishohaku1' && <>
-            <Link href='/[eventId]/circles?starred' as={`/${eventId}/circles?starred`} passHref>
-              <a css={noDecoration}>
-                <ListItem
-                  primary="チェックしたサークル"
-                  secondary="チェックをつけたサークルを確認できます"
-                  contentAfter={<IconChevronRight />}
-                />
-              </a>
-            </Link>
-            <Link href='/[eventId]/mypage/book_stars`' as={`/${eventId}/mypage/book_stars`} passHref>
-              <a css={noDecoration}>
-                <ListItem
-                  primary="チェックした頒布物"
-                  secondary="チェックをつけた頒布物が確認できます"
-                  contentAfter={<IconChevronRight />}
-                />
-              </a>
-            </Link>
-          </>
-          }
+          <Link href='/[eventId]/mypage/circle_stars' as={`/${eventId}/mypage/circle_stars`} passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="チェックしたサークル"
+                secondary="チェックをつけたサークルを確認できます"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href='/[eventId]/mypage/book_stars' as={`/${eventId}/mypage/book_stars`} passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="チェックした頒布物"
+                secondary="チェックをつけた頒布物が確認できます"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
           {circleRef && (
             <Link href='/[eventId]/mypage/circle' as={`/${eventId}/mypage/circle`} passHref>
               <a css={noDecoration}>
