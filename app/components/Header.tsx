@@ -5,9 +5,10 @@ import logo from '../images/shortLogo.svg'
 import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
-import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink } from 'sancho'
+import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink, IconHeart, IconLogIn } from 'sancho'
 import { useState, useContext } from 'react'
 import EventContext from '../contexts/EventContext'
+import UserContext from '../contexts/UserContext'
 // import { ListItem } from '../components/List'
 
 const buttonSize = 48
@@ -17,7 +18,6 @@ const noDecoration = css`
 `
 
 const hamburgerButton = css`
-  margin-left: auto;
   width: ${buttonSize}px;
   height: ${buttonSize}px;
   border-radius: ${buttonSize / 2}px;
@@ -42,6 +42,7 @@ const hamburgerButton = css`
 
 const Header: React.FC<any> = () => {
   const { eventId } = useContext(EventContext)
+  const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
   return (
     <header
@@ -53,11 +54,12 @@ const Header: React.FC<any> = () => {
         padding: 0 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         min-height: 66px;
+        user-select: none;
       `}
     >
-      <div
-        css={[hamburgerButton, css` visibility: hidden; `]}
-      />
+      <div css={[hamburgerButton, css`margin-right: auto;`]} onClick={() => setOpen(true)}>
+        <IconMenu />
+      </div>
       <Link href={`/${eventId == 'gishohaku2' ? '' : eventId}`} passHref>
         <a
           css={css`
@@ -75,15 +77,18 @@ const Header: React.FC<any> = () => {
             width={80}
             css={css`
               display: block;
+              pointer-events: none;
             `}
             alt="技術書同人誌博覧会"
           />
         </a>
       </Link>
-      <div css={hamburgerButton} onClick={() => setOpen(true)}>
-        <IconMenu />
+      <div css={[hamburgerButton, css`margin-left: auto;`]}>
+        {user && <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`}>
+          <IconHeart />
+        </Link>}
       </div>
-      <Sheet position="right" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
+      <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
         <List>
           <Link href="/gishohaku1" passHref>
             <a css={noDecoration}>
