@@ -109,7 +109,7 @@ const Hero = () => (
       <div css={css`margin-top: 16px;`}>
 
         <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-attend">一般参加の案内</LinkButton>
-        <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル参加の案内</LinkButton>
+        <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-circle-info">サークル参加の案内</LinkButton>
       </div>
     </div>
   </div>
