@@ -5,6 +5,8 @@ import book from '../images/icons/book.svg'
 import groupWork from '../images/icons/groupWork.svg'
 import home from '../images/icons/home.svg'
 import person from '../images/icons/person.svg'
+import { useContext } from 'react'
+import EventContext from '../contexts/EventContext'
 
 const spacer = css`
   width: 8px;
@@ -12,7 +14,7 @@ const spacer = css`
 `
 
 const item = css`
-  padding: 10px 0;
+  padding: 10px 0 8px;
   width: 80px;
   display: inline-block;
   text-align: center;
@@ -35,10 +37,10 @@ const item = css`
 `
 
 const label = css`
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   opacity: 0.8;
-  margin-top: 2px;
+  margin-top: 1px;
 `
 
 const icon = css`
@@ -48,6 +50,7 @@ const icon = css`
 `
 
 export default () => {
+  const { eventId } = useContext(EventContext)
   return (
     <div
       css={css`
@@ -66,30 +69,33 @@ export default () => {
           display: flex;
           justify-content: center;
           padding-bottom: 4px;
+          padding-bottom: calc(constant(safe-area-inset-bottom) + 4px);
+          padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+          transition: padding-bottom .15s ease-out;
         `}
       >
         <span css={spacer} />
-        <Link href="/gishohaku1" passHref>
+        <Link href={eventId === 'gishohaku2' ? "/" : `/${eventId}`} passHref>
           <a css={item}>
-            <img src={home} width={30} css={icon} />
+            <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>
           </a>
         </Link>
-        <Link href="/[eventId]/circles" as="/gishohaku1/circles" passHref>
+        <Link href="/[eventId]/circles" as={`/${eventId}/circles`} passHref>
           <a css={item}>
-            <img src={groupWork} width={30} css={icon} />
+            <img src={groupWork} width={28} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
-        <Link href="/[eventId]/books" as="/gishohaku1/books" passHref>
+        <Link href="/[eventId]/books" as={`/${eventId}/books`} passHref>
           <a css={item}>
-            <img src={book} width={30} css={icon} />
+            <img src={book} width={28} css={icon} />
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href="/[eventId]/mypage" as="/gishohaku1/mypage" passHref>
+        <Link href="/[eventId]/mypage" as={`/${eventId}/mypage`} passHref>
           <a css={item}>
-            <img src={person} width={30} css={icon} />
+            <img src={person} width={28} css={icon} />
             <div css={label}>マイページ</div>
           </a>
         </Link>

@@ -4,7 +4,7 @@ import { colors, media } from '../utils/style'
 import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
-import Header from './Header'
+import Header, { headerHeight } from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
@@ -17,6 +17,7 @@ const Layout: React.FC<any> = props => {
       <SEO />
       <Head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Global
@@ -35,6 +36,8 @@ const Layout: React.FC<any> = props => {
             background-color: #f7f8fa;
             /* For BottomBar */
             margin-bottom: 76px;
+            /* Sheetの実装とぶつかるためのimportant */
+            padding-top: ${headerHeight}px !important;
           }
           p,
           li {
@@ -51,8 +54,9 @@ const Layout: React.FC<any> = props => {
       >
         {props.children}
       </div>
-      {eventId === 'gishohaku1' && <BottomBar />}
-      {eventId === 'gishohaku2' && <MypageButton />}
+      {/* TODO: sign_in/やsign_up/で死ぬので要対応 */}
+      {['gishohaku1', 'gishohaku2'].includes(eventId) && <BottomBar />}
+      {/* {eventId === 'gishohaku2' && <MypageButton />} */}
     </>
   )
 }

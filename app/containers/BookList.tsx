@@ -8,11 +8,11 @@ import { getBooks, perBookCount } from '../utils/functions'
 import Book from '../utils/book'
 import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
-import SectionHeader from '../components/atoms/SectionHeader'
 import InfiniteScroll from 'react-infinite-scroller'
 import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
+import { SectionHeader } from '../pages'
 
 interface InitialProps {
   books: Book[]
@@ -37,9 +37,12 @@ const Index: NextPage<InitialProps> = props => {
       `}
     >
       <SEO title="頒布物一覧" />
-      <SectionHeader text="BOOKS" pageHeader>
-        頒布物一覧
-      </SectionHeader>
+      <div css={css`
+        position: relative;
+        margin-top: 48px;
+      `}>
+        <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
+      </div>
       <InfiniteScroll
         pageStart={0}
         loadMore={async () => {

@@ -23,7 +23,6 @@ import {
   IconArrowDown,
   Divider,
   Button,
-  IconChevronRight
 } from 'sancho'
 import { media } from '../utils/style'
 import Contents from './Contents'
@@ -33,6 +32,7 @@ import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
 import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
+import CircleCell, { CircleBooth } from './CircleCell'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -124,19 +124,16 @@ const BookCell: React.SFC<Props> = ({
   }, [])
 
   return (
-    <Container ref={docRef}>
+    <>
       {isShowCircle && (
         <a
           target="_blank"
           href={`/${eventId}/circles/${circleId}`}
           css={css`
-            align-items: center;
+            margin-top: 24px;
+            display: block;
             text-decoration: none;
-            font-weight: bold;
-            padding: 4px 8px;
-            margin: 0 -8px;
-            display: inline-flex;
-            border-radius: 4px;
+            border-top-right-radius: 4px;
             color: inherit;
             svg {
               margin-left: 4px;
@@ -146,206 +143,197 @@ const BookCell: React.SFC<Props> = ({
             }
           `}
         >
-          <div
-            css={css`
-              display: inline-block;
-              background-color: #2a5773;
-              color: white;
-              padding: 2px 8px;
-              border-radius: 2px;
-              margin-right: 6px;
-            `}
-          >
+          <CircleBooth name={book.circle!.name}>
             {book.circle!.booth}
-          </div>{' '}
-          {book.circle!.name}
-          <IconChevronRight />
+          </CircleBooth>
         </a>
       )}
-      <div
-        css={css`
-          display: flex;
-          align-items: center;
-
-          @media ${media.small} {
-            flex-direction: column;
-            align-items: initial;
-          }
-        `}
-      >
+      <Container ref={docRef}>
         <div
           css={css`
+            display: flex;
+            align-items: center;
+
             @media ${media.small} {
-              margin-bottom: 12px;
+              flex-direction: column;
+              align-items: initial;
             }
           `}
         >
-          <BookTitle>{book.title}</BookTitle>
           <div
             css={css`
-              font-size: 13px;
-              margin-top: 2px;
+              @media ${media.small} {
+                margin-bottom: 12px;
+              }
             `}
           >
-            {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text="新刊" />}
-            <span
+            <BookTitle>{book.title}</BookTitle>
+            <div
               css={css`
-                opacity: 0.8;
+                font-size: 13px;
+                margin-top: 2px;
               `}
             >
-              {metadata.join('・')}
-            </span>
+              {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text="新刊" />}
+              <span
+                css={css`
+                  opacity: 0.8;
+                `}
+              >
+                {metadata.join('・')}
+              </span>
+            </div>
           </div>
+
+          {editable ? <CheckCount count={starCount} /> : (
+            <CheckButton
+              isChecked={(book.id && userStars[eventId].bookStars.includes(book.id)) || false}
+              onClick={() => {
+                if (!user) {
+                  return openLoginModal()
+                }
+                if (!book.id) return
+                if (userStars[eventId].bookStars.includes(book.id)) {
+                  removeStar(eventId, 'books', book.id)
+                  toast({
+                    title: `「${book.title}」のチェックを外しました`,
+                    intent: 'success'
+                  })
+                } else {
+                  addStar(eventId, 'books', book.id)
+                  toast({
+                    title: `「${book.title}」をチェックしました`,
+                    intent: 'success'
+                  })
+                }
+              }}
+            />
+          )}
+        </div>
+        {editable && (
+          <div
+            css={css`
+              margin-top: 12px;
+              margin-bottom: 12px;
+              margin-left: auto;
+              display: flex;
+              > * {
+                margin-left: 6px;
+              }
+              > *:first-child {
+                margin-left: auto;
+              }
+            `}
+          >
+            {eventId === 'gishohaku1' && book.type == 'fanzine' && (
+              <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
+                <a css={css(button)}>見本誌の提出</a>
+              </Link>
+            )}
+            <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
+              <a css={button}>編集</a>
+            </Link>
+            {(!isFirst || !isLast) && (
+              <ResponsivePopover
+                placement="bottom-end"
+                content={
+                  // @ts-ignore
+                  <MenuList>
+                    {!isFirst && movePrev && (
+                      <MenuItem
+                        contentBefore={<IconArrowUp />}
+                        onPress={e => {
+                          docRef.current && docRef.current.click()
+                          movePrev(e as any)
+                        }}
+                      >
+                        上に移動
+                      </MenuItem>
+                    )}
+                    {!isLast && moveNext && (
+                      <MenuItem
+                        contentBefore={<IconArrowDown />}
+                        onPress={e => {
+                          docRef.current && docRef.current.click()
+                          moveNext(e as any)
+                        }}
+                      >
+                        下に移動
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                }
+              >
+                <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+              </ResponsivePopover>
+            )}
+          </div>
+        )}
+        {images.length > 0 && (
+          <div css={css` margin: 20px -20px 0; `}>
+            <ImagesContainer>
+              {images.map((image, index) => {
+                return (
+                  <ImageBox
+                    imageUrl={image}
+                    size="square"
+                    onClick={() => {
+                      updateOpenLightBox(true)
+                      updateLightboxIndex(index)
+                    }}
+                    width={180}
+                    key={index}
+                  />
+                )
+              })}
+            </ImagesContainer>
+          </div>
+        )}
+        {descriptionHTML.length > 0 && (
+          <Contents dangerouslySetInnerHTML={{ __html: descriptionHTML }} />
+        )}
+        {(book.sampleUrl || book.purchaseUrl) && <Divider />}
+        <div css={css`display: flex;`}>
+          {book.sampleUrl && (
+            <Button
+              component="a"
+              href={book.sampleUrl}
+              target="_blank"
+              rel="noopner"
+              variant={'ghost'}
+              css={flexChildLink}
+            >
+              立ち読み
+            </Button>
+          )}
+          {book.purchaseUrl && (
+            <Button
+              component="a"
+              href={book.purchaseUrl}
+              target="_blank"
+              rel="noopner"
+              css={flexChildLink}
+            >
+              電子版を購入
+            </Button>
+          )}
         </div>
 
-        {editable ? <CheckCount count={starCount} /> : (
-          <CheckButton
-            isChecked={(book.id && userStars[eventId].bookStars.includes(book.id)) || false}
-            onClick={() => {
-              if (!user) {
-                return openLoginModal()
-              }
-              if (!book.id) return
-              if (userStars[eventId].bookStars.includes(book.id)) {
-                removeStar(eventId, 'books', book.id)
-                toast({
-                  title: `「${book.title}」のチェックを外しました`,
-                  intent: 'success'
-                })
-              } else {
-                addStar(eventId, 'books', book.id)
-                toast({
-                  title: `「${book.title}」をチェックしました`,
-                  intent: 'success'
-                })
-              }
-            }}
+        {isOpenLightbox && (
+          <Lightbox
+            animationDuration={100}
+            mainSrc={images[lightBoxIndex]}
+            nextSrc={images[(lightBoxIndex + 1) % images.length]}
+            prevSrc={images[(lightBoxIndex + images.length - 1) % images.length]}
+            onCloseRequest={() => updateOpenLightBox(false)}
+            onMovePrevRequest={() =>
+              updateLightboxIndex((lightBoxIndex + images.length - 1) % images.length)
+            }
+            onMoveNextRequest={() => updateLightboxIndex((lightBoxIndex + +1) % images.length)}
           />
         )}
-      </div>
-      {editable && (
-        <div
-          css={css`
-            margin-top: 12px;
-            margin-bottom: 12px;
-            margin-left: auto;
-            display: flex;
-            > * {
-              margin-left: 6px;
-            }
-            > *:first-child {
-              margin-left: auto;
-            }
-          `}
-        >
-          {eventId === 'gishohaku1' && book.type == 'fanzine' && (
-            <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
-              <a css={css(button)}>見本誌の提出</a>
-            </Link>
-          )}
-          <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
-            <a css={button}>編集</a>
-          </Link>
-          {(!isFirst || !isLast) && (
-            <ResponsivePopover
-              placement="bottom-end"
-              content={
-                // @ts-ignore
-                <MenuList>
-                  {!isFirst && movePrev && (
-                    <MenuItem
-                      contentBefore={<IconArrowUp />}
-                      onPress={e => {
-                        docRef.current && docRef.current.click()
-                        movePrev(e as any)
-                      }}
-                    >
-                      上に移動
-                    </MenuItem>
-                  )}
-                  {!isLast && moveNext && (
-                    <MenuItem
-                      contentBefore={<IconArrowDown />}
-                      onPress={e => {
-                        docRef.current && docRef.current.click()
-                        moveNext(e as any)
-                      }}
-                    >
-                      下に移動
-                    </MenuItem>
-                  )}
-                </MenuList>
-              }
-            >
-              <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
-            </ResponsivePopover>
-          )}
-        </div>
-      )}
-      {images.length > 0 && (
-        <div css={css` margin: 20px -20px 0; `}>
-          <ImagesContainer>
-            {images.map((image, index) => {
-              return (
-                <ImageBox
-                  imageUrl={image}
-                  size="square"
-                  onClick={() => {
-                    updateOpenLightBox(true)
-                    updateLightboxIndex(index)
-                  }}
-                  width={180}
-                  key={index}
-                />
-              )
-            })}
-          </ImagesContainer>
-        </div>
-      )}
-      {descriptionHTML.length > 0 && (
-        <Contents dangerouslySetInnerHTML={{ __html: descriptionHTML }} />
-      )}
-      {(book.sampleUrl || book.purchaseUrl) && <Divider />}
-      <div css={css`display: flex;`}>
-        {book.sampleUrl && (
-          <Button
-            component="a"
-            href={book.sampleUrl}
-            target="_blank"
-            rel="noopner"
-            variant={'ghost'}
-            css={flexChildLink}
-          >
-            立ち読み
-          </Button>
-        )}
-        {book.purchaseUrl && (
-          <Button
-            component="a"
-            href={book.purchaseUrl}
-            target="_blank"
-            rel="noopner"
-            css={flexChildLink}
-          >
-            電子版を購入
-          </Button>
-        )}
-      </div>
-
-      {isOpenLightbox && (
-        <Lightbox
-          animationDuration={100}
-          mainSrc={images[lightBoxIndex]}
-          nextSrc={images[(lightBoxIndex + 1) % images.length]}
-          prevSrc={images[(lightBoxIndex + images.length - 1) % images.length]}
-          onCloseRequest={() => updateOpenLightBox(false)}
-          onMovePrevRequest={() =>
-            updateLightboxIndex((lightBoxIndex + images.length - 1) % images.length)
-          }
-          onMoveNextRequest={() => updateLightboxIndex((lightBoxIndex + +1) % images.length)}
-        />
-      )}
-    </Container>
+      </Container>
+    </>
   )
 }
 
@@ -357,6 +345,7 @@ const Container = styled.div`
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
+  border-top-left-radius: 0;
 `
 
 const ImagesContainer = styled.div`
