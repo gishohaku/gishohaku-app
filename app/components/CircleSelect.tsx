@@ -611,6 +611,9 @@ const container = css`
   padding: 12px;
   background-color: white;
   border-bottom: 1px solid #ddd;
+  position: sticky;
+  z-index: 101;
+  top: 0;
 `
 
 const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {

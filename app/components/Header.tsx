@@ -6,7 +6,7 @@ import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
 import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink, IconHeart, IconLogIn } from 'sancho'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
 import UserContext from '../contexts/UserContext'
 // import { ListItem } from '../components/List'
@@ -40,10 +40,44 @@ const hamburgerButton = css`
   }
 `
 
+export const headerHeight = 66
+
+const useShyHeader = () => {
+  const [isHeaderVisible, setVisible] = useState(true)
+
+  useEffect(() => {
+    let prevOffset = 0, ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        if (window.pageYOffset <= 100) {
+          setVisible(true)
+        } else if (prevOffset <= window.pageYOffset) {
+          setVisible(false)
+          prevOffset = window.pageYOffset;
+        } else if (prevOffset > window.pageYOffset + headerHeight) {
+          setVisible(true)
+          prevOffset = window.pageYOffset;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    return () => document.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return { isHeaderVisible }
+}
+
 const Header: React.FC<any> = () => {
   const { eventId } = useContext(EventContext)
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
+  const { isHeaderVisible } = useShyHeader()
+
   return (
     <header
       css={css`
@@ -53,9 +87,16 @@ const Header: React.FC<any> = () => {
         font-size: 12px;
         padding: 0 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        min-height: 66px;
+        min-height: ${headerHeight}px;
         user-select: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transition: transform .15s ease-out;
       `}
+      style={{ transform: `translateY(${isHeaderVisible ? '0' : '-66'}px)` }}
     >
       <div css={[hamburgerButton, css`margin-right: auto;`]} onClick={() => setOpen(true)}>
         <IconMenu />

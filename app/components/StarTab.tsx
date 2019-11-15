@@ -30,6 +30,9 @@ export default () => {
     border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: center;
+    position: sticky;
+    z-index: 101;
+    top: 0;
   `}>
     <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`}>
       <Item isActive={pathname === "/[eventId]/mypage/circle_stars"}>チェックしたサークル</Item>

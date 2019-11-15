@@ -4,7 +4,7 @@ import { colors, media } from '../utils/style'
 import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
-import Header from './Header'
+import Header, { headerHeight } from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
@@ -36,6 +36,8 @@ const Layout: React.FC<any> = props => {
             background-color: #f7f8fa;
             /* For BottomBar */
             margin-bottom: 76px;
+            /* Sheetの実装とぶつかるためのimportant */
+            padding-top: ${headerHeight}px !important;
           }
           p,
           li {
