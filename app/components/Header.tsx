@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import logo from '../images/logo.png'
+import logo from '../images/shortLogo.svg'
 import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
-import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink } from 'sancho'
-import { useState, useContext } from 'react'
+import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink, IconHeart, IconLogIn } from 'sancho'
+import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
+import UserContext from '../contexts/UserContext'
 // import { ListItem } from '../components/List'
 
 const buttonSize = 48
@@ -17,10 +18,8 @@ const noDecoration = css`
 `
 
 const hamburgerButton = css`
-  margin-left: auto;
   width: ${buttonSize}px;
   height: ${buttonSize}px;
-  background-color: #eee;
   border-radius: ${buttonSize / 2}px;
   position: relative;
   cursor: pointer;
@@ -41,9 +40,44 @@ const hamburgerButton = css`
   }
 `
 
+export const headerHeight = 66
+
+const useShyHeader = () => {
+  const [isHeaderVisible, setVisible] = useState(true)
+
+  useEffect(() => {
+    let prevOffset = 0, ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        if (window.pageYOffset <= 100) {
+          setVisible(true)
+        } else if (prevOffset <= window.pageYOffset) {
+          setVisible(false)
+          prevOffset = window.pageYOffset;
+        } else if (prevOffset > window.pageYOffset + headerHeight) {
+          setVisible(true)
+          prevOffset = window.pageYOffset;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    return () => document.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return { isHeaderVisible }
+}
+
 const Header: React.FC<any> = () => {
   const { eventId } = useContext(EventContext)
+  const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
+  const { isHeaderVisible } = useShyHeader()
+
   return (
     <header
       css={css`
@@ -51,25 +85,26 @@ const Header: React.FC<any> = () => {
         display: flex;
         align-items: center;
         font-size: 12px;
-        padding: 0 16px;
+        padding: 0 12px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        min-height: 80px;
-        @media ${media.small} {
-          padding: 0;
-        }
+        min-height: ${headerHeight}px;
+        user-select: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transition: transform .15s ease-out;
       `}
+      style={{ transform: `translateY(${isHeaderVisible ? '0' : '-66'}px)` }}
     >
-      <div
-        css={css(
-          hamburgerButton,
-          `
-      visibility: hidden;
-    `
-        )}
-      />
+      <div css={[hamburgerButton, css`margin-right: auto;`]} onClick={() => setOpen(true)}>
+        <IconMenu />
+      </div>
       <Link href={`/${eventId == 'gishohaku2' ? '' : eventId}`} passHref>
         <a
           css={css`
+          padding: 13px;
             &:hover {
               background-color: #eff0f0;
             }
@@ -81,18 +116,20 @@ const Header: React.FC<any> = () => {
           <img
             src={logo}
             width={80}
-            height={80}
             css={css`
               display: block;
+              pointer-events: none;
             `}
             alt="技術書同人誌博覧会"
           />
         </a>
       </Link>
-      <div css={hamburgerButton} onClick={() => setOpen(true)}>
-        <IconMenu />
+      <div css={[hamburgerButton, css`margin-left: auto;`]}>
+        {user && <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`}>
+          <IconHeart />
+        </Link>}
       </div>
-      <Sheet position="right" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
+      <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
         <List>
           <Link href="/gishohaku1" passHref>
             <a css={noDecoration}>

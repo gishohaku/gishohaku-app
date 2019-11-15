@@ -26,7 +26,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     "url": "https://gishohaku.dev/",
     "offers": {
       "@type": "Offer",
-      "availability":"InStock",
+      "availability": "InStock",
       "description": "来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。",
       "price": "0",
       "priceCurrency": "JPY",
@@ -36,9 +36,9 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       "@type": "PerformingGroup",
       "name": "技術書同人誌博覧会 運営事務局"
     },
-    "location" : {
-      "@type" : "Place",
-      "name" : "プラザマーム",
+    "location": {
+      "@type": "Place",
+      "name": "プラザマーム",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "東京都",
@@ -54,7 +54,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <title>{metaTitle}</title>
       <meta property="og:description" content={metaDescription} key="description" />
       <meta property="og:type" content="website" key="type" />
-      <meta property="og:image" content={imageUrl || 'https://gishohaku.dev/static/ogp.jpg'} key="image" />
+      <meta property="og:image" content={imageUrl || 'https://img.esa.io/uploads/production/attachments/13039/2019/11/15/4651/62f3ec17-e47b-4520-aeda-5cd2ee8a8395.png'} key="image" />
       <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
       <meta name="twitter:creator" content="@gishohaku" key="twitter:creater" />
       <meta name="twitter:title" content={metaTitle} key="twitter:title" />
