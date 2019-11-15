@@ -7,14 +7,14 @@ import TextBlock from "../components/atoms/TextBlock"
 import placeIcon from '../components/top/round-place.svg'
 import directionsIcon from '../components/top/round-directions_run.svg'
 
-const orange = '#E1740C'
+const keyColor = '#204986'
 
 const LinkButton: React.SFC<{
   href: string
 }> = ({ href, children }) => (
   <a css={css`
     font-size: 16px;
-    color: ${orange};
+    color: ${keyColor};
     font-weight: bold;
     padding: 12px 16px;
     background-color: white;
@@ -33,7 +33,7 @@ const LinkButton: React.SFC<{
 
 const Hero = () => (
   <div css={css`
-    background-color: ${orange};
+    background-color: ${keyColor};
     color: white;
     padding: 32px;
     display: flex;
@@ -68,11 +68,11 @@ const Hero = () => (
       display: flex;
       align-items: center;
       small {
-        font-size: 20px;
+        font-size: 18px;
         background-color: white;
-        color: ${orange};
+        color: ${keyColor};
         display: inline-block;
-        padding: 2px 16px;
+        padding: 2px 12px;
         margin-right: 8px;
         border-radius: 4px;
       }
@@ -219,7 +219,7 @@ export const SectionHeader: React.FC<{
       width: 80px;
       bottom: 0;
       display: block;
-      background-color: ${orange};
+      background-color: ${keyColor};
       left: 50%;
       transform: translateX(-50%);
       @media ${media.small} {
