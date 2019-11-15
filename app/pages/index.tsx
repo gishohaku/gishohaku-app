@@ -28,7 +28,7 @@ const LinkButton: React.SFC<{
       margin: 8px 0 0;
       display: block;
     }
-  `} href={href}>{children}</a>
+  `} target="_blank" rel="noopener" href={href}>{children}</a>
 )
 
 const Hero = () => (
@@ -108,8 +108,8 @@ const Hero = () => (
         @プラザマーム（東京日本橋）</div>
       <div css={css`margin-top: 16px;`}>
 
-        <LinkButton href="/gishohaku2/circles">一般参加の案内</LinkButton>
-        <LinkButton href="/gishohaku2/circles">サークル参加の案内</LinkButton>
+        <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-attend">一般参加の案内</LinkButton>
+        <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル参加の案内</LinkButton>
       </div>
     </div>
   </div>
