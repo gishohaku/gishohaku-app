@@ -95,7 +95,7 @@ Index.getInitialProps = async ({ res, query }) => {
 }
 export default withRouter(Index)
 
-const CirclesList = styled.div`
+export const CirclesList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
