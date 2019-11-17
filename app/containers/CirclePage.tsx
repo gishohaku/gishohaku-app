@@ -51,7 +51,10 @@ CirclePage.getInitialProps = async ({ query, res }) => {
     .where('circleRef', '==', circleRef)
     .orderBy('order', 'asc')
     .get()
-  const books = bookSnapshots.docs.map(doc => refToId(doc.data() as Book))
+  const books = bookSnapshots.docs.map(doc => ({
+    id: doc.id,
+    ...refToId(doc.data() as Book)
+  }))
 
   return { circle, books }
 }
