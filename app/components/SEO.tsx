@@ -27,10 +27,11 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     "offers": {
       "@type": "Offer",
       "availability": "InStock",
+      "validFrom": "2019-11-15T12:00",
       "description": "来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。",
       "price": "0",
       "priceCurrency": "JPY",
-      "url": "https://gishohaku.dev/"
+      "url": "https://peatix.com/event/1374236"
     },
     "performer": {
       "@type": "PerformingGroup",
