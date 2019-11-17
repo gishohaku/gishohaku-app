@@ -125,8 +125,10 @@ const Header: React.FC<any> = () => {
         </a>
       </Link>
       <div css={[hamburgerButton, css`margin-left: auto;`]}>
-        {user && <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`}>
-          <IconHeart />
+        {user && <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`} passHref>
+          <a css={css`display: block; height: 100%;`}>
+            <IconHeart />
+          </a>
         </Link>}
       </div>
       <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
