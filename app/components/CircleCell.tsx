@@ -69,17 +69,11 @@ export const CircleBooth: React.FC<{
   display: flex;
   align-items: center;
 `}>
-  <div css={css`
-    color: white;
-    background-color: #2a5773;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    margin-right: 8px;
-  `}>{children}</div>
+  {(children && (children as string).startsWith('2F')) ? (
+    <CircleBooth2nd>{children}</CircleBooth2nd>
+  ): (
+    <CircleBooth3rd>{children}</CircleBooth3rd>
+  )}
   {name && <div css={css`
     flex: 1;
     white-space: nowrap;
@@ -94,6 +88,30 @@ export const CircleBooth: React.FC<{
 </div>
 
 export default CircleCell
+
+const CircleBooth2nd = styled.div`
+  color: white;
+  background-color: ${colors.floor2nd};
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-right: 8px;
+`
+
+const CircleBooth3rd = styled.div`
+  color: white;
+  background-color: ${colors.floor3rd};
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  margin-right: 8px;
+`
 
 const Container = styled.div`
   margin: 0 12px 32px;
