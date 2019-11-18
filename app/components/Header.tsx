@@ -175,13 +175,13 @@ const Header: React.FC<any> = () => {
           }
         `}>
           <li>
-            <a href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル出展要項</a>
+            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル出展要項</a>
           </li>
           <li>
-            <a href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">サークル出展の手引き</a>
+            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">サークル出展の手引き</a>
           </li>
           <li>
-            <a href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">行動規範</a>
+            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">行動規範</a>
           </li>
           <li>
             <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
