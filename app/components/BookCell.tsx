@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import marked from 'marked'
 
 import Book, { types, mediums } from '../utils/book'
+import { colors } from '../utils/style'
 import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
 import CheckButton from '../components/CheckButton'
@@ -33,12 +34,14 @@ import CheckCount from './CheckCount'
 import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
 import CircleCell, { CircleBooth } from './CircleCell'
+import SnsShare, { SnsShareSize } from './SnsShare'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
   book: Book
   editable?: boolean
   isShowCircle?: boolean
+  isShowSnsShare?: boolean
   isLast?: boolean
   isFirst?: boolean
   movePrev?: (e: Event) => void
@@ -48,6 +51,8 @@ interface Props {
 interface StarCount {
   count: number
 }
+
+const width = 252
 
 const flexChildLink = css`
   flex: 1;
@@ -77,6 +82,7 @@ const BookCell: React.SFC<Props> = ({
   book,
   editable = false,
   isShowCircle = false,
+  isShowSnsShare = false,
   moveNext,
   movePrev,
   isLast = true,
@@ -167,7 +173,11 @@ const BookCell: React.SFC<Props> = ({
               }
             `}
           >
-            <BookTitle>{book.title}</BookTitle>
+            <Link href='/[eventId]/books/[id]' as={`/${eventId}/books/${book.id}`} key={book.id} passHref>
+              <BookLink>
+                <BookTitle>{book.title}</BookTitle>
+              </BookLink>
+            </Link>
             <div
               css={css`
                 font-size: 13px;
@@ -269,6 +279,18 @@ const BookCell: React.SFC<Props> = ({
             )}
           </div>
         )}
+
+        {isShowSnsShare && (
+          <div
+              css={css`
+                margin-top: 12px;
+                margin-bottom: 12px;
+              `}
+            >
+            <SnsShare size={SnsShareSize.Large} />
+          </div>
+        )}
+
         {images.length > 0 && (
           <div css={css` margin: 20px -20px 0; `}>
             <ImagesContainer>
@@ -354,6 +376,16 @@ const ImagesContainer = styled.div`
   padding: 0 20px;
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
+`
+const BookLink = styled.a`
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 4px;
+  color: inherit;
+  &:hover h2 {
+    color: ${colors.primary};
+  }
 `
 
 const BookTitle = styled.div`

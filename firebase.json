@@ -28,6 +28,10 @@
         "destination": "/gishohaku1/books/[id]/submit.html"
       },
       {
+        "source": "/gishohaku2/books/**",
+        "function": "app"
+      },
+      {
         "source": "/gishohaku1/books",
         "function": "app"
       },

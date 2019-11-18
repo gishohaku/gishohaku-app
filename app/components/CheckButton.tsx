@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { IconHeart } from 'sancho'
+import { IconCheck, IconHeart } from 'sancho'
 
 interface Props {
   isChecked: boolean
@@ -34,9 +34,17 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
       `}
       onClick={onClick}
     >
-      <IconHeart fill='white' stroke="none" />
-
-      {isChecked ? 'チェック済み' : 'チェックする'}
+      {isChecked ? (
+        <>
+          <IconCheck fill='white' />
+          チェック済み
+        </>
+      ) : (
+        <>
+          <IconHeart fill='white' stroke="none" />
+          チェックする
+        </>
+       )}
     </div>
   )
 }
