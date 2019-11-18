@@ -1,4 +1,6 @@
 export const colors = {
+  floor2nd: '#37AB9D',
+  floor3rd: '#4CB0DF',
   primary: '#2B5773',
   gray900: '#1D272D',
   gray700: '#505A60',
