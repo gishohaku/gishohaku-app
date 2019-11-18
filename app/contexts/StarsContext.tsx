@@ -20,12 +20,12 @@ const starTypeToKey: {
   books: 'bookStars'
 }
 
-const incrementStarCount = async (ref: firebase.firestore.DocumentReference, diff: number) => {
+const incrementStarCount = async (eventId: EventId, ref: firebase.firestore.DocumentReference, diff: number) => {
   const documentId = ref.path.replace('/', '-')
   return db
     .collection('starCounts')
     .doc(documentId)
-    .set({ ref, count: firebase.firestore.FieldValue.increment(diff) }, { merge: true })
+    .set({ ref, eventId, count: firebase.firestore.FieldValue.increment(diff) }, { merge: true })
 }
 
 const defaultStars = {
@@ -66,7 +66,7 @@ export const StarsProvider: React.FC = ({ children }) => {
     setUserStars(newState)
 
     const targetRef = db.collection(starType).doc(targetId)
-    incrementStarCount(targetRef, 1)
+    incrementStarCount(eventId, targetRef, 1)
 
     db.doc(`users/${userId}/stars/${eventId}`).set({
       [starKey]: firebase.firestore.FieldValue.arrayUnion(targetId)
@@ -81,7 +81,7 @@ export const StarsProvider: React.FC = ({ children }) => {
     setUserStars(newState)
 
     const targetRef = db.collection(starType).doc(targetId)
-    incrementStarCount(targetRef, -1)
+    incrementStarCount(eventId, targetRef, -1)
 
     await db.doc(`users/${userId}/stars/${eventId}`).update({
       [starKey]: firebase.firestore.FieldValue.arrayRemove(targetId)
