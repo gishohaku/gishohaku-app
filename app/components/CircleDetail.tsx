@@ -21,6 +21,7 @@ import { useToast } from 'sancho'
 
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
+import SnsShare, { SnsShareSize } from './SnsShare'
 import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
 
@@ -28,6 +29,7 @@ interface Props {
   circle: Circle
   books: Book[]
   editable?: boolean
+  isShowSnsShare?: boolean
   setBooks?: (books: Book[]) => void
 }
 
@@ -35,7 +37,13 @@ interface StarCount {
   count: number
 }
 
-const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) => {
+const CircleDetail: React.FC<Props> = ({
+  circle,
+  books,
+  editable,
+  isShowSnsShare = false,
+  setBooks
+}) => {
   const { user, openLoginModal } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const toast = useToast()
@@ -125,6 +133,17 @@ const CircleDetail: React.FC<Props> = ({ circle, books, editable, setBooks }) =>
                 }
               }}
             />
+          )}
+
+          {isShowSnsShare && (
+            <div
+                css={css`
+                  margin-top: 12px;
+                  margin-bottom: 12px;
+                `}
+              >
+              <SnsShare size={SnsShareSize.Small} />
+            </div>
           )}
       </div>
       <BooksContainer>

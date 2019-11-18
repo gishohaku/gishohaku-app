@@ -21,6 +21,7 @@ module.exports = withImages(
       outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
         delete defaultPathMap['/[eventId]/books']
+        delete defaultPathMap['/[eventId]/books/[id]']
         delete defaultPathMap['/[eventId]/circles']
         delete defaultPathMap['/[eventId]/circles/[id]']
         delete defaultPathMap['/[eventId]/mypage']
