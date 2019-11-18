@@ -12,7 +12,7 @@ import Book from '../utils/book'
 import Circle, { allCategories } from '../utils/circle'
 import BookCell from '../components/BookCell'
 import CheckButton from './CheckButton'
-import { media } from '../utils/style'
+import { colors, media } from '../utils/style'
 import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
 import { useContext, useEffect, useState } from 'react'
@@ -61,6 +61,8 @@ const CircleDetail: React.FC<Props> = ({
     }
   }, [])
 
+  const circleColor: string = (circle.booth.startsWith('2F')) ? colors.floor2nd : colors.floor3rd;
+
   if (!circle) return null
 
   return (
@@ -77,7 +79,7 @@ const CircleDetail: React.FC<Props> = ({
         <ImageBox width={258} size="circlecut" imageUrl={circle.image || circleTumbnail} />
         <div style={{ marginTop: 8 }}>
           {circle.booth && (
-            <Label backgroundColor={'#2A5773'} color={'white'} text={circle.booth} />
+            <Label backgroundColor={circleColor} color={'white'} text={circle.booth} />
           )}
           <Label text={allCategories[circle.category]} />
         </div>
