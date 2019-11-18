@@ -45,6 +45,7 @@ const SnsShare: React.SFC<Props> = (props) => {
       .hatena-bookmark-button-frame {
         vertical-align: top;
         margin-right: 4px;
+        display: inline-block;
       }
       .fb-share-button > span {
         vertical-align: top !important;
