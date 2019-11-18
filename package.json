@@ -15,7 +15,9 @@
     "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
-    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com"
+    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com",
+    "test": "jest",
+    "test:firestore": "firebase emulators:exec --only firestore 'yarn test'"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
@@ -57,11 +59,14 @@
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@firebase/testing": "^0.15.1",
+    "@types/jest": "^24.0.23",
     "@types/marked": "^0.6.5",
     "@types/qs": "^6.5.3",
     "@types/react-infinite-scroller": "^1.2.1",
     "@types/react-lazyload": "^2.5.0",
     "@types/react-virtualized": "^9.21.2",
+    "jest": "^24.9.0",
     "mysql": "^2.17.1",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
