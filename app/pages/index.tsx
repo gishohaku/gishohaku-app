@@ -381,8 +381,8 @@ export default () => {
             display: flex;
             flex-flow: row wrap;
             justify-content: center;
-            align-content: center;
-            align-items: center;
+            align-content: flex-start;
+            align-items: flex-start;
             margin: 12px 0;
           }
         `}>
@@ -460,6 +460,26 @@ export default () => {
                 href="https://www.shimaya.net/"
               />
           </div>
+          <div className="sponsorlist">
+            <Sponsor
+                name="CodeZine"
+                role="メディアサポーター"
+                image="/static/sponsors/codezine.png"
+                href="https://codezine.jp/"
+              />
+            <Sponsor
+                name="ThinkIT"
+                role="メディアサポーター"
+                image="/static/sponsors/thinkit.png"
+                href="https://thinkit.co.jp/"
+              />
+            <Sponsor
+                name="日経ソフトウエア"
+                role="メディアサポーター"
+                image="/static/sponsors/nikkei.png"
+                href="https://nkbp.jp/nsoft"
+              />
+          </div>
         </div>
       </TextBlock>
     </section>
@@ -470,8 +490,8 @@ export default () => {
           display: flex;
           flex-flow: row wrap;
           justify-content: center;
-          align-content: center;
-          align-items: center;
+          align-content: flex-start;
+          align-items: flex-start;
         `}>
           <Printing
             name="しまや出版"
@@ -523,8 +543,8 @@ export default () => {
           display: flex;
           flex-flow: row wrap;
           justify-content: center;
-          align-content: center;
-          align-items: center;
+          align-content: flex-start;
+          align-items: flex-start;
         `}>
           <Staff
             name="ariaki"
