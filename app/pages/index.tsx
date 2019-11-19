@@ -534,9 +534,9 @@ export default () => {
             linkUrl="https://www.nikko-pc.com/"
           />
           <Printing
-            name="http://www.inv.co.jp/~popls/"
+            name="ポプルス"
             imageUrl="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
-            linkUrl="ポプルス"
+            linkUrl="http://www.inv.co.jp/~popls/"
           />
           <Printing
             name="栄光"
