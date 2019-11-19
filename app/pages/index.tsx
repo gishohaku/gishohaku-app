@@ -121,7 +121,7 @@ const Hero = () => (
         font-size: 16px;
       }
     `}>
-        @プラザマーム（東京日本橋）</div>
+        @プラザマーム（日本橋浜町）</div>
       <div css={css`margin-top: 16px;`}>
 
         <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-attend">一般参加の案内</LinkButton>
