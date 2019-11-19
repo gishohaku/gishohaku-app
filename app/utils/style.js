@@ -10,10 +10,12 @@ export const colors = {
 
 const breakpoints = {
   small: 480,
-  medium: 768
+  medium: 768,
+  large: 980
 }
 
 export const media = {
   small: `screen and (max-width: ${breakpoints.small - 1}px)`,
-  medium: `screen and (max-width: ${breakpoints.medium - 1}px)`
+  medium: `screen and (max-width: ${breakpoints.medium - 1}px)`,
+  large: `screen and (max-width: ${breakpoints.large - 1}px)`
 }

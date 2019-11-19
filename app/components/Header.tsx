@@ -9,6 +9,7 @@ import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExterna
 import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
 import UserContext from '../contexts/UserContext'
+import { useRouter } from 'next/router'
 // import { ListItem } from '../components/List'
 
 const buttonSize = 48
@@ -25,11 +26,11 @@ const hamburgerButton = css`
   cursor: pointer;
 
   &:hover {
-    background-color: #e5e5e5;
+    background-color: rgba(0, 0, 0, 0.08);
   }
 
   &:active {
-    background-color: #ddd;
+    background-color: rgba(0, 0, 0, 0.12);
   }
 
   svg {
@@ -77,16 +78,19 @@ const Header: React.FC<any> = () => {
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
   const { isHeaderVisible } = useShyHeader()
+  const router = useRouter()
+
+  const isTransparent = router.asPath === '/'
 
   return (
     <header
       css={css`
-        background-color: white;
+        background-color: ${isTransparent ? 'transparent' : 'white'};
         display: flex;
         align-items: center;
         font-size: 12px;
         padding: 0 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 8px ${isTransparent ? 'transparent' : 'rgba(0, 0, 0, 0.08)'};
         min-height: ${headerHeight}px;
         user-select: none;
         position: fixed;
@@ -104,12 +108,13 @@ const Header: React.FC<any> = () => {
       <Link href={`/${eventId == 'gishohaku2' ? '' : eventId}`} passHref>
         <a
           css={css`
-          padding: 13px;
+            padding: 13px;
             &:hover {
-              background-color: #eff0f0;
+              background-color: rgba(0, 0, 0, 0.08);
             }
+
             &:active {
-              background-color: #dededf;
+              background-color: rgba(0, 0, 0, 0.12);
             }
           `}
         >
