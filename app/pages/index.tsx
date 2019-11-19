@@ -1,7 +1,5 @@
 /** @jsx jsx */
-import Sections from "../components/top/sections"
 import { css, jsx } from '@emotion/core'
-import logo from '../images/fullLogo.png'
 import { media } from '../utils/style'
 import TextBlock from "../components/atoms/TextBlock"
 import placeIcon from '../components/top/round-place.svg'
@@ -14,51 +12,68 @@ const LinkButton: React.SFC<{
 }> = ({ href, children }) => (
   <a css={css`
     font-size: 16px;
-    color: ${keyColor};
+    border: 2px solid #1C3559;
+    color: #1C3559;
     font-weight: bold;
-    padding: 12px 16px;
-    background-color: white;
+    padding: 10px 16px;
     display: inline-block;
     text-decoration: none;
     border-radius: 4px;
     margin-right: 8px;
     min-width: 200px;
     text-align: center;
-    @media ${media.small} {
+    transition: all 0.1s ease-out;
+    @media ${media.large} {
       margin: 8px 0 0;
       display: block;
+    }
+    &:hover {
+      background-color: #1C3559;
+      color: white;
     }
   `} target="_blank" rel="noopener" href={href}>{children}</a>
 )
 
 const Hero = () => (
   <div css={css`
-    background-color: ${keyColor};
-    color: white;
+    background: linear-gradient(180deg, #CCE0FF 0%, rgba(208, 224, 249, 0.791667) 40%, rgba(255, 255, 255, 100) 100%);
+    margin-top: -66px;
     padding: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('/static/bg.png');
-    @media ${media.small} {
+    padding-top: 66px;
+    padding-bottom: 0;
+
+    color: white;
+    color: #1C3559;
+    /* background-image: url('/static/bg.png'); */
+    @media ${media.large} {
       flex-direction: column;
-      padding: 16px;
+      padding: ${66}px 16px 16px;
       align-items: start;
     }
   `}>
     <img css={css`
-      @media ${media.small} {
-        width: 120px;
-        margin-bottom: 24px;
-        margin-left: -8px;
-
+      width: 400px;
+      position: relative;
+      left: -10px;
+      @media ${media.large} {
+        width: 280px;
+        margin: 0 auto 20px;
+        left: 0;
       }
-    `} src={logo} width={200} height={256} />
+    `} src='https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png' width={280} height={286} />
     <div css={css`
-      margin-left: 24px;
-      @media ${media.small} {
+      margin-left: 32px;
+      position: relative;
+      top: -8px;
+      @media ${media.large} {
         margin-left: 0;
         width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        top: 0;
       }
     `}>
 
@@ -70,13 +85,14 @@ const Hero = () => (
       small {
         font-size: 18px;
         background-color: white;
-        color: ${keyColor};
+        background-color: #1C3559;
+        color: white;
         display: inline-block;
-        padding: 2px 12px;
+        padding: 2px 10px;
         margin-right: 8px;
         border-radius: 4px;
       }
-      @media ${media.small} {
+      @media ${media.large} {
         font-size: 24px;
         small {
           font-size: 16px;
@@ -94,14 +110,14 @@ const Hero = () => (
       small {
         font-size: 24px;
       }
-      @media ${media.small} {
+      @media ${media.large} {
         font-size: 28px;
       }
     `}>2019.12.14 <small>Sat. 11:00~17:00</small></div>
       <div css={css`
       font-size: 20px;
       font-weight: bold;
-      @media ${media.small} {
+      @media ${media.large} {
         font-size: 16px;
       }
     `}>
@@ -118,7 +134,7 @@ const Hero = () => (
 const section = css`
   padding: 48px 0;
   background-color: white;
-  @media ${media.small} {
+  @media ${media.large} {
     padding: 32px 0;
   }
 `
