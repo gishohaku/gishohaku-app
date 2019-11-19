@@ -339,7 +339,7 @@ export default () => {
         <p css={css`
           margin-top: 32px;
           text-align: center;
-          a { margin: 0 16px; }
+          a { margin: 8px 16px; }
         `}>
           <LinkButton href="https://peatix.com/event/1374236">本編への参加<br />（無料）</LinkButton>
           <LinkButton href="https://peatix.com/event/1374258">懇親会への参加<br />（有料）</LinkButton>
