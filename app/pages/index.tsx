@@ -416,15 +416,15 @@ export default () => {
           </div>
           <div className="sponsorlist">
             <Sponsor
-                name="株式会社インプレスR＆D"
-                role="ランチサポーター・懇親会サポーター"
-                image="/static/sponsors/impress.png"
-                href="https://nextpublishing.jp/"
+                name="NextPublishing POD出版サービス"
+                role="ランチサポーター"
+                image="/static/sponsors/nextpub.jpg"
+                href="https://nextpublishing.jp/author/"
               />
             <Sponsor
               name="テクノブレーン株式会社"
                 role="キャラバンサポーター"
-                image="/static/sponsors/tbc.gif"
+                image="/static/sponsors/technobrain.jpg"
                 href="https://www.techno-brain.co.jp/"
               />
           </div>
@@ -447,8 +447,12 @@ export default () => {
                 image="/static/sponsors/graat.png"
                 href="https://www.graat.co.jp/"
               />
-          </div>
-          <div className="sponsorlist">
+            <Sponsor
+                name="株式会社インプレスR&amp;D 技術の泉シリーズ"
+                role="懇親会サポーター"
+                image="/static/sponsors/impress_izumi.jpg"
+                href="https://nextpublishing.jp/"
+              />
             <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
