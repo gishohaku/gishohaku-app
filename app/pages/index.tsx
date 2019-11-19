@@ -123,7 +123,6 @@ const Hero = () => (
     `}>
         @プラザマーム（日本橋浜町）</div>
       <div css={css`margin-top: 16px;`}>
-
         <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-attend">一般参加の案内</LinkButton>
         <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-circle-info">サークル参加の案内</LinkButton>
       </div>
@@ -306,6 +305,9 @@ const section = css`
   @media ${media.large} {
     padding: 32px 0;
   }
+  :nth-child(odd){
+    background-color: #f7f8fa;
+  }
 `
 
 export default () => {
@@ -322,7 +324,29 @@ export default () => {
         </p>
       </TextBlock>
     </section>
-    <section css={[section, css`background-color: #f7f8fa;`]}>
+    <section css={section}>
+      <SectionHeader en="TICKET">チケット申込</SectionHeader>
+      <TextBlock>
+        <p>
+          技書博本編へ 11:00～13:59 に来場される場合には事前予約（無料）が必要です。
+          14:00 以降は予約なしで入場いただけます。
+          配布ノベルティ数に限りがありますので、早めの予約をオススメします。
+          <br />
+          また、技書博終了後に会場内で懇親会を催します。
+          著者・来場者・スタッフなどすべての方が集まり、技書博で頒布された本や技術について語り合います。
+          技書博本編とあわせてぜひご参加ください。
+        </p>
+        <p css={css`
+          margin-top: 32px;
+          text-align: center;
+          a { margin: 0 16px; }
+        `}>
+          <LinkButton href="https://peatix.com/event/1374236">本編への参加<br />（無料）</LinkButton>
+          <LinkButton href="https://peatix.com/event/1374258">懇親会への参加<br />（有料）</LinkButton>
+        </p>
+      </TextBlock>
+    </section>
+    <section css={section}>
       <SectionHeader en="ACCESS">アクセス</SectionHeader>
       <TextBlock>
         <p
@@ -484,7 +508,7 @@ export default () => {
         </div>
       </TextBlock>
     </section>
-    <section css={[section, css`background-color: #f7f8fa;`]}>
+    <section css={section}>
       <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
       <TextBlock>
         <div css={css`
@@ -620,7 +644,7 @@ export default () => {
         </div>
       </TextBlock>
     </section>
-    <section css={[section, css`background-color: #f7f8fa;`]}>
+    <section css={section}>
       <SectionHeader en="RELEASE">プレスリリース</SectionHeader>
       <TextBlock>
         <iframe
