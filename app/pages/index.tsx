@@ -646,6 +646,14 @@ export default () => {
             twitter="zucky_zakizaki"
           />
         </div>
+        <div css={css` margin-top: 32px; `}>
+          <p>
+            当日の運営を一緒にお手伝い頂ける「当日スタッフ」を募集します。
+            私たちは、来場者の方々と共にイベントを楽しみ、多くを学び、素晴らしい1日にしたいと考えています。
+            技書博をさらによいイベントにするため、ぜひあなたの力をお貸しください。
+          </p>
+          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/51/69d8a6ea1cfac9cc16f9.html">当日スタッフ募集の詳細はこちら</LinkButton>
+        </div>
       </TextBlock>
     </section>
     <section css={section}>
