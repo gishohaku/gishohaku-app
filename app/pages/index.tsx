@@ -234,11 +234,15 @@ const Staff: React.SFC<{
         display: flex-item;
         width: 120px;
         text-align: center;
-        margin: 16px;
+        margin: 12px;
         img {
           margin: 0 auto;
           border: 1px solid #eee;
           border-radius: 50% !important;
+        }
+        @media ${media.small} {
+          width: 100px;
+          margin: 6px;
         }
       `}
     >
@@ -562,7 +566,7 @@ export default () => {
       </TextBlock>
     </section>
     <section css={section}>
-      <SectionHeader en="STAFF">コアスタッフ</SectionHeader>
+      <SectionHeader en="TEAM">チーム</SectionHeader>
       <TextBlock>
         <div css={css`
           display: flex;
