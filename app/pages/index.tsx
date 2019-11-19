@@ -238,6 +238,7 @@ const Staff: React.SFC<{
         margin: 16px;
         img {
           margin: 0 auto;
+          border: 1px solid #eee;
           border-radius: 50% !important;
         }
       `}
