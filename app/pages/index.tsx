@@ -121,7 +121,7 @@ const Hero = () => (
         font-size: 16px;
       }
     `}>
-        @プラザマーム（東京日本橋）</div>
+        @プラザマーム（日本橋浜町）</div>
       <div css={css`margin-top: 16px;`}>
 
         <LinkButton href="https://blog.gishohaku.dev/entry/gishohaku2-attend">一般参加の案内</LinkButton>
@@ -130,6 +130,175 @@ const Hero = () => (
     </div>
   </div>
 )
+
+const Sponsor: React.SFC<{
+  image: string
+  name: string
+  role: string
+  href: string
+}> = ({
+  image,
+  name,
+  role,
+  href
+}) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 220px;
+        text-align: center;
+        margin: 8px;
+      `}
+    >
+      <div
+        css={css`
+          border: 1px solid #eee;
+          background-color: white;
+          width: 200px;
+          height: 200px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}
+      >
+        <a
+          href={href || 'javascript:void(0);'}
+          css={css`
+            padding: 12px;
+            text-align: center;
+            display: block;
+          `}
+          target="_blank"
+          rel="noopener"
+        >
+          <img
+            css={css`
+              max-width: 170px;
+              max-height: 160px;
+              margin: 0 auto;
+            `}
+            src={image}
+          />
+        </a>
+      </div>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 6px;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}
+        dangerouslySetInnerHTML={{ __html: role.replace(/・/g, "・<br />") }}
+      >
+      </p>
+      <p
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+        `}
+      >
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={href}
+          target="_blank"
+          rel="noopener"
+        >
+          {name}
+        </a>
+      </p>
+    </div>
+  )
+}
+
+const Staff: React.SFC<{
+  name: string
+  imageUrl: string
+  twitter: string
+}> = ({
+  name,
+  imageUrl,
+  twitter
+}) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 120px;
+        text-align: center;
+        margin: 16px;
+        img {
+          margin: 0 auto;
+          border: 1px solid #eee;
+          border-radius: 50% !important;
+        }
+      `}
+    >
+      <a target="_blank" rel="noopener" href={'https://twitter.com/'+twitter}>
+        <img src={imageUrl} />
+      </a>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 6px;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}
+      >
+        {name}
+      </p>
+    </div>
+  )
+}
+
+const Printing: React.SFC<{
+  name: string
+  imageUrl: string
+  linkUrl: string
+}> = ({
+  name,
+  imageUrl,
+  linkUrl
+}) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 200px;
+        text-align: center;
+        margin: 16px;
+        img {
+          margin: 0 auto;
+          max-width: 200px;
+          max-height: 40px;
+        }
+      `}
+    >
+      <a target="_blank" rel="noopener" href={linkUrl}>
+        <img src={imageUrl} />
+      </a>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 6px;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}
+      >
+        {name}
+      </p>
+    </div>
+  )
+}
 
 const section = css`
   padding: 48px 0;
@@ -205,9 +374,274 @@ export default () => {
     </section>
     {/* <Sections /> */}
     <section css={section}>
+      <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+      <TextBlock>
+        <div css={css`
+          text-align: center;
+          .sponsorlist {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-content: flex-start;
+            align-items: flex-start;
+            margin: 12px 0;
+          }
+        `}>
+          <div className="sponsorlist">
+            <Sponsor
+                name="株式会社grasys"
+                role="リーディングサポーター・運営インフラサポーター・トートバッグサポーター"
+                image="/static/sponsors/grasys.gif"
+                href="https://www.grasys.io/"
+              />
+          </div>
+          <div className="sponsorlist">
+            <Sponsor
+                name="株式会社メディアドゥ"
+                role="デザインサポーター・パブリシティーサポーター"
+                image="/static/sponsors/mediado.png"
+                href="https://mediado.jp/"
+              />
+            <Sponsor
+                name="Sansan株式会社"
+                role="セキュリティーサポーター"
+                image="/static/sponsors/sansan.png"
+                href="https://jp.corp-sansan.com/"
+              />
+            <Sponsor
+                name="株式会社ランチェスター"
+                role="トートバッグサポーター"
+                image="/static/sponsors/lanches.png"
+                href="https://www.lanches.co.jp/"
+              />
+          </div>
+          <div className="sponsorlist">
+            <Sponsor
+                name="NextPublishing POD出版サービス"
+                role="ランチサポーター"
+                image="/static/sponsors/nextpub.jpg"
+                href="https://nextpublishing.jp/author/"
+              />
+            <Sponsor
+              name="テクノブレーン株式会社"
+                role="キャラバンサポーター"
+                image="/static/sponsors/technobrain.jpg"
+                href="https://www.techno-brain.co.jp/"
+              />
+          </div>
+          <div className="sponsorlist">
+            <Sponsor
+                name="さくらインターネット株式会社                "
+                role="ガイドブックサポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+            <Sponsor
+                name="ギリア株式会社"
+                role="ガイドブックサポーター"
+                image="/static/sponsors/ghelia.png"
+                href="https://ghelia.com/"
+              />
+            <Sponsor
+                name="グロース・アーキテクチャ＆チームス株式会社"
+                role="ガイドブックサポーター"
+                image="/static/sponsors/graat.png"
+                href="https://www.graat.co.jp/"
+              />
+            <Sponsor
+                name="株式会社インプレスR&amp;D 技術の泉シリーズ"
+                role="懇親会サポーター"
+                image="/static/sponsors/impress_izumi.jpg"
+                href="https://nextpublishing.jp/"
+              />
+            <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+          </div>
+          <div className="sponsorlist">
+            <Sponsor
+                name="CodeZine"
+                role="メディアサポーター"
+                image="/static/sponsors/codezine.png"
+                href="https://codezine.jp/"
+              />
+            <Sponsor
+                name="ThinkIT"
+                role="メディアサポーター"
+                image="/static/sponsors/thinkit.png"
+                href="https://thinkit.co.jp/"
+              />
+            <Sponsor
+                name="日経ソフトウエア"
+                role="メディアサポーター"
+                image="/static/sponsors/nikkei.png"
+                href="https://nkbp.jp/nsoft"
+              />
+          </div>
+        </div>
+      </TextBlock>
+    </section>
+    <section css={[section, css`background-color: #f7f8fa;`]}>
+      <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+      <TextBlock>
+        <div css={css`
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
+          align-content: flex-start;
+          align-items: flex-start;
+        `}>
+          <Printing
+            name="しまや出版"
+            imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
+            linkUrl="https://www.shimaya.net/"
+          />
+          <Printing
+            name="ねこのしっぽ"
+            imageUrl="https://www.shippo.co.jp/neko/img/neko_banner.gif"
+            linkUrl="https://www.shippo.co.jp/neko/"
+          />
+          <Printing
+            name="日光企画"
+            imageUrl="http://www.nikko-pc.com/start/logo.gif"
+            linkUrl="https://www.nikko-pc.com/"
+          />
+          <Printing
+            name="http://www.inv.co.jp/~popls/"
+            imageUrl="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
+            linkUrl="ポプルス"
+          />
+          <Printing
+            name="栄光"
+            imageUrl="http://www.eikou.com/link/eikoubanner.gif"
+            linkUrl="http://www.eikou.com/"
+          />
+          <Printing
+            name="PICO"
+            imageUrl="http://www.pico-net.com/topmenu/pico_bunner.gif"
+            linkUrl="http://www.pico-net.com/doujinshi/"
+          />
+          <Printing
+            name="PrintWalk"
+            imageUrl="http://www.print-walk.co.jp/links/images/banner02.gif"
+            linkUrl="http://www.print-walk.co.jp/"
+          />
+          <Printing
+            name="K-9"
+            imageUrl="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
+            linkUrl="https://www.k-k9.jp/"
+          />
+        </div>
+      </TextBlock>
+    </section>
+    <section css={section}>
+      <SectionHeader en="STAFF">コアスタッフ</SectionHeader>
+      <TextBlock>
+        <div css={css`
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
+          align-content: flex-start;
+          align-items: flex-start;
+        `}>
+          <Staff
+            name="ariaki"
+            imageUrl="https://pbs.twimg.com/profile_images/941464951406940160/lHEop40U_400x400.jpg"
+            twitter="ariaki4dev"
+          />
+          <Staff
+            name="水殿"
+            imageUrl="https://pbs.twimg.com/profile_images/1071222075501629442/bAQUfeke_400x400.jpg"
+            twitter="midono_ap1"
+          />
+          <Staff
+            name="おやかた"
+            imageUrl="https://pbs.twimg.com/profile_images/893588120666480640/i-kZmS-f_400x400.jpg"
+            twitter="oyakata2438"
+          />
+          <Staff
+            name="kurakake"
+            imageUrl="https://i.gyazo.com/0ef049e049c0b0587db07c79c0c373ff.jpg"
+            twitter="kurakake"
+          />
+          <Staff
+            name="なのなの"
+            imageUrl="https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg"
+            twitter="nano2_aloerina"
+          />
+          <Staff
+            name="くりまお"
+            imageUrl="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/44748/4e9b3331-25b8-4b2e-ab7a-0182d520950c.png"
+            twitter="awa_kuri23"
+          />
+          <Staff
+            name="なつお"
+            imageUrl="https://pbs.twimg.com/profile_images/1163733716625084417/rKHB3a6M_400x400.png"
+            twitter="KazuyaNakahara"
+          />
+          <Staff
+            name="mottox2"
+            imageUrl="https://avatars1.githubusercontent.com/u/7007253?s=460&v=4"
+            twitter="mottox2"
+          />
+          <Staff
+            name="こまっち"
+            imageUrl="https://pbs.twimg.com/profile_images/1129052243204816899/-ncXI3sj_400x400.jpg"
+            twitter="komacchi_u"
+          />
+          <Staff
+            name="たろすけ"
+            imageUrl="https://pbs.twimg.com/profile_images/1168150305600524289/YCACfoXk_400x400.jpg"
+            twitter="tarosuke777000"
+          />
+          <Staff
+            name="kazto"
+            imageUrl="https://pbs.twimg.com/profile_images/998919655359107072/WZplgK9h_400x400.jpg"
+            twitter="bainarian"
+          />
+          <Staff
+            name="かめねこ"
+            imageUrl="https://storage.googleapis.com/jump/kameneko_icon.jpg"
+            twitter="kameneko1004"
+          />
+          <Staff
+            name="Alice_You"
+            imageUrl="https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg"
+            twitter="Alice_You"
+          />
+          <Staff
+            name="ざき"
+            imageUrl="https://pbs.twimg.com/profile_images/1077006051533189120/nm5Zz0Qy_400x400.jpg"
+            twitter="zucky_zakizaki"
+          />
+        </div>
+      </TextBlock>
+    </section>
+    <section css={[section, css`background-color: #f7f8fa;`]}>
+      <SectionHeader en="RELEASE">プレスリリース</SectionHeader>
+      <TextBlock>
+        <iframe
+          src="https://www.value-press.com/pressrelease/latest_lists/61565"
+          frameBorder="0"
+          title="リリース"
+          css={css`
+            border: 0;
+            height: 100%;
+            width: 100%;
+            min-height: 240px;
+          `}
+        />
+        </TextBlock>
+    </section>
+    <section css={section}>
       <SectionHeader en="BANNER">リンクバナー</SectionHeader>
       <TextBlock>
-        <p>
+        <p css={css`
+          text-align: center;
+        `}>
             当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
         </p>
         <p css={css`
