@@ -158,9 +158,8 @@ export default () => {
       <TextBlock>
         <p
           css={css`
-            font-size: 32px;
+            font-size: 24px;
             font-weight: bold;
-            text-align: center;
             @media ${media.small} {
               font-size: 24px;
             }
@@ -173,33 +172,72 @@ export default () => {
             background-color: #fff;
             padding: 12px;
             border-radius: 4px;
-            margin-top: 12px;
+            margin-top: 8px;
           `}
         >
           <p css={withIcon}>
             <img src={placeIcon} alt="住所" />
             東京都中央区日本橋浜町1-1-12（
-            <a href="https://goo.gl/maps/8b45soYqMvtZK2498">
+            <a target="_blank" href="https://goo.gl/maps/8b45soYqMvtZK2498">
               Google マップ
             </a>
             ）
           </p>
           <p css={withIcon}>
             <img src={directionsIcon} alt="アクセス" />
-            浅草線 人形町駅より徒歩6分・浅草線 東日本橋駅より徒歩4分
+            JR総武線 馬喰町駅 徒歩8分
             <br />
-            新宿線 浜町駅より徒歩2分・新宿線 馬喰横山駅より徒歩8分
+            都営地下鉄 新宿線 浜町駅 A1出口より徒歩2分
             <br />
-            日比谷線 人形町駅より徒歩6分
+            都営地下鉄 新宿線 馬喰横山駅 A3出口より徒歩8分
             <br />
-            半蔵門線 水天宮前駅より徒歩15分
+            都営地下鉄 浅草線 東日本橋駅 B1出口より徒歩4分
             <br />
-            総武線 馬喰町駅より徒歩8分
+            都営地下鉄 浅草線・東京メトロ日比谷線 人形町駅 A4出口より徒歩6分
+            <br />
           </p>
         </div>
+        <iframe css={css`
+          width: 100%;
+          min-height: 240px;
+        `} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.5072151593613!2d139.78382831555126!3d35.689134037145216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018894e83ede355%3A0xbcb68738d6f39a3c!2z44CSMTAzLTAwMDcg5p2x5Lqs6YO95Lit5aSu5Yy65pel5pys5qmL5rWc55S677yR5LiB55uu77yR4oiS77yR77ySIOODl-ODqeOCtuODnuODvOODoA!5e0!3m2!1sja!2sjp!4v1574141241612!5m2!1sja!2sjp"></iframe>
       </TextBlock>
     </section>
     {/* <Sections /> */}
+    <section css={section}>
+      <SectionHeader en="BANNER">リンクバナー</SectionHeader>
+      <TextBlock>
+        <p>
+            当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
+        </p>
+        <p css={css`
+          text-align: center;
+          .banner {
+            display: block;
+            width: 200px;
+            border: 1px solid #ddd;
+          }
+          .banner-outer {
+            text-align: center;
+            display: inline-block;
+            margin: 0px 8px;
+          }
+          .banner-caption {
+            font-size: 12px;
+            color: #888;
+          }
+        `}>
+          <div className="banner-outer">
+            <img className="banner" src="/static/banner_2_600x120.png" />
+            <span className="banner-caption">（大サイズ：600×120ピクセル）</span>
+          </div>
+          <div className="banner-outer">
+            <img className="banner" src="/static/banner_2_200x40.png" />
+            <span className="banner-caption">（小サイズ：200×40ピクセル）</span>
+          </div>
+        </p>
+      </TextBlock>
+    </section>
   </>
 }
 
