@@ -141,17 +141,17 @@ const Sponsor: React.SFC<{
   role,
   href
 }) => {
-  return (
-    <div
-      css={css`
+    return (
+      <div
+        css={css`
         display: flex-item;
         width: 220px;
         text-align: center;
         margin: 8px;
       `}
-    >
-      <div
-        css={css`
+      >
+        <div
+          css={css`
           border: 1px solid #eee;
           background-color: white;
           width: 200px;
@@ -165,59 +165,59 @@ const Sponsor: React.SFC<{
           -webkit-justify-content: center;
           justify-content: center;
         `}
-      >
-        <a
-          href={href || 'javascript:void(0);'}
-          css={css`
+        >
+          <a
+            href={href || 'javascript:void(0);'}
+            css={css`
             padding: 12px;
             text-align: center;
             display: block;
           `}
-          target="_blank"
-          rel="noopener"
-        >
-          <img
-            css={css`
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              css={css`
               max-width: 170px;
               max-height: 160px;
               margin: 0 auto;
             `}
-            src={image}
-          />
-        </a>
-      </div>
-      <p
-        css={css`
+              src={image}
+            />
+          </a>
+        </div>
+        <p
+          css={css`
           font-size: 12px;
           margin-top: 6px;
           line-height: 1.4;
           opacity: 0.8;
         `}
-        dangerouslySetInnerHTML={{ __html: role.replace(/・/g, "・<br />") }}
-      >
-      </p>
-      <p
-        css={css`
+          dangerouslySetInnerHTML={{ __html: role.replace(/・/g, "・<br />") }}
+        >
+        </p>
+        <p
+          css={css`
           font-size: 15px;
           font-weight: bold;
           line-height: 1.5;
         `}
-      >
-        <a
-          css={css`
+        >
+          <a
+            css={css`
             text-decoration: none;
             color: #1d272d;
           `}
-          href={href}
-          target="_blank"
-          rel="noopener"
-        >
-          {name}
-        </a>
-      </p>
-    </div>
-  )
-}
+            href={href}
+            target="_blank"
+            rel="noopener"
+          >
+            {name}
+          </a>
+        </p>
+      </div>
+    )
+  }
 
 const Staff: React.SFC<{
   name: string
@@ -228,9 +228,9 @@ const Staff: React.SFC<{
   imageUrl,
   twitter
 }) => {
-  return (
-    <div
-      css={css`
+    return (
+      <div
+        css={css`
         display: flex-item;
         width: 120px;
         text-align: center;
@@ -245,23 +245,23 @@ const Staff: React.SFC<{
           margin: 6px;
         }
       `}
-    >
-      <a target="_blank" rel="noopener" href={'https://twitter.com/'+twitter}>
-        <img src={imageUrl} />
-      </a>
-      <p
-        css={css`
+      >
+        <a target="_blank" rel="noopener" href={'https://twitter.com/' + twitter}>
+          <img src={imageUrl} />
+        </a>
+        <p
+          css={css`
           font-size: 12px;
           margin-top: 6px;
           line-height: 1.4;
           opacity: 0.8;
         `}
-      >
-        {name}
-      </p>
-    </div>
-  )
-}
+        >
+          {name}
+        </p>
+      </div>
+    )
+  }
 
 const Printing: React.SFC<{
   name: string
@@ -272,9 +272,9 @@ const Printing: React.SFC<{
   imageUrl,
   linkUrl
 }) => {
-  return (
-    <div
-      css={css`
+    return (
+      <div
+        css={css`
         display: flex-item;
         width: 200px;
         text-align: center;
@@ -285,23 +285,23 @@ const Printing: React.SFC<{
           max-height: 40px;
         }
       `}
-    >
-      <a target="_blank" rel="noopener" href={linkUrl}>
-        <img src={imageUrl} />
-      </a>
-      <p
-        css={css`
+      >
+        <a target="_blank" rel="noopener" href={linkUrl}>
+          <img src={imageUrl} />
+        </a>
+        <p
+          css={css`
           font-size: 12px;
           margin-top: 6px;
           line-height: 1.4;
           opacity: 0.8;
         `}
-      >
-        {name}
-      </p>
-    </div>
-  )
-}
+        >
+          {name}
+        </p>
+      </div>
+    )
+  }
 
 const section = css`
   padding: 48px 0;
@@ -417,97 +417,97 @@ export default () => {
         `}>
           <div className="sponsorlist">
             <Sponsor
-                name="株式会社grasys"
-                role="リーディングサポーター・運営インフラサポーター・トートバッグサポーター"
-                image="/static/sponsors/grasys.gif"
-                href="https://www.grasys.io/"
-              />
+              name="株式会社grasys"
+              role="リーディングサポーター・運営インフラサポーター・トートバッグサポーター"
+              image="/static/sponsors/grasys.gif"
+              href="https://www.grasys.io/"
+            />
           </div>
           <div className="sponsorlist">
             <Sponsor
-                name="株式会社メディアドゥ"
-                role="デザインサポーター・パブリシティーサポーター"
-                image="/static/sponsors/mediado.png"
-                href="https://mediado.jp/"
-              />
+              name="株式会社メディアドゥ"
+              role="デザインサポーター・パブリシティーサポーター"
+              image="/static/sponsors/mediado.png"
+              href="https://mediado.jp/"
+            />
             <Sponsor
-                name="Sansan株式会社"
-                role="セキュリティーサポーター"
-                image="/static/sponsors/sansan.png"
-                href="https://jp.corp-sansan.com/"
-              />
+              name="Sansan株式会社"
+              role="セキュリティーサポーター"
+              image="/static/sponsors/sansan.png"
+              href="https://jp.corp-sansan.com/"
+            />
             <Sponsor
-                name="株式会社ランチェスター"
-                role="トートバッグサポーター"
-                image="/static/sponsors/lanches.png"
-                href="https://www.lanches.co.jp/"
-              />
+              name="株式会社ランチェスター"
+              role="トートバッグサポーター"
+              image="/static/sponsors/lanches.png"
+              href="https://www.lanches.co.jp/"
+            />
           </div>
           <div className="sponsorlist">
             <Sponsor
-                name="NextPublishing POD出版サービス"
-                role="ランチサポーター"
-                image="/static/sponsors/nextpub.jpg"
-                href="https://nextpublishing.jp/author/"
-              />
+              name="NextPublishing POD出版サービス"
+              role="ランチサポーター"
+              image="/static/sponsors/nextpub.jpg"
+              href="https://nextpublishing.jp/author/"
+            />
             <Sponsor
               name="テクノブレーン株式会社"
-                role="キャラバンサポーター"
-                image="/static/sponsors/technobrain.jpg"
-                href="https://www.techno-brain.co.jp/"
-              />
+              role="キャラバンサポーター"
+              image="/static/sponsors/technobrain.jpg"
+              href="https://www.techno-brain.co.jp/"
+            />
           </div>
           <div className="sponsorlist">
             <Sponsor
-                name="さくらインターネット株式会社                "
-                role="ガイドブックサポーター"
-                image="/static/sponsors/sakura.png"
-                href="https://www.sakura.ad.jp/"
-              />
+              name="さくらインターネット株式会社"
+              role="ガイドブックサポーター"
+              image="/static/sponsors/sakura.png"
+              href="https://www.sakura.ad.jp/"
+            />
             <Sponsor
-                name="ギリア株式会社"
-                role="ガイドブックサポーター"
-                image="/static/sponsors/ghelia.png"
-                href="https://ghelia.com/"
-              />
+              name="ギリア株式会社"
+              role="ガイドブックサポーター"
+              image="/static/sponsors/ghelia.png"
+              href="https://ghelia.com/"
+            />
             <Sponsor
-                name="グロース・アーキテクチャ＆チームス株式会社"
-                role="ガイドブックサポーター"
-                image="/static/sponsors/graat.png"
-                href="https://www.graat.co.jp/"
-              />
+              name="グロース・アーキテクチャ＆チームス株式会社"
+              role="ガイドブックサポーター"
+              image="/static/sponsors/graat.png"
+              href="https://www.graat.co.jp/"
+            />
             <Sponsor
-                name="株式会社インプレスR&amp;D 技術の泉シリーズ"
-                role="懇親会サポーター"
-                image="/static/sponsors/impress_izumi.jpg"
-                href="https://nextpublishing.jp/"
-              />
+              name="株式会社インプレスR&amp;D 技術の泉シリーズ"
+              role="懇親会サポーター"
+              image="/static/sponsors/impress_izumi.jpg"
+              href="https://nextpublishing.jp/"
+            />
             <Sponsor
-                name="株式会社しまや出版"
-                role="プリンティングサポーター"
-                image="/static/sponsors/shimaya.png"
-                href="https://www.shimaya.net/"
-              />
+              name="株式会社しまや出版"
+              role="プリンティングサポーター"
+              image="/static/sponsors/shimaya.png"
+              href="https://www.shimaya.net/"
+            />
           </div>
           <div className="sponsorlist">
             <Sponsor
-                name="CodeZine"
-                role="メディアサポーター"
-                image="/static/sponsors/codezine.png"
-                href="https://codezine.jp/"
-              />
+              name="CodeZine"
+              role="メディアサポーター"
+              image="/static/sponsors/codezine.png"
+              href="https://codezine.jp/"
+            />
             <Sponsor
-                name="ThinkIT"
-                role="メディアサポーター"
-                image="/static/sponsors/thinkit.png"
-                href="https://thinkit.co.jp/"
-              />
+              name="ThinkIT"
+              role="メディアサポーター"
+              image="/static/sponsors/thinkit.png"
+              href="https://thinkit.co.jp/"
+            />
             <Sponsor
-                name="日経ソフトウエア"
-                role="メディアサポーター"
-                image="/static/sponsors/nikkei.png"
-                href="https://nkbp.jp/nsoft"
-              />
+              name="日経ソフトウエア"
+              role="メディアサポーター"
+              image="/static/sponsors/nikkei.png"
+              href="https://nkbp.jp/nsoft"
+            />
           </div>
         </div>
       </TextBlock>
@@ -670,7 +670,7 @@ export default () => {
             min-height: 240px;
           `}
         />
-        </TextBlock>
+      </TextBlock>
     </section>
     <section css={section}>
       <SectionHeader en="BANNER">リンクバナー</SectionHeader>
@@ -678,7 +678,7 @@ export default () => {
         <p css={css`
           text-align: center;
         `}>
-            当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
+          当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
         </p>
         <p css={css`
           text-align: center;
