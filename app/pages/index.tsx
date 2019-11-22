@@ -502,12 +502,6 @@ export default () => {
               image="/static/sponsors/thinkit.png"
               href="https://thinkit.co.jp/"
             />
-            <Sponsor
-              name="日経ソフトウエア"
-              role="メディアサポーター"
-              image="/static/sponsors/nikkei.png"
-              href="https://nkbp.jp/nsoft"
-            />
           </div>
         </div>
       </TextBlock>
