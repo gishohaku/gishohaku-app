@@ -246,9 +246,13 @@ const Staff: React.SFC<{
         }
       `}
       >
-        <a target="_blank" rel="noopener" href={'https://twitter.com/' + twitter}>
-          <img src={imageUrl} />
+      {(twitter) ? (
+        <a target="_blank" rel="noopener" href={twitter}>
+          <img src={imageUrl || '/static/gishohaku_gray.png'} />
         </a>
+      ) : (
+        <img src={imageUrl || '/static/gishohaku_gray.png'} />
+      )}
         <p
           css={css`
           font-size: 12px;
@@ -502,12 +506,6 @@ export default () => {
               image="/static/sponsors/thinkit.png"
               href="https://thinkit.co.jp/"
             />
-            <Sponsor
-              name="日経ソフトウエア"
-              role="メディアサポーター"
-              image="/static/sponsors/nikkei.png"
-              href="https://nkbp.jp/nsoft"
-            />
           </div>
         </div>
       </TextBlock>
@@ -578,72 +576,157 @@ export default () => {
           <Staff
             name="ariaki"
             imageUrl="https://pbs.twimg.com/profile_images/941464951406940160/lHEop40U_400x400.jpg"
-            twitter="ariaki4dev"
+            twitter="https://twitter.com/ariaki4dev"
           />
           <Staff
             name="水殿"
             imageUrl="https://pbs.twimg.com/profile_images/1071222075501629442/bAQUfeke_400x400.jpg"
-            twitter="midono_ap1"
+            twitter="https://twitter.com/midono_ap1"
           />
           <Staff
             name="おやかた"
             imageUrl="https://pbs.twimg.com/profile_images/893588120666480640/i-kZmS-f_400x400.jpg"
-            twitter="oyakata2438"
+            twitter="https://twitter.com/oyakata2438"
           />
           <Staff
             name="kurakake"
             imageUrl="https://i.gyazo.com/0ef049e049c0b0587db07c79c0c373ff.jpg"
-            twitter="kurakake"
+            twitter="https://twitter.com/kurakake"
           />
           <Staff
             name="なのなの"
             imageUrl="https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg"
-            twitter="nano2_aloerina"
+            twitter="https://twitter.com/nano2_aloerina"
           />
           <Staff
             name="くりまお"
             imageUrl="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/44748/4e9b3331-25b8-4b2e-ab7a-0182d520950c.png"
-            twitter="awa_kuri23"
+            twitter="https://twitter.com/awa_kuri23"
           />
           <Staff
             name="なつお"
             imageUrl="https://pbs.twimg.com/profile_images/1163733716625084417/rKHB3a6M_400x400.png"
-            twitter="KazuyaNakahara"
+            twitter="https://twitter.com/KazuyaNakahara"
           />
           <Staff
             name="mottox2"
             imageUrl="https://avatars1.githubusercontent.com/u/7007253?s=460&v=4"
-            twitter="mottox2"
+            twitter="https://twitter.com/mottox2"
           />
           <Staff
             name="こまっち"
             imageUrl="https://pbs.twimg.com/profile_images/1129052243204816899/-ncXI3sj_400x400.jpg"
-            twitter="komacchi_u"
+            twitter="https://twitter.com/komacchi_u"
           />
           <Staff
             name="たろすけ"
             imageUrl="https://pbs.twimg.com/profile_images/1168150305600524289/YCACfoXk_400x400.jpg"
-            twitter="tarosuke777000"
+            twitter="https://twitter.com/tarosuke777000"
           />
           <Staff
             name="kazto"
             imageUrl="https://pbs.twimg.com/profile_images/998919655359107072/WZplgK9h_400x400.jpg"
-            twitter="bainarian"
+            twitter="https://twitter.com/bainarian"
           />
           <Staff
             name="かめねこ"
             imageUrl="https://storage.googleapis.com/jump/kameneko_icon.jpg"
-            twitter="kameneko1004"
+            twitter="https://twitter.com/kameneko1004"
           />
           <Staff
             name="Alice_You"
             imageUrl="https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg"
-            twitter="Alice_You"
+            twitter="https://twitter.com/Alice_You"
           />
           <Staff
             name="ざき"
             imageUrl="https://pbs.twimg.com/profile_images/1077006051533189120/nm5Zz0Qy_400x400.jpg"
-            twitter="zucky_zakizaki"
+            twitter="https://twitter.com/zucky_zakizaki"
+          />
+          <Staff
+            name="おっ"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="Tab(Kojima)"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="えびちき"
+            imageUrl="https://pbs.twimg.com/profile_images/2532434929/image_400x400.png"
+            twitter="https://twitter.com/ebichiki"
+          />
+          <Staff
+            name="yonezo"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="たっしー"
+            imageUrl="https://pbs.twimg.com/profile_images/1190993996463661056/R2fPU0xM_400x400.jpg"
+            twitter="https://twitter.com/tashipiyo"
+          />
+          <Staff
+            name="たけのこ"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="Azevinho"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="和毛"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="Taro Yamada"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="KANE"
+            imageUrl="https://pbs.twimg.com/profile_images/1066541445543276544/zHx_piIh_400x400.jpg"
+            twitter="https://twitter.com/higuyume"
+          />
+          <Staff
+            name="くま"
+            imageUrl=""
+            twitter=""
+          />
+          <Staff
+            name="ドフ"
+            imageUrl="/static/staffs/dofu.png"
+            twitter=""
+          />
+          <Staff
+            name="あっきー"
+            imageUrl="https://pbs.twimg.com/profile_images/1129973479942500354/NkwE4ZCK_400x400.jpg"
+            twitter="https://twitter.com/papi_tokei"
+          />
+          <Staff
+            name="もっさん"
+            imageUrl="https://pbs.twimg.com/profile_images/1138693205807968261/AsBEYMVw_400x400.jpg"
+            twitter=""
+          />
+          <Staff
+            name="muno_92"
+            imageUrl="https://pbs.twimg.com/profile_images/1093479766773002241/O9oxJI9j_400x400.jpg"
+            twitter="https://twitter.com/muno_92"
+          />
+          <Staff
+            name="hayashih"
+            imageUrl="https://pbs.twimg.com/profile_images/2511088129/0yuoxnv34wsl958gufd0_400x400.jpeg"
+            twitter="https://twitter.com/hayashih"
+          />
+          <Staff
+            name="白栁隆司"
+            imageUrl="https://pbs.twimg.com/profile_images/1133305920136417281/r9dtmhSU_400x400.jpg"
+            twitter="https://twitter.com/ShirayanagiRyuj"
           />
         </div>
         <div css={css` margin-top: 32px; `}>

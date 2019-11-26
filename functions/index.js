@@ -112,13 +112,17 @@ exports.onCreateFile = functions.storage.object().onFinalize(async (object, cont
   })
   const [_directory, bookId, _timestamp] = object.name.split('/')
 
+  const bookRef = await admin.firestore().collection('books').doc(bookId).get()
+  const { eventId } = bookRef.data()
+
   const submission = {
     originalName: object.metadata.originalName,
     path: object.name,
     contentType: object.contentType,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
     isChecked: false,
-    url: urls[0]
+    url: urls[0],
+    eventId,
   }
 
   await admin
