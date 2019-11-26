@@ -649,9 +649,9 @@ export default () => {
             twitter=""
           />
           <Staff
-            name="Tab(Kojima)"
-            imageUrl=""
-            twitter=""
+            name="Tab (KOJIMA)"
+            imageUrl="https://pbs.twimg.com/profile_images/1197758375703928832/x3u_r4Kx_400x400.jpg"
+            twitter="https://twitter.com/_TigerBrother"
           />
           <Staff
             name="えびちき"
