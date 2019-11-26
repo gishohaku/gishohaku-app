@@ -235,7 +235,7 @@ const BookCell: React.SFC<Props> = ({
               }
             `}
           >
-            {eventId === 'gishohaku1' && book.type == 'fanzine' && (
+            {book.type == 'fanzine' && (
               <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
                 <a css={css(button)}>見本誌の提出</a>
               </Link>
@@ -282,11 +282,11 @@ const BookCell: React.SFC<Props> = ({
 
         {isShowSnsShare && (
           <div
-              css={css`
+            css={css`
                 margin-top: 12px;
                 margin-bottom: 12px;
               `}
-            >
+          >
             <SnsShare size={SnsShareSize.Large} />
           </div>
         )}
