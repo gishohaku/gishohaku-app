@@ -728,6 +728,11 @@ export default () => {
             imageUrl="https://pbs.twimg.com/profile_images/1133305920136417281/r9dtmhSU_400x400.jpg"
             twitter="https://twitter.com/ShirayanagiRyuj"
           />
+          <Staff
+            name="ぎょりー"
+            imageUrl=""
+            twitter=""
+          />
         </div>
         <div css={css` margin-top: 32px; `}>
           <p>
