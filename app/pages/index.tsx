@@ -685,8 +685,8 @@ export default () => {
           />
           <Staff
             name="Taro Yamada"
-            imageUrl=""
-            twitter=""
+            imageUrl="https://pbs.twimg.com/profile_images/889781623452975104/WnazPKxi.jpg"
+            twitter="https://twitter.com/solareenlo"
           />
           <Staff
             name="KANE"
