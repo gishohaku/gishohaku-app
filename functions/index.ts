@@ -1,9 +1,8 @@
-const admin = require('firebase-admin')
-const functions = require('firebase-functions')
-const { Storage } = require('@google-cloud/storage')
+import admin from 'firebase-admin'
+import functions from 'firebase-functions'
+import { Storage } from '@google-cloud/storage'
 
-const app = require('./app')
-exports.app = app
+export { default as app } from './app'
 
 // https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
 // HostingでRewriteできる関数はus-central1を利用する必要がある
@@ -14,7 +13,7 @@ const onCall = functions.https.onCall
 
 admin.initializeApp(functions.config().firebase)
 
-exports.receiveInvitation = onCall(async (data, context) => {
+export const receiveInvitation = onCall(async (data, context) => {
   const { token, circleId } = data
   const auth = context.auth
   console.log(data, context.auth)
@@ -25,7 +24,7 @@ exports.receiveInvitation = onCall(async (data, context) => {
   const invitationRef = db.collection(`circles/${circleId}/circleInvitations`).doc(token)
   const snapshot = await invitationRef.get()
   if (!snapshot || !snapshot.exists) { return { message: '無効な招待リンクです。' } }
-  const eventId = snapshot.data().eventId
+  const { eventId } = snapshot.data()!
   if (!eventId) { return { message: '無効なイベントです。' } }
   const targetRef = db.collection('users').doc(auth.uid)
   await targetRef.update({
@@ -34,14 +33,14 @@ exports.receiveInvitation = onCall(async (data, context) => {
   return { message: 'サークルに参加しました。' }
 })
 
-exports.apiCircles = onRequest(async (req, res) => {
+export const apiCircles = onRequest(async (req, res) => {
   const snapshots = await admin
     .firestore()
     .collection('circles')
     .where("eventId", "==", "gishohaku1")
     .orderBy('boothNumber', 'asc')
     .get()
-  const circles = []
+  const circles: any[] = []
   snapshots.forEach(circle => {
     const data = circle.data()
     circles.push({
@@ -55,13 +54,13 @@ exports.apiCircles = onRequest(async (req, res) => {
   res.status(200).send(JSON.stringify(circles))
 })
 
-exports.apiBooks = onRequest(async (req, res) => {
+export const apiBooks = onRequest(async (req, res) => {
   const snapshots = await admin
     .firestore()
     .collection('books')
     .where("eventId", "==", "gishohaku1")
     .get()
-  const books = []
+  const books: any[] = []
   snapshots.forEach(book => {
     books.push({
       id: book.id,
@@ -75,10 +74,10 @@ exports.apiBooks = onRequest(async (req, res) => {
   res.status(200).send(JSON.stringify(books))
 })
 
-exports.addCircleRefToStarCounts = functions.firestore
+export const addCircleRefToStarCounts = functions.firestore
   .document('starCounts/{countId}')
   .onCreate(async snap => {
-    const data = snap.data()
+    const data: any = snap.data()
     const collectionName = data.ref.parent.id
     console.log('starred:', data.ref.path)
     switch (collectionName) {
@@ -95,9 +94,9 @@ exports.addCircleRefToStarCounts = functions.firestore
     }
   })
 
-exports.onCreateFile = functions.storage.object().onFinalize(async (object, context) => {
+export const onCreateFile = functions.storage.object().onFinalize(async (object, context) => {
   console.log(object, context)
-  const filePath = object.name
+  const filePath = object.name as string
   if (!filePath.startsWith('submissions/')) {
     console.log('check submissions')
     return
@@ -110,13 +109,13 @@ exports.onCreateFile = functions.storage.object().onFinalize(async (object, cont
     action: 'read',
     expires: '03-09-2491'
   })
-  const [_directory, bookId, _timestamp] = object.name.split('/')
+  const [_directory, bookId, _timestamp] = object.name!.split('/')
 
   const bookRef = await admin.firestore().collection('books').doc(bookId).get()
-  const { eventId } = bookRef.data()
+  const { eventId } = bookRef.data()!
 
   const submission = {
-    originalName: object.metadata.originalName,
+    originalName: object.metadata!.originalName,
     path: object.name,
     contentType: object.contentType,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
