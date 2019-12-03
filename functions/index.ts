@@ -1,13 +1,10 @@
 import admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
+import * as API from './api'
 import { Storage } from '@google-cloud/storage'
 
 export { default as app } from './app'
-
-// https://firebase.google.com/docs/functions/locations#http_and_client_callable_functions
-// HostingでRewriteできる関数はus-central1を利用する必要がある
-const onRequest = functions.https.onRequest
-const onRequestAsia = functions.region('asia-northeast1').https.onRequest
+export const api = { ...API }
 
 const onCall = functions.https.onCall
 
@@ -31,47 +28,6 @@ export const receiveInvitation = onCall(async (data, context) => {
     [`event.${eventId}`]: db.collection('circles').doc(circleId)
   })
   return { message: 'サークルに参加しました。' }
-})
-
-export const apiCircles = onRequest(async (req, res) => {
-  const snapshots = await admin
-    .firestore()
-    .collection('circles')
-    .where("eventId", "==", "gishohaku1")
-    .orderBy('boothNumber', 'asc')
-    .get()
-  const circles: any[] = []
-  snapshots.forEach(circle => {
-    const data = circle.data()
-    circles.push({
-      id: circle.id,
-      ...data
-    })
-  })
-  res.set('Content-Type', 'application/json')
-  res.set('Cache-Control', 'public, max-age=60, s-maxage=3600')
-  res.set('Access-Control-Allow-Origin', '*')
-  res.status(200).send(JSON.stringify(circles))
-})
-
-export const apiBooks = onRequest(async (req, res) => {
-  const snapshots = await admin
-    .firestore()
-    .collection('books')
-    .where("eventId", "==", "gishohaku1")
-    .get()
-  const books: any[] = []
-  snapshots.forEach(book => {
-    books.push({
-      id: book.id,
-      ...book.data()
-    })
-  })
-  res.set('Content-Type', 'application/json')
-  res.set('Cache-Control', 'public, max-age=60, s-maxage=600')
-  res.set('Access-Control-Allow-Origin', '*')
-  res.set('Access-Control-Allow-Methods', 'GET, PURGE')
-  res.status(200).send(JSON.stringify(books))
 })
 
 export const addCircleRefToStarCounts = functions.firestore
