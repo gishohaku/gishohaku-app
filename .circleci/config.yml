@@ -22,7 +22,7 @@ jobs:
       - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ] || [ "${CIRCLE_BRANCH}" == "ci" ]; then
-              yarn firebase deploy --token=$FIREBASE_TOKEN
+              yarn firebase deploy --token=$FIREBASE_TOKEN -f
             fi
 
 workflows:
