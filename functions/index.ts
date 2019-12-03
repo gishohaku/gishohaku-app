@@ -1,5 +1,5 @@
 import admin from 'firebase-admin'
-import functions from 'firebase-functions'
+import * as functions from 'firebase-functions'
 import { Storage } from '@google-cloud/storage'
 
 export { default as app } from './app'
