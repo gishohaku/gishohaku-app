@@ -78,6 +78,20 @@ const button = css`
   }
 `
 
+const useCheckSubmission = (isOwner: boolean, bookId: string) => {
+  const [submission, setSubmission] = useState()
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    if (!isOwner) return
+    const submissionQuery = db.collection('bookSubmissions').doc(bookId)
+    submissionQuery.get().then(res => {
+      setLoading(false)
+      if (res.exists) setSubmission(res.data())
+    })
+  }, [bookId])
+  return !loading && !submission
+}
+
 const BookCell: React.SFC<Props> = ({
   book,
   editable = false,
@@ -92,6 +106,7 @@ const BookCell: React.SFC<Props> = ({
   const { user, openLoginModal } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
+  const notSubmitted = useCheckSubmission(editable, book.id!)
   const toast = useToast()
 
   const metadata = [
@@ -235,11 +250,22 @@ const BookCell: React.SFC<Props> = ({
               }
             `}
           >
-            {book.type == 'fanzine' && (
+            {book.type == 'fanzine' && <div css={css`position: relative;`}>
               <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
                 <a css={css(button)}>見本誌の提出</a>
               </Link>
-            )}
+              {notSubmitted && <span css={css`
+                position: absolute;
+                top: -12px;
+                background-color: red;
+                border-radius: 20px;
+                font-size: 12px;
+                padding: 2px 10px;
+                right: -6px;
+                color: white;
+                font-weight: bold;
+              `}>要提出</span>}
+            </div>}
             <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
               <a css={button}>編集</a>
             </Link>
