@@ -5,17 +5,42 @@ import Book from '../utils/book'
 import { useState, useEffect } from 'react'
 import Loader from './Loader'
 import { useDropzone } from 'react-dropzone'
-import { firebase } from '../utils/firebase'
+import { firebase, db } from '../utils/firebase'
 
 interface Props {
   book: Book
 }
 
+const useSubmission = (bookId: string) => {
+  const [isLoading, setLoading] = useState(true)
+  const [submission, setSubmission] = useState()
+  useEffect(() => {
+    setLoading(true)
+    db.collection('bookSubmissions')
+      .doc(bookId)
+      .get()
+      .then(snapshot => {
+        setLoading(false)
+        if (snapshot.exists) {
+          console.log(snapshot.data())
+          setSubmission({
+            ...snapshot.data(),
+            id: snapshot.id
+          })
+        }
+      })
+  }, [bookId])
+  return {
+    isLoading,
+    submission,
+    setSubmission
+  }
+}
+
 const BookSubmitForm: React.FC<Props> = ({ book }) => {
   const toast = useToast()
-  const [isLoading, setLoading] = useState(true)
   const [isUploading, setUploading] = useState(false)
-  const [submission, setSubmission] = useState()
+  const { submission, isLoading, setSubmission } = useSubmission(book.id!)
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
@@ -29,13 +54,23 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
       await ref.put(files[0], {
         customMetadata: { originalName }
       })
-      setUploading(false)
 
-      setSubmission({ ...submission, originalName })
-      toast({
-        title: '見本誌をアップロードしました',
-        intent: 'success'
-      })
+      const unsubscribe = db.collection('bookSubmissions')
+        .doc(book!.id)
+        .onSnapshot(snapshot => {
+          if (!snapshot.exists) return
+          const { createdAt } = snapshot.data()!
+          if (!submission || createdAt.seconds !== submission.createdAt.seconds) {
+            console.log('========UPLOADED=========', originalName)
+            setUploading(false)
+            setSubmission({ ...submission, originalName })
+            unsubscribe()
+            toast({
+              title: '見本誌をアップロードしました',
+              intent: 'success'
+            })
+          }
+        })
     },
     onDropRejected: () => {
       alert('アップロードに失敗しました')
@@ -43,21 +78,6 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
     maxSize: 1000 * 1000 * 100,
     disabled: isUploading
   })
-
-  useEffect(() => {
-    const id = book!.id
-    const db: firebase.firestore.Firestore = firebase.firestore()
-    db.collection('bookSubmissions')
-      .doc(id)
-      .get()
-      .then(docSnapshot => {
-        setLoading(false)
-        if (docSnapshot.exists) {
-          console.log(docSnapshot.data())
-          setSubmission(docSnapshot.data())
-        }
-      })
-  }, [])
 
   if (isLoading) {
     return <Loader />
