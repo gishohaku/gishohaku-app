@@ -17,10 +17,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: cp -a functions/ dist/
+      - run: yarn build:functions
       - run: yarn build:app
       - run: yarn export:app
-      - run: cp package.json dist/functions && cp package-lock.json dist/functions
+      - run: yarn copy:build:app
       - run: mkdir pages
       - run:
           command: |
