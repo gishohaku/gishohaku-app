@@ -58,10 +58,12 @@ const Hero = () => (
       width: 400px;
       position: relative;
       left: -10px;
+      height: 370px;
       @media ${media.large} {
         width: 280px;
         margin: 0 auto 20px;
         left: 0;
+        height: auto;
       }
     `} src='https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png' width={280} height={286} />
     <div css={css`
@@ -189,7 +191,8 @@ const Sponsor: React.SFC<{
         <p
           css={css`
           font-size: 12px;
-          margin-top: 6px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
           line-height: 1.4;
           opacity: 0.8;
         `}
@@ -232,7 +235,7 @@ const Staff: React.SFC<{
       <div
         css={css`
         display: flex-item;
-        width: 120px;
+        width: 96px;
         text-align: center;
         margin: 12px;
         img {
@@ -241,18 +244,18 @@ const Staff: React.SFC<{
           border-radius: 50% !important;
         }
         @media ${media.small} {
-          width: 100px;
+          width: 72px;
           margin: 6px;
         }
       `}
       >
-      {(twitter) ? (
-        <a target="_blank" rel="noopener" href={twitter}>
-          <img src={imageUrl || '/static/gishohaku_gray.png'} />
-        </a>
-      ) : (
-        <img src={imageUrl || '/static/gishohaku_gray.png'} />
-      )}
+        {(twitter) ? (
+          <a target="_blank" rel="noopener" href={twitter}>
+            <img src={imageUrl || '/static/gishohaku_gray.png'} />
+          </a>
+        ) : (
+            <img src={imageUrl || '/static/gishohaku_gray.png'} />
+          )}
         <p
           css={css`
           font-size: 12px;
