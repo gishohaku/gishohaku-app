@@ -17,10 +17,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn build:functions
-      - run: yarn build:app
-      - run: yarn export:app
-      - run: yarn copy:build:app
+      - run: yarn predeploy
       - run: mkdir pages
       - run:
           command: |

@@ -12,7 +12,7 @@
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "babel functions -d dist/functions --extensions='.ts'",
     "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
-    "predeploy": "npm run build:app && npm run build:functions && npm run copy:deps",
+    "predeploy": "npm run build:app && npm run build:functions && npm run copy:build:app && npm run copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
     "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com"
