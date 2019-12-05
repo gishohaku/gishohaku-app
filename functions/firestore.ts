@@ -15,7 +15,7 @@ const buildSubmissionMessage = (submission: any, book: any) => ({
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": `:arrow_up: 見本誌がアップロードされました:\n *<${submission.url}|${book.title}>* （<${circleUrl(book.circle.id)}|${book.circle.name}>）`
+        "text": `:arrow_up: 見本誌がアップロードされました:\n *<${submission.url}|${book.title}>* （<${circleUrl(book.circle.ref.id)}|${book.circle.name}>）`
       }
     },
     {
