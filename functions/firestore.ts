@@ -27,7 +27,7 @@ const buildSubmissionMessage = (submission: any, book: any) => ({
       "elements": [
         {
           "type": "mrkdwn",
-          "text": ":eyes: View all items with `/mihonshi list`"
+          "text": ":eyes: View all items with `/gishohaku list` in `#core-mihonshi`"
         }
       ]
     }

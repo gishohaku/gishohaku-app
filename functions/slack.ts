@@ -32,6 +32,13 @@ export const commands = onRequest(async (req, res) => {
       res.status(200).json({ text: '#core-mihonshi チャンネルで実行してください' })
     const query = admin.firestore().collection('bookSubmissions').where("eventId", "==", "gishohaku2")
     const refs = await query.get()
+    for await (let doc of refs.docs) {
+      const { url } = doc.data()
+      const bookRef = admin.firestore().collection('books').doc(doc.id)
+      const book = await bookRef.get()
+      const { title } = book.data() || {}
+      return `/books/${doc.id} <${url}|${title}>`
+    }
     const result = refs.docs.map(doc => {
       const { url, originalName } = doc.data()
       return `/books/${doc.id} <${url}|${originalName}>`
