@@ -21,7 +21,7 @@ jobs:
       - run: mkdir pages
       - run:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ] || [ "${CIRCLE_BRANCH}" == "submission-slack" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ] || [ "${CIRCLE_BRANCH}" == "ci" ]; then
               yarn firebase deploy --token=$FIREBASE_TOKEN
             fi
 
