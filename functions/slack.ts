@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions'
 import admin from 'firebase-admin'
 import axios from 'axios'
+import { notifyToSlack } from './firestore'
 
 const onRequest = functions.https.onRequest
 
@@ -25,6 +26,12 @@ export const actions = onRequest(async (req, res) => {
 // TODO: slack-commands
 export const commands = onRequest(async (req, res) => {
   const body = req.body
+
+  console.log(body)
+  if (body.token !== functions.config().slack.token) {
+    res.status(200).json({ text: 'Invalid token.' })
+  }
+
   // /gishohaku list
   if (body.text === 'list') {
     console.log(body.channel_id, body.channel_name)
@@ -32,18 +39,16 @@ export const commands = onRequest(async (req, res) => {
       res.status(200).json({ text: '#core-mihonshi チャンネルで実行してください' })
     const query = admin.firestore().collection('bookSubmissions').where("eventId", "==", "gishohaku2")
     const refs = await query.get()
+    const rows = []
     for await (let doc of refs.docs) {
       const { url } = doc.data()
       const bookRef = admin.firestore().collection('books').doc(doc.id)
       const book = await bookRef.get()
       const { title } = book.data() || {}
-      return `/books/${doc.id} <${url}|${title}>`
+      rows.push(`/books/${doc.id} <${url}|${title}>`)
     }
-    const result = refs.docs.map(doc => {
-      const { url, originalName } = doc.data()
-      return `/books/${doc.id} <${url}|${originalName}>`
-    }).join('\n')
-    res.status(200).json({ text: result, response_type: 'in_channel' })
+    await notifyToSlack({ text: rows.join('\n') })
+    res.status(200).json({ text: '' })
   } else {
     res.status(200).json({ text: 'Help `/gishohaku list`' })
   }

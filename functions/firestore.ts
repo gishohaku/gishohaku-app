@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions'
 import admin from 'firebase-admin'
 import axios from 'axios'
 
-const notifyToSlack = async (data: any) => {
+export const notifyToSlack = async (data: any) => {
   const webhookUrl = functions.config().slack.webhook.submission
   return await axios.post(webhookUrl, data)
 }
