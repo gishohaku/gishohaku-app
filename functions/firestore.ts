@@ -37,7 +37,7 @@ const buildSubmissionMessage = (submission: any, book: any) => ({
 const getBookData = async (bookId: string) => {
   const bookRef = admin.firestore().collection('books').doc(bookId)
   return {
-    ...(await bookRef.get()).data()!,
+    ...(await bookRef.get()).data()! as { title: string },
     id: bookId
   }
 }
@@ -48,6 +48,10 @@ export const createSubmission = functions.firestore
     const bookId = context.params.bookId as string
     const submission = snapshot.data()
     const book = await getBookData(bookId)
+
+    await snapshot.ref.update({
+      book: { title: book.title }
+    })
 
     await notifyToSlack(buildSubmissionMessage(submission, book))
   })
