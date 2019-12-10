@@ -4,12 +4,14 @@ import * as API from './api'
 import { Storage } from '@google-cloud/storage'
 import * as FirestoreFunctions from './firestore'
 import * as SlackFunctions from './slack'
+import * as PubSubFunctions from './pubsub'
 
 export { default as app } from './app'
 
 export const api = { ...API }
 export const firestore = { ...FirestoreFunctions }
 export const slack = { ...SlackFunctions }
+export const pubsub = { ...PubSubFunctions }
 
 const onCall = functions.https.onCall
 

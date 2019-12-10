@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions'
 import admin from 'firebase-admin'
 import axios from 'axios'
-import { notifyToSlack } from './firestore'
+import { PubSub } from '@google-cloud/pubsub'
 
 const onRequest = functions.https.onRequest
 
@@ -37,18 +37,13 @@ export const commands = onRequest(async (req, res) => {
     console.log(body.channel_id, body.channel_name)
     if (body.channel_id !== 'GLMG8URB8') // #core-mihonshi
       res.status(200).json({ text: '#core-mihonshi チャンネルで実行してください' })
-    const query = admin.firestore().collection('bookSubmissions').where("eventId", "==", "gishohaku2")
-    const refs = await query.get()
-    const rows = refs.docs.map(doc => {
-      const { url, book } = doc.data()
-      return `/books/${doc.id} <${url}|${book.title}>`
-    })
-    // await notifyToSlack({ text: rows.join('\n') })
-    const token = functions.config().slack.token
-    axios.post('https://slack.com/api/files.upload', {
-      token, channels: 'GLMG8URB8', content: rows.join('\n'),
-    })
-    res.status(200).json({ text: '' })
+
+    const pubsub = new PubSub()
+    const topic = pubsub.topic('list-submission')
+    await topic.publish(Buffer.from(JSON.stringify({
+      data: {}
+    })))
+    res.status(200).json({ text: 'Loading...' })
   } else {
     res.status(200).json({ text: 'Help `/gishohaku list`' })
   }
