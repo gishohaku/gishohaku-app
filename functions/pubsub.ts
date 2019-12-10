@@ -10,7 +10,7 @@ export const listSubmission = functions.pubsub.topic('list-submission').onPublis
     return `/books/${doc.id} <${url}|${book.title}>`
   })
 
-  const token = functions.config().slack.token
+  const token = functions.config().slack.oauthtoken
   const web = new WebClient(token)
   const res = await web.files.upload({ channels: 'GLMG8URB8', content: rows.join('\n') })
   console.log('listSubmission ok:', res.ok)
