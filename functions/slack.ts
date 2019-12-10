@@ -23,7 +23,7 @@ export const actions = onRequest(async (req, res) => {
   res.status(200).send()
 })
 
-// TODO: slack-commands
+// slack-commands
 export const commands = onRequest(async (req, res) => {
   const body = req.body
 
