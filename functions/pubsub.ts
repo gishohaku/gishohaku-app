@@ -7,7 +7,7 @@ export const listSubmission = functions.pubsub.topic('list-submission').onPublis
   const refs = await query.get()
   const rows = refs.docs.map(doc => {
     const { url, book } = doc.data()
-    return `/books/${doc.id} <${url}|${book.title}>`
+    return [`/books/${doc.id}`, book.title, url].join(', ')
   })
 
   const token = functions.config().slack.oauthtoken

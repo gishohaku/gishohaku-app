@@ -37,7 +37,7 @@ const buildSubmissionMessage = (submission: any, book: any) => ({
 const getBookData = async (bookId: string) => {
   const bookRef = admin.firestore().collection('books').doc(bookId)
   return {
-    ...(await bookRef.get()).data()! as { title: string },
+    ...(await bookRef.get()).data()!,
     id: bookId
   }
 }
