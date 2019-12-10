@@ -39,15 +39,15 @@ export const commands = onRequest(async (req, res) => {
       res.status(200).json({ text: '#core-mihonshi チャンネルで実行してください' })
     const query = admin.firestore().collection('bookSubmissions').where("eventId", "==", "gishohaku2")
     const refs = await query.get()
-    const rows = []
-    for await (let doc of refs.docs) {
-      const { url } = doc.data()
-      const bookRef = admin.firestore().collection('books').doc(doc.id)
-      const book = await bookRef.get()
-      const { title } = book.data() || {}
-      rows.push(`/books/${doc.id} <${url}|${title}>`)
-    }
-    await notifyToSlack({ text: rows.join('\n') })
+    const rows = refs.docs.map(doc => {
+      const { url, book } = doc.data()
+      return `/books/${doc.id} <${url}|${book.title}>`
+    })
+    // await notifyToSlack({ text: rows.join('\n') })
+    const token = functions.config().slack.token
+    axios.post('https://slack.com/api/files.upload', {
+      token, channels: 'GLMG8URB8', content: rows.join('\n'),
+    })
     res.status(200).json({ text: '' })
   } else {
     res.status(200).json({ text: 'Help `/gishohaku list`' })
