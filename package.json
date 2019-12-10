@@ -15,6 +15,7 @@
     "predeploy": "yarn build:app && yarn build:functions && yarn copy:build:app && yarn export:app && yarn copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
+    "functions:emulator": "yarn firebase emulators:start --only functions",
     "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com"
   },
   "dependencies": {

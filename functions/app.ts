@@ -5,6 +5,6 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, conf: { distDir: 'next' } })
 const handler = app.getRequestHandler()
 
-export default functions.https.onRequest((req, res) =>
+export default functions.https.onRequest((req, res) => {
   app.prepare().then(() => handler(req, res))
-)
+})
