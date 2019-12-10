@@ -49,10 +49,6 @@ export const createSubmission = functions.firestore
     const submission = snapshot.data()
     const book = await getBookData(bookId)
 
-    await snapshot.ref.update({
-      book: { title: book.title }
-    })
-
     await notifyToSlack(buildSubmissionMessage(submission, book))
   })
 
