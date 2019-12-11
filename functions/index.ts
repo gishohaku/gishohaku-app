@@ -4,12 +4,14 @@ import * as API from './api'
 import { Storage } from '@google-cloud/storage'
 import * as FirestoreFunctions from './firestore'
 import * as SlackFunctions from './slack'
+import * as PubSubFunctions from './pubsub'
 
 export { default as app } from './app'
 
 export const api = { ...API }
 export const firestore = { ...FirestoreFunctions }
 export const slack = { ...SlackFunctions }
+export const pubsub = { ...PubSubFunctions }
 
 const onCall = functions.https.onCall
 
@@ -73,7 +75,7 @@ export const onCreateFile = functions.storage.object().onFinalize(async (object,
   const [_directory, bookId, _timestamp] = object.name!.split('/')
 
   const bookRef = await admin.firestore().collection('books').doc(bookId).get()
-  const { eventId } = bookRef.data()!
+  const { eventId, title } = bookRef.data()!
 
   const submission = {
     originalName: object.metadata!.originalName,
@@ -83,6 +85,7 @@ export const onCreateFile = functions.storage.object().onFinalize(async (object,
     isChecked: false,
     url: urls[0],
     eventId,
+    book: { title },
   }
 
   await admin
