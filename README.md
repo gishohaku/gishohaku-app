@@ -41,5 +41,5 @@ scripts/ディレクトリにはFirestoreのデータを操作するようなス
 できるだけimmutableになるように意識はしているが、処理を確認してから実行すること
 
 ```
-yarn babel-node scripts/20191001-refactorBookSchema.ts  --extensions=".ts
+yarn runscript scripts/20191001-refactorBookSchema.ts
 ```
