@@ -8,6 +8,8 @@ admin.initializeApp({
   storageBucket: process.env.STORAGE_BUCKET
 })
 
+const eventId = 'gishohaku2'
+
 const types = {
   fanzine: '同人誌',
   commerce: '商業誌'
@@ -20,21 +22,24 @@ const mediums = {
 }
 
 const main = async () => {
+  const db = admin.firestore()
+
   let submissionMap = {}
-  const snaps = await admin.firestore().collection('bookSubmissions').where('eventId', '==', 'gishohaku2').get()
-  snaps.docs.forEach(d => {
+  const submissionQuery = db.collection('bookSubmissions').where('eventId', '==', eventId)
+  const submissions = await submissionQuery.get()
+  submissions.docs.forEach(d => {
     submissionMap[d.id] = d.data()
   })
 
   let circleMap = {}
-  const circleSnaps = await admin.firestore().collection('circles').where('eventId', '==', 'gishohaku2').get()
-  circleSnaps.docs.forEach(d => {
+  const circleQuery = db.collection('circles').where('eventId', '==', eventId)
+  const circles = await circleQuery.get()
+  circles.docs.forEach(d => {
     circleMap[d.id] = d.data()
   })
 
-  const bookSnapshots = await admin.firestore().collection('books').where('eventId', '==', 'gishohaku2').get()
-  let bookMap = {}
-  const books = bookSnapshots.docs.map(doc => {
+  const bookQuery = db.collection('books').where('eventId', '==', eventId)
+  const books = (await bookQuery.get()).docs.map(doc => {
     const data = doc.data()
     const circle = circleMap[data.circleRef.path.replace('circles/', '')]
     // console.log(data.circleRef.path, circle)
