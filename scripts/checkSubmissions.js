@@ -13,20 +13,26 @@ const types = {
   commerce: '商業誌'
 }
 
+const mediums = {
+  degital: '電子',
+  paper: '紙',
+  both: '紙/電子'
+}
+
 const main = async () => {
   let submissionMap = {}
-  const snaps = await admin.firestore().collection('bookSubmissions').get()
+  const snaps = await admin.firestore().collection('bookSubmissions').where('eventId', '==', 'gishohaku2').get()
   snaps.docs.forEach(d => {
     submissionMap[d.id] = d.data()
   })
 
   let circleMap = {}
-  const circleSnaps = await admin.firestore().collection('circles').get()
+  const circleSnaps = await admin.firestore().collection('circles').where('eventId', '==', 'gishohaku2').get()
   circleSnaps.docs.forEach(d => {
     circleMap[d.id] = d.data()
   })
 
-  const bookSnapshots = await admin.firestore().collection('books').get()
+  const bookSnapshots = await admin.firestore().collection('books').where('eventId', '==', 'gishohaku2').get()
   let bookMap = {}
   const books = bookSnapshots.docs.map(doc => {
     const data = doc.data()
@@ -40,10 +46,9 @@ const main = async () => {
   }).sort((book1, book2) => {
     return book1.circleNumber - book2.circleNumber
   })
-  // console.log(books.map(d => d.circleNumber))
   for (let book of books) {
     let submission = submissionMap[book.id]
-    console.log([book.id, book.circleBooth, book.circleName, types[book.type], book.title, submission && submission.url, submission && (new Date(submission.createdAt._seconds * 1000))].join(", "))
+    console.log([book.id, `"${book.circle.booth}（${book.circle.name}）"`, types[book.type], mediums[book.medium], `"${book.title}"`, submission && submission.url, submission && (new Date(submission.createdAt._seconds * 1000))].join(", "))
   }
 }
 

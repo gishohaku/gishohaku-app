@@ -16,7 +16,8 @@
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
     "functions:emulator": "yarn firebase emulators:start --only functions",
-    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com"
+    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com",
+    "runscript": "babel-node --extensions='.tsx,.ts'"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
