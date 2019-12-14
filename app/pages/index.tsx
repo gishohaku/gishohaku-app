@@ -516,6 +516,20 @@ export default () => {
               href="https://nkbp.jp/nsoft"
             />
           </div>
+          <div className="sponsorlist">
+            <Sponsor
+              name="esa"
+              role="ツールサポーター"
+              image="/static/sponsors/esa.png"
+              href="https://esa.io"
+            />
+            <Sponsor
+              name="ImageFlux"
+              role="ツールサポーター"
+              image="/static/sponsors/imageflux.png"
+              href="https://www.sakura.ad.jp/services/imageflux/"
+            />
+          </div>
         </div>
       </TextBlock>
     </section>
