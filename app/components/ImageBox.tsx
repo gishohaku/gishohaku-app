@@ -7,11 +7,12 @@ interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   // TODO
   size: 'square' | 'circlecut'
   width?: number
+  noBorder?: boolean
   onClick?: () => void
 }
 
 const ImageBox: React.FC<ImageBoxProps> = props => {
-  const { imageUrl, size, width, ...otherProps } = props
+  const { imageUrl, size, width, noBorder, ...otherProps } = props
   return (
     <span
       css={css`
@@ -19,7 +20,7 @@ const ImageBox: React.FC<ImageBoxProps> = props => {
         display: inline-block;
         align-items: center;
         justify-content: center;
-        border: 1px solid #ddd;
+        border: ${noBorder ? '0' : '1'}px solid #ddd;
         margin-right: 8px;
         position: relative;
 

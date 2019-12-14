@@ -14,6 +14,7 @@ import { useContext, useCallback } from 'react'
 import UserContext from '../contexts/UserContext'
 import { UserStars } from '../contexts/StarsContext'
 import EventContext from '../contexts/EventContext'
+import { imageUrl } from '../utils/imageUrl'
 
 interface Props {
   circle: Circle
@@ -50,7 +51,11 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
       <Link href='/[eventId]/circles/[id]' as={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
         <CircleLink>
           <CircleBooth>{circle.booth}</CircleBooth>
-          <ImageBox size="circlecut" imageUrl={circle.image || circleTumbnail} />
+          <ImageBox size="circlecut" imageUrl={imageUrl(circle.image, {
+            width: 504,
+            height: 710,
+            aspect: 'crop',
+          }) || circleTumbnail} noBorder />
           <CircleName>{circle.name}</CircleName>
           <CircleCategory>{allCategories[circle.category]}</CircleCategory>
         </CircleLink>
@@ -71,9 +76,9 @@ export const CircleBooth: React.FC<{
 `}>
   {(children && (children as string).startsWith('2F')) ? (
     <CircleBooth2nd>{children}</CircleBooth2nd>
-  ): (
-    <CircleBooth3rd>{children}</CircleBooth3rd>
-  )}
+  ) : (
+      <CircleBooth3rd>{children}</CircleBooth3rd>
+    )}
   {name && <div css={css`
     flex: 1;
     white-space: nowrap;
