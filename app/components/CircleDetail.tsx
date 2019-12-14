@@ -24,6 +24,7 @@ import CheckCount from './CheckCount'
 import SnsShare, { SnsShareSize } from './SnsShare'
 import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
+import { imageUrl } from '../utils/imageUrl'
 
 interface Props {
   circle: Circle
@@ -76,7 +77,11 @@ const CircleDetail: React.FC<Props> = ({
           }
         `}
       >
-        <ImageBox width={258} size="circlecut" imageUrl={circle.image || circleTumbnail} />
+        <ImageBox width={258} size="circlecut" imageUrl={imageUrl(circle.image, {
+          width: 504,
+          height: 710,
+          aspect: 'crop',
+        }) || circleTumbnail} />
         <div style={{ marginTop: 8 }}>
           {circle.booth && (
             <Label backgroundColor={circleColor} color={'white'} text={circle.booth} />
@@ -137,16 +142,16 @@ const CircleDetail: React.FC<Props> = ({
             />
           )}
 
-          {isShowSnsShare && (
-            <div
-                css={css`
+        {isShowSnsShare && (
+          <div
+            css={css`
                   margin-top: 12px;
                   margin-bottom: 12px;
                 `}
-              >
-              <SnsShare size={SnsShareSize.Small} />
-            </div>
-          )}
+          >
+            <SnsShare size={SnsShareSize.Small} />
+          </div>
+        )}
       </div>
       <BooksContainer>
         {books.map((book, index) => (

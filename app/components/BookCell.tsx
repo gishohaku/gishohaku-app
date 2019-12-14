@@ -35,6 +35,7 @@ import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
 import CircleCell, { CircleBooth } from './CircleCell'
 import SnsShare, { SnsShareSize } from './SnsShare'
+import { imageUrl } from '../utils/imageUrl'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {
@@ -323,7 +324,7 @@ const BookCell: React.SFC<Props> = ({
               {images.map((image, index) => {
                 return (
                   <ImageBox
-                    imageUrl={image}
+                    imageUrl={imageUrl(image, { height: 712 })}
                     size="square"
                     onClick={() => {
                       updateOpenLightBox(true)
