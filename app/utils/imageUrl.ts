@@ -14,8 +14,10 @@ export const imageUrl = (origin: string, options: Partial<ImageOption>): string 
     h: number | undefined
     a: number | undefined
     u: number
+    f: string
   }> = {
-    u: 1 // 出力画像が入力画像より拡大されることを許可しない
+    u: 1, // 出力画像が入力画像より拡大されることを許可しない,
+    f: 'webp:auto'
   }
   params.a = {
     'scale': 0,
