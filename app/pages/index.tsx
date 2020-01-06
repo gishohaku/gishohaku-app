@@ -333,6 +333,13 @@ export default () => {
           その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
           私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
         </p>
+        <p css={css`
+          margin-top: 32px;
+          text-align: center;
+          a { margin: 8px 16px; }
+        `}>
+          <LinkButton href="https://gishohaku.booth.pm/items/1712299">公式ガイドブックを無料ダウンロードする</LinkButton>
+        </p>
       </TextBlock>
     </section>
     <section css={section}>
@@ -348,12 +355,13 @@ export default () => {
           技書博本編とあわせてぜひご参加ください。
         </p>
         <p css={css`
+          color: #888;
+          font-size: 14px;
           margin-top: 32px;
           text-align: center;
           a { margin: 8px 16px; }
         `}>
-          <LinkButton href="https://peatix.com/event/1374236">本編への参加<br />（無料）</LinkButton>
-          <LinkButton href="https://peatix.com/event/1374258">懇親会への参加<br />（有料）</LinkButton>
+          第二回技術書同人誌博覧会は終了しました。ご参加くださりありがとうございました。
         </p>
       </TextBlock>
     </section>
@@ -756,14 +764,6 @@ export default () => {
             imageUrl=""
             twitter=""
           />
-        </div>
-        <div css={css` margin-top: 32px; `}>
-          <p>
-            当日の運営を一緒にお手伝い頂ける「当日スタッフ」を募集します。
-            私たちは、来場者の方々と共にイベントを楽しみ、多くを学び、素晴らしい1日にしたいと考えています。
-            技書博をさらによいイベントにするため、ぜひあなたの力をお貸しください。
-          </p>
-          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/51/69d8a6ea1cfac9cc16f9.html">当日スタッフ募集の詳細はこちら</LinkButton>
         </div>
       </TextBlock>
     </section>
