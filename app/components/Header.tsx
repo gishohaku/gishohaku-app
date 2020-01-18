@@ -138,11 +138,21 @@ const Header: React.FC<any> = () => {
       </div>
       <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
         <List>
+          <Link href="/gishohaku3" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第3回 技術書同人誌博覧会"
+                secondary="2020年6月27日 開催予定"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
+          </Link>
           <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第2回 技術書同人誌博覧会"
-                secondary="2019年12月14日 開催予定"
+                secondary="2019年12月14日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
