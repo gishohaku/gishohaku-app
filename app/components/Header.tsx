@@ -80,7 +80,7 @@ const Header: React.FC<any> = () => {
   const { isHeaderVisible } = useShyHeader()
   const router = useRouter()
 
-  const isTransparent = router.asPath === '/'
+  const isTransparent = router.asPath === '/gishohaku2' // TODO
 
   return (
     <header
@@ -105,7 +105,7 @@ const Header: React.FC<any> = () => {
       <div css={[hamburgerButton, css`margin-right: auto;`]} onClick={() => setOpen(true)}>
         <IconMenu />
       </div>
-      <Link href={`/${eventId == 'gishohaku2' ? '' : eventId}`} passHref>
+      <Link href={`/${['gishohaku1', 'gishohaku2'].includes(eventId) ? eventId : ''}`} passHref>
         <a
           css={css`
             padding: 13px;
@@ -138,7 +138,7 @@ const Header: React.FC<any> = () => {
       </div>
       <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
         <List>
-          <Link href="/gishohaku3" passHref>
+          <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第3回 技術書同人誌博覧会"
@@ -148,7 +148,7 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/gishohaku2" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第2回 技術書同人誌博覧会"
