@@ -12,7 +12,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
-import { SectionHeader } from '../pages'
+import SectionHeader from '../components/SectionHeder'
 
 interface InitialProps {
   books: Book[]

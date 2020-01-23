@@ -15,7 +15,7 @@ import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
-import { SectionHeader } from '../pages'
+import SectionHeader from '../components/SectionHeder'
 
 interface InitialProps {
   circles: Circle[]
