@@ -8,7 +8,7 @@ interface Props {
 }
 
 const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
-  const metaTitle = [title, '第二回 技術書同人誌博覧会'].filter(o => o).join(' | ')
+  const metaTitle = [title, '技術書同人誌博覧会'].filter(o => o).join(' | ')
   const metaDescription = [
     description,
     'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。'
@@ -18,10 +18,10 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   const jsonLdTags = {
     "@context": "http://schema.org",
     "@type": "Event",
-    "name": "第二回 技術書同人誌博覧会",
+    "name": "技術書同人誌博覧会",
     "description": "あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。",
-    "startDate": "2019-12-14",
-    "endDate": "2019-12-14",
+    "startDate": "2020-06-27",
+    "endDate": "2020-06-27",
     "image": "https://gishohaku.dev/static/ogp.jpg",
     "url": "https://gishohaku.dev/",
     "offers": {
