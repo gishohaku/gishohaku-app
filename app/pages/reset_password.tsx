@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 
 import { jsx } from '@emotion/core'
 import firebase from 'firebase/app'
-import SectionHeader from '../components/atoms/SectionHeader'
+import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
 import { Button, InputGroup, Input, Alert, useToast } from 'sancho'
