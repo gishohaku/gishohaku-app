@@ -5,7 +5,7 @@ import placeIcon from './round-place.svg'
 import directionsIcon from './round-directions_run.svg'
 
 import { media, colors } from '../../utils/style'
-import SectionHeader from '../atoms/SectionHeader'
+import SectionHeader from '../gishohaku1/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
 
 import Sponsor from './sponsor'
