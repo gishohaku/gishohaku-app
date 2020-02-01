@@ -1,0 +1,69 @@
+import MdxContainer from '../components/MdxContainer'
+import SectionHeader from '../components/gishohaku1/SectionHeader'
+import SEO from '../components/SEO'
+
+<SEO title="サークル出展費のお支払い"/>
+
+<SectionHeader text="ENTRY" pageHeader>
+サークル出展費のお支払い
+</SectionHeader>
+
+<MdxContainer>
+
+## はじめに
+
+本ページは、第3回技術書同人誌博覧会にサークル出展申込された方が、出展費をお支払いいただくためのページです。
+別途「サークル出展費のお支払いにつて」ご連絡を差し上げた方を対象にしています。
+「今すぐ購入」リンク（PayPalを使用します）より、**2020年4月3日（金）まで**に購入手続きを完了してください。
+
+お支払いが確認できたサークル主催者に対して、運営事務局よりサークル出展確定の旨をご連絡します。
+お支払い手続きは必ず1度のみ行ってください。
+
+## お支払い手続き
+
+以下フォームよりお支払い手続きを行ってください。
+決済代行会社としてPayPalを利用しています。
+PayPalをご利用いただけない場合、振込先銀行口座をご案内いたしますのでメールにて別途お問い合わせください。
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="shift_jis">
+  <input type="hidden" name="cmd" value="_s-xclick"/>
+  <input type="hidden" name="hosted_button_id" value="7R5XMMKUUUV3U"/>
+  <input type="hidden" name="currency_code" value="JPY"/>
+  <input type="hidden" name="on0" value="申込プラン"/>
+  <div style={{margin: '12px 0'}}>
+    <h4>申込プラン</h4>
+    <select name="os0">
+      <option value="通常プラン">通常プラン（5,000円）</option>
+      <option value="ゆったりプラン">ゆったりプラン（8,000円）</option>
+    </select>
+  </div>
+  <div style={{margin: '12px 0'}}>
+    <h4>貴サークル名</h4>
+    <input type="text" name="os1" maxlength="200"/>
+  </div>
+  <div style={{margin: '12px 0'}}>
+    <h4>申込時のメールアドレス</h4>
+    <input type="text" name="os2" maxlength="200"/>
+  </div>
+  <div>
+    <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal支払い"/>
+    <img src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1"/>
+  </div>
+</form>
+
+## 注意事項
+
+お支払いに際して、必ず以下のドキュメントをご確認ください。
+お支払い完了時点で内容に同意されたとみなします。
+
+- [サークル出展要項](https://esa-pages.io/p/sharing/13039/posts/92/d8895bbcc65751f99ae4.html)（出展申込に際しての規約と詳細）
+- [サークル出展の手引き](https://esa-pages.io/p/sharing/13039/posts/91/d7acc66896074dd0789e.html)（出展申込～当日の作業内容まとめ）
+- [行動規範（Code of Conduct）](https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html)
+
+## 運営団体
+
+- 運営者：[技術書同人誌博覧会 運営事務局](https://gishohaku.dev/) / イミナス合同会社
+- 代表者：森川 晃
+- 問合先：[info@gishohaku.dev](mailto:info@gishohaku.dev)
+
+</MdxContainer>
