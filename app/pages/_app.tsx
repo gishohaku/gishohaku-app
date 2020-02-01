@@ -32,7 +32,7 @@ class MyApp extends App {
     return {
       pageProps,
       // query from next config pathmap
-      eventId: ctx.query.eventId || 'gishohaku2'
+      eventId: ctx.query.eventId || 'gishohaku3'
     }
   }
 
