@@ -26,29 +26,29 @@ import SEO from '../components/SEO'
 PayPalをご利用いただけない場合、振込先銀行口座をご案内いたしますのでメールにて別途お問い合わせください。
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="shift_jis">
-  <input type="hidden" name="cmd" value="_s-xclick">
-  <input type="hidden" name="hosted_button_id" value="7R5XMMKUUUV3U">
-  <input type="hidden" name="currency_code" value="JPY">
-  <input type="hidden" name="on0" value="申込プラン">
-    <div style={{margin: '12px 0'}}>
-      <h4>申込プラン</h4>
-      <select name="os0">
-        <option value="通常プラン">通常プラン（5,000円）</option>
-        <option value="ゆったりプラン">ゆったりプラン（8,000円）</option>
-      </select>
-    </div>
-    <div style={{margin: '12px 0'}}>
-      <h4>貴サークル名</h4>
-      <input type="text" name="os1" maxlength="200">
-    </div>
-    <div style={{margin: '12px 0'}}>
-      <h4>申込時のメールアドレス</h4>
-      <input type="text" name="os2" maxlength="200">
-    </div>
-    <div>
-        <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal支払い/>
-        <img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1"/>
-    </div>
+  <input type="hidden" name="cmd" value="_s-xclick"/>
+  <input type="hidden" name="hosted_button_id" value="7R5XMMKUUUV3U"/>
+  <input type="hidden" name="currency_code" value="JPY"/>
+  <input type="hidden" name="on0" value="申込プラン"/>
+  <div style={{margin: '12px 0'}}>
+    <h4>申込プラン</h4>
+    <select name="os0">
+      <option value="通常プラン">通常プラン（5,000円）</option>
+      <option value="ゆったりプラン">ゆったりプラン（8,000円）</option>
+    </select>
+  </div>
+  <div style={{margin: '12px 0'}}>
+    <h4>貴サークル名</h4>
+    <input type="text" name="os1" maxlength="200"/>
+  </div>
+  <div style={{margin: '12px 0'}}>
+    <h4>申込時のメールアドレス</h4>
+    <input type="text" name="os2" maxlength="200"/>
+  </div>
+  <div>
+    <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal支払い/>
+    <img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1"/>
+  </div>
 </form>
 
 ## 注意事項
