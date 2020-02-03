@@ -32,6 +32,7 @@ module.exports = withImages(
           ...defaultPathMap,
           '/gishohaku1/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku1' } },
           '/gishohaku2/mypage': { page: '/[eventId]/mypage', query: { eventId: 'gishohaku2' } },
+          '/gishohaku2/circles/[id]': { page: '/[eventId]/circles/[id]', query: { eventId: 'gishohaku2'}},
           '/gishohaku1/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku1' } },
           '/gishohaku2/mypage/circle': { page: '/[eventId]/mypage/circle', query: { eventId: 'gishohaku2' } },
           '/gishohaku1/mypage/join': { page: '/[eventId]/mypage/join', query: { eventId: 'gishohaku1' } },
