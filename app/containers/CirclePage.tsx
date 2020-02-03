@@ -41,7 +41,6 @@ const CirclePage = () => {
   // FirebaseのRewriteを用いているためquery.idが[id]になる瞬間があるための対応。
   const { circle, circleRef } = useCircle(id === '[id]' ? undefined : id)
   const { books } = useBooks(circleRef)
-  console.log(router, circle, books)
 
   return (
     <>

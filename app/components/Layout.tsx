@@ -9,12 +9,16 @@ import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
 import Head from 'next/head'
+import { NextRouter } from 'next/router'
 
-const Layout: React.FC<any> = props => {
+const Layout: React.FC<{
+  router: NextRouter
+}> = props => {
   const { eventId } = useContext(EventContext)
+  const isCirclePage = props.router.pathname.match(/circles\/\w+/)
   return (
     <>
-      <SEO />
+      { isCirclePage && <SEO />}
       <Head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap" />
@@ -45,7 +49,7 @@ const Layout: React.FC<any> = props => {
           }
         `}
       />
-      {!props.hideHeader && <Header />}
+      <Header />
       <div
         css={css`
           min-height: calc(100vh - 80px - 88px);
