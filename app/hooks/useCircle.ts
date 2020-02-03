@@ -6,6 +6,7 @@ const useCircle = (id?: string) => {
   const [circle, setCircle] = useState<Circle>()
   const [circleRef, setRef] = useState<any>()
   useEffect(() => {
+    if (!id) return
     const ref = db.collection('circles').doc(id)
     if (!ref) return
     setRef(ref)

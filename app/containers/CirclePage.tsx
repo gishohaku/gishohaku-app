@@ -16,7 +16,6 @@ const useBooks = (circleRef: any) => {
   const [books, setBooks] = useState<Book[]>([])
   useEffect(() => {
     if (!circleRef) return
-    console.log(circleRef)
     db.collection('books')
       .where('circleRef', '==', circleRef)
       .orderBy('order', 'asc')
@@ -37,8 +36,12 @@ const CirclePage = () => {
   const { eventId } = useContext(EventContext)
   const { userStars } = useContext(StarsContext)
   const router = useRouter()
-  const { circle, circleRef } = useCircle(router.query.id as string)
+
+  const id = router.query.id as string
+  // FirebaseのRewriteを用いているためquery.idが[id]になる瞬間があるための対応。
+  const { circle, circleRef } = useCircle(id === '[id]' ? undefined : id)
   const { books } = useBooks(circleRef)
+  console.log(router, circle, books)
 
   return (
     <>

@@ -44,7 +44,7 @@
         "function": "app"
       },
       {
-        "source": "/gishohaku2/circles/:id",
+        "source": "/gishohaku2/circles/**",
         "destination": "/gishohaku2/circles/[id].html"
       },
       {
