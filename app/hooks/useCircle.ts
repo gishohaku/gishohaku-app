@@ -4,9 +4,11 @@ import { db } from '../utils/firebase'
 
 const useCircle = (id?: string) => {
   const [circle, setCircle] = useState<Circle>()
+  const [circleRef, setRef] = useState<any>()
   useEffect(() => {
     const ref = db.collection('circles').doc(id)
     if (!ref) return
+    setRef(ref)
     ref.get().then(snapshot => {
       setCircle({
         id: snapshot.id,
@@ -14,7 +16,7 @@ const useCircle = (id?: string) => {
       })
     })
   }, [id])
-  return { circle }
+  return { circle, circleRef }
 }
 
 export default useCircle
