@@ -13,7 +13,7 @@ interface Props {
 
 const useSubmission = (bookId: string) => {
   const [isLoading, setLoading] = useState(true)
-  const [submission, setSubmission] = useState()
+  const [submission, setSubmission] = useState<any>()
   useEffect(() => {
     setLoading(true)
     db.collection('bookSubmissions')

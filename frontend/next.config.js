@@ -14,7 +14,7 @@ module.exports = withImages(
         PROJECT_ID: process.env.PROJECT_ID,
         SENTRY_DSN: process.env.SENTRY_DSN,
       },
-      distDir: './dist/functions/next',
+      // distDir: './dist/functions/next',
       // outDir: '../dist/public',
       // exportPathMap: defaultPathMap => {
       //   delete defaultPathMap['/[eventId]/books']
