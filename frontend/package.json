@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "next app",
     "build": "next build",
-    "export:app": "next export app --outdir dist/public",
+    "build:app": "next build frontend",
+    "export:app": "next export frontend --outdir dist/public",
     "start": "next start app",
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "babel functions -d dist/functions --extensions='.ts'",
