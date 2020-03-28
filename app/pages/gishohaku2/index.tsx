@@ -564,7 +564,7 @@ export default () => {
           />
           <Printing
             name="日光企画"
-            imageUrl="http://www.nikko-pc.com/start/logo.gif"
+            imageUrl="https://www.nikko-pc.com/start/logo.gif"
             linkUrl="https://www.nikko-pc.com/"
           />
           <Printing
@@ -574,12 +574,12 @@ export default () => {
           />
           <Printing
             name="栄光"
-            imageUrl="http://www.eikou.com/link/eikoubanner.gif"
+            imageUrl="https://www.eikou.com/link/eikoubanner.gif"
             linkUrl="http://www.eikou.com/"
           />
           <Printing
             name="PICO"
-            imageUrl="http://www.pico-net.com/topmenu/pico_bunner.gif"
+            imageUrl="https://www.pico-net.com/topmenu/pico_bunner.gif"
             linkUrl="http://www.pico-net.com/doujinshi/"
           />
           <Printing
