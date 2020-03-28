@@ -5,6 +5,8 @@ import TextBlock from "../../components/atoms/TextBlock"
 import SectionHeader from "../../components/SectionHeder"
 import placeIcon from '../../components/top/round-place.svg'
 import directionsIcon from '../../components/top/round-directions_run.svg'
+import { GetStaticProps } from 'next'
+import { EventId } from '../../utils/event'
 
 const keyColor = colors.primaryDarker
 
@@ -833,3 +835,9 @@ const withIcon = css`
     opacity: 0.3;
   }
 `
+
+export const getStaticProps: GetStaticProps<{
+  eventId: string
+}> = async () => {
+  return { props: { eventId: 'gishohaku2' } }
+}

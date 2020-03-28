@@ -1,5 +1,5 @@
 import React, { ErrorInfo as _ErrorInfo } from 'react'
-import App, { AppContext } from 'next/app'
+import App from 'next/app'
 import Router from 'next/router'
 import { UserProvider } from '../contexts/UserContext'
 import { EventProvider } from '../contexts/EventContext'
@@ -24,18 +24,6 @@ const TRACKING_ID = 'UA-129667923-2'
 // }
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    let pageProps = {}
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
-    }
-    return {
-      pageProps,
-      // query from next config pathmap
-      eventId: ctx.query.eventId || 'gishohaku3'
-    }
-  }
-
   componentDidMount() {
     ReactGA.initialize(TRACKING_ID, {
       debug: process.env.NODE_ENV !== 'production',
@@ -54,7 +42,8 @@ class MyApp extends App {
   // }
 
   public render() {
-    const { Component, pageProps, router, eventId } = this.props as any
+    const { Component, pageProps, router } = this.props as any
+    const eventId = router.query?.eventId || pageProps?.eventId
     return (
       <UserProvider>
         <EventProvider initialId={eventId}>
