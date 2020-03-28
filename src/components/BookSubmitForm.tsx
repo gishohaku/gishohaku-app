@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import 'firebase/storage'
 import { IconUpload, useToast } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'

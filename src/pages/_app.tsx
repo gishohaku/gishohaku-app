@@ -24,17 +24,17 @@ const TRACKING_ID = 'UA-129667923-2'
 // }
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    let pageProps = {}
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
-    }
-    return {
-      pageProps,
-      // query from next config pathmap
-      eventId: ctx.query.eventId || 'gishohaku3'
-    }
-  }
+  // static async getInitialProps({ Component, ctx }: AppContext) {
+  //   let pageProps = {}
+  //   if (Component.getInitialProps) {
+  //     pageProps = await Component.getInitialProps(ctx)
+  //   }
+  //   return {
+  //     pageProps,
+  //     // query from next config pathmap
+  //     eventId: ctx.query.eventId || 'gishohaku3'
+  //   }
+  // }
 
   componentDidMount() {
     ReactGA.initialize(TRACKING_ID, {
@@ -54,7 +54,10 @@ class MyApp extends App {
   // }
 
   public render() {
-    const { Component, pageProps, router, eventId } = this.props as any
+    const { Component, pageProps, router } = this.props as any
+    const eventId = router.query.eventId || 'gishohaku3'
+    // contextで渡す必要があるっぽい
+    // console.log('app props', eventId, eventId2)
     return (
       <UserProvider>
         <EventProvider initialId={eventId}>

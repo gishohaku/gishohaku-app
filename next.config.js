@@ -17,8 +17,8 @@ module.exports = withImages(
         STORAGE_BUCKET: process.env.STORAGE_BUCKET,
         SENTRY_DSN: process.env.SENTRY_DSN
       },
-      distDir: '../dist/functions/next',
-      outDir: '../dist/public',
+      // distDir: '../dist/functions/next',
+      // outDir: '../dist/public',
       exportPathMap: defaultPathMap => {
         delete defaultPathMap['/[eventId]/books']
         delete defaultPathMap['/[eventId]/books/[id]']
@@ -41,8 +41,6 @@ module.exports = withImages(
           '/gishohaku2/mypage/book_stars': { page: '/[eventId]/mypage/book_stars', query: { eventId: 'gishohaku2' } }
         }
 
-        console.log('== Result')
-        console.log(pathMap)
         return pathMap
       }
     })

@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import 'firebase/storage'
 import { useDropzone } from 'react-dropzone'
 import { jsx, css } from '@emotion/core'
 import { useState } from 'react'
