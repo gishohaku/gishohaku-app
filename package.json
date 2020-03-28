@@ -17,7 +17,14 @@
     "functions:shell": "firebase experimental:functions:shell",
     "functions:emulator": "yarn firebase emulators:start --only functions",
     "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com",
-    "runscript": "babel-node --extensions='.tsx,.ts'"
+    "runscript": "babel-node --extensions='.tsx,.ts'",
+    "format": "prettier 'app/**/*.{ts,tsx}' --write"
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
@@ -68,6 +75,7 @@
     "@types/react-lazyload": "^2.5.0",
     "@types/react-virtualized": "^9.21.2",
     "mysql": "^2.17.1",
+    "prettier": "^2.0.2",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
   },
