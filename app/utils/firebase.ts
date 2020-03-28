@@ -4,13 +4,16 @@ import 'firebase/storage'
 import 'firebase/functions'
 import 'firebase/auth'
 
+const apiKey = process.env.API_KEY
+const projectId = process.env.PROJECT_ID
+
 if (!firebase.apps.length) {
   firebase.initializeApp({
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    databaseURL: process.env.DATABASE_URL,
-    storageBucket: process.env.STORAGE_BUCKET
+    projectId,
+    apiKey,
+    authDomain: `${projectId}.firebaseapp.com`,
+    databaseURL: `https://${projectId}.firebaseio.com/`,
+    storageBucket: `gs://${projectId}.appspot.com`
   })
 }
 
