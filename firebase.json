@@ -1,11 +1,7 @@
 {
   "hosting": {
     "public": "dist/public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
       {
         "source": "/books",
@@ -26,34 +22,6 @@
       {
         "source": "/gishohaku1/books/**/submit",
         "destination": "/gishohaku1/books/[id]/submit.html"
-      },
-      {
-        "source": "/gishohaku2/books/**",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku1/books",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku2/books",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku1/circles/**",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku2/circles/**",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku1/circles",
-        "function": "app"
-      },
-      {
-        "source": "/gishohaku2/circles",
-        "function": "app"
       }
     ],
     "headers": [

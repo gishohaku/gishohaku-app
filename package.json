@@ -12,7 +12,7 @@
     "copy:build:app": "cp -a dist/functions/next/static dist/public/_next",
     "build:functions": "babel functions -d dist/functions --extensions='.ts'",
     "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
-    "predeploy": "FIREBASE=1 yarn build:app && yarn build:functions && yarn copy:build:app && yarn export:app && yarn copy:deps",
+    "predeploy": "yarn build:functions && yarn copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
     "functions:emulator": "yarn firebase emulators:start --only functions",
