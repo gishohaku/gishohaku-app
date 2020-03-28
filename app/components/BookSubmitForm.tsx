@@ -19,13 +19,13 @@ const useSubmission = (bookId: string) => {
     db.collection('bookSubmissions')
       .doc(bookId)
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         setLoading(false)
         if (snapshot.exists) {
           console.log(snapshot.data())
           setSubmission({
             ...snapshot.data(),
-            id: snapshot.id
+            id: snapshot.id,
           })
         }
       })
@@ -33,7 +33,7 @@ const useSubmission = (bookId: string) => {
   return {
     isLoading,
     submission,
-    setSubmission
+    setSubmission,
   }
 }
 
@@ -44,30 +44,36 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    onDropAccepted: async files => {
+    onDropAccepted: async (files) => {
       setUploading(true)
       const storageRef = firebase.storage().ref()
       const originalName = files[0].name
-      const ref = storageRef.child(`/submissions/${book!.id}/${Date.now()}-${originalName}`)
+      const ref = storageRef.child(
+        `/submissions/${book!.id}/${Date.now()}-${originalName}`,
+      )
       console.log('begin upload', originalName, files[0])
 
       await ref.put(files[0], {
-        customMetadata: { originalName }
+        customMetadata: { originalName },
       })
 
-      const unsubscribe = db.collection('bookSubmissions')
+      const unsubscribe = db
+        .collection('bookSubmissions')
         .doc(book!.id)
-        .onSnapshot(snapshot => {
+        .onSnapshot((snapshot) => {
           if (!snapshot.exists) return
           const { createdAt } = snapshot.data()!
-          if (!submission || createdAt.seconds !== submission.createdAt.seconds) {
+          if (
+            !submission ||
+            createdAt.seconds !== submission.createdAt.seconds
+          ) {
             console.log('========UPLOADED=========', originalName)
             setUploading(false)
             setSubmission({ ...submission, originalName })
             unsubscribe()
             toast({
               title: '見本誌をアップロードしました',
-              intent: 'success'
+              intent: 'success',
             })
           }
         })
@@ -76,7 +82,7 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
       alert('アップロードに失敗しました')
     },
     maxSize: 1000 * 1000 * 100,
-    disabled: isUploading
+    disabled: isUploading,
   })
 
   if (isLoading) {
@@ -90,10 +96,10 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
           <b>アップロード済み</b> {submission.originalName}
         </p>
       ) : (
-          <p>
-            <b>未アップロード</b>
-          </p>
-        )}
+        <p>
+          <b>未アップロード</b>
+        </p>
+      )}
       <div
         {...getRootProps({
           css: css`
@@ -104,9 +110,8 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
             display: flex;
             align-items: center;
             justify-content: center;
-          `
-        })}
-      >
+          `,
+        })}>
         {isUploading && <Loader label="Uploading..." />}
 
         {!isUploading && (

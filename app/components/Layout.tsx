@@ -10,15 +10,24 @@ import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
 import Head from 'next/head'
 
-const Layout: React.FC<any> = props => {
+const Layout: React.FC<any> = (props) => {
   const { eventId } = useContext(EventContext)
   return (
     <>
       <SEO />
       <Head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
       </Head>
       <Global
         styles={css`
@@ -27,8 +36,8 @@ const Layout: React.FC<any> = props => {
             touch-action: manipulation;
           }
           body {
-            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, Roboto, '游ゴシック体',
-              YuGothic, 'Yu Gothic Medium', sans-serif;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont,
+              Roboto, '游ゴシック体', YuGothic, 'Yu Gothic Medium', sans-serif;
             -webkit-font-smoothing: antialiased;
             font-feature-settings: 'palt';
             font-size: 15px;
@@ -50,8 +59,7 @@ const Layout: React.FC<any> = props => {
         css={css`
           min-height: calc(100vh - 80px - 88px);
           position: relative;
-        `}
-      >
+        `}>
         {props.children}
       </div>
       {/* TODO: sign_in/やsign_up/で死ぬので要対応 */}
@@ -63,28 +71,31 @@ const Layout: React.FC<any> = props => {
 
 const MypageButton = () => {
   const { eventId } = useContext(EventContext)
-  return <Link href="/[eventId]/mypage/circle" as={`/${eventId}/mypage/circle`}>
-    <a css={css`
-      position: fixed;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      background-color: #ECB40D;
-      color: white;
-      padding: 16px 32px;
-      border-radius: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      cursor: pointer;
-      font-weight: 600;
-      white-space: nowrap;
-      &:hover {
-        background-color: #dbae29;
-      }
-    `}>
-      サークルマイページ
-    </a>
-  </Link>
+  return (
+    <Link href="/[eventId]/mypage/circle" as={`/${eventId}/mypage/circle`}>
+      <a
+        css={css`
+          position: fixed;
+          bottom: 16px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 10;
+          background-color: #ecb40d;
+          color: white;
+          padding: 16px 32px;
+          border-radius: 30px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          font-weight: 600;
+          white-space: nowrap;
+          &:hover {
+            background-color: #dbae29;
+          }
+        `}>
+        サークルマイページ
+      </a>
+    </Link>
+  )
 }
 
 const Footer = () => (
@@ -94,8 +105,7 @@ const Footer = () => (
       font-size: 12px;
       padding: 8px 12px ${72 + 16}px;
       text-align: center;
-    `}
-  >
+    `}>
     <ul
       css={css`
         li {
@@ -111,16 +121,27 @@ const Footer = () => (
             padding: 6px;
           }
         }
-      `}
-    >
+      `}>
       <li>
-        <a target="_blank" href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル出展要項</a>
+        <a
+          target="_blank"
+          href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">
+          サークル出展要項
+        </a>
       </li>
       <li>
-        <a target="_blank" href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">サークル出展の手引き</a>
+        <a
+          target="_blank"
+          href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">
+          サークル出展の手引き
+        </a>
       </li>
       <li>
-        <a target="_blank" href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">行動規範</a>
+        <a
+          target="_blank"
+          href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">
+          行動規範
+        </a>
       </li>
       <li>
         <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
@@ -130,8 +151,7 @@ const Footer = () => (
       css={css`
         margin: 6px 0;
         opacity: 0.8;
-      `}
-    >
+      `}>
       © 技術書同人誌博覧会 運営事務局
     </p>
   </footer>

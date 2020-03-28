@@ -31,8 +31,7 @@ const banner: React.FC<Props> = ({ image, name }) => {
         &:hover {
           border-color: ${colors.primary};
         }
-      `}
-    >
+      `}>
       {image ? (
         <LazyLoad offset={400}>
           <img

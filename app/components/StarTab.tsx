@@ -10,12 +10,13 @@ import { useRouter } from 'next/router'
 const Item = styled.div<{
   isActive?: boolean
 }>`
-  border-bottom: 2px solid ${props => props.isActive ? colors.primary : 'transparent'};
+  border-bottom: 2px solid
+    ${(props) => (props.isActive ? colors.primary : 'transparent')};
   padding: 12px 16px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  color: ${props => props.isActive ? colors.primary : '#787878'};
+  color: ${(props) => (props.isActive ? colors.primary : '#787878')};
   &:hover {
     background-color: #fafafa;
   }
@@ -24,21 +25,32 @@ const Item = styled.div<{
 export default () => {
   const { eventId } = useContext(EventContext)
   const { pathname } = useRouter()
-  return <div css={css`
-    margin: 0 auto;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    position: sticky;
-    z-index: 101;
-    top: 0;
-  `}>
-    <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`}>
-      <Item isActive={pathname === "/[eventId]/mypage/circle_stars"}>チェックしたサークル</Item>
-    </Link>
-    <Link href="/[eventId]/mypage/book_stars" as={`/${eventId}/mypage/book_stars`}>
-      <Item isActive={pathname === "/[eventId]/mypage/book_stars"}>チェックした頒布物</Item>
-    </Link>
-  </div>
+  return (
+    <div
+      css={css`
+        margin: 0 auto;
+        background-color: white;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: center;
+        position: sticky;
+        z-index: 101;
+        top: 0;
+      `}>
+      <Link
+        href="/[eventId]/mypage/circle_stars"
+        as={`/${eventId}/mypage/circle_stars`}>
+        <Item isActive={pathname === '/[eventId]/mypage/circle_stars'}>
+          チェックしたサークル
+        </Item>
+      </Link>
+      <Link
+        href="/[eventId]/mypage/book_stars"
+        as={`/${eventId}/mypage/book_stars`}>
+        <Item isActive={pathname === '/[eventId]/mypage/book_stars'}>
+          チェックした頒布物
+        </Item>
+      </Link>
+    </div>
+  )
 }

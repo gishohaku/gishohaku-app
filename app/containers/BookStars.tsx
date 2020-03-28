@@ -33,14 +33,11 @@ const BookStars: React.FC = () => {
             padding-left: 0;
             padding-right: 0;
           }
-        `}
-      >
-        {bookStars.map(bookId => (
+        `}>
+        {bookStars.map((bookId) => (
           <AsnycBookCell bookId={bookId} key={bookId} />
         ))}
-        {
-          bookStars.length === 0 && <p>チェックされた頒布物がありません。</p>
-        }
+        {bookStars.length === 0 && <p>チェックされた頒布物がありません。</p>}
       </Container>
     </>
   )

@@ -1,15 +1,15 @@
-import { firestore } from "firebase"
+import { firestore } from 'firebase'
 import { EventId } from './event'
 
 export const mediums = {
   degital: '電子',
   paper: '紙',
-  both: '紙/電子'
+  both: '紙/電子',
 }
 
 export const types = {
   fanzine: '同人誌',
-  commerce: '商業誌'
+  commerce: '商業誌',
 }
 
 export type BookType = keyof typeof types
@@ -50,8 +50,8 @@ export const refToId = (book: Book) => {
     ...book,
     circle: {
       ...book.circle,
-      id: book.circle!.ref.id
-    }
+      id: book.circle!.ref.id,
+    },
   }
 
   delete results.circleRef

@@ -11,7 +11,7 @@ import { Button, InputGroup, Input, Alert, useToast } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 
 const loginData = {
-  email: ''
+  email: '',
 }
 
 interface Props {
@@ -26,9 +26,8 @@ const ResetPassword: NextPage<Props> = ({ router }) => {
       <Container
         style={{
           maxWidth: 380,
-          paddingTop: 60
-        }}
-      >
+          paddingTop: 60,
+        }}>
         <SectionHeader text="">パスワードの再設定</SectionHeader>
         <Formik
           initialValues={loginData}
@@ -41,7 +40,7 @@ const ResetPassword: NextPage<Props> = ({ router }) => {
                 router.push('/')
                 toast({
                   title: 'パスワード再設定メールを送信しました',
-                  intent: 'success'
+                  intent: 'success',
                 })
               })
               .catch((error: any) => {
@@ -53,7 +52,9 @@ const ResetPassword: NextPage<Props> = ({ router }) => {
                     setError('ユーザーが見つかりませんでした。')
                     break
                   default:
-                    setError('エラーが発生しました。運営事務局までご連絡ください。')
+                    setError(
+                      'エラーが発生しました。運営事務局までご連絡ください。',
+                    )
                 }
                 console.log(error)
                 actions.setSubmitting(false)
@@ -73,9 +74,8 @@ const ResetPassword: NextPage<Props> = ({ router }) => {
                   component="button"
                   style={{
                     marginTop: 24,
-                    width: '100%'
-                  }}
-                >
+                    width: '100%',
+                  }}>
                   メールを送信
                 </Button>
               </Form>
@@ -92,10 +92,12 @@ const CustomInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }: FieldProps<any>) => (
-    <div>
-      <Input type="text" {...field} {...props} />
-      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
-    </div>
-  )
+  <div>
+    <Input type="text" {...field} {...props} />
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
+  </div>
+)
 
 export default withRouter(ResetPassword)

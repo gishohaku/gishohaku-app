@@ -33,10 +33,12 @@ const Mypage: React.FC<Props> = ({ userData }) => {
           border-radius: 4px;
           overflow: hidden;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-        `}
-      >
+        `}>
         <List>
-          <Link href='/[eventId]/mypage/circle_stars' as={`/${eventId}/mypage/circle_stars`} passHref>
+          <Link
+            href="/[eventId]/mypage/circle_stars"
+            as={`/${eventId}/mypage/circle_stars`}
+            passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="チェックしたサークル"
@@ -45,7 +47,10 @@ const Mypage: React.FC<Props> = ({ userData }) => {
               />
             </a>
           </Link>
-          <Link href='/[eventId]/mypage/book_stars' as={`/${eventId}/mypage/book_stars`} passHref>
+          <Link
+            href="/[eventId]/mypage/book_stars"
+            as={`/${eventId}/mypage/book_stars`}
+            passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="チェックした頒布物"
@@ -55,7 +60,10 @@ const Mypage: React.FC<Props> = ({ userData }) => {
             </a>
           </Link>
           {circleRef && (
-            <Link href='/[eventId]/mypage/circle' as={`/${eventId}/mypage/circle`} passHref>
+            <Link
+              href="/[eventId]/mypage/circle"
+              as={`/${eventId}/mypage/circle`}
+              passHref>
               <a css={noDecoration}>
                 <ListItem
                   primary="サークル情報編集"
@@ -71,8 +79,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
       <List
         css={css`
           margin-top: 20px;
-        `}
-      >
+        `}>
         <ListItem
           primary="ログアウト"
           contentBefore={<IconLogOut />}

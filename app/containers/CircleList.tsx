@@ -24,11 +24,15 @@ interface InitialProps {
 const mapUrl: {
   [key in EventId]: string
 } = {
-  gishohaku1: 'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/a27e64dc-082c-4d24-afa6-a0083664f885.png',
-  gishohaku2: 'https://img.esa.io/uploads/production/attachments/13039/2019/11/21/44748/0c049717-3499-4bc1-9ed3-11772775f922.png'
+  gishohaku1:
+    'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/a27e64dc-082c-4d24-afa6-a0083664f885.png',
+  gishohaku2:
+    'https://img.esa.io/uploads/production/attachments/13039/2019/11/21/44748/0c049717-3499-4bc1-9ed3-11772775f922.png',
 }
 
-const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
+const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = (
+  props,
+) => {
   const { circles } = props
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
@@ -39,13 +43,13 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
         max-width: ${1080 + 12 * 2}px;
         margin-top: px;
         padding: 0 !important;
-      `}
-    >
-      <SEO title="サークル一覧" />
-      <div css={css`
-        position: relative;
-        margin-top: 48px;
       `}>
+      <SEO title="サークル一覧" />
+      <div
+        css={css`
+          position: relative;
+          margin-top: 48px;
+        `}>
         <SectionHeader en="CIRCLES">サークル一覧</SectionHeader>
         <a
           target="_blank"
@@ -62,8 +66,7 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
             color: white;
             padding: 8px 24px;
             text-decoration: none;
-          `}
-        >
+          `}>
           会場マップ
         </a>
       </div>
@@ -86,7 +89,10 @@ const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = props => {
 
 Index.getInitialProps = async ({ res, query }) => {
   if (res && res.setHeader) {
-    res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=360, stale-while-revalidate',
+    )
   }
 
   const eventId = query.eventId as EventId

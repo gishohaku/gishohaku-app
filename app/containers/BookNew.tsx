@@ -22,16 +22,22 @@ const BooksNew: NextPage<{
   const circleRef = userData.event && userData.event[eventId]
   const { circle } = useCircle(circleRef && circleRef.id)
 
-  if (!circleRef) { return <p>権限ないっす</p> }
-  if (!circle) { return <Loader /> }
+  if (!circleRef) {
+    return <p>権限ないっす</p>
+  }
+  if (!circle) {
+    return <Loader />
+  }
 
   return (
     <>
       <FormContainer>
         <BookForm
           user={user}
-          onSubmit={async book => {
-            const query = db.collection('books').where('circle.ref', '==', circleRef)
+          onSubmit={async (book) => {
+            const query = db
+              .collection('books')
+              .where('circle.ref', '==', circleRef)
             const bookSnapshots = await query.get()
             await db.collection('books').add({
               ...book,
@@ -40,11 +46,11 @@ const BooksNew: NextPage<{
               circle: {
                 ref: circleRef,
                 name: circle.name,
-                booth: circle.booth
+                booth: circle.booth,
               },
               circleRef: circleRef,
               order: bookSnapshots.size,
-              eventId
+              eventId,
             })
             router.push(`/${eventId}/mypage/circle`)
           }}

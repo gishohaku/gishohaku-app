@@ -18,7 +18,7 @@ interface InitialProps {
   books: Book[]
 }
 
-const Index: NextPage<InitialProps> = props => {
+const Index: NextPage<InitialProps> = (props) => {
   const { books: initialBooks } = props
   const [hasMore, setHasMore] = useState(true)
   const [books, setBooks] = useState<Book[]>(initialBooks)
@@ -34,13 +34,13 @@ const Index: NextPage<InitialProps> = props => {
           padding-left: 0;
           padding-right: 0;
         }
-      `}
-    >
-      <SEO title="頒布物一覧" />
-      <div css={css`
-        position: relative;
-        margin-top: 48px;
       `}>
+      <SEO title="頒布物一覧" />
+      <div
+        css={css`
+          position: relative;
+          margin-top: 48px;
+        `}>
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
       </div>
       <InfiniteScroll
@@ -50,7 +50,10 @@ const Index: NextPage<InitialProps> = props => {
           const lastBook = books[books.length - 1]
           const updatedAt = lastBook.updatedAt
           const nextBooks = await getBooks(eventId, {
-            startAfter: new firebase.firestore.Timestamp(updatedAt!.seconds, updatedAt!.nanoseconds)
+            startAfter: new firebase.firestore.Timestamp(
+              updatedAt!.seconds,
+              updatedAt!.nanoseconds,
+            ),
           })
           setBooks([...books, ...nextBooks])
 
@@ -63,8 +66,7 @@ const Index: NextPage<InitialProps> = props => {
           <div className="loader" key={0}>
             Loading ...
           </div>
-        }
-      >
+        }>
         {books.map((book: Book) => (
           <BookCell book={book} key={book.id} isShowCircle={true} />
         ))}
@@ -75,13 +77,16 @@ const Index: NextPage<InitialProps> = props => {
 
 Index.getInitialProps = async ({ res, query }) => {
   if (res && res.setHeader) {
-    res.setHeader('Cache-Control', 'public, s-maxage=360, stale-while-revalidate')
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=360, stale-while-revalidate',
+    )
   }
 
   const eventId = query.eventId as EventId
   const books = await getBooks(eventId, {})
   return {
-    books
+    books,
   }
 }
 export default Index

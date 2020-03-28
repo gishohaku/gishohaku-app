@@ -6,7 +6,10 @@ import { EventId } from './event'
 
 export const perBookCount = 5
 
-export const getBooks = async (eventId: EventId, options: { startAfter?: any }) => {
+export const getBooks = async (
+  eventId: EventId,
+  options: { startAfter?: any },
+) => {
   let query = db
     .collection('books')
     .where('eventId', '==', eventId)
@@ -17,7 +20,7 @@ export const getBooks = async (eventId: EventId, options: { startAfter?: any }) 
   }
   const snapshots = await query.get()
   const results: Book[] = []
-  snapshots.forEach(snapshot => {
+  snapshots.forEach((snapshot) => {
     const data = snapshot.data() as Book
     const book = refToId(data)
     results.push({
@@ -28,7 +31,9 @@ export const getBooks = async (eventId: EventId, options: { startAfter?: any }) 
   return results
 
   // TODO: ある程度データが入力されたらキャッシュを利用したFunctionsに差し替える
-  const result = await axios.get('https://us-central1-gishohaku.cloudfunctions.net/apiBooks')
+  const result = await axios.get(
+    'https://us-central1-gishohaku.cloudfunctions.net/apiBooks',
+  )
   return result.data
 }
 
@@ -39,15 +44,17 @@ export const getCircles = async (eventId: EventId) => {
     .orderBy('booth', 'asc')
     .get()
   const results: Circle[] = []
-  snapshots.forEach(snapshot => {
+  snapshots.forEach((snapshot) => {
     results.push({
       id: snapshot.id,
-      ...(snapshot.data() as Circle)
+      ...(snapshot.data() as Circle),
     })
   })
   return results
 
   // TODO: ある程度データが入力されたらキャッシュを利用したFunctionsに差し替える
-  const result = await axios.get('https://us-central1-gishohaku.cloudfunctions.net/apiCircles')
+  const result = await axios.get(
+    'https://us-central1-gishohaku.cloudfunctions.net/apiCircles',
+  )
   return result.data as Circle[]
 }

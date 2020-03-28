@@ -24,31 +24,25 @@ export const UserProvider = (props: any) => {
 
   useEffect(() => {
     const auth: firebase.auth.Auth = firebase.auth()
-    auth.onAuthStateChanged(async user => {
+    auth.onAuthStateChanged(async (user) => {
       setIsLoading(true)
       setCurrentUser(user)
       if (user) {
         console.log(user.uid)
-        const userSnapshot = await db
-          .collection('users')
-          .doc(user.uid)
-          .get()
+        const userSnapshot = await db.collection('users').doc(user.uid).get()
         if (userSnapshot.exists) {
           setUserData({
             uid: user.uid,
-            ...(userSnapshot.data() as User)
+            ...(userSnapshot.data() as User),
           })
         } else {
           const userDoc = {
             email: user.email,
             displayName: user.displayName,
             photoURL: user.photoURL,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           }
-          await db
-            .collection('users')
-            .doc(user.uid)
-            .set(userDoc)
+          await db.collection('users').doc(user.uid).set(userDoc)
           console.log('Create user document')
           setUserData(userDoc as User)
         }
@@ -76,9 +70,8 @@ export const UserProvider = (props: any) => {
         userData,
         isUserLoading: isLoading,
         reloadUser,
-        openLoginModal
-      }}
-    >
+        openLoginModal,
+      }}>
       <LoginSheet onRequestClose={() => setModal(false)} isOpen={isOpenModal} />
       {props.children}
     </UserContext.Provider>
@@ -95,6 +88,6 @@ export default React.createContext<{
   user: null,
   isUserLoading: true,
   userData: null,
-  reloadUser: () => { },
-  openLoginModal: () => { }
+  reloadUser: () => {},
+  openLoginModal: () => {},
 })

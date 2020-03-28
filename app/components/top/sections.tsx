@@ -35,63 +35,71 @@ const members = [
   {
     name: 'ariaki',
     twitter: 'ariaki4dev',
-    imageUrl: 'https://portal.engineers-lt.info/elt_logo_w.png'
+    imageUrl: 'https://portal.engineers-lt.info/elt_logo_w.png',
   },
   {
     name: '水殿',
     twitter: 'midono_ap1',
-    imageUrl: 'https://pbs.twimg.com/profile_images/1071222075501629442/bAQUfeke_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/1071222075501629442/bAQUfeke_400x400.jpg',
   },
   {
     name: 'おやかた',
     twitter: 'oyakata2438',
-    imageUrl: 'https://pbs.twimg.com/profile_images/893588120666480640/i-kZmS-f_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/893588120666480640/i-kZmS-f_400x400.jpg',
   },
   {
     name: 'kurakake',
     twitter: 'kurakake',
-    imageUrl: 'https://i.gyazo.com/0ef049e049c0b0587db07c79c0c373ff.jpg'
+    imageUrl: 'https://i.gyazo.com/0ef049e049c0b0587db07c79c0c373ff.jpg',
   },
   {
     name: 'かめねこ',
     twitter: 'kameneko1004',
-    imageUrl: 'https://storage.googleapis.com/jump/kameneko_icon.jpg'
+    imageUrl: 'https://storage.googleapis.com/jump/kameneko_icon.jpg',
   },
   {
     name: 'kazto',
     twitter: 'bainarian',
-    imageUrl: 'https://pbs.twimg.com/profile_images/998919655359107072/WZplgK9h_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/998919655359107072/WZplgK9h_400x400.jpg',
   },
   {
     name: 'なつお',
     twitter: 'KazuyaNakahara',
-    imageUrl: 'https://pbs.twimg.com/profile_images/1086995556600209410/7yUdS_qB_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/1086995556600209410/7yUdS_qB_400x400.jpg',
   },
   {
     name: 'mottox2',
     twitter: 'mottox2',
-    imageUrl: 'https://avatars1.githubusercontent.com/u/7007253?s=460&v=4'
+    imageUrl: 'https://avatars1.githubusercontent.com/u/7007253?s=460&v=4',
   },
   {
     name: 'Alice_You',
     twitter: 'Alice_You',
-    imageUrl: 'https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg',
   },
   {
     name: 'なのなの',
     twitter: 'nano2_aloerina',
-    imageUrl: 'https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/926635106860535808/lQbUVyz1.jpg',
   },
   {
     name: 'akazunoma',
     twitter: 'akazunoma',
-    imageUrl: 'https://pbs.twimg.com/profile_images/1076979292460859395/RKmEjFKW_400x400.jpg'
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/1076979292460859395/RKmEjFKW_400x400.jpg',
   },
   {
     name: 'ざき',
     twitter: 'zucky_zakizaki',
-    imageUrl: 'https://pbs.twimg.com/profile_images/1077006051533189120/nm5Zz0Qy_400x400.jpg'
-  }
+    imageUrl:
+      'https://pbs.twimg.com/profile_images/1077006051533189120/nm5Zz0Qy_400x400.jpg',
+  },
 ]
 
 const Sections = () => (
@@ -141,8 +149,7 @@ const Sections = () => (
             dd {
               width: calc(100% - 112px);
             }
-          `}
-        >
+          `}>
           <dt>日時</dt>
           <dd>
             2019.07.27(Sat.) 11:00-17:00
@@ -153,7 +160,10 @@ const Sections = () => (
           <dt>Twitter</dt>
           <dd>
             公式アカウント:{' '}
-            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/gishohaku">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://twitter.com/gishohaku">
               @gishohaku
             </a>
             <br />
@@ -161,8 +171,7 @@ const Sections = () => (
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://twitter.com/hashtag/%E6%8A%80%E6%9B%B8%E5%8D%9A"
-            >
+              href="https://twitter.com/hashtag/%E6%8A%80%E6%9B%B8%E5%8D%9A">
               #技書博
             </a>
           </dd>
@@ -174,9 +183,8 @@ const Sections = () => (
         section,
         `
         background-color: #f7f8fa;
-      `
-      )}
-    >
+      `,
+      )}>
       <SectionHeader text="ACCESS">アクセス</SectionHeader>
       {/* <div
         css={css`
@@ -205,8 +213,7 @@ const Sections = () => (
             @media ${media.small} {
               font-size: 24px;
             }
-          `}
-        >
+          `}>
           大田区産業プラザPiO
         </p>
         <div
@@ -215,8 +222,7 @@ const Sections = () => (
             padding: 12px;
             border-radius: 4px;
             margin-top: 12px;
-          `}
-        >
+          `}>
           <p css={withIcon}>
             <img src={placeIcon} alt="住所" />
             東京都大田区南蒲田1丁目20-20（
@@ -239,24 +245,21 @@ const Sections = () => (
         section,
         `
         background-color: fff;
-      `
-      )}
-    >
+      `,
+      )}>
       <SectionHeader text="TEAM">チーム</SectionHeader>
 
       <Container
         css={css`
           max-width: 740px;
-        `}
-      >
+        `}>
         <div
           css={css`
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-          `}
-        >
-          {members.map(profile => {
+          `}>
+          {members.map((profile) => {
             return (
               <a
                 href={`https://twitter.com/${profile.twitter}`}
@@ -267,8 +270,7 @@ const Sections = () => (
                   margin: 24px 12px 12px;
                   color: inherit;
                   text-decoration: none;
-                `}
-              >
+                `}>
                 <img
                   src={profile.imageUrl}
                   css={css`
@@ -290,8 +292,7 @@ const Sections = () => (
                     text-align: center;
                     font-size: 15px;
                     font-weight: bold;
-                  `}
-                >
+                  `}>
                   {profile.name}
                 </p>
               </a>
@@ -305,23 +306,20 @@ const Sections = () => (
         section,
         `
         background-color: #f7f8fa;
-      `
-      )}
-    >
+      `,
+      )}>
       <SectionHeader text="SPONSOR">スポンサー</SectionHeader>
       <Container
         css={css`
           max-width: 740px;
-        `}
-      >
+        `}>
         <div
           css={css`
             margin-top: 36px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-          `}
-        >
+          `}>
           <Sponsor
             name="株式会社grasys"
             role="トートバッグサポーター・運営サポーター"
@@ -412,8 +410,7 @@ const Sections = () => (
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-        `}
-      >
+        `}>
         <Printing
           name="ねこのしっぽ"
           url="https://www.shippo.co.jp/"
@@ -437,7 +434,8 @@ const Sections = () => (
         <Printing
           name="栄光"
           url="http://www.eikou.com/event_support/index.html"
-          image="http://www.eikou.com/link/eikoubanner.gif" />
+          image="http://www.eikou.com/link/eikoubanner.gif"
+        />
         <Printing
           name="しまや出版"
           url="https://www.shimaya.net/"
@@ -450,16 +448,14 @@ const Sections = () => (
         section,
         `
         background-color: #f7f8fa;
-      `
-      )}
-    >
+      `,
+      )}>
       <SectionHeader text="HOTEL">宿泊のご案内</SectionHeader>
       <Container
         css={css`
           max-width: 740px;
           margin-top: 36px;
-        `}
-      >
+        `}>
         <p>
           技書博では、遠方から参加される方のために、会場至近のホテルを割安の価格で利用できる「公式応援ホテル」として提携しました。
           技書博参加者限定で、通常プランと比べ格安に宿泊できるプランを準備していますので、ぜひご検討下さい。
@@ -480,23 +476,20 @@ const Sections = () => (
                 background-color: #dbae29;
               }
             `}
-            href="/gishohaku1/hotel"
-          >
+            href="/gishohaku1/hotel">
             <span
               className="material-icons"
               css={css`
                 vertical-align: middle;
                 margin-right: 4px;
                 font-size: 20px;
-              `}
-            >
+              `}>
               hotel
             </span>
             <span
               css={css`
                 vertical-align: middle;
-              `}
-            >
+              `}>
               宿泊の詳細はこちら
             </span>
           </a>
@@ -509,8 +502,7 @@ const Sections = () => (
         css={css`
           max-width: 740px;
           margin-top: 36px;
-        `}
-      >
+        `}>
         <Banner name="バナー1" image="/static/banner_1.png" />
         <Banner name="バナー2" image="/static/banner_2.png" />
       </Container>
@@ -520,9 +512,8 @@ const Sections = () => (
         section,
         `
         background-color: #f7f8fa;
-      `
-      )}
-    >
+      `,
+      )}>
       <SectionHeader text="RELEASE">リリース</SectionHeader>
       <Container
         css={css`
@@ -531,8 +522,7 @@ const Sections = () => (
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-        `}
-      >
+        `}>
         <iframe
           src="https://www.value-press.com/pressrelease/latest_lists/61565"
           frameBorder="0"

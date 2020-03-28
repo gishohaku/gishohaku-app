@@ -17,7 +17,7 @@ import CircleCopyButton from '../components/CircleCopyButton'
 import { db } from '../utils/firebase'
 
 const Mypage: React.FC<{
-  user: firebase.User,
+  user: firebase.User
   userData: User
 }> = ({ user, userData }) => {
   const [books, setBooks] = useState<Book[]>([])
@@ -31,17 +31,20 @@ const Mypage: React.FC<{
     if (!circleRef) {
       setLoading(false)
       console.log('Not circle member', user, userData)
-      return () => { }
+      return () => {}
     }
-    ; (async () => {
-      if (!circleRef) { return }
+    ;(async () => {
+      if (!circleRef) {
+        return
+      }
       const circleSnapShot = await circleRef.get()
       setCircle({ id: circleSnapShot.id, ...(circleSnapShot.data() as Circle) })
-      const query = db.collection('books')
+      const query = db
+        .collection('books')
         .where('circle.ref', '==', circleRef)
         .orderBy('order', 'asc')
       const snapshots = await query.get()
-      const books = snapshots.docs.map(book => {
+      const books = snapshots.docs.map((book) => {
         const data = book.data() as Book
         return { ...refToId(data), id: book.id }
       })
@@ -59,7 +62,9 @@ const Mypage: React.FC<{
     )
   }
 
-  if (isLoading || !circle) { return <Loader label="Loading..." /> }
+  if (isLoading || !circle) {
+    return <Loader label="Loading..." />
+  }
 
   return (
     <>
@@ -68,38 +73,41 @@ const Mypage: React.FC<{
           max-width: ${1080 + 32}px;
           padding: 0 16px;
           margin: 32px auto;
-        `}
-      >
-        {eventId === 'gishohaku1' &&
+        `}>
+        {eventId === 'gishohaku1' && (
           <div
             css={css`
-            background-color: white;
-            padding: 20px;
-            margin-top: 20px;
-            background-color: #2a5773;
-            color: white;
-            a {
-              color: inherit;
-              font-weight: bold;
-            }
-            border-radius: 8px;
-          `}
-          >
+              background-color: white;
+              padding: 20px;
+              margin-top: 20px;
+              background-color: #2a5773;
+              color: white;
+              a {
+                color: inherit;
+                font-weight: bold;
+              }
+              border-radius: 8px;
+            `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-            <Link href={`/${eventId}/circles/[id]`} as={`/${eventId}/circles/${circle.id}`}>
+              <Link
+                href={`/${eventId}/circles/[id]`}
+                as={`/${eventId}/circles/${circle.id}`}>
                 <a>こちら</a>
               </Link>
               。
-          </p>
+            </p>
             {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}
           </div>
-        }
-        {eventId === 'gishohaku2' &&
-          <CircleCopyButton />
-        }
+        )}
+        {eventId === 'gishohaku2' && <CircleCopyButton />}
       </div>
-      <CircleDetail circle={circle} books={books} editable={true} setBooks={setBooks} />
+      <CircleDetail
+        circle={circle}
+        books={books}
+        editable={true}
+        setBooks={setBooks}
+      />
     </>
   )
 }

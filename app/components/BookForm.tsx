@@ -1,5 +1,13 @@
 /** @jsx jsx */
-import { Button, InputGroup, Input, TextArea, Divider, Select, Check } from 'sancho'
+import {
+  Button,
+  InputGroup,
+  Input,
+  TextArea,
+  Divider,
+  Select,
+  Check,
+} from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Book, { types, mediums, BookMedium, BookType } from '../utils/book'
@@ -24,17 +32,24 @@ const initialState: Book = {
   medium: '',
   sampleUrl: '',
   purchaseUrl: '',
-  eventId: 'gishohaku1'
+  eventId: 'gishohaku1',
 }
 
 const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
   return (
     <Formik
       initialValues={initialBook || initialState}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values)
       }}
-      render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
+      render={({
+        values,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        setFieldValue,
+        isSubmitting,
+      }) => {
         return (
           <form onSubmit={handleSubmit}>
             <InputGroup label="タイトル *">
@@ -42,18 +57,15 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
             </InputGroup>
             <InputGroup
               label="画像"
-              helpText="画像は最大1MB/4枚まで、jpg/gif/pngのいずれかの形式でアップロードしてください。"
-            >
+              helpText="画像は最大1MB/4枚まで、jpg/gif/pngのいずれかの形式でアップロードしてください。">
               <div
                 css={css`
                   overflow-x: auto;
-                `}
-              >
+                `}>
                 <div
                   css={css`
                     display: flex;
-                  `}
-                >
+                  `}>
                   {values.images &&
                     values.images.map((imageUrl, index) => {
                       return (
@@ -63,7 +75,10 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                           width={180}
                           onClick={() => {
                             if (confirm('画像を削除しますか？')) {
-                              setFieldValue('images', values.images.filter((_, i) => i != index))
+                              setFieldValue(
+                                'images',
+                                values.images.filter((_, i) => i != index),
+                              )
                             }
                           }}
                           key={index}
@@ -86,7 +101,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
             </InputGroup>
             <InputGroup label="種別 *">
               <>
-                {Object.keys(types).map(key => {
+                {Object.keys(types).map((key) => {
                   const typeKey = key as BookType
                   const label = types[typeKey]
                   return (
@@ -105,8 +120,7 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
             </InputGroup>
             <InputGroup
               label="頒布予定数"
-              helpText="頒布数は公開されますが、空欄でも問題ありません。"
-            >
+              helpText="頒布数は公開されますが、空欄でも問題ありません。">
               <Field name="stock" type="number" component={CustomInput} />
             </InputGroup>
             <InputGroup label="ページ数">
@@ -118,10 +132,9 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 // @ts-ignore
-                value={values.medium}
-              >
+                value={values.medium}>
                 <option>選択してください</option>
-                {Object.keys(mediums).map(key => {
+                {Object.keys(mediums).map((key) => {
                   const mediumKey = key as BookMedium
                   const label = mediums[mediumKey]
                   return (
@@ -132,22 +145,17 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                 })}
               </Select>
             </InputGroup>
-            <InputGroup
-              label="説明"
-              helpText="Markdownが使用可能です。"
-            >
+            <InputGroup label="説明" helpText="Markdownが使用可能です。">
               <Field name="description" component={CustomTextarea} rows={5} />
             </InputGroup>
             <InputGroup
               label="立ち読みURL"
-              helpText="外部サイトで読者向けに用意している場合入力してください。"
-            >
+              helpText="外部サイトで読者向けに用意している場合入力してください。">
               <Field name="sampleUrl" component={CustomInput} />
             </InputGroup>
             <InputGroup
               label="電子版購入URL"
-              helpText="電子版の購入/ダウンロードURLが決まっている場合入力してください。"
-            >
+              helpText="電子版の購入/ダウンロードURLが決まっている場合入力してください。">
               <Field name="purchaseUrl" component={CustomInput} />
             </InputGroup>
             <InputGroup label="新刊">
@@ -162,7 +170,11 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
               </>
             </InputGroup>
             <Divider />
-            <Button component="button" block intent="primary" loading={isSubmitting}>
+            <Button
+              component="button"
+              block
+              intent="primary"
+              loading={isSubmitting}>
               保存する
             </Button>
           </form>
@@ -179,7 +191,9 @@ const CustomInput = ({
 }: FieldProps<any>) => (
   <div>
     <Input type="text" {...field} {...props} />
-    {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
   </div>
 )
 
@@ -190,7 +204,9 @@ const CustomTextarea = ({
 }: FieldProps<any>) => (
   <div>
     <TextArea {...field} {...props} />
-    {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
   </div>
 )
 

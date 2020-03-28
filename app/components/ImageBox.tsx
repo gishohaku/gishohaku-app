@@ -11,7 +11,7 @@ interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick?: () => void
 }
 
-const ImageBox: React.FC<ImageBoxProps> = props => {
+const ImageBox: React.FC<ImageBoxProps> = (props) => {
   const { imageUrl, size, width, noBorder, ...otherProps } = props
   return (
     <span
@@ -42,8 +42,7 @@ const ImageBox: React.FC<ImageBoxProps> = props => {
           z-index: -1;
         }
       `}
-      {...otherProps}
-    >
+      {...otherProps}>
       <LazyLoad offset={400}>
         <img
           src={props.imageUrl}

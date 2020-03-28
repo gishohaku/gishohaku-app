@@ -82,7 +82,8 @@ const contents = css`
 
   select {
     appearance: none;
-    background: transparent url(/images/icon-down.svg) no-repeat center right 8px/16px 16px;
+    background: transparent url(/images/icon-down.svg) no-repeat center right
+      8px/16px 16px;
     border: 1px solid rgba(0, 0, 0, 0.16);
     border-radius: 0;
     color: inherit;
@@ -94,7 +95,7 @@ const contents = css`
   }
 `
 
-const Contents: React.FC<any> = props => {
+const Contents: React.FC<any> = (props) => {
   return <div css={contents}>{props.children}</div>
 }
 

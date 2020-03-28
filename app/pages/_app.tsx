@@ -32,14 +32,14 @@ class MyApp extends App {
     return {
       pageProps,
       // query from next config pathmap
-      eventId: ctx.query.eventId || 'gishohaku3'
+      eventId: ctx.query.eventId || 'gishohaku3',
     }
   }
 
   componentDidMount() {
     ReactGA.initialize(TRACKING_ID, {
       debug: process.env.NODE_ENV !== 'production',
-      testMode: process.env.NODE_ENV !== 'production'
+      testMode: process.env.NODE_ENV !== 'production',
     })
   }
 

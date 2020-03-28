@@ -43,7 +43,7 @@ const CircleDetail: React.FC<Props> = ({
   books,
   editable,
   isShowSnsShare = false,
-  setBooks
+  setBooks,
 }) => {
   const { user, openLoginModal } = useContext(UserContext)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
@@ -54,7 +54,7 @@ const CircleDetail: React.FC<Props> = ({
   useEffect(() => {
     if (editable) {
       const query = db.collection('starCounts').doc(`circles-${circle.id}`)
-      query.get().then(res => {
+      query.get().then((res) => {
         const count = res.exists ? (res.data() as StarCount).count : 0
         console.log(circle.id, count)
         setStarCount(count)
@@ -62,7 +62,9 @@ const CircleDetail: React.FC<Props> = ({
     }
   }, [])
 
-  const circleColor: string = (circle.booth.startsWith('2F')) ? colors.floor2nd : colors.floor3rd;
+  const circleColor: string = circle.booth.startsWith('2F')
+    ? colors.floor2nd
+    : colors.floor3rd
 
   if (!circle) return null
 
@@ -75,16 +77,25 @@ const CircleDetail: React.FC<Props> = ({
           @media ${media.medium} {
             margin: 0 0 24px;
           }
-        `}
-      >
-        <ImageBox width={258} size="circlecut" imageUrl={imageUrl(circle.image, {
-          width: 504,
-          height: 710,
-          aspect: 'crop',
-        }) || circleTumbnail} />
+        `}>
+        <ImageBox
+          width={258}
+          size="circlecut"
+          imageUrl={
+            imageUrl(circle.image, {
+              width: 504,
+              height: 710,
+              aspect: 'crop',
+            }) || circleTumbnail
+          }
+        />
         <div style={{ marginTop: 8 }}>
           {circle.booth && (
-            <Label backgroundColor={circleColor} color={'white'} text={circle.booth} />
+            <Label
+              backgroundColor={circleColor}
+              color={'white'}
+              text={circle.booth}
+            />
           )}
           <Label text={allCategories[circle.category]} />
         </div>
@@ -92,7 +103,9 @@ const CircleDetail: React.FC<Props> = ({
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
-            <Link href={`/[eventId]/circles/[id]/edit`} as={`/${eventId}/circles/${circle.id}/edit`}>
+            <Link
+              href={`/[eventId]/circles/[id]/edit`}
+              as={`/${eventId}/circles/${circle.id}/edit`}>
               <a
                 css={css`
                   flex: 1;
@@ -115,40 +128,42 @@ const CircleDetail: React.FC<Props> = ({
                     background-color: #2a5773;
                     color: white;
                   }
-                `}
-              >
+                `}>
                 編集
-                    </a>
+              </a>
             </Link>
           </div>
         ) : (
-            <CheckButton
-              isChecked={(circle.id && userStars[eventId].circleStars.includes(circle.id)) || false}
-              onClick={() => {
-                if (!user) {
-                  return openLoginModal()
-                }
-                if (!circle.id) {
-                  return
-                }
-                if (userStars[eventId].circleStars.includes(circle.id)) {
-                  removeStar(eventId, 'circles', circle.id)
-                  toast({ title: `サークルのチェックを外しました` })
-                } else {
-                  addStar(eventId, 'circles', circle.id)
-                  toast({ title: `サークルをチェックしました` })
-                }
-              }}
-            />
-          )}
+          <CheckButton
+            isChecked={
+              (circle.id &&
+                userStars[eventId].circleStars.includes(circle.id)) ||
+              false
+            }
+            onClick={() => {
+              if (!user) {
+                return openLoginModal()
+              }
+              if (!circle.id) {
+                return
+              }
+              if (userStars[eventId].circleStars.includes(circle.id)) {
+                removeStar(eventId, 'circles', circle.id)
+                toast({ title: `サークルのチェックを外しました` })
+              } else {
+                addStar(eventId, 'circles', circle.id)
+                toast({ title: `サークルをチェックしました` })
+              }
+            }}
+          />
+        )}
 
         {isShowSnsShare && (
           <div
             css={css`
-                  margin-top: 12px;
-                  margin-bottom: 12px;
-                `}
-          >
+              margin-top: 12px;
+              margin-bottom: 12px;
+            `}>
             <SnsShare size={SnsShareSize.Small} />
           </div>
         )}
@@ -162,33 +177,37 @@ const CircleDetail: React.FC<Props> = ({
             isLast={index === books.length - 1}
             isFirst={index === 0}
             movePrev={() => {
-              const newBooks = produce(books, drafts => {
+              const newBooks = produce(books, (drafts) => {
                 drafts[index] = books[index - 1]
                 drafts[index - 1] = books[index]
               })
               console.log(newBooks)
               setBooks && setBooks(newBooks)
-              newBooks.map(b => b.id).forEach((bookId, order) => {
-                db.collection('books').doc(bookId).update({ order })
-              })
+              newBooks
+                .map((b) => b.id)
+                .forEach((bookId, order) => {
+                  db.collection('books').doc(bookId).update({ order })
+                })
               toast({
                 title: `頒布物を並び替えました`,
-                intent: 'success'
+                intent: 'success',
               })
             }}
             moveNext={() => {
-              const newBooks = produce(books, drafts => {
+              const newBooks = produce(books, (drafts) => {
                 drafts[index] = books[index + 1]
                 drafts[index + 1] = books[index]
               })
               console.log(newBooks)
               setBooks && setBooks(newBooks)
-              newBooks.map(b => b.id).forEach((bookId, order) => {
-                db.collection('books').doc(bookId).update({ order })
-              })
+              newBooks
+                .map((b) => b.id)
+                .forEach((bookId, order) => {
+                  db.collection('books').doc(bookId).update({ order })
+                })
               toast({
                 title: `頒布物を並び替えました`,
-                intent: 'success'
+                intent: 'success',
               })
             }}
           />
@@ -210,22 +229,33 @@ const CircleDetail: React.FC<Props> = ({
 const BlankMessage: React.FC<{
   circleName: string
 }> = ({ circleName }) => (
-  <div css={css`
-    padding: 0 16px;
-  `}>
-    <img css={css`
-      max-width: 100%;
-      width: 400px;
-      display: block;
-      margin: 0 auto;
-    `} src="/static/blank.png" />
-    <h2 css={css`
-      font-size: 20px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 8px;
-    `}>頒布物が登録されていません</h2>
-    <p>「{circleName}」には頒布物が登録されていないようです。<br />読みたい本がありそうなら筆者に気持ちを伝えてみましょう。</p>
+  <div
+    css={css`
+      padding: 0 16px;
+    `}>
+    <img
+      css={css`
+        max-width: 100%;
+        width: 400px;
+        display: block;
+        margin: 0 auto;
+      `}
+      src="/static/blank.png"
+    />
+    <h2
+      css={css`
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 8px;
+      `}>
+      頒布物が登録されていません
+    </h2>
+    <p>
+      「{circleName}」には頒布物が登録されていないようです。
+      <br />
+      読みたい本がありそうなら筆者に気持ちを伝えてみましょう。
+    </p>
   </div>
 )
 

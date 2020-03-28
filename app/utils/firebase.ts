@@ -13,7 +13,7 @@ if (!firebase.apps.length) {
     apiKey,
     authDomain: `${projectId}.firebaseapp.com`,
     databaseURL: `https://${projectId}.firebaseio.com/`,
-    storageBucket: `gs://${projectId}.appspot.com`
+    storageBucket: `gs://${projectId}.appspot.com`,
   })
 }
 

@@ -15,9 +15,14 @@ import { CirclesList } from './CircleList'
 const AsnycCircleCell = ({ circleId }: any) => {
   const { circle } = useCircle(circleId)
   const { userStars, addStar, removeStar } = useContext(StarsContext)
-  return circle
-    ? <CircleCell circle={circle} userStars={userStars} addStar={addStar} removeStar={removeStar} />
-    : null
+  return circle ? (
+    <CircleCell
+      circle={circle}
+      userStars={userStars}
+      addStar={addStar}
+      removeStar={removeStar}
+    />
+  ) : null
 }
 
 const BookStars: React.FC = () => {
@@ -32,21 +37,20 @@ const BookStars: React.FC = () => {
       <StarTab />
       <Container
         css={css`
-        margin: 32px auto;
-        padding: 0 16px;
-        @media ${media.small} {
-          padding-left: 0;
-          padding-right: 0;
-        }
-      `}
-      >
+          margin: 32px auto;
+          padding: 0 16px;
+          @media ${media.small} {
+            padding-left: 0;
+            padding-right: 0;
+          }
+        `}>
         <CirclesList>
-          {circleStars.map(circleId => (
+          {circleStars.map((circleId) => (
             <AsnycCircleCell circleId={circleId} key={circleId} />
           ))}
-          {
-            circleStars.length === 0 && <p>チェックしたサークルがありません。</p>
-          }
+          {circleStars.length === 0 && (
+            <p>チェックしたサークルがありません。</p>
+          )}
         </CirclesList>
       </Container>
     </>

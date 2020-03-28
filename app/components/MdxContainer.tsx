@@ -18,7 +18,9 @@ const MdxContainer: React.SFC = ({ children }) => {
           padding: 8px 16px;
           text-decoration: none;
         }
-        .button:active, .button:focus, .button:hover {
+        .button:active,
+        .button:focus,
+        .button:hover {
           background-color: #e7e7e7;
         }
 
@@ -27,18 +29,19 @@ const MdxContainer: React.SFC = ({ children }) => {
           background-color: #ffffff;
           color: #516c9d;
         }
-        .button.primary:active, .button.primary:focus, .button.primary:hover {
+        .button.primary:active,
+        .button.primary:focus,
+        .button.primary:hover {
           border: 1px solid #516c9d;
           background-color: #516c9d;
           color: #ffffff;
         }
-      `}
-    >
+      `}>
       <Global
         styles={{
           body: {
-            backgroundColor: 'white'
-          }
+            backgroundColor: 'white',
+          },
         }}
       />
       <Contents>{children}</Contents>

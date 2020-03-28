@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { withRouter, NextRouter } from 'next/router';
+import { withRouter, NextRouter } from 'next/router'
 
 import { db } from '../utils/firebase'
 import Book, { refToId } from '../utils/book'
@@ -13,7 +13,7 @@ interface Props {
   book: Book
 }
 
-const BookPage: NextPage<Props & { router: NextRouter }, Props> = props => {
+const BookPage: NextPage<Props & { router: NextRouter }, Props> = (props) => {
   const { book } = props
 
   return (
@@ -27,12 +27,12 @@ const BookPage: NextPage<Props & { router: NextRouter }, Props> = props => {
             padding-left: 0;
             padding-right: 0;
           }
-        `}
-      >
+        `}>
         <SEO
           title={book.title}
           description={book.description}
-          imageUrl={book.images[0]} />
+          imageUrl={book.images[0]}
+        />
         <BookCell book={book} isShowCircle={true} isShowSnsShare={true} />
       </div>
     </>

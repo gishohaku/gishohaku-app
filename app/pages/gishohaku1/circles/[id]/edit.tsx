@@ -12,7 +12,6 @@ import Circle from '../../../../utils/circle'
 import withUser from '../../../../withUser'
 import { db } from '../../../../utils/firebase'
 
-
 const BooksNew: NextPage<{
   user: firebase.User
   userData: User
@@ -22,15 +21,19 @@ const BooksNew: NextPage<{
 
   useEffect(() => {
     const id = router.query.id as string
-    if (!id) { return }
+    if (!id) {
+      return
+    }
     const query = db.collection('circles').doc(id)
-    query.get().then(docRef => {
+    query.get().then((docRef) => {
       console.log(docRef)
       setCircle({ id: docRef.id, ...(docRef.data() as Circle) })
     })
   }, [router.query.id])
 
-  if (!circle) { return <Loader /> }
+  if (!circle) {
+    return <Loader />
+  }
 
   return (
     <>
@@ -38,7 +41,7 @@ const BooksNew: NextPage<{
         <CircleForm
           user={user}
           circle={circle}
-          onSubmit={async circle => {
+          onSubmit={async (circle) => {
             const id = router.query.id as string
             const query = db.collection('circles').doc(id)
             await query.update(circle)

@@ -5,7 +5,17 @@ import logo from '../images/shortLogo.svg'
 import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
-import { IconMenu, Sheet, List, ListItem, IconChevronRight, Divider, IconExternalLink, IconHeart, IconLogIn } from 'sancho'
+import {
+  IconMenu,
+  Sheet,
+  List,
+  ListItem,
+  IconChevronRight,
+  Divider,
+  IconExternalLink,
+  IconHeart,
+  IconLogIn,
+} from 'sancho'
 import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
 import UserContext from '../contexts/UserContext'
@@ -47,27 +57,28 @@ const useShyHeader = () => {
   const [isHeaderVisible, setVisible] = useState(true)
 
   useEffect(() => {
-    let prevOffset = 0, ticking = false;
+    let prevOffset = 0,
+      ticking = false
 
     const handleScroll = () => {
-      if (ticking) return;
+      if (ticking) return
       window.requestAnimationFrame(() => {
         if (window.pageYOffset <= 100) {
           setVisible(true)
         } else if (prevOffset <= window.pageYOffset) {
           setVisible(false)
-          prevOffset = window.pageYOffset;
+          prevOffset = window.pageYOffset
         } else if (prevOffset > window.pageYOffset + headerHeight) {
           setVisible(true)
-          prevOffset = window.pageYOffset;
+          prevOffset = window.pageYOffset
         }
-        ticking = false;
-      });
-      ticking = true;
+        ticking = false
+      })
+      ticking = true
     }
 
-    document.addEventListener("scroll", handleScroll, { passive: true });
-    return () => document.removeEventListener("scroll", handleScroll)
+    document.addEventListener('scroll', handleScroll, { passive: true })
+    return () => document.removeEventListener('scroll', handleScroll)
   }, [])
 
   return { isHeaderVisible }
@@ -90,7 +101,8 @@ const Header: React.FC<any> = () => {
         align-items: center;
         font-size: 12px;
         padding: 0 12px;
-        box-shadow: 0 2px 8px ${isTransparent ? 'transparent' : 'rgba(0, 0, 0, 0.08)'};
+        box-shadow: 0 2px 8px
+          ${isTransparent ? 'transparent' : 'rgba(0, 0, 0, 0.08)'};
         min-height: ${headerHeight}px;
         user-select: none;
         position: fixed;
@@ -98,14 +110,24 @@ const Header: React.FC<any> = () => {
         left: 0;
         right: 0;
         z-index: 100;
-        transition: transform .15s ease-out;
+        transition: transform 0.15s ease-out;
       `}
-      style={{ transform: `translateY(${isHeaderVisible ? '0' : '-66'}px)` }}
-    >
-      <div css={[hamburgerButton, css`margin-right: auto;`]} onClick={() => setOpen(true)}>
+      style={{ transform: `translateY(${isHeaderVisible ? '0' : '-66'}px)` }}>
+      <div
+        css={[
+          hamburgerButton,
+          css`
+            margin-right: auto;
+          `,
+        ]}
+        onClick={() => setOpen(true)}>
         <IconMenu />
       </div>
-      <Link href={`/${['gishohaku1', 'gishohaku2'].includes(eventId) ? eventId : ''}`} passHref>
+      <Link
+        href={`/${
+          ['gishohaku1', 'gishohaku2'].includes(eventId) ? eventId : ''
+        }`}
+        passHref>
         <a
           css={css`
             padding: 13px;
@@ -116,8 +138,7 @@ const Header: React.FC<any> = () => {
             &:active {
               background-color: rgba(0, 0, 0, 0.12);
             }
-          `}
-        >
+          `}>
           <img
             src={logo}
             width={80}
@@ -129,14 +150,32 @@ const Header: React.FC<any> = () => {
           />
         </a>
       </Link>
-      <div css={[hamburgerButton, css`margin-left: auto;`]}>
-        {user && <Link href="/[eventId]/mypage/circle_stars" as={`/${eventId}/mypage/circle_stars`} passHref>
-          <a css={css`display: block; height: 100%;`}>
-            <IconHeart />
-          </a>
-        </Link>}
+      <div
+        css={[
+          hamburgerButton,
+          css`
+            margin-left: auto;
+          `,
+        ]}>
+        {user && (
+          <Link
+            href="/[eventId]/mypage/circle_stars"
+            as={`/${eventId}/mypage/circle_stars`}
+            passHref>
+            <a
+              css={css`
+                display: block;
+                height: 100%;
+              `}>
+              <IconHeart />
+            </a>
+          </Link>
+        )}
       </div>
-      <Sheet position="left" onRequestClose={() => setOpen(false)} isOpen={isOpen}>
+      <Sheet
+        position="left"
+        onRequestClose={() => setOpen(false)}
+        isOpen={isOpen}>
         <List>
           <Link href="/" passHref>
             <a css={noDecoration}>
@@ -169,7 +208,11 @@ const Header: React.FC<any> = () => {
             </a>
           </Link>
           <Divider />
-          <a href="https://blog.gishohaku.dev/" target="_blank" rel="noopener" css={noDecoration}>
+          <a
+            href="https://blog.gishohaku.dev/"
+            target="_blank"
+            rel="noopener"
+            css={noDecoration}>
             <ListItem
               primary="公式ブログ"
               secondary="コアスタッフによる情報発信ブログ"
@@ -178,36 +221,53 @@ const Header: React.FC<any> = () => {
           </a>
           <Divider />
         </List>
-        <ul css={css`
-          li a {
-            display: block;
-            text-decoration: none;
-            padding: 0.2rem 1.5rem;
-            color: inherit;
-            &:hover {
-              background-color: #f1f3f5;
+        <ul
+          css={css`
+            li a {
+              display: block;
+              text-decoration: none;
+              padding: 0.2rem 1.5rem;
+              color: inherit;
+              &:hover {
+                background-color: #f1f3f5;
+              }
             }
-          }
-        `}>
+          `}>
           <li>
-            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">サークル出展要項</a>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">
+              サークル出展要項
+            </a>
           </li>
           <li>
-            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">サークル出展の手引き</a>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">
+              サークル出展の手引き
+            </a>
           </li>
           <li>
-            <a target="_blank" rel="noopener" href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">行動規範</a>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">
+              行動規範
+            </a>
           </li>
           <li>
             <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
           </li>
         </ul>
         <Divider />
-        <div css={css`
-          padding: 0 1.5rem;
-          opacity: 0.6;
-          font-size: 12px;
-        `}>
+        <div
+          css={css`
+            padding: 0 1.5rem;
+            opacity: 0.6;
+            font-size: 12px;
+          `}>
           © 技術書同人誌博覧会 運営事務局
         </div>
       </Sheet>

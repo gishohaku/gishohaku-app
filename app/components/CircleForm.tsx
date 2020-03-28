@@ -1,5 +1,13 @@
 /** @jsx jsx */
-import { Button, InputGroup, Input, Divider, Select, useTheme, Text } from 'sancho'
+import {
+  Button,
+  InputGroup,
+  Input,
+  Divider,
+  Select,
+  useTheme,
+  Text,
+} from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'
@@ -21,10 +29,17 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
   return (
     <Formik
       initialValues={circle}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values)
       }}
-      render={({ values, handleSubmit, handleChange, handleBlur, setFieldValue, isSubmitting }) => {
+      render={({
+        values,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        setFieldValue,
+        isSubmitting,
+      }) => {
         return (
           <form onSubmit={handleSubmit}>
             <InputGroup label="サークル名 *">
@@ -38,17 +53,15 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                   > div {
                     margin-right: 12px;
                   }
-                `}
-              >
+                `}>
                 <div>
                   <Text
                     css={{
                       display: 'block',
                       color: theme.colors.text.muted,
                       marginTop: theme.spaces.xs,
-                      marginBottom: theme.spaces.xs
-                    }}
-                  >
+                      marginBottom: theme.spaces.xs,
+                    }}>
                     カラー
                   </Text>
                   {values.image ? (
@@ -63,14 +76,14 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                       }}
                     />
                   ) : (
-                      <ImageUploader
-                        user={user}
-                        size="circlecut"
-                        addUrl={(url: string) => {
-                          setFieldValue('image', url)
-                        }}
-                      />
-                    )}
+                    <ImageUploader
+                      user={user}
+                      size="circlecut"
+                      addUrl={(url: string) => {
+                        setFieldValue('image', url)
+                      }}
+                    />
+                  )}
                 </div>
                 <div>
                   <Text
@@ -78,9 +91,8 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                       display: 'block',
                       color: theme.colors.text.muted,
                       marginTop: theme.spaces.xs,
-                      marginBottom: theme.spaces.xs
-                    }}
-                  >
+                      marginBottom: theme.spaces.xs,
+                    }}>
                     グレースケール
                   </Text>
                   {values.imageMonochro ? (
@@ -95,14 +107,14 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                       }}
                     />
                   ) : (
-                      <ImageUploader
-                        user={user}
-                        size="circlecut"
-                        addUrl={(url: string) => {
-                          setFieldValue('imageMonochro', url)
-                        }}
-                      />
-                    )}
+                    <ImageUploader
+                      user={user}
+                      size="circlecut"
+                      addUrl={(url: string) => {
+                        setFieldValue('imageMonochro', url)
+                      }}
+                    />
+                  )}
                 </div>
               </div>
               <Text
@@ -110,10 +122,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                   display: 'block',
                   marginTop: theme.spaces.xs,
                   color: theme.colors.text.muted,
-                  fontSize: theme.fontSizes[0]
+                  fontSize: theme.fontSizes[0],
                 }}
-                variant="body"
-              >
+                variant="body">
                 ※推奨サイズ: 横635px
                 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。
                 <br />
@@ -125,8 +136,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 <a
                   target="_blank"
                   rel="noopener"
-                  href="https://docs.circle.ms/howto/circlecut.html"
-                >
+                  href="https://docs.circle.ms/howto/circlecut.html">
                   こちら
                 </a>
                 をお使い下さい。
@@ -138,10 +148,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.plan}
-                disabled
-              >
+                disabled>
                 <option>選択してください</option>
-                {Object.keys(plans).map(key => {
+                {Object.keys(plans).map((key) => {
                   const planKey = key as CriclePlan
                   const label = plans[planKey]
                   return (
@@ -157,10 +166,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 name="category"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.category}
-              >
+                value={values.category}>
                 <option>選択してください</option>
-                {Object.keys(categoryOptions).map(key => {
+                {Object.keys(categoryOptions).map((key) => {
                   const categoryKey = key as keyof typeof categoryOptions
                   const label = categoryOptions[categoryKey]
                   return (
@@ -172,7 +180,11 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
               </Select>
             </InputGroup>
             <Divider />
-            <Button component="button" block intent="primary" loading={isSubmitting}>
+            <Button
+              component="button"
+              block
+              intent="primary"
+              loading={isSubmitting}>
               保存する
             </Button>
           </form>
@@ -187,10 +199,12 @@ const CustomInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }: FieldProps<any>) => (
-    <div>
-      <Input type="text" {...field} {...props} />
-      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
-    </div>
-  )
+  <div>
+    <Input type="text" {...field} {...props} />
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
+  </div>
+)
 
 export default CircleForm

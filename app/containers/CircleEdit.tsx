@@ -10,7 +10,6 @@ import withUser from '../withUser'
 import useCircle from '../hooks/useCircle'
 import { db } from '../utils/firebase'
 
-
 const CircleEdit: NextPage<{
   user: firebase.User
   userData: User
@@ -21,14 +20,16 @@ const CircleEdit: NextPage<{
   const id = router.query.id as string
   const { circle } = useCircle(id)
 
-  if (!circle) { return <Loader /> }
+  if (!circle) {
+    return <Loader />
+  }
 
   return (
     <FormContainer>
       <CircleForm
         user={user}
         circle={circle}
-        onSubmit={async circle => {
+        onSubmit={async (circle) => {
           const query = db.collection('circles').doc(id)
           await query.update(circle)
           router.push(`/${eventId}/mypage/circle`)

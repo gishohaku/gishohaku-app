@@ -7,11 +7,11 @@ const useBook = (id?: string) => {
   useEffect(() => {
     const ref = db.collection('books').doc(id)
     if (!ref) return
-    ref.get().then(snapshot => {
+    ref.get().then((snapshot) => {
       if (!snapshot.exists) return
       setBook({
         id: snapshot.id,
-        ...(snapshot.data() as Book)
+        ...(snapshot.data() as Book),
       })
     })
   }, [id])

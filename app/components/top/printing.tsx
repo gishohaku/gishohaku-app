@@ -33,8 +33,7 @@ const printing: React.FC<Props> = ({ image, name, url }) => {
           &:hover {
             border-color: ${colors.primary};
           }
-        `}
-      >
+        `}>
         {image ? (
           <LazyLoad offset={400}>
             <img

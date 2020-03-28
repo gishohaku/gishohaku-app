@@ -6,7 +6,15 @@ import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter } from 'next/router'
-import { Button, InputGroup, Input, Divider, Text, useToast, Alert } from 'sancho'
+import {
+  Button,
+  InputGroup,
+  Input,
+  Divider,
+  Text,
+  useToast,
+  Alert,
+} from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { redirectAfterLogin } from './sign_in'
 import { NextPage } from 'next'
@@ -14,7 +22,7 @@ import { WithRouterProps } from 'next/dist/client/with-router'
 
 const loginData = {
   email: '',
-  password: ''
+  password: '',
 }
 
 const SignUp: NextPage<WithRouterProps> = ({ router }) => {
@@ -26,16 +34,15 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
       <Global
         styles={{
           body: {
-            backgroundColor: 'white'
-          }
+            backgroundColor: 'white',
+          },
         }}
       />
       <Container
         style={{
           maxWidth: 380,
-          paddingTop: 60
-        }}
-      >
+          paddingTop: 60,
+        }}>
         <SectionHeader text="SIGNUP">会員登録</SectionHeader>
         <Formik
           initialValues={loginData}
@@ -48,23 +55,29 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
                 redirectAfterLogin(router)
                 toast({
                   title: '会員登録が完了しました',
-                  intent: 'success'
+                  intent: 'success',
                 })
               })
-              .catch(error => {
+              .catch((error) => {
                 switch (error.code) {
                   case 'auth/invalid-email':
                     actions.setFieldError('email', '不正なメールアドレスです。')
                     break
                   case 'auth/email-already-in-use':
-                    actions.setFieldError('email', '既に登録済みのアドレスです。')
+                    actions.setFieldError(
+                      'email',
+                      '既に登録済みのアドレスです。',
+                    )
                     break
                   case 'auth/weak-password':
-                    actions.setFieldError('password', 'パスワードは6文字以上に設定してください')
+                    actions.setFieldError(
+                      'password',
+                      'パスワードは6文字以上に設定してください',
+                    )
                     break
                   default:
                     setError(
-                      `エラーが発生しました。運営事務局までご連絡ください。: ${error.message}`
+                      `エラーが発生しました。運営事務局までご連絡ください。: ${error.message}`,
                     )
                   // 不明のエラー的な
                 }
@@ -81,16 +94,21 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
                 <InputGroup label="メールアドレス *">
                   <Field type="email" name="email" component={CustomInput} />
                 </InputGroup>
-                <InputGroup label="パスワード *" helpText="6文字以上で入力してください">
-                  <Field type="password" name="password" component={CustomInput} />
+                <InputGroup
+                  label="パスワード *"
+                  helpText="6文字以上で入力してください">
+                  <Field
+                    type="password"
+                    name="password"
+                    component={CustomInput}
+                  />
                 </InputGroup>
                 <p
                   css={css`
                     font-size: 12px;
                     margin-top: 24px;
                     line-height: 1.5;
-                  `}
-                >
+                  `}>
                   登録することで、
                   <Link href="/gishohaku1/privacy" passHref>
                     <a>利用規約/プライバシーポリシー</a>
@@ -103,9 +121,8 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
                   loading={isSubmitting}
                   style={{
                     marginTop: 8,
-                    width: '100%'
-                  }}
-                >
+                    width: '100%',
+                  }}>
                   登録する
                 </Button>
               </Form>
@@ -119,27 +136,29 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
         <Button
           component="button"
           onClick={async () => {
-            await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            await firebase
+              .auth()
+              .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             redirectAfterLogin(router)
             toast({
               title: 'ログインしました',
-              intent: 'success'
+              intent: 'success',
             })
-          }}
-        >
+          }}>
           Google
         </Button>
         <Button
           component="button"
           onClick={async () => {
-            await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())
+            await firebase
+              .auth()
+              .signInWithPopup(new firebase.auth.GithubAuthProvider())
             redirectAfterLogin(router)
             toast({
               title: 'ログインしました',
-              intent: 'success'
+              intent: 'success',
             })
-          }}
-        >
+          }}>
           GitHub
         </Button>
         <p
@@ -147,8 +166,7 @@ const SignUp: NextPage<WithRouterProps> = ({ router }) => {
             font-size: 12px;
             margin-top: 2px;
             line-height: 1.5;
-          `}
-        >
+          `}>
           登録することで、
           <Link href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
@@ -171,10 +189,12 @@ const CustomInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }: FieldProps<any>) => (
-    <div>
-      <Input type="text" {...field} {...props} />
-      {touched[field.name] && errors[field.name] && <div className="error">{errors[field.name]}</div>}
-    </div>
-  )
+  <div>
+    <Input type="text" {...field} {...props} />
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
+  </div>
+)
 
 export default withRouter(SignUp)

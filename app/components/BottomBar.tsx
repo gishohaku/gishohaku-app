@@ -59,8 +59,7 @@ export default () => {
         width: 100%;
         z-index: 10;
         white-space: nowrap;
-      `}
-    >
+      `}>
       <div
         css={css`
           border: 1px solid #eee;
@@ -71,11 +70,10 @@ export default () => {
           padding-bottom: 4px;
           padding-bottom: calc(constant(safe-area-inset-bottom) + 4px);
           padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
-          transition: padding-bottom .15s ease-out;
-        `}
-      >
+          transition: padding-bottom 0.15s ease-out;
+        `}>
         <span css={spacer} />
-        <Link href={eventId === 'gishohaku2' ? "/" : `/${eventId}`} passHref>
+        <Link href={eventId === 'gishohaku2' ? '/' : `/${eventId}`} passHref>
           <a css={item}>
             <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>

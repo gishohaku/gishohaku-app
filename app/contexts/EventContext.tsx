@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import { EventId } from "../utils/event";
-import { useRouter, NextRouter } from "next/router";
+import { createContext, useState, useEffect } from 'react'
+import { EventId } from '../utils/event'
+import { useRouter, NextRouter } from 'next/router'
 
 export const getEventId = (router: NextRouter): EventId => {
   const { query } = router
@@ -21,15 +21,19 @@ export const EventProvider: React.FC<{
     setEventId(getEventId(router))
   }, [router])
 
-  return <EventContext.Provider value={{ eventId }}>
-    {children}
-  </EventContext.Provider>
+  return (
+    <EventContext.Provider value={{ eventId }}>
+      {children}
+    </EventContext.Provider>
+  )
 }
 
 const EventContext = createContext<{
   eventId: EventId
-}>({} as any as {
-  eventId: EventId
-})
+}>(
+  ({} as any) as {
+    eventId: EventId
+  },
+)
 
 export default EventContext

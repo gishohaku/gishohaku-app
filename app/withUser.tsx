@@ -19,26 +19,25 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
   }
 
   if (!userData) {
-    return <MessageBox
-      title="ログインが必要です。"
-      description="このページを利用するにはログインが必要です。"
-    >
-      <Link href="/sign_in" passHref>
-        <Button
-          component="a"
-          onClick={() => {
-            localStorage.setItem(REDIRECT_TO_AFTER_LOGIN, router.asPath)
-          }}
-          css={css`
-          margin-top: 12px;
-          width: 100%;
-        `}
-        >
-          ログイン
-      </Button>
-      </Link>
-    </MessageBox>
-
+    return (
+      <MessageBox
+        title="ログインが必要です。"
+        description="このページを利用するにはログインが必要です。">
+        <Link href="/sign_in" passHref>
+          <Button
+            component="a"
+            onClick={() => {
+              localStorage.setItem(REDIRECT_TO_AFTER_LOGIN, router.asPath)
+            }}
+            css={css`
+              margin-top: 12px;
+              width: 100%;
+            `}>
+            ログイン
+          </Button>
+        </Link>
+      </MessageBox>
+    )
   }
 
   return <WrappedComponent user={user} userData={userData} {...props} />

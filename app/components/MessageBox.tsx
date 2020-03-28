@@ -6,7 +6,7 @@ interface Props {
   description: string
 }
 
-const MessageBox: React.SFC<Props> = props => {
+const MessageBox: React.SFC<Props> = (props) => {
   return (
     <div
       css={css`
@@ -21,14 +21,12 @@ const MessageBox: React.SFC<Props> = props => {
         top: 50%;
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
-      `}
-    >
+      `}>
       <div
         css={css`
           font-weight: 600;
           font-size: 18px;
-        `}
-      >
+        `}>
         {props.title}
       </div>
       <div
@@ -36,8 +34,7 @@ const MessageBox: React.SFC<Props> = props => {
           font-size: 15px;
           opacity: 0.6;
           margin-top: 4px;
-        `}
-      >
+        `}>
         {props.description}
       </div>
       {props.children}

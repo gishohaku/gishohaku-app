@@ -25,7 +25,12 @@ interface Props {
 
 const width = 252
 
-const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar }) => {
+const CircleCell: React.FC<Props> = ({
+  circle,
+  userStars,
+  addStar,
+  removeStar,
+}) => {
   const { user, openLoginModal } = useContext(UserContext)
   const { eventId } = useContext(EventContext)
   const toast = useToast()
@@ -48,20 +53,33 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
 
   return (
     <Container>
-      <Link href='/[eventId]/circles/[id]' as={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
+      <Link
+        href="/[eventId]/circles/[id]"
+        as={`/${eventId}/circles/${circle.id}`}
+        key={circle.id}
+        passHref>
         <CircleLink>
           <CircleBooth>{circle.booth}</CircleBooth>
-          <ImageBox size="circlecut" imageUrl={imageUrl(circle.image, {
-            width: 504,
-            height: 710,
-            aspect: 'crop',
-          }) || circleTumbnail} noBorder />
+          <ImageBox
+            size="circlecut"
+            imageUrl={
+              imageUrl(circle.image, {
+                width: 504,
+                height: 710,
+                aspect: 'crop',
+              }) || circleTumbnail
+            }
+            noBorder
+          />
           <CircleName>{circle.name}</CircleName>
           <CircleCategory>{allCategories[circle.category]}</CircleCategory>
         </CircleLink>
       </Link>
       <CheckButton
-        isChecked={(circle.id && userStars[eventId].circleStars.includes(circle.id)) || false}
+        isChecked={
+          (circle.id && userStars[eventId].circleStars.includes(circle.id)) ||
+          false
+        }
         onClick={onCheckClick}
       />
     </Container>
@@ -70,27 +88,33 @@ const CircleCell: React.FC<Props> = ({ circle, userStars, addStar, removeStar })
 
 export const CircleBooth: React.FC<{
   name?: string
-}> = ({ children, name }) => <div css={css`
-  display: flex;
-  align-items: center;
-`}>
-  {(children && (children as string).startsWith('2F')) ? (
-    <CircleBooth2nd>{children}</CircleBooth2nd>
-  ) : (
+}> = ({ children, name }) => (
+  <div
+    css={css`
+      display: flex;
+      align-items: center;
+    `}>
+    {children && (children as string).startsWith('2F') ? (
+      <CircleBooth2nd>{children}</CircleBooth2nd>
+    ) : (
       <CircleBooth3rd>{children}</CircleBooth3rd>
     )}
-  {name && <div css={css`
-    flex: 1;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    align-items: center;
-    display: flex;
-    margin-right: 12px;
-  `}>
-    {name} <IconChevronRight />
-  </div>}
-</div>
+    {name && (
+      <div
+        css={css`
+          flex: 1;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          align-items: center;
+          display: flex;
+          margin-right: 12px;
+        `}>
+        {name} <IconChevronRight />
+      </div>
+    )}
+  </div>
+)
 
 export default CircleCell
 

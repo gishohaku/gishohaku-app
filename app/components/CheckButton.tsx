@@ -32,19 +32,18 @@ const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
           margin-right: 6px;
         }
       `}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       {isChecked ? (
         <>
-          <IconCheck fill='white' />
+          <IconCheck fill="white" />
           チェック済み
         </>
       ) : (
         <>
-          <IconHeart fill='white' stroke="none" />
+          <IconHeart fill="white" stroke="none" />
           チェックする
         </>
-       )}
+      )}
     </div>
   )
 }

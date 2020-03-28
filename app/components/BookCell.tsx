@@ -85,7 +85,7 @@ const useCheckSubmission = (isOwner: boolean, bookId: string) => {
   useEffect(() => {
     if (!isOwner) return
     const submissionQuery = db.collection('bookSubmissions').doc(bookId)
-    submissionQuery.get().then(res => {
+    submissionQuery.get().then((res) => {
       setLoading(false)
       if (res.exists) setSubmission(res.data())
     })
@@ -101,7 +101,7 @@ const BookCell: React.SFC<Props> = ({
   moveNext,
   movePrev,
   isLast = true,
-  isFirst = true
+  isFirst = true,
 }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   const { user, openLoginModal } = useContext(UserContext)
@@ -115,8 +115,9 @@ const BookCell: React.SFC<Props> = ({
     book.pages > 0 && `${book.pages}ページ`,
     book.stock > 0 && `${book.stock}部頒布`,
     book.medium && `${mediums[book.medium]}`,
-    book.price > 0 && `${String(book.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`
-  ].filter(el => el)
+    book.price > 0 &&
+      `${String(book.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}円`,
+  ].filter((el) => el)
   // できれば分けたい
   const [isOpenLightbox, updateOpenLightBox] = useState(false)
   const [lightBoxIndex, updateLightboxIndex] = useState(0)
@@ -126,7 +127,7 @@ const BookCell: React.SFC<Props> = ({
     return marked(book.description, {
       gfm: true,
       breaks: true,
-      sanitize: true
+      sanitize: true,
     })
   }, [book.description])
   // 順番を並び替えたときにPopoverを閉じるために利用するRef
@@ -137,7 +138,7 @@ const BookCell: React.SFC<Props> = ({
   useEffect(() => {
     if (editable) {
       const query = db.collection('starCounts').doc(`books-${book.id}`)
-      query.get().then(res => {
+      query.get().then((res) => {
         const count = res.exists ? (res.data() as StarCount).count : 0
         console.log(book.id, count)
         setStarCount(count)
@@ -163,8 +164,7 @@ const BookCell: React.SFC<Props> = ({
             &:hover {
               background-color: #eee;
             }
-          `}
-        >
+          `}>
           <CircleBooth name={book.circle!.name}>
             {book.circle!.booth}
           </CircleBooth>
@@ -180,16 +180,18 @@ const BookCell: React.SFC<Props> = ({
               flex-direction: column;
               align-items: initial;
             }
-          `}
-        >
+          `}>
           <div
             css={css`
               @media ${media.small} {
                 margin-bottom: 12px;
               }
-            `}
-          >
-            <Link href='/[eventId]/books/[id]' as={`/${eventId}/books/${book.id}`} key={book.id} passHref>
+            `}>
+            <Link
+              href="/[eventId]/books/[id]"
+              as={`/${eventId}/books/${book.id}`}
+              key={book.id}
+              passHref>
               <BookLink>
                 <BookTitle>{book.title}</BookTitle>
               </BookLink>
@@ -198,22 +200,31 @@ const BookCell: React.SFC<Props> = ({
               css={css`
                 font-size: 13px;
                 margin-top: 2px;
-              `}
-            >
-              {book.isNew && <Label backgroundColor={'#ECB40D'} color={'white'} text="新刊" />}
+              `}>
+              {book.isNew && (
+                <Label
+                  backgroundColor={'#ECB40D'}
+                  color={'white'}
+                  text="新刊"
+                />
+              )}
               <span
                 css={css`
                   opacity: 0.8;
-                `}
-              >
+                `}>
                 {metadata.join('・')}
               </span>
             </div>
           </div>
 
-          {editable ? <CheckCount count={starCount} /> : (
+          {editable ? (
+            <CheckCount count={starCount} />
+          ) : (
             <CheckButton
-              isChecked={(book.id && userStars[eventId].bookStars.includes(book.id)) || false}
+              isChecked={
+                (book.id && userStars[eventId].bookStars.includes(book.id)) ||
+                false
+              }
               onClick={() => {
                 if (!user) {
                   return openLoginModal()
@@ -223,13 +234,13 @@ const BookCell: React.SFC<Props> = ({
                   removeStar(eventId, 'books', book.id)
                   toast({
                     title: `「${book.title}」のチェックを外しました`,
-                    intent: 'success'
+                    intent: 'success',
                   })
                 } else {
                   addStar(eventId, 'books', book.id)
                   toast({
                     title: `「${book.title}」をチェックしました`,
-                    intent: 'success'
+                    intent: 'success',
                   })
                 }
               }}
@@ -249,25 +260,40 @@ const BookCell: React.SFC<Props> = ({
               > *:first-child {
                 margin-left: auto;
               }
-            `}
-          >
-            {book.type == 'fanzine' && <div css={css`position: relative;`}>
-              <Link href='/[eventId]/books/[id]/submit' as={`/${eventId}/books/${book.id}/submit`} passHref>
-                <a css={css(button)}>見本誌の提出</a>
-              </Link>
-              {notSubmitted && <span css={css`
-                position: absolute;
-                top: -12px;
-                background-color: red;
-                border-radius: 20px;
-                font-size: 12px;
-                padding: 2px 10px;
-                right: -6px;
-                color: white;
-                font-weight: bold;
-              `}>要提出</span>}
-            </div>}
-            <Link href='/[eventId]/books/[id]/edit' as={`/${eventId}/books/${book.id}/edit`} passHref>
+            `}>
+            {book.type == 'fanzine' && (
+              <div
+                css={css`
+                  position: relative;
+                `}>
+                <Link
+                  href="/[eventId]/books/[id]/submit"
+                  as={`/${eventId}/books/${book.id}/submit`}
+                  passHref>
+                  <a css={css(button)}>見本誌の提出</a>
+                </Link>
+                {notSubmitted && (
+                  <span
+                    css={css`
+                      position: absolute;
+                      top: -12px;
+                      background-color: red;
+                      border-radius: 20px;
+                      font-size: 12px;
+                      padding: 2px 10px;
+                      right: -6px;
+                      color: white;
+                      font-weight: bold;
+                    `}>
+                    要提出
+                  </span>
+                )}
+              </div>
+            )}
+            <Link
+              href="/[eventId]/books/[id]/edit"
+              as={`/${eventId}/books/${book.id}/edit`}
+              passHref>
               <a css={button}>編集</a>
             </Link>
             {(!isFirst || !isLast) && (
@@ -279,29 +305,30 @@ const BookCell: React.SFC<Props> = ({
                     {!isFirst && movePrev && (
                       <MenuItem
                         contentBefore={<IconArrowUp />}
-                        onPress={e => {
+                        onPress={(e) => {
                           docRef.current && docRef.current.click()
                           movePrev(e as any)
-                        }}
-                      >
+                        }}>
                         上に移動
                       </MenuItem>
                     )}
                     {!isLast && moveNext && (
                       <MenuItem
                         contentBefore={<IconArrowDown />}
-                        onPress={e => {
+                        onPress={(e) => {
                           docRef.current && docRef.current.click()
                           moveNext(e as any)
-                        }}
-                      >
+                        }}>
                         下に移動
                       </MenuItem>
                     )}
                   </MenuList>
-                }
-              >
-                <IconButton variant="outline" icon={<IconMoreVertical />} label="Show more" />
+                }>
+                <IconButton
+                  variant="outline"
+                  icon={<IconMoreVertical />}
+                  label="Show more"
+                />
               </ResponsivePopover>
             )}
           </div>
@@ -310,16 +337,18 @@ const BookCell: React.SFC<Props> = ({
         {isShowSnsShare && (
           <div
             css={css`
-                margin-top: 12px;
-                margin-bottom: 12px;
-              `}
-          >
+              margin-top: 12px;
+              margin-bottom: 12px;
+            `}>
             <SnsShare size={SnsShareSize.Large} />
           </div>
         )}
 
         {images.length > 0 && (
-          <div css={css` margin: 20px -20px 0; `}>
+          <div
+            css={css`
+              margin: 20px -20px 0;
+            `}>
             <ImagesContainer>
               {images.map((image, index) => {
                 return (
@@ -342,7 +371,10 @@ const BookCell: React.SFC<Props> = ({
           <Contents dangerouslySetInnerHTML={{ __html: descriptionHTML }} />
         )}
         {(book.sampleUrl || book.purchaseUrl) && <Divider />}
-        <div css={css`display: flex;`}>
+        <div
+          css={css`
+            display: flex;
+          `}>
           {book.sampleUrl && (
             <Button
               component="a"
@@ -350,8 +382,7 @@ const BookCell: React.SFC<Props> = ({
               target="_blank"
               rel="noopner"
               variant={'ghost'}
-              css={flexChildLink}
-            >
+              css={flexChildLink}>
               立ち読み
             </Button>
           )}
@@ -361,8 +392,7 @@ const BookCell: React.SFC<Props> = ({
               href={book.purchaseUrl}
               target="_blank"
               rel="noopner"
-              css={flexChildLink}
-            >
+              css={flexChildLink}>
               電子版を購入
             </Button>
           )}
@@ -373,12 +403,18 @@ const BookCell: React.SFC<Props> = ({
             animationDuration={100}
             mainSrc={images[lightBoxIndex]}
             nextSrc={images[(lightBoxIndex + 1) % images.length]}
-            prevSrc={images[(lightBoxIndex + images.length - 1) % images.length]}
+            prevSrc={
+              images[(lightBoxIndex + images.length - 1) % images.length]
+            }
             onCloseRequest={() => updateOpenLightBox(false)}
             onMovePrevRequest={() =>
-              updateLightboxIndex((lightBoxIndex + images.length - 1) % images.length)
+              updateLightboxIndex(
+                (lightBoxIndex + images.length - 1) % images.length,
+              )
             }
-            onMoveNextRequest={() => updateLightboxIndex((lightBoxIndex + +1) % images.length)}
+            onMoveNextRequest={() =>
+              updateLightboxIndex((lightBoxIndex + +1) % images.length)
+            }
           />
         )}
       </Container>

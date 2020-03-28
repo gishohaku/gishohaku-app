@@ -13,7 +13,13 @@ interface Props {
   block?: boolean
 }
 
-const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) => {
+const sponsor: React.FC<Props> = ({
+  image,
+  name,
+  role,
+  href,
+  block = false,
+}) => {
   return (
     <div
       css={css`
@@ -25,8 +31,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           margin-right: 10px;
           margin-left: 10px;
         }
-      `}
-    >
+      `}>
       <Embed
         width={150}
         height={150}
@@ -35,8 +40,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           background-color: white;
           width: 160px;
           margin: 0 auto;
-        `}
-      >
+        `}>
         <LazyLoad offset={400}>
           <a
             href={href || 'javascript:void(0);'}
@@ -47,8 +51,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
               text-align: center;
             `}
             target="_blank"
-            rel="noopener"
-          >
+            rel="noopener">
             <img
               css={css`
                 max-height: 100%;
@@ -65,8 +68,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           margin-top: 6px;
           line-height: 1.4;
           opacity: 0.8;
-        `}
-      >
+        `}>
         {role}
       </p>
       <p
@@ -74,8 +76,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           font-size: 15px;
           font-weight: bold;
           line-height: 1.5;
-        `}
-      >
+        `}>
         <a
           css={css`
             text-decoration: none;
@@ -83,8 +84,7 @@ const sponsor: React.FC<Props> = ({ image, name, role, href, block = false }) =>
           `}
           href={href}
           target="_blank"
-          rel="noopener"
-        >
+          rel="noopener">
           {name || '募集中'}
         </a>
       </p>

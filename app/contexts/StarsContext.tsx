@@ -17,27 +17,35 @@ const starTypeToKey: {
   [key in StarType]: StarKey
 } = {
   circles: 'circleStars',
-  books: 'bookStars'
+  books: 'bookStars',
 }
 
-const incrementStarCount = async (eventId: EventId, ref: firebase.firestore.DocumentReference, diff: number) => {
+const incrementStarCount = async (
+  eventId: EventId,
+  ref: firebase.firestore.DocumentReference,
+  diff: number,
+) => {
   const documentId = ref.path.replace('/', '-')
   return db
     .collection('starCounts')
     .doc(documentId)
-    .set({ ref, eventId, count: firebase.firestore.FieldValue.increment(diff) }, { merge: true })
+    .set(
+      { ref, eventId, count: firebase.firestore.FieldValue.increment(diff) },
+      { merge: true },
+    )
 }
 
 const defaultStars = {
-  bookStars: [], circleStars: []
+  bookStars: [],
+  circleStars: [],
 }
 
 export const StarsProvider: React.FC = ({ children }) => {
   const { user } = useContext(UserContext)
-  const userId = user && user.uid || undefined
+  const userId = (user && user.uid) || undefined
   const [userStars, setUserStars] = useState<UserStars>({
     gishohaku1: { bookStars: [], circleStars: [] },
-    gishohaku2: { bookStars: [], circleStars: [] }
+    gishohaku2: { bookStars: [], circleStars: [] },
   })
 
   useEffect(() => {
@@ -53,7 +61,7 @@ export const StarsProvider: React.FC = ({ children }) => {
       }
     }
 
-    fetchStars(userId).then(res => {
+    fetchStars(userId).then((res) => {
       setUserStars(res)
     })
   }, [userId])
@@ -68,23 +76,32 @@ export const StarsProvider: React.FC = ({ children }) => {
     const targetRef = db.collection(starType).doc(targetId)
     incrementStarCount(eventId, targetRef, 1)
 
-    db.doc(`users/${userId}/stars/${eventId}`).set({
-      [starKey]: firebase.firestore.FieldValue.arrayUnion(targetId)
-    }, { merge: true })
+    db.doc(`users/${userId}/stars/${eventId}`).set(
+      {
+        [starKey]: firebase.firestore.FieldValue.arrayUnion(targetId),
+      },
+      { merge: true },
+    )
   }
 
-  const removeStar = async (eventId: EventId, starType: StarType, targetId: string) => {
+  const removeStar = async (
+    eventId: EventId,
+    starType: StarType,
+    targetId: string,
+  ) => {
     if (!userId) return
     const starKey = starTypeToKey[starType]
     const newState = { ...userStars }
-    newState[eventId][starKey] = newState[eventId][starKey].filter(id => id !== targetId)
+    newState[eventId][starKey] = newState[eventId][starKey].filter(
+      (id) => id !== targetId,
+    )
     setUserStars(newState)
 
     const targetRef = db.collection(starType).doc(targetId)
     incrementStarCount(eventId, targetRef, -1)
 
     await db.doc(`users/${userId}/stars/${eventId}`).update({
-      [starKey]: firebase.firestore.FieldValue.arrayRemove(targetId)
+      [starKey]: firebase.firestore.FieldValue.arrayRemove(targetId),
     })
   }
 
@@ -93,30 +110,31 @@ export const StarsProvider: React.FC = ({ children }) => {
       value={{
         userStars,
         addStar,
-        removeStar
-      }}
-    >
+        removeStar,
+      }}>
       {children}
     </StarsContext.Provider>
   )
 }
 
 type StarsContextType = {
-  userStars: UserStars,
-  addStar: (eventId: EventId, starType: StarType, targetId: string) => void,
+  userStars: UserStars
+  addStar: (eventId: EventId, starType: StarType, targetId: string) => void
   removeStar: (eventId: EventId, starType: StarType, targetId: string) => void
 }
 
-const StarsContext = React.createContext<StarsContextType>({
+const StarsContext = React.createContext<StarsContextType>(({
   userStars: {
     gishohaku2: {
-      bookStars: [], circleStars: []
+      bookStars: [],
+      circleStars: [],
     },
     gishohaku1: {
-      bookStars: [], circleStars: []
-    }
+      bookStars: [],
+      circleStars: [],
+    },
   },
-  addStar: () => { },
-  removeStar: () => { }
-} as any as StarsContextType)
+  addStar: () => {},
+  removeStar: () => {},
+} as any) as StarsContextType)
 export default StarsContext

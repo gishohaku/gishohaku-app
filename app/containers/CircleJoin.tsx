@@ -25,16 +25,22 @@ const Join: React.FC = () => {
   console.log(circleId, token)
 
   useEffect(() => {
-    if (!circleId) { return }
-    if (!circleId || !token) { return }
+    if (!circleId) {
+      return
+    }
+    if (!circleId || !token) {
+      return
+    }
     const circleRef = db.collection('circles').doc(circleId)
-    circleRef.get().then(snapshot => {
+    circleRef.get().then((snapshot) => {
       setCircle(snapshot.data())
     })
   }, [circleId])
 
   const handleClick = async () => {
-    if (isProcessing) { return }
+    if (isProcessing) {
+      return
+    }
     setProcessing(true)
     const receiveInvitation = functions.httpsCallable('receiveInvitation')
     const result = await receiveInvitation({ circleId, token })
@@ -43,13 +49,18 @@ const Join: React.FC = () => {
     await reloadUser()
     toast({
       title: 'サークルに参加しました',
-      intent: 'success'
+      intent: 'success',
     })
     router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }
 
   if (!circleId || !token) {
-    return <MessageBox title="無効なURLです。" description="URLを確認してください。" />
+    return (
+      <MessageBox
+        title="無効なURLです。"
+        description="URLを確認してください。"
+      />
+    )
   }
 
   if (!circle) {
@@ -59,8 +70,7 @@ const Join: React.FC = () => {
   return (
     <MessageBox
       title="サークルに参加する"
-      description={`「${circle.name}」から招待を受け取りました。`}
-    >
+      description={`「${circle.name}」から招待を受け取りました。`}>
       <Button
         loading={isProcessing}
         component="button"
@@ -68,8 +78,7 @@ const Join: React.FC = () => {
         css={css`
           margin-top: 12px;
         `}
-        onPress={handleClick}
-      >
+        onPress={handleClick}>
         サークルに参加する
       </Button>
     </MessageBox>

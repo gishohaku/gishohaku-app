@@ -25,7 +25,9 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
   const id = router.query.id as string
   const { book } = useBook(id)
   // Redirect
-  if (!id) { return null }
+  if (!id) {
+    return null
+  }
   const circleRef = userData.event && userData.event[eventId]
 
   const deleteBook = useCallback(async () => {
@@ -36,13 +38,17 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
     await query.delete()
     toast({
       title: '頒布物を削除しました',
-      intent: 'success'
+      intent: 'success',
     })
     router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }, [id])
 
-  if (!book) { return <Loader /> }
-  if (!circleRef) { return <p>サークル専用ページです。</p> }
+  if (!book) {
+    return <Loader />
+  }
+  if (!circleRef) {
+    return <p>サークル専用ページです。</p>
+  }
 
   return (
     <>
@@ -50,15 +56,16 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
         <BookForm
           user={user}
           book={book}
-          onSubmit={book => {
+          onSubmit={(book) => {
             const id = router.query.id as string
-            const query = db.collection('books')
+            const query = db
+              .collection('books')
               .doc(id)
               .update({
                 ...book,
-                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
               })
-            query.then(_ => {
+            query.then((_) => {
               router.push(`/${eventId}/mypage/circle`)
             })
           }}

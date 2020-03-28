@@ -20,13 +20,11 @@ const LoginSheet: React.SFC<Props> = ({ onRequestClose, isOpen }) => {
         <div
           css={css`
             padding: 20px 20px 0;
-          `}
-        >
+          `}>
           <p
             css={css`
               margin-bottom: 8px;
-            `}
-          >
+            `}>
             この機能を利用するにはログインしてください。
           </p>
           <a href="/sign_in" css={buttonLink}>

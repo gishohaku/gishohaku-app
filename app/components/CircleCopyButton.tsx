@@ -22,7 +22,9 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
     const toCircleRef = db.collection('circles').doc(toCircleId)
     const toCricle = await toCircleRef.get()
 
-    const getQuery = db.collection('books').where('circle.ref', '==', fromCircleRef)
+    const getQuery = db
+      .collection('books')
+      .where('circle.ref', '==', fromCircleRef)
     const books = await getQuery.get()
 
     books.docs.forEach(async (book) => {
@@ -33,10 +35,10 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
         circle: {
           ref: toCircleRef,
           name,
-          booth
+          booth,
         },
         circleRef: toCircleRef,
-        eventId: 'gishohaku2'
+        eventId: 'gishohaku2',
       }
       db.collection('books').add(newBook)
     })
@@ -47,7 +49,7 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
 
   return {
     processing,
-    start
+    start,
   }
 }
 
@@ -59,19 +61,27 @@ const CircleCopyButton: React.FC = () => {
   const toCircleRef = userData!.event && userData!.event[eventId]
   if (!fromCircleRef || !toCircleRef) return null
   const { processing, start } = useCircleCopy(fromCircleRef.id, toCircleRef.id)
-  return <div css={css`
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    border-radius: 8px;
-    background-color: white;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-  `}>
-    技書博1で登録した頒布物のインポートを行えます。
-    <Button loading={processing} onClick={start} css={css`
-      margin-left: auto;
-    `}>インポート</Button>
-  </div>
+  return (
+    <div
+      css={css`
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        background-color: white;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+      `}>
+      技書博1で登録した頒布物のインポートを行えます。
+      <Button
+        loading={processing}
+        onClick={start}
+        css={css`
+          margin-left: auto;
+        `}>
+        インポート
+      </Button>
+    </div>
+  )
 }
 
 export default CircleCopyButton

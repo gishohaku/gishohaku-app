@@ -17,13 +17,13 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: 'image/gif,image/jpeg,image/png,image/jpg',
-    onDropAccepted: async files => {
+    onDropAccepted: async (files) => {
       setUploading(true)
       const storageRef = firebase.storage().ref()
       const ref = storageRef.child(`/uploads/${user.uid}/${Date.now()}`)
       console.log('begin upload')
       const snapshot = await ref.put(files[0], {
-        cacheControl: 'public, max-age=31536000'
+        cacheControl: 'public, max-age=31536000',
       })
       const url = await snapshot.ref.getDownloadURL()
       console.log(url)
@@ -34,7 +34,7 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
       alert('画像アップロードに失敗しました')
     },
     maxSize: 1000 * 1000 * 1,
-    disabled: isUploading
+    disabled: isUploading,
   })
 
   return (
@@ -49,9 +49,8 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
             display: flex;
             align-items: center;
             justify-content: center;
-          `
-        })}
-      >
+          `,
+        })}>
         {isUploading && <Spinner label="Uploading..." />}
 
         {!isUploading && (

@@ -7,10 +7,10 @@ const useCircle = (id?: string) => {
   useEffect(() => {
     const ref = db.collection('circles').doc(id)
     if (!ref) return
-    ref.get().then(snapshot => {
+    ref.get().then((snapshot) => {
       setCircle({
         id: snapshot.id,
-        ...(snapshot.data() as Circle)
+        ...(snapshot.data() as Circle),
       })
     })
   }, [id])
