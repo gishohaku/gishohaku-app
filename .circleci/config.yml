@@ -21,7 +21,7 @@ jobs:
       - run: mkdir pages
       - run:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "staging" ]; then
+            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "feat/cloudrun" ]; then
               yarn firebase deploy --token=$FIREBASE_TOKEN
             fi
 
