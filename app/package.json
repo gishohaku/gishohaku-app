@@ -5,9 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next app",
+    "dev": "next",
     "build": "next build",
-    "start": "next start app",
+    "start": "next start -p $PORT",
     "format": "prettier 'app/**/*.{ts,tsx}' --write"
   },
   "prettier": {
