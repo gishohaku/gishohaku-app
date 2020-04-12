@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next frontend",
-    "build:app": "next build frontend",
+    "dev": "next app",
+    "build:app": "next build app",
     "start": "next start app",
     "build:functions": "babel functions -d dist/functions --extensions='.ts'",
     "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
