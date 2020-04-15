@@ -1,0 +1,25 @@
+steps:
+  # - name: node:10
+  #   entrypoint: yarn
+  #   args: ['install']
+  #   dir: app
+  # - name: node:10
+  #   entrypoint: yarn
+  #   args: ['build']
+  #   dir: app
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'gcr.io/gishohaku/gishohaku-app',
+        '--build-arg',
+        'api_key=${_API_KEY}',
+        '--build-arg',
+        'project_id=${_PROJECT_ID}',
+        '.',
+      ]
+    dir: app
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/gishohaku/gishohaku-app:latest']
+    dir: app
