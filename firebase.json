@@ -56,7 +56,7 @@
     "cleanUrls": true
   },
   "functions": {
-    "source": "dist/functions"
+    "source": "functions"
   },
   "firestore": {
     "rules": "firestore.rules",

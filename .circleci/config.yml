@@ -12,17 +12,22 @@ jobs:
     steps:
       - checkout
 
-      - run: yarn install
+      - run:
+          command: yarn install
+          working_directory: ~/repo/functions
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn predeploy
+          key: v1-dependencies-{{ checksum "functions/package.json" }}
+      - run:
+          command: yarn build
+          working_directory: ~/repo/functions
       - run:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "chore/function-deploy" ]; then
+            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "refactor/functions" ]; then
               yarn firebase deploy --token=$FIREBASE_TOKEN
             fi
+          working_directory: ~/repo/functions
 
 workflows:
   version: 2

@@ -1,0 +1,42 @@
+{
+  "name": "@gishohaku/functions",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "babel src -d dist --extensions='.ts'",
+    "functions:shell": "firebase experimental:functions:shell",
+    "functions:emulator": "yarn firebase emulators:start --only functions",
+    "format": "prettier 'app/**/*.{ts,tsx}' --write"
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^1.7.2",
+    "@slack/web-api": "^5.6.0",
+    "axios": "^0.19.0",
+    "firebase": "^6.4.0",
+    "firebase-admin": "^8.4.0",
+    "firebase-functions": "^3.3.0",
+    "firebase-tools": "^7.2.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "mysql": "^2.17.1",
+    "prettier": "^2.0.2",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  },
+  "engines": {
+    "node": "10"
+  }
+}
