@@ -4,9 +4,6 @@ const withMDX = require('@next/mdx')({
 const withCSS = require('@zeit/next-css')
 const withImages = require('next-images')
 
-const firebaseConfig = process.env.FIREBASE
-  ? { distDir: '../dist/functions/next' }
-  : {}
 // compose使う
 module.exports = withImages(
   withCSS(
@@ -17,8 +14,7 @@ module.exports = withImages(
         PROJECT_ID: process.env.PROJECT_ID,
         SENTRY_DSN: process.env.SENTRY_DSN,
       },
-      ...firebaseConfig,
-      exportPathMap: defaultPathMap => {
+      exportPathMap: (defaultPathMap) => {
         delete defaultPathMap['/[eventId]/books']
         delete defaultPathMap['/[eventId]/books/[id]']
         delete defaultPathMap['/[eventId]/circles']

@@ -50,24 +50,6 @@
             "value": "max-age=86400"
           }
         ]
-      },
-      {
-        "source": "/gishohaku1/books",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=600"
-          }
-        ]
-      },
-      {
-        "source": "/gishohaku1/circles",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=600"
-          }
-        ]
       }
     ],
     "trailingSlash": false,
