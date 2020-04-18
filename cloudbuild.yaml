@@ -1,12 +1,4 @@
 steps:
-  # - name: node:10
-  #   entrypoint: yarn
-  #   args: ['install']
-  #   dir: app
-  # - name: node:10
-  #   entrypoint: yarn
-  #   args: ['build']
-  #   dir: app
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
@@ -23,3 +15,17 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/gishohaku/gishohaku-app:latest']
     dir: app
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'run',
+        'deploy',
+        'gishohaku-app',
+        '--image',
+        'gcr.io/gishohaku/gishohaku-app',
+        '--region',
+        'asia-northeast1',
+        '--platform',
+        'managed',
+        '--allow-unauthenticated',
+      ]
