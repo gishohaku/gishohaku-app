@@ -1,8 +1,0 @@
-{
-  "build": {
-    "env": {
-      "API_KEY":"@gishohaku-api-key",
-      "PROJECT_ID":"@gishohaku-project-id"
-    }
-  }
-}
