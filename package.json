@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build:functions": "babel functions -d dist/functions --extensions='.ts'",
-    "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
+    "copy:deps": "cp package.json dist/functions; cp yarn.lock dist/functions",
     "predeploy": "yarn build:functions && yarn copy:deps",
     "deploy": "firebase deploy",
     "functions:shell": "firebase experimental:functions:shell",
