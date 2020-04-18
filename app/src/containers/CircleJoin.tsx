@@ -10,6 +10,7 @@ import qs from 'qs'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import { db, functions } from '../utils/firebase'
+import Circle from '../utils/circle'
 
 const Join: React.FC = () => {
   const { eventId } = useContext(EventContext)
@@ -17,7 +18,7 @@ const Join: React.FC = () => {
   const router = useRouter()
   const { reloadUser } = useContext(UserContext)
   const [isProcessing, setProcessing] = useState(false)
-  const [circle, setCircle] = useState()
+  const [circle, setCircle] = useState<Circle>()
 
   // Static Site Exportではprops.router.queryが固定されており、自前でqueryを取得する必要がある
   // https://github.com/zeit/next.js/issues/4804
@@ -33,7 +34,7 @@ const Join: React.FC = () => {
     }
     const circleRef = db.collection('circles').doc(circleId)
     circleRef.get().then((snapshot) => {
-      setCircle(snapshot.data())
+      setCircle(snapshot.data() as Circle)
     })
   }, [circleId])
 

@@ -1,7 +1,31 @@
 steps:
-    - name: node
-      entrypoint: npm
-      args: ['install']
-    - name: node
-      entrypoint: npm
-      args: ['build']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'gcr.io/gishohaku/gishohaku-app',
+        '--build-arg',
+        'api_key=${_API_KEY}',
+        '--build-arg',
+        'project_id=${_PROJECT_ID}',
+        '.',
+      ]
+    dir: app
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/gishohaku/gishohaku-app:latest']
+    dir: app
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'run',
+        'deploy',
+        'gishohaku-app',
+        '--image',
+        'gcr.io/gishohaku/gishohaku-app',
+        '--region',
+        'asia-northeast1',
+        '--platform',
+        'managed',
+        '--allow-unauthenticated',
+      ]

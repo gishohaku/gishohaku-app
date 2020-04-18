@@ -19,8 +19,8 @@
     "strict": true,
     "target": "esnext",
     "typeRoots": [
-      "../node_modules/@types",
-      "types"
+      "./node_modules/@types",
+      "./app/src/types"
     ],
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,

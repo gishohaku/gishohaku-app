@@ -5,17 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next app",
-    "build:app": "next build app",
-    "start": "next start app",
-    "build:functions": "babel functions -d dist/functions --extensions='.ts'",
-    "copy:deps": "cp package.json dist/functions; cp package-lock.json dist/functions",
-    "predeploy": "FIREBASE=1 yarn build:app && yarn build:functions && yarn copy:deps",
-    "deploy": "firebase deploy",
-    "functions:shell": "firebase experimental:functions:shell",
-    "functions:emulator": "yarn firebase emulators:start --only functions",
-    "buckup:firestore": "gcloud beta firestore export gs://gishohaku.appspot.com",
-    "runscript": "babel-node --extensions='.tsx,.ts'",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT",
     "format": "prettier 'app/**/*.{ts,tsx}' --write"
   },
   "prettier": {

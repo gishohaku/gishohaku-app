@@ -87,7 +87,7 @@ const useCheckSubmission = (isOwner: boolean, bookId: string) => {
     const submissionQuery = db.collection('bookSubmissions').doc(bookId)
     submissionQuery.get().then((res) => {
       setLoading(false)
-      if (res.exists) setSubmission(res.data())
+      if (res.exists) setSubmission(res.data() as any)
     })
   }, [bookId])
   return !loading && !submission
