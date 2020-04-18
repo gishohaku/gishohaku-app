@@ -24,7 +24,7 @@ jobs:
           working_directory: ~/repo/functions
       - run:
           command: |
-            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "chore/function-deploy" ]; then
+            if [ "${CIRCLE_BRANCH}" == "firebase" ] || [ "${CIRCLE_BRANCH}" == "refactor/functions" ]; then
               yarn firebase deploy --token=$FIREBASE_TOKEN
             fi
           working_directory: ~/repo/functions
