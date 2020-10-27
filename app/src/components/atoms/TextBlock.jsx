@@ -28,4 +28,6 @@ p {
 }
 `
 
-export default ({children}) => <div css={paragraphBlock}>{children}</div>
+const TextBlock = ({children}) => <div css={paragraphBlock}>{children}</div>;
+
+export default TextBlock;
