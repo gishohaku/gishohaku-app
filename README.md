@@ -3,7 +3,7 @@
 ## 環境
 
 - Node.js 10
-- Next.js 9.3
+- Next.js 10
 
 ## 開発
 
