@@ -49,7 +49,7 @@ const icon = css`
   margin: 0 auto;
 `
 
-export default () => {
+const BottomBar = () => {
   const { eventId } = useContext(EventContext)
   return (
     <div
@@ -101,4 +101,6 @@ export default () => {
       </div>
     </div>
   )
-}
+};
+
+export default BottomBar;

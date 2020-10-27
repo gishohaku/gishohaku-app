@@ -22,7 +22,7 @@ const Item = styled.div<{
   }
 `
 
-export default () => {
+const StarTab = () => {
   const { eventId } = useContext(EventContext)
   const { pathname } = useRouter()
   return (
@@ -53,4 +53,6 @@ export default () => {
       </Link>
     </div>
   )
-}
+};
+
+export default StarTab;
