@@ -180,8 +180,8 @@ const Header: React.FC<any> = () => {
           <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第3回 技術書同人誌博覧会"
-                secondary="2020年6月27日 開催予定"
+                primary="第5回 技術書同人誌博覧会"
+                secondary="2021年6月19日 開催予定"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
@@ -237,7 +237,7 @@ const Header: React.FC<any> = () => {
             <a
               target="_blank"
               rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">
+              href="https://esa-pages.io/p/sharing/13039/posts/115/7fbe936149a836eac678.html">
               サークル出展要項
             </a>
           </li>
@@ -245,7 +245,7 @@ const Header: React.FC<any> = () => {
             <a
               target="_blank"
               rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">
+              href="https://esa-pages.io/p/sharing/13039/posts/114/1bf5c92680752740142d.html">
               サークル出展の手引き
             </a>
           </li>
