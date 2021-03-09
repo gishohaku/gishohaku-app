@@ -23,7 +23,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
     startDate: '2020-06-27',
     endDate: '2020-06-27',
-    image: 'https://gishohaku.dev/static/ogp.jpg',
+    image: 'https://img.esa.io/uploads/production/attachments/13039/2021/03/09/44748/7c616002-4dfc-4ecd-823b-fcca437ef91e.png',
     url: 'https://gishohaku.dev/',
     offers: {
       '@type': 'Offer',
@@ -65,7 +65,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         property="og:image"
         content={
           imageUrl ||
-          'https://img.esa.io/uploads/production/attachments/13039/2019/11/15/4651/62f3ec17-e47b-4520-aeda-5cd2ee8a8395.png'
+          'https://img.esa.io/uploads/production/attachments/13039/2021/03/09/44748/7c616002-4dfc-4ecd-823b-fcca437ef91e.png'
         }
         key="image"
       />
