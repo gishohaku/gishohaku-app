@@ -608,14 +608,11 @@ const gishohaku2Circles = [
   },
 ]
 
-const gishohaku3Circles = [
-]
+const gishohaku3Circles = {}
 
-const gishohaku4Circles = [
-]
+const gishohaku4Circles = {}
 
-const gishohaku5Circles = [
-]
+const gishohaku5Circles = {}
 
 const container = css`
   margin: 0 auto;
