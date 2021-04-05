@@ -627,9 +627,9 @@ const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
   const circles = {
     gishohaku1: gishohaku1Circles,
     gishohaku2: gishohaku2Circles,
-    gishohaku2: gishohaku3Circles,
-    gishohaku2: gishohaku4Circles,
-    gishohaku2: gishohaku5Circles,
+    gishohaku3: gishohaku3Circles,
+    gishohaku4: gishohaku4Circles,
+    gishohaku5: gishohaku5Circles,
   }[eventId]
   const index = circles.findIndex((c) => c.id === circleId)
   const nextCircle = circles[index + 1]
