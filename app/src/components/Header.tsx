@@ -125,7 +125,7 @@ const Header: React.FC<any> = () => {
       </div>
       <Link
         href={`/${
-          ['gishohaku1', 'gishohaku2', 'gishohaku5'].includes(eventId) ? eventId : ''
+          ['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4', 'gishohaku5'].includes(eventId) ? eventId : ''
         }`}
         passHref>
         <a
