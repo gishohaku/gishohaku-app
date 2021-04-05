@@ -91,7 +91,7 @@ const Header: React.FC<any> = () => {
   const { isHeaderVisible } = useShyHeader()
   const router = useRouter()
 
-  const isTransparent = router.asPath === '/gishohaku2' // TODO
+  const isTransparent = router.asPath === '/gishohaku5' // TODO
 
   return (
     <header
@@ -125,7 +125,7 @@ const Header: React.FC<any> = () => {
       </div>
       <Link
         href={`/${
-          ['gishohaku1', 'gishohaku2'].includes(eventId) ? eventId : ''
+          ['gishohaku1', 'gishohaku2', 'gishohaku5'].includes(eventId) ? eventId : ''
         }`}
         passHref>
         <a

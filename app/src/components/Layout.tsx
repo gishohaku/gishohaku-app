@@ -63,8 +63,8 @@ const Layout: React.FC<any> = (props) => {
         {props.children}
       </div>
       {/* TODO: sign_in/やsign_up/で死ぬので要対応 */}
-      {['gishohaku1', 'gishohaku2'].includes(eventId) && <BottomBar />}
-      {/* {eventId === 'gishohaku2' && <MypageButton />} */}
+      {['gishohaku1', 'gishohaku2', 'gishohaku5'].includes(eventId) && <BottomBar />}
+      {/* {eventId === 'gishohaku5' && <MypageButton />} */}
     </>
   )
 }
