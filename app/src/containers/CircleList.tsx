@@ -28,6 +28,9 @@ const mapUrl: {
     'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/a27e64dc-082c-4d24-afa6-a0083664f885.png',
   gishohaku2:
     'https://img.esa.io/uploads/production/attachments/13039/2019/11/21/44748/0c049717-3499-4bc1-9ed3-11772775f922.png',
+  gishohaku3: '',
+  gishohaku4: '',
+  gishohaku5: '',
 }
 
 const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = (
