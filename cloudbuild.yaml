@@ -29,3 +29,5 @@ steps:
         'managed',
         '--allow-unauthenticated',
       ]
+  - name: gcr.io/gishohaku/firebase
+    args: ['deploy', '--project=gishohaku', '--only=hosting']
