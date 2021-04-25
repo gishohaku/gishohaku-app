@@ -1,6 +1,6 @@
 node_modules/
 .next
-dist/
+dist/functions
 .firebase
 .firebaserc
 .envrc
