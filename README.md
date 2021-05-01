@@ -29,16 +29,6 @@ $ npm run dev
 $ open http://localhost:3000
 ```
 
-### Docker 環境
-
-docker-compose を準備した状態で次のコマンドを実行
-
-```shell
-$ docker-compose up
-```
-
-ただし、ライブラリが更新される度に `docker-compose exec app npm install` を行うこと。
-
 ## デプロイ
 
 デプロイは CircleCI で Firebase に対して行っている。
