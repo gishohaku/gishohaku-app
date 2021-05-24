@@ -48,10 +48,6 @@ const Join: React.FC = () => {
     // TODO: メッセージの表示
     console.log(result)
     await reloadUser()
-    toast({
-      title: 'サークルに参加しました',
-      intent: 'success',
-    })
     router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }
 
