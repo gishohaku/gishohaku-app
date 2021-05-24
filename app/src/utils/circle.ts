@@ -118,7 +118,11 @@ export const plans = {
   premium: '倍量プラン',
 }
 
-export type CricleCategory = keyof typeof categories1 | keyof typeof categories2
+export type CricleCategory = keyof typeof categories1 |
+  keyof typeof categories2 |
+  keyof typeof categories3 |
+  keyof typeof categories4 |
+  keyof typeof categories5
 export type CriclePlan = keyof typeof plans
 
 export const allCategories: {
@@ -136,6 +140,7 @@ export default interface Circle {
   space: string
   name: string
   nameKana: string
+  description: string
   image: string
   imageMonochro: string
   category: CricleCategory

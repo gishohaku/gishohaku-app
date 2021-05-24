@@ -3,6 +3,7 @@ import {
   Button,
   InputGroup,
   Input,
+  TextArea,
   Divider,
   Select,
   useTheme,
@@ -44,6 +45,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
           <form onSubmit={handleSubmit}>
             <InputGroup label="サークル名 *">
               <Field name="name" component={CustomInput} disabled />
+            </InputGroup>
+            <InputGroup label="サークル紹介" helpText="Markdownが使用可能です。">
+              <Field name="description" component={CustomTextarea} rows={5} />
             </InputGroup>
             <InputGroup label="画像">
               <div
@@ -201,6 +205,19 @@ const CustomInput = ({
 }: FieldProps<any>) => (
   <div>
     <Input type="text" {...field} {...props} />
+    {touched[field.name] && errors[field.name] && (
+      <div className="error">{errors[field.name]}</div>
+    )}
+  </div>
+)
+
+const CustomTextarea = ({
+  field, // { name, value, onChange, onBlur }
+  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
+}: FieldProps<any>) => (
+  <div>
+    <TextArea {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
       <div className="error">{errors[field.name]}</div>
     )}
