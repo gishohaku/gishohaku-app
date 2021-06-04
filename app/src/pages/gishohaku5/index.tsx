@@ -447,14 +447,12 @@ export default () => {
               <Sponsor
                 name="エンジニアフレンドリーシティ福岡"
                 role="サポーター"
-                image=""
                 image="/static/sponsors/fukuoka.png"
                 href="https://efc.fukuoka.jp/"
               />
               <Sponsor
                 name="株式会社セレマアシスト"
                 role="サポーター"
-                image=""
                 image="/static/sponsors/thelemaassist.png"
                 href="https://thelemaassist.com/"
               />
