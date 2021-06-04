@@ -633,13 +633,13 @@ export default () => {
               }
             `}>
             <div className="banner-outer">
-              <img className="banner" src="/static/banner_2_600x120.png" />
+              <img className="banner" src="/static/banner_600x120.png" />
               <span className="banner-caption">
                 （大サイズ：600×120ピクセル）
               </span>
             </div>
             <div className="banner-outer">
-              <img className="banner" src="/static/banner_2_200x40.png" />
+              <img className="banner" src="/static/banner_200x40.png" />
               <span className="banner-caption">
                 （小サイズ：200×40ピクセル）
               </span>
