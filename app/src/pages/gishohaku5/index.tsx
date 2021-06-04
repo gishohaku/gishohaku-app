@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { media, colors } from '../../utils/style'
+import { media, colors } from '../utils/style'
 import TextBlock from '../../components/atoms/TextBlock'
 import SectionHeader from '../../components/SectionHeder'
 import placeIcon from '../../components/top/round-place.svg'
