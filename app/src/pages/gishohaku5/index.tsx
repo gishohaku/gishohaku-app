@@ -152,7 +152,7 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
         `}>
-        <LinkButton href="https://blog.https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
+        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
           一般参加申込はこちら
         </LinkButton>
       </div>
@@ -170,7 +170,7 @@ const Sponsor: React.SFC<{
     <div
       css={css`
         display: flex-item;
-        width: 220px;
+        width: 240px;
         text-align: center;
         margin: 8px;
       `}>
@@ -178,8 +178,8 @@ const Sponsor: React.SFC<{
         css={css`
           border: 1px solid #eee;
           background-color: white;
-          width: 200px;
-          height: 200px;
+          width: 220px;
+          height: 220px;
           margin: 0 auto;
           display: -webkit-flex;
           display: flex;
@@ -340,18 +340,6 @@ export default () => {
             その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
             私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
           </p>
-          <p
-            css={css`
-              margin-top: 32px;
-              text-align: center;
-              a {
-                margin: 8px 16px;
-              }
-            `}>
-            <LinkButton href="https://gishohaku.booth.pm/items/1712299">
-              公式ガイドブックを無料ダウンロードする
-            </LinkButton>
-          </p>
         </TextBlock>
       </section>
       <section css={section}>
@@ -371,7 +359,7 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="https://blog.https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
+            <LinkButton href="/blog.https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
               一般参加申込はこちら
             </LinkButton>
           </p>
