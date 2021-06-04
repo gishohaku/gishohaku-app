@@ -509,11 +509,6 @@ export default () => {
               linkUrl="https://www.nikko-pc.com/"
             />
             <Printing
-              name="ポプルス"
-              imageUrl="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
-              linkUrl="http://www.inv.co.jp/~popls/"
-            />
-            <Printing
               name="栄光"
               imageUrl="https://www.eikou.com/link/eikoubanner.gif"
               linkUrl="http://www.eikou.com/"
@@ -525,12 +520,12 @@ export default () => {
             />
             <Printing
               name="PrintWalk"
-              imageUrl="http://www.print-walk.co.jp/links/images/banner02.gif"
-              linkUrl="http://www.print-walk.co.jp/"
+              imageUrl="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
             />
             <Printing
               name="K-9"
-              imageUrl="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
+              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type1.jpg"
               linkUrl="https://www.k-k9.jp/"
             />
           </div>
