@@ -549,7 +549,7 @@ export default () => {
             `}>
             <Staff
               name="ariaki"
-              imageUrl="https://pbs.twimg.com/profile_images/941464951406940160/lHEop40U_400x400.jpg"
+              imageUrl="/static/staffs/ariaki.png"
               twitter="https://twitter.com/ariaki4dev"
             />
             <Staff
@@ -591,11 +591,6 @@ export default () => {
               name="こまっち"
               imageUrl="https://pbs.twimg.com/profile_images/1129052243204816899/-ncXI3sj_400x400.jpg"
               twitter="https://twitter.com/komacchi_u"
-            />
-            <Staff
-              name="たろすけ"
-              imageUrl="https://pbs.twimg.com/profile_images/1168150305600524289/YCACfoXk_400x400.jpg"
-              twitter="https://twitter.com/tarosuke777000"
             />
             <Staff
               name="かめねこ"

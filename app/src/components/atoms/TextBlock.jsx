@@ -6,7 +6,7 @@ import { media } from "../../utils/style"
 
 const paragraphBlock = css`
 font-size: 15px;
-max-width: ${740 + 12 * 2}px;
+max-width: ${820 + 12 * 2}px;
 margin: 32px auto;
 padding: 0 12px;
 line-height: 1.8;
