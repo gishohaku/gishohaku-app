@@ -635,7 +635,7 @@ const gishohaku5Circles = [
   { id:"hRrSG9IZADYFq4INeHrv", name:"Shinko Lab", booth:"25" },
   { id:"HvNo2zrEFnh7N6Dnmu8p", name:"きじのしっぽ", booth:"26" },
   { id:"3BaJoxF4tl9DWFvwKo27", name:"kinnekoの薄い本屋", booth:"28" },
-  { id:"jGfkSMRxPfjGzRTY6MjK", name:"ふがふが", booth:"29" },
+  { id:"jGfkSMRxPfjGzRTY6MjK", name:"ふがふが", booth:"30" },
   { id:"m8eY74lJVNMjRLcnq8Ne", name:"脆弱性診断研究会", booth:"31" },
   { id:"bP1MYJuwj2MOpTDXehyZ", name:"JSTQB Advanced Level 試験対策勉強会", booth:"32" },
   { id:"X8L1KkqJbIC8dIrgjZ04", name:"ちんちらんど", booth:"33" },
