@@ -359,7 +359,7 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="/blog.https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
+            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html.dev/entry/gishohaku2-attend">
               一般参加申込はこちら
             </LinkButton>
           </p>
