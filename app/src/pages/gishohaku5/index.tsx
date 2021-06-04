@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { media, colors } from '../utils/style'
-import TextBlock from '../components/atoms/TextBlock'
-import SectionHeader from '../components/SectionHeder'
-import placeIcon from '../components/top/round-place.svg'
-import directionsIcon from '../components/top/round-directions_run.svg'
+import { media, colors } from '../../utils/style'
+import TextBlock from '../../components/atoms/TextBlock'
+import SectionHeader from '../../components/SectionHeder'
+import placeIcon from '../../components/top/round-place.svg'
+import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
