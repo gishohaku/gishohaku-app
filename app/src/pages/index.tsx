@@ -6,7 +6,7 @@ import SectionHeader from '../components/SectionHeder'
 import placeIcon from '../components/top/round-place.svg'
 import directionsIcon from '../components/top/round-directions_run.svg'
 
-const keyColor = colors.primaryDarker
+const keyColor = '#009ac7'
 
 const LinkButton: React.SFC<{
   href: string
@@ -44,19 +44,14 @@ const LinkButton: React.SFC<{
 const Hero = () => (
   <div
     css={css`
-      background: linear-gradient(
-        180deg,
-        #cce0ff 0%,
-        rgba(208, 224, 249, 0.791667) 40%,
-        rgba(255, 255, 255, 100) 100%
-      );
+      background-color: #edefe8;
       margin-top: -66px;
       padding: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding-top: 66px;
-      padding-bottom: 0;
+      padding-bottom: 24px;
 
       color: white;
       color: #1c3559;
@@ -72,7 +67,7 @@ const Hero = () => (
         width: 400px;
         position: relative;
         left: -10px;
-        height: 370px;
+        height: 400px;
         @media ${media.large} {
           width: 280px;
           margin: 0 auto 20px;
@@ -80,7 +75,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png"
+      src="/static/gishohaku5-logo.png"
       width={280}
       height={286}
     />
@@ -323,7 +318,7 @@ const section = css`
     padding: 32px 0;
   }
   :nth-child(odd) {
-    background-color: #f7f8fa;
+    background-color: #edefe8;
   }
 `
 
