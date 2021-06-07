@@ -76,7 +76,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         property="favicon"
         content={
           imageUrl ||
-          'https://img.esa.io/uploads/production/attachments/13039/2021/03/09/44748/7c616002-4dfc-4ecd-823b-fcca437ef91e.png'
+          '/static/gishohaku5-icon.png'
         }
         key="image"
       />
@@ -90,7 +90,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         property="og:image"
         content={
           imageUrl ||
-          'https://img.esa.io/uploads/production/attachments/13039/2021/03/09/44748/7c616002-4dfc-4ecd-823b-fcca437ef91e.png'
+          '/static/gishohaku5-ogp.png'
         }
         key="image"
       />
