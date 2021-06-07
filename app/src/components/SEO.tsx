@@ -55,6 +55,31 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   return (
     <Head>
       <title>{metaTitle}</title>
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link
+        rel="icon shortcut"
+        content={
+          imageUrl ||
+          '/static/gishohaku5-icon.png'
+        }
+        type="image/png"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="256x256"
+        content={
+          imageUrl ||
+          '/static/gishohaku5-icon.png'
+        }
+      />
+      <meta
+        property="favicon"
+        content={
+          imageUrl ||
+          'https://img.esa.io/uploads/production/attachments/13039/2021/03/09/44748/7c616002-4dfc-4ecd-823b-fcca437ef91e.png'
+        }
+        key="image"
+      />
       <meta
         property="og:description"
         content={metaDescription}
