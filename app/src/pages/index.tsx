@@ -6,7 +6,7 @@ import SectionHeader from '../components/SectionHeder'
 import placeIcon from '../components/top/round-place.svg'
 import directionsIcon from '../components/top/round-directions_run.svg'
 
-const keyColor = '#009ac7'
+const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
   href: string
