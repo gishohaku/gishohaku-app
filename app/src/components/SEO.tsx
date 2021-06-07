@@ -57,7 +57,8 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <title>{metaTitle}</title>
       <link
         rel="icon shortcut"
-        content={
+        sizes="256x256"
+        href={
           imageUrl ||
           '/static/gishohaku5-icon.png'
         }
@@ -66,10 +67,11 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        content={
+        href={
           imageUrl ||
           '/static/gishohaku5-icon.png'
         }
+        type="image/png"
       />
       <meta
         property="favicon"
