@@ -8,7 +8,7 @@ import React, {
 
 type ToastProps = {
   title: string
-  intent: string
+  intent?: string
 }
 
 const ToastContext = createContext({} as (props: ToastProps) => void)
@@ -21,8 +21,6 @@ export const ToastProvider: FC = ({ children }) => {
       setCurrent(null)
     }, 5000)
   }, [])
-
-  console.log(current)
 
   return (
     <ToastContext.Provider value={show}>

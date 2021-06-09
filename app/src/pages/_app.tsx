@@ -10,6 +10,7 @@ import ReactGA from 'react-ga'
 
 import '../lightbox.css'
 import { StarsProvider } from '../contexts/StarsContext'
+import { ToastProvider } from '../components/Toast'
 
 const TRACKING_ID = 'UA-129667923-2'
 
@@ -59,9 +60,11 @@ class MyApp extends App {
       <UserProvider>
         <EventProvider initialId={eventId}>
           <StarsProvider>
-            <Layout router={router}>
-              <Component {...pageProps} />
-            </Layout>
+            <ToastProvider>
+              <Layout router={router}>
+                <Component {...pageProps} />
+              </Layout>
+            </ToastProvider>
           </StarsProvider>
         </EventProvider>
       </UserProvider>

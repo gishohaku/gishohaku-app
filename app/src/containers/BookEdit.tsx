@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { useToast, Button, Divider } from 'sancho'
+import { Button, Divider } from 'sancho'
 
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'
@@ -12,6 +12,7 @@ import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import useBook from '../hooks/useBook'
 import { firebase, db } from '../utils/firebase'
+import { useToast } from '../components/Toast'
 
 interface Props {
   user: firebase.User

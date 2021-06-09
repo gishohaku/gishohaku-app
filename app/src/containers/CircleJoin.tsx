@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { Button, useToast } from 'sancho'
+import { Button } from 'sancho'
 import { useRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
 import UserContext from '../contexts/UserContext'
@@ -11,6 +11,7 @@ import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import { db, functions } from '../utils/firebase'
 import Circle from '../utils/circle'
+import { useToast } from '../components/Toast'
 
 const Join: React.FC = () => {
   const { eventId } = useContext(EventContext)
@@ -47,6 +48,7 @@ const Join: React.FC = () => {
     const result = await receiveInvitation({ circleId, token })
     // TODO: メッセージの表示
     console.log(result)
+    toast({ title: 'サークルに参加しました' })
     await reloadUser()
     router.push('/[eventId]/mypage/circle', `/${eventId}/mypage/circle`)
   }
