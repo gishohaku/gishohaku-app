@@ -7,8 +7,9 @@ import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
-import { Button, InputGroup, Input, Alert, useToast } from 'sancho'
+import { Button, InputGroup, Input, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
+import { useToast } from '../components/Toast'
 
 const loginData = {
   email: '',
