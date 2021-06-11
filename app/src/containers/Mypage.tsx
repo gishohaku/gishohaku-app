@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { firebase } from '../utils/firebase'
 
 import { jsx, css } from '@emotion/core'

@@ -2,8 +2,9 @@
 import { useDropzone } from 'react-dropzone'
 import { jsx, css } from '@emotion/core'
 import { useState } from 'react'
-import { Spinner, IconUpload } from 'sancho'
+import { IconUpload } from 'sancho'
 import { firebase } from '../utils/firebase'
+import Loader from '../components/Loader'
 
 interface Props {
   user: firebase.User
@@ -51,7 +52,7 @@ const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
             justify-content: center;
           `,
         })}>
-        {isUploading && <Spinner label="Uploading..." />}
+        {isUploading && <Loader />}
 
         {!isUploading && (
           <>

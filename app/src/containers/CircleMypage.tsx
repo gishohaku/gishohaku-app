@@ -63,7 +63,7 @@ const Mypage: React.FC<{
   }
 
   if (isLoading || !circle) {
-    return <Loader label="Loading..." />
+    return <Loader />
   }
 
   return (

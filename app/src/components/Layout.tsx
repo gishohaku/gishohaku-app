@@ -52,6 +52,16 @@ const Layout: React.FC<any> = (props) => {
           li {
             line-height: 1.8;
           }
+
+          @keyframes dot-flashing {
+            0% {
+              background-color: #9880ff;
+            }
+            50%,
+            100% {
+              background-color: #ebe6ff;
+            }
+          }
         `}
       />
       {!props.hideHeader && <Header />}
@@ -63,7 +73,13 @@ const Layout: React.FC<any> = (props) => {
         {props.children}
       </div>
       {/* TODO: sign_in/やsign_up/で死ぬので要対応 */}
-      {['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4', 'gishohaku5'].includes(eventId) && <BottomBar />}
+      {[
+        'gishohaku1',
+        'gishohaku2',
+        'gishohaku3',
+        'gishohaku4',
+        'gishohaku5',
+      ].includes(eventId) && <BottomBar />}
       {/* {eventId === 'gishohaku5' && <MypageButton />} */}
     </>
   )

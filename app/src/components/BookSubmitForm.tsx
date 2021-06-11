@@ -113,7 +113,7 @@ const BookSubmitForm: React.FC<Props> = ({ book }) => {
             justify-content: center;
           `,
         })}>
-        {isUploading && <Loader label="Uploading..." />}
+        {isUploading && <Loader />}
 
         {!isUploading && (
           <>

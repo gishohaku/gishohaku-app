@@ -66,7 +66,7 @@ const Join: React.FC = () => {
   }
 
   if (!circle) {
-    return <Loader label="loading..." />
+    return <Loader />
   }
 
   return (
