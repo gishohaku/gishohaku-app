@@ -632,7 +632,7 @@ export default () => {
             />
             <Staff
               name="さんじょう"
-              imageUrl="https://gishohaku.slack.com/archives/C022K8MLW13/p1622700271034300?thread_ts=1622508771.031000&channel=C022K8MLW13&message_ts=1622700271.034300"
+              imageUrl="/static/staffs/sanjo.jpg"
               twitter=""
             />
             <Staff
@@ -652,17 +652,17 @@ export default () => {
             />
             <Staff
               name="みなみん"
-              imageUrl="https://twitter.com/sminamino/photo"
+              imageUrl="/static/staffs/shimamino.png"
               twitter=""
             />
             <Staff
               name="梅林良太"
-              imageUrl="https://www.facebook.com/photo/?fbid=1048954018517242&set=a.102390786506908"
+              imageUrl="/static/staffs/umebayashi.jpg"
               twitter=""
             />
             <Staff
               name="けるびん"
-              imageUrl="https://drive.google.com/file/d/1YlBVD2mfaTfv1HDwKFqrVJkXb2yQg3Zx/view?usp=sharing"
+              imageUrl="/static/staffs/kerubin.png"
               twitter=""
             />
             <Staff
@@ -672,7 +672,7 @@ export default () => {
             />
             <Staff
               name="もつ"
-              imageUrl="https://drive.google.com/file/d/1oeN2SBCWds4gnUBNqQXagJVP8EI7_TS6/view?usp=sharing"
+              imageUrl="/static/staffs/motsu.jpg"
               twitter=""
             />
             <Staff
@@ -692,7 +692,7 @@ export default () => {
             />
             <Staff
               name="ほげさん"
-              imageUrl="https://twitter.com/suzuki_hoge/photo"
+              imageUrl="https://pbs.twimg.com/profile_images/701081366645993472/qHYp5OwX_400x400.jpg"
               twitter=""
             />
             <Staff
@@ -702,7 +702,7 @@ export default () => {
             />
             <Staff
               name="えがら"
-              imageUrl="https://drive.google.com/file/d/1fdQcPPFrgpzXSP49UaVMa8HXJuOQMZJd/view?usp=drivesdk"
+              imageUrl="/static/staffs/egara.jpg"
               twitter=""
             />
           </div>
