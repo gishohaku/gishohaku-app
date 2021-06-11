@@ -9,8 +9,9 @@ import directionsIcon from '../components/top/round-directions_run.svg'
 const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
-  href: string
-}> = ({ href, children }) => (
+  href: string,
+  className?: string
+}> = ({ href, children, className }) => (
   <a
     css={css`
       font-size: 16px;
@@ -36,7 +37,8 @@ const LinkButton: React.SFC<{
     `}
     target="_blank"
     rel="noopener"
-    href={href}>
+    href={href}
+    className={className}>
     {children}
   </a>
 )
@@ -146,9 +148,28 @@ const Hero = () => (
       <div
         css={css`
           margin-top: 16px;
+          .btn-green {
+            border: 2px solid #00c79a;
+            background-color: #00c79a;
+            color: white;
+            &:hover {
+              background-color: transparent;
+              color: #00c79a;
+            }
+          }
+          .btn-blue {
+            border: 2px solid #009ac7;
+            background-color: #009ac7;
+            color: white;
+            &:hover {
+              background-ccolor: transparent;
+              color: #009ac7;
+            }
+          }
         `}>
-        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-          一般参加申込はこちら
+        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html" className="btn-blue">
+          来場を事前予約する<br>
+          <small>（無料・完全予約制）</small>
         </LinkButton>
       </div>
     </div>
@@ -338,7 +359,7 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="TICKET">チケット申込</SectionHeader>
+        <SectionHeader en="ENTRY">一般来場予約</SectionHeader>
         <TextBlock>
           <p>
             技書博本編に来場される際には、事前予約（無料）が必要です。<br />
@@ -355,7 +376,8 @@ export default () => {
               }
             `}>
             <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-              一般参加申込はこちら
+              来場を事前予約する<br>
+              <small>（無料・完全予約制）</small>
             </LinkButton>
           </p>
         </TextBlock>
