@@ -4,7 +4,6 @@ import {
   InputGroup,
   Input,
   TextArea,
-  Divider,
   Select,
   useTheme,
   Text,
@@ -46,7 +45,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
             <InputGroup label="サークル名 *">
               <Field name="name" component={CustomInput} disabled />
             </InputGroup>
-            <InputGroup label="サークル紹介" helpText="Markdownが使用可能です。">
+            <InputGroup
+              label="サークル紹介"
+              helpText="Markdownが使用可能です。">
               <Field name="description" component={CustomTextarea} rows={5} />
             </InputGroup>
             <InputGroup label="画像">
@@ -183,11 +184,11 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 })}
               </Select>
             </InputGroup>
-            <Divider />
             <Button
               component="button"
               block
               intent="primary"
+              style={{ marginTop: 32 }}
               loading={isSubmitting}>
               保存する
             </Button>

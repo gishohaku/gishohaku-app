@@ -1,13 +1,5 @@
 /** @jsx jsx */
-import {
-  Button,
-  InputGroup,
-  Input,
-  TextArea,
-  Divider,
-  Select,
-  Check,
-} from 'sancho'
+import { Button, InputGroup, Input, TextArea, Select, Check } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Book, { types, mediums, BookMedium, BookType } from '../utils/book'
@@ -169,8 +161,8 @@ const BookForm = ({ onSubmit, user, book: initialBook }: Props) => {
                 />
               </>
             </InputGroup>
-            <Divider />
             <Button
+              style={{ marginTop: 32 }}
               component="button"
               block
               intent="primary"

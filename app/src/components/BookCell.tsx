@@ -21,7 +21,6 @@ import {
   IconMoreVertical,
   IconArrowUp,
   IconArrowDown,
-  Divider,
   Button,
 } from 'sancho'
 import { media } from '../utils/style'
@@ -360,10 +359,10 @@ const BookCell: React.SFC<Props> = ({
         {descriptionHTML.length > 0 && (
           <Contents dangerouslySetInnerHTML={{ __html: descriptionHTML }} />
         )}
-        {(book.sampleUrl || book.purchaseUrl) && <Divider />}
         <div
           css={css`
             display: flex;
+            margin-top: 24px;
           `}>
           {book.sampleUrl && (
             <Button
