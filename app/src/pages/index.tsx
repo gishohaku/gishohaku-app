@@ -618,69 +618,92 @@ export default () => {
             <Staff
               name="にしこさん"
               imageUrl="https://pbs.twimg.com/profile_images/1351110571513565192/NQ0ZcB8P_400x400.jpg"
+              twitter=""
             />
             <Staff
               name="KANE"
               imageUrl="https://pbs.twimg.com/profile_images/1066541445543276544/zHx_piIh_400x400.jpg"
+              twitter=""
             />
             <Staff
               name="なべくら"
               imageUrl="https://gishohaku.slack.com/files/UK92M62DQ/F023N8GAT51/______________________________.jpg"
+              twitter=""
             />
             <Staff
               name="さんじょう"
               imageUrl="https://gishohaku.slack.com/archives/C022K8MLW13/p1622700271034300?thread_ts=1622508771.031000&channel=C022K8MLW13&message_ts=1622700271.034300"
+              twitter=""
             />
             <Staff
               name="ごまなつ"
               imageUrl="https://github.com/akrolayer/review-keybind/blob/master/images/gomana2_400x400.jpg"
+              twitter=""
             />
             <Staff
               name="いまい"
+              imageUrl=""
+              twitter=""
             />
             <Staff
               name="ふーれむ"
               imageUrl="https://pbs.twimg.com/profile_images/1647040005/screenshot_01_400x400.jpg"
+              twitter=""
             />
             <Staff
               name="みなみん"
               imageUrl="https://twitter.com/sminamino/photo"
+              twitter=""
             />
             <Staff
               name="梅林良太"
               imageUrl="https://www.facebook.com/photo/?fbid=1048954018517242&set=a.102390786506908"
+              twitter=""
             />
             <Staff
               name="けるびん"
               imageUrl="https://drive.google.com/file/d/1YlBVD2mfaTfv1HDwKFqrVJkXb2yQg3Zx/view?usp=sharing"
+              twitter=""
             />
             <Staff
               name="くろす"
+              imageUrl=""
+              twitter=""
             />
             <Staff
               name="もつ"
               imageUrl="https://drive.google.com/file/d/1oeN2SBCWds4gnUBNqQXagJVP8EI7_TS6/view?usp=sharing"
+              twitter=""
             />
             <Staff
               name="木檜和明"
               imageUrl="https://l-w-i.net/img/profile_480.jpg"
+              twitter=""
             />
             <Staff
               name="室谷優"
+              imageUrl=""
+              twitter=""
             />
             <Staff
               name="alwehf"
+              imageUrl=""
+              twitter=""
             />
             <Staff
               name="ほげさん"
               imageUrl="https://twitter.com/suzuki_hoge/photo"
+              twitter=""
             />
             <Staff
               name="けい酸ネコ"
+              imageUrl=""
+              twitter=""
             />
             <Staff
               name="えがら"
               imageUrl="https://drive.google.com/file/d/1fdQcPPFrgpzXSP49UaVMa8HXJuOQMZJd/view?usp=drivesdk"
+              twitter=""
             />
           </div>
         </TextBlock>
