@@ -153,7 +153,7 @@ const Hero = () => (
             background-color: #00c79a;
             color: white;
             &:hover {
-              background-color: transparent;
+              background-color: white;
               color: #00c79a;
             }
           }
@@ -162,14 +162,16 @@ const Hero = () => (
             background-color: #009ac7;
             color: white;
             &:hover {
-              background-ccolor: transparent;
+              background-ccolor: white;
               color: #009ac7;
             }
           }
         `}>
         <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html" className="btn-blue">
-          来場を事前予約する<br />
-          <small>（無料・完全予約制）</small>
+          来場事前予約（無料）
+        </LinkButton>
+        <LinkButton href={`/gishohaku5/circles`} className="btn-green">
+          出展サークルを確認
         </LinkButton>
       </div>
     </div>
@@ -376,8 +378,7 @@ export default () => {
               }
             `}>
             <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-              来場を事前予約する<br />
-              <small>（無料・完全予約制）</small>
+              来場事前予約（無料）
             </LinkButton>
           </p>
         </TextBlock>
