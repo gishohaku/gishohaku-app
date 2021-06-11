@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { Embed } from 'sancho'
+import { Embed } from '../common/Embed'
 import defaultImage from '../../images/sponsor.png'
 import LazyLoad from 'react-lazyload'
 import { media } from '../../utils/style'
