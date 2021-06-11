@@ -1,7 +1,5 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { withRouter, NextRouter } from 'next/router'
-
 import { db } from '../utils/firebase'
 import Book, { refToId } from '../utils/book'
 import SEO from '../components/SEO'
@@ -13,7 +11,7 @@ interface Props {
   book: Book
 }
 
-const BookPage: NextPage<Props & { router: NextRouter }, Props> = (props) => {
+const BookPage: NextPage<Props> = (props) => {
   const { book } = props
 
   return (
@@ -51,4 +49,4 @@ BookPage.getInitialProps = async ({ query }) => {
   return { book }
 }
 
-export default withRouter(BookPage)
+export default BookPage

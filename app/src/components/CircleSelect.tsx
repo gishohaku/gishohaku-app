@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Select, IconButton, IconChevronLeft, IconChevronRight } from 'sancho'
-import { NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { jsx, css } from '@emotion/core'
 import { media } from '../utils/style'
 import { useCallback, useContext } from 'react'
@@ -10,7 +10,6 @@ import { EventId } from '../utils/event'
 interface Props {
   circleId: string
   starIds: string[]
-  router: NextRouter
 }
 
 // TODO: イベント終わったら静的ファイル化して外に出す
@@ -676,7 +675,8 @@ const container = css`
   top: 0;
 `
 
-const CircleSelect: React.FC<Props> = ({ circleId, router, starIds }) => {
+const CircleSelect: React.FC<Props> = ({ circleId, starIds }) => {
+  const router = useRouter()
   const { eventId } = useContext(EventContext)
   const circles = {
     gishohaku1: gishohaku1Circles,

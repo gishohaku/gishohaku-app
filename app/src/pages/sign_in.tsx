@@ -5,11 +5,10 @@ import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
-import { withRouter, NextRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { NextPage } from 'next'
-import { WithRouterProps } from 'next/dist/client/with-router'
 import { REDIRECT_TO_AFTER_LOGIN } from '../withUser'
 import { useToast } from '../components/Toast'
 
@@ -24,8 +23,9 @@ export const redirectAfterLogin = (router: NextRouter) => {
   router.push(afterLoginPath || '/')
 }
 
-const SignIn: NextPage<WithRouterProps> = ({ router }) => {
+const SignIn: NextPage = () => {
   const toast = useToast()
+  const router = useRouter()
   const [error, setError] = useState('')
   return (
     <>
@@ -184,4 +184,4 @@ const CustomInput = ({
   </div>
 )
 
-export default withRouter(SignIn)
+export default SignIn

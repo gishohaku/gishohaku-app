@@ -6,7 +6,7 @@ import { jsx } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
-import { withRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { Button, InputGroup, Input, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { useToast } from '../components/Toast'
@@ -15,12 +15,9 @@ const loginData = {
   email: '',
 }
 
-interface Props {
-  router: NextRouter
-}
-
-const ResetPassword: NextPage<Props> = ({ router }) => {
+const ResetPassword: NextPage = () => {
   const toast = useToast()
+  const router = useRouter()
   const [error, setError] = useState('')
   return (
     <>
@@ -101,4 +98,4 @@ const CustomInput = ({
   </div>
 )
 
-export default withRouter(ResetPassword)
+export default ResetPassword
