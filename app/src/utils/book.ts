@@ -1,4 +1,6 @@
-import { firestore } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
 import { EventId } from './event'
 
 export const mediums = {
@@ -32,7 +34,7 @@ export default interface Book {
   purchaseUrl: string
   circleRef?: any
   circle?: {
-    ref: firestore.DocumentReference
+    ref: firebase.firestore.DocumentReference
     name: string
     booth: string
     id: string

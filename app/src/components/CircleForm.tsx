@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import firebase from 'firebase/app'
 import { Button, InputGroup, Input, TextArea, Select, Text } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'

@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import firebase from 'firebase/app'
 import Link from 'next/link'
 
 import { jsx, css } from '@emotion/core'
