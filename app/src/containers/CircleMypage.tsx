@@ -90,9 +90,7 @@ const Mypage: React.FC<{
             `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-              <Link
-                href={`/${eventId}/circles/[id]`}
-                as={`/${eventId}/circles/${circle.id}`}>
+              <Link href={`/${eventId}/circles/${circle.id}`}>
                 <a>こちら</a>
               </Link>
               。

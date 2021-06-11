@@ -125,7 +125,11 @@ const Header: React.FC<any> = () => {
       </div>
       <Link
         href={`/${
-          ['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4'].includes(eventId) ? eventId : ''
+          ['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4'].includes(
+            eventId,
+          )
+            ? eventId
+            : ''
         }`}
         passHref>
         <a
@@ -158,10 +162,7 @@ const Header: React.FC<any> = () => {
           `,
         ]}>
         {user && (
-          <Link
-            href="/[eventId]/mypage/circle_stars"
-            as={`/${eventId}/mypage/circle_stars`}
-            passHref>
+          <Link href={`/${eventId}/mypage/circle_stars`} passHref>
             <a
               css={css`
                 display: block;

@@ -103,9 +103,7 @@ const CircleDetail: React.FC<Props> = ({
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
-            <Link
-              href={`/[eventId]/circles/[id]/edit`}
-              as={`/${eventId}/circles/${circle.id}/edit`}>
+            <Link href={`/${eventId}/circles/${circle.id}/edit`}>
               <a
                 css={css`
                   flex: 1;
@@ -214,7 +212,7 @@ const CircleDetail: React.FC<Props> = ({
         ))}
         {books.length === 0 && <BlankMessage circleName={circle.name} />}
         {editable && (
-          <Link href="/[eventId]/books/new" as={`/${eventId}/books/new`}>
+          <Link href={`/${eventId}/books/new`}>
             <NewBookButton>
               <img src={editIcon} />
               頒布物を追加

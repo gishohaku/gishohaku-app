@@ -72,7 +72,7 @@ const Layout: React.FC<any> = (props) => {
 const MypageButton = () => {
   const { eventId } = useContext(EventContext)
   return (
-    <Link href="/[eventId]/mypage/circle" as={`/${eventId}/mypage/circle`}>
+    <Link href={`/${eventId}/mypage/circle`}>
       <a
         css={css`
           position: fixed;
