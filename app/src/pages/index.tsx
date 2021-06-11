@@ -133,7 +133,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2021.06.19 <small>Sat. 11:00~17:00</small>
+        2021.06.19 <small>Sat. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -143,7 +143,7 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @大田区産業プラザPiO
+        @大田区産業プラザPiO 1F 大展示ホール
       </div>
       <div
         css={css`
