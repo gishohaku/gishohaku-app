@@ -22,7 +22,10 @@ const Join: React.FC = () => {
 
   // Static Site Exportではprops.router.queryが固定されており、自前でqueryを取得する必要がある
   // https://github.com/zeit/next.js/issues/4804
-  const { circleId, token } = qs.parse(router.asPath.split('?')[1])
+  const queries = qs.parse(router.asPath.split('?')[1])
+  const circleId = queries.circleId as string | undefined
+  const token = queries.token as string | undefined
+  //const { circleId, token } = qs.parse(router.asPath.split('?')[1])
   console.log(circleId, token)
 
   useEffect(() => {

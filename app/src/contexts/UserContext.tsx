@@ -32,8 +32,8 @@ export const UserProvider = (props: any) => {
         const userSnapshot = await db.collection('users').doc(user.uid).get()
         if (userSnapshot.exists) {
           setUserData({
-            uid: user.uid,
             ...(userSnapshot.data() as User),
+            uid: user.uid,
           })
         } else {
           const userDoc = {
