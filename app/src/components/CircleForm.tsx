@@ -1,14 +1,5 @@
 /** @jsx jsx */
-import {
-  Button,
-  InputGroup,
-  Input,
-  TextArea,
-  Divider,
-  Select,
-  useTheme,
-  Text,
-} from 'sancho'
+import { Button, InputGroup, Input, TextArea, Select, Text } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'
@@ -23,8 +14,15 @@ interface Props {
   circle: Circle
 }
 
+const smallGray = css`
+  display: block;
+  color: #5f6871;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+`
+
 const CircleForm = ({ onSubmit, user, circle }: Props) => {
-  const theme = useTheme()
   const { eventId } = useContext(EventContext)
   const categoryOptions = categoriesByEvent[eventId]
   return (
@@ -46,7 +44,9 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
             <InputGroup label="サークル名 *">
               <Field name="name" component={CustomInput} disabled />
             </InputGroup>
-            <InputGroup label="サークル紹介" helpText="Markdownが使用可能です。">
+            <InputGroup
+              label="サークル紹介"
+              helpText="Markdownが使用可能です。">
               <Field name="description" component={CustomTextarea} rows={5} />
             </InputGroup>
             <InputGroup label="画像">
@@ -59,15 +59,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                   }
                 `}>
                 <div>
-                  <Text
-                    css={{
-                      display: 'block',
-                      color: theme.colors.text.muted,
-                      marginTop: theme.spaces.xs,
-                      marginBottom: theme.spaces.xs,
-                    }}>
-                    カラー
-                  </Text>
+                  <Text css={smallGray}>カラー</Text>
                   {values.image ? (
                     <ImageBox
                       imageUrl={values.image}
@@ -90,15 +82,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                   )}
                 </div>
                 <div>
-                  <Text
-                    css={{
-                      display: 'block',
-                      color: theme.colors.text.muted,
-                      marginTop: theme.spaces.xs,
-                      marginBottom: theme.spaces.xs,
-                    }}>
-                    グレースケール
-                  </Text>
+                  <Text css={smallGray}>グレースケール</Text>
                   {values.imageMonochro ? (
                     <ImageBox
                       imageUrl={values.imageMonochro}
@@ -121,14 +105,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                   )}
                 </div>
               </div>
-              <Text
-                css={{
-                  display: 'block',
-                  marginTop: theme.spaces.xs,
-                  color: theme.colors.text.muted,
-                  fontSize: theme.fontSizes[0],
-                }}
-                variant="body">
+              <Text css={smallGray}>
                 ※推奨サイズ: 横635px
                 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。
                 <br />
@@ -183,11 +160,11 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 })}
               </Select>
             </InputGroup>
-            <Divider />
             <Button
               component="button"
               block
               intent="primary"
+              style={{ marginTop: 32 }}
               loading={isSubmitting}>
               保存する
             </Button>

@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 
 import { getCircles } from '../utils/functions'
 import Circle from '../utils/circle'

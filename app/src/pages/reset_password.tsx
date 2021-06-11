@@ -2,10 +2,10 @@
 import { useState } from 'react'
 import { NextPage } from 'next'
 
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import { useRouter } from 'next/router'
 import { Button, InputGroup, Input, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
@@ -22,10 +22,10 @@ const ResetPassword: NextPage = () => {
   return (
     <>
       <Container
-        style={{
-          maxWidth: 380,
-          paddingTop: 60,
-        }}>
+        css={css`
+          max-width: 380px;
+          padding-top: 60px;
+        `}>
         <SectionHeader text="">パスワードの再設定</SectionHeader>
         <Formik
           initialValues={loginData}

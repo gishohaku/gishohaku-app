@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import { NextRouter, useRouter } from 'next/router'
-import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
+import { Button, InputGroup, Input, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { NextPage } from 'next'
 import { REDIRECT_TO_AFTER_LOGIN } from '../withUser'
@@ -37,10 +37,10 @@ const SignIn: NextPage = () => {
         }}
       />
       <Container
-        style={{
-          maxWidth: 380,
-          paddingTop: 60,
-        }}>
+        css={css`
+          max-width: 380px;
+          padding-top: 60px;
+        `}>
         <SectionHeader text="LOGIN">ログイン</SectionHeader>
         <Formik
           initialValues={loginData}
@@ -116,8 +116,7 @@ const SignIn: NextPage = () => {
             )
           }}
         />
-        <Divider />
-        <Text variant="h6" muted>
+        <Text variant="h6" muted style={{ marginTop: 32 }}>
           ソーシャルアカウントで登録・ログイン
         </Text>
         <Button
@@ -153,6 +152,7 @@ const SignIn: NextPage = () => {
             font-size: 12px;
             margin-top: 2px;
             line-height: 1.5;
+            margin-bottom: 32px;
           `}>
           登録することで、
           <Link href="/gishohaku1/privacy" passHref>
@@ -160,7 +160,6 @@ const SignIn: NextPage = () => {
           </Link>
           に同意するものとします
         </p>
-        <Divider />
         <Link href="/sign_up">
           <Button component="a" block variant="outline">
             会員登録はこちら

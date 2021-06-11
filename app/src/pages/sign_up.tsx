@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import { useRouter } from 'next/router'
-import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
+import { Button, InputGroup, Input, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { redirectAfterLogin } from './sign_in'
 import { NextPage } from 'next'
@@ -32,10 +32,10 @@ const SignUp: NextPage = () => {
         }}
       />
       <Container
-        style={{
-          maxWidth: 380,
-          paddingTop: 60,
-        }}>
+        css={css`
+          max-width: 380px;
+          padding-top: 60px;
+        `}>
         <SectionHeader text="SIGNUP">会員登録</SectionHeader>
         <Formik
           initialValues={loginData}
@@ -122,8 +122,7 @@ const SignUp: NextPage = () => {
             )
           }}
         />
-        <Divider />
-        <Text variant="h6" muted>
+        <Text variant="h6" muted style={{ marginTop: 32 }}>
           ソーシャルアカウントで登録・ログイン
         </Text>
         <Button
@@ -158,6 +157,7 @@ const SignUp: NextPage = () => {
           css={css`
             font-size: 12px;
             margin-top: 2px;
+            margin-bottom: 32px;
             line-height: 1.5;
           `}>
           登録することで、
@@ -166,7 +166,6 @@ const SignUp: NextPage = () => {
           </Link>
           に同意するものとします
         </p>
-        <Divider />
         <Link href="/sign_in">
           <Button component="a" block variant="outline">
             すでに会員の方はこちら

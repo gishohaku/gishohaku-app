@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { Button, Divider } from 'sancho'
+import { Button } from 'sancho'
 
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'
@@ -71,7 +71,6 @@ const BooksNew: NextPage<Props> = ({ user, userData }) => {
             })
           }}
         />
-        <Divider />
       </FormContainer>
       <FormContainer>
         <Button intent="danger" onPress={deleteBook} block>

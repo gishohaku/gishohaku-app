@@ -11,10 +11,8 @@ import {
   List,
   ListItem,
   IconChevronRight,
-  Divider,
   IconExternalLink,
   IconHeart,
-  IconLogIn,
 } from 'sancho'
 import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
@@ -26,6 +24,11 @@ const buttonSize = 48
 
 const noDecoration = css`
   text-decoration: none;
+`
+
+const divider = css`
+  margin: 16px 0;
+  border-top: 1px solid #ddd;
 `
 
 const hamburgerButton = css`
@@ -208,7 +211,7 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Divider />
+          <div css={divider} />
           <a
             href="https://blog.gishohaku.dev/"
             target="_blank"
@@ -220,7 +223,7 @@ const Header: React.FC<any> = () => {
               contentAfter={<IconExternalLink />}
             />
           </a>
-          <Divider />
+          <div css={divider} />
         </List>
         <ul
           css={css`
@@ -262,7 +265,7 @@ const Header: React.FC<any> = () => {
             <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
           </li>
         </ul>
-        <Divider />
+        <div css={divider} />
         <div
           css={css`
             padding: 0 1.5rem;

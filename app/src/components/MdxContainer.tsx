@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css, Global } from '@emotion/core'
 import Contents from './MdxContents'
-import { Container } from 'sancho'
+import { Container } from './common/Container'
 
 const MdxContainer: React.SFC = ({ children }) => {
   return (
