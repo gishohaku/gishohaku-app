@@ -627,7 +627,7 @@ export default () => {
             />
             <Staff
               name="なべくら"
-              imageUrl="https://gishohaku.slack.com/files/UK92M62DQ/F023N8GAT51/______________________________.jpg"
+              imageUrl="/static/staffs/nabekura.jpg"
               twitter=""
             />
             <Staff
@@ -637,7 +637,7 @@ export default () => {
             />
             <Staff
               name="ごまなつ"
-              imageUrl="https://github.com/akrolayer/review-keybind/blob/master/images/gomana2_400x400.jpg"
+              imageUrl="/static/staffs/gomanatsu.jpg"
               twitter=""
             />
             <Staff
