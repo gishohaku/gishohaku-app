@@ -151,18 +151,18 @@ const Hero = () => (
           .btn-green {
             border: 2px solid #00c79a;
             background-color: #00c79a;
-            color: white;
+            color: #edefe8;
             &:hover {
-              background-color: white;
+              background-color: #edefe8;
               color: #00c79a;
             }
           }
           .btn-blue {
             border: 2px solid #009ac7;
             background-color: #009ac7;
-            color: white;
+            color: #edefe8;
             &:hover {
-              background-ccolor: white;
+              background-color: #edefe8;
               color: #009ac7;
             }
           }
