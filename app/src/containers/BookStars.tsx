@@ -2,7 +2,7 @@
 import { useContext } from 'react'
 
 import { jsx, css } from '@emotion/core'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import BookCell from '../components/BookCell'
 import { media } from '../utils/style'
 import withUser from '../withUser'

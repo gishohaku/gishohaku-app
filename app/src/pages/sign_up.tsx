@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import { useRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
@@ -32,10 +32,10 @@ const SignUp: NextPage = () => {
         }}
       />
       <Container
-        style={{
-          maxWidth: 380,
-          paddingTop: 60,
-        }}>
+        css={css`
+          max-width: 380px;
+          padding-top: 60px;
+        `}>
         <SectionHeader text="SIGNUP">会員登録</SectionHeader>
         <Formik
           initialValues={loginData}

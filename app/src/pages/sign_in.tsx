@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { jsx, css, Global } from '@emotion/core'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
-import { Container } from 'sancho'
+import { Container } from '../components/common/Container'
 import { NextRouter, useRouter } from 'next/router'
 import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
@@ -37,10 +37,10 @@ const SignIn: NextPage = () => {
         }}
       />
       <Container
-        style={{
-          maxWidth: 380,
-          paddingTop: 60,
-        }}>
+        css={css`
+          max-width: 380px;
+          padding-top: 60px;
+        `}>
         <SectionHeader text="LOGIN">ログイン</SectionHeader>
         <Formik
           initialValues={loginData}

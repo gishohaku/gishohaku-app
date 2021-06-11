@@ -7,12 +7,12 @@ import directionsIcon from './round-directions_run.svg'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../gishohaku1/SectionHeader'
 import TextBlock from '../atoms/TextBlock'
+import { Container } from '../common/Container'
 
 import Sponsor from './sponsor'
 import Printing from './printing'
 import Banner from './banner'
 
-import { Container } from 'sancho'
 
 const section = css`
   padding: 32px 0 48px;
