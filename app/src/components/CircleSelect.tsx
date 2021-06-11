@@ -2,10 +2,8 @@
 import { Select, IconButton, IconChevronLeft, IconChevronRight } from 'sancho'
 import { useRouter } from 'next/router'
 import { jsx, css } from '@emotion/core'
-import { media } from '../utils/style'
 import { useCallback, useContext } from 'react'
 import EventContext from '../contexts/EventContext'
-import { EventId } from '../utils/event'
 
 interface Props {
   circleId: string

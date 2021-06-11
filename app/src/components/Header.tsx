@@ -2,7 +2,6 @@
 import Link from 'next/link'
 
 import logo from '../images/shortLogo.svg'
-import { media } from '../utils/style'
 
 import { jsx, css } from '@emotion/core'
 import {
@@ -18,7 +17,6 @@ import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
 import UserContext from '../contexts/UserContext'
 import { useRouter } from 'next/router'
-// import { ListItem } from '../components/List'
 
 const buttonSize = 48
 
