@@ -6,19 +6,12 @@ import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from 'sancho'
 import { withRouter, NextRouter } from 'next/router'
-import {
-  Button,
-  InputGroup,
-  Input,
-  Divider,
-  Text,
-  Alert,
-  useToast,
-} from 'sancho'
+import { Button, InputGroup, Input, Divider, Text, Alert } from 'sancho'
 import { Formik, Field, Form, FieldProps } from 'formik'
 import { NextPage } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import { REDIRECT_TO_AFTER_LOGIN } from '../withUser'
+import { useToast } from '../components/Toast'
 
 const loginData = {
   email: '',

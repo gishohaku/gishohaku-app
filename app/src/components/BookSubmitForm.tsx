@@ -1,11 +1,12 @@
 /** @jsx jsx */
-import { IconUpload, useToast } from 'sancho'
+import { IconUpload } from 'sancho'
 import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'
 import { useState, useEffect } from 'react'
 import Loader from './Loader'
 import { useDropzone } from 'react-dropzone'
 import { firebase, db } from '../utils/firebase'
+import { useToast } from './Toast'
 
 interface Props {
   book: Book

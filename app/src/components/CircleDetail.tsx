@@ -17,7 +17,6 @@ import ImageBox from '../components/ImageBox'
 import Label from '../components/Label'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext'
-import { useToast } from 'sancho'
 
 import EventContext from '../contexts/EventContext'
 import CheckCount from './CheckCount'
@@ -25,6 +24,7 @@ import SnsShare, { SnsShareSize } from './SnsShare'
 import StarsContext from '../contexts/StarsContext'
 import { db } from '../utils/firebase'
 import { imageUrl } from '../utils/imageUrl'
+import { useToast } from './Toast'
 
 interface Props {
   circle: Circle

@@ -14,7 +14,6 @@ import Lightbox from 'react-image-lightbox'
 import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import UserContext from '../contexts/UserContext'
 import {
-  useToast,
   ResponsivePopover,
   MenuList,
   MenuItem,
@@ -36,6 +35,7 @@ import { db } from '../utils/firebase'
 import CircleCell, { CircleBooth } from './CircleCell'
 import SnsShare, { SnsShareSize } from './SnsShare'
 import { imageUrl } from '../utils/imageUrl'
+import { useToast } from './Toast'
 
 // TODO(mottox2): 頒布物一覧とサークル内のBookCellは分割したい
 interface Props {

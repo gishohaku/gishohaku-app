@@ -9,12 +9,13 @@ import Circle, { allCategories } from '../utils/circle'
 import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
-import { useToast, IconChevronRight } from 'sancho'
+import { IconChevronRight } from 'sancho'
 import { useContext, useCallback } from 'react'
 import UserContext from '../contexts/UserContext'
 import { UserStars } from '../contexts/StarsContext'
 import EventContext from '../contexts/EventContext'
 import { imageUrl } from '../utils/imageUrl'
+import { useToast } from './Toast'
 
 interface Props {
   circle: Circle
