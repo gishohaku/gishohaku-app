@@ -168,7 +168,7 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html" className="btn-blue">
-          来場を事前予約する<br>
+          来場を事前予約する<br />
           <small>（無料・完全予約制）</small>
         </LinkButton>
       </div>
@@ -376,7 +376,7 @@ export default () => {
               }
             `}>
             <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-              来場を事前予約する<br>
+              来場を事前予約する<br />
               <small>（無料・完全予約制）</small>
             </LinkButton>
           </p>
