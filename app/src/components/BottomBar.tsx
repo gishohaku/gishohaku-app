@@ -79,19 +79,19 @@ const BottomBar = () => {
             <div css={label}>ホーム</div>
           </a>
         </Link>
-        <Link href="/[eventId]/circles" as={`/${eventId}/circles`} passHref>
+        <Link href={`/${eventId}/circles`} passHref>
           <a css={item}>
             <img src={groupWork} width={28} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
-        <Link href="/[eventId]/books" as={`/${eventId}/books`} passHref>
+        <Link href={`/${eventId}/books`} passHref>
           <a css={item}>
             <img src={book} width={28} css={icon} />
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href="/[eventId]/mypage" as={`/${eventId}/mypage`} passHref>
+        <Link href={`/${eventId}/mypage`} passHref>
           <a css={item}>
             <img src={person} width={28} css={icon} />
             <div css={label}>マイページ</div>

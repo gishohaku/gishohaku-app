@@ -4,14 +4,12 @@ import styled from '@emotion/styled'
 import { NextPage } from 'next'
 
 import { Container } from 'sancho'
-import { withRouter } from 'next/router'
 
 import { getCircles } from '../utils/functions'
 import Circle from '../utils/circle'
 import CircleCell from '../components/CircleCell'
-import { useContext, useState, useMemo } from 'react'
+import { useContext } from 'react'
 import StarsContext from '../contexts/StarsContext'
-import { WithRouterProps } from 'next/dist/client/with-router'
 import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
@@ -33,9 +31,7 @@ const mapUrl: {
   gishohaku5: '',
 }
 
-const Index: NextPage<WithRouterProps & InitialProps, InitialProps> = (
-  props,
-) => {
+const Index: NextPage<InitialProps> = (props) => {
   const { circles } = props
   const { userStars, addStar, removeStar } = useContext(StarsContext)
   const { eventId } = useContext(EventContext)
@@ -102,7 +98,8 @@ Index.getInitialProps = async ({ res, query }) => {
   const circles = await getCircles(eventId)
   return { circles }
 }
-export default withRouter(Index)
+
+export default Index
 
 export const CirclesList = styled.div`
   display: flex;

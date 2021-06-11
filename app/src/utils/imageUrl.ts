@@ -36,8 +36,6 @@ export const imageUrl = (
     })
     .join(',')
 
-  console.log(imageParams)
-
   // return origin
   return origin.replace(firebaseOrigin, imageFluxOrigin + '/' + imageParams)
 }

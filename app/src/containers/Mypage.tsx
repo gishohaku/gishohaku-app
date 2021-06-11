@@ -60,10 +60,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
             </a>
           </Link>
           {circleRef && (
-            <Link
-              href="/[eventId]/mypage/circle"
-              as={`/${eventId}/mypage/circle`}
-              passHref>
+            <Link href={`/${eventId}/mypage/circle`} passHref>
               <a css={noDecoration}>
                 <ListItem
                   primary="サークル情報編集"

@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import { useContext } from 'react'
-import { withRouter, NextRouter } from 'next/router'
 
 import { db } from '../utils/firebase'
 import Circle from '../utils/circle'
@@ -18,16 +17,15 @@ interface Props {
   books: Book[]
 }
 
-const CirclePage: NextPage<Props & { router: NextRouter }, Props> = (props) => {
+const CirclePage: NextPage<Props> = (props) => {
   const { eventId } = useContext(EventContext)
   const { userStars } = useContext(StarsContext)
-  const { circle, books, router } = props
+  const { circle, books } = props
   return (
     <>
       <SEO title={circle.name} imageUrl={circle.image} />
       <CircleSelect
         circleId={circle.id!}
-        router={router}
         starIds={userStars[eventId].circleStars}
       />
       <CircleDetail
@@ -68,4 +66,4 @@ CirclePage.getInitialProps = async ({ query, res }) => {
   return { circle, books }
 }
 
-export default withRouter(CirclePage)
+export default CirclePage
