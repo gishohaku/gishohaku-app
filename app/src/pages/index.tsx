@@ -358,6 +358,18 @@ export default () => {
             その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
             私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
           </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              a {
+                margin: 8px 16px;
+              }
+            `}>
+            <LinkButton href="https://gishohaku.booth.pm/items/3044913">
+              公式ガイドブックを無料ダウンロードする
+            </LinkButton>
+          </p>
         </TextBlock>
       </section>
       <section css={section}>
