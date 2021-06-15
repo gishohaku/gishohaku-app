@@ -396,6 +396,23 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
+        <SectionHeader en="RADIO">技書博ラジオ</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。<br />
+            技書博にオフライン参加されていない方にも雰囲気が伝わるよう、豪華ゲストやスポンサー様を呼んでのトーク、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。<br />
+            当日はYouTube Liveの技書博チャンネルで配信します。<br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+            `}>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/MukacNr759M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
           <p
