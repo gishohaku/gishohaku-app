@@ -408,7 +408,15 @@ export default () => {
               margin-top: 32px;
               text-align: center;
             `}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/MukacNr759M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/MukacNr759M"
+              title="技書博ラジオ"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
           </p>
         </TextBlock>
       </section>
