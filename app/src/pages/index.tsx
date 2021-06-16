@@ -459,13 +459,16 @@ export default () => {
             <div className="banner-outer">
               <img className="banner" src="https://www.toranoana.jp/icon/tora_bn.gif" />
               <span className="banner-caption">
-                （近日公開）
+                （特集ページを近日公開）
               </span>
             </div>
             <div className="banner-outer">
               <a target="_blank" href="https://booth.pm/ja/events/gishohaku5">
                 <img className="banner" src="https://asset.booth.pm/static-images/banner/200x40_01.png" />
               </a>
+              <span className="banner-caption">
+                公開中！
+              </span>
             </div>
           </p>
         </TextBlock>
