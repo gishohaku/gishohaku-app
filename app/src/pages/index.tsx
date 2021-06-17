@@ -358,13 +358,25 @@ export default () => {
             その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
             私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
           </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              a {
+                margin: 8px 16px;
+              }
+            `}>
+            <LinkButton href="https://gishohaku.booth.pm/items/3044913">
+              公式ガイドブックを無料ダウンロードする
+            </LinkButton>
+          </p>
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="ENTRY">一般来場予約</SectionHeader>
+        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
         <TextBlock>
           <p>
-            技書博本編に来場される際には、事前予約（無料）が必要です。<br />
+            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。<br />
             時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
             必ず事前にチケットをお求めのうえ、ご参加ください。<br />
           </p>
@@ -380,6 +392,119 @@ export default () => {
             <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
               来場事前予約（無料）
             </LinkButton>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。<br />
+            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。<br />
+            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。<br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/MukacNr759M?controls=0"
+              title="技書博ラジオ"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / マーケット</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博関連の頒布物を各社のオンラインマーケット上でもご購入いただけます。<br />
+            以下のバナーよりご覧ください！<br />
+          </p>
+          <p
+            css={css`
+              text-align: center;
+              .banner {
+                display: block;
+                width: 200px;
+                border: 1px solid #ddd;
+              }
+              .banner-outer {
+                text-align: center;
+                display: inline-block;
+                margin: 0px 8px;
+              }
+              .banner-caption {
+                font-size: 12px;
+                color: #888;
+              }
+            `}>
+            <div className="banner-outer">
+              <img className="banner" src="https://www.toranoana.jp/icon/tora_bn.gif" />
+              <span className="banner-caption">
+                （特集ページを近日公開）
+              </span>
+            </div>
+            <div className="banner-outer">
+              <a target="_blank" href="https://booth.pm/ja/events/gishohaku5">
+                <img className="banner" src="https://asset.booth.pm/static-images/banner/200x40_01.png" />
+              </a>
+              <span className="banner-caption">
+                公開中！
+              </span>
+            </div>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / 前夜祭</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。<br />
+            開催直前の準備状況やスタッフ裏話、当日企画の詳細など、いろいろお話させていただきますので、お楽しみに。<br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/76WPGlK_8l4?controls=0"
+              title="技書博ラジオ 前夜祭"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
           </p>
         </TextBlock>
       </section>
@@ -422,7 +547,7 @@ export default () => {
           <iframe
             css={css`
               width: 100%;
-              min-height: 240px;
+              min-height: 320px;
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.794138856147!2d139.72187801537484!3d35.55878604428462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1622789832134!5m2!1sja!2sjp"></iframe>
         </TextBlock>

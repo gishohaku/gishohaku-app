@@ -1,3 +1,4 @@
+import firebase from 'firebase/app'
 import { NextPage } from 'next'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
