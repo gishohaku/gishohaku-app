@@ -65,13 +65,9 @@ const Hero = () => (
         align-items: start;
       }
     `}>
-      <div className='mx-auto px-4 sm:px-0'>
-        <Image
-          width={400}
-          height={400}
-          src="/static/gishohaku5-logo.png"
-        />
-      </div>
+    <div className="mx-auto lg:mx-0 px-4">
+      <Image width={400} height={400} src="/static/gishohaku5-logo.png" />
+    </div>
     <div
       css={css`
         margin-left: 32px;
@@ -158,7 +154,9 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html" className="btn-blue">
+        <LinkButton
+          href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html"
+          className="btn-blue">
           来場事前予約（無料）
         </LinkButton>
         <LinkButton href={`/gishohaku5/circles`} className="btn-green">
