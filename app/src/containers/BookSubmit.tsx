@@ -21,6 +21,10 @@ const description = css`
   margin-bottom: 12px;
 `
 
+declare const window: {
+  location: any
+}
+
 const BooksSubmit: NextPage<any> = ({ userData }) => {
   const router = useRouter()
   const { eventId } = useContext(EventContext)
