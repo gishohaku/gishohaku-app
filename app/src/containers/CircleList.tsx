@@ -22,13 +22,11 @@ interface InitialProps {
 const mapUrl: {
   [key in EventId]: string
 } = {
-  gishohaku1:
-    'https://img.esa.io/uploads/production/attachments/13039/2019/11/14/4651/a27e64dc-082c-4d24-afa6-a0083664f885.png',
-  gishohaku2:
-    'https://img.esa.io/uploads/production/attachments/13039/2019/11/21/44748/0c049717-3499-4bc1-9ed3-11772775f922.png',
+  gishohaku1: '/static/gishohaku1-layout.png',
+  gishohaku2: '/static/gishohaku2-layout.png',
   gishohaku3: '',
   gishohaku4: '',
-  gishohaku5: '',
+  gishohaku5: '/static/gishohaku5-layout.png',
 }
 
 const Index: NextPage<InitialProps> = (props) => {
