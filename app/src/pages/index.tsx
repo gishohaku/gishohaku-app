@@ -345,7 +345,7 @@ const section = css`
   }
 `
 
-export default () => {
+const Page = () => {
   return (
     <>
       <Hero />
@@ -367,7 +367,7 @@ export default () => {
               }
             `}>
             <LinkButton href="https://gishohaku.booth.pm/items/3044913">
-              公式ガイドブックを無料ダウンロードする
+              公式ガイドブックを無料ダウンロード
             </LinkButton>
           </p>
         </TextBlock>
@@ -376,9 +376,12 @@ export default () => {
         <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
         <TextBlock>
           <p>
-            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。<br />
-            時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
-            必ず事前にチケットをお求めのうえ、ご参加ください。<br />
+            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
+            <br />
+            時間指定制になりますので、券面に表記された時間以外は入場頂けません。
+            <br />
+            必ず事前にチケットをお求めのうえ、ご参加ください。
+            <br />
           </p>
           <p
             css={css`
@@ -399,9 +402,12 @@ export default () => {
         <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
         <TextBlock>
           <p>
-            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。<br />
-            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。<br />
-            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。<br />
+            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
+            <br />
+            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。
+            <br />
+            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。
+            <br />
           </p>
           <p
             css={css`
@@ -426,17 +432,18 @@ export default () => {
               src="https://www.youtube.com/embed/MukacNr759M?controls=0"
               title="技書博ラジオ"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen>
-            </iframe>
+              allowFullScreen></iframe>
           </p>
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / マーケット</SectionHeader>
+        <SectionHeader en="MARKET">オンライン参加 / マーケット</SectionHeader>
         <TextBlock>
           <p>
-            技書博関連の頒布物を各社のオンラインマーケット上でもご購入いただけます。<br />
-            以下のバナーよりご覧ください！<br />
+            技書博関連の頒布物を各社のオンラインマーケット上でもご購入いただけます。
+            <br />
+            以下のバナーよりご覧ください！
+            <br />
           </p>
           <p
             css={css`
@@ -457,13 +464,21 @@ export default () => {
               }
             `}>
             <div className="banner-outer">
-              <a target="_blank" href="https://ecs.toranoana.jp/tora/ec/cot/pages/all/item/2021/06/19/00001/">
-                <img className="banner" src="https://www.toranoana.jp/icon/tora_bn.gif" />
+              <a
+                target="_blank"
+                href="https://ecs.toranoana.jp/tora/ec/cot/pages/all/item/2021/06/19/00001/">
+                <img
+                  className="banner"
+                  src="https://www.toranoana.jp/icon/tora_bn.gif"
+                />
               </a>
             </div>
             <div className="banner-outer">
               <a target="_blank" href="https://booth.pm/ja/events/gishohaku5">
-                <img className="banner" src="https://asset.booth.pm/static-images/banner/200x40_01.png" />
+                <img
+                  className="banner"
+                  src="https://asset.booth.pm/static-images/banner/200x40_01.png"
+                />
               </a>
             </div>
           </p>
@@ -473,8 +488,10 @@ export default () => {
         <SectionHeader en="RADIO">オンライン参加 / 前夜祭</SectionHeader>
         <TextBlock>
           <p>
-            技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。<br />
-            開催直前の準備状況やスタッフ裏話、当日企画の詳細など、いろいろお話させていただきますので、お楽しみに。<br />
+            技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。
+            <br />
+            開催直前の準備状況やスタッフ裏話、当日企画の詳細など、いろいろお話させていただきますので、お楽しみに。
+            <br />
           </p>
           <p
             css={css`
@@ -499,8 +516,7 @@ export default () => {
               src="https://www.youtube.com/embed/76WPGlK_8l4?controls=0"
               title="技書博ラジオ 前夜祭"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen>
-            </iframe>
+              allowFullScreen></iframe>
           </p>
         </TextBlock>
       </section>
@@ -761,11 +777,7 @@ export default () => {
               imageUrl="/static/staffs/gomanatsu.jpg"
               twitter=""
             />
-            <Staff
-              name="いまい"
-              imageUrl=""
-              twitter=""
-            />
+            <Staff name="いまい" imageUrl="" twitter="" />
             <Staff
               name="ふーれむ"
               imageUrl="https://pbs.twimg.com/profile_images/1647040005/screenshot_01_400x400.jpg"
@@ -786,41 +798,21 @@ export default () => {
               imageUrl="/static/staffs/kerubin.png"
               twitter=""
             />
-            <Staff
-              name="くろす"
-              imageUrl=""
-              twitter=""
-            />
-            <Staff
-              name="もつ"
-              imageUrl="/static/staffs/motsu.jpg"
-              twitter=""
-            />
+            <Staff name="くろす" imageUrl="" twitter="" />
+            <Staff name="もつ" imageUrl="/static/staffs/motsu.jpg" twitter="" />
             <Staff
               name="木檜和明"
               imageUrl="https://l-w-i.net/img/profile_480.jpg"
               twitter=""
             />
-            <Staff
-              name="室谷優"
-              imageUrl=""
-              twitter=""
-            />
-            <Staff
-              name="alwehf"
-              imageUrl=""
-              twitter=""
-            />
+            <Staff name="室谷優" imageUrl="" twitter="" />
+            <Staff name="alwehf" imageUrl="" twitter="" />
             <Staff
               name="ほげさん"
               imageUrl="https://pbs.twimg.com/profile_images/701081366645993472/qHYp5OwX_400x400.jpg"
               twitter=""
             />
-            <Staff
-              name="けい酸ネコ"
-              imageUrl=""
-              twitter=""
-            />
+            <Staff name="けい酸ネコ" imageUrl="" twitter="" />
             <Staff
               name="えがら"
               imageUrl="/static/staffs/egara.jpg"
@@ -885,3 +877,5 @@ const withIcon = css`
     opacity: 0.3;
   }
 `
+
+export default Page
