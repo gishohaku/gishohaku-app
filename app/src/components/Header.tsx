@@ -115,12 +115,8 @@ const Header: React.FC<any> = () => {
       `}
       style={{ transform: `translateY(${isHeaderVisible ? '0' : '-66'}px)` }}>
       <div
-        css={[
-          hamburgerButton,
-          css`
-            margin-right: auto;
-          `,
-        ]}
+        className="mr-auto"
+        css={hamburgerButton}
         onClick={() => setOpen(true)}>
         <IconMenu />
       </div>
@@ -155,20 +151,10 @@ const Header: React.FC<any> = () => {
           />
         </a>
       </Link>
-      <div
-        css={[
-          hamburgerButton,
-          css`
-            margin-left: auto;
-          `,
-        ]}>
+      <div className="ml-auto" css={hamburgerButton}>
         {user && (
           <Link href={`/${eventId}/mypage/circle_stars`} passHref>
-            <a
-              css={css`
-                display: block;
-                height: 100%;
-              `}>
+            <a className='block h-full'>
               <IconHeart />
             </a>
           </Link>
