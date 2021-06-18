@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { jsx, css } from '@emotion/core'
@@ -27,6 +27,10 @@ const BooksSubmit: NextPage<any> = ({ userData }) => {
   const circleRef = userData.event && userData.event[eventId]
   const id = router.query.id as string
   const { book } = useBook(id)
+
+  useEffect(() => {
+    window.location = '/'
+  }, [])
 
   if (!circleRef) {
     return <p>サークル参加者向けページです。</p>

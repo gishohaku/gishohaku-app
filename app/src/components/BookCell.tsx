@@ -256,7 +256,7 @@ const BookCell: React.SFC<Props> = ({
                 margin-left: auto;
               }
             `}>
-            {book.type == 'fanzine' && (
+            {false && book.type == 'fanzine' && (
               <div
                 css={css`
                   position: relative;
