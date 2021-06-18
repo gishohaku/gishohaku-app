@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
+import Image from 'next/image'
 import { media, colors } from '../utils/style'
 import TextBlock from '../components/atoms/TextBlock'
 import SectionHeader from '../components/SectionHeder'
@@ -64,23 +65,13 @@ const Hero = () => (
         align-items: start;
       }
     `}>
-    <img
-      css={css`
-        width: 400px;
-        position: relative;
-        left: -10px;
-        height: 400px;
-        @media ${media.large} {
-          width: 280px;
-          margin: 0 auto 20px;
-          left: 0;
-          height: auto;
-        }
-      `}
-      src="/static/gishohaku5-logo.png"
-      width={280}
-      height={286}
-    />
+      <div className='mx-auto px-4 sm:px-0'>
+        <Image
+          width={400}
+          height={400}
+          src="/static/gishohaku5-logo.png"
+        />
+      </div>
     <div
       css={css`
         margin-left: 32px;
