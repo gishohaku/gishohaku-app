@@ -1,13 +1,10 @@
-/** @jsx jsx */
 import { useState, useContext } from 'react'
 import { NextPage } from 'next'
-import { jsx, css } from '@emotion/core'
 import firebase from 'firebase/app'
 
 import { getBooks, perBookCount } from '../utils/functions'
 import Book from '../utils/book'
 import BookCell from '../components/BookCell'
-import { media } from '../utils/style'
 import InfiniteScroll from 'react-infinite-scroller'
 import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
@@ -25,22 +22,9 @@ const Index: NextPage<InitialProps> = (props) => {
   const { eventId } = useContext(EventContext)
 
   return (
-    <div
-      css={css`
-        max-width: 720px;
-        margin: 32px auto;
-        padding: 0 16px;
-        @media ${media.small} {
-          padding-left: 0;
-          padding-right: 0;
-        }
-      `}>
+    <div className="mt-8 mx-auto px-0 sm:px-4 max-w-3xl" >
       <SEO title="頒布物一覧" />
-      <div
-        css={css`
-          position: relative;
-          margin-top: 48px;
-        `}>
+      <div className="relative mt-12">
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
       </div>
       <InfiniteScroll
@@ -49,10 +33,11 @@ const Index: NextPage<InitialProps> = (props) => {
           setHasMore(false)
           const lastBook = books[books.length - 1]
           const updatedAt = lastBook.updatedAt
+          if (!updatedAt) return
           const nextBooks = await getBooks(eventId, {
             startAfter: new firebase.firestore.Timestamp(
-              updatedAt!.seconds,
-              updatedAt!.nanoseconds,
+              updatedAt.seconds,
+              updatedAt.nanoseconds,
             ),
           })
           setBooks([...books, ...nextBooks])

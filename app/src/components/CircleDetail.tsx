@@ -100,6 +100,7 @@ const CircleDetail: React.FC<Props> = ({
           <Label text={allCategories[circle.category]} />
         </div>
         <CircleName>{circle.name}</CircleName>
+        <p className="text-sm mb-4 text-gray-600">{circle.description}</p>
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
@@ -308,5 +309,4 @@ const CircleName = styled.h2`
   font-size: 20px;
   font-weight: bold;
   margin-top: 2px;
-  margin-bottom: 8px;
 `
