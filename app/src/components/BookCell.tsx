@@ -41,7 +41,6 @@ interface Props {
   book: Book
   editable?: boolean
   isShowCircle?: boolean
-  isShowSnsShare?: boolean
   isLast?: boolean
   isFirst?: boolean
   movePrev?: (e: Event) => void
@@ -96,7 +95,6 @@ const BookCell: React.SFC<Props> = ({
   book,
   editable = false,
   isShowCircle = false,
-  isShowSnsShare = false,
   moveNext,
   movePrev,
   isLast = true,
@@ -203,12 +201,7 @@ const BookCell: React.SFC<Props> = ({
                   text="新刊"
                 />
               )}
-              <span
-                css={css`
-                  opacity: 0.8;
-                `}>
-                {metadata.join('・')}
-              </span>
+              <span className="opacity-80">{metadata.join('・')}</span>
             </div>
           </div>
 
@@ -320,16 +313,6 @@ const BookCell: React.SFC<Props> = ({
                 />
               </ResponsivePopover>
             )}
-          </div>
-        )}
-
-        {isShowSnsShare && (
-          <div
-            css={css`
-              margin-top: 12px;
-              margin-bottom: 12px;
-            `}>
-            <SnsShare size={SnsShareSize.Large} />
           </div>
         )}
 
