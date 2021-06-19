@@ -4,6 +4,7 @@ import { colors, media } from '../utils/style'
 import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/core'
 import BottomBar from './BottomBar'
+import { LiveNow } from './LiveNow'
 import Header, { headerHeight } from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
@@ -80,6 +81,7 @@ const Layout: React.FC<any> = (props) => {
         'gishohaku4',
         'gishohaku5',
       ].includes(eventId) && <BottomBar />}
+      <LiveNow />
       {/* {eventId === 'gishohaku5' && <MypageButton />} */}
     </>
   )
