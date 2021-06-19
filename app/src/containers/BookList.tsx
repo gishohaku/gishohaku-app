@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { IconShoppingCart, IconX } from 'sancho'
 import { Portal } from '../components/Portal'
 import { Embed } from '../components/common/Embed'
+import { RemoveScroll } from 'react-remove-scroll'
 
 interface InitialProps {
   books: Book[]
@@ -89,24 +90,26 @@ const Index: NextPage<InitialProps> = (props) => {
         </div>
         {active > -1 && (
           <Portal>
-            <div
-              className="fixed top-0 right-0 bottom-0 left-0 overflow-y-scroll"
-              style={{ zIndex: 100 }}>
-              <div className="my-8 sm:my-24 z-30 relative max-w-screen-md mx-auto pointer-events-none">
-                {/* FIXME(mottox2): better pointer events */}
-                <div className="pointer-events-auto inline-block mb-4">
-                  <CircleLink book={books[active]} />
-                </div>
-                <div className="pointer-events-auto">
-                  <BookCell book={books[active]} />
-                </div>
-              </div>
-              <CloseButton onClick={() => setActive(-1)} />
+            <RemoveScroll>
               <div
-                onClick={() => setActive(-1)}
-                className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-20"
-              />
-            </div>
+                className="fixed top-0 right-0 bottom-0 left-0 overflow-y-scroll"
+                style={{ zIndex: 100 }}>
+                <div className="my-8 sm:my-24 z-30 relative max-w-screen-md mx-auto pointer-events-none">
+                  {/* FIXME(mottox2): better pointer events */}
+                  <div className="pointer-events-auto inline-block mb-4">
+                    <CircleLink book={books[active]} />
+                  </div>
+                  <div className="pointer-events-auto">
+                    <BookCell book={books[active]} />
+                  </div>
+                </div>
+                <CloseButton onClick={() => setActive(-1)} />
+                <div
+                  onClick={() => setActive(-1)}
+                  className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-20"
+                />
+              </div>
+            </RemoveScroll>
           </Portal>
         )}
       </InfiniteScroll>
