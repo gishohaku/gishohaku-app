@@ -28,7 +28,7 @@ const Index: NextPage<InitialProps> = (props) => {
   const [active, setActive] = useState(-1)
 
   useEffect(() => {
-    const handleKeydown = (e) => {
+    const handleKeydown = (e: KeyboardEvent) => {
       if (e.code === 'ArrowLeft') setActive((prev) => Math.max(0, prev - 1))
       if (e.code === 'ArrowRight')
         setActive((prev) => Math.min(books.length - 1, prev + 1))
