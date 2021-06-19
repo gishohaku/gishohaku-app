@@ -10,6 +10,7 @@ import SEO from '../components/SEO'
 import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
 import SectionHeader from '../components/SectionHeder'
+import { imageUrl } from '../utils/imageUrl'
 
 interface InitialProps {
   books: Book[]
@@ -20,9 +21,11 @@ const Index: NextPage<InitialProps> = (props) => {
   const [hasMore, setHasMore] = useState(true)
   const [books, setBooks] = useState<Book[]>(initialBooks)
   const { eventId } = useContext(EventContext)
+  const [active, setActive] = useState(-1)
+  const handleClick = (index: number) => setActive(index)
 
   return (
-    <div className="mt-8 mx-auto px-0 sm:px-4 max-w-3xl" >
+    <div className="mt-8 mx-auto px-0 sm:px-4 max-w-screen-lg">
       <SEO title="頒布物一覧" />
       <div className="relative mt-12">
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
@@ -52,10 +55,40 @@ const Index: NextPage<InitialProps> = (props) => {
             Loading ...
           </div>
         }>
-        {books.map((book: Book) => (
-          <BookCell book={book} key={book.id} isShowCircle={true} />
-        ))}
+        <div className="flex flex-wrap">
+          {books.map((book: Book, i: number) => {
+            return (
+              <BookItem
+                key={book.id}
+                book={book}
+                onClick={() => {
+                  setActive(i)
+                }}
+              />
+            )
+          })}
+        </div>
+        {active > -1}
       </InfiniteScroll>
+    </div>
+  )
+}
+
+const BookItem: React.FC<{
+  book: Book
+  onClick(): void
+}> = ({ book }) => {
+  return (
+    <div className="w-1/3 lg:w-1/4 inline-block mb-4">
+      <img
+        src={imageUrl(book.images[0], {
+          aspect: 'pad',
+          width: 200,
+          height: 320,
+        })}
+      />
+      <p className="font-bold text-base leading-normal">{book.title}</p>
+      <p className="text-sm">{book.circle?.name}</p>
     </div>
   )
 }

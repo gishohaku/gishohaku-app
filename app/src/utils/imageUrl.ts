@@ -1,7 +1,7 @@
 interface ImageOption {
   width: number
   height: number
-  aspect: 'scale' | 'crop'
+  aspect: 'scale' | 'crop' | 'pad'
 }
 
 const firebaseOrigin = 'firebasestorage.googleapis.com'
@@ -12,6 +12,7 @@ export const imageUrl = (
   origin: string,
   options: Partial<ImageOption>,
 ): string => {
+  if (!origin) return ''
   let params: Partial<{
     w: number | undefined
     h: number | undefined
@@ -25,12 +26,18 @@ export const imageUrl = (
   params.a = {
     scale: 0,
     crop: 2,
+    pad: 3,
   }[options.aspect || 'crop']
   if (options.width) params.w = options.width
   if (options.height) params.h = options.height
 
+  console.log(params)
+
   const imageParams = Object.keys(params)
-    .filter((key) => Boolean(params[key as keyof typeof params]))
+    .filter((key) => {
+      const val = params[key as keyof typeof params]
+      return Boolean(val) || val === 0
+    })
     .map((key) => {
       return key + '=' + params[key as keyof typeof params]
     })
