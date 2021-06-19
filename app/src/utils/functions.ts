@@ -4,7 +4,7 @@ import Circle from './circle'
 import { db } from './firebase'
 import { EventId } from './event'
 
-export const perBookCount = 5
+export const perBookCount = 12
 
 export const getBooks = async (
   eventId: EventId,

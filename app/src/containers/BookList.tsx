@@ -11,8 +11,10 @@ import EventContext from '../contexts/EventContext'
 import { EventId } from '../utils/event'
 import SectionHeader from '../components/SectionHeder'
 import { imageUrl } from '../utils/imageUrl'
-import Circle from '../utils/circle'
 import Link from 'next/link'
+import { IconShoppingCart, IconX } from 'sancho'
+import { Portal } from '../components/Portal'
+import { Embed } from '../components/common/Embed'
 
 interface InitialProps {
   books: Book[]
@@ -27,6 +29,9 @@ const Index: NextPage<InitialProps> = (props) => {
 
   useEffect(() => {
     const handleKeydown = (e) => {
+      if (e.code === 'ArrowLeft') setActive((prev) => Math.max(0, prev - 1))
+      if (e.code === 'ArrowRight')
+        setActive((prev) => Math.min(books.length - 1, prev + 1))
       if (e.code === 'Escape') setActive(-1)
     }
     window.addEventListener('keydown', handleKeydown)
@@ -38,6 +43,11 @@ const Index: NextPage<InitialProps> = (props) => {
       <SEO title="頒布物一覧" />
       <div className="relative mt-12">
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
+        <Link href={`/${eventId}/mypage/book_stars`} passHref>
+          <a className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gishohaku5 rounded font-bold text-white py-2 px-4">
+            チェックリスト
+          </a>
+        </Link>
       </div>
       <InfiniteScroll
         pageStart={0}
@@ -78,37 +88,56 @@ const Index: NextPage<InitialProps> = (props) => {
           })}
         </div>
         {active > -1 && (
-          <div className="fixed top-0 right-0 bottom-0 left-0 overflow-y-scroll">
-            <div className="my-24 z-30 relative max-w-screen-md mx-auto pointer-events-none">
-              {/* FIXME(mottox2): better pointer events */}
-              <div className="pointer-events-auto inline-block mb-4">
-                <CircleLink book={books[active]}/>
-              </div>
-              <div className="pointer-events-auto">
-                <BookCell book={books[active]} />
-              </div>
-            </div>
+          <Portal>
             <div
-              onClick={() => setActive(-1)}
-              className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-20"
-            />
-          </div>
+              className="fixed top-0 right-0 bottom-0 left-0 overflow-y-scroll"
+              style={{ zIndex: 100 }}>
+              <div className="my-8 sm:my-24 z-30 relative max-w-screen-md mx-auto pointer-events-none">
+                {/* FIXME(mottox2): better pointer events */}
+                <div className="pointer-events-auto inline-block mb-4">
+                  <CircleLink book={books[active]} />
+                </div>
+                <div className="pointer-events-auto">
+                  <BookCell book={books[active]} />
+                </div>
+              </div>
+              <CloseButton onClick={() => setActive(-1)} />
+              <div
+                onClick={() => setActive(-1)}
+                className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-20"
+              />
+            </div>
+          </Portal>
         )}
       </InfiniteScroll>
     </div>
   )
 }
 
+const CloseButton: React.FC<{
+  onClick(): void
+}> = ({ onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="close modal"
+      className="fixed top-0 right-0 p-4 m-4 bg-white z-30 rounded-full shadow border border-gray-200">
+      <IconX />
+    </button>
+  )
+}
+
 const CircleLink: React.FC<{
   book: Book
-}> = ({ book, className }) => {
+}> = ({ book }) => {
   const circle = book.circle
   if (!circle) return null
   return (
     <Link href={`/${book.eventId}/circles/${circle.id}`}>
-      <a className={`bg-white inline-block p-3 rounded ${className || ''}`}>
-        <span className="bg-red-500 text-white px-2 py-1 font-bold text-sm rounded mr-2">{circle.booth}</span>{' '}
-       {' '}
+      <a className={`bg-white inline-block p-3 rounded`}>
+        <span className="bg-red-500 text-white px-2 py-1 font-bold text-sm rounded mr-2">
+          {circle.booth}
+        </span>
         {circle.name}
       </a>
     </Link>
@@ -129,16 +158,33 @@ const BookItem: React.FC<{
         e.preventDefault()
         onClick()
       }}>
-      <img
-        className="max-w-full"
-        src={imageUrl(book.images[0], {
-          aspect: 'pad',
-          width: 300,
-          height: 460,
-        })}
-      />
-      <p className="mt-1 font-bold text-base leading-normal">{book.title}</p>
-      <p className="text-sm">{book.circle?.name}</p>
+      <div className="relative">
+        <Embed width={300} height={420}>
+          <img
+            className="max-w-full"
+            src={imageUrl(book.images[0], {
+              aspect: 'pad',
+              width: 300,
+              height: 420,
+            })}
+          />
+        </Embed>
+        {book.purchaseUrl && (
+          <a
+            className="absolute bottom-0 right-0 p-2 m-2 bg-white rounded-full flex items-center justify-center shadow border border-gray-200"
+            href={book.purchaseUrl}
+            target="_blank"
+            rel="noopener norefferer">
+            <div className="relative left-[-1px]">
+              <IconShoppingCart />
+            </div>
+          </a>
+        )}
+      </div>
+      <p className="mt-2 mb-0.5 font-bold text-base leading-normal line-clamp-3">
+        {book.title}
+      </p>
+      <p className="text-sm text-gray-500">{book.circle?.name}</p>
     </a>
   )
 }
