@@ -22,7 +22,6 @@ const Index: NextPage<InitialProps> = (props) => {
   const [books, setBooks] = useState<Book[]>(initialBooks)
   const { eventId } = useContext(EventContext)
   const [active, setActive] = useState(-1)
-  const handleClick = (index: number) => setActive(index)
 
   return (
     <div className="mt-8 mx-auto px-0 sm:px-4 max-w-screen-lg">
@@ -68,7 +67,14 @@ const Index: NextPage<InitialProps> = (props) => {
             )
           })}
         </div>
-        {active > -1}
+        {active > -1 && (
+          <div className="fixed top-0 right-0 bottom-0 left-0 overflow-y-scroll">
+            <div className="mx-12 my-24 z-30 relative">
+              <BookCell book={books[active]} />
+            </div>
+            <div onClick={() => setActive(-1)} className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-20"/>
+          </div>
+        )}
       </InfiniteScroll>
     </div>
   )
@@ -77,19 +83,25 @@ const Index: NextPage<InitialProps> = (props) => {
 const BookItem: React.FC<{
   book: Book
   onClick(): void
-}> = ({ book }) => {
+}> = ({ book, onClick }) => {
+  console.log(book)
+  const {eventId, id} = book
   return (
-    <div className="w-1/3 lg:w-1/4 inline-block mb-4">
+    <a href={`/${eventId}/books/${id}`} className="w-1/3 lg:w-1/4 inline-block mb-4" onClick={(e) => {
+      e.preventDefault()
+      onClick()
+    }}>
       <img
+        className="max-w-full"
         src={imageUrl(book.images[0], {
           aspect: 'pad',
-          width: 200,
-          height: 320,
+          width: 300,
+          height: 480,
         })}
       />
-      <p className="font-bold text-base leading-normal">{book.title}</p>
+      <p className="mt-1 font-bold text-base leading-normal">{book.title}</p>
       <p className="text-sm">{book.circle?.name}</p>
-    </div>
+    </a>
   )
 }
 
