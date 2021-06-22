@@ -360,7 +360,7 @@ const Page = () => {
         </TextBlock>
       </section>
       <section css={section} id='market'>
-        <SectionHeader en="MARKET">オンライン参加 / マーケット</SectionHeader>
+        <SectionHeader en="MARKET">マーケット</SectionHeader>
         <TextBlock>
           <p>
             技書博関連の頒布物を各社のオンラインマーケット上でもご購入いただけます。
@@ -408,7 +408,7 @@ const Page = () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
+        <SectionHeader en="ENTRY">一般来場予約</SectionHeader>
         <TextBlock>
           <p>
             技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
@@ -421,7 +421,7 @@ const Page = () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
+        <SectionHeader en="RADIO">技書博ラジオ</SectionHeader>
         <TextBlock>
           <p>
             技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
@@ -459,7 +459,7 @@ const Page = () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / 前夜祭</SectionHeader>
+        <SectionHeader en="RADIO">前夜祭</SectionHeader>
         <TextBlock>
           <p>
             技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。
