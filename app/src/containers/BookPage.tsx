@@ -19,10 +19,10 @@ const BookPage: NextPage<Props> = (props) => {
         description={book.description}
         imageUrl={book.images[0]}
       />
-      <div className="text-right">
+      <div className="text-right mb-8">
         <SnsShare size={SnsShareSize.Large} />
       </div>
-      <BookCell book={book} isShowCircle={true} />
+      <BookCell book={book} />
     </div>
   )
 }

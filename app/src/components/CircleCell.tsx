@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 
 import circleTumbnail from '../images/circle.png'
@@ -9,7 +9,6 @@ import Circle, { allCategories } from '../utils/circle'
 import { colors, media } from '../utils/style'
 import ImageBox from './ImageBox'
 import CheckButton from './CheckButton'
-import { IconChevronRight } from 'sancho'
 import { useContext, useCallback } from 'react'
 import UserContext from '../contexts/UserContext'
 import { UserStars } from '../contexts/StarsContext'
@@ -56,7 +55,7 @@ const CircleCell: React.FC<Props> = ({
     <Container>
       <Link href={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
         <CircleLink>
-          <CircleBooth>{circle.booth}</CircleBooth>
+          <BoothNum>{circle.booth}</BoothNum>
           <ImageBox
             size="circlecut"
             imageUrl={
@@ -83,60 +82,17 @@ const CircleCell: React.FC<Props> = ({
   )
 }
 
-export const CircleBooth: React.FC<{
-  name?: string
-}> = ({ children, name }) => (
-  <div
-    css={css`
-      display: flex;
-      align-items: center;
-    `}>
-    {children && (children as string).startsWith('2F') ? (
-      <CircleBooth2nd>{children}</CircleBooth2nd>
-    ) : (
-      <CircleBooth3rd>{children}</CircleBooth3rd>
-    )}
-    {name && (
-      <div
-        css={css`
-          flex: 1;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          align-items: center;
-          display: flex;
-          margin-right: 12px;
-        `}>
-        {name} <IconChevronRight />
-      </div>
-    )}
-  </div>
-)
-
 export default CircleCell
 
-const CircleBooth2nd = styled.div`
+const BoothNum = styled.div`
   color: white;
-  background-color: ${colors.floor2nd};
+  background-color: ${colors.primary};
   display: inline-block;
   font-size: 16px;
   font-weight: bold;
   padding: 4px 8px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  margin-right: 8px;
-`
-
-const CircleBooth3rd = styled.div`
-  color: white;
-  background-color: ${colors.floor3rd};
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  margin-right: 8px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
 `
 
 const Container = styled.div`
