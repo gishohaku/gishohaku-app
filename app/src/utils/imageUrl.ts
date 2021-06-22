@@ -31,8 +31,6 @@ export const imageUrl = (
   if (options.width) params.w = options.width
   if (options.height) params.h = options.height
 
-  console.log(params)
-
   const imageParams = Object.keys(params)
     .filter((key) => {
       const val = params[key as keyof typeof params]
