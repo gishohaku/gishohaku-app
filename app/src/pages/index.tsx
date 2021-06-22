@@ -152,9 +152,7 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton
-          href="#market"
-          className="btn-blue">
+        <LinkButton href="#market" className="btn-blue">
           オンラインマーケット
         </LinkButton>
         <LinkButton href={`/gishohaku5/circles`} className="btn-green">
@@ -359,7 +357,7 @@ const Page = () => {
           </p>
         </TextBlock>
       </section>
-      <section css={section} id='market'>
+      <section css={section} id="market">
         <SectionHeader en="MARKET">マーケット</SectionHeader>
         <TextBlock>
           <p>
@@ -417,6 +415,7 @@ const Page = () => {
             <br />
             必ず事前にチケットをお求めのうえ、ご参加ください。
             <br />
+            <strong>イベントは終了しました。</strong>
           </p>
         </TextBlock>
       </section>
@@ -432,15 +431,10 @@ const Page = () => {
             <br />
           </p>
           <p
+            className="mt-8 text-center relative w-full h-0"
             css={css`
-              margin-top: 32px;
-              text-align: center;
-              position: relative;
-              width: 100%;
-              height: 0;
               padding-bottom: 56.25%;
               overflow: hidden;
-              margin-bottom: 50px;
             `}>
             <iframe
               css={css`
@@ -468,15 +462,10 @@ const Page = () => {
             <br />
           </p>
           <p
+            className="mt-8 text-center relative w-full h-0"
             css={css`
-              margin-top: 32px;
-              text-align: center;
-              position: relative;
-              width: 100%;
-              height: 0;
               padding-bottom: 56.25%;
               overflow: hidden;
-              margin-bottom: 50px;
             `}>
             <iframe
               css={css`
