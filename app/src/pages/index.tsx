@@ -10,7 +10,7 @@ import directionsIcon from '../components/top/round-directions_run.svg'
 const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
-  href: string,
+  href: string
   className?: string
 }> = ({ href, children, className }) => (
   <a
@@ -36,8 +36,6 @@ const LinkButton: React.SFC<{
         color: white;
       }
     `}
-    target="_blank"
-    rel="noopener"
     href={href}
     className={className}>
     {children}
@@ -155,9 +153,9 @@ const Hero = () => (
           }
         `}>
         <LinkButton
-          href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html"
+          href="#market"
           className="btn-blue">
-          来場事前予約（無料）
+          オンラインマーケット
         </LinkButton>
         <LinkButton href={`/gishohaku5/circles`} className="btn-green">
           出展サークルを確認
@@ -361,71 +359,7 @@ const Page = () => {
           </p>
         </TextBlock>
       </section>
-      <section css={section}>
-        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
-        <TextBlock>
-          <p>
-            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
-            <br />
-            時間指定制になりますので、券面に表記された時間以外は入場頂けません。
-            <br />
-            必ず事前にチケットをお求めのうえ、ご参加ください。
-            <br />
-          </p>
-          <p
-            css={css`
-              font-size: 14px;
-              margin-top: 32px;
-              text-align: center;
-              a {
-                margin: 8px 16px;
-              }
-            `}>
-            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-              来場事前予約（無料）
-            </LinkButton>
-          </p>
-        </TextBlock>
-      </section>
-      <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
-        <TextBlock>
-          <p>
-            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
-            <br />
-            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。
-            <br />
-            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。
-            <br />
-          </p>
-          <p
-            css={css`
-              margin-top: 32px;
-              text-align: center;
-              position: relative;
-              width: 100%;
-              height: 0;
-              padding-bottom: 56.25%;
-              overflow: hidden;
-              margin-bottom: 50px;
-            `}>
-            <iframe
-              css={css`
-                border: 0;
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-              `}
-              src="https://www.youtube.com/embed/MukacNr759M?controls=0"
-              title="技書博ラジオ"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
-          </p>
-        </TextBlock>
-      </section>
-      <section css={section}>
+      <section css={section} id='market'>
         <SectionHeader en="MARKET">オンライン参加 / マーケット</SectionHeader>
         <TextBlock>
           <p>
@@ -470,6 +404,57 @@ const Page = () => {
                 />
               </a>
             </div>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
+            <br />
+            時間指定制になりますので、券面に表記された時間以外は入場頂けません。
+            <br />
+            必ず事前にチケットをお求めのうえ、ご参加ください。
+            <br />
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
+            <br />
+            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。
+            <br />
+            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。
+            <br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/MukacNr759M?controls=0"
+              title="技書博ラジオ"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
           </p>
         </TextBlock>
       </section>
