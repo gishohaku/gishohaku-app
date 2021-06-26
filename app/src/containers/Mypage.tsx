@@ -1,13 +1,10 @@
-/** @jsx jsx */
+import { useContext } from 'react'
 import Link from 'next/link'
-import { firebase } from '../utils/firebase'
-
-import { jsx, css } from '@emotion/core'
-
 import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
+
+import { firebase } from '../utils/firebase'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
-import { useContext } from 'react'
 import { User } from '../contexts/UserContext'
 
 interface Props {
@@ -15,30 +12,16 @@ interface Props {
   userData: User
 }
 
-const noDecoration = css`
-  text-decoration: none;
-`
-
 const Mypage: React.FC<Props> = ({ userData }) => {
   const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
 
   return (
     <Container>
-      <div
-        css={css`
-          background-color: white;
-          margin-top: 20px;
-          border-radius: 4px;
-          overflow: hidden;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-        `}>
+      <div className="bg-white mt-8 overflow-hidden rounded shadow">
         <List>
-          <Link
-            href="/[eventId]/mypage/circle_stars"
-            as={`/${eventId}/mypage/circle_stars`}
-            passHref>
-            <a css={noDecoration}>
+          <Link href={`/${eventId}/mypage/circle_stars`} passHref>
+            <a>
               <ListItem
                 primary="チェックしたサークル"
                 secondary="チェックをつけたサークルを確認できます"
@@ -46,11 +29,8 @@ const Mypage: React.FC<Props> = ({ userData }) => {
               />
             </a>
           </Link>
-          <Link
-            href="/[eventId]/mypage/book_stars"
-            as={`/${eventId}/mypage/book_stars`}
-            passHref>
-            <a css={noDecoration}>
+          <Link href={`/${eventId}/mypage/book_stars`} passHref>
+            <a>
               <ListItem
                 primary="チェックした頒布物"
                 secondary="チェックをつけた頒布物が確認できます"
@@ -60,7 +40,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
           </Link>
           {circleRef && (
             <Link href={`/${eventId}/mypage/circle`} passHref>
-              <a css={noDecoration}>
+              <a>
                 <ListItem
                   primary="サークル情報編集"
                   secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
@@ -72,10 +52,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         </List>
       </div>
 
-      <List
-        css={css`
-          margin-top: 20px;
-        `}>
+      <List className="mt-4">
         <ListItem
           primary="ログアウト"
           contentBefore={<IconLogOut />}

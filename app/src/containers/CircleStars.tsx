@@ -1,9 +1,6 @@
-/** @jsx jsx */
 import { useContext } from 'react'
 
-import { jsx, css } from '@emotion/core'
 import { Container } from '../components/common/Container'
-import { media } from '../utils/style'
 import withUser from '../withUser'
 import EventContext from '../contexts/EventContext'
 import StarsContext from '../contexts/StarsContext'
@@ -35,15 +32,7 @@ const BookStars: React.FC = () => {
   return (
     <>
       <StarTab />
-      <Container
-        css={css`
-          margin: 32px auto;
-          padding: 0 16px;
-          @media ${media.small} {
-            padding-left: 0;
-            padding-right: 0;
-          }
-        `}>
+      <Container className="my-8 mx-auto px-0 md:px-4">
         <CirclesList>
           {circleStars.map((circleId) => (
             <AsnycCircleCell circleId={circleId} key={circleId} />

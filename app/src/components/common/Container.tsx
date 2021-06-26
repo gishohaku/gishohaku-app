@@ -10,7 +10,8 @@ export const Container: React.FC<{
         width: 100%;
         max-width: 1200px;
         box-sizing: border-box;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         padding: 0 1rem;
 
         @media (min-width: 992px) {
