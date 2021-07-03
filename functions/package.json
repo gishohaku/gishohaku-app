@@ -7,7 +7,7 @@
   "scripts": {
     "build": "babel src -d dist --extensions='.ts'",
     "functions:shell": "firebase experimental:functions:shell",
-    "functions:emulator": "yarn firebase emulators:start --only functions",
+    "functions:emulator": "yarn firebase emulators:start",
     "format": "prettier 'app/**/*.{ts,tsx}' --write"
   },
   "prettier": {
@@ -20,10 +20,10 @@
     "@google-cloud/pubsub": "^1.7.2",
     "@slack/web-api": "^5.6.0",
     "axios": "^0.19.0",
-    "firebase": "^6.4.0",
-    "firebase-admin": "^8.4.0",
-    "firebase-functions": "^3.3.0",
-    "firebase-tools": "^7.2.4"
+    "firebase": "^8.7.0",
+    "firebase-admin": "^9.10.0",
+    "firebase-functions": "^3.14.1",
+    "firebase-tools": "^9.14.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
@@ -37,6 +37,6 @@
     "typescript": "^3.4.5"
   },
   "engines": {
-    "node": "10"
+    "node": "14"
   }
 }
