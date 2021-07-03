@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "build": "babel src -d dist --extensions='.ts'",
-    "functions:shell": "firebase experimental:functions:shell",
-    "functions:emulator": "yarn firebase emulators:start",
+    "predeploy": "npm run build",
+    "deploy": "firebase deploy --only='functions'",
+    "shell": "firebase experimental:functions:shell",
+    "emulator": "firebase emulators:start --only functions",
     "format": "prettier 'app/**/*.{ts,tsx}' --write"
   },
   "prettier": {
