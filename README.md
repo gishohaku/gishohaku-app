@@ -2,7 +2,7 @@
 
 ## 環境
 
-- Node.js 10
+- Node.js 14
 - Next.js 10
 
 ## 開発
@@ -21,9 +21,10 @@ export PROJECT_ID=
 
 ### ローカル環境
 
-Node.js 10.13 以上を導入した環境で次のコマンドを実行を実行してください。
+Node.js 14 を導入した環境で次のコマンドを実行を実行してください。
 
 ```shell
+$ cd app
 $ npm install
 $ npm run dev
 $ open http://localhost:3000
@@ -31,9 +32,7 @@ $ open http://localhost:3000
 
 ## デプロイ
 
-デプロイは CircleCI で Firebase に対して行っている。
-認証系の情報も CircleCI にもたせているので意識する必要はない。
-
+デプロイは Google Cloud Build で行っている。
 master ブランチに push すると本番に影響があるので、怪しい変更は Pull Request を作ること。
 
 ## scripts
