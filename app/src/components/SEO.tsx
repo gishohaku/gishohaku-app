@@ -58,27 +58,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={
-          imageUrl ||
-          'https://gishohaku.dev/static/gishohaku5-icon.png'
-        }
+        href={'https://gishohaku.dev/static/gishohaku5-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={
-          imageUrl ||
-          'https://gishohaku.dev/static/gishohaku5-icon.png'
-        }
+        href={'https://gishohaku.dev/static/gishohaku5-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={
-          imageUrl ||
-          'https://gishohaku.dev/static/gishohaku5-icon.png'
-        }
+        content={'https://gishohaku.dev/static/gishohaku5-icon.png'}
         key="image"
       />
       <meta
@@ -88,11 +79,13 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta property="og:type" content="website" key="type" />
       <meta
+        property="og:site_name"
+        content="技術書同人誌博覧会"
+        key="site_name"
+      />
+      <meta
         property="og:image"
-        content={
-          imageUrl ||
-          'https://gishohaku.dev/static/gishohaku5-ogp.png'
-        }
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku5-ogp.png'}
         key="image"
       />
       <meta
@@ -106,6 +99,11 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         name="twitter:description"
         content={metaDescription}
         key="twitter:description"
+      />
+      <meta
+        property="twitter:image"
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku5-ogp.png'}
+        key="twitter:image"
       />
       <meta name="description" content={metaDescription} key="description" />
       <meta
