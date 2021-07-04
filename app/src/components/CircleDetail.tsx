@@ -62,9 +62,7 @@ const CircleDetail: React.FC<Props> = ({
     }
   }, [])
 
-  const circleColor: string = circle.booth.startsWith('2F')
-    ? colors.floor2nd
-    : colors.floor3rd
+  const circleColor: string = '#3FBD92'
 
   if (!circle) return null
 
