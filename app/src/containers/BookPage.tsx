@@ -17,7 +17,7 @@ const BookPage: NextPage<Props> = (props) => {
       <SEO
         title={book.title}
         description={book.description}
-        imageUrl={book.images[0]}
+        imageUrl={`https://us-central1-gishohaku.cloudfunctions.net/og-image/books/${book.id}.png`}
       />
       <div className="text-right mb-8">
         <SnsShare size={SnsShareSize.Large} />
