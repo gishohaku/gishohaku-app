@@ -111,6 +111,7 @@ export const categoriesByEvent = {
   gishohaku3: categories3,
   gishohaku4: categories4,
   gishohaku5: categories5,
+  gishohaku6: categories6,
 }
 
 export const plans = {

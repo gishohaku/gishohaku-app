@@ -1,11 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import Image from 'next/image'
-import { media, colors } from '../utils/style'
-import TextBlock from '../components/atoms/TextBlock'
-import SectionHeader from '../components/SectionHeder'
-import placeIcon from '../components/top/round-place.svg'
-import directionsIcon from '../components/top/round-directions_run.svg'
+import { media, colors } from '../../utils/style'
+import TextBlock from '../../components/atoms/TextBlock'
+import SectionHeader from '../../components/SectionHeder'
+import placeIcon from '../../components/top/round-place.svg'
+import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
@@ -153,8 +152,8 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
         `}>
-        <LinkButton href="https://forms.gle/1QtaPJBHYxMCgNig6">
-          参加サークル募集中！
+        <LinkButton href="#">
+          一般参加申込は1月中旬ごろ開始予定です
         </LinkButton>
       </div>
     </div>

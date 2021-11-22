@@ -49,6 +49,7 @@ export const StarsProvider: React.FC = ({ children }) => {
     gishohaku3: { bookStars: [], circleStars: [] },
     gishohaku4: { bookStars: [], circleStars: [] },
     gishohaku5: { bookStars: [], circleStars: [] },
+    gishohaku6: { bookStars: [], circleStars: [] },
   })
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export const StarsProvider: React.FC = ({ children }) => {
       const stars3 = await db.doc(`users/${userId}/stars/gishohaku3`).get()
       const stars4 = await db.doc(`users/${userId}/stars/gishohaku4`).get()
       const stars5 = await db.doc(`users/${userId}/stars/gishohaku5`).get()
+      const stars6 = await db.doc(`users/${userId}/stars/gishohaku6`).get()
 
       return {
         gishohaku1: { ...defaultStars, ...stars1.data() } as Stars,
@@ -67,6 +69,7 @@ export const StarsProvider: React.FC = ({ children }) => {
         gishohaku3: { ...defaultStars, ...stars3.data() } as Stars,
         gishohaku4: { ...defaultStars, ...stars4.data() } as Stars,
         gishohaku5: { ...defaultStars, ...stars5.data() } as Stars,
+        gishohaku6: { ...defaultStars, ...stars5.data() } as Stars,
       }
     }
 
@@ -134,6 +137,10 @@ type StarsContextType = {
 
 const StarsContext = React.createContext<StarsContextType>(({
   userStars: {
+    gishohaku6: {
+      bookStars: [],
+      circleStars: [],
+    },
     gishohaku5: {
       bookStars: [],
       circleStars: [],

@@ -79,8 +79,9 @@ const Layout: React.FC<any> = (props) => {
         'gishohaku3',
         'gishohaku4',
         'gishohaku5',
+        'gishohaku6',
       ].includes(eventId) && <BottomBar />}
-      {/* {eventId === 'gishohaku5' && <MypageButton />} */}
+      {/* {eventId === 'gishohaku6' && <MypageButton />} */}
     </>
   )
 }

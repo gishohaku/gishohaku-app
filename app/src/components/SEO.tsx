@@ -21,9 +21,9 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     name: '技術書同人誌博覧会',
     description:
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
-    startDate: '2020-06-27',
-    endDate: '2020-06-27',
-    image: 'https://gishohaku.dev/static/gishohaku5-ogp.png',
+    startDate: '2022-02-26',
+    endDate: '2022-02-26',
+    image: 'https://gishohaku.dev/static/gishohaku6-ogp.png',
     url: 'https://gishohaku.dev/',
     offers: {
       '@type': 'Offer',
@@ -41,13 +41,13 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     },
     location: {
       '@type': 'Place',
-      name: 'プラザマーム',
+      name: '東京都産業貿易センター 台東館',
       address: {
         '@type': 'PostalAddress',
         addressLocality: '東京都',
         addressRegion: 'JP',
-        postalCode: '103-0007',
-        streetAddress: '東京都中央区日本橋浜町1丁目1-12（プラザANSビル2F,3F）',
+        postalCode: '111-0033',
+        streetAddress: '東京都台東区花川戸2-6-5-4F',
       },
     },
   }
@@ -58,18 +58,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku5-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku6-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku5-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku6-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={'https://gishohaku.dev/static/gishohaku5-icon.png'}
+        content={'https://gishohaku.dev/static/gishohaku6-icon.png'}
         key="image"
       />
       <meta
@@ -85,7 +85,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="og:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku5-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku6-ogp.png'}
         key="image"
       />
       <meta
@@ -102,7 +102,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="twitter:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku5-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku6-ogp.png'}
         key="twitter:image"
       />
       <meta name="description" content={metaDescription} key="description" />

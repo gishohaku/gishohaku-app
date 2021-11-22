@@ -7,7 +7,7 @@ export const LiveNow = () => {
       href="https://www.youtube.com/watch?v=MukacNr759M"
       target="_blank"
       rel="noopener"
-      className="fixed m-4 bottom-16 bg-gishohaku5 text-white p-3 right-0 z-[12] shadow flex items-center rounded text-base">
+      className="fixed m-4 bottom-16 bg-gishohaku6 text-white p-3 right-0 z-[12] shadow flex items-center rounded text-base">
       <div className="bg-white rounded-full flex items-center justify-center p-1.5 mr-2">
         <IconPlay
           fill="#328BB6"

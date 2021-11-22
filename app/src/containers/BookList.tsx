@@ -45,7 +45,7 @@ const Index: NextPage<InitialProps> = (props) => {
       <div className="relative mt-12">
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
         <Link href={`/${eventId}/mypage/book_stars`} passHref>
-          <a className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gishohaku5 rounded font-bold text-white py-2 px-4">
+          <a className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gishohaku6 rounded font-bold text-white py-2 px-4">
             チェックリスト
           </a>
         </Link>
