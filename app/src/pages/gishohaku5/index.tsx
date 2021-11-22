@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
+import Image from 'next/image'
 import { media, colors } from '../../utils/style'
 import TextBlock from '../../components/atoms/TextBlock'
 import SectionHeader from '../../components/SectionHeder'
@@ -10,7 +11,8 @@ const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
   href: string
-}> = ({ href, children }) => (
+  className?: string
+}> = ({ href, children, className }) => (
   <a
     css={css`
       font-size: 16px;
@@ -34,9 +36,8 @@ const LinkButton: React.SFC<{
         color: white;
       }
     `}
-    target="_blank"
-    rel="noopener"
-    href={href}>
+    href={href}
+    className={className}>
     {children}
   </a>
 )
@@ -44,19 +45,14 @@ const LinkButton: React.SFC<{
 const Hero = () => (
   <div
     css={css`
-      background: linear-gradient(
-        180deg,
-        #cce0ff 0%,
-        rgba(208, 224, 249, 0.791667) 40%,
-        rgba(255, 255, 255, 100) 100%
-      );
+      background-color: #edefe8;
       margin-top: -66px;
       padding: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding-top: 66px;
-      padding-bottom: 0;
+      padding-bottom: 24px;
 
       color: white;
       color: #1c3559;
@@ -67,23 +63,9 @@ const Hero = () => (
         align-items: start;
       }
     `}>
-    <img
-      css={css`
-        width: 400px;
-        position: relative;
-        left: -10px;
-        height: 370px;
-        @media ${media.large} {
-          width: 280px;
-          margin: 0 auto 20px;
-          left: 0;
-          height: auto;
-        }
-      `}
-      src="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png"
-      width={280}
-      height={286}
-    />
+    <div className="mx-auto lg:mx-0 px-4">
+      <Image width={400} height={400} src="/static/gishohaku5-logo.png" />
+    </div>
     <div
       css={css`
         margin-left: 32px;
@@ -136,7 +118,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2021.06.19 <small>Sat. 11:00~17:00</small>
+        2021.06.19 <small>Sat. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -146,14 +128,37 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @大田区産業プラザPiO
+        @大田区産業プラザPiO 1F 大展示ホール
       </div>
       <div
         css={css`
           margin-top: 16px;
+          .btn-green {
+            border: 2px solid #00c79a;
+            background-color: #00c79a;
+            color: #edefe8;
+            &:hover {
+              background-color: #edefe8;
+              color: #00c79a;
+            }
+          }
+          .btn-blue {
+            border: 2px solid #009ac7;
+            background-color: #009ac7;
+            color: #edefe8;
+            &:hover {
+              background-color: #edefe8;
+              color: #009ac7;
+            }
+          }
         `}>
-        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-          一般参加申込はこちら
+        <LinkButton
+          href="#market"
+          className="btn-blue">
+          オンラインマーケット
+        </LinkButton>
+        <LinkButton href={`/gishohaku5/circles`} className="btn-green">
+          出展サークルを確認
         </LinkButton>
       </div>
     </div>
@@ -323,11 +328,11 @@ const section = css`
     padding: 32px 0;
   }
   :nth-child(odd) {
-    background-color: #f7f8fa;
+    background-color: #edefe8;
   }
 `
 
-export default () => {
+const Page = () => {
   return (
     <>
       <Hero />
@@ -340,28 +345,152 @@ export default () => {
             その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
             私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
           </p>
-        </TextBlock>
-      </section>
-      <section css={section}>
-        <SectionHeader en="TICKET">チケット申込</SectionHeader>
-        <TextBlock>
-          <p>
-            技書博本編に来場される際には、事前予約（無料）が必要です。<br />
-            時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
-            必ず事前にチケットをお求めのうえ、ご参加ください。<br />
-          </p>
           <p
             css={css`
-              font-size: 14px;
               margin-top: 32px;
               text-align: center;
               a {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01p1tn197jn11.html">
-              一般参加申込はこちら
+            <LinkButton href="https://gishohaku.booth.pm/items/3044913">
+              公式ガイドブックを無料ダウンロード
             </LinkButton>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section} id='market'>
+        <SectionHeader en="MARKET">オンライン参加 / マーケット</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博関連の頒布物を各社のオンラインマーケット上でもご購入いただけます。
+            <br />
+            以下のバナーよりご覧ください！
+            <br />
+          </p>
+          <p
+            css={css`
+              text-align: center;
+              .banner {
+                display: block;
+                width: 200px;
+                border: 1px solid #ddd;
+              }
+              .banner-outer {
+                text-align: center;
+                display: inline-block;
+                margin: 0px 8px;
+              }
+              .banner-caption {
+                font-size: 12px;
+                color: #888;
+              }
+            `}>
+            <div className="banner-outer">
+              <a
+                target="_blank"
+                href="https://ecs.toranoana.jp/tora/ec/cot/pages/all/item/2021/06/19/00001/">
+                <img
+                  className="banner"
+                  src="https://www.toranoana.jp/icon/tora_bn.gif"
+                />
+              </a>
+            </div>
+            <div className="banner-outer">
+              <a target="_blank" href="https://booth.pm/ja/events/gishohaku5">
+                <img
+                  className="banner"
+                  src="https://asset.booth.pm/static-images/banner/200x40_01.png"
+                />
+              </a>
+            </div>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
+            <br />
+            時間指定制になりますので、券面に表記された時間以外は入場頂けません。
+            <br />
+            必ず事前にチケットをお求めのうえ、ご参加ください。
+            <br />
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
+            <br />
+            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。
+            <br />
+            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。
+            <br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/MukacNr759M?controls=0"
+              title="技書博ラジオ"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="RADIO">オンライン参加 / 前夜祭</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。
+            <br />
+            開催直前の準備状況やスタッフ裏話、当日企画の詳細など、いろいろお話させていただきますので、お楽しみに。
+            <br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/76WPGlK_8l4?controls=0"
+              title="技書博ラジオ 前夜祭"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
           </p>
         </TextBlock>
       </section>
@@ -404,7 +533,7 @@ export default () => {
           <iframe
             css={css`
               width: 100%;
-              min-height: 240px;
+              min-height: 320px;
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.794138856147!2d139.72187801537484!3d35.55878604428462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1622789832134!5m2!1sja!2sjp"></iframe>
         </TextBlock>
@@ -597,6 +726,72 @@ export default () => {
               imageUrl="https://pbs.twimg.com/profile_images/192706028/withmona_400x400.jpg"
               twitter="https://twitter.com/Alice_You"
             />
+            <Staff
+              name="にしこさん"
+              imageUrl="https://pbs.twimg.com/profile_images/1351110571513565192/NQ0ZcB8P_400x400.jpg"
+              twitter=""
+            />
+            <Staff
+              name="KANE"
+              imageUrl="https://pbs.twimg.com/profile_images/1066541445543276544/zHx_piIh_400x400.jpg"
+              twitter=""
+            />
+            <Staff
+              name="なべくら"
+              imageUrl="/static/staffs/nabekura.jpg"
+              twitter=""
+            />
+            <Staff
+              name="さんじょう"
+              imageUrl="/static/staffs/sanjo.jpg"
+              twitter=""
+            />
+            <Staff
+              name="ごまなつ"
+              imageUrl="/static/staffs/gomanatsu.jpg"
+              twitter=""
+            />
+            <Staff name="いまい" imageUrl="" twitter="" />
+            <Staff
+              name="ふーれむ"
+              imageUrl="https://pbs.twimg.com/profile_images/1647040005/screenshot_01_400x400.jpg"
+              twitter=""
+            />
+            <Staff
+              name="みなみん"
+              imageUrl="/static/staffs/shimamino.png"
+              twitter=""
+            />
+            <Staff
+              name="梅林良太"
+              imageUrl="/static/staffs/umebayashi.jpg"
+              twitter=""
+            />
+            <Staff
+              name="けるびん"
+              imageUrl="/static/staffs/kerubin.png"
+              twitter=""
+            />
+            <Staff name="くろす" imageUrl="" twitter="" />
+            <Staff name="もつ" imageUrl="/static/staffs/motsu.jpg" twitter="" />
+            <Staff
+              name="木檜和明"
+              imageUrl="https://l-w-i.net/img/profile_480.jpg"
+              twitter=""
+            />
+            <Staff name="室谷優" imageUrl="" twitter="" />
+            <Staff name="alwehf" imageUrl="" twitter="" />
+            <Staff
+              name="ほげさん"
+              imageUrl="https://pbs.twimg.com/profile_images/701081366645993472/qHYp5OwX_400x400.jpg"
+              twitter=""
+            />
+            <Staff name="けい酸ネコ" imageUrl="" twitter="" />
+            <Staff
+              name="えがら"
+              imageUrl="/static/staffs/egara.jpg"
+              twitter=""
+            />
           </div>
         </TextBlock>
       </section>
@@ -656,3 +851,5 @@ const withIcon = css`
     opacity: 0.3;
   }
 `
+
+export default Page
