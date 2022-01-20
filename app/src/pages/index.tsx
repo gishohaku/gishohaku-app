@@ -43,6 +43,31 @@ const LinkButton: React.SFC<{
 )
 
 const Hero = () => (
+  <div>
+      <section css={section}>
+        <SectionHeader en="">技書博6　中止のお知らせ</SectionHeader>
+        <TextBlock>
+<p>
+年明けより、オミクロン株が猛威を振るい、急速にコロナ感染者数が拡大を続けております。
+</p>
+<p>
+東京都におきましても、まん延防止等重点措置の発令が確定しました。<br />
+こうした状況下において、スタッフ一同、安全にイベントを提供できる方法を模索してまいりましたが、連日過去最大感染者数を更新し続けている今般の状況を重くとらえ、2月26日に予定していた第6回技術書同人誌博覧会の開催の中止を決定いたしました。<br />
+残念なご案内を差し上げることになり、誠に申し訳ございません。<br />
+既に準備を始められていた方も多いでしょう。スタッフ一同としても断腸の思いです。<br />
+</p>
+<p>
+なお、中止に伴い、順次、サークル参加費用の払い戻しを行います。追っての連絡をお待ちください。
+</p>
+<p>
+しかしながら、技書博というイベントが「技術者のアウトプットを応援する」存在であることに代わりはありません。<br />
+代替の催しや、新しいアウトプットの形を、引き続き探っていきたいと思っております。<br />
+</p>
+<p>
+厳しい状況がなかなか収まりませんが、引き続き応援してくださると嬉しいです。
+</p>
+        </TextBlock>
+      </section>
   <div
     css={css`
       background: linear-gradient(
@@ -51,7 +76,7 @@ const Hero = () => (
         rgba(208, 224, 249, 0.791667) 40%,
         rgba(255, 255, 255, 100) 100%
       );
-      margin-top: -66px;
+      margin-top: 10px;
       padding: 32px;
       display: flex;
       align-items: center;
@@ -68,6 +93,8 @@ const Hero = () => (
         align-items: start;
       }
     `}>
+    
+
     <img
       css={css`
         width: 400px;
@@ -153,11 +180,9 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
         `}>
-        <LinkButton href="https://forms.gle/1QtaPJBHYxMCgNig6">
-          参加サークル募集中！
-        </LinkButton>
       </div>
     </div>
+  </div>
   </div>
 )
 
@@ -360,9 +385,6 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="#">
-              一般参加申込は1月中旬ごろ開始予定です
-            </LinkButton>
           </p>
         </TextBlock>
       </section>
