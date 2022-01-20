@@ -66,6 +66,9 @@ const Hero = () => (
 <p>
 厳しい状況がなかなか収まりませんが、引き続き応援してくださると嬉しいです。
 </p>
+<p css={css `text-align: right`}>
+2022年1月21日　技術書同人誌博覧会 運営事務局
+</p>
         </TextBlock>
       </section>
   <div
