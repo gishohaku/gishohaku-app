@@ -49,24 +49,19 @@ import SEO from '../components/SEO'
 
       onApprove: function(data, actions) {
         return actions.order.capture().then(function(orderData) {
-          
           // Full available details
           console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
           // Show a success message within this page, e.g.
           const element = document.getElementById('paypal-button-container');
           element.innerHTML = '';
-          element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-          // Or go to another URL:  actions.redirect('thank_you.html');
-          
+          element.innerHTML = '<h3>決済が完了しました。続けて出展登録してください。</h3>';
         });
       },
 
       onError: function(err) {
         console.log(err);
       }
-    }).render('#paypal-button-container');
+    }).render('#paypal-button-container')
   }
   initPayPalButton();
 </script>
