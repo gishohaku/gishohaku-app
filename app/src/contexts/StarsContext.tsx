@@ -62,6 +62,7 @@ export const StarsProvider: React.FC = ({ children }) => {
       const stars4 = await db.doc(`users/${userId}/stars/gishohaku4`).get()
       const stars5 = await db.doc(`users/${userId}/stars/gishohaku5`).get()
       const stars6 = await db.doc(`users/${userId}/stars/gishohaku6`).get()
+      const stars7 = await db.doc(`users/${userId}/stars/gishohaku7`).get()
 
       return {
         gishohaku1: { ...defaultStars, ...stars1.data() } as Stars,
@@ -69,7 +70,8 @@ export const StarsProvider: React.FC = ({ children }) => {
         gishohaku3: { ...defaultStars, ...stars3.data() } as Stars,
         gishohaku4: { ...defaultStars, ...stars4.data() } as Stars,
         gishohaku5: { ...defaultStars, ...stars5.data() } as Stars,
-        gishohaku6: { ...defaultStars, ...stars5.data() } as Stars,
+        gishohaku6: { ...defaultStars, ...stars6.data() } as Stars,
+        gishohaku7: { ...defaultStars, ...stars7.data() } as Stars,
       }
     }
 
@@ -137,6 +139,10 @@ type StarsContextType = {
 
 const StarsContext = React.createContext<StarsContextType>(({
   userStars: {
+    gishohaku7: {
+      bookStars: [],
+      circleStars: [],
+    },
     gishohaku6: {
       bookStars: [],
       circleStars: [],

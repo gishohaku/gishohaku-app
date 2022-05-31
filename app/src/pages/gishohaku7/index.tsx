@@ -1,11 +1,10 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import Image from 'next/image'
-import { media, colors } from '../utils/style'
-import TextBlock from '../components/atoms/TextBlock'
-import SectionHeader from '../components/SectionHeder'
-import placeIcon from '../components/top/round-place.svg'
-import directionsIcon from '../components/top/round-directions_run.svg'
+import { media, colors } from '../../utils/style'
+import TextBlock from '../../components/atoms/TextBlock'
+import SectionHeader from '../../components/SectionHeder'
+import placeIcon from '../../components/top/round-place.svg'
+import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
@@ -43,7 +42,6 @@ const LinkButton: React.SFC<{
 )
 
 const Hero = () => (
-  <div>
   <div
     css={css`
       background: linear-gradient(
@@ -52,7 +50,7 @@ const Hero = () => (
         rgba(208, 224, 249, 0.791667) 40%,
         rgba(255, 255, 255, 100) 100%
       );
-      margin-top: 10px;
+      margin-top: -66px;
       padding: 32px;
       display: flex;
       align-items: center;
@@ -69,8 +67,6 @@ const Hero = () => (
         align-items: start;
       }
     `}>
-    
-
     <img
       css={css`
         width: 400px;
@@ -156,12 +152,11 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
         `}>
-        <LinkButton href={`#`} className="btn-green">
-          サークル出展申込はこちら（準備中）
+        <LinkButton href="#">
+          一般参加申込は10月より開始予定です
         </LinkButton>
       </div>
     </div>
-  </div>
   </div>
 )
 
@@ -364,6 +359,9 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
+            <LinkButton href="#">
+              一般参加申込は1月中旬ごろ開始予定です
+            </LinkButton>
           </p>
         </TextBlock>
       </section>
