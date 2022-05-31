@@ -23,48 +23,15 @@ import SEO from '../components/SEO'
 - 出納業務簡略化のため、今回より支払い方法をPayPalのみに変更しています
 - 運営事務局よりお支払いを免除されたサークルはこの手順をスキップしてください
 
-<div id="smart-button-container">
-  <div style="text-align: center;">
-    <div id="paypal-button-container"></div>
-  </div>
-</div>
-
-<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=JPY" data-sdk-integration-source="button-factory"></script>
-<script>
-  function initPayPalButton() {
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'blue',
-        layout: 'vertical',
-        label: 'pay',
-        
-      },
-
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{"description":"技書博7 サークル出展料","amount":{"currency_code":"JPY","value":8000}}]
-        });
-      },
-
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(orderData) {
-          // Full available details
-          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-          // Show a success message within this page, e.g.
-          const element = document.getElementById('paypal-button-container');
-          element.innerHTML = '';
-          element.innerHTML = '<h3>決済が完了しました。続けて出展登録してください。</h3>';
-        });
-      },
-
-      onError: function(err) {
-        console.log(err);
-      }
-    }).render('#paypal-button-container')
-  }
-  initPayPalButton();
-</script>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="Shift_JIS">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="ZVYP66QP27RYE">
+<table>
+<tr><td><input type="hidden" name="on0" value="サークル名">サークル名</td></tr><tr><td><input type="text" name="os0" maxlength="200"></td></tr>
+</table>
+<input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - オンラインでより安全・簡単にお支払い">
+<img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 ## 2. サークル出展登録
 
