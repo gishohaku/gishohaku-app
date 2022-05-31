@@ -50,6 +50,7 @@ export const StarsProvider: React.FC = ({ children }) => {
     gishohaku4: { bookStars: [], circleStars: [] },
     gishohaku5: { bookStars: [], circleStars: [] },
     gishohaku6: { bookStars: [], circleStars: [] },
+    gishohaku7: { bookStars: [], circleStars: [] },
   })
 
   useEffect(() => {
