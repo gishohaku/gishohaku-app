@@ -2,73 +2,96 @@ import MdxContainer from '../components/MdxContainer'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import SEO from '../components/SEO'
 
-<SEO title="サークル出展費のお支払い"/>
+<SEO title="サークル出展お申し込み"/>
 
 <SectionHeader text="ENTRY" pageHeader>
-サークル出展費のお支払い
+サークル出展お申し込み
 </SectionHeader>
 
 <MdxContainer>
 
 ## はじめに
 
-本ページは、第6回技術書同人誌博覧会にサークル出展申込された方が、出展費をお支払いいただくためのページです。
-別途「[サークル出展の申込](https://forms.gle/PnexiV6CUGSfuaaE9)」が完了している方のみを対象にしていますので、必ず事前に出展申し込みを行ってください。
-（サークル出展の申込登録が完了していない場合、支払いが完了していてもサークル参加できない場合があります。）
-**2022年1月5日まで**に購入手続きを完了してください。
+本ページは、技術書同人誌博覧会にサークル出展お申し込みいただく手順をご紹介しています。
 
-お支払いが確認できたサークル主催者に対して、運営事務局より改めてサークル出展確定の旨をご連絡します。
-お支払い手続きは必ず1度のみ行ってください。
-
-## お支払い手続き
-
-以下いずれかの方法にてお支払いください。
-
-### PayPalで支払う場合
+## 1. お支払い手続き
 
 以下の購入フォームよりお支払い手続きを行ってください。
-決済代行会社としてPayPalを利用しています。
-PayPalアカウントをお持ちでない方には振込先銀行口座をご案内いたしますので、メールにて別途お問い合わせください。
+決済代行会社としてPayPalを利用しています。お支払い手続きは必ず1度のみ行ってください。
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="shift_jis">
-  <input type="hidden" name="cmd" value="_s-xclick" />
-  <input type="hidden" name="hosted_button_id" value="M8AG9HX3D43LW" />
-  <div style={{margin: '12px 0'}}>
-    <h4>貴サークル名</h4>
-    <input type="text" name="os0" maxlength="200" required="required" />
+- お支払いは必ず1回のみ行ってください
+- 出納業務簡略化のため、今回より支払い方法をPayPalのみに変更しています
+- 運営事務局よりお支払いを免除されたサークルはこの手順をスキップしてください
+
+<div id="smart-button-container">
+  <div style="text-align: center;">
+    <div id="paypal-button-container"></div>
   </div>
-  <div style={{margin: '12px 0'}}>
-    <h4>出展申込時のメールアドレス</h4>
-    <input type="text" name="os1" maxlength="200" required="required" />
-  </div>
-  <div>
-    <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - オンラインでより安全・簡単にお支払い" />
-    <img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1" />
-  </div>
-</form>
+</div>
 
-### 銀行振込で支払う場合
+<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=JPY" data-sdk-integration-source="button-factory"></script>
+<script>
+  function initPayPalButton() {
+    paypal.Buttons({
+      style: {
+        shape: 'rect',
+        color: 'blue',
+        layout: 'vertical',
+        label: 'pay',
+        
+      },
 
-以下の口座に振込のうえ、運営事務局まで振込完了の旨をメールください。
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{"description":"技書博7 サークル出展料","amount":{"currency_code":"JPY","value":8000}}]
+        });
+      },
 
-- 銀行名：GMOあおぞらネット銀行（0310）
-- 支店名：法人営業部（101）
-- 口座番号：普通 1144873
-- 口座名義：イミナス（ド
-- 完了連絡先：circle@gishohaku.dev
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(orderData) {
+          
+          // Full available details
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // Show a success message within this page, e.g.
+          const element = document.getElementById('paypal-button-container');
+          element.innerHTML = '';
+          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+          // Or go to another URL:  actions.redirect('thank_you.html');
+          
+        });
+      },
+
+      onError: function(err) {
+        console.log(err);
+      }
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+</script>
+
+## 2. サークル出展登録
+
+以下のフォームより必ずサークル情報をご登録ください。
+申込期日までにご登録がない場合、出展いただけません。
+
+https://forms.gle/KESR7C5mbWx1o3u16
+
+（申込期限：2022年8月31日）
 
 ## 注意事項
 
 お支払いに際して、必ず以下のドキュメントをご確認ください。
 お支払い完了時点で内容に同意されたとみなします。
 
-- [サークル出展要項](https://esa-pages.io/p/sharing/13039/posts/115/7fbe936149a836eac678.html)（出展申込に際しての規約と詳細）
-- [サークル出展の手引き](https://esa-pages.io/p/sharing/13039/posts/114/1bf5c92680752740142d.html)（出展申込～当日の作業内容まとめ）
+- [サークル出展要項](https://esa-pages.io/p/sharing/13039/posts/183/414e8727a713c09715d7.html)（出展申込に際しての規約と詳細）
+- [サークル出展の手引き](https://esa-pages.io/p/sharing/13039/posts/184/73ee5b937bfef7daebab.html)（出展申込～当日の作業内容まとめ）
 - [行動規範（Code of Conduct）](https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html)
 
 ## 運営団体
 
-- 運営者：[技術書同人誌博覧会 運営事務局](https://gishohaku.dev/) / イミナス合同会社
+- 運営者：[技術書同人誌博覧会 運営事務局](https://gishohaku.dev/)
 - 代表者：森川 晃
 - 問合先：[info@gishohaku.dev](mailto:info@gishohaku.dev)
 
