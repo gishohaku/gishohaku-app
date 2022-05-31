@@ -155,9 +155,18 @@ const Hero = () => (
       <div
         css={css`
           margin-top: 16px;
+          .btn-blue {
+            border: 2px solid #009ac7;
+            background-color: #009ac7;
+            color: #edefe8;
+            &:hover {
+              background-color: #edefe8;
+              color: #009ac7;
+            }
+          }
         `}>
-        <LinkButton href={`#`} className="btn-green">
-          サークル出展申込はこちら（準備中）
+        <LinkButton href={`/circle-entry`} className="btn-blue">
+          サークル出展申込はこちら
         </LinkButton>
       </div>
     </div>
