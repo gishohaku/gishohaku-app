@@ -10,8 +10,9 @@ import directionsIcon from '../components/top/round-directions_run.svg'
 const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
-  href: string
-}> = ({ href, children }) => (
+  href: string,
+  className?: string
+}> = ({ href, children, className }) => (
   <a
     css={css`
       font-size: 16px;
@@ -37,7 +38,8 @@ const LinkButton: React.SFC<{
     `}
     target="_blank"
     rel="noopener"
-    href={href}>
+    href={href}
+    className={className}>
     {children}
   </a>
 )
