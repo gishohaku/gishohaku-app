@@ -86,7 +86,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png"
+      src="/static/gishohaku7-logo.png"
       width={280}
       height={286}
     />
@@ -423,6 +423,122 @@ export default () => {
               min-height: 240px;
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4783797179557!2d139.79658031549522!3d35.714451780186536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ec3d981d0f5%3A0x82b2ec9f4699aec6!2z5p2x5Lqs6YO956uL55Sj5qWt6LK_5piT44K744Oz44K_44O8IOWPsOadsemkqA!5e0!3m2!1sja!2sjp!4v1637550055034!5m2!1sja!2sjp"></iframe>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+              <Sponsor
+                name="エンジニアフレンドリーシティ福岡"
+                role="サポーター"
+                image="/static/sponsors/fukuoka.png"
+                href="https://efc.fukuoka.jp/"
+              />
+              <Sponsor
+                name="株式会社セレマアシスト"
+                role="サポーター"
+                image="/static/sponsors/thelemaassist.png"
+                href="https://thelemaassist.com/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="熱海怪獣映画祭"
+                role="怪獣サポーター"
+                image="/static/sponsors/atamikaiju.png"
+                href="https://atamikaiju.jp/"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+      <section css={section}>
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="https://www.shippo.co.jp/neko/img/neko_banner.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="https://www.nikko-pc.com/start/logo.gif"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="https://www.eikou.com/link/eikoubanner.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="PICO"
+              imageUrl="https://www.pico-net.com/topmenu/pico_bunner.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="PrintWalk"
+              imageUrl="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type1.jpg"
+              linkUrl="https://www.k-k9.jp/"
+            />
+          </div>
         </TextBlock>
       </section>
       <section css={section}>

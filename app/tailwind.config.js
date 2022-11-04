@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         gishohaku5: '#328BB6',
         gishohaku6: '#328BB6',
-        gishohaku7: '#328BB6',
+        gishohaku7: '#35A6DF',
       },
     },
   },
