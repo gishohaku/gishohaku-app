@@ -505,55 +505,6 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
-        <TextBlock>
-          <div
-            css={css`
-              display: flex;
-              flex-flow: row wrap;
-              justify-content: center;
-              align-content: flex-start;
-              align-items: flex-start;
-            `}>
-            <Printing
-              name="しまや出版"
-              imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
-              linkUrl="https://www.shimaya.net/"
-            />
-            <Printing
-              name="ねこのしっぽ"
-              imageUrl="https://www.shippo.co.jp/neko/img/neko_banner.gif"
-              linkUrl="https://www.shippo.co.jp/neko/"
-            />
-            <Printing
-              name="日光企画"
-              imageUrl="https://www.nikko-pc.com/start/logo.gif"
-              linkUrl="https://www.nikko-pc.com/"
-            />
-            <Printing
-              name="栄光"
-              imageUrl="https://www.eikou.com/link/eikoubanner.gif"
-              linkUrl="http://www.eikou.com/"
-            />
-            <Printing
-              name="PICO"
-              imageUrl="https://www.pico-net.com/topmenu/pico_bunner.gif"
-              linkUrl="http://www.pico-net.com/doujinshi/"
-            />
-            <Printing
-              name="PrintWalk"
-              imageUrl="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
-              linkUrl="https://www.print-walk.co.jp/"
-            />
-            <Printing
-              name="K-9"
-              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type1.jpg"
-              linkUrl="https://www.k-k9.jp/"
-            />
-          </div>
-        </TextBlock>
-      </section>
-      <section css={section}>
         <SectionHeader en="BANNER">リンクバナー</SectionHeader>
         <TextBlock>
           <p
