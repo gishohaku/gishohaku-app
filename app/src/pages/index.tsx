@@ -461,19 +461,33 @@ export default () => {
                 href="https://efc.fukuoka.jp/"
               />
               <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                href="https://www.sakura.ad.jp/"
+                image="/static/sponsors/sakura.png"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
                 name="株式会社セレマアシスト"
                 role="サポーター"
                 image="/static/sponsors/thelemaassist.png"
                 href="https://thelemaassist.com/"
               />
-            </div>
-            <div className="sponsorlist">
+              <Sponsor
+                name="熱海怪獣映画祭"
+                role="怪獣サポーター"
+                image="/static/sponsors/atamikaiju.png"
+                href="https://atamikaiju.jp/"
+              />
               <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
                 image="/static/sponsors/shimaya.png"
                 href="https://www.shimaya.net/"
               />
+            </div>
+            <div className="sponsorlist">
               <Sponsor
                 name="esa"
                 role="ツールサポーター"
@@ -485,14 +499,6 @@ export default () => {
                 role="ツールサポーター"
                 image="/static/sponsors/imageflux.png"
                 href="https://www.sakura.ad.jp/services/imageflux/"
-              />
-            </div>
-            <div className="sponsorlist">
-              <Sponsor
-                name="熱海怪獣映画祭"
-                role="怪獣サポーター"
-                image="/static/sponsors/atamikaiju.png"
-                href="https://atamikaiju.jp/"
               />
             </div>
           </div>
