@@ -152,7 +152,7 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @東京都産業貿易センター 台東館
+        @東京都産業貿易センター 台東館 7F
       </div>
       <div
         css={css`
@@ -167,8 +167,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href={`/circle-entry`} className="btn-blue">
-          サークル出展申込はこちら
+        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01mn55v7g5p21.html">
+          来場予約はこちら
         </LinkButton>
       </div>
     </div>
@@ -359,7 +359,7 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="TICKET">チケット申込</SectionHeader>
+        <SectionHeader en="ENTRY">一般来場予約</SectionHeader>
         <TextBlock>
           <p>
             技書博本編に来場される際には、事前予約（無料）が必要です。<br />
@@ -375,6 +375,12 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
+            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01mn55v7g5p21.html">
+              来場予約はこちら
+            </LinkButton>
+            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01ikpjr40pp21.html">
+              懇親会予約はこちら
+            </LinkButton>
           </p>
         </TextBlock>
       </section>
@@ -389,7 +395,7 @@ export default () => {
                 font-size: 24px;
               }
             `}>
-            東京都産業貿易センター 台東館
+            東京都産業貿易センター 台東館 7階展示室
           </p>
           <div
             css={css`
