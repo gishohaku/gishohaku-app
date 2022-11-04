@@ -48,19 +48,14 @@ const Hero = () => (
   <div>
   <div
     css={css`
-      background: linear-gradient(
-        180deg,
-        #cce0ff 0%,
-        rgba(208, 224, 249, 0.791667) 40%,
-        rgba(255, 255, 255, 100) 100%
-      );
+      background-color: #edefe8;
       margin-top: 10px;
       padding: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding-top: 66px;
-      padding-bottom: 0;
+      padding-bottom: 66px;
 
       color: white;
       color: #1c3559;
@@ -79,6 +74,7 @@ const Hero = () => (
         position: relative;
         left: -10px;
         height: 370px;
+        border: 1px solid #d5d7d0;
         @media ${media.large} {
           width: 280px;
           margin: 0 auto 20px;
@@ -88,7 +84,7 @@ const Hero = () => (
       `}
       src="/static/gishohaku7-logo.png"
       width={280}
-      height={286}
+      height={280}
     />
     <div
       css={css`
