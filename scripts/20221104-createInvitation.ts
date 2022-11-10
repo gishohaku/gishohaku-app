@@ -1,4 +1,7 @@
-
+/**
+ * command-line:
+ * ts-node-esm scripts/20221104-createInvitation.ts
+ */
 import admin from 'firebase-admin'
 
 admin.initializeApp({
