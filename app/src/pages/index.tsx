@@ -496,6 +496,12 @@ export default () => {
                 image="/static/sponsors/imageflux.png"
                 href="https://www.sakura.ad.jp/services/imageflux/"
               />
+              <Sponsor
+                name="株式会社野村総合研究所"
+                role="ツールサポーター"
+                image="/static/sponsors/nri.png"
+                href="https://aslead.nri.co.jp/products/miro/"
+              />
             </div>
           </div>
         </TextBlock>
