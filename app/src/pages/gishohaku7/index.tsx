@@ -80,7 +80,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="https://img.esa.io/uploads/production/attachments/13039/2019/11/19/4651/01cecbd6-0b7e-4369-93f3-17ac06fb7402.png"
+      src="/static/gishohaku7-logo.png"
       width={280}
       height={286}
     />
@@ -152,8 +152,8 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
         `}>
-        <LinkButton href="#">
-          一般参加申込は10月より開始予定です
+        <LinkButton href={`/gishohaku7/circles`} className="btn-green">
+          出展サークルを確認
         </LinkButton>
       </div>
     </div>
@@ -349,19 +349,6 @@ export default () => {
             技書博本編に来場される際には、事前予約（無料）が必要です。<br />
             時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
             必ず事前にチケットをお求めのうえ、ご参加ください。<br />
-          </p>
-          <p
-            css={css`
-              font-size: 14px;
-              margin-top: 32px;
-              text-align: center;
-              a {
-                margin: 8px 16px;
-              }
-            `}>
-            <LinkButton href="#">
-              一般参加申込は1月中旬ごろ開始予定です
-            </LinkButton>
           </p>
         </TextBlock>
       </section>

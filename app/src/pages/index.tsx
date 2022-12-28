@@ -16,8 +16,8 @@ const LinkButton: React.SFC<{
   <a
     css={css`
       font-size: 16px;
-      border: 2px solid #1c3559;
-      color: #1c3559;
+      border: 2px solid #fc913a;
+      color: #fc913a;
       font-weight: bold;
       padding: 10px 16px;
       display: inline-block;
@@ -32,7 +32,7 @@ const LinkButton: React.SFC<{
         display: block;
       }
       &:hover {
-        background-color: #1c3559;
+        background-color: #fc913a;
         color: white;
       }
     `}
@@ -48,7 +48,7 @@ const Hero = () => (
   <div>
   <div
     css={css`
-      background-color: #edefe8;
+      background-color: #fff4e0;
       margin-top: 10px;
       padding: 32px;
       display: flex;
@@ -58,7 +58,7 @@ const Hero = () => (
       padding-bottom: 66px;
 
       color: white;
-      color: #1c3559;
+      color: #fc913a;
       /* background-image: url('/static/bg.png'); */
       @media ${media.large} {
         flex-direction: column;
@@ -82,7 +82,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku7-logo.png"
+      src="/static/gishohaku8-logo.png"
       width={280}
       height={280}
     />
@@ -108,7 +108,7 @@ const Hero = () => (
           small {
             font-size: 18px;
             background-color: white;
-            background-color: #1c3559;
+            background-color: #fc913a;
             color: white;
             display: inline-block;
             padding: 2px 10px;
@@ -122,7 +122,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第七回</small>技術書同人誌博覧会
+        <small>第八回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -138,7 +138,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2022.11.20 <small>Sun. 11:00~16:00</small>
+        2023.05.28 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -148,23 +148,25 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @東京都産業貿易センター 台東館 7F
+        @吹上ホール<span css={csss`
+          color: #F99292;
+        `}>（名古屋）</span> 第2ファッション展示場
       </div>
       <div
         css={css`
           margin-top: 16px;
           .btn-blue {
-            border: 2px solid #009ac7;
-            background-color: #009ac7;
-            color: #edefe8;
+            border: 2px solid #ffbc61;
+            background-color: #ffbc61;
+            color: #fff4e0;
             &:hover {
-              background-color: #edefe8;
-              color: #009ac7;
+              background-color: #fff4e0;
+              color: #ffbc61;
             }
           }
         `}>
-        <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01mn55v7g5p21.html">
-          来場予約はこちら
+        <LinkButton href="#">
+          来場予約は4月1日より開始予定です
         </LinkButton>
       </div>
     </div>
@@ -371,11 +373,8 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01mn55v7g5p21.html">
-              来場予約はこちら
-            </LinkButton>
-            <LinkButton href="https://passmarket.yahoo.co.jp/event/show/detail/01ikpjr40pp21.html">
-              懇親会予約はこちら
+            <LinkButton href="#">
+            来場予約は4月1日より開始予定です
             </LinkButton>
           </p>
         </TextBlock>
@@ -391,7 +390,7 @@ export default () => {
                 font-size: 24px;
               }
             `}>
-            東京都産業貿易センター 台東館 7階展示室
+            吹上ホール 第2ファッション展示場
           </p>
           <div
             css={css`
@@ -402,21 +401,15 @@ export default () => {
             `}>
             <p css={withIcon}>
               <img src={placeIcon} alt="住所" />
-              東京都台東区花川戸2-6-5（
-              <a target="_blank" href="https://goo.gl/maps/uhe7NUtw36Vz5yAQ8">
+              愛知県名古屋市千種区吹上2-6-3（
+              <a target="_blank" href="https://goo.gl/maps/Vx6RZb4N1BqY2wyE7">
                 Google マップ
               </a>
               ）
             </p>
             <p css={withIcon}>
               <img src={directionsIcon} alt="アクセス" />
-              東京メトロ 銀座線・東武伊勢崎線「浅草」駅より徒歩約5分
-              <br />
-              都営浅草線「浅草」駅より徒歩約8分
-              <br />
-              つくばエクスプレス「浅草」駅より徒歩約9分
-              <br />
-              都営バス「二天門」下車すぐ前
+              地下鉄桜通線「名古屋駅」から徳重行き、「吹上駅」下車 ５番出口より徒歩５分
             </p>
           </div>
           <iframe
@@ -424,88 +417,10 @@ export default () => {
               width: 100%;
               min-height: 240px;
             `}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.4783797179557!2d139.79658031549522!3d35.714451780186536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ec3d981d0f5%3A0x82b2ec9f4699aec6!2z5p2x5Lqs6YO956uL55Sj5qWt6LK_5piT44K744Oz44K_44O8IOWPsOadsemkqA!5e0!3m2!1sja!2sjp!4v1637550055034!5m2!1sja!2sjp"></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.9198594638074!2d136.92774131537575!3d35.158619366062545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600370905bbb84e3%3A0x51f9c8110f90c29e!2z5Lit5bCP5LyB5qWt5oyv6IiI5Lya6aSoIOesrDLjg5XjgqHjg4Pjgrfjg6fjg7PlsZXnpLrloLQ!5e0!3m2!1sja!2sjp!4v1672195378590!5m2!1sja!2sjp"></iframe>
         </TextBlock>
       </section>
 
-      <section css={section}>
-        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
-        <TextBlock>
-          <div
-            css={css`
-              text-align: center;
-              .sponsorlist {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: center;
-                align-content: flex-start;
-                align-items: flex-start;
-                margin: 12px 0;
-              }
-            `}>
-            <div className="sponsorlist">
-              <Sponsor
-                name="株式会社システムアイ"
-                role="アワードサポーター"
-                image="/static/sponsors/systemi.png"
-                href="https://systemi.co.jp/"
-              />
-              <Sponsor
-                name="エンジニアフレンドリーシティ福岡"
-                role="サポーター"
-                image="/static/sponsors/fukuoka.png"
-                href="https://efc.fukuoka.jp/"
-              />
-              <Sponsor
-                name="さくらインターネット株式会社"
-                role="サポーター"
-                href="https://www.sakura.ad.jp/"
-                image="/static/sponsors/sakura.png"
-              />
-            </div>
-            <div className="sponsorlist">
-              <Sponsor
-                name="株式会社セレマアシスト"
-                role="サポーター"
-                image="/static/sponsors/thelemaassist.png"
-                href="https://thelemaassist.com/"
-              />
-              <Sponsor
-                name="熱海怪獣映画祭"
-                role="怪獣サポーター"
-                image="/static/sponsors/atamikaiju.png"
-                href="https://atamikaiju.jp/"
-              />
-              <Sponsor
-                name="株式会社しまや出版"
-                role="プリンティングサポーター"
-                image="/static/sponsors/shimaya.png"
-                href="https://www.shimaya.net/"
-              />
-            </div>
-            <div className="sponsorlist">
-              <Sponsor
-                name="esa"
-                role="ツールサポーター"
-                image="/static/sponsors/esa.png"
-                href="https://esa.io"
-              />
-              <Sponsor
-                name="ImageFlux"
-                role="ツールサポーター"
-                image="/static/sponsors/imageflux.png"
-                href="https://www.sakura.ad.jp/services/imageflux/"
-              />
-              <Sponsor
-                name="株式会社野村総合研究所"
-                role="ツールサポーター"
-                image="/static/sponsors/nri.png"
-                href="https://aslead.nri.co.jp/products/miro/"
-              />
-            </div>
-          </div>
-        </TextBlock>
-      </section>
       <section css={section}>
         <SectionHeader en="BANNER">リンクバナー</SectionHeader>
         <TextBlock>

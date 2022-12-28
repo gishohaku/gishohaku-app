@@ -8,7 +8,7 @@ export const getEventId = (router: NextRouter): EventId => {
   const pathname = process.browser ? location.pathname : router.asPath
   const [_, eventId] = pathname.split('/')
   if (eventId) return eventId as EventId
-  return 'gishohaku7'
+  return 'gishohaku8'
 }
 
 export const EventProvider: React.FC<{
