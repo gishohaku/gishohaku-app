@@ -53,7 +53,7 @@ const Hero = () => (
       align-items: center;
       justify-content: center;
       padding-top: 66px;
-      padding-bottom: 0;
+      padding-bottom: 66px;
 
       color: white;
       color: #1c3559;
