@@ -46,13 +46,8 @@ const LinkButton: React.SFC<{
 const Hero = () => (
   <div
     css={css`
-      background: linear-gradient(
-        180deg,
-        #cce0ff 0%,
-        rgba(208, 224, 249, 0.791667) 40%,
-        rgba(255, 255, 255, 100) 100%
-      );
-      margin-top: -66px;
+      background-color: #edefe8;
+      margin-top: 10px;
       padding: 32px;
       display: flex;
       align-items: center;
