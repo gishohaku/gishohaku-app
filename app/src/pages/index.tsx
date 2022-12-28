@@ -148,8 +148,8 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @吹上ホール<span css={csss`
-          color: #F99292;
+        @吹上ホール<span css={css`
+          color: #f99292;
         `}>（名古屋）</span> 第2ファッション展示場
       </div>
       <div
