@@ -411,6 +411,84 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+              <Sponsor
+                name="エンジニアフレンドリーシティ福岡"
+                role="サポーター"
+                image="/static/sponsors/fukuoka.png"
+                href="https://efc.fukuoka.jp/"
+              />
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                href="https://www.sakura.ad.jp/"
+                image="/static/sponsors/sakura.png"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社セレマアシスト"
+                role="サポーター"
+                image="/static/sponsors/thelemaassist.png"
+                href="https://thelemaassist.com/"
+              />
+              <Sponsor
+                name="熱海怪獣映画祭"
+                role="怪獣サポーター"
+                image="/static/sponsors/atamikaiju.png"
+                href="https://atamikaiju.jp/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+              <Sponsor
+                name="株式会社野村総合研究所"
+                role="ツールサポーター"
+                image="/static/sponsors/nri.png"
+                href="https://aslead.nri.co.jp/products/miro/"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+      <section css={section}>
         <SectionHeader en="BANNER">リンクバナー</SectionHeader>
         <TextBlock>
           <p
