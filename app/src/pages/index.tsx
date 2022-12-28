@@ -155,7 +155,7 @@ const Hero = () => (
       <div
         css={css`
           margin-top: 16px;
-          .btn-blue {
+          .btn-orange {
             border: 2px solid #ffbc61;
             background-color: #ffbc61;
             color: #fff4e0;
@@ -164,9 +164,21 @@ const Hero = () => (
               color: #ffbc61;
             }
           }
+          .btn-pink {
+            border: 2px solid #f99292;
+            background-color: #f99292;
+            color: #fff4e0;
+            &:hover {
+              background-color: #fff4e0;
+              color: #f99292;
+            }
+          }
         `}>
-        <LinkButton href="#">
-          来場予約は4月1日より開始予定です
+        <LinkButton href="#" class="btn-orange">
+          サークル申込（12/31-開始）
+        </LinkButton>
+        <LinkButton href="#" class="btn-pink">
+          来場予約（4/1-開始）
         </LinkButton>
       </div>
     </div>

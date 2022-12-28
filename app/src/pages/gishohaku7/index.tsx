@@ -151,6 +151,15 @@ const Hero = () => (
       <div
         css={css`
           margin-top: 16px;
+          .btn-green {
+            border: 2px solid #00c79a;
+            background-color: #00c79a;
+            color: #edefe8;
+            &:hover {
+              background-color: #edefe8;
+              color: #00c79a;
+            }
+          }
         `}>
         <LinkButton href={`/gishohaku7/circles`} className="btn-green">
           出展サークルを確認
