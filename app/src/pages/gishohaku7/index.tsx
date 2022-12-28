@@ -10,7 +10,8 @@ const keyColor = colors.primaryDarker
 
 const LinkButton: React.SFC<{
   href: string
-}> = ({ href, children }) => (
+  className?: string
+}> = ({ href, children, className }) => (
   <a
     css={css`
       font-size: 16px;
@@ -36,7 +37,8 @@ const LinkButton: React.SFC<{
     `}
     target="_blank"
     rel="noopener"
-    href={href}>
+    href={href}
+    className={className}>
     {children}
   </a>
 )
