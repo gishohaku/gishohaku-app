@@ -174,10 +174,10 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="#" class="btn-orange">
+        <LinkButton href="#" className="btn-orange">
           サークル申込（12/31-開始）
         </LinkButton>
-        <LinkButton href="#" class="btn-pink">
+        <LinkButton href="#" className="btn-pink">
           来場予約（4/1-開始）
         </LinkButton>
       </div>
