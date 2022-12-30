@@ -174,8 +174,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="#" className="btn-orange">
-          サークル申込（12/31-開始）
+        <LinkButton href="/circle-entry" className="btn-orange">
+          サークル申込
         </LinkButton>
         <LinkButton href="#" className="btn-pink">
           来場予約（4/1-開始）
