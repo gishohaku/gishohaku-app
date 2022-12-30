@@ -181,6 +181,44 @@ const Hero = () => (
           来場予約（4/1-開始）
         </LinkButton>
       </div>
+      <div
+        css={css`
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        `}>
+        <div>
+          <img
+            width={150}
+            height={150}
+            src="/static/osc.png"
+          />
+        </div>
+        <div
+          css={css`
+            font-size: 20px;
+            font-weight: bold;
+            @media ${media.large} {
+              font-size: 16px;
+            }
+          `}>
+          併催：Open Source Conference 2023 Nagoya<br />
+          <small
+            css={css`
+            margin-top: 4px;
+            font-size: 16px;
+            font-weight: normal;
+            @media ${media.large} {
+              font-size: 12px;
+              font-weight: normal;
+            }
+            `}>
+            ※当日は<strong>ブース展示のみ</strong><br />
+            ※セミナーはオンライン形式で5月20日(土)に開催予定<br />
+          </small>
+        </div>
+      </div>
     </div>
   </div>
   </div>
