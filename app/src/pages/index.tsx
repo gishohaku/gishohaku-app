@@ -155,6 +155,7 @@ const Hero = () => (
       <div
         css={css`
           margin-top: 16px;
+          margin-bottom: 16px;
           .btn-orange {
             border: 2px solid #ffbc61;
             background-color: #ffbc61;
@@ -181,8 +182,11 @@ const Hero = () => (
           来場予約（4/1-開始）
         </LinkButton>
       </div>
+      <hr />
       <div
         css={css`
+        margin-top: 16px;
+        margin-bottom: 16px;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -190,27 +194,28 @@ const Hero = () => (
         `}>
         <div>
           <img
-            width={150}
-            height={150}
+            width={80}
+            height={80}
             src="/static/osc.png"
           />
         </div>
         <div
           css={css`
-            font-size: 20px;
+            margin-left: 12px;
+            font-size: 18px;
             font-weight: bold;
             @media ${media.large} {
-              font-size: 16px;
+              font-size: 14px;
             }
           `}>
           併催：Open Source Conference 2023 Nagoya<br />
           <small
             css={css`
             margin-top: 4px;
-            font-size: 16px;
+            font-size: 12px;
             font-weight: normal;
             @media ${media.large} {
-              font-size: 12px;
+              font-size: 10px;
               font-weight: normal;
             }
             `}>
