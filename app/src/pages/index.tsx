@@ -178,8 +178,8 @@ const Hero = () => (
         <LinkButton href="/circle-entry" className="btn-orange">
           サークル申込
         </LinkButton>
-        <LinkButton href="#" className="btn-pink">
-          来場予約（4/1-開始）
+        <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/199/38e20063e6a03661c8b9.html" className="btn-pink">
+          協賛申込
         </LinkButton>
       </div>
       <hr />
