@@ -144,14 +144,14 @@ const Footer = () => (
       <li>
         <a
           target="_blank"
-          href="https://esa-pages.io/p/sharing/13039/posts/16/eef77d23431caad54852.html">
+          href="https://esa-pages.io/p/sharing/13039/posts/191/04cfb413b5ed58f9a7cf.html">
           サークル出展要項
         </a>
       </li>
       <li>
         <a
           target="_blank"
-          href="https://esa-pages.io/p/sharing/13039/posts/17/b94c6f164d6264cc7790.html">
+          href="https://esa-pages.io/p/sharing/13039/posts/192/3db77756af92269cae9b.html">
           サークル出展の手引き
         </a>
       </li>
