@@ -175,11 +175,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="/circle-entry" className="btn-orange">
-          サークル申込
-        </LinkButton>
-        <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/199/38e20063e6a03661c8b9.html" className="btn-pink">
-          協賛申込
+        <LinkButton href="https://ospn.connpass.com/event/278668/" className="btn-orange">
+          来場予約はこちら
         </LinkButton>
       </div>
       <hr />
@@ -428,8 +425,8 @@ export default () => {
                 margin: 8px 16px;
               }
             `}>
-            <LinkButton href="#">
-            来場予約は4月1日より開始予定です
+            <LinkButton href="https://ospn.connpass.com/event/278668/">
+            来場予約はこちら
             </LinkButton>
           </p>
         </TextBlock>
