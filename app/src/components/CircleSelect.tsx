@@ -731,7 +731,33 @@ const gishohaku7Circles = [
   { id: 'wAPKmVwXksEwrGGCBWd0', name: 'ノラハック', booth: 'か-07' },
   { id: 'WQm3ApJyBLv9RxJLrcOk', name: '熱海怪獣映画祭', booth: '物販-01' },
 ]
-const gishohaku8Circles = [{ id: 'XXXXXXXXXXXXXXXXXXXX', name: '運営事務局', booth: 'Z-99' }]
+const gishohaku8Circles = [
+  { id: 'u4RbQ4nRv6ioY1xQ3ESG', name: '福岡市', booth: 'あ-01' },
+  { id: 'ESPSsKkaYDC3Np2xBHSR', name: '親方Project', booth: 'あ-02' },
+  { id: 'SFWL7J35kJPMGGa90KpE', name: 'ゆめみ大技林製作委員会', booth: 'あ-03' },
+  { id: '2sjwBuTYnNh4lP8fubds', name: 'Just1factory', booth: 'あ-04' },
+  { id: '4f8Sj13yfUC3coWVNcUl', name: 'Type D4 Lab', booth: 'あ-05' },
+  { id: 'R2wVDfaCIuiA45JCvD13', name: 'ピープルソフトウエア', booth: 'あ-06' },
+  { id: 'bCZk9NDvsnRdb269VlPy', name: 'Rails Girls わんだーらんど', booth: 'あ-07' },
+  { id: 'psMAlQDlMGZvDvg2ONV5', name: 'システム工学研究会', booth: 'あ-08' },
+  { id: 'lYtZVfGUSXZ0yOwg1vu3', name: '電脳世界', booth: 'あ-09' },
+  { id: 'RtpDcAMIx3pWJ2xDpWRx', name: 'のみぞーん', booth: 'あ-10' },
+  { id: 'Tk2mFiVwcTvT0jQJJA0s', name: 'Auth屋', booth: 'あ-11' },
+  { id: 'mpQ2NDQrSTmzqASeRHvR', name: '脆弱性診断研究会', booth: 'あ-12' },
+  { id: 'UqHENcox3bF6dyulEzvp', name: '半田技術研究所', booth: 'あ-13' },
+  { id: 'nUjOVrkuNE7wdsGsT4A8', name: 'Aurantifolia', booth: 'あ-14' },
+  { id: '68NVrbp4WNZH7Wn8xQmj', name: 'へにゃぺんて', booth: 'い-01' },
+  { id: 'OtchSmoriV8JrwR5zfbm', name: 'みやこ電子工房', booth: 'い-02' },
+  { id: 'WGHb8TlWgGFDR0S1PX7r', name: '徒然メカ', booth: 'い-03' },
+  { id: 'aOydtomnKIsVisbzpiHq', name: 'まぬる猫の工作部屋', booth: 'い-04' },
+  { id: 'xpyFZNXdPjjeQOLn7Sd3', name: 'CNMTC', booth: 'い-05' },
+  { id: 'EoDBG78VdTq7QJZEKVmi', name: 'きんとーん・らぼ', booth: 'い-06' },
+  { id: 'jjpT7h22q1xwlTbBAHuk', name: 'いもあらい。', booth: 'い-08' },
+  { id: 'JvWJArOvzBFrx3w9l7Ck', name: 'たいら屋', booth: 'い-09' },
+  { id: 'xVMY2KtyYWAdp6xku81Y', name: 'Mathematica研究会葛飾支部', booth: 'い-10' },
+  { id: 'wwGIqqq6RsN5A39eSkeM', name: 'からあげ', booth: 'い-12' },
+  { id: 'vrANWdPXwatvAI2fCM2s', name: 'モウフカブール', booth: 'い-13' },
+]
 
 const container = css`
   margin: 0 auto;

@@ -1,6 +1,6 @@
 /**
  * command-line:
- * ts-node-esm scripts/20221104-createCircles.ts
+ * ts-node scripts/20230426-createCircles.ts
  */
 import fs from 'fs'
 import csv from 'csv-parser'

@@ -1,6 +1,6 @@
 /**
  * command-line:
- * ts-node-esm scripts/20221104-createInvitation.ts
+ * ts-node scripts/20230426-createInvitation.ts
  */
 import admin from 'firebase-admin'
 
