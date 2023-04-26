@@ -2,6 +2,7 @@
 import { css, jsx } from '@emotion/core'
 import Image from 'next/image'
 import { media, colors } from '../utils/style'
+import FluidBlock from '../components/atoms/FluidBlock'
 import TextBlock from '../components/atoms/TextBlock'
 import SectionHeader from '../components/SectionHeder'
 import placeIcon from '../components/top/round-place.svg'
@@ -467,13 +468,15 @@ export default () => {
               地下鉄桜通線「名古屋駅」から徳重行き、「吹上駅」下車 ５番出口より徒歩５分
             </p>
           </div>
+        </TextBlock>
+        <FluidBlock>
           <iframe
             css={css`
               width: 100%;
-              min-height: 240px;
+              min-height: 420px;
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.9198594638074!2d136.92774131537575!3d35.158619366062545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600370905bbb84e3%3A0x51f9c8110f90c29e!2z5Lit5bCP5LyB5qWt5oyv6IiI5Lya6aSoIOesrDLjg5XjgqHjg4Pjgrfjg6fjg7PlsZXnpLrloLQ!5e0!3m2!1sja!2sjp!4v1672195378590!5m2!1sja!2sjp"></iframe>
-        </TextBlock>
+        </FluidBlock>
       </section>
 
       <section css={section}>
