@@ -48,7 +48,7 @@ const Hero = () => (
   <div>
   <div
     css={css`
-      background-color: #fff4e0;
+      background-color: #f2f7f9;
       margin-top: 10px;
       padding: 32px;
       display: flex;
@@ -149,7 +149,7 @@ const Hero = () => (
           }
         `}>
         @吹上ホール<span css={css`
-          color: #f99292;
+          color: #c581b4;
         `}>（名古屋）</span> 第2ファッション展示場
       </div>
       <div
@@ -157,21 +157,21 @@ const Hero = () => (
           margin-top: 16px;
           margin-bottom: 16px;
           .btn-orange {
-            border: 2px solid #ffbc61;
-            background-color: #ffbc61;
-            color: #fff4e0;
+            border: 2px solid #81b4c5;
+            background-color: #81b4c5;
+            color: #f2f7f9;
             &:hover {
-              background-color: #fff4e0;
-              color: #ffbc61;
+              background-color: #f2f7f9;
+              color: #81b4c5;
             }
           }
           .btn-pink {
-            border: 2px solid #f99292;
-            background-color: #f99292;
-            color: #fff4e0;
+            border: 2px solid #c581b4;
+            background-color: #c581b4;
+            color: #f2f7f9;
             &:hover {
-              background-color: #fff4e0;
-              color: #f99292;
+              background-color: #f2f7f9;
+              color: #c581b4;
             }
           }
         `}>
