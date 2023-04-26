@@ -176,7 +176,10 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://ospn.connpass.com/event/278668/" className="btn-orange">
-          来場予約はこちら
+          一般来場予約
+        </LinkButton>
+        <LinkButton href="https://ospn.connpass.com/event/281175/" className="btn-pink">
+          懇親会予約
         </LinkButton>
       </div>
       <hr />
