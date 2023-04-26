@@ -16,8 +16,8 @@ const LinkButton: React.SFC<{
   <a
     css={css`
       font-size: 16px;
-      border: 2px solid #fc913a;
-      color: #fc913a;
+      border: 2px solid #81b4c5;
+      color: #81b4c5;
       font-weight: bold;
       padding: 10px 16px;
       display: inline-block;
@@ -32,7 +32,7 @@ const LinkButton: React.SFC<{
         display: block;
       }
       &:hover {
-        background-color: #fc913a;
+        background-color: #81b4c5;
         color: white;
       }
     `}
@@ -58,7 +58,7 @@ const Hero = () => (
       padding-bottom: 66px;
 
       color: white;
-      color: #fc913a;
+      color: #81b4c5;
       /* background-image: url('/static/bg.png'); */
       @media ${media.large} {
         flex-direction: column;
@@ -108,7 +108,7 @@ const Hero = () => (
           small {
             font-size: 18px;
             background-color: white;
-            background-color: #fc913a;
+            background-color: #81b4c5;
             color: white;
             display: inline-block;
             padding: 2px 10px;
