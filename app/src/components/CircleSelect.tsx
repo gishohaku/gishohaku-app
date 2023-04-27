@@ -737,7 +737,7 @@ const gishohaku8Circles = [
   { id: 'OtchSmoriV8JrwR5zfbm', name: 'ゆめみ大技林製作委員会', booth: 'あ-03' },
   { id: '4f8Sj13yfUC3coWVNcUl', name: 'Just1factory', booth: 'あ-04' },
   { id: 'xVMY2KtyYWAdp6xku81Y', name: 'Type D4 Lab', booth: 'あ-05' },
-//  { id: 'wwGIqqq6RsN5A39eSkeM', name: 'ピープルソフトウエア', booth: 'あ-06' },
+//  { id: 'wwGIqqq6RsN5A39eSkeM', name: 'ピープルソフトウェア', booth: 'あ-06' },
   { id: 'RtpDcAMIx3pWJ2xDpWRx', name: 'Rails Girls わんだーらんど', booth: 'あ-07' },
   { id: 'Tk2mFiVwcTvT0jQJJA0s', name: 'システム工学研究会', booth: 'あ-08' },
   { id: 'EoDBG78VdTq7QJZEKVmi', name: '電脳世界', booth: 'あ-09' },
