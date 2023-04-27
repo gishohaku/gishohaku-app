@@ -516,7 +516,7 @@ export default () => {
             </div>
             <div className="sponsorlist">
               <Sponsor
-                name="ピープルソフトウエア株式会社"
+                name="ピープルソフトウェア株式会社"
                 role="サポーター"
                 image="/static/sponsors/peoplesoftware.png"
                 href="https://pscsrv.co.jp/"
