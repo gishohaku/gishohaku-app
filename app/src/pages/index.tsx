@@ -522,6 +522,12 @@ export default () => {
                 href="https://pscsrv.co.jp/"
               />
               <Sponsor
+                name="デザイン読書日和"
+                role="デザインサポーター"
+                image="/static/sponsors/dezabiyo.png"
+                href="https://dezabiyo.studio.site/"
+              />
+              <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
                 image="/static/sponsors/shimaya.png"
