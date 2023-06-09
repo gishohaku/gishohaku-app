@@ -13,6 +13,7 @@ module.exports = {
         gishohaku6: '#328BB6',
         gishohaku7: '#35A6DF',
         gishohaku8: '#81B4C5',
+        gishohaku9: '#81B4C5',
       },
     },
   },

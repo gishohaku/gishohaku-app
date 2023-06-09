@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import Image from 'next/image'
-import { media, colors } from '../utils/style'
-import FluidBlock from '../components/atoms/FluidBlock'
-import TextBlock from '../components/atoms/TextBlock'
-import SectionHeader from '../components/SectionHeder'
-import placeIcon from '../components/top/round-place.svg'
-import directionsIcon from '../components/top/round-directions_run.svg'
+import { media, colors } from '../../utils/style'
+import FluidBlock from '../../components/atoms/FluidBlock'
+import TextBlock from '../../components/atoms/TextBlock'
+import SectionHeader from '../../components/SectionHeder'
+import placeIcon from '../../components/top/round-place.svg'
+import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
@@ -83,7 +83,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku9-logo.jpg"
+      src="/static/gishohaku8-logo.jpg"
       width={280}
       height={280}
     />
@@ -123,7 +123,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第九回</small>技術書同人誌博覧会
+        <small>第八回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -139,7 +139,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2023.11.25 <small>Sut. 11:00~16:00</small>
+        2023.05.28 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -149,7 +149,9 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @大田区産業プラザPiO 大展示ホール
+        @吹上ホール<span css={css`
+          color: #c581b4;
+        `}>（名古屋）</span> 第2ファッション展示場
       </div>
       <div
         css={css`
@@ -164,10 +166,64 @@ const Hero = () => (
               color: #81b4c5;
             }
           }
+          .btn-pink {
+            border: 2px solid #c581b4;
+            background-color: #c581b4;
+            color: #f2f7f9;
+            &:hover {
+              background-color: #f2f7f9;
+              color: #c581b4;
+            }
+          }
         `}>
-        <LinkButton href="/circle-entry" className="btn-orange">
-          サークル申込はこちら
+        <LinkButton href="https://ospn.connpass.com/event/278668/" className="btn-orange">
+          一般来場予約
         </LinkButton>
+        <LinkButton href="https://ospn.connpass.com/event/281175/" className="btn-pink">
+          懇親会予約
+        </LinkButton>
+      </div>
+      <hr />
+      <div
+        css={css`
+        margin-top: 16px;
+        margin-bottom: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: flex-start;
+        `}>
+        <div>
+          <img
+            width={80}
+            height={80}
+            src="/static/osc.png"
+          />
+        </div>
+        <div
+          css={css`
+            margin-left: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            @media ${media.large} {
+              font-size: 14px;
+            }
+          `}>
+          併催：Open Source Conference 2023 Nagoya<br />
+          <small
+            css={css`
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: normal;
+            @media ${media.large} {
+              font-size: 10px;
+              font-weight: normal;
+            }
+            `}>
+            ※当日は<strong>ブース展示のみ</strong><br />
+            ※セミナーはオンライン形式で5月20日(土)に開催予定<br />
+          </small>
+        </div>
       </div>
     </div>
   </div>
@@ -357,6 +413,29 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
+        <SectionHeader en="ENTRY">一般来場予約</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博本編に来場される際には、事前予約（無料）が必要です。<br />
+            時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
+            必ず事前にチケットをお求めのうえ、ご参加ください。<br />
+          </p>
+          <p
+            css={css`
+              font-size: 14px;
+              margin-top: 32px;
+              text-align: center;
+              a {
+                margin: 8px 16px;
+              }
+            `}>
+            <LinkButton href="https://ospn.connpass.com/event/278668/">
+            来場予約はこちら
+            </LinkButton>
+          </p>
+        </TextBlock>
+      </section>
+      <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
           <p
@@ -367,7 +446,7 @@ export default () => {
                 font-size: 24px;
               }
             `}>
-            大田区産業プラザPiO 大展示ホール
+            吹上ホール 第2ファッション展示場
           </p>
           <div
             css={css`
@@ -378,15 +457,15 @@ export default () => {
             `}>
             <p css={withIcon}>
               <img src={placeIcon} alt="住所" />
-              東京都大田区南蒲田1-20-20（
-              <a target="_blank" href="https://goo.gl/maps/2J282yVtzG3T5f398">
+              愛知県名古屋市千種区吹上2-6-3（
+              <a target="_blank" href="https://goo.gl/maps/Vx6RZb4N1BqY2wyE7">
                 Google マップ
               </a>
               ）
             </p>
             <p css={withIcon}>
               <img src={directionsIcon} alt="アクセス" />
-              京浜急行「京急蒲田」駅東口より徒歩約3分
+              地下鉄桜通線「名古屋駅」から徳重行き、「吹上駅」下車 ５番出口より徒歩５分
             </p>
           </div>
         </TextBlock>
@@ -396,8 +475,87 @@ export default () => {
               width: 100%;
               min-height: 420px;
             `}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.7943158893236!2d139.72149177618968!3d35.55878167262698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1686285144204!5m2!1sja!2sjp"></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.9198594638074!2d136.92774131537575!3d35.158619366062545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600370905bbb84e3%3A0x51f9c8110f90c29e!2z5Lit5bCP5LyB5qWt5oyv6IiI5Lya6aSoIOesrDLjg5XjgqHjg4Pjgrfjg6fjg7PlsZXnpLrloLQ!5e0!3m2!1sja!2sjp!4v1672195378590!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="エンジニアフレンドリーシティ福岡"
+                role="サポーター"
+                image="/static/sponsors/fukuoka.png"
+                href="https://efc.fukuoka.jp/"
+              />
+              <Sponsor
+                name="サイボウズ株式会社"
+                role="サポーター"
+                image="/static/sponsors/kintone.png"
+                href="https://kintone.cybozu.co.jp/"
+              />
+              <Sponsor
+                name="Seeed株式会社"
+                role="サポーター"
+                image="/static/sponsors/seeed.png"
+                href="https://www.seeed.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="ピープルソフトウェア株式会社"
+                role="サポーター"
+                image="/static/sponsors/peoplesoftware.png"
+                href="https://pscsrv.co.jp/"
+              />
+              <Sponsor
+                name="デザイン読書日和"
+                role="デザインサポーター"
+                image="/static/sponsors/dezabiyo.png"
+                href="https://dezabiyo.studio.site/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+              <Sponsor
+                name="株式会社野村総合研究所"
+                role="ツールサポーター"
+                image="/static/sponsors/nri.png"
+                href="https://aslead.nri.co.jp/products/miro/"
+              />
+            </div>
+          </div>
+        </TextBlock>
       </section>
 
       <section css={section}>
