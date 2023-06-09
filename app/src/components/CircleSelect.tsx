@@ -758,7 +758,9 @@ const gishohaku8Circles = [
   { id: 'vrANWdPXwatvAI2fCM2s', name: 'からあげ', booth: 'い-12' },
   { id: 'SFWL7J35kJPMGGa90KpE', name: 'モウフカブール', booth: 'い-13' },
 ]
-const gishohaku9Circles = []
+const gishohaku9Circles = [
+  { id: 'XXXXXXXXXXXXXXXXXXXX', name: '運営事務局', booth: 'Z-99' }
+]
 
 const container = css`
   margin: 0 auto;
