@@ -83,7 +83,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku9-logo.jpg"
+      src="/static/gishohaku9-logo.png"
       width={280}
       height={280}
     />
