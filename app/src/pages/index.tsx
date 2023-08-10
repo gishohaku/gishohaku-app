@@ -155,7 +155,7 @@ const Hero = () => (
         css={css`
           margin-top: 16px;
           margin-bottom: 16px;
-          .btn-blue {
+          a {
             border: 2px solid #81b4c5;
             background-color: #81b4c5;
             color: #f2f7f9;
@@ -164,21 +164,12 @@ const Hero = () => (
               color: #81b4c5;
             }
           }
-          .btn-green {
-            border: 2px solid #81c5b4;
-            background-color: #81c5b4;
-            color: #f2f7f9;
-            &:hover {
-              background-color: #f2f9f7;
-              color: #81c5b4;
-            }
-          }
         `}>
-        <LinkButton href="/circle-entry" className="btn-blue">
+        <LinkButton href="/circle-entry">
           サークル申込
         </LinkButton>
-        <LinkButton href="https://docs.google.com/presentation/d/1HXrPaTPJnFhAdMEwRa1q2XNMneZjfO-WFNKhVzDtNyk/edit?usp=sharing" className="btn-green">
-          協賛要項
+        <LinkButton href="https://blog.gishohaku.dev/entry/2023/08/10/135926">
+          協賛のご案内
         </LinkButton>
       </div>
     </div>
