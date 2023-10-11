@@ -451,12 +451,20 @@ export default () => {
               />
             </div>
             <div className="sponsorlist">
+            <Sponsor
+                name="株式会社はてな"
+                role="サポーター"
+                image="/static/sponsors/hatena.png"
+                href="https://hatenablog.com/"
+              />
               <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
                 image="/static/sponsors/shimaya.png"
                 href="https://www.shimaya.net/"
               />
+            </div>
+            <div className="sponsorlist">
               <Sponsor
                 name="esa"
                 role="ツールサポーター"
