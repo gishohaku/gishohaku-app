@@ -49,8 +49,7 @@ const Hero = () => (
   <div>
   <div
     css={css`
-      background-color: #f2f7f9;
-      margin-top: 10px;
+      background-color: #f3b7ae;
       padding: 32px;
       display: flex;
       align-items: center;
@@ -59,7 +58,6 @@ const Hero = () => (
       padding-bottom: 66px;
 
       color: white;
-      color: #81b4c5;
       /* background-image: url('/static/bg.png'); */
       @media ${media.large} {
         flex-direction: column;
@@ -108,9 +106,8 @@ const Hero = () => (
           align-items: center;
           small {
             font-size: 18px;
-            background-color: white;
-            background-color: #81b4c5;
-            color: white;
+            background-color: #ffffff;
+            color: #f3b7ae;
             display: inline-block;
             padding: 2px 10px;
             margin-right: 8px;
@@ -156,12 +153,12 @@ const Hero = () => (
           margin-top: 16px;
           margin-bottom: 16px;
           a {
-            border: 2px solid #81b4c5;
-            background-color: #81b4c5;
-            color: #f2f7f9;
+            border: 2px solid #ffffff;
+            background-color: #ffffff;
+            color: #ffffff;
             &:hover {
-              background-color: #f2f7f9;
-              color: #81b4c5;
+              background-color: #f9f7f2;
+              color: #f3b7ae;
             }
           }
         `}>
