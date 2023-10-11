@@ -165,9 +165,6 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="/circle-entry">
-          サークル申込
-        </LinkButton>
         <LinkButton href="https://blog.gishohaku.dev/entry/2023/08/10/135926">
           協賛のご案内
         </LinkButton>
