@@ -182,6 +182,7 @@ const Sponsor: React.SFC<{
 }> = ({ image, name, role, href }) => {
   return (
     <div
+      className="sponsor"
       css={css`
         display: flex-item;
         width: 240px;
@@ -189,6 +190,7 @@ const Sponsor: React.SFC<{
         margin: 8px;
       `}>
       <div
+        className="sponsor-image"
         css={css`
           border: 1px solid #eee;
           background-color: white;
@@ -396,6 +398,84 @@ export default () => {
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.7943158893236!2d139.72149177618968!3d35.55878167262698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1686285144204!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+              .sponsorlist.extra .sponsor {
+                width: 360px;
+              }
+              .sponsorlist.extra .sponsor .sponsor-image {
+                width: 340px;
+                height: 340px;
+              }
+              .sponsorlist.extra .sponsor-image img {
+                max-width: 300px;
+                max-height: 290px;
+              }
+            `}>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="ソシム株式会社"
+                role="ランチサポーター"
+                image="/static/sponsors/socym.png"
+                href="https://www.socym.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社タイミー"
+                role="サポーター"
+                image="/static/sponsors/timee.png"
+                href="https://timee.notion.site/timee/Timee-Product-Org-Entrance-Book-b7380eb4f6954e29b2664fe6f5e775f9"
+              />
+              <Sponsor
+                name="サイボウズ株式会社"
+                role="サポーター"
+                image="/static/sponsors/kintone.png"
+                href="https://kintone.cybozu.co.jp/"
+              />
+              <Sponsor
+                name="株式会社Helpfeel"
+                role="サポーター"
+                image="/static/sponsors/helpfeel.png"
+                href="https://corp.helpfeel.com/ja/home"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+            </div>
+          </div>
+        </TextBlock>
       </section>
 
       <section css={section}>
