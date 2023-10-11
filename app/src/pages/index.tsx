@@ -73,7 +73,6 @@ const Hero = () => (
         position: relative;
         left: -10px;
         height: 370px;
-        border: 1px solid #d5d7d0;
         @media ${media.large} {
           width: 280px;
           margin: 0 auto 20px;
@@ -155,7 +154,7 @@ const Hero = () => (
           a {
             border: 2px solid #ffffff;
             background-color: #ffffff;
-            color: #ffffff;
+            color: #f3b7ae;
             &:hover {
               background-color: #f9f7f2;
               color: #f3b7ae;
