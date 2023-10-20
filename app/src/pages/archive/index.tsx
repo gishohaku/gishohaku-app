@@ -33,16 +33,16 @@ export default () => {
           <Link href="/gishohaku10" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博10"
+                primary="第十回 技術書同人誌博覧会"
                 secondary="2024年5月12日 開催"
                 contentAfter={<IconChevronRight />}
               />
             </a>
           </Link>
-          <Link href="/gishohaku9" passHref>
+          <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博9"
+                primary="第九回 技術書同人誌博覧会"
                 secondary="2023年11月25日 開催"
                 contentAfter={<IconChevronRight />}
               />
@@ -51,7 +51,7 @@ export default () => {
           <Link href="/gishohaku8" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博8"
+                primary="第八回 技術書同人誌博覧会"
                 secondary="2023年5月28日 開催"
                 contentAfter={<IconChevronRight />}
               />
@@ -60,7 +60,7 @@ export default () => {
           <Link href="/gishohaku7" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博7"
+                primary="第七回 技術書同人誌博覧会"
                 secondary="2022年11月20日 開催"
                 contentAfter={<IconChevronRight />}
               />
@@ -69,7 +69,7 @@ export default () => {
           <Link href="/gishohaku5" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博5"
+                primary="第五回 技術書同人誌博覧会"
                 secondary="2021年6月19日 開催"
                 contentAfter={<IconChevronRight />}
               />
@@ -78,7 +78,7 @@ export default () => {
           <Link href="/gishohaku2" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博2"
+                primary="第二回 技術書同人誌博覧会"
                 secondary="2019年12月14日 開催"
                 contentAfter={<IconChevronRight />}
               />
@@ -87,7 +87,7 @@ export default () => {
           <Link href="/gishohaku1" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="技書博1"
+                primary="第一回 技術書同人誌博覧会"
                 secondary="2019年7月27日 開催"
                 contentAfter={<IconChevronRight />}
               />
