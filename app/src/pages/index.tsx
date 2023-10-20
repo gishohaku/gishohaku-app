@@ -483,6 +483,51 @@ export default () => {
       </section>
 
       <section css={section}>
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type3.jpg"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="https://img.esa.io/uploads/production/attachments/13039/2023/10/18/142080/87d4bcf8-e4ca-4d77-81df-6816db03f2e8.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="https://www.eikou.com/link/eikoubanner.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="PrintWalk"
+              imageUrl="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="https://www2.popls.co.jp/pop/img/popls_bn2020c.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
         <SectionHeader en="BANNER">リンクバナー</SectionHeader>
         <TextBlock>
           <p
