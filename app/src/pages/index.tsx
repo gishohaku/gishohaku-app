@@ -500,12 +500,12 @@ export default () => {
             />
             <Printing
               name="K-9"
-              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type3.jpg"
+              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type3.gif"
               linkUrl="https://www.k-k9.jp/"
             />
             <Printing
               name="日光企画"
-              imageUrl="https://img.esa.io/uploads/production/attachments/13039/2023/10/18/142080/87d4bcf8-e4ca-4d77-81df-6816db03f2e8.png"
+              imageUrl="https://www.nikko-pc.com/only-event/img/niko.png"
               linkUrl="https://www.nikko-pc.com/"
             />
             <Printing
