@@ -206,6 +206,17 @@ const Header: React.FC<any> = () => {
               contentAfter={<IconExternalLink />}
             />
           </a>
+          <a
+            href="https://gishohaku.connpass.com/"
+            target="_blank"
+            rel="noopener"
+            css={noDecoration}>
+            <ListItem
+              primary="Connpass"
+              secondary="技書博関連イベントページ"
+              contentAfter={<IconExternalLink />}
+            />
+          </a>
           <div css={divider} />
         </List>
         <ul
