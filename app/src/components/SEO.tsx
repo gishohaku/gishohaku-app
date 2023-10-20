@@ -33,7 +33,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
         '来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。',
       price: '0',
       priceCurrency: 'JPY',
-      url: 'https://gishohaku.dev/',
+      url: 'https://gishohaku.connpass.com/event/298538/',
     },
     performer: {
       '@type': 'PerformingGroup',

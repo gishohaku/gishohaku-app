@@ -161,8 +161,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://blog.gishohaku.dev/entry/2023/08/10/135926">
-          協賛のご案内
+        <LinkButton href="https://gishohaku.connpass.com/event/298538/">
+          技書博に一般参加する
         </LinkButton>
       </div>
     </div>
