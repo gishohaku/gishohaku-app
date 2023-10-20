@@ -352,6 +352,7 @@ export default () => {
           </p>
         </TextBlock>
       </section>
+
       <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
@@ -394,6 +395,23 @@ export default () => {
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.7943158893236!2d139.72149177618968!3d35.55878167262698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1686285144204!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <TextBlock>
+          <p>
+            サークル参加される方に向けたご案内資料です。
+          </p>
+          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/214/100a86af275822f92ffd.html">
+            出展要項<br />
+            <small>（出展に関する規約類）</small>
+          </LinkButton>
+          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/213/f3930a09ba1375a8fca6.html">
+            出展の手引き<br />
+            <small>（当日までの作業案内）</small>
+          </LinkButton>
+        </TextBlock>
       </section>
 
       <section css={section}>

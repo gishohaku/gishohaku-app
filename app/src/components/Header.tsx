@@ -235,22 +235,6 @@ const Header: React.FC<any> = () => {
             <a
               target="_blank"
               rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/214/100a86af275822f92ffd.html">
-              サークル出展要項
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/213/f3930a09ba1375a8fca6.html">
-              サークル出展の手引き
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              rel="noopener"
               href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">
               行動規範
             </a>
