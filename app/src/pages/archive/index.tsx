@@ -66,6 +66,10 @@ export default () => {
               />
             </a>
           </Link>
+          <ListItem
+                primary="第六回 技術書同人誌博覧会"
+                secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
+              />
           <Link href="/gishohaku5" passHref>
             <a css={noDecoration}>
               <ListItem
@@ -75,6 +79,14 @@ export default () => {
               />
             </a>
           </Link>
+          <ListItem
+                primary="第四回 技術書同人誌博覧会"
+                secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
+              />
+          <ListItem
+                primary="第三回 技術書同人誌博覧会"
+                secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
+              />
           <Link href="/gishohaku2" passHref>
             <a css={noDecoration}>
               <ListItem
