@@ -31,6 +31,7 @@ const mapUrl: {
   gishohaku7: '/static/gishohaku7-layout.png',
   gishohaku8: '',
   gishohaku9: '',
+  gishohaku10: '',
 }
 
 const Index: NextPage<InitialProps> = (props) => {
