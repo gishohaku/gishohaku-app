@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
+import SectionHeader from '../../components/SectionHeder'
 
 import { jsx, css } from '@emotion/core'
 import {
@@ -11,75 +12,88 @@ import {
 const noDecoration = css`
   text-decoration: none;
 `
+const section = css`
+  padding: 48px 0;
+  background-color: white;
+  @media ${media.large} {
+    padding: 32px 0;
+  }
+  :nth-child(odd) {
+    background-color: #f7f8fa;
+  }
+`
 
 export default () => {
   return (
     <>
-      <List>
-        <Link href="/gishohaku10" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博10"
-              secondary="2024.5.12"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku9" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博9"
-              secondary="2023.11.25"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku8" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博8"
-              secondary="2023.5.28"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku7" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博7"
-              secondary="2022.11.20"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku5" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博5"
-              secondary="2021.6.19"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku2" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博2"
-              secondary="2019.12.14"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-        <Link href="/gishohaku1" passHref>
-          <a css={noDecoration}>
-            <ListItem
-              primary="技書博1"
-              secondary="2019.7.27"
-              contentAfter={<IconChevronRight />}
-            />
-          </a>
-        </Link>
-      </List>
+      <section css={section}>
+        <SectionHeader en="ARCHIVE">過去の開催回一覧</SectionHeader>
+        <List>
+          <Link href="/gishohaku10" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博10"
+                secondary="2024年5月12日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku9" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博9"
+                secondary="2023年11月25日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku8" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博8"
+                secondary="2023年5月28日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku7" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博7"
+                secondary="2022年11月20日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku5" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博5"
+                secondary="2021年6月19日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku2" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博2"
+                secondary="2019年12月14日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku1" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="技書博1"
+                secondary="2019年7月27日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+        </List>
+      </section>
     </>
   )
 }

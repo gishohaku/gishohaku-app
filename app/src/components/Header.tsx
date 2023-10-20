@@ -185,53 +185,12 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku8" passHref>
+          <div css={divider} />
+          <Link href="/archive" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第八回 技術書同人誌博覧会"
-                secondary="2023年5月28日 開催"
+                primary="過去の開催回一覧"
                 contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku7" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第七回 技術書同人誌博覧会"
-                secondary="2022年11月20日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku5" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第五回 技術書同人誌博覧会"
-                secondary="2021年6月19日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku2" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第二回 技術書同人誌博覧会"
-                secondary="2019年12月14日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku1" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第一回 技術書同人誌博覧会"
-                secondary="2019年7月27日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
               />
             </a>
           </Link>
