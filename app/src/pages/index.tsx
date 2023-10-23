@@ -541,6 +541,16 @@ export default () => {
               imageUrl="https://www2.popls.co.jp/pop/img/popls_bn2020c.jpg"
               linkUrl="https://www.popls.co.jp/"
             />
+            <Printing
+              name="PICO"
+              imageUrl="http://www.pico-net.com/topmenu/pico_bunner.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="https://www.shippo.co.jp/neko/img/neko_bannerHD.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
           </div>
         </TextBlock>
       </section>
