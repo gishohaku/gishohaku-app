@@ -488,7 +488,7 @@ export default () => {
               <Sponsor
                 name="テクノブレーン株式会社"
                 role="キャラバンサポーター"
-                image="/static/sponsors/technobrain.jpg"
+                image="/static/sponsors/technobrain.png"
                 href="https://www.techno-brain.co.jp/"
               />
             </div>
