@@ -573,14 +573,14 @@ const Page = () => {
                 image="/static/sponsors/thelemaassist.png"
                 href="https://thelemaassist.com/"
               />
-            </div>
-            <div className="sponsorlist">
               <Sponsor
                 name="テクノブレーン株式会社"
                 role="サポーター"
                 image="/static/sponsors/technobrain.png"
                 href="https://www.techno-brain.co.jp/"
               />
+            </div>
+            <div className="sponsorlist">
               <Sponsor
                 name="株式会社メディアドゥ"
                 role="サポーター"

@@ -442,6 +442,12 @@ export default () => {
             `}>
             <div className="sponsorlist extra">
               <Sponsor
+                name="テクノブレーン株式会社"
+                role="カフェサポーター"
+                image="/static/sponsors/technobrain.png"
+                href="https://www.techno-brain.co.jp/"
+              />
+              <Sponsor
                 name="株式会社システムアイ"
                 role="ノベルティサポーター・アワードサポーター"
                 image="/static/sponsors/systemi.png"
@@ -449,12 +455,6 @@ export default () => {
               />
             </div>
             <div className="sponsorlist extra">
-              <Sponsor
-                name="テクノブレーン株式会社"
-                role="カフェサポーター"
-                image="/static/sponsors/technobrain.png"
-                href="https://www.techno-brain.co.jp/"
-              />
               <Sponsor
                 name="ソシム株式会社"
                 role="ランチサポーター"
