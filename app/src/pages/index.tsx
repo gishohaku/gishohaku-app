@@ -442,6 +442,20 @@ export default () => {
             `}>
             <div className="sponsorlist extra">
               <Sponsor
+                name="株式会社システムアイ"
+                role="ノベルティサポーター・アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="テクノブレーン株式会社"
+                role="カフェサポーター"
+                image="/static/sponsors/technobrain.jpg"
+                href="https://www.techno-brain.co.jp/"
+              />
+              <Sponsor
                 name="ソシム株式会社"
                 role="ランチサポーター"
                 image="/static/sponsors/socym.png"
@@ -469,11 +483,17 @@ export default () => {
               />
             </div>
             <div className="sponsorlist">
-            <Sponsor
+              <Sponsor
                 name="株式会社はてな"
                 role="サポーター"
                 image="/static/sponsors/hatena.png"
                 href="https://hatenablog.com/"
+              />
+              <Sponsor
+                name="株式会社翔泳社"
+                role="サポーター"
+                image="/static/sponsors/shoeisha.png"
+                href="https://www.shoeisha.co.jp"
               />
               <Sponsor
                 name="株式会社しまや出版"
