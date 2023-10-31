@@ -509,6 +509,12 @@ export default () => {
                 image="/static/sponsors/shimaya.png"
                 href="https://www.shimaya.net/"
               />
+              <Sponsor
+                name="株式会社技術評論社"
+                role="メディアスポンサー"
+                image="/static/sponsors/gihyo.png"
+                href="https://gihyo.jp"
+              />
             </div>
             <div className="sponsorlist">
               <Sponsor
@@ -522,12 +528,6 @@ export default () => {
                 role="ツールサポーター"
                 image="/static/sponsors/imageflux.png"
                 href="https://www.sakura.ad.jp/services/imageflux/"
-              />
-              <Sponsor
-                name="株式会社技術評論社"
-                role="メディアスポンサー"
-                image="/static/sponsors/gihyo.png"
-                href="https://gihyo.jp"
               />
             </div>
           </div>
