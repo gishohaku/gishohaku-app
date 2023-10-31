@@ -496,30 +496,18 @@ export default () => {
                 href="https://www.shoeisha.co.jp"
               />
               <Sponsor
-                name="株式会社しまや出版"
-                role="プリンティングサポーター"
-                image="/static/sponsors/shimaya.png"
-                href="https://www.shimaya.net/"
+                name="株式会社リセ"
+                role="サポーター"
+                image="/static/sponsors/lisse.png"
+                href="https://lisse-law.com/"
               />
             </div>
             <div className="sponsorlist">
               <Sponsor
-                name="esa"
-                role="ツールサポーター"
-                image="/static/sponsors/esa.png"
-                href="https://esa.io"
-              />
-              <Sponsor
-                name="ImageFlux"
-                role="ツールサポーター"
-                image="/static/sponsors/imageflux.png"
-                href="https://www.sakura.ad.jp/services/imageflux/"
-              />
-              <Sponsor
-                name="株式会社技術評論社"
-                role="メディアスポンサー"
-                image="/static/sponsors/gihyo.png"
-                href="https://gihyo.jp"
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
               />
             </div>
             <div className="sponsorlist">
