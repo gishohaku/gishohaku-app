@@ -439,6 +439,17 @@ export default () => {
                 max-width: 300px;
                 max-height: 290px;
               }
+              .sponsorlist.small .sponsor {
+                width: 180px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
             `}>
             <div className="sponsorlist extra">
               <Sponsor
@@ -509,14 +520,14 @@ export default () => {
                 image="/static/sponsors/shimaya.png"
                 href="https://www.shimaya.net/"
               />
+            </div>
+            <div className="sponsorlist small">
               <Sponsor
                 name="株式会社技術評論社"
                 role="メディアスポンサー"
                 image="/static/sponsors/gihyo.png"
                 href="https://gihyo.jp"
               />
-            </div>
-            <div className="sponsorlist">
               <Sponsor
                 name="esa"
                 role="ツールサポーター"
