@@ -248,7 +248,10 @@ const BlankMessage: React.FC<{
       `}>
       頒布物が登録されていません
     </h2>
-    <p>
+    <p
+      css={css`
+        text-align: center;
+      `}>
       「{circleName}」には頒布物が登録されていないようです。
       <br />
       読みたい本がありそうなら筆者に気持ちを伝えてみましょう。
