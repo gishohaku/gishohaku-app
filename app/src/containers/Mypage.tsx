@@ -18,10 +18,6 @@ const Mypage: React.FC<Props> = ({ userData }) => {
 
   return (
     <Container>
-      <div className="mt-4">
-        {userData.displayName}さん ({userData.uid})
-      </div>
-
       <div className="bg-white mt-8 overflow-hidden rounded shadow">
         <List>
           <Link href={`/${eventId}/mypage/circle_stars`} passHref>
@@ -70,6 +66,10 @@ const Mypage: React.FC<Props> = ({ userData }) => {
           }}
         />
       </List>
+
+      <div className="mt-4">
+        uid: {userData.uid}
+      </div>
     </Container>
   )
 }
