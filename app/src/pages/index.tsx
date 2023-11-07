@@ -178,12 +178,13 @@ const Sponsor: React.SFC<{
 }> = ({ image, name, role, href }) => {
   return (
     <div
-      className="sponsor"
+      className="sponsor”
       css={css`
         display: flex-item;
         width: 240px;
         text-align: center;
         margin: 8px;
+        filter:drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.2));
       `}>
       <div
         className="sponsor-image"
@@ -427,6 +428,7 @@ export default () => {
                 align-content: flex-start;
                 align-items: flex-start;
                 margin: 12px 0;
+                gap: 12px 0;
               }
               .sponsorlist.extra .sponsor {
                 width: 360px;
@@ -464,8 +466,6 @@ export default () => {
                 image="/static/sponsors/systemi.png"
                 href="https://systemi.co.jp/"
               />
-            </div>
-            <div className="sponsorlist extra">
               <Sponsor
                 name="ソシム株式会社"
                 role="ランチサポーター"
@@ -492,8 +492,6 @@ export default () => {
                 image="/static/sponsors/helpfeel.png"
                 href="https://corp.helpfeel.com/ja/home"
               />
-            </div>
-            <div className="sponsorlist">
               <Sponsor
                 name="株式会社はてな"
                 role="サポーター"
@@ -512,8 +510,6 @@ export default () => {
                 image="/static/sponsors/lisse.png"
                 href="https://lisse-law.com/"
               />
-            </div>
-            <div className="sponsorlist">
               <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
