@@ -13,6 +13,12 @@ interface Props {
   userData: User
 }
 
+const uidCss = css`
+  text-align: right;
+  color: #bbb;
+  font-size: 80%;
+`
+
 const Mypage: React.FC<Props> = ({ userData }) => {
   const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
@@ -68,13 +74,7 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         />
       </List>
 
-      <div
-        className="mt-4"
-          css={css`
-          text-align: right;
-          color: #bbb;
-          font-size: 80%;
-        `}>
+      <div className="mt-4" css={uidCss}>
         ({userData.uid})
       </div>
     </Container>
