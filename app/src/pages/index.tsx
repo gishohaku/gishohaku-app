@@ -184,7 +184,7 @@ const Sponsor: React.SFC<{
         width: 240px;
         text-align: center;
         margin: 8px;
-        filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.1));
       `}>
       <div
         className="sponsor-image"
@@ -430,8 +430,11 @@ export default () => {
                 margin: 12px 0;
                 gap: 12px 0;
               }
+              .sponsorlist.extra {
+                gap: 16px 0;
+              }
               .sponsorlist.extra .sponsor {
-                width: 360px;
+                width: 375px;
               }
               .sponsorlist.extra .sponsor .sponsor-image {
                 width: 340px;
@@ -442,7 +445,7 @@ export default () => {
                 max-height: 290px;
               }
               .sponsorlist.small .sponsor {
-                width: 180px;
+                width: 175px;
               }
               .sponsorlist.small .sponsor .sponsor-image {
                 width: 160px;
