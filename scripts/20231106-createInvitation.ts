@@ -18,7 +18,7 @@ admin.initializeApp({
     const { name } = doc.data()
     // console.log(doc.id, name)
     const result = await doc.ref.collection('circleInvitations').add({
-      eventId: "gishohaku8"
+      eventId: "gishohaku9"
     })
     const token = result.id
     console.log([
