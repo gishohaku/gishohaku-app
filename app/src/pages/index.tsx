@@ -430,6 +430,9 @@ export default () => {
                 margin: 12px 0;
                 gap: 12px 0;
               }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
               .sponsorlist.extra {
                 gap: 16px 0;
               }
@@ -523,7 +526,7 @@ export default () => {
             <div className="sponsorlist small">
               <Sponsor
                 name="株式会社技術評論社"
-                role="メディアスポンサー"
+                role="メディアサポーター"
                 image="/static/sponsors/gihyo.png"
                 href="https://gihyo.jp"
               />
