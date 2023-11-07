@@ -335,7 +335,7 @@ const section = css`
     padding: 32px 0;
   }
   :nth-child(odd) {
-    background-color: #f7f8fa;
+    background-color: #fdf7f6;
   }
 `
 
