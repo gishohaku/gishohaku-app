@@ -178,13 +178,13 @@ const Sponsor: React.SFC<{
 }> = ({ image, name, role, href }) => {
   return (
     <div
-      className="sponsor”
+      className="sponsor"
       css={css`
         display: flex-item;
         width: 240px;
         text-align: center;
         margin: 8px;
-        filter:drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.2));
       `}>
       <div
         className="sponsor-image"
