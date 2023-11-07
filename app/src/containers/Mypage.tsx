@@ -67,8 +67,14 @@ const Mypage: React.FC<Props> = ({ userData }) => {
         />
       </List>
 
-      <div className="mt-4">
-        uid: {userData.uid}
+      <div
+        className="mt-4"
+          css={css`
+          text-align: right;
+          color: #bbb;
+          font-size: 80%;
+        `}>
+        ({userData.uid})
       </div>
     </Container>
   )
