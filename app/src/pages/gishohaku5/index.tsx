@@ -392,7 +392,7 @@ const Page = () => {
                 href="https://ecs.toranoana.jp/tora/ec/cot/pages/all/item/2021/06/19/00001/">
                 <img
                   className="banner"
-                  src="https://www.toranoana.jp/icon/tora_bn.gif"
+                  src="/static/printings/toranoana.gif"
                 />
               </a>
             </div>
@@ -400,7 +400,7 @@ const Page = () => {
               <a target="_blank" href="https://booth.pm/ja/events/gishohaku5">
                 <img
                   className="banner"
-                  src="https://asset.booth.pm/static-images/banner/200x40_01.png"
+                  src="/static/printings/booth.png"
                 />
               </a>
             </div>
