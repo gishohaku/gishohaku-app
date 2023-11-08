@@ -413,33 +413,33 @@ const Sections = () => (
         `}>
         <Printing
           name="ねこのしっぽ"
-          url="https://www.shippo.co.jp/"
-          image="https://www.shippo.co.jp/neko/img/neko_banner.gif"
+          imageUrl="/static/printings/neko.gif"
+          linkUrl="https://www.shippo.co.jp/neko/"
         />
         <Printing
           name="日光企画"
-          url="http://www.nikko-pc.com"
-          image="http://www.nikko-pc.com/start/logo.gif"
+          imageUrl="/static/printings/nikko.png"
+          linkUrl="https://www.nikko-pc.com/"
         />
         <Printing
           name="ポプルス"
-          url="http://www.inv.co.jp/~popls"
-          image="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
+          imageUrl="/static/printings/popls.jpg"
+          linkUrl="http://www.inv.co.jp/~popls/"
         />
         <Printing
-          name="ケーナイン"
-          url="https://www.k-k9.jp/"
-          image="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
+          name="K-9"
+          imageUrl="/static/printings/k9.gif"
+          linkUrl="https://www.k-k9.jp/"
         />
         <Printing
           name="栄光"
-          url="http://www.eikou.com/event_support/index.html"
-          image="http://www.eikou.com/link/eikoubanner.gif"
+          imageUrl="/static/printings/eikou.gif"
+          linkUrl="http://www.eikou.com/"
         />
         <Printing
           name="しまや出版"
-          url="https://www.shimaya.net/"
-          image="/static/printings/shimaya.png"
+          imageUrl="/static/printings/shimaya.png"
+          linkUrl="https://www.shimaya.net/"
         />
       </Container>
     </section>
