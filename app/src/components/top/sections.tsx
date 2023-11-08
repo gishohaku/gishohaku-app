@@ -413,33 +413,33 @@ const Sections = () => (
         `}>
         <Printing
           name="ねこのしっぽ"
-          imageUrl="/static/printings/neko.gif"
-          linkUrl="https://www.shippo.co.jp/neko/"
+          image="/static/printings/neko.gif"
+          url="https://www.shippo.co.jp/neko/"
         />
         <Printing
           name="日光企画"
-          imageUrl="/static/printings/nikko.png"
-          linkUrl="https://www.nikko-pc.com/"
+          image="/static/printings/nikko.png"
+          url="https://www.nikko-pc.com/"
         />
         <Printing
           name="ポプルス"
-          imageUrl="/static/printings/popls.jpg"
-          linkUrl="http://www.inv.co.jp/~popls/"
+          image="/static/printings/popls.jpg"
+          url="http://www.inv.co.jp/~popls/"
         />
         <Printing
           name="K-9"
-          imageUrl="/static/printings/k9.gif"
-          linkUrl="https://www.k-k9.jp/"
+          image="/static/printings/k9.gif"
+          url="https://www.k-k9.jp/"
         />
         <Printing
           name="栄光"
-          imageUrl="/static/printings/eikou.gif"
-          linkUrl="http://www.eikou.com/"
+          image="/static/printings/eikou.gif"
+          url="http://www.eikou.com/"
         />
         <Printing
           name="しまや出版"
-          imageUrl="/static/printings/shimaya.png"
-          linkUrl="https://www.shimaya.net/"
+          image="/static/printings/shimaya.png"
+          url="https://www.shimaya.net/"
         />
       </Container>
     </section>
