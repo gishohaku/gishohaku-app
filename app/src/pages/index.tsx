@@ -550,6 +550,18 @@ export default () => {
                 image="/static/sponsors/gihyo.png"
                 href="https://gihyo.jp"
               />
+              <Sponsor
+                name="マイナビBOOKS"
+                role="メディアサポーター"
+                image="/static/sponsors/mynavi.png"
+                href="https://book.mynavi.jp/"
+              />
+              <Sponsor
+                name="I/O"
+                role="メディアサポーター"
+                image="/static/sponsors/io.png"
+                href="https://www.kohgakusha.co.jp"
+              />
             </div>
           </div>
         </TextBlock>
