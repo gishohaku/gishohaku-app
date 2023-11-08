@@ -33,7 +33,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "frame-ancestors 'none'"
+            "value": "frame-ancestors 'none'; default-src 'none'; img-src 'self'; font-src https://fonts.gstatic.com; style-src https://fonts.googleapis.com; script-src https://www.google-analytics.com https://maps.googleapis.com https://maps.gstatic.com "
           },
           {
             "key": "X-Content-Type-Options",
@@ -45,7 +45,7 @@
           },
           {
             "key": "X-XSS-Protection",
-            "value": "0"
+            "value": "1; mode=block"
           }
         ]
       },

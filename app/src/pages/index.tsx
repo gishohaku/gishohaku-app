@@ -560,42 +560,42 @@ export default () => {
             `}>
             <Printing
               name="しまや出版"
-              imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
+              imageUrl="/static/printings/shimaya.png"
               linkUrl="https://www.shimaya.net/"
             />
             <Printing
               name="K-9"
-              imageUrl="https://www.k-k9.jp/wp-content/themes/k-9/img/event/bana_type3.gif"
+              imageUrl="/static/printings/k9.gif"
               linkUrl="https://www.k-k9.jp/"
             />
             <Printing
               name="日光企画"
-              imageUrl="https://www.nikko-pc.com/only-event/img/niko.png"
+              imageUrl="/static/printings/nikko.png"
               linkUrl="https://www.nikko-pc.com/"
             />
             <Printing
               name="栄光"
-              imageUrl="https://www.eikou.com/link/eikoubanner.gif"
+              imageUrl="/static/printings/eikou.gif"
               linkUrl="http://www.eikou.com/"
             />
             <Printing
               name="PrintWalk"
-              imageUrl="https://www.print-walk.co.jp/manual/images/printwalk01_-banner.jpg"
+              imageUrl="/static/printings/printwalk.jpg"
               linkUrl="https://www.print-walk.co.jp/"
             />
             <Printing
               name="ポプルス"
-              imageUrl="https://www2.popls.co.jp/pop/img/popls_bn2020c.jpg"
+              imageUrl="/static/printings/popls.jpg"
               linkUrl="https://www.popls.co.jp/"
             />
             <Printing
               name="PICO"
-              imageUrl="http://www.pico-net.com/topmenu/pico_bunner.gif"
+              imageUrl="/static/printings/pico.gif"
               linkUrl="http://www.pico-net.com/doujinshi/"
             />
             <Printing
               name="ねこのしっぽ"
-              imageUrl="https://www.shippo.co.jp/neko/img/neko_bannerHD.gif"
+              imageUrl="/static/printings/neko.gif"
               linkUrl="https://www.shippo.co.jp/neko/"
             />
           </div>
