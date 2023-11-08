@@ -54,6 +54,7 @@ const Index: NextPage<InitialProps> = (props) => {
         pageStart={0}
         loadMore={async () => {
           setHasMore(false)
+          if (books.length < 1) return
           const lastBook = books[books.length - 1]
           const updatedAt = lastBook.updatedAt
           if (!updatedAt) return
