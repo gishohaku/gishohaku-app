@@ -525,12 +525,6 @@ export default () => {
             </div>
             <div className="sponsorlist small">
               <Sponsor
-                name="株式会社技術評論社"
-                role="メディアサポーター"
-                image="/static/sponsors/gihyo.png"
-                href="https://gihyo.jp"
-              />
-              <Sponsor
                 name="esa"
                 role="ツールサポーター"
                 image="/static/sponsors/esa.png"
@@ -541,6 +535,20 @@ export default () => {
                 role="ツールサポーター"
                 image="/static/sponsors/imageflux.png"
                 href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+              <Sponsor
+                name="株式会社野村総合研究所"
+                role="ツールサポーター"
+                image="/static/sponsors/nri.png"
+                href="https://aslead.nri.co.jp/products/miro/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="株式会社技術評論社"
+                role="メディアサポーター"
+                image="/static/sponsors/gihyo.png"
+                href="https://gihyo.jp"
               />
             </div>
           </div>
