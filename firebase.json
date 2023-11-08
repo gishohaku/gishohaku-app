@@ -33,7 +33,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "frame-ancestors 'none'; default-src 'unsafe-inline' data:; img-src 'self' data:; font-src https://fonts.gstatic.com; style-src 'unsafe-inline' https://fonts.googleapis.com; script-src 'unsafe-inline' https://www.google-analytics.com https://maps.gstatic.com; require-trusted-types-for 'script'"
+            "value": "frame-ancestors 'none'; default-src 'unsafe-inline' data:; frame-src *.google.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com *.google.com *.googleusercontent.com; font-src https://fonts.gstatic.com; style-src 'unsafe-inline' https://fonts.googleapis.com; script-src 'unsafe-inline' 'unsafe-eval' https:; require-trusted-types-for 'script'; trusted-types"
           },
           {
             "key": "X-Content-Type-Options",
