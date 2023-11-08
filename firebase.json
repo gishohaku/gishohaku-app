@@ -33,7 +33,7 @@
           },
           {
             "key": "Content-Security-Policy",
-            "value": "frame-ancestors 'none'; default-src 'unsafe-inline' data:; frame-src *.google.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com *.google.com *.googleusercontent.com; font-src 'self' https://*.googleapis.com https://*.gstatic.com; style-src 'self' 'unsafe-inline' https://*.googleapis.com https://*.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://*.googleapis.com https://*.gstatic.com; connect-src 'self' https://*.googleapis.com https://*.gstatic.com  *.google.com data: blob:;"
+            "value": "frame-ancestors 'none'; default-src data:; frame-src *.google.com; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com *.google.com *.googleusercontent.com; font-src 'self' https://*.googleapis.com https://*.gstatic.com; style-src 'self' https://*.googleapis.com https://*.gstatic.com; script-src 'self' https://www.google-analytics.com https://*.googleapis.com https://*.gstatic.com; connect-src 'self' https://*.googleapis.com https://*.gstatic.com  *.google.com data: blob:;"
           },
           {
             "key": "X-Content-Type-Options",
