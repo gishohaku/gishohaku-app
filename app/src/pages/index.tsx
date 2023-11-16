@@ -399,6 +399,41 @@ export default () => {
       </section>
 
       <section css={section}>
+        <SectionHeader en="RADIO">【オンライン】技書博ラジオ 直前スペシャル</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博9の直前スペシャルとして配信する、リアルタイムラジオ番組です。<strong>11月23日21時〜配信</strong>します。
+            <br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/e01hU3_hvoE?controls=0"
+              title="技書博ラジオ 技書博9直前スペシャル"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
+          </p>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
         <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
         <TextBlock>
           <p>
