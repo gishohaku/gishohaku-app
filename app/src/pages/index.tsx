@@ -580,7 +580,7 @@ export default () => {
             </div>
             <div className="sponsorlist small">
               <Sponsor
-                name="株式会社技術評論社"
+                name="技術評論社"
                 role="メディアサポーター"
                 image="/static/sponsors/gihyo.png"
                 href="https://gihyo.jp"
