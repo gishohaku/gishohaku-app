@@ -597,6 +597,12 @@ export default () => {
                 image="/static/sponsors/io.png"
                 href="https://www.kohgakusha.co.jp"
               />
+              <Sponsor
+                name="CodeZine"
+                role="メディアサポーター"
+                image="/static/sponsors/codezine.png"
+                href="https://codezine.jp/"
+              />
             </div>
           </div>
         </TextBlock>
