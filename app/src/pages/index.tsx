@@ -260,6 +260,34 @@ const Award: React.SFC<{
   )
 }
 
+const TimeTable: React.SFC<{
+  time: string
+  caption: string
+  description: string
+}> = ({ time, caption, description }) => {
+  return (
+    <div
+      css={css`
+        display: flex;
+        width: 100%;
+        margin: 8px;
+        display: flex;
+      `}>
+      <div
+        css={css`
+          width: 150px;
+        `}>{time}</div>
+      <div>
+        <div>{caption}</div>
+        <div
+          css={css`
+          color: #888888;
+          `}>{description}</div>
+      </div>
+    </div>
+  )
+}
+
 const Sponsor: React.SFC<{
   image: string
   name: string
@@ -576,6 +604,27 @@ export default () => {
               </div>
             </div>
           </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="STAGE">タイムテーブル</SectionHeader>
+        <TextBlock>
+          <TimeTable
+            time="12:30-12:50"
+            caption="著者対談「商業誌の魅力・同人誌の魅力」"
+            description="大澤文孝×増井敏克"
+          />
+          <TimeTable
+            time="12:50-13:30"
+            caption="編集者座談会「商業誌と技術書の未来」"
+            description=""
+          />
+          <TimeTable
+            time="13:30-13:45"
+            caption="表彰式「この観点、これぞ同人誌！技術書アワード！」"
+            description="株式会社システムアイ"
+          />
         </TextBlock>
       </section>
 
