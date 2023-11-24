@@ -197,7 +197,7 @@ const Award: React.SFC<{
           justify-content: center;
         `}>
         <a
-          href={bookhref || 'javascript:void(0);'}
+          href={bookref || 'javascript:void(0);'}
           css={css`
             padding: 12px;
             text-align: center;
