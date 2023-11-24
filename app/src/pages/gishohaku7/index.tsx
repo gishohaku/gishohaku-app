@@ -166,6 +166,100 @@ const Hero = () => (
   </div>
 )
 
+const Award: React.SFC<{
+  title: string
+  book: string
+  circle: string
+  image: string
+  bookref: string
+  circleref: string
+}> = ({ title, book, circle, image, bookref, circleref }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 300px;
+        text-align: center;
+        margin: 8px;
+      `}>
+      <div
+        css={css`
+          border: 1px solid #eee;
+          background-color: white;
+          width: 220px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <a
+          href={bookhref || 'javascript:void(0);'}
+          css={css`
+            padding: 12px;
+            text-align: center;
+            display: block;
+          `}
+          target="_blank"
+          rel="noopener">
+          <img
+            css={css`
+              max-width: 170px;
+              max-height: 160px;
+              margin: 0 auto;
+            `}
+            src={image}
+          />
+        </a>
+      </div>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>{title}</p>
+      <p
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={href}
+          target="_blank"
+          rel="noopener">
+          {book}
+        </a>
+      </p>
+      <p
+        css={css`
+          font-size: 15px;
+          line-height: 1.5;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={href}
+          target="_blank"
+          rel="noopener">
+          {circle}
+        </a>
+      </p>
+    </div>
+  )
+}
+
 const Sponsor: React.SFC<{
   image: string
   name: string
@@ -349,13 +443,43 @@ export default () => {
         </TextBlock>
       </section>
       <section css={section}>
-        <SectionHeader en="TICKET">チケット申込</SectionHeader>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
         <TextBlock>
           <p>
-            技書博本編に来場される際には、事前予約（無料）が必要です。<br />
-            時間指定制になりますので、券面に表記された時間以外は入場頂けません。<br />
-            必ず事前にチケットをお求めのうえ、ご参加ください。<br />
+            中堅以上のエンジニア必見！技術書アワード<br />
+            Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
           </p>
+          <div
+            css={css`
+              text-align: center;
+              .awardlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="awardlist">
+            <Award
+                title="最優秀賞"
+                book="PICT HACKS ～組み合わせテスト入門"
+                circle="品質公団"
+                image="/static/awards/gishohaku7-award-best.png"
+                bookref=""
+                circleref="/gishohaku7/circles/CjVjdYKyBk4oJ94bF3dQ"
+              />
+              <Award
+                title="優秀賞"
+                book="これからロゴデザインを始める人のための本。 - 基礎知識、着想と展開、ロゴフォリオ。"
+                circle="SAKANA（デザイン読書日和）"
+                image="/static/awards/gishohaku7-award-excellence.png"
+                bookref="/gishohaku7/books/HUB9o3l93TMPUigaDnIM"
+                circleref="/gishohaku7/circles/rHS6mioas8tHbcp2SGJh"
+              />
+            </div>
+          </div>
         </TextBlock>
       </section>
       <section css={section}>
