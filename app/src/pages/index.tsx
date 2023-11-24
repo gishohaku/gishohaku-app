@@ -170,6 +170,96 @@ const Hero = () => (
   </div>
 )
 
+const Award: React.SFC<{
+  title: string
+  book: string
+  circle: string
+  image: string
+  bookref: string
+  circleref: string
+}> = ({ title, book, circle, image, bookref, circleref }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 300px;
+        text-align: center;
+        margin: 8px;
+      `}>
+      <div
+        css={css`
+          width: 300px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <a
+          href={bookref || 'javascript:void(0);'}
+          css={css`
+            padding: 12px;
+            text-align: center;
+            display: block;
+          `}
+          rel="noopener">
+          <img
+            css={css`
+              max-width: 200px;
+              max-height: 240px;
+              margin: 0 auto;
+            `}
+            src={image}
+          />
+        </a>
+      </div>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>{title}</p>
+      <p
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={bookref || 'javascript:void(0);'}
+          rel="noopener">
+          {book}
+        </a>
+      </p>
+      <p
+        css={css`
+          font-size: 15px;
+          line-height: 1.5;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={circleref || 'javascript:void(0);'}
+          rel="noopener">
+          {circle}
+        </a>
+      </p>
+    </div>
+  )
+}
+
 const Sponsor: React.SFC<{
   image: string
   name: string
@@ -430,6 +520,62 @@ export default () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen></iframe>
           </p>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 18px;
+                font-weight: bold;
+              `}>
+              この観点、これぞ同人誌！技術書アワード 
+            </div>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+              <Award
+                  title="最優秀賞"
+                  book="COMING SOON"
+                  circle="-"
+                  image="/static/awards/dummy.png"
+                  bookref=""
+                  circleref=""
+                />
+                <Award
+                  title="優秀賞"
+                  book="COMING SOON"
+                  circle="-"
+                  image="/static/awards/dummy.png"
+                  bookref=""
+                  circleref=""
+                />
+              </div>
+            </div>
+          </div>
         </TextBlock>
       </section>
 

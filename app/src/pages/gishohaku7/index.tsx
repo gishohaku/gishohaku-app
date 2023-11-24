@@ -201,12 +201,11 @@ const Award: React.SFC<{
             text-align: center;
             display: block;
           `}
-          target="_blank"
           rel="noopener">
           <img
             css={css`
-              max-width: 170px;
-              max-height: 160px;
+              max-width: 200px;
+              max-height: 240px;
               margin: 0 auto;
             `}
             src={image}
@@ -234,7 +233,6 @@ const Award: React.SFC<{
             color: #1d272d;
           `}
           href={bookref || 'javascript:void(0);'}
-          target="_blank"
           rel="noopener">
           {book}
         </a>
@@ -250,7 +248,6 @@ const Award: React.SFC<{
             color: #1d272d;
           `}
           href={circleref || 'javascript:void(0);'}
-          target="_blank"
           rel="noopener">
           {circle}
         </a>
@@ -446,11 +443,11 @@ export default () => {
         <TextBlock>
           <div
             css={css`
-              font-size: 15px;
               text-align: center;
             `}>
             <div
               css={css`
+                font-size: 18px;
                 font-weight: bold;
               `}>
               中堅以上のエンジニア必見！技術書アワード
