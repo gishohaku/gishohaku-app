@@ -216,15 +216,15 @@ const Award: React.SFC<{
           />
         </a>
       </div>
-      <p
+      <div
         css={css`
           font-size: 12px;
           margin-top: 8px;
           margin-bottom: 4px !important;
           line-height: 1.4;
           opacity: 0.8;
-        `}>{title}</p>
-      <p
+        `}>{title}</div>
+      <div
         css={css`
           font-size: 15px;
           font-weight: bold;
@@ -240,8 +240,8 @@ const Award: React.SFC<{
           rel="noopener">
           {book}
         </a>
-      </p>
-      <p
+      </div>
+      <div
         css={css`
           font-size: 15px;
           line-height: 1.5;
@@ -255,7 +255,7 @@ const Award: React.SFC<{
           rel="noopener">
           {circle}
         </a>
-      </p>
+      </div>
     </div>
   )
 }
