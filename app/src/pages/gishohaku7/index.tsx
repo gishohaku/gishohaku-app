@@ -234,7 +234,7 @@ const Award: React.SFC<{
             text-decoration: none;
             color: #1d272d;
           `}
-          href={href}
+          href={bookref}
           target="_blank"
           rel="noopener">
           {book}
@@ -250,7 +250,7 @@ const Award: React.SFC<{
             text-decoration: none;
             color: #1d272d;
           `}
-          href={href}
+          href={circleref}
           target="_blank"
           rel="noopener">
           {circle}
