@@ -184,9 +184,7 @@ const Award: React.SFC<{
       `}>
       <div
         css={css`
-          border: 1px solid #eee;
-          background-color: white;
-          width: 220px;
+          width: 300px;
           margin: 0 auto;
           display: -webkit-flex;
           display: flex;
@@ -228,13 +226,14 @@ const Award: React.SFC<{
           font-size: 15px;
           font-weight: bold;
           line-height: 1.5;
+          margin-bottom: 4px;
         `}>
         <a
           css={css`
             text-decoration: none;
             color: #1d272d;
           `}
-          href={bookref}
+          href={bookref || 'javascript:void(0);'}
           target="_blank"
           rel="noopener">
           {book}
@@ -250,7 +249,7 @@ const Award: React.SFC<{
             text-decoration: none;
             color: #1d272d;
           `}
-          href={circleref}
+          href={circleref || 'javascript:void(0);'}
           target="_blank"
           rel="noopener">
           {circle}
@@ -445,39 +444,54 @@ export default () => {
       <section css={section}>
         <SectionHeader en="AWARD">技書博アワード</SectionHeader>
         <TextBlock>
-          <p>
-            中堅以上のエンジニア必見！技術書アワード<br />
-            Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
-          </p>
           <div
             css={css`
+              font-size: 15px;
               text-align: center;
-              .awardlist {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: center;
-                align-content: flex-start;
-                align-items: flex-start;
-                margin: 12px 0;
-              }
             `}>
-            <div className="awardlist">
-            <Award
-                title="最優秀賞"
-                book="PICT HACKS ～組み合わせテスト入門"
-                circle="品質公団"
-                image="/static/awards/gishohaku7-award-best.png"
-                bookref=""
-                circleref="/gishohaku7/circles/CjVjdYKyBk4oJ94bF3dQ"
-              />
+            <div
+              css={css`
+                font-weight: bold;
+              `}>
+              中堅以上のエンジニア必見！技術書アワード
+            </div>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
               <Award
-                title="優秀賞"
-                book="これからロゴデザインを始める人のための本。 - 基礎知識、着想と展開、ロゴフォリオ。"
-                circle="SAKANA（デザイン読書日和）"
-                image="/static/awards/gishohaku7-award-excellence.png"
-                bookref="/gishohaku7/books/HUB9o3l93TMPUigaDnIM"
-                circleref="/gishohaku7/circles/rHS6mioas8tHbcp2SGJh"
-              />
+                  title="最優秀賞"
+                  book="PICT HACKS ～組み合わせテスト入門"
+                  circle="品質公団"
+                  image="/static/awards/gishohaku7-award-best.png"
+                  bookref=""
+                  circleref="/gishohaku7/circles/CjVjdYKyBk4oJ94bF3dQ"
+                />
+                <Award
+                  title="優秀賞"
+                  book="これからロゴデザインを始める人のための本。 - 基礎知識、着想と展開、ロゴフォリオ。"
+                  circle="SAKANA（デザイン読書日和）"
+                  image="/static/awards/gishohaku7-award-excellence.png"
+                  bookref="/gishohaku7/books/HUB9o3l93TMPUigaDnIM"
+                  circleref="/gishohaku7/circles/rHS6mioas8tHbcp2SGJh"
+                />
+              </div>
             </div>
           </div>
         </TextBlock>
