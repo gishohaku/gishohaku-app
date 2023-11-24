@@ -165,6 +165,96 @@ const Hero = () => (
   </div>
 )
 
+const Award: React.SFC<{
+  title: string
+  book: string
+  circle: string
+  image: string
+  bookref: string
+  circleref: string
+}> = ({ title, book, circle, image, bookref, circleref }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 300px;
+        text-align: center;
+        margin: 8px;
+      `}>
+      <div
+        css={css`
+          width: 300px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <a
+          href={bookref || 'javascript:void(0);'}
+          css={css`
+            padding: 12px;
+            text-align: center;
+            display: block;
+          `}
+          rel="noopener">
+          <img
+            css={css`
+              max-width: 200px;
+              max-height: 240px;
+              margin: 0 auto;
+            `}
+            src={image}
+          />
+        </a>
+      </div>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>{title}</p>
+      <p
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={bookref || 'javascript:void(0);'}
+          rel="noopener">
+          {book}
+        </a>
+      </p>
+      <p
+        css={css`
+          font-size: 15px;
+          line-height: 1.5;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={circleref || 'javascript:void(0);'}
+          rel="noopener">
+          {circle}
+        </a>
+      </p>
+    </div>
+  )
+}
+
 const Sponsor: React.SFC<{
   image: string
   name: string
@@ -407,30 +497,66 @@ const Page = () => {
           </p>
         </TextBlock>
       </section>
+
       <section css={section}>
-        <SectionHeader en="ENTRY">オフライン参加 / 一般来場予約</SectionHeader>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
         <TextBlock>
-          <p>
-            技書博本編に来場（オフライン参加）される際には、事前予約（無料）が必要です。
-            <br />
-            時間指定制になりますので、券面に表記された時間以外は入場頂けません。
-            <br />
-            必ず事前にチケットをお求めのうえ、ご参加ください。
-            <br />
-          </p>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 18px;
+                font-weight: bold;
+              `}>
+              <a href="https://www.wantedly.com/companies/apcommunications/post_articles/332306">インフラエンジニアBooksアワード2021＠技書博5</a>
+            </div>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://www.ap-com.co.jp/" target="_blank">株式会社エーピーコミュニケーションズ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+                <Award
+                  title="最優秀賞"
+                  book="ハラククリカタ"
+                  circle="誰も知らない出版（Growthfaction）"
+                  image="/static/awards/gishohaku5-award-best.png"
+                  bookref="/gishohaku5/books/acsxsD0Xh6Tz6RN1LQ44"
+                  circleref="/gishohaku5/circles/LEbxPS8epJw9DpdkH4kX"
+                />
+                <Award
+                  title="優秀賞"
+                  book="HACK OR DIE 1～4"
+                  circle="GATOMICARISE"
+                  image="/static/awards/gishohaku5-award-excellence.png"
+                  bookref="/gishohaku5/books/UCnDS4icsNzoXxsjEDsn"
+                  circleref="/gishohaku5/circles/01yNsExFLe0hkwTidLMs"
+                />
+              </div>
+            </div>
+          </div>
         </TextBlock>
       </section>
+
       <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / 技書博ラジオ</SectionHeader>
+        <SectionHeader en="RADIO">技書博ラジオ</SectionHeader>
         <TextBlock>
-          <p>
-            技書博当日の会期中（11時〜16時）にオンラインラジオを配信します。
-            <br />
-            オンライン参加される方にも会場の雰囲気が伝わるよう、豪華ゲストやスポンサー様をお呼びしてのトークイベント、サークルや頒布物情報の紹介など、さまざまな企画を準備していますのでお楽しみに。
-            <br />
-            なお、当日会場内でも館内放送をもちいて同じ内容を配信する予定です。
-            <br />
-          </p>
           <p
             css={css`
               margin-top: 32px;
@@ -455,17 +581,6 @@ const Page = () => {
               title="技書博ラジオ"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen></iframe>
-          </p>
-        </TextBlock>
-      </section>
-      <section css={section}>
-        <SectionHeader en="RADIO">オンライン参加 / 前夜祭</SectionHeader>
-        <TextBlock>
-          <p>
-            技書博の前夜祭を<strong>6月16日20時〜配信</strong>します。
-            <br />
-            開催直前の準備状況やスタッフ裏話、当日企画の詳細など、いろいろお話させていただきますので、お楽しみに。
-            <br />
           </p>
           <p
             css={css`

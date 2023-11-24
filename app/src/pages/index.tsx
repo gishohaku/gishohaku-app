@@ -557,7 +557,7 @@ export default () => {
                 }
               `}>
               <div className="awardlist">
-              <Award
+                <Award
                   title="最優秀賞"
                   book="COMING SOON"
                   circle="-"

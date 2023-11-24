@@ -472,7 +472,7 @@ export default () => {
                 }
               `}>
               <div className="awardlist">
-              <Award
+                <Award
                   title="最優秀賞"
                   book="PICT HACKS ～組み合わせテスト入門"
                   circle="品質公団"
