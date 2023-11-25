@@ -165,7 +165,7 @@ const Header: React.FC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link href="/gishohaku10" passHref>
+          <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十回 技術書同人誌博覧会"
@@ -175,7 +175,7 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/gishohaku9" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第九回 技術書同人誌博覧会"
