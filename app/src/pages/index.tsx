@@ -587,19 +587,19 @@ export default () => {
               <div className="awardlist">
                 <Award
                   title="最優秀賞"
-                  book="COMING SOON"
-                  circle="-"
-                  image="/static/awards/dummy.png"
-                  bookref=""
-                  circleref=""
+                  book="回路屋グッピーの『基板設計完全に理解した』から抜け出す本"
+                  circle="しょ〜とらば〜ず"
+                  image="/static/awards/gishohaku9-award-best.png"
+                  bookref="/gishohaku9/books/GDJ8vrnXODDmPF7jKkJZ"
+                  circleref="/gishohaku9/circles/zennqr8SA0Rz7u3FKT7w"
                 />
                 <Award
                   title="優秀賞"
-                  book="COMING SOON"
-                  circle="-"
-                  image="/static/awards/dummy.png"
-                  bookref=""
-                  circleref=""
+                  book="絵が描けなくてもキャラモデリング"
+                  circle="Computer Society"
+                  image="/static/awards/gishohaku9-award-excellence.png"
+                  bookref="/gishohaku9/books/bwGJEMBfJDRI9DzJfNgX"
+                  circleref="/gishohaku9/circles/qt3jxgwOQ9XLrguxP2g1"
                 />
               </div>
             </div>
