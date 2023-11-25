@@ -139,7 +139,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2024.05.12 <small>Sat. 11:00~16:00</small>
+        2024.05.12 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
