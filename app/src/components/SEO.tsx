@@ -23,7 +23,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
     startDate: '2023-11-25',
     endDate: '2023-11-25',
-    image: 'https://gishohaku.dev/static/gishohaku9-ogp.png',
+    image: 'https://gishohaku.dev/static/gishohaku10-ogp.png',
     url: 'https://gishohaku.dev/',
     offers: {
       '@type': 'Offer',
@@ -58,18 +58,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        content={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         key="image"
       />
       <meta
@@ -85,7 +85,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="og:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku9-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku10-ogp.png'}
         key="image"
       />
       <meta
@@ -102,7 +102,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="twitter:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku9-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku10-ogp.png'}
         key="twitter:image"
       />
       <meta name="description" content={metaDescription} key="description" />
