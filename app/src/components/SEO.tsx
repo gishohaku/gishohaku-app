@@ -21,23 +21,28 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     name: '技術書同人誌博覧会',
     description:
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
-    startDate: '2023-11-25',
-    endDate: '2023-11-25',
+    startDate: '2024-05-12',
+    endDate: '2024-05-12',
     image: 'https://gishohaku.dev/static/gishohaku10-ogp.png',
     url: 'https://gishohaku.dev/',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
     offers: {
       '@type': 'Offer',
       availability: 'InStock',
-      validFrom: '2023-10-01T12:00',
+      validFrom: '2024-04-01T12:00',
       description:
-        '来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。',
+        '来場者は無料で入場いただけるほか、有料懇親会も用意しています。',
       price: '0',
       priceCurrency: 'JPY',
-      url: 'https://gishohaku.connpass.com/event/298538/',
+      url: 'https://gishohaku.connpass.com/',
     },
-    performer: {
-      '@type': 'PerformingGroup',
-      name: '技術書同人誌博覧会 運営事務局',
+    organizer: {
+      '@type': 'Organization',
+      name: '技術書同人誌博覧会',
+      alternateName: '技書博',
+      email: 'info@gishohaku.dev',
+      url: 'https://gishohaku.dev/',
     },
     location: {
       '@type': 'Place',
