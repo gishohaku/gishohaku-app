@@ -18,7 +18,8 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   const jsonLdTags = {
     '@context': 'http://schema.org',
     '@type': 'Event',
-    name: '技術書同人誌博覧会',
+    name: '第十回技術書同人誌博覧会',
+    alternateName: '技書博10',
     description:
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
     startDate: '2024-05-12',
@@ -38,6 +39,13 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       url: 'https://gishohaku.connpass.com/',
     },
     organizer: {
+      '@type': 'Organization',
+      name: '技術書同人誌博覧会',
+      alternateName: '技書博',
+      email: 'info@gishohaku.dev',
+      url: 'https://gishohaku.dev/',
+    },
+    performer: {
       '@type': 'Organization',
       name: '技術書同人誌博覧会',
       alternateName: '技書博',
