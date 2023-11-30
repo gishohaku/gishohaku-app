@@ -11,7 +11,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   const metaTitle = [title, '技術書同人誌博覧会'].filter((o) => o).join(' | ')
   const metaDescription = [
     description,
-    'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
+    'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
   ]
     .filter((o) => o)
     .join(' | ')
@@ -20,7 +20,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
     '@type': 'Event',
     name: '技術書同人誌博覧会',
     description:
-      'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
+      'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
     startDate: '2023-11-25',
     endDate: '2023-11-25',
     image: 'https://gishohaku.dev/static/gishohaku10-ogp.png',
@@ -108,7 +108,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <meta name="description" content={metaDescription} key="description" />
       <meta
         name="keywords"
-        content="同人誌即売会, 技術同人誌, 技書博"
+        content="技術同人誌,技術同人,技術書,技書博,技術書同人誌博覧会,同人誌即売会,同人誌,即売会"
         key="keywords"
       />
       <script
