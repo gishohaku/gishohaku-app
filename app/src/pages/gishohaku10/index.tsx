@@ -164,7 +164,7 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="/gishohaku10/circle-entry-earlybird">
+        <LinkButton href="/gishohaku10/circle-entry">
           サークル参加を申し込む
         </LinkButton>
       </div>
