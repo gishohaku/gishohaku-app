@@ -12,10 +12,13 @@ import { EventId } from '../utils/event'
 import SectionHeader from '../components/SectionHeder'
 import { imageUrl } from '../utils/imageUrl'
 import Link from 'next/link'
-import { IconShoppingCart, IconX } from 'sancho'
 import { Portal } from '../components/Portal'
 import { Embed } from '../components/common/Embed'
 import { RemoveScroll } from 'react-remove-scroll'
+import {
+  X as IconX,
+  ShoppingCart as IconShoppingCart,
+} from 'react-feather'
 
 interface InitialProps {
   books: Book[]

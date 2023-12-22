@@ -2,7 +2,11 @@
 import { jsx, css } from '@emotion/core'
 import { useContext } from 'react'
 import Link from 'next/link'
-import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
+import { Container, List, ListItem } from 'sancho'
+import {
+  LogOut as IconLogOut,
+  ChevronRight as IconChevronRight,
+} from 'react-feather'
 
 import { firebase } from '../utils/firebase'
 import withUser from '../withUser'
