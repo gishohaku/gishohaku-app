@@ -83,7 +83,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku9-logo.png"
+      src="/static/gishohaku10-logo.png"
       width={280}
       height={280}
     />
@@ -123,7 +123,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第九回</small>技術書同人誌博覧会
+        <small>第十回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -139,7 +139,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2023.11.25 <small>Sat. 11:00~16:00</small>
+        2024.05.12 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -157,181 +157,21 @@ const Hero = () => (
           margin-bottom: 16px;
           a {
             border: 2px solid #81b4c5;
-            background-color: #81b4c5;
-            color: #f2f7f9;
+            color: #81b4c5;
             &:hover {
-              background-color: #f2f7f9;
-              color: #81b4c5;
+              background-color: #81b4c5;
+              color: white;
             }
           }
         `}>
-        <LinkButton href="/circle-entry">
-          サークル申込
-        </LinkButton>
-        <LinkButton href="https://blog.gishohaku.dev/entry/2023/08/10/135926">
-          協賛のご案内
+        <LinkButton href="/gishohaku10/circle-entry">
+          サークル参加を申し込む
         </LinkButton>
       </div>
     </div>
   </div>
   </div>
 )
-
-const Sponsor: React.SFC<{
-  image: string
-  name: string
-  role: string
-  href: string
-}> = ({ image, name, role, href }) => {
-  return (
-    <div
-      css={css`
-        display: flex-item;
-        width: 240px;
-        text-align: center;
-        margin: 8px;
-      `}>
-      <div
-        css={css`
-          border: 1px solid #eee;
-          background-color: white;
-          width: 220px;
-          height: 220px;
-          margin: 0 auto;
-          display: -webkit-flex;
-          display: flex;
-          text-align: center;
-          -webkit-align-items: center;
-          align-items: center;
-          -webkit-justify-content: center;
-          justify-content: center;
-        `}>
-        <a
-          href={href || 'javascript:void(0);'}
-          css={css`
-            padding: 12px;
-            text-align: center;
-            display: block;
-          `}
-          target="_blank"
-          rel="noopener">
-          <img
-            css={css`
-              max-width: 170px;
-              max-height: 160px;
-              margin: 0 auto;
-            `}
-            src={image}
-          />
-        </a>
-      </div>
-      <p
-        css={css`
-          font-size: 12px;
-          margin-top: 8px;
-          margin-bottom: 4px !important;
-          line-height: 1.4;
-          opacity: 0.8;
-        `}
-        dangerouslySetInnerHTML={{
-          __html: role.replace(/・/g, '・<br />'),
-        }}></p>
-      <p
-        css={css`
-          font-size: 15px;
-          font-weight: bold;
-          line-height: 1.5;
-        `}>
-        <a
-          css={css`
-            text-decoration: none;
-            color: #1d272d;
-          `}
-          href={href}
-          target="_blank"
-          rel="noopener">
-          {name}
-        </a>
-      </p>
-    </div>
-  )
-}
-
-const Staff: React.SFC<{
-  name: string
-  imageUrl: string
-  twitter: string
-}> = ({ name, imageUrl, twitter }) => {
-  return (
-    <div
-      css={css`
-        display: flex-item;
-        width: 96px;
-        text-align: center;
-        margin: 12px;
-        img {
-          margin: 0 auto;
-          border: 1px solid #eee;
-          border-radius: 50% !important;
-        }
-        @media ${media.small} {
-          width: 72px;
-          margin: 6px;
-        }
-      `}>
-      {twitter ? (
-        <a target="_blank" rel="noopener" href={twitter}>
-          <img src={imageUrl || '/static/gishohaku_gray.png'} />
-        </a>
-      ) : (
-        <img src={imageUrl || '/static/gishohaku_gray.png'} />
-      )}
-      <p
-        css={css`
-          font-size: 12px;
-          margin-top: 6px;
-          line-height: 1.4;
-          opacity: 0.8;
-        `}>
-        {name}
-      </p>
-    </div>
-  )
-}
-
-const Printing: React.SFC<{
-  name: string
-  imageUrl: string
-  linkUrl: string
-}> = ({ name, imageUrl, linkUrl }) => {
-  return (
-    <div
-      css={css`
-        display: flex-item;
-        width: 200px;
-        text-align: center;
-        margin: 16px;
-        img {
-          margin: 0 auto;
-          max-width: 200px;
-          max-height: 40px;
-        }
-      `}>
-      <a target="_blank" rel="noopener" href={linkUrl}>
-        <img src={imageUrl} />
-      </a>
-      <p
-        css={css`
-          font-size: 12px;
-          margin-top: 6px;
-          line-height: 1.4;
-          opacity: 0.8;
-        `}>
-        {name}
-      </p>
-    </div>
-  )
-}
 
 const section = css`
   padding: 48px 0;
@@ -352,10 +192,8 @@ export default () => {
         <SectionHeader en="ABOUT">技書博とは？</SectionHeader>
         <TextBlock>
           <p>
-            技術書同人誌博覧会（技書博）は、エンジニア（おもにITエンジニア）が自身の知見を「本」という形で共有するために開催される、技術書オンリーイベント（同人誌頒布即売会）です。
-            私たちエンジニアは、日々の業務や学習によって得た膨大な知識を記憶し、活かしています。
-            その知識の大半は「暗黙知」として個人の中に留まり続け、他者に共有できていない有用な情報がたくさんあるのではないでしょうか。
-            私たちは、知識を「集合知」としてコミュニティに還元しあうことによって、何倍もの知識を吸収でき、よりよい世界を作り出せると考えています。
+          技術書同人誌博覧会（技書博）は、技術に関する同人誌の即売会です。ITの他に、理工/数学/デザイン/マネジメントなど幅広い技術を取り扱っています。エンジニアのアウトプットを応援したい＆増やしたいという思いからこのイベントが生まれました。初心者にもベテランにも優しく、ゆったりと交流しながら知識を深め、仲間を作ったり成長できるような場所を目指しています。
+          （<a target="_blank" href="https://blog.gishohaku.dev/entry/2023/09/04/131252">もっとくわしい説明はこちら</a>）
           </p>
         </TextBlock>
       </section>

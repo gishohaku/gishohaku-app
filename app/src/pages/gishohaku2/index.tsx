@@ -488,7 +488,7 @@ export default () => {
               <Sponsor
                 name="テクノブレーン株式会社"
                 role="キャラバンサポーター"
-                image="/static/sponsors/technobrain.jpg"
+                image="/static/sponsors/technobrain.png"
                 href="https://www.techno-brain.co.jp/"
               />
             </div>
@@ -574,42 +574,42 @@ export default () => {
             `}>
             <Printing
               name="しまや出版"
-              imageUrl="https://gishohaku.dev/static/printings/shimaya.png"
+              imageUrl="/static/printings/shimaya.png"
               linkUrl="https://www.shimaya.net/"
             />
             <Printing
               name="ねこのしっぽ"
-              imageUrl="https://www.shippo.co.jp/neko/img/neko_banner.gif"
+              imageUrl="/static/printings/neko.gif"
               linkUrl="https://www.shippo.co.jp/neko/"
             />
             <Printing
               name="日光企画"
-              imageUrl="https://www.nikko-pc.com/start/logo.gif"
+              imageUrl="/static/printings/nikko.png"
               linkUrl="https://www.nikko-pc.com/"
             />
             <Printing
               name="ポプルス"
-              imageUrl="http://www.inv.co.jp/~popls/sozai/poplsbn2.gif"
+              imageUrl="/static/printings/popls.jpg"
               linkUrl="http://www.inv.co.jp/~popls/"
             />
             <Printing
               name="栄光"
-              imageUrl="https://www.eikou.com/link/eikoubanner.gif"
+              imageUrl="/static/printings/eikou.gif"
               linkUrl="http://www.eikou.com/"
             />
             <Printing
               name="PICO"
-              imageUrl="https://www.pico-net.com/topmenu/pico_bunner.gif"
+              imageUrl="/static/printings/pico.gif"
               linkUrl="http://www.pico-net.com/doujinshi/"
             />
             <Printing
               name="PrintWalk"
-              imageUrl="http://www.print-walk.co.jp/links/images/banner02.gif"
-              linkUrl="http://www.print-walk.co.jp/"
+              imageUrl="/static/printings/printwalk.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
             />
             <Printing
               name="K-9"
-              imageUrl="https://www.k-k9.jp/wp-content/themes/k9_20160801/img/logo.gif"
+              imageUrl="/static/printings/k9.gif"
               linkUrl="https://www.k-k9.jp/"
             />
           </div>

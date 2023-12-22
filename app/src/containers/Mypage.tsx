@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import { useContext } from 'react'
 import Link from 'next/link'
 import { Container, List, ListItem } from 'sancho'
@@ -15,6 +17,12 @@ interface Props {
   user: firebase.User
   userData: User
 }
+
+const uidCss = css`
+  text-align: right;
+  color: #bbb;
+  font-size: 80%;
+`
 
 const Mypage: React.FC<Props> = ({ userData }) => {
   const { eventId } = useContext(EventContext)
@@ -70,6 +78,10 @@ const Mypage: React.FC<Props> = ({ userData }) => {
           }}
         />
       </List>
+
+      <div className="mt-4" css={uidCss}>
+        ({userData.uid})
+      </div>
     </Container>
   )
 }

@@ -11,33 +11,46 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   const metaTitle = [title, '技術書同人誌博覧会'].filter((o) => o).join(' | ')
   const metaDescription = [
     description,
-    'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
+    'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
   ]
     .filter((o) => o)
     .join(' | ')
   const jsonLdTags = {
     '@context': 'http://schema.org',
     '@type': 'Event',
-    name: '技術書同人誌博覧会',
+    name: '第十回技術書同人誌博覧会',
+    alternateName: '技書博10',
     description:
-      'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書オンリーイベントです。',
-    startDate: '2023-11-25',
-    endDate: '2023-11-25',
-    image: 'https://gishohaku.dev/static/gishohaku9-ogp.png',
+      'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
+    startDate: '2024-05-12',
+    endDate: '2024-05-12',
+    image: 'https://gishohaku.dev/static/gishohaku10-ogp.png',
     url: 'https://gishohaku.dev/',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
     offers: {
       '@type': 'Offer',
       availability: 'InStock',
-      validFrom: '2023-10-01T12:00',
+      validFrom: '2024-04-01T12:00',
       description:
-        '来場者は会期中に無料（時間予約制）で入場いただけるほか、有料懇親会も用意しています。',
+        '来場者は無料で入場いただけるほか、有料懇親会も用意しています。',
       price: '0',
       priceCurrency: 'JPY',
+      url: 'https://gishohaku.connpass.com/',
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: '技術書同人誌博覧会',
+      alternateName: '技書博',
+      email: 'info@gishohaku.dev',
       url: 'https://gishohaku.dev/',
     },
     performer: {
-      '@type': 'PerformingGroup',
-      name: '技術書同人誌博覧会 運営事務局',
+      '@type': 'Organization',
+      name: '技術書同人誌博覧会',
+      alternateName: '技書博',
+      email: 'info@gishohaku.dev',
+      url: 'https://gishohaku.dev/',
     },
     location: {
       '@type': 'Place',
@@ -58,18 +71,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={'https://gishohaku.dev/static/gishohaku9-icon.png'}
+        content={'https://gishohaku.dev/static/gishohaku10-icon.png'}
         key="image"
       />
       <meta
@@ -85,7 +98,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="og:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku9-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku10-ogp.png'}
         key="image"
       />
       <meta
@@ -102,13 +115,13 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="twitter:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku9-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku10-ogp.png'}
         key="twitter:image"
       />
       <meta name="description" content={metaDescription} key="description" />
       <meta
         name="keywords"
-        content="同人誌即売会, 技術同人誌, 技書博"
+        content="技術同人誌,技術同人,技術書,技書博,技術書同人誌博覧会,同人誌即売会,同人誌,即売会"
         key="keywords"
       />
       <script

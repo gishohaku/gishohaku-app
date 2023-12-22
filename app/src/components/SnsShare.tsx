@@ -23,7 +23,7 @@ const SnsShare: React.SFC<Props> = (props) => {
 
     const facebook_js = document.createElement('script')
     facebook_js.id = 'facebook-js'
-    facebook_js.src = '//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v5.0'
+    facebook_js.src = '//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v18.0'
     parent_js.parentNode!.insertBefore(facebook_js, parent_js)
 
     const twitter_js = document.createElement('script')

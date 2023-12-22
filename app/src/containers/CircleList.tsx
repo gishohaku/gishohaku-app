@@ -30,7 +30,23 @@ const mapUrl: {
   gishohaku6: '',
   gishohaku7: '/static/gishohaku7-layout.png',
   gishohaku8: '',
-  gishohaku9: '',
+  gishohaku9: '/static/gishohaku9-layout.png',
+  gishohaku10: '/static/gishohaku10-layout.png',
+}
+
+const appealUrl: {
+  [key in EventId]: string
+} = {
+  gishohaku1: '',
+  gishohaku2: '',
+  gishohaku3: '',
+  gishohaku4: '',
+  gishohaku5: '',
+  gishohaku6: '',
+  gishohaku7: '',
+  gishohaku8: '',
+  gishohaku9: 'https://docs.google.com/presentation/d/e/2PACX-1vSCzubLGp8DDN0Ucml88KC7EXun_Lg0L4V5q4f2flBDKv9kcDtsBdm3_pqGamlricHqSWWY4GXSYAzl/pub',
+  gishohaku10: '',
 }
 
 const Index: NextPage<InitialProps> = (props) => {
@@ -52,24 +68,42 @@ const Index: NextPage<InitialProps> = (props) => {
           margin-top: 48px;
         `}>
         <SectionHeader en="CIRCLES">サークル一覧</SectionHeader>
-        <a
-          target="_blank"
-          rel="noopener"
-          href={mapUrl[eventId]}
-          css={css`
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #2a5773;
-            border-radius: 4px;
-            font-weight: bold;
-            color: white;
-            padding: 8px 24px;
-            text-decoration: none;
-          `}>
-          会場マップ
-        </a>
+        <div css={css`
+          position: absolute;
+          right: 16px;
+          top: 50%;
+          transform: translateY(-50%);
+        `}>
+          <a
+            target="_blank"
+            rel="noopener"
+            href={mapUrl[eventId]}
+            css={css`
+              background-color: #2a5773;
+              border-radius: 4px;
+              font-weight: bold;
+              color: white;
+              padding: 8px 24px;
+              text-decoration: none;
+              margin-right: 4px;
+            `}>
+            会場マップ
+          </a>
+          <a
+            target="_blank"
+            rel="noopener"
+            href={appealUrl[eventId]}
+            css={css`
+              background-color: #2a5773;
+              border-radius: 4px;
+              font-weight: bold;
+              color: white;
+              padding: 8px 24px;
+              text-decoration: none;
+            `}>
+            アピールスライド
+          </a>
+        </div>
       </div>
       <CirclesList>
         {circles.map((circle: Circle) => {

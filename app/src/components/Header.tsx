@@ -163,73 +163,32 @@ const Header: React.FC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-        <Link href="/" passHref>
+          <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第9回 技術書同人誌博覧会"
+                primary="第十回 技術書同人誌博覧会"
+                secondary="2024年5月12日 開催"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku9" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第九回 技術書同人誌博覧会"
                 secondary="2023年11月25日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
             </a>
           </Link>
-          <Link href="/gishohaku8" passHref>
+          <div css={divider} />
+          <Link href="/archive" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第8回 技術書同人誌博覧会"
-                secondary="2023年5月28日 開催"
+                primary="過去の開催回一覧"
                 contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku7" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第7回 技術書同人誌博覧会"
-                secondary="2022年11月20日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku6" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第6回 技術書同人誌博覧会"
-                secondary="2022年2月26日 開催予定"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku5" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第5回 技術書同人誌博覧会"
-                secondary="2021年6月19日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku2" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第2回 技術書同人誌博覧会"
-                secondary="2019年12月14日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link href="/gishohaku1" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第1回 技術書同人誌博覧会"
-                secondary="2019年7月27日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
               />
             </a>
           </Link>
@@ -242,6 +201,17 @@ const Header: React.FC<any> = () => {
             <ListItem
               primary="公式ブログ"
               secondary="コアスタッフによる情報発信ブログ"
+              contentAfter={<IconExternalLink />}
+            />
+          </a>
+          <a
+            href="https://gishohaku.connpass.com/"
+            target="_blank"
+            rel="noopener"
+            css={noDecoration}>
+            <ListItem
+              primary="Connpass"
+              secondary="技書博関連イベントページ"
               contentAfter={<IconExternalLink />}
             />
           </a>
@@ -259,22 +229,6 @@ const Header: React.FC<any> = () => {
               }
             }
           `}>
-          <li>
-            <a
-              target="_blank"
-              rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/214/100a86af275822f92ffd.html">
-              サークル出展要項
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/213/f3930a09ba1375a8fca6.html">
-              サークル出展の手引き
-            </a>
-          </li>
           <li>
             <a
               target="_blank"

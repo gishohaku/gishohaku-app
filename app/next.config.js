@@ -46,6 +46,10 @@ module.exports = withImages(
           page: '/[eventId]/mypage/join',
           query: { eventId: 'gishohaku2' },
         },
+        '/gishohaku2/mypage/join': {
+          page: '/[eventId]/mypage/join',
+          query: { eventId: 'gishohaku2' },
+        },
         '/gishohaku1/mypage/book_stars': {
           page: '/[eventId]/mypage/book_stars',
           query: { eventId: 'gishohaku1' },
