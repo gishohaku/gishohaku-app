@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconPlay } from 'sancho'
+import { Play as IconPlay } from 'react-feather'
 
 export const LiveNow = () => {
   return (

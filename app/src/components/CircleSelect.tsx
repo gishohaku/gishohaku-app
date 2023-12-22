@@ -1,5 +1,9 @@
 /** @jsx jsx */
-import { Select, IconButton, IconChevronLeft, IconChevronRight } from 'sancho'
+import { Select, IconButton } from 'sancho'
+import {
+  ChevronLeft as IconChevronLeft,
+  ChevronRight as IconChevronRight,
+} from 'react-feather'
 import { useRouter } from 'next/router'
 import { jsx, css } from '@emotion/core'
 import { useCallback, useContext } from 'react'

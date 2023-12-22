@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { IconUpload } from 'sancho'
+import { Upload as IconUpload } from 'react-feather'
 import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'
 import { useState, useEffect } from 'react'

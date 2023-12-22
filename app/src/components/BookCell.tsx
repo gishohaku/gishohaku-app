@@ -18,11 +18,13 @@ import {
   MenuList,
   MenuItem,
   IconButton,
-  IconMoreVertical,
-  IconArrowUp,
-  IconArrowDown,
   Button,
 } from 'sancho'
+import {
+  MoreVertical as IconMoreVertical,
+  ArrowUp as IconArrowUp,
+  ArrowDown as IconArrowDown,
+} from 'react-feather'
 import { media } from '../utils/style'
 import Contents from './Contents'
 
