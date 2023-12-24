@@ -2,12 +2,8 @@ import admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import * as API from './api'
 import { Storage } from '@google-cloud/storage'
-import * as SlackFunctions from './slack'
-import * as PubSubFunctions from './pubsub'
 
 export const api = { ...API }
-export const slack = { ...SlackFunctions }
-export const pubsub = { ...PubSubFunctions }
 
 const onCall = functions.https.onCall
 
