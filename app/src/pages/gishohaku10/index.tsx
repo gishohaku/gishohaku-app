@@ -151,23 +151,6 @@ const Hero = () => (
         `}>
         @大田区産業プラザPiO 大展示ホール
       </div>
-      <div
-        css={css`
-          margin-top: 16px;
-          margin-bottom: 16px;
-          a {
-            border: 2px solid #81b4c5;
-            color: #81b4c5;
-            &:hover {
-              background-color: #81b4c5;
-              color: white;
-            }
-          }
-        `}>
-        <LinkButton href="/gishohaku10/circle-entry">
-          サークル参加を申し込む
-        </LinkButton>
-      </div>
     </div>
   </div>
   </div>
