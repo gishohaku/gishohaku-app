@@ -17,8 +17,8 @@ const LinkButton: React.SFC<{
   <a
     css={css`
       font-size: 16px;
-      border: 2px solid #C1D1EB;
-      color: #C1D1EB;
+      border: 2px solid #364493;
+      color: #364493;
       font-weight: bold;
       padding: 10px 16px;
       display: inline-block;
@@ -33,7 +33,7 @@ const LinkButton: React.SFC<{
         display: block;
       }
       &:hover {
-        background-color: #C1D1EB;
+        background-color: #364493;
         color: white;
       }
     `}
@@ -59,7 +59,7 @@ const Hero = () => (
       padding-bottom: 66px;
 
       color: white;
-      color: #C1D1EB;
+      color: #364493;
       /* background-image: url('/static/bg.png'); */
       @media ${media.large} {
         flex-direction: column;
@@ -109,7 +109,7 @@ const Hero = () => (
           small {
             font-size: 18px;
             background-color: white;
-            background-color: #C1D1EB;
+            background-color: #364493;
             color: white;
             display: inline-block;
             padding: 2px 10px;
@@ -156,16 +156,16 @@ const Hero = () => (
           margin-top: 16px;
           margin-bottom: 16px;
           a {
-            border: 2px solid #C1D1EB;
-            color: #C1D1EB;
+            border: 2px solid #364493;
+            color: #364493;
             &:hover {
-              background-color: #C1D1EB;
+              background-color: #364493;
               color: white;
             }
           }
         `}>
-        <LinkButton href="https://docs.google.com/presentation/d/1i5o8hgqHdmLDwwVO_BefY8lCYWZTyMleaPO0OKBmNVI/edit?usp=sharing">
-          協賛ご案内資料はこちら
+        <LinkButton href="https://gishohaku.connpass.com/event/315446/">
+          技書博に一般参加する
         </LinkButton>
       </div>
     </div>
