@@ -173,6 +173,176 @@ const Hero = () => (
   </div>
 )
 
+const Sponsor: React.SFC<{
+  image: string
+  name: string
+  role: string
+  href: string
+}> = ({ image, name, role, href }) => {
+  return (
+    <div
+      className="sponsor"
+      css={css`
+        display: flex-item;
+        width: 240px;
+        text-align: center;
+        margin: 8px;
+        filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.1));
+      `}>
+      <div
+        className="sponsor-image"
+        css={css`
+          border: 1px solid #eee;
+          background-color: white;
+          width: 220px;
+          height: 220px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <a
+          href={href || 'javascript:void(0);'}
+          css={css`
+            padding: 12px;
+            text-align: center;
+            display: block;
+          `}
+          target="_blank"
+          rel="noopener">
+          <img
+            css={css`
+              max-width: 170px;
+              max-height: 160px;
+              margin: 0 auto;
+            `}
+            src={image}
+          />
+        </a>
+      </div>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}
+        dangerouslySetInnerHTML={{
+          __html: role.replace(/・/g, '・<br />'),
+        }}></p>
+      <p
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+        `}>
+        <a
+          css={css`
+            text-decoration: none;
+            color: #1d272d;
+          `}
+          href={href}
+          target="_blank"
+          rel="noopener">
+          {name}
+        </a>
+      </p>
+    </div>
+  )
+}
+
+const Staff: React.SFC<{
+  name: string
+  imageUrl: string
+  twitter: string
+}> = ({ name, imageUrl, twitter }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 96px;
+        text-align: center;
+        margin: 12px;
+        img {
+          margin: 0 auto;
+          border: 1px solid #eee;
+          border-radius: 50% !important;
+        }
+        @media ${media.small} {
+          width: 72px;
+          margin: 6px;
+        }
+      `}>
+      {twitter ? (
+        <a target="_blank" rel="noopener" href={twitter}>
+          <img src={imageUrl || '/static/gishohaku_gray.png'} />
+        </a>
+      ) : (
+        <img src={imageUrl || '/static/gishohaku_gray.png'} />
+      )}
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 6px;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>
+        {name}
+      </p>
+    </div>
+  )
+}
+
+const Printing: React.SFC<{
+  name: string
+  imageUrl: string
+  linkUrl: string
+}> = ({ name, imageUrl, linkUrl }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 200px;
+        text-align: center;
+        margin: 16px;
+        img {
+          margin: 0 auto;
+          max-width: 200px;
+          max-height: 40px;
+        }
+      `}>
+      <a target="_blank" rel="noopener" href={linkUrl}>
+        <img src={imageUrl} />
+      </a>
+      <p
+        css={css`
+          font-size: 12px;
+          margin-top: 6px;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>
+        {name}
+      </p>
+    </div>
+  )
+}
+
+const section = css`
+  padding: 48px 0;
+  background-color: white;
+  @media ${media.large} {
+    padding: 32px 0;
+  }
+  :nth-child(odd) {
+    background-color: #fdf7f6;
+  }
+`
+
 const section = css`
   padding: 48px 0;
   background-color: white;
@@ -239,6 +409,199 @@ export default () => {
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.7943158893236!2d139.72149177618968!3d35.55878167262698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1686285144204!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+              .sponsorlist.extra {
+                gap: 16px 0;
+              }
+              .sponsorlist.extra .sponsor {
+                width: 375px;
+              }
+              .sponsorlist.extra .sponsor .sponsor-image {
+                width: 340px;
+                height: 340px;
+              }
+              .sponsorlist.extra .sponsor-image img {
+                max-width: 300px;
+                max-height: 290px;
+              }
+              .sponsorlist.small .sponsor {
+                width: 175px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="サポーター・アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+              <Sponsor
+                name="NPO法人LPI-Japan"
+                role="サポーター"
+                image="/static/sponsors/lpi.png"
+                href="https://lpi.or.jp/"
+              />
+              <Sponsor
+                name="ピープルソフトウェア株式会社"
+                role="サポーター"
+                image="/static/sponsors/peoplesoftware.png"
+                href="https://pscsrv.co.jp/"
+              />
+              <Sponsor
+                name="サイボウズ株式会社"
+                role="サポーター"
+                image="/static/sponsors/kintone.png"
+                href="https://kintone.cybozu.co.jp/"
+              />
+              <Sponsor
+                name="ウェルスナビ株式会社"
+                role="サポーター"
+                image="/static/sponsors/wealthnavi.png"
+                href="https://corp.wealthnavi.com/"
+              />
+              <Sponsor
+                name="株式会社翔泳社"
+                role="サポーター"
+                image="/static/sponsors/shoeisha.png"
+                href="https://www.shoeisha.co.jp"
+              />
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="オフィシャルサポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="株式会社キッカケクリエイション"
+                role="サポーター"
+                image="/static/sponsors/kikkakecreation.png"
+                href="https://kikkakecreation.com/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+              <Sponsor
+                name="株式会社野村総合研究所"
+                role="ツールサポーター"
+                image="/static/sponsors/nri.png"
+                href="https://aslead.nri.co.jp/products/miro/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="I/O"
+                role="メディアサポーター"
+                image="/static/sponsors/io.png"
+                href="https://www.kohgakusha.co.jp"
+              />
+              <Sponsor
+                name="CodeZine"
+                role="メディアサポーター"
+                image="/static/sponsors/codezine.png"
+                href="https://codezine.jp/"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="/static/printings/k9.gif"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="/static/printings/nikko.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="/static/printings/eikou.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="PrintWalk"
+              imageUrl="/static/printings/printwalk.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="/static/printings/popls.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+            <Printing
+              name="PICO"
+              imageUrl="/static/printings/pico.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="/static/printings/neko.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
+          </div>
+        </TextBlock>
       </section>
 
       <section css={section}>
