@@ -479,7 +479,7 @@ export default () => {
               />
               <Sponsor
                 name="さくらインターネット株式会社"
-                role="オフィシャルサポーター"
+                role="サポーター"
                 image="/static/sponsors/sakura.png"
                 href="https://www.sakura.ad.jp/"
               />
