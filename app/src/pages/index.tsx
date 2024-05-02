@@ -339,17 +339,6 @@ const section = css`
     padding: 32px 0;
   }
   :nth-child(odd) {
-    background-color: #fdf7f6;
-  }
-`
-
-const section = css`
-  padding: 48px 0;
-  background-color: white;
-  @media ${media.large} {
-    padding: 32px 0;
-  }
-  :nth-child(odd) {
     background-color: #f7f8fa;
   }
 `
