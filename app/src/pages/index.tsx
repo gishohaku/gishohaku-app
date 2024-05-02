@@ -455,12 +455,20 @@ export default () => {
                 max-height: 110px;
               }
             `}>
-            <div className="sponsorlist">
+            <div className="sponsorlist extra">
               <Sponsor
                 name="株式会社システムアイ"
                 role="サポーター・アワードサポーター"
                 image="/static/sponsors/systemi.png"
                 href="https://systemi.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="ウェルスナビ株式会社"
+                role="サポーター"
+                image="/static/sponsors/wealthnavi.png"
+                href="https://corp.wealthnavi.com/"
               />
               <Sponsor
                 name="NPO法人LPI-Japan"
@@ -469,10 +477,10 @@ export default () => {
                 href="https://lpi.or.jp/"
               />
               <Sponsor
-                name="ピープルソフトウェア株式会社"
+                name="株式会社キッカケクリエイション"
                 role="サポーター"
-                image="/static/sponsors/peoplesoftware.png"
-                href="https://pscsrv.co.jp/"
+                image="/static/sponsors/kikkakecreation.png"
+                href="https://kikkakecreation.com/"
               />
               <Sponsor
                 name="サイボウズ株式会社"
@@ -481,10 +489,10 @@ export default () => {
                 href="https://kintone.cybozu.co.jp/"
               />
               <Sponsor
-                name="ウェルスナビ株式会社"
-                role="サポーター"
-                image="/static/sponsors/wealthnavi.png"
-                href="https://corp.wealthnavi.com/"
+                name="さくらインターネット株式会社"
+                role="オフィシャルサポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
               />
               <Sponsor
                 name="株式会社翔泳社"
@@ -493,16 +501,10 @@ export default () => {
                 href="https://www.shoeisha.co.jp"
               />
               <Sponsor
-                name="さくらインターネット株式会社"
-                role="オフィシャルサポーター"
-                image="/static/sponsors/sakura.png"
-                href="https://www.sakura.ad.jp/"
-              />
-              <Sponsor
-                name="株式会社キッカケクリエイション"
+                name="ピープルソフトウェア株式会社"
                 role="サポーター"
-                image="/static/sponsors/kikkakecreation.png"
-                href="https://kikkakecreation.com/"
+                image="/static/sponsors/peoplesoftware.png"
+                href="https://pscsrv.co.jp/"
               />
               <Sponsor
                 name="株式会社しまや出版"
