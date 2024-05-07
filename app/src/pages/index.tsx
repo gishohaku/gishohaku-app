@@ -468,7 +468,7 @@ export default () => {
               <Sponsor
                 name="株式会社キッカケクリエイション"
                 role="サポーター"
-                image="/static/sponsors/kikkakecreation.png"
+                image="/static/sponsors/kikkake.png"
                 href="https://kikkakecreation.com/"
               />
               <Sponsor
