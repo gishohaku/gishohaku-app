@@ -401,6 +401,62 @@ export default () => {
       </section>
 
       <section css={section}>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 18px;
+                font-weight: bold;
+              `}>
+              この観点、これぞ同人誌！技術書アワード 
+            </div>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+                <Award
+                  title="最優秀賞"
+                  book="QRコードを編む"
+                  circle="megusunuLab"
+                  image="/static/awards/gishohaku10-award-best.png"
+                  bookref="/gishohaku10/books/HgjmwBr1MQeG9bcvDepL"
+                  circleref="/gishohaku10/circles/H2xSXCms65NwTpjFsUFR"
+                />
+                <Award
+                  title="優秀賞"
+                  book="めもおきば TechReport 2024.05"
+                  circle="めもおきば"
+                  image="/static/awards/gishohaku10-award-excellence.png"
+                  bookref="/gishohaku10/books/HC4jmKx88uKb1HCXgGKN"
+                  circleref="/gishohaku10/circles/1ywf4RCuXKPYaYVggK1F"
+                />
+              </div>
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
           <div
