@@ -444,11 +444,11 @@ export default () => {
                 />
                 <Award
                   title="優秀賞"
-                  book="めもおきば TechReport 2024.05"
-                  circle="めもおきば"
+                  book="Proxmoxで作る超便利な自宅サーバーレシピ"
+                  circle="愛知工業大学 システム工学研究会"
                   image="/static/awards/gishohaku10-award-excellence.png"
-                  bookref="/gishohaku10/books/HC4jmKx88uKb1HCXgGKN"
-                  circleref="/gishohaku10/circles/1ywf4RCuXKPYaYVggK1F"
+                  bookref="/gishohaku10/books/Yg8LoZtLKok7cHUT2wDf"
+                  circleref="/gishohaku10/circles/Fpz1d7MuRAvCBmmfIT7U"
                 />
               </div>
             </div>
