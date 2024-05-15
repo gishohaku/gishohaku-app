@@ -499,13 +499,6 @@ export default () => {
             `}>
             <div
               css={css`
-                font-size: 18px;
-                font-weight: bold;
-              `}>
-              この観点、これぞ同人誌！技術書アワード 
-            </div>
-            <div
-              css={css`
                 font-size: 12px;
                 color: #888888;
               `}>
