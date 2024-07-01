@@ -151,6 +151,23 @@ const Hero = () => (
         `}>
         @横浜産貿ホール マリネリア
       </div>
+      <div
+        css={css`
+          margin-top: 16px;
+          margin-bottom: 16px;
+          a {
+            border: 2px solid #364493;
+            color: #364493;
+            &:hover {
+              background-color: #364493;
+              color: white;
+            }
+          }
+        `}>
+        <LinkButton href="/gishohaku11/circle-entry">
+          サークル参加を申し込む
+        </LinkButton>
+      </div>
     </div>
   </div>
   </div>
@@ -429,6 +446,7 @@ export default () => {
           </p>
         </TextBlock>
       </section>
+
       <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
@@ -471,6 +489,19 @@ export default () => {
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.308756014233!2d139.6432574761854!3d35.447149872663815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185cfc879b30db%3A0x8d76dbf7eaf7b911!2z5qiq5rWc55Sj6LK_44Ob44O844OrIOODnuODquODjeODquOCog!5e0!3m2!1sja!2sjp!4v1719810190206!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+      <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <TextBlock>
+          <p>
+            サークル参加される方に向けたご案内資料です。
+          </p>
+          <LinkButton href="https://gishohaku.notion.site/">
+            技書博ポータル
+            <small>（サークル向けの手続き案内・諸情報）</small>
+          </LinkButton>
+        </TextBlock>
       </section>
 
       <section css={section}>
