@@ -972,6 +972,7 @@ const gishohaku10Circles = [
   { id: 'yPZBHIbFS7hE1odMUQay', name: 'メロンブックス', booth: 'し-09' },
 ]
 const gishohaku11Circles = [
+  { id: '-', name: '(配置は未決定です)', booth: '-' },
 ]
 
 const container = css`
