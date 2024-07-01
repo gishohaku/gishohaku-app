@@ -971,6 +971,8 @@ const gishohaku10Circles = [
   { id: 'NUXqRb6H8ACZpds2vKNu', name: 'f/ats', booth: 'し-08' },
   { id: 'yPZBHIbFS7hE1odMUQay', name: 'メロンブックス', booth: 'し-09' },
 ]
+const gishohaku11Circles = [
+]
 
 const container = css`
   margin: 0 auto;
@@ -996,6 +998,7 @@ const CircleSelect: React.FC<Props> = ({ circleId, starIds }) => {
     gishohaku8: gishohaku8Circles,
     gishohaku9: gishohaku9Circles,
     gishohaku10: gishohaku10Circles,
+    gishohaku11: gishohaku11Circles,
   }[eventId]
   const index = circles.findIndex((c) => c.id === circleId)
   const nextCircle = circles[index + 1]

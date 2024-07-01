@@ -32,6 +32,7 @@ const mapUrl: {
   gishohaku8: '',
   gishohaku9: '/static/gishohaku9-layout.png',
   gishohaku10: '/static/gishohaku10-layout.png',
+  gishohaku11: '',
 }
 
 const appealUrl: {
@@ -47,6 +48,7 @@ const appealUrl: {
   gishohaku8: '',
   gishohaku9: 'https://docs.google.com/presentation/d/e/2PACX-1vSCzubLGp8DDN0Ucml88KC7EXun_Lg0L4V5q4f2flBDKv9kcDtsBdm3_pqGamlricHqSWWY4GXSYAzl/pub',
   gishohaku10: '',
+  gishohaku11: '',
 }
 
 const Index: NextPage<InitialProps> = (props) => {

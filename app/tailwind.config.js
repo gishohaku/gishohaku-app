@@ -15,6 +15,7 @@ module.exports = {
         gishohaku8: '#81B4C5',
         gishohaku9: '#F3B7AE',
         gishohaku10: '#C1D1EB',
+        gishohaku11: '#C1D1EB',
       },
     },
   },
