@@ -167,6 +167,9 @@ const Hero = () => (
         <LinkButton href="/gishohaku11/circle-entry">
           サークル参加を申し込む
         </LinkButton>
+        <LinkButton href="https://docs.google.com/presentation/d/1jICotm-shRQigEXbw-R2AdbXJakgIqQvcwkmmOrcS1s/edit?usp=sharing">
+          スポンサー募集資料をみる
+        </LinkButton>
       </div>
     </div>
   </div>
