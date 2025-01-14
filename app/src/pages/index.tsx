@@ -164,11 +164,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="/gishohaku11/circle-entry">
-          サークル参加を申し込む
-        </LinkButton>
-        <LinkButton href="https://docs.google.com/presentation/d/1jICotm-shRQigEXbw-R2AdbXJakgIqQvcwkmmOrcS1s/edit?usp=sharing">
-          スポンサー募集資料をみる
+        <LinkButton href="https://gishohaku.connpass.com/event/341858/">
+          技書博11に一般参加する（無料）
         </LinkButton>
       </div>
     </div>
@@ -504,6 +501,151 @@ export default () => {
             技書博ポータル
             <small>（サークル向けの手続き案内・諸情報）</small>
           </LinkButton>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+              .sponsorlist.extra {
+                gap: 16px 0;
+              }
+              .sponsorlist.extra .sponsor {
+                width: 375px;
+              }
+              .sponsorlist.extra .sponsor .sponsor-image {
+                width: 340px;
+                height: 340px;
+              }
+              .sponsorlist.extra .sponsor-image img {
+                max-width: 300px;
+                max-height: 290px;
+              }
+              .sponsorlist.small .sponsor {
+                width: 175px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
+            `}>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="サポーター・アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="ソシム株式会社"
+                role="ランチサポーター"
+                image="/static/sponsors/socym.png"
+                href="https://www.socym.co.jp/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="/static/printings/k9.gif"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="/static/printings/nikko.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="/static/printings/eikou.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="PrintWalk"
+              imageUrl="/static/printings/printwalk.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="/static/printings/popls.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+            <Printing
+              name="PICO"
+              imageUrl="/static/printings/pico.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="/static/printings/neko.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
+          </div>
         </TextBlock>
       </section>
 
