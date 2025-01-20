@@ -565,7 +565,7 @@ export default () => {
               />
               <Sponsor
                 name="ソシム株式会社"
-                role="ランチサポーター"
+                role="サポーター"
                 image="/static/sponsors/socym.png"
                 href="https://www.socym.co.jp/"
               />
