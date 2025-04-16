@@ -85,8 +85,9 @@ const Layout: React.FC<any> = (props) => {
         'gishohaku9',
         'gishohaku10',
         'gishohaku11',
+        'gishohaku12',
       ].includes(eventId) && <BottomBar />}
-      {/* {eventId === 'gishohaku11' && <MypageButton />} */}
+      {/* {eventId === 'gishohaku12' && <MypageButton />} */}
     </>
   )
 }
@@ -147,21 +148,14 @@ const Footer = () => (
       <li>
         <a
           target="_blank"
-          href="https://esa-pages.io/p/sharing/13039/posts/191/04cfb413b5ed58f9a7cf.html">
-          サークル出展要項
+          href="https://gishohaku.notion.site/e987823213594baa9ac539e6a8f8923a">
+          サークル向け重要説明事項
         </a>
       </li>
       <li>
         <a
           target="_blank"
-          href="https://esa-pages.io/p/sharing/13039/posts/192/3db77756af92269cae9b.html">
-          サークル出展の手引き
-        </a>
-      </li>
-      <li>
-        <a
-          target="_blank"
-          href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">
+          href="/code-of-conduct">
           行動規範
         </a>
       </li>

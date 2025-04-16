@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import Image from 'next/image'
-import { media, colors } from '../../utils/style'
-import FluidBlock from '../../components/atoms/FluidBlock'
-import TextBlock from '../../components/atoms/TextBlock'
-import SectionHeader from '../../components/SectionHeder'
-import placeIcon from '../../components/top/round-place.svg'
-import directionsIcon from '../../components/top/round-directions_run.svg'
+import { media, colors } from '../utils/style'
+import FluidBlock from '../components/atoms/FluidBlock'
+import TextBlock from '../components/atoms/TextBlock'
+import SectionHeader from '../components/SectionHeder'
+import placeIcon from '../components/top/round-place.svg'
+import directionsIcon from '../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
@@ -150,6 +150,23 @@ const Hero = () => (
           }
         `}>
         @横浜産貿ホール マリネリア
+      </div>
+      <div
+        css={css`
+          margin-top: 16px;
+          margin-bottom: 16px;
+          a {
+            border: 2px solid #364493;
+            color: #364493;
+            &:hover {
+              background-color: #364493;
+              color: white;
+            }
+          }
+        `}>
+        <LinkButton href="https://gishohaku.connpass.com/event/341858/">
+          技書博11に一般参加する（無料）
+        </LinkButton>
       </div>
     </div>
   </div>
@@ -429,6 +446,7 @@ export default () => {
           </p>
         </TextBlock>
       </section>
+
       <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
@@ -471,6 +489,221 @@ export default () => {
             `}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.308756014233!2d139.6432574761854!3d35.447149872663815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185cfc879b30db%3A0x8d76dbf7eaf7b911!2z5qiq5rWc55Sj6LK_44Ob44O844OrIOODnuODquODjeODquOCog!5e0!3m2!1sja!2sjp!4v1719810190206!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+                <Award
+                  title="最優秀賞"
+                  book="Pythonで始める生成AI開発入門"
+                  circle="味噌とんトロ定食"
+                  image="/static/awards/gishohaku11-award-best.png"
+                  bookref="/gishohaku11/books/8U3xok62RZH5a136d14h"
+                  circleref="/gishohaku11/circles/3QahcWr8puWztyiT2Ntj"
+                />
+                <Award
+                  title="優秀賞"
+                  book="「ウォーターフォール」の原典の「はず」のRoyce論文解説"
+                  circle="品質公団"
+                  image="/static/awards/gishohaku11-award-excellence.png"
+                  bookref="/gishohaku11/books/WumKMMy26wnmPyJOeyRm"
+                  circleref="/gishohaku11/circles/CrBqLzdJ5L91F1kFukFb"
+                />
+                <Award
+                  title="奨励賞"
+                  book="OtakuAssemblyシリーズ"
+                  circle="OtakuAssembly"
+                  image="/static/awards/gishohaku11-award-encouragement.png"
+                  bookref="/gishohaku11/books/4ftT1yCbX0MXbLd66LDZ"
+                  circleref="/gishohaku11/circles/z7N2cWTqM9PvkiH0uInz"
+                />
+              </div>
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+      <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <TextBlock>
+          <p>
+            サークル参加される方に向けたご案内資料です。
+          </p>
+          <LinkButton href="https://gishohaku.notion.site/">
+            技書博ポータル
+            <small>（サークル向けの手続き案内・諸情報）</small>
+          </LinkButton>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+              .sponsorlist.extra {
+                gap: 16px 0;
+              }
+              .sponsorlist.extra .sponsor {
+                width: 375px;
+              }
+              .sponsorlist.extra .sponsor .sponsor-image {
+                width: 340px;
+                height: 340px;
+              }
+              .sponsorlist.extra .sponsor-image img {
+                max-width: 300px;
+                max-height: 290px;
+              }
+              .sponsorlist.small .sponsor {
+                width: 175px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
+            `}>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="サポーター・アワードサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="ソシム株式会社"
+                role="サポーター"
+                image="/static/sponsors/socym.png"
+                href="https://www.socym.co.jp/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="ImageFlux"
+                role="ツールサポーター"
+                image="/static/sponsors/imageflux.png"
+                href="https://www.sakura.ad.jp/services/imageflux/"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="/static/printings/k9.gif"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="/static/printings/nikko.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="/static/printings/eikou.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="PrintWalk"
+              imageUrl="/static/printings/printwalk.jpg"
+              linkUrl="https://www.print-walk.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="/static/printings/popls.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+            <Printing
+              name="PICO"
+              imageUrl="/static/printings/pico.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="/static/printings/neko.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
+          </div>
+        </TextBlock>
       </section>
 
       <section css={section}>

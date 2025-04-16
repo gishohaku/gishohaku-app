@@ -372,6 +372,7 @@ export const categoriesByEvent = {
   gishohaku9: categories9,
   gishohaku10: categories10,
   gishohaku11: categories11,
+  gishohaku12: categories12,
 }
 
 export const plans = {
@@ -389,7 +390,8 @@ export type CricleCategory = keyof typeof categories1 |
   keyof typeof categories8 |
   keyof typeof categories9 |
   keyof typeof categories10 |
-  keyof typeof categories11
+  keyof typeof categories11 |
+  keyof typeof categories12
 export type CriclePlan = keyof typeof plans
 
 export const allCategories: {
@@ -406,6 +408,7 @@ export const allCategories: {
   ...categories9,
   ...categories10,
   ...categories11,
+  ...categories12,
 }
 
 export default interface Circle {

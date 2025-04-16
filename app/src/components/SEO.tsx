@@ -18,20 +18,20 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
   const jsonLdTags = {
     '@context': 'http://schema.org',
     '@type': 'Event',
-    name: '第十一回技術書同人誌博覧会',
-    alternateName: '技書博11',
+    name: '第十二回技術書同人誌博覧会',
+    alternateName: '技書博12',
     description:
       'あなたが最も得意とする技術、最も世界中に広めたい技術を、『技術書』という形で共有しませんか？ 技書博は、ITエンジニアが知見を共有するために開催される、技術書（技術同人誌）オンリーの同人誌即売会イベントです。',
-    startDate: '2025-01-25',
-    endDate: '2025-01-25',
-    image: 'https://gishohaku.dev/static/gishohaku11-ogp.png',
+    startDate: '2025-10-26',
+    endDate: '2025-10-26',
+    image: 'https://gishohaku.dev/static/gishohaku12-ogp.png',
     url: 'https://gishohaku.dev/',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     offers: {
       '@type': 'Offer',
       availability: 'InStock',
-      validFrom: '2024-12-01T12:00',
+      validFrom: '2025-04-16T12:00',
       description:
         '来場者は無料で入場いただけるほか、有料懇親会も用意しています。',
       price: '0',
@@ -57,10 +57,10 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       name: '横浜産貿ホール マリネリア',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: '神奈川県横浜市中区',
+        addressLocality: '埼玉県さいたま市大宮区',
         addressRegion: 'JP',
-        postalCode: '230-0023',
-        streetAddress: '神奈川県横浜市中区山下町2',
+        postalCode: '330-8669',
+        streetAddress: '埼玉県さいたま市大宮区桜木町1-7-5',
       },
     },
   }
@@ -71,18 +71,18 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku11-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku12-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku11-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku12-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={'https://gishohaku.dev/static/gishohaku11-icon.png'}
+        content={'https://gishohaku.dev/static/gishohaku12-icon.png'}
         key="image"
       />
       <meta
@@ -98,7 +98,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="og:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku11-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku12-ogp.png'}
         key="image"
       />
       <meta
@@ -115,7 +115,7 @@ const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
       />
       <meta
         property="twitter:image"
-        content={imageUrl || 'https://gishohaku.dev/static/gishohaku11-ogp.png'}
+        content={imageUrl || 'https://gishohaku.dev/static/gishohaku12-ogp.png'}
         key="twitter:image"
       />
       <meta name="description" content={metaDescription} key="description" />

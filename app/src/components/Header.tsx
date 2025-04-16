@@ -235,7 +235,7 @@ const Header: React.FC<any> = () => {
             <a
               target="_blank"
               rel="noopener"
-              href="https://esa-pages.io/p/sharing/13039/posts/13/4c6fe5c0f58bb4fb32cd.html">
+              href="/code-of-conduct">
               行動規範
             </a>
           </li>
