@@ -261,6 +261,14 @@ const Header: React.FC<any> = () => {
             </a>
           </li>
           <li>
+            <a
+              target="_blank"
+              rel="noopener"
+              href="/harassment-case-study">
+              ハラスメントの種類と具体例
+            </a>
+          </li>
+          <li>
             <a href="mailto:info@gishohaku.dev">お問い合わせ</a>
           </li>
         </ul>
