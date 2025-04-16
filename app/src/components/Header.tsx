@@ -165,21 +165,31 @@ const Header: React.FC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link href="/" passHref>
+        <Link href="/" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第十回 技術書同人誌博覧会"
-                secondary="2024年5月12日 開催"
+                primary="第十二回 技術書同人誌博覧会"
+                secondary="2025年10月26日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
             </a>
           </Link>
-          <Link href="/gishohaku9" passHref>
+          <Link href="/gishohaku11" passHref>
             <a css={noDecoration}>
               <ListItem
-                primary="第九回 技術書同人誌博覧会"
-                secondary="2023年11月25日 開催"
+                primary="第十一回 技術書同人誌博覧会"
+                secondary="2025年1月25日 開催"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
+          </Link>
+          <Link href="/gishohaku10" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十回 技術書同人誌博覧会"
+                secondary="2024年5月12日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
@@ -195,6 +205,17 @@ const Header: React.FC<any> = () => {
             </a>
           </Link>
           <div css={divider} />
+          <a
+            href="http://gishohaku.notion.site/"
+            target="_blank"
+            rel="noopener"
+            css={noDecoration}>
+            <ListItem
+              primary="技書博ポータル"
+              secondary="サークル向け情報まとめサイト"
+              contentAfter={<IconExternalLink />}
+            />
+          </a>
           <a
             href="https://blog.gishohaku.dev/"
             target="_blank"
