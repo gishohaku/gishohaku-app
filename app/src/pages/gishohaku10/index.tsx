@@ -441,7 +441,7 @@ export default () => {
         <TextBlock>
           <p>
           技術書同人誌博覧会（技書博）は、技術に関する同人誌の即売会です。ITの他に、理工/数学/デザイン/マネジメントなど幅広い技術を取り扱っています。エンジニアのアウトプットを応援したい＆増やしたいという思いからこのイベントが生まれました。初心者にもベテランにも優しく、ゆったりと交流しながら知識を深め、仲間を作ったり成長できるような場所を目指しています。
-          （<a target="_blank" href="https://blog.gishohaku.dev/entry/2023/09/04/131252">もっとくわしい説明はこちら</a>）
+          （<a target="_blank" href="https://blog.gishohaku.dev/entry/about">もっとくわしい説明はこちら</a>）
           </p>
         </TextBlock>
       </section>
