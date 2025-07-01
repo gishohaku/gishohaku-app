@@ -550,7 +550,12 @@ export default () => {
                 max-height: 110px;
               }
             `}>
-              （準備中です）
+            技書博は協賛企業さまのご支援によって運営を継続させて頂いております。<br />
+            スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。<br />
+            <br />
+            <LinkButton href="https://docs.google.com/presentation/d/1S0qzmFl3pV6w3IC4S1dFS4wdy17L7q35YrbE30hz4iE/edit?usp=sharing">
+              スポンサーメニューを確認する
+            </LinkButton>
           </div>
         </TextBlock>
       </section>

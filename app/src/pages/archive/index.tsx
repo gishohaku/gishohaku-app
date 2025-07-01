@@ -30,11 +30,11 @@ export default () => {
       <section css={section}>
         <SectionHeader en="ARCHIVE">過去の開催回一覧</SectionHeader>
         <List>
-        <Link href="/gishohaku12" passHref>
+          <Link href="/gishohaku12" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十二回 技術書同人誌博覧会"
-                secondary="2025年10月26日 開催"
+                secondary="2025年10月26日 開催予定"
                 contentAfter={<IconChevronRight />}
               />
             </a>
@@ -57,7 +57,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/gishohaku9" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第九回 技術書同人誌博覧会"
