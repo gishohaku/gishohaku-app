@@ -519,6 +519,7 @@ export default () => {
 
           <div
             css={css`
+              margin-top: 16px;
               text-align: center;
               .sponsorlist {
                 display: flex;
@@ -558,7 +559,28 @@ export default () => {
                 max-height: 110px;
               }
             `}>
-              （スポンサーリストは準備中です）
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+            </div>
           </div>
         </TextBlock>
       </section>
