@@ -567,6 +567,12 @@ export default () => {
                 href="https://www.sakura.ad.jp/"
               />
               <Sponsor
+                name="株式会社ゆめみ"
+                role="サポーター"
+                image="/static/sponsors/yumemi.png"
+                href="https://www.yumemi.co.jp/"
+              />
+              <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
                 image="/static/sponsors/shimaya.png"
