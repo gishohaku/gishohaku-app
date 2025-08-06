@@ -439,7 +439,7 @@ export default () => {
   return (
     <>
       <Hero />
-      <section css={section}>
+      <section css={section}  id="about">
         <SectionHeader en="ABOUT">技書博とは？</SectionHeader>
         <TextBlock>
           <p>
@@ -449,7 +449,7 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="access">
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
           <p
@@ -493,7 +493,7 @@ export default () => {
         </FluidBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="circle">
       <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
         <TextBlock>
           <p>
@@ -506,11 +506,20 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
+          <p>
+            技書博は協賛企業さまのご支援によって運営を継続させて頂いております。<br />
+            スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。<br />
+          </p>
+          <LinkButton href="https://docs.google.com/presentation/d/1S0qzmFl3pV6w3IC4S1dFS4wdy17L7q35YrbE30hz4iE/edit?usp=sharing">
+            スポンサーメニューを確認する
+          </LinkButton>
+
           <div
             css={css`
+              margin-top: 16px;
               text-align: center;
               .sponsorlist {
                 display: flex;
@@ -550,12 +559,39 @@ export default () => {
                 max-height: 110px;
               }
             `}>
-              （準備中です）
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="株式会社ゆめみ"
+                role="サポーター"
+                image="/static/sponsors/yumemi.png"
+                href="https://www.yumemi.co.jp/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+            </div>
           </div>
         </TextBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="printing">
         <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
         <TextBlock>
           <div
@@ -605,7 +641,7 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="banner">
         <SectionHeader en="BANNER">リンクバナー</SectionHeader>
         <TextBlock>
           <p
