@@ -573,6 +573,14 @@ export default () => {
                 href="https://www.yumemi.co.jp/"
               />
               <Sponsor
+                name="虎の穴ラボ株式会社"
+                role="サポーター"
+                image="/static/sponsors/toralab.png"
+                href="https://toranoana-lab.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
                 image="/static/sponsors/shimaya.png"
