@@ -559,6 +559,14 @@ export default () => {
                 max-height: 110px;
               }
             `}>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="サポーター・アワードサポーター・トートバッグサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+            </div>
             <div className="sponsorlist">
               <Sponsor
                 name="さくらインターネット株式会社"
