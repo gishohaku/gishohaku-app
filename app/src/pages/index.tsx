@@ -562,7 +562,7 @@ export default () => {
             <div className="sponsorlist extra">
               <Sponsor
                 name="株式会社システムアイ"
-                role="サポーター・アワードサポーター・トートバッグサポーター"
+                role="サポーター・アワードサポーター・エコバッグサポーター"
                 image="/static/sponsors/systemi.png"
                 href="https://systemi.co.jp/"
               />
