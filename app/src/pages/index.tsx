@@ -581,7 +581,6 @@ export default () => {
                 position="執行役員 営業部部長"
                 description="2003年緑陽社に入社。以来様々な装丁の相談を承る。現在、ティアズマガジンで装丁に関するコラムを連載中。"
                 image="/static/speaker/gishohaku12_jinbo.jpg"
-                sns="https://x.com/shimaya_ceo"
               />
               <Speaker
                 name="ねこ社長"
