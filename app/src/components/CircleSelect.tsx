@@ -1124,7 +1124,6 @@ const gishohaku12Circles = [
   { id: 'BRRhGzXG5iUjoyE2sjrl', name: 'いもあらい。', booth: 'う-15'},
   { id: 'rrm7q97RcRFKA5na8FCv', name: 'たいら屋', booth: 'う-16'},
   { id: 'bY16Ke4nhSKOtB2RtVpO', name: 'Lettuce Yogurt', booth: 'え-01'},
-  { id: '0V9jGRdQi3cwM3g12VsZ', name: 'アニメから得た学びを執筆会', booth: 'え-02'},
   { id: 'WdAz2OtqX7XM7kbI2nVP', name: '黒猫舎', booth: 'え-04'},
   { id: 'gKf08hh6GqB2a390UlqU', name: 'ZINE Community', booth: 'え-05a'},
   { id: 'ggzO60WA4IzlLDpixuuB', name: '誤家庭工房', booth: 'え-05b'},
