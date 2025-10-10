@@ -164,16 +164,77 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://gishohaku.connpass.com/event/352601/">
-          技書博12にサークル参加する
-        </LinkButton>
-        <LinkButton href="https://gishohaku.connpass.com/event/352601/">
           技書博12に一般参加する（無料）
+        </LinkButton>
+        <LinkButton href="https://gishohaku.connpass.com/event/371840/">
+          懇親会に参加する
         </LinkButton>
       </div>
     </div>
   </div>
   </div>
 )
+
+const Speaker: React.SFC<{
+  name: string
+  company: string
+  position: string
+  image: string
+  description: string
+}> = ({ name, company, position, image, description }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 300px;
+        text-align: center;
+        margin: 8px;
+      `}>
+      <div
+        css={css`
+          width: 300px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <img
+          css={css`
+            max-width: 200px;
+            max-height: 240px;
+            margin: 0 auto;
+          `}
+          src={image}
+        />
+      </div>
+      <div
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>{company} {position}</div>
+      <div
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>{name}</div>
+      <div
+        css={css`
+          font-size: 12px;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>{description}</div>
+    </div>
+  )
+}
 
 const Award: React.SFC<{
   title: string
@@ -493,8 +554,55 @@ export default () => {
         </FluidBlock>
       </section>
 
+      <section css={section} id="event">
+        <SectionHeader en="EVENT">スペシャルトークセッション</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博12ではイベントが開始される10:30よりスペシャルトークセッションを開催します。
+            東京都内に拠点を構える同人印刷3社をお招きし、同人印刷や業界の話などざっくばらんにお話いただきます。
+            この機会をぜひお見逃しなく！
+          </p>
+          <div
+            css={css`
+              text-align: center;
+              .speakers {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="speakers">
+              <Speaker
+                name="神保"
+                company="株式会社緑陽社"
+                position="執行役員 営業部部長"
+                description="2003年緑陽社に入社。以来様々な装丁の相談を承る。現在、ティアズマガジンで装丁に関するコラムを連載中。"
+                image="/static/speaker/gishohaku12_jinbo.jpg"
+              />
+              <Speaker
+                name="ねこ社長"
+                company="有限会社ねこのしっぽ"
+                position="代表取締役"
+                description="1997年に有限会社ねこのしっぽを立ち上げる。即売会主催、ライブ主催、各種セミナー、大学講師などを経て2025年よりネコモッチという2人ユニットでライブ活動中。"
+                image="/static/speaker/gishohaku12_neko.jpg"
+              />
+              <Speaker
+                name="小早川真樹"
+                company="株式会社しまや出版"
+                position="代表取締役"
+                description="しまや出版創業者である義父の急逝により、2007年にしまや出版に入社。製本技能士1級取得。"
+                image="/static/speaker/gishohaku12_kohayakawa.jpg"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
       <section css={section} id="circle">
-      <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
         <TextBlock>
           <p>
             サークル参加される方に向けたご案内資料です。
