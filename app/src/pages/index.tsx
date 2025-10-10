@@ -554,8 +554,8 @@ export default () => {
         </FluidBlock>
       </section>
 
-      <section css={section} id="event">
-        <SectionHeader en="EVENT">スペシャルトークセッション</SectionHeader>
+      <section css={section} id="session">
+        <SectionHeader en="SESSION">スペシャルトークセッション</SectionHeader>
         <TextBlock>
           <p>
             技書博12ではイベントが開始される10:30よりスペシャルトークセッションを開催します。
