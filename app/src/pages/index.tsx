@@ -186,7 +186,7 @@ const Speaker: React.SFC<{
     <div
       css={css`
         display: flex-item;
-        width: 300px;
+        width: 250px;
         text-align: center;
         margin: 8px;
       `}>
@@ -581,6 +581,7 @@ export default () => {
                 position="執行役員 営業部部長"
                 description="2003年緑陽社に入社。以来様々な装丁の相談を承る。現在、ティアズマガジンで装丁に関するコラムを連載中。"
                 image="/static/speaker/gishohaku12_jinbo.jpg"
+                sns="https://x.com/shimaya_ceo"
               />
               <Speaker
                 name="ねこ社長"
@@ -594,7 +595,7 @@ export default () => {
                 company="株式会社しまや出版"
                 position="代表取締役"
                 description="しまや出版創業者である義父の急逝により、2007年にしまや出版に入社。製本技能士1級取得。"
-                image="/static/speaker/gishohaku12_kohayakawa.jpg"
+                image="/static/speaker/gishohaku12_kohayakawa.png"
               />
             </div>
           </div>
@@ -617,14 +618,6 @@ export default () => {
       <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
-          <p>
-            技書博は協賛企業さまのご支援によって運営を継続させて頂いております。<br />
-            スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。<br />
-          </p>
-          <LinkButton href="https://docs.google.com/presentation/d/1S0qzmFl3pV6w3IC4S1dFS4wdy17L7q35YrbE30hz4iE/edit?usp=sharing">
-            スポンサーメニューを確認する
-          </LinkButton>
-
           <div
             css={css`
               margin-top: 16px;
