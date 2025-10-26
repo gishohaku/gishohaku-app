@@ -73,7 +73,7 @@ const BottomBar = () => {
           transition: padding-bottom 0.15s ease-out;
         `}>
         <span css={spacer} />
-        <Link href={eventId === 'gishohaku12' ? '/' : `/${eventId}`} passHref>
+        <Link href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} passHref>
           <a css={item}>
             <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>

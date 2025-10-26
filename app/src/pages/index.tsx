@@ -82,7 +82,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku12-logo.png"
+      src="/static/gishohaku13-logo.png"
       width={280}
       height={280}
     />
@@ -122,7 +122,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第十二回</small>技術書同人誌博覧会
+        <small>第十三回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -138,7 +138,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2025.10.26 <small>Sun. 10:30~16:00</small>
+        2026.05.10 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -148,7 +148,7 @@ const Hero = () => (
             font-size: 16px;
           }
         `}>
-        @大宮ソニックシティ
+        @大田区産業プラザPiO 大展示ホール
       </div>
       <div
         css={css`
@@ -163,78 +163,14 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://gishohaku.connpass.com/event/352601/">
-          技書博12に一般参加する（無料）
-        </LinkButton>
-        <LinkButton href="https://gishohaku.connpass.com/event/371840/">
-          懇親会に参加する
+        <LinkButton href="https://gishohaku.connpass.com/event/372013/">
+          技書博13にサークル参加する
         </LinkButton>
       </div>
     </div>
   </div>
   </div>
 )
-
-const Speaker: React.SFC<{
-  name: string
-  company: string
-  position: string
-  image: string
-  description: string
-}> = ({ name, company, position, image, description }) => {
-  return (
-    <div
-      css={css`
-        display: flex-item;
-        width: 250px;
-        text-align: center;
-        margin: 8px;
-      `}>
-      <div
-        css={css`
-          width: 300px;
-          margin: 0 auto;
-          display: -webkit-flex;
-          display: flex;
-          text-align: center;
-          -webkit-align-items: center;
-          align-items: center;
-          -webkit-justify-content: center;
-          justify-content: center;
-        `}>
-        <img
-          css={css`
-            max-width: 200px;
-            max-height: 240px;
-            margin: 0 auto;
-          `}
-          src={image}
-        />
-      </div>
-      <div
-        css={css`
-          font-size: 12px;
-          margin-top: 8px;
-          margin-bottom: 4px !important;
-          line-height: 1.4;
-          opacity: 0.8;
-        `}>{company} {position}</div>
-      <div
-        css={css`
-          font-size: 15px;
-          font-weight: bold;
-          line-height: 1.5;
-          margin-bottom: 4px;
-        `}>{name}</div>
-      <div
-        css={css`
-          font-size: 12px;
-          line-height: 1.5;
-          margin-bottom: 4px;
-        `}>{description}</div>
-    </div>
-  )
-}
 
 const Award: React.SFC<{
   title: string
@@ -521,7 +457,7 @@ export default () => {
                 font-size: 24px;
               }
             `}>
-            ソニックシティ
+            大田区産業プラザPiO 大展示ホール
           </p>
           <div
             css={css`
@@ -532,15 +468,15 @@ export default () => {
             `}>
             <p css={withIcon}>
               <img src={placeIcon} alt="住所" />
-              埼玉県さいたま市大宮区桜木町1-7-5（
-              <a target="_blank" href="https://maps.app.goo.gl/YySEtAYeVX137UoQA">
+              東京都大田区南蒲田1-20-20（
+              <a target="_blank" href="https://goo.gl/maps/2J282yVtzG3T5f398">
                 Google マップ
               </a>
               ）
             </p>
             <p css={withIcon}>
               <img src={directionsIcon} alt="アクセス" />
-              JR「大宮駅」西口より徒歩約3分
+              京浜急行「京急蒲田」駅東口より徒歩約3分
             </p>
           </div>
         </TextBlock>
@@ -550,260 +486,8 @@ export default () => {
               width: 100%;
               min-height: 420px;
             `}
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.211032162132!2d139.6171346760428!3d35.90526951763406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018c14334b5b89f%3A0x1f5fecd47f68d7f1!2z44K944OL44OD44Kv44K344OG44Kj!5e1!3m2!1sja!2sjp!4v1744762942967!5m2!1sja!2sjp"></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.7943158893236!2d139.72149177618968!3d35.55878167262698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601860f87f5da4e3%3A0x8a0493a2f4accfb0!2z5aSn55Sw5Yy655Sj5qWt44OX44Op44K2UGlP!5e0!3m2!1sja!2sjp!4v1686285144204!5m2!1sja!2sjp"></iframe>
         </FluidBlock>
-      </section>
-
-      <section css={section} id="session">
-        <SectionHeader en="SESSION">スペシャルトークセッション</SectionHeader>
-        <TextBlock>
-          <p>
-            技書博12ではイベントが開始される10:30よりスペシャルトークセッションを開催します。
-            東京都内に拠点を構える同人印刷3社をお招きし、同人印刷や業界の話などざっくばらんにお話いただきます。
-            この機会をぜひお見逃しなく！
-          </p>
-          <div
-            css={css`
-              text-align: center;
-              .speakers {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: center;
-                align-content: flex-start;
-                align-items: flex-start;
-                margin: 12px 0;
-              }
-            `}>
-            <div className="speakers">
-              <Speaker
-                name="神保"
-                company="株式会社緑陽社"
-                position="執行役員 営業部部長"
-                description="2003年緑陽社に入社。以来様々な装丁の相談を承る。現在、ティアズマガジンで装丁に関するコラムを連載中。"
-                image="/static/speaker/gishohaku12_jinbo.jpg"
-              />
-              <Speaker
-                name="ねこ社長"
-                company="有限会社ねこのしっぽ"
-                position="代表取締役"
-                description="1997年に有限会社ねこのしっぽを立ち上げる。即売会主催、ライブ主催、各種セミナー、大学講師などを経て2025年よりネコモッチという2人ユニットでライブ活動中。"
-                image="/static/speaker/gishohaku12_neko.jpg"
-              />
-              <Speaker
-                name="小早川真樹"
-                company="株式会社しまや出版"
-                position="代表取締役"
-                description="しまや出版創業者である義父の急逝により、2007年にしまや出版に入社。製本技能士1級取得。"
-                image="/static/speaker/gishohaku12_kohayakawa.png"
-              />
-            </div>
-          </div>
-        </TextBlock>
-      </section>
-
-      <section css={section}>
-        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
-        <TextBlock>
-          <div
-            css={css`
-              text-align: center;
-            `}>
-            <div
-              css={css`
-                font-size: 12px;
-                color: #888888;
-              `}>
-              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
-            </div>
-            <div
-              css={css`
-                text-align: center;
-                .awardlist {
-                  display: flex;
-                  flex-flow: row wrap;
-                  justify-content: center;
-                  align-content: flex-start;
-                  align-items: flex-start;
-                  margin: 12px 0;
-                }
-              `}>
-              <div className="awardlist">
-                <Award
-                  title="最優秀賞"
-                  book="お気に入りに出会うキーボード旅のしおり"
-                  circle="EverTail Lab"
-                  image="/static/awards/gishohaku12-award-best.png"
-                  bookref="/gishohaku12/books/kSFvdZpPbPYlyWZmHizS"
-                  circleref="/gishohaku12/circles/guO87mEMVeRfgdOMSUYS"
-                />
-                <Award
-                  title="優秀賞"
-                  book="今日はハッキング日和"
-                  circle="のみぞーん"
-                  image="/static/awards/gishohaku12-award-excellence.png"
-                  bookref="gishohaku12/books/i0qRUoifTD0cyMJk7D4z"
-                  circleref="/gishohaku12/circles/WZFsrlFA7vB2Txnva4cW"
-                />
-              </div>
-            </div>
-          </div>
-        </TextBlock>
-      </section>
-
-      <section css={section} id="circle">
-        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
-        <TextBlock>
-          <p>
-            サークル参加される方に向けたご案内資料です。
-          </p>
-          <LinkButton href="https://gishohaku.notion.site/">
-            技書博ポータル
-            <small>（サークル向けの手続き案内・諸情報）</small>
-          </LinkButton>
-        </TextBlock>
-      </section>
-
-      <section css={section} id="sponsor">
-        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
-        <TextBlock>
-          <div
-            css={css`
-              margin-top: 16px;
-              text-align: center;
-              .sponsorlist {
-                display: flex;
-                flex-flow: row wrap;
-                justify-content: center;
-                align-content: flex-start;
-                align-items: flex-start;
-                margin: 12px 0;
-                gap: 12px 0;
-              }
-              .sponsorlist .sponsor:hover {
-                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
-              }
-              .sponsorlist.extra {
-                gap: 16px 0;
-              }
-              .sponsorlist.extra .sponsor {
-                width: 375px;
-              }
-              .sponsorlist.extra .sponsor .sponsor-image {
-                width: 340px;
-                height: 340px;
-              }
-              .sponsorlist.extra .sponsor-image img {
-                max-width: 300px;
-                max-height: 290px;
-              }
-              .sponsorlist.small .sponsor {
-                width: 175px;
-              }
-              .sponsorlist.small .sponsor .sponsor-image {
-                width: 160px;
-                height: 160px;
-              }
-              .sponsorlist.small .sponsor-image img {
-                max-width: 120px;
-                max-height: 110px;
-              }
-            `}>
-            <div className="sponsorlist extra">
-              <Sponsor
-                name="株式会社システムアイ"
-                role="サポーター・アワードサポーター・エコバッグサポーター"
-                image="/static/sponsors/systemi.png"
-                href="https://systemi.co.jp/"
-              />
-            </div>
-            <div className="sponsorlist">
-              <Sponsor
-                name="さくらインターネット株式会社"
-                role="サポーター"
-                image="/static/sponsors/sakura.png"
-                href="https://www.sakura.ad.jp/"
-              />
-              <Sponsor
-                name="株式会社ゆめみ"
-                role="サポーター"
-                image="/static/sponsors/yumemi.png"
-                href="https://www.yumemi.co.jp/"
-              />
-              <Sponsor
-                name="虎の穴ラボ株式会社"
-                role="サポーター"
-                image="/static/sponsors/toralab.png"
-                href="https://toranoana-lab.co.jp/"
-              />
-            </div>
-            <div className="sponsorlist">
-              <Sponsor
-                name="株式会社しまや出版"
-                role="プリンティングサポーター"
-                image="/static/sponsors/shimaya.png"
-                href="https://www.shimaya.net/"
-              />
-            </div>
-            <div className="sponsorlist small">
-              <Sponsor
-                name="esa"
-                role="ツールサポーター"
-                image="/static/sponsors/esa.png"
-                href="https://esa.io"
-              />
-            </div>
-          </div>
-        </TextBlock>
-      </section>
-
-      <section css={section} id="printing">
-        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
-        <TextBlock>
-          <div
-            css={css`
-              display: flex;
-              flex-flow: row wrap;
-              justify-content: center;
-              align-content: flex-start;
-              align-items: flex-start;
-            `}>
-            <Printing
-              name="しまや出版"
-              imageUrl="/static/printings/shimaya.png"
-              linkUrl="https://www.shimaya.net/"
-            />
-            <Printing
-              name="K-9"
-              imageUrl="/static/printings/k9.gif"
-              linkUrl="https://www.k-k9.jp/"
-            />
-            <Printing
-              name="日光企画"
-              imageUrl="/static/printings/nikko.png"
-              linkUrl="https://www.nikko-pc.com/"
-            />
-            <Printing
-              name="栄光"
-              imageUrl="/static/printings/eikou.gif"
-              linkUrl="http://www.eikou.com/"
-            />
-            <Printing
-              name="ポプルス"
-              imageUrl="/static/printings/popls.jpg"
-              linkUrl="https://www.popls.co.jp/"
-            />
-            <Printing
-              name="PICO"
-              imageUrl="/static/printings/pico.gif"
-              linkUrl="http://www.pico-net.com/doujinshi/"
-            />
-            <Printing
-              name="ねこのしっぽ"
-              imageUrl="/static/printings/neko.gif"
-              linkUrl="https://www.shippo.co.jp/neko/"
-            />
-          </div>
-        </TextBlock>
       </section>
 
       <section css={section} id="banner">

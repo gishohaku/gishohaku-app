@@ -164,16 +164,77 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://gishohaku.connpass.com/event/352601/">
-          技書博12にサークル参加する
-        </LinkButton>
-        <LinkButton href="https://gishohaku.connpass.com/event/352601/">
           技書博12に一般参加する（無料）
+        </LinkButton>
+        <LinkButton href="https://gishohaku.connpass.com/event/371840/">
+          懇親会に参加する
         </LinkButton>
       </div>
     </div>
   </div>
   </div>
 )
+
+const Speaker: React.SFC<{
+  name: string
+  company: string
+  position: string
+  image: string
+  description: string
+}> = ({ name, company, position, image, description }) => {
+  return (
+    <div
+      css={css`
+        display: flex-item;
+        width: 250px;
+        text-align: center;
+        margin: 8px;
+      `}>
+      <div
+        css={css`
+          width: 300px;
+          margin: 0 auto;
+          display: -webkit-flex;
+          display: flex;
+          text-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+        `}>
+        <img
+          css={css`
+            max-width: 200px;
+            max-height: 240px;
+            margin: 0 auto;
+          `}
+          src={image}
+        />
+      </div>
+      <div
+        css={css`
+          font-size: 12px;
+          margin-top: 8px;
+          margin-bottom: 4px !important;
+          line-height: 1.4;
+          opacity: 0.8;
+        `}>{company} {position}</div>
+      <div
+        css={css`
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>{name}</div>
+      <div
+        css={css`
+          font-size: 12px;
+          line-height: 1.5;
+          margin-bottom: 4px;
+        `}>{description}</div>
+    </div>
+  )
+}
 
 const Award: React.SFC<{
   title: string
@@ -493,8 +554,104 @@ export default () => {
         </FluidBlock>
       </section>
 
+      <section css={section} id="session">
+        <SectionHeader en="SESSION">スペシャルトークセッション</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博12ではイベントが開始される10:30よりスペシャルトークセッションを開催します。
+            東京都内に拠点を構える同人印刷3社をお招きし、同人印刷や業界の話などざっくばらんにお話いただきます。
+            この機会をぜひお見逃しなく！
+          </p>
+          <div
+            css={css`
+              text-align: center;
+              .speakers {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+              }
+            `}>
+            <div className="speakers">
+              <Speaker
+                name="神保"
+                company="株式会社緑陽社"
+                position="執行役員 営業部部長"
+                description="2003年緑陽社に入社。以来様々な装丁の相談を承る。現在、ティアズマガジンで装丁に関するコラムを連載中。"
+                image="/static/speaker/gishohaku12_jinbo.jpg"
+              />
+              <Speaker
+                name="ねこ社長"
+                company="有限会社ねこのしっぽ"
+                position="代表取締役"
+                description="1997年に有限会社ねこのしっぽを立ち上げる。即売会主催、ライブ主催、各種セミナー、大学講師などを経て2025年よりネコモッチという2人ユニットでライブ活動中。"
+                image="/static/speaker/gishohaku12_neko.jpg"
+              />
+              <Speaker
+                name="小早川真樹"
+                company="株式会社しまや出版"
+                position="代表取締役"
+                description="しまや出版創業者である義父の急逝により、2007年にしまや出版に入社。製本技能士1級取得。"
+                image="/static/speaker/gishohaku12_kohayakawa.png"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section}>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+                <Award
+                  title="最優秀賞"
+                  book="お気に入りに出会うキーボード旅のしおり"
+                  circle="EverTail Lab"
+                  image="/static/awards/gishohaku12-award-best.png"
+                  bookref="/gishohaku12/books/kSFvdZpPbPYlyWZmHizS"
+                  circleref="/gishohaku12/circles/guO87mEMVeRfgdOMSUYS"
+                />
+                <Award
+                  title="優秀賞"
+                  book="今日はハッキング日和"
+                  circle="のみぞーん"
+                  image="/static/awards/gishohaku12-award-excellence.png"
+                  bookref="gishohaku12/books/i0qRUoifTD0cyMJk7D4z"
+                  circleref="/gishohaku12/circles/WZFsrlFA7vB2Txnva4cW"
+                />
+              </div>
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
       <section css={section} id="circle">
-      <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
         <TextBlock>
           <p>
             サークル参加される方に向けたご案内資料です。
@@ -506,17 +663,44 @@ export default () => {
         </TextBlock>
       </section>
 
+      <section css={section}>
+        <SectionHeader en="RADIO">技書博ラジオ 直前スペシャル</SectionHeader>
+        <TextBlock>
+          <p>
+            技書博開催の直前に配信された、全サークルを紹介するラジオ番組です。
+            <br />
+          </p>
+          <p
+            css={css`
+              margin-top: 32px;
+              text-align: center;
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 56.25%;
+              overflow: hidden;
+              margin-bottom: 50px;
+            `}>
+            <iframe
+              css={css`
+                border: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+              `}
+              src="https://www.youtube.com/embed/D_rdS0IAsvE?controls=0"
+              title="技書博ラジオ 技書博12直前スペシャル"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen></iframe>
+          </p>
+        </TextBlock>
+      </section>
+
       <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
-          <p>
-            技書博は協賛企業さまのご支援によって運営を継続させて頂いております。<br />
-            スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。<br />
-          </p>
-          <LinkButton href="https://docs.google.com/presentation/d/1S0qzmFl3pV6w3IC4S1dFS4wdy17L7q35YrbE30hz4iE/edit?usp=sharing">
-            スポンサーメニューを確認する
-          </LinkButton>
-
           <div
             css={css`
               margin-top: 16px;
@@ -559,6 +743,14 @@ export default () => {
                 max-height: 110px;
               }
             `}>
+            <div className="sponsorlist extra">
+              <Sponsor
+                name="株式会社システムアイ"
+                role="サポーター・アワードサポーター・エコバッグサポーター"
+                image="/static/sponsors/systemi.png"
+                href="https://systemi.co.jp/"
+              />
+            </div>
             <div className="sponsorlist">
               <Sponsor
                 name="さくらインターネット株式会社"
@@ -572,6 +764,14 @@ export default () => {
                 image="/static/sponsors/yumemi.png"
                 href="https://www.yumemi.co.jp/"
               />
+              <Sponsor
+                name="虎の穴ラボ株式会社"
+                role="サポーター"
+                image="/static/sponsors/toralab.png"
+                href="https://toranoana-lab.co.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
               <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
