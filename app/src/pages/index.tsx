@@ -601,6 +601,55 @@ export default () => {
         </TextBlock>
       </section>
 
+      <section css={section}>
+        <SectionHeader en="AWARD">技書博アワード</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              text-align: center;
+            `}>
+            <div
+              css={css`
+                font-size: 12px;
+                color: #888888;
+              `}>
+              Presented by <a href="https://systemi.co.jp/" target="_blank">株式会社システムアイ</a>
+            </div>
+            <div
+              css={css`
+                text-align: center;
+                .awardlist {
+                  display: flex;
+                  flex-flow: row wrap;
+                  justify-content: center;
+                  align-content: flex-start;
+                  align-items: flex-start;
+                  margin: 12px 0;
+                }
+              `}>
+              <div className="awardlist">
+                <Award
+                  title="最優秀賞"
+                  book="お気に入りに出会うキーボード旅のしおり"
+                  circle="EverTail Lab"
+                  image="/static/awards/gishohaku12-award-best.png"
+                  bookref="/gishohaku12/books/kSFvdZpPbPYlyWZmHizS"
+                  circleref="/gishohaku12/circles/guO87mEMVeRfgdOMSUYS"
+                />
+                <Award
+                  title="優秀賞"
+                  book="今日はハッキング日和"
+                  circle="のみぞーん"
+                  image="/static/awards/gishohaku12-award-excellence.png"
+                  bookref="gishohaku12/books/i0qRUoifTD0cyMJk7D4z"
+                  circleref="/gishohaku12/circles/WZFsrlFA7vB2Txnva4cW"
+                />
+              </div>
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
       <section css={section} id="circle">
         <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
         <TextBlock>
