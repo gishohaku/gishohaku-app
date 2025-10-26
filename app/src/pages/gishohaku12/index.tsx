@@ -650,19 +650,6 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section} id="circle">
-        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
-        <TextBlock>
-          <p>
-            サークル参加される方に向けたご案内資料です。
-          </p>
-          <LinkButton href="https://gishohaku.notion.site/">
-            技書博ポータル
-            <small>（サークル向けの手続き案内・諸情報）</small>
-          </LinkButton>
-        </TextBlock>
-      </section>
-
       <section css={section}>
         <SectionHeader en="RADIO">技書博ラジオ 直前スペシャル</SectionHeader>
         <TextBlock>
@@ -695,6 +682,19 @@ export default () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen></iframe>
           </p>
+        </TextBlock>
+      </section>
+
+      <section css={section} id="circle">
+        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <TextBlock>
+          <p>
+            サークル参加される方に向けたご案内資料です。
+          </p>
+          <LinkButton href="https://gishohaku.notion.site/">
+            技書博ポータル
+            <small>（サークル向けの手続き案内・諸情報）</small>
+          </LinkButton>
         </TextBlock>
       </section>
 

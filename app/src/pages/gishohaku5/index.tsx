@@ -590,61 +590,6 @@ const Page = () => {
       </section>
 
       <section css={section}>
-        <SectionHeader en="RADIO">技書博ラジオ</SectionHeader>
-        <TextBlock>
-          <p
-            css={css`
-              margin-top: 32px;
-              text-align: center;
-              position: relative;
-              width: 100%;
-              height: 0;
-              padding-bottom: 56.25%;
-              overflow: hidden;
-              margin-bottom: 50px;
-            `}>
-            <iframe
-              css={css`
-                border: 0;
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-              `}
-              src="https://www.youtube.com/embed/MukacNr759M?controls=0"
-              title="技書博ラジオ"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
-          </p>
-          <p
-            css={css`
-              margin-top: 32px;
-              text-align: center;
-              position: relative;
-              width: 100%;
-              height: 0;
-              padding-bottom: 56.25%;
-              overflow: hidden;
-              margin-bottom: 50px;
-            `}>
-            <iframe
-              css={css`
-                border: 0;
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-              `}
-              src="https://www.youtube.com/embed/76WPGlK_8l4?controls=0"
-              title="技書博ラジオ 前夜祭"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen></iframe>
-          </p>
-        </TextBlock>
-      </section>
-      <section css={section}>
         <SectionHeader en="ACCESS">アクセス</SectionHeader>
         <TextBlock>
           <p
