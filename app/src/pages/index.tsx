@@ -452,14 +452,10 @@ export default () => {
           <p>
           技書博におけるあれこれを紹介するPodcastをはじめました！
           </p>
-        </TextBlock>
-        <div css={css`
-          text-align: center;
-        `}>
           <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
             技書博Podcastを聴く
           </LinkButton>
-        </div>
+        </TextBlock>
       </section>
 
       <section css={section} id="access">
