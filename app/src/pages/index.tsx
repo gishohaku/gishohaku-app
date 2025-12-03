@@ -446,7 +446,7 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section}  id="about">
+      <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
         <TextBlock>
           <p>
