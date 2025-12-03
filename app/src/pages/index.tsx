@@ -164,7 +164,7 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://gishohaku.connpass.com/event/372013/">
-          技書博13にサークル参加する
+          技書博13に参加する（サークル＆一般参加）
         </LinkButton>
       </div>
     </div>
@@ -444,6 +444,18 @@ export default () => {
           （<a target="_blank" href="https://blog.gishohaku.dev/entry/about">もっとくわしい説明はこちら</a>）
           </p>
         </TextBlock>
+      </section>
+
+      <section css={section}  id="about">
+        <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
+        <TextBlock>
+          <p>
+          技書博におけるあれこれを紹介するPodcastをはじめました！
+          </p>
+        </TextBlock>
+        <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
+          技書博Podcastを聴く
+        </LinkButton>
       </section>
 
       <section css={section} id="access">
