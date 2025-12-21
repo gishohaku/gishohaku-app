@@ -448,14 +448,52 @@ export default () => {
 
       <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
-        <TextBlock>
-          <p>
-          技書博におけるあれこれを紹介するPodcastをはじめました！
-          </p>
-          <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
-            技書博Podcastを聴く
-          </LinkButton>
-        </TextBlock>
+        <div
+          css={css`
+            background-color: #f2f7f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            color: #364493;
+            /* background-image: url('/static/bg.png'); */
+            @media ${media.large} {
+              flex-direction: column;
+              padding: ${66}px 16px 16px;
+              align-items: start;
+            }
+          `}>
+          <img
+            css={css`
+              width: 200px;
+              position: relative;
+              left: -20px;
+              height: 185px;
+              border: 1px solid #d5d7d0;
+              @media ${media.large} {
+                width: 280px;
+                margin: 0 auto 20px;
+                left: 0;
+                height: auto;
+              }
+            `}
+            src="/static/gishohaku-radio.png"
+            width={280}
+            height={280}
+          />
+          <div>
+            <p>
+            技書博におけるあれこれを紹介するPodcastをはじめました！
+            </p>
+            <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
+              YouTubeで聴く
+            </LinkButton>
+            <LinkButton href="https://open.spotify.com/show/0yIsnO6w69uYbSoJGZjC1u">
+              Spotifyで聴く
+            </LinkButton>
+          </div>
+        </div>
       </section>
 
       <section css={section} id="access">
