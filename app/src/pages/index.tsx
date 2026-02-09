@@ -450,46 +450,15 @@ export default () => {
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
           <p>技書博13にご支援いただけるスポンサー様を募集中です。<br />スポンサーメニューは以下ボタンよりご覧ください。</p>
-        </TextBlock>
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            margin-top: 16px;
-            margin-bottom: 16px;
-            a {
-              border: 2px solid #364493;
-              color: #364493;
-              &:hover {
-                background-color: #364493;
-                color: white;
-              }
-            }
-          `}>
           <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/405/daac30f1d6ab4955f72f.html">
             技書博13 スポンサー募集要項
           </LinkButton>
-        </div>
+        </TextBlock>
       </section>
 
       <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
-        <div
-          css={css`
-            background-color: #f2f7f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            color: white;
-            color: #364493;
-            /* background-image: url('/static/bg.png'); */
-            @media ${media.large} {
-              flex-direction: column;
-              padding: ${66}px 16px 16px;
-              align-items: start;
-            }
-          `}>
+        <TextBlock>
           <img
             css={css`
               width: 200px;
@@ -508,16 +477,18 @@ export default () => {
             width={280}
             height={280}
           />
-          <p>
-          技書博におけるあれこれを紹介するPodcastをはじめました！
-          </p>
-          <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
-            YouTubeで聴く
-          </LinkButton>
-          <LinkButton href="https://open.spotify.com/show/0yIsnO6w69uYbSoJGZjC1u">
-            Spotifyで聴く
-          </LinkButton>
-        </div>
+          <div>
+            <p>
+            技書博におけるあれこれを紹介するPodcastをはじめました！
+            </p>
+            <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
+              YouTubeで聴く
+            </LinkButton>
+            <LinkButton href="https://open.spotify.com/show/0yIsnO6w69uYbSoJGZjC1u">
+              Spotifyで聴く
+            </LinkButton>
+          </div>
+        </TextBlock>
       </section>
 
       <section css={section} id="access">
