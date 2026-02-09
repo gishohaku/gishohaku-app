@@ -453,6 +453,8 @@ export default () => {
         </TextBlock>
         <div
           css={css`
+            display: flex;
+            justify-content: center;
             margin-top: 16px;
             margin-bottom: 16px;
             a {
