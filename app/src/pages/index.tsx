@@ -446,6 +446,30 @@ export default () => {
         </TextBlock>
       </section>
 
+      <section css={section}>
+        <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
+        <TextBlock>
+          <p>技書博13にご支援いただけるスポンサー様を募集中です。<br />スポンサーメニューは以下ボタンよりご覧ください。</p>
+        </TextBlock>
+        <div
+          css={css`
+            margin-top: 16px;
+            margin-bottom: 16px;
+            a {
+              border: 2px solid #364493;
+              color: #364493;
+              &:hover {
+                background-color: #364493;
+                color: white;
+              }
+            }
+          `}>
+          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/405/daac30f1d6ab4955f72f.html">
+            技書博13 スポンサー募集要項
+          </LinkButton>
+        </div>
+      </section>
+
       <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
         <div
