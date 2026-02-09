@@ -462,6 +462,8 @@ export default () => {
           <p
             css={css`
               text-align: center;
+              display: flex;
+              justify-content: center;
             `}>
             <img
               css={css`
