@@ -459,28 +459,33 @@ export default () => {
       <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
         <TextBlock>
-          <img
+          <p
             css={css`
-              width: 200px;
-              position: relative;
-              left: -20px;
-              height: 185px;
-              border: 1px solid #d5d7d0;
-              @media ${media.large} {
-                width: 280px;
-                margin: 0 auto 20px;
-                left: 0;
-                height: auto;
-              }
-            `}
-            src="/static/gishohaku-radio.png"
-            width={280}
-            height={280}
-          />
+              text-align: center;
+            `}>
+            <img
+              css={css`
+                width: 200px;
+                position: relative;
+                left: -20px;
+                height: 185px;
+                border: 1px solid #d5d7d0;
+                @media ${media.large} {
+                  width: 280px;
+                  margin: 0 auto 20px;
+                  left: 0;
+                  height: auto;
+                }
+              `}
+              src="/static/gishohaku-radio.png"
+              width={280}
+              height={280}
+            />
+          </p>
+          <p>
+          技書博におけるあれこれを紹介するPodcastをはじめました！
+          </p>
           <div>
-            <p>
-            技書博におけるあれこれを紹介するPodcastをはじめました！
-            </p>
             <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
               YouTubeで聴く
             </LinkButton>
