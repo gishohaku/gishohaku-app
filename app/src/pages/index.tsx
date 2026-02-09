@@ -508,17 +508,15 @@ export default () => {
             width={280}
             height={280}
           />
-          <div>
-            <p>
-            技書博におけるあれこれを紹介するPodcastをはじめました！
-            </p>
-            <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
-              YouTubeで聴く
-            </LinkButton>
-            <LinkButton href="https://open.spotify.com/show/0yIsnO6w69uYbSoJGZjC1u">
-              Spotifyで聴く
-            </LinkButton>
-          </div>
+          <p>
+          技書博におけるあれこれを紹介するPodcastをはじめました！
+          </p>
+          <LinkButton href="https://www.youtube.com/@gishohaku/podcasts">
+            YouTubeで聴く
+          </LinkButton>
+          <LinkButton href="https://open.spotify.com/show/0yIsnO6w69uYbSoJGZjC1u">
+            Spotifyで聴く
+          </LinkButton>
         </div>
       </section>
 
