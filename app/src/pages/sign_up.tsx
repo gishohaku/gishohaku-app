@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useState } from 'react'
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/react'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from '../components/common/Container'
@@ -103,9 +103,7 @@ const SignUp: NextPage = () => {
                     line-height: 1.5;
                   `}>
                   登録することで、
-                  <Link href="/gishohaku1/privacy" passHref>
-                    <a>利用規約/プライバシーポリシー</a>
-                  </Link>
+                  <Link href="/gishohaku1/privacy">利用規約/プライバシーポリシー</Link>
                   に同意するものとします
                 </p>
                 <Button
@@ -161,12 +159,10 @@ const SignUp: NextPage = () => {
             line-height: 1.5;
           `}>
           登録することで、
-          <Link href="/gishohaku1/privacy" passHref>
-            <a>利用規約/プライバシーポリシー</a>
-          </Link>
+          <Link href="/gishohaku1/privacy">利用規約/プライバシーポリシー</Link>
           に同意するものとします
         </p>
-        <Link href="/sign_in">
+        <Link href="/sign_in" legacyBehavior>
           <Button component="a" block variant="outline">
             すでに会員の方はこちら
           </Button>

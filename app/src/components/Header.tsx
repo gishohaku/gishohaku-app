@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import logo from '../images/shortLogo.svg'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import {
   IconMenu,
   Sheet,
@@ -89,8 +89,11 @@ const Header: React.FC<any> = () => {
   const { eventId } = useContext(EventContext)
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { isHeaderVisible } = useShyHeader()
   const router = useRouter()
+
+  useEffect(() => { setMounted(true) }, [])
 
   const isTransparent = router.asPath === '/gishohaku2' // TODO
 
@@ -128,81 +131,65 @@ const Header: React.FC<any> = () => {
             ? eventId
             : ''
         }`}
-        passHref>
-        <a
-          css={css`
-            padding: 13px;
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.08);
-            }
+        css={css`
+          padding: 13px;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.08);
+          }
 
-            &:active {
-              background-color: rgba(0, 0, 0, 0.12);
-            }
-          `}>
-          <img
-            src={logo}
-            width={80}
-            css={css`
-              display: block;
-              pointer-events: none;
-            `}
-            alt="技術書同人誌博覧会"
-          />
-        </a>
+          &:active {
+            background-color: rgba(0, 0, 0, 0.12);
+          }
+        `}>
+        <img
+          src={logo}
+          width={80}
+          css={css`
+            display: block;
+            pointer-events: none;
+          `}
+          alt="技術書同人誌博覧会"
+        />
       </Link>
       <div className="ml-auto" css={hamburgerButton}>
         {user && (
-          <Link href={`/${eventId}/mypage/circle_stars`} passHref>
-            <a className='block h-full'>
-              <IconHeart />
-            </a>
+          <Link href={`/${eventId}/mypage/circle_stars`} className='block h-full'>
+            <IconHeart />
           </Link>
         )}
       </div>
-      <Sheet
+      {mounted && <Sheet
         position="left"
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link href="/" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十三回 技術書同人誌博覧会"
-                secondary="2026年05月10日 開催予定"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/" css={noDecoration} onClick={() => setOpen(false)}>
+            <ListItem
+              primary="第十三回 技術書同人誌博覧会"
+              secondary="2026年05月10日 開催予定"
+              contentAfter={<IconChevronRight />}
+            />
           </Link>
-          <Link href="/gishohaku12" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十二回 技術書同人誌博覧会"
-                secondary="2025年10月26日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/gishohaku12" css={noDecoration} onClick={() => setOpen(false)}>
+            <ListItem
+              primary="第十二回 技術書同人誌博覧会"
+              secondary="2025年10月26日 開催"
+              contentAfter={<IconChevronRight />}
+            />
           </Link>
-          <Link href="/gishohaku11" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十一回 技術書同人誌博覧会"
-                secondary="2025年1月25日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/gishohaku11" css={noDecoration} onClick={() => setOpen(false)}>
+            <ListItem
+              primary="第十一回 技術書同人誌博覧会"
+              secondary="2025年1月25日 開催"
+              contentAfter={<IconChevronRight />}
+            />
           </Link>
           <div css={divider} />
-          <Link href="/archive" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="過去の開催回一覧"
-                contentAfter={<IconChevronRight />}
-              />
-            </a>
+          <Link href="/archive" css={noDecoration}>
+            <ListItem
+              primary="過去の開催回一覧"
+              contentAfter={<IconChevronRight />}
+            />
           </Link>
           <div css={divider} />
           <a
@@ -281,7 +268,7 @@ const Header: React.FC<any> = () => {
           `}>
           © 技術書同人誌博覧会 運営事務局
         </div>
-      </Sheet>
+      </Sheet>}
     </header>
   )
 }

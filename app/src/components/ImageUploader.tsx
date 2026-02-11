@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { useDropzone } from 'react-dropzone'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useState } from 'react'
 import { IconUpload } from 'sancho'
 import { firebase } from '../utils/firebase'

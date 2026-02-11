@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import check from '../images/check.svg'
 
 interface Props {
   count: number
 }
 
-const CheckCount: React.SFC<Props> = ({ count }) => {
+const CheckCount: React.FC<Props> = ({ count }) => {
   // FIXME(mottox2): 状態管理ライブラリを入れるべき。やっぱりpropsリレーしんどい
   return (
     <div

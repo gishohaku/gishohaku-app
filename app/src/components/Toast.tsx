@@ -13,7 +13,7 @@ type ToastProps = {
 
 const ToastContext = createContext({} as (props: ToastProps) => void)
 
-export const ToastProvider: FC = ({ children }) => {
+export const ToastProvider: FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [current, setCurrent] = useState<ToastProps | null>(null)
   const show = useCallback((toast: ToastProps) => {
     setCurrent(toast)

@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom'
 
 let container: Element | null = null
 
-export const Portal: React.FC = ({ children }) => {
-  const [target] = useState<HTMLDivElement | null>(() => {
-    if (typeof document === 'undefined') {
-      return null
-    }
+export const Portal: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  const [target, setTarget] = useState<HTMLDivElement | null>(null)
 
+  useEffect(() => {
     if (!container) {
       container = document.createElement('div')
       document.body.appendChild(container)
@@ -16,17 +14,12 @@ export const Portal: React.FC = ({ children }) => {
 
     const div = document.createElement('div')
     container.appendChild(div)
+    setTarget(div)
 
-    return div
-  })
-
-  useEffect(() => {
     return () => {
-      if (target) {
-        container!.removeChild(target)
-      }
+      container!.removeChild(div)
     }
-  }, [target])
+  }, [])
 
   return target ? ReactDOM.createPortal(children, target) : null
 }
