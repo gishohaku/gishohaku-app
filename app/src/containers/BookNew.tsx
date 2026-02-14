@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'

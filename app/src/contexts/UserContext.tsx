@@ -23,32 +23,42 @@ export const UserProvider = (props: any) => {
   const [isOpenModal, setModal] = useState<boolean>(false)
 
   useEffect(() => {
-    const auth: firebase.auth.Auth = firebase.auth()
-    auth.onAuthStateChanged(async (user) => {
-      setIsLoading(true)
-      setCurrentUser(user)
-      if (user) {
-        console.log(user.uid)
-        const userSnapshot = await db.collection('users').doc(user.uid).get()
-        if (userSnapshot.exists) {
-          setUserData({
-            ...(userSnapshot.data() as User),
-            uid: user.uid,
-          })
-        } else {
-          const userDoc = {
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    try {
+      const auth: firebase.auth.Auth = firebase.auth()
+      auth.onAuthStateChanged(async (user) => {
+        try {
+          setIsLoading(true)
+          setCurrentUser(user)
+          if (user) {
+            console.log(user.uid)
+            const userSnapshot = await db.collection('users').doc(user.uid).get()
+            if (userSnapshot.exists) {
+              setUserData({
+                ...(userSnapshot.data() as User),
+                uid: user.uid,
+              })
+            } else {
+              const userDoc = {
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              }
+              await db.collection('users').doc(user.uid).set(userDoc)
+              console.log('Create user document')
+              setUserData(userDoc as User)
+            }
           }
-          await db.collection('users').doc(user.uid).set(userDoc)
-          console.log('Create user document')
-          setUserData(userDoc as User)
+        } catch (error) {
+          console.error('Auth state change error:', error)
+        } finally {
+          setIsLoading(false)
         }
-      }
+      })
+    } catch (error) {
+      console.error('Firebase auth initialization error:', error)
       setIsLoading(false)
-    })
+    }
   }, [])
 
   const reloadUser = useCallback(async () => {

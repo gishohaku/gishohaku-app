@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import Link from 'next/link'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import circleTumbnail from '../images/circle.png'

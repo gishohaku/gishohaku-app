@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { NextPage } from 'next'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import firebase from 'firebase/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from '../components/common/Container'

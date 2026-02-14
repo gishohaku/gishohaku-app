@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { colors } from '../utils/style'
 import Link from 'next/link'

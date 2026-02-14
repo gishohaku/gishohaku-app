@@ -5,7 +5,7 @@ import { useRouter, NextRouter } from 'next/router'
 export const getEventId = (router: NextRouter): EventId => {
   const { query } = router
   if (query.eventId) return query.eventId as EventId
-  const pathname = process.browser ? location.pathname : router.asPath
+  const pathname = router.asPath
   const [_, eventId] = pathname.split('/')
   if (eventId) return eventId as EventId
   return 'gishohaku12'
@@ -13,6 +13,7 @@ export const getEventId = (router: NextRouter): EventId => {
 
 export const EventProvider: React.FC<{
   initialId: EventId
+  children?: React.ReactNode
 }> = ({ initialId, children }) => {
   const [eventId, setEventId] = useState<EventId>(initialId)
   const router = useRouter()

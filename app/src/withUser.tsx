@@ -5,7 +5,7 @@ import Loader from './components/Loader'
 import MessageBox from './components/MessageBox'
 import Link from 'next/link'
 import { Button } from 'sancho'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useRouter } from 'next/router'
 
 export const REDIRECT_TO_AFTER_LOGIN = 'REDIRECT_TO_AFTER_LOGIN'

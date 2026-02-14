@@ -46,15 +46,11 @@ class MyApp extends App {
     })
   }
 
-  // componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-  //   Sentry.withScope((scope: any) => {
-  //     Object.keys(errorInfo).forEach(key => {
-  //       scope.setExtra(key, errorInfo[key])
-  //     })
-  //     Sentry.captureException(error)
-  //   })
-  //   super.componentDidCatch(error, errorInfo)
-  // }
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error('APP ERROR:', error.message)
+    console.error('APP ERROR STACK:', error.stack)
+    console.error('APP ERROR INFO:', errorInfo?.componentStack)
+  }
 
   public render() {
     const { Component, pageProps, router, eventId } = this.props as any

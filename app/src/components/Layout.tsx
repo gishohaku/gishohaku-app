@@ -2,33 +2,18 @@
 import { colors, media } from '../utils/style'
 
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/react'
 import BottomBar from './BottomBar'
 import Header, { headerHeight } from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
-import Head from 'next/head'
 
 const Layout: React.FC<any> = (props) => {
   const { eventId } = useContext(EventContext)
   return (
     <>
       <SEO />
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-      </Head>
       <Global
         styles={css`
           html {
@@ -96,28 +81,26 @@ const Layout: React.FC<any> = (props) => {
 const MypageButton = () => {
   const { eventId } = useContext(EventContext)
   return (
-    <Link href={`/${eventId}/mypage/circle`}>
-      <a
-        css={css`
-          position: fixed;
-          bottom: 16px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 10;
-          background-color: #ecb40d;
-          color: white;
-          padding: 16px 32px;
-          border-radius: 30px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-          cursor: pointer;
-          font-weight: 600;
-          white-space: nowrap;
-          &:hover {
-            background-color: #dbae29;
-          }
-        `}>
-        サークルマイページ
-      </a>
+    <Link href={`/${eventId}/mypage/circle`}
+      css={css`
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        background-color: #ecb40d;
+        color: white;
+        padding: 16px 32px;
+        border-radius: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-weight: 600;
+        white-space: nowrap;
+        &:hover {
+          background-color: #dbae29;
+        }
+      `}>
+      サークルマイページ
     </Link>
   )
 }

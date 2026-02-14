@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import Link from 'next/link'
 import book from '../images/icons/book.svg'
 import groupWork from '../images/icons/groupWork.svg'
@@ -73,29 +73,21 @@ const BottomBar = () => {
           transition: padding-bottom 0.15s ease-out;
         `}>
         <span css={spacer} />
-        <Link href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} passHref>
-          <a css={item}>
-            <img src={home} width={28} css={icon} />
-            <div css={label}>ホーム</div>
-          </a>
+        <Link href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} css={item}>
+          <img src={home} width={28} css={icon} />
+          <div css={label}>ホーム</div>
         </Link>
-        <Link href={`/${eventId}/circles`} passHref>
-          <a css={item}>
-            <img src={groupWork} width={28} css={icon} />
-            <div css={label}>サークル</div>
-          </a>
+        <Link href={`/${eventId}/circles`} css={item}>
+          <img src={groupWork} width={28} css={icon} />
+          <div css={label}>サークル</div>
         </Link>
-        <Link href={`/${eventId}/books`} passHref>
-          <a css={item}>
-            <img src={book} width={28} css={icon} />
-            <div css={label}>頒布物</div>
-          </a>
+        <Link href={`/${eventId}/books`} css={item}>
+          <img src={book} width={28} css={icon} />
+          <div css={label}>頒布物</div>
         </Link>
-        <Link href={`/${eventId}/mypage`} passHref>
-          <a css={item}>
-            <img src={person} width={28} css={icon} />
-            <div css={label}>マイページ</div>
-          </a>
+        <Link href={`/${eventId}/mypage`} css={item}>
+          <img src={person} width={28} css={icon} />
+          <div css={label}>マイページ</div>
         </Link>
         <span css={spacer} />
       </div>
