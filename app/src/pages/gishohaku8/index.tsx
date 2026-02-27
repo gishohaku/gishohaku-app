@@ -238,7 +238,7 @@ const Sponsor: React.FC<{
   return (
     <div
       css={css`
-        display: flex-item;
+        display: block;
         width: 240px;
         text-align: center;
         margin: 8px;
@@ -317,7 +317,7 @@ const Staff: React.FC<{
   return (
     <div
       css={css`
-        display: flex-item;
+        display: block;
         width: 96px;
         text-align: center;
         margin: 12px;
@@ -359,7 +359,7 @@ const Printing: React.FC<{
   return (
     <div
       css={css`
-        display: flex-item;
+        display: block;
         width: 200px;
         text-align: center;
         margin: 16px;
@@ -566,18 +566,19 @@ export default () => {
             `}>
             当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
           </p>
-          <p
+          <div
             css={css`
               text-align: center;
               .banner {
                 display: block;
-                width: 200px;
+                max-width: 100%;
                 border: 1px solid #ddd;
+                margin: 0 auto;
               }
               .banner-outer {
                 text-align: center;
-                display: inline-block;
-                margin: 0px 8px;
+                display: block;
+                margin: 8px 0;
               }
               .banner-caption {
                 font-size: 12px;
@@ -596,7 +597,7 @@ export default () => {
                 （小サイズ：200×40ピクセル）
               </span>
             </div>
-          </p>
+          </div>
         </TextBlock>
       </section>
     </>

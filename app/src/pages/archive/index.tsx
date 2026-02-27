@@ -12,6 +12,8 @@ import {
 
 const noDecoration = css`
   text-decoration: none;
+  display: block;
+  color: inherit;
 `
 const section = css`
   padding: 48px 0;
