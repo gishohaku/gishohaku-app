@@ -6,9 +6,16 @@
   "dependencies": {
     "csv-parser": "^3.0.0",
     "firebase-admin": "^11.2.0",
-    "firebase-functions": "^4.0.2"
+    "firebase-functions": "^4.0.2",
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.16"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/nodemailer": "^6.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
