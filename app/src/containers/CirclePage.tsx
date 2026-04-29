@@ -48,6 +48,7 @@ CirclePage.getInitialProps = async ({ query, res }) => {
         Location: `/${circle.eventId}/circles/${id}`,
       })
       res.end()
+      return { circle, books: [] }
     }
   }
 
