@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 
 const Loader: React.FC = (props: any) => {
   return (

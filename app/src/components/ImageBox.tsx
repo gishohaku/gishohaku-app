@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import LazyLoad from 'react-lazyload'
 
 interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../../components/SectionHeder'
 
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import {
   List,
   ListItem,
@@ -32,58 +32,72 @@ export default () => {
       <section css={section}>
         <SectionHeader en="ARCHIVE">過去の開催回一覧</SectionHeader>
         <List>
-          <Link href="/gishohaku12" css={noDecoration}>
-            <ListItem
-              primary="第十二回 技術書同人誌博覧会"
-              secondary="2025年10月26日 開催予定"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku12" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十二回 技術書同人誌博覧会"
+                secondary="2025年10月26日 開催予定"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku11" css={noDecoration}>
-            <ListItem
-              primary="第十一回 技術書同人誌博覧会"
-              secondary="2025年1月25日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku11" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十一回 技術書同人誌博覧会"
+                secondary="2025年1月25日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku10" css={noDecoration}>
-            <ListItem
-              primary="第十回 技術書同人誌博覧会"
-              secondary="2024年5月12日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku10" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十回 技術書同人誌博覧会"
+                secondary="2024年5月12日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku9" css={noDecoration}>
-            <ListItem
-              primary="第九回 技術書同人誌博覧会"
-              secondary="2023年11月25日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku9" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第九回 技術書同人誌博覧会"
+                secondary="2023年11月25日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku8" css={noDecoration}>
-            <ListItem
-              primary="第八回 技術書同人誌博覧会"
-              secondary="2023年5月28日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku8" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第八回 技術書同人誌博覧会"
+                secondary="2023年5月28日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku7" css={noDecoration}>
-            <ListItem
-              primary="第七回 技術書同人誌博覧会"
-              secondary="2022年11月20日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku7" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第七回 技術書同人誌博覧会"
+                secondary="2022年11月20日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
           <ListItem
                 primary="第六回 技術書同人誌博覧会"
                 secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
               />
-          <Link href="/gishohaku5" css={noDecoration}>
-            <ListItem
-              primary="第五回 技術書同人誌博覧会"
-              secondary="2021年6月19日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku5" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第五回 技術書同人誌博覧会"
+                secondary="2021年6月19日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
           <ListItem
                 primary="第四回 技術書同人誌博覧会"
@@ -93,19 +107,23 @@ export default () => {
                 primary="第三回 技術書同人誌博覧会"
                 secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
               />
-          <Link href="/gishohaku2" css={noDecoration}>
-            <ListItem
-              primary="第二回 技術書同人誌博覧会"
-              secondary="2019年12月14日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku2" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第二回 技術書同人誌博覧会"
+                secondary="2019年12月14日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
-          <Link href="/gishohaku1" css={noDecoration}>
-            <ListItem
-              primary="第一回 技術書同人誌博覧会"
-              secondary="2019年7月27日 開催"
-              contentAfter={<IconChevronRight />}
-            />
+          <Link href="/gishohaku1" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第一回 技術書同人誌博覧会"
+                secondary="2019年7月27日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
           </Link>
         </List>
       </section>

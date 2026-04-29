@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/react'
+import { css, jsx } from '@emotion/core'
 import { media, colors } from '../utils/style'
 import FluidBlock from '../components/atoms/FluidBlock'
 import TextBlock from '../components/atoms/TextBlock'
@@ -9,10 +9,9 @@ import directionsIcon from '../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
-const LinkButton: React.FC<{
+const LinkButton: React.SFC<{
   href: string,
-  className?: string,
-  children?: React.ReactNode
+  className?: string
 }> = ({ href, children, className }) => (
   <a
     css={css`
@@ -173,7 +172,7 @@ const Hero = () => (
   </div>
 )
 
-const Award: React.FC<{
+const Award: React.SFC<{
   title: string
   book: string
   circle: string
@@ -263,7 +262,7 @@ const Award: React.FC<{
   )
 }
 
-const Sponsor: React.FC<{
+const Sponsor: React.SFC<{
   image: string
   name: string
   role: string
@@ -346,7 +345,7 @@ const Sponsor: React.FC<{
   )
 }
 
-const Staff: React.FC<{
+const Staff: React.SFC<{
   name: string
   imageUrl: string
   twitter: string
@@ -388,7 +387,7 @@ const Staff: React.FC<{
   )
 }
 
-const Printing: React.FC<{
+const Printing: React.SFC<{
   name: string
   imageUrl: string
   linkUrl: string
@@ -460,7 +459,7 @@ export default () => {
       <section css={section}  id="podcast">
         <SectionHeader en="PODCAST">技書博ラジオ</SectionHeader>
         <TextBlock>
-          <div
+          <p
             css={css`
               text-align: center;
               display: flex;
@@ -484,7 +483,7 @@ export default () => {
               width={280}
               height={280}
             />
-          </div>
+          </p>
           <p>
           技書博におけるあれこれを紹介するPodcastをはじめました！
           </p>
@@ -552,7 +551,7 @@ export default () => {
             `}>
             当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
           </p>
-          <div
+          <p
             css={css`
               text-align: center;
               .banner {
@@ -583,7 +582,7 @@ export default () => {
                 （小サイズ：200×40ピクセル）
               </span>
             </div>
-          </div>
+          </p>
         </TextBlock>
       </section>
     </>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useContext } from 'react'
 
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import { Container } from '../components/common/Container'
 import BookCell from '../components/BookCell'
 import withUser from '../withUser'

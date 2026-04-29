@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx, css, Global } from '@emotion/react'
+import { jsx, css, Global } from '@emotion/core'
 import Contents from './MdxContents'
 import { Container } from './common/Container'
 
-const MdxContainer: React.FC = ({ children }) => {
+const MdxContainer: React.SFC = ({ children }) => {
   return (
     <Container
       css={css`

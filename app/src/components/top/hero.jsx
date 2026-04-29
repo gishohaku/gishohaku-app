@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useEffect, useState } from 'react'
 
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import Link from 'next/link'
 
 import logo from '../../images/logo.png'
@@ -130,82 +130,94 @@ const Hero = () => {
         @大田区産業プラザPiO
       </p>
       <p>
-        <Link href="/gishohaku1/circle-info"
-          css={css`
-            background-color: ${colors.accent};
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            padding: 11px 36px 13px;
-            min-width: 270px;
-            display: inline-block;
-            border-radius: 30px;
-            margin: 24px 12px 0 12px;
-            text-decoration: none;
-            transition: transform 0.15s ease-out;
-            transform: translateY(0);
-            &:hover {
-              transform: translateY(-1px);
-              background-color: #dbae29;
-            }
-          `}
-        >
-          <span
-            className="material-icons"
+        <Link href="/gishohaku1/circle-info" passHref>
+          <a
             css={css`
-              vertical-align: middle;
-              margin-right: 4px;
-              font-size: 20px;
+              background-color: ${colors.accent};
+              font-size: 16px;
+              font-weight: bold;
+              color: white;
+              padding: 11px 36px 13px;
+              min-width: 270px;
+              display: inline-block;
+              border-radius: 30px;
+              margin: 24px 12px 0 12px;
+              text-decoration: none;
+              transition: transform 0.15s ease-out;
+              transform: translateY(0);
+              &:hover {
+                transform: translateY(-1px);
+                background-color: #dbae29;
+              }
+              // background-color: #aaaaaa;
+              // &:hover {
+              //   background-color: #aaaaaa;
+              // }
             `}
           >
-            chat
-          </span>
-          <span
-            css={css`
-              vertical-align: middle;
-            `}
-          >
-            サークル参加者へのご案内
-          </span>
+            <span
+              className="material-icons"
+              css={css`
+                vertical-align: middle;
+                margin-right: 4px;
+                font-size: 20px;
+              `}
+            >
+              chat
+            </span>
+            <span
+              css={css`
+                vertical-align: middle;
+              `}
+            >
+              サークル参加者へのご案内
+            </span>
+          </a>
         </Link>
 
-        <Link href="/gishohaku1/guest-info"
-          css={css`
-            background-color: ${colors.accent};
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            padding: 11px 36px 13px;
-            min-width: 270px;
-            display: inline-block;
-            border-radius: 30px;
-            margin: 24px 12px 0 12px;
-            text-decoration: none;
-            transition: transform 0.15s ease-out;
-            transform: translateY(0);
-            &:hover {
-              transform: translateY(-1px);
-              background-color: #dbae29;
-            }
-          `}
-        >
-          <span
-            className="material-icons"
+        <Link href="/gishohaku1/guest-info" passHref>
+          <a
             css={css`
-              vertical-align: middle;
-              margin-right: 4px;
-              font-size: 20px;
+              background-color: ${colors.accent};
+              font-size: 16px;
+              font-weight: bold;
+              color: white;
+              padding: 11px 36px 13px;
+              min-width: 270px;
+              display: inline-block;
+              border-radius: 30px;
+              margin: 24px 12px 0 12px;
+              text-decoration: none;
+              transition: transform 0.15s ease-out;
+              transform: translateY(0);
+              &:hover {
+                transform: translateY(-1px);
+                background-color: #dbae29;
+              }
+              // background-color: #aaaaaa;
+              // &:hover {
+              //   background-color: #aaaaaa;
+              // }
             `}
           >
-            chat
-          </span>
-          <span
-            css={css`
-              vertical-align: middle;
-            `}
-          >
-            一般参加者へのご案内
-          </span>
+            <span
+              className="material-icons"
+              css={css`
+                vertical-align: middle;
+                margin-right: 4px;
+                font-size: 20px;
+              `}
+            >
+              chat
+            </span>
+            <span
+              css={css`
+                vertical-align: middle;
+              `}
+            >
+              一般参加者へのご案内
+            </span>
+          </a>
         </Link>
       </p>
     </section>
