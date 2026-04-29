@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import Book from '../utils/book'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -13,7 +13,7 @@ interface Props {
   size: SnsShareSize
 }
 
-const SnsShare: React.FC<Props> = (props) => {
+const SnsShare: React.SFC<Props> = (props) => {
   useEffect(() => {
     const scriptNode = document.getElementById('twitter-wjs')
     if (scriptNode) {

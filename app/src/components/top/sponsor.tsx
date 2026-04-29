@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import { Embed } from '../common/Embed'
 import defaultImage from '../../images/sponsor.png'
 import LazyLoad from 'react-lazyload'

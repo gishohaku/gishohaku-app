@@ -7,10 +7,6 @@ import 'firebase/auth'
 const apiKey = process.env.API_KEY
 const projectId = process.env.PROJECT_ID
 
-if (!apiKey || !projectId) {
-  console.warn('Firebase: API_KEY or PROJECT_ID is not set. Firebase features will not work.')
-}
-
 if (!firebase.apps.length) {
   firebase.initializeApp({
     projectId,

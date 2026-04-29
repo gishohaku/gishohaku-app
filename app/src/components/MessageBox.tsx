@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 
 interface Props {
   title: string
   description: string
 }
 
-const MessageBox: React.FC<Props> = (props) => {
+const MessageBox: React.SFC<Props> = (props) => {
   return (
     <div
       css={css`

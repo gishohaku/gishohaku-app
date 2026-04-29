@@ -2,7 +2,7 @@
 import firebase from 'firebase/app'
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/react'
+import { jsx, css } from '@emotion/core'
 import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../utils/circle'
@@ -91,7 +91,9 @@ const Mypage: React.FC<{
             `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-              <Link href={`/${eventId}/circles/${circle.id}`}>こちら</Link>
+              <Link href={`/${eventId}/circles/${circle.id}`}>
+                <a>こちら</a>
+              </Link>
               。
             </p>
             {/* <p>シェアURL: https://gishohaku.dev/circles/{circle.id}</p> */}

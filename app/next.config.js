@@ -1,4 +1,3 @@
-const path = require('path')
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 })
@@ -7,24 +6,11 @@ const withImages = require('next-images')
 // compose使う
 module.exports = withImages(
   withMDX({
-    typescript: {
-      // sancho uses bundled @types/react@16 which conflicts with @types/react@17
-      ignoreBuildErrors: true,
-    },
-    images: {
-      disableStaticImages: true,
-    },
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
     env: {
       API_KEY: process.env.API_KEY,
       PROJECT_ID: process.env.PROJECT_ID,
       SENTRY_DSN: process.env.SENTRY_DSN,
-    },
-    transpilePackages: ['sancho'],
-    webpack: (config, { isServer }) => {
-      // Alias @emotion/core to @emotion/react for sancho compatibility
-      config.resolve.alias['@emotion/core'] = require.resolve('@emotion/react')
-      return config
     },
     exportPathMap: (defaultPathMap) => {
       delete defaultPathMap['/[eventId]/books']
