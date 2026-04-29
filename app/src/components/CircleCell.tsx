@@ -53,7 +53,7 @@ const CircleCell: React.FC<Props> = ({
 
   return (
     <Container>
-      <Link href={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
+      <Link href={`/${eventId}/circles/${circle.id}`} key={circle.id} legacyBehavior passHref>
         <CircleLink>
           <BoothNum>{circle.booth}</BoothNum>
           <ImageBox
