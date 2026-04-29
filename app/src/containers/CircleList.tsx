@@ -52,7 +52,7 @@ const appealUrl: {
   gishohaku10: 'https://docs.google.com/presentation/d/e/2PACX-1vSjb-1y42NpyxyXiEF_shPELCZJ-7kNh2vm57mTNEulq8dfhx5GucpfSqbSHJR74Wbvrj7kcXTwV_yt/pub',
   gishohaku11: 'https://docs.google.com/presentation/d/e/2PACX-1vTH2hnc8lDFbLg6-dusd_ma2lLLUngJHOTXz2OOGDQNZMhcV-VrVEv8o6-X7yj19w7zuN1O5dv0n_Up/pub',
   gishohaku12: 'https://docs.google.com/presentation/d/e/2PACX-1vR3DN1qESCRjENKn_dxb8JbDpc75BJ9c-f5_M8jlxlJs-SMJfEh21ZmbxxjqibEo3eV7xbiMQ_Ej7Jj/pub',
-  gishohaku13: '',
+  gishohaku13: 'https://docs.google.com/presentation/d/e/2PACX-1vQYyVOnQBdw2XR7OAQ47XGb9zCXYwTc8Z69SO_ccNGVtYQdnhe7OpkCnioQlWyfp-7Kn2L-Y1A1szb9/pub',
 }
 
 const Index: NextPage<InitialProps> = (props) => {
