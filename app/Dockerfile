@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:14-alpine
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ ARG api_key
 
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
-RUN npm install --legacy-peer-deps
+RUN npm install
 
 ADD . .
 RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build
