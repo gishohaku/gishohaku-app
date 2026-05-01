@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 WORKDIR /app
 
@@ -6,10 +6,11 @@ ARG project_id
 ARG api_key
 
 ENV PORT=8080
+ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY package.json package-lock.json ./
 
-RUN npm install --legacy-peer-deps --production=false
+RUN npm ci --legacy-peer-deps
 
 COPY . .
 
@@ -19,4 +20,4 @@ ENV NODE_ENV=production
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "npx next start -p ${PORT}"]
+CMD ["sh", "-c", "npm start -- -p ${PORT}"]
