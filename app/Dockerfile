@@ -1,3 +1,4 @@
+# Next.jsのバージョンアップ対応と一緒に構成を再度検討する
 FROM node:14-alpine
 
 WORKDIR /app
