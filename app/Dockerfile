@@ -1,5 +1,4 @@
-# Next.jsのバージョンアップ対応と一緒に構成を再度検討する
-FROM node:14-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -13,4 +12,4 @@ RUN npm install
 ADD . .
 RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
