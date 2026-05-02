@@ -34,7 +34,7 @@ const mapUrl: {
   gishohaku10: '/static/gishohaku10-layout.png',
   gishohaku11: '/static/gishohaku11-layout.png',
   gishohaku12: '/static/gishohaku12-layout.png',
-  gishohaku13: '',
+  gishohaku13: '/static/gishohaku13-layout.png',
 }
 
 const appealUrl: {
