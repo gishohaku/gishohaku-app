@@ -122,7 +122,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第十三回</small>技術書同人誌博覧会
+        <small>第十四回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -138,7 +138,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2026.05.10 <small>Sun. 11:00~16:00</small>
+        2026.09.13 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -163,8 +163,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://gishohaku.connpass.com/event/372013/">
-          技書博13に参加する（サークル＆一般参加）
+        <LinkButton href="https://gishohaku.connpass.com/event/389491/">
+          技書博14にサークル参加する
         </LinkButton>
       </div>
     </div>
@@ -449,10 +449,14 @@ export default () => {
       <section css={section}>
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
-          <p>技書博13にご支援いただけるスポンサー様を募集中です。<br />スポンサーメニューは以下ボタンよりご覧ください。</p>
-          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/405/daac30f1d6ab4955f72f.html">
+          <p>
+            技書博14をご支援いただけるスポンサー様を募集予定です。<br />
+            詳細の公開までお待ちください。
+            {/* <br />スポンサーメニューは以下ボタンよりご覧ください。 */}
+          </p>
+          {/* <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/405/daac30f1d6ab4955f72f.html">
             技書博13 スポンサー募集要項
-          </LinkButton>
+          </LinkButton> */}
         </TextBlock>
       </section>
 
