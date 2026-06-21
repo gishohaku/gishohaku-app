@@ -450,13 +450,12 @@ export default () => {
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
           <p>
-            技書博14をご支援いただけるスポンサー様を募集予定です。<br />
-            詳細の公開までお待ちください。
-            {/* <br />スポンサーメニューは以下ボタンよりご覧ください。 */}
+            技書博は協賛企業さまのご支援によって運営を継続させて頂いております。
+            <br />スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。
           </p>
-          {/* <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/405/daac30f1d6ab4955f72f.html">
-            技書博13 スポンサー募集要項
-          </LinkButton> */}
+          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/431/85b06feb69847bd81874.html">
+            技書博14 スポンサー募集要項
+          </LinkButton>
         </TextBlock>
       </section>
 
