@@ -164,7 +164,7 @@ const Hero = () => (
           }
         `}>
         <LinkButton href="https://gishohaku.connpass.com/event/389491/">
-          技書博14にサークル参加する 
+          技書博14にサークル参加する
         </LinkButton>
       </div>
     </div>
