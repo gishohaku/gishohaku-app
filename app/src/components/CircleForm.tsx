@@ -1,6 +1,11 @@
 /** @jsx jsx */
 import firebase from 'firebase/app'
-import { Button, InputGroup, Input, TextArea, Select, Text } from 'sancho'
+import { Button } from './common/Button'
+import { InputGroup } from './common/InputGroup'
+import { Input } from './common/Input'
+import { TextArea } from './common/TextArea'
+import { Select } from './common/Select'
+import { Text } from './common/Text'
 import { jsx, css } from '@emotion/core'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'

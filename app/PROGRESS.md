@@ -122,3 +122,17 @@
   - Mypage.tsx は認証必須のためスクリーンショット未取得(型チェックとコードレビューで代替。フェーズ5で再度記録)
 - 次のアクション:
   - グループ3(reset_password.tsx → sign_in.tsx → sign_up.tsx → BookForm.tsx → CircleForm.tsx)
+
+## 2026-07-02 [フェーズ3] グループ3置き換え完了
+
+- やったこと:
+  - グループ3(5ファイル)の import を置換: reset_password.tsx, sign_in.tsx, sign_up.tsx, BookForm.tsx, CircleForm.tsx
+  - `npx tsc --noEmit` 実行 → エラー0件
+  - dev サーバーで `/sign_in`, `/sign_up`, `/reset_password` を再スクリーンショットしフェーズ1 before と比較
+- 結果:
+  - 型チェック: エラーなし
+  - 3ページとも before/after でピクセル差なし
+  - **副次的な改善**: フェーズ1 baseline で出ていた `The pseudo class ":first-child" is potentially unsafe when doing server-side rendering` という console 警告(sancho の InputGroup 由来)が **3ページとも解消**。新実装の InputGroup で `:first-of-type` を採用したため
+  - BookForm.tsx / CircleForm.tsx は認証必須(サークル/頒布物編集画面)のためスクリーンショット未取得。型チェック通過とコードレビュー(props一致確認)で代替。フェーズ5で再度記録・可能なら認証して確認
+- 次のアクション:
+  - グループ4(LoginSheet.tsx: Sheet + Button)
