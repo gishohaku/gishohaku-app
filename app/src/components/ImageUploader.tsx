@@ -2,7 +2,7 @@
 import { useDropzone } from 'react-dropzone'
 import { jsx, css } from '@emotion/core'
 import { useState } from 'react'
-import { IconUpload } from 'sancho'
+import { IconUpload } from './common/icons'
 import { firebase } from '../utils/firebase'
 import Loader from '../components/Loader'
 

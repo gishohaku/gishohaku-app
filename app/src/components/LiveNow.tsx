@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconPlay } from 'sancho'
+import { IconPlay } from './common/icons'
 
 export const LiveNow = () => {
   return (

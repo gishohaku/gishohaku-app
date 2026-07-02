@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { Button } from 'sancho'
+import { Button } from '../components/common/Button'
 import { useRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
 import UserContext from '../contexts/UserContext'
