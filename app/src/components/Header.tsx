@@ -4,15 +4,14 @@ import Link from 'next/link'
 import logo from '../images/shortLogo.svg'
 
 import { jsx, css } from '@emotion/core'
+import { Sheet } from './common/Sheet'
+import { List, ListItem } from './common/List'
 import {
   IconMenu,
-  Sheet,
-  List,
-  ListItem,
   IconChevronRight,
   IconExternalLink,
   IconHeart,
-} from 'sancho'
+} from './common/icons'
 import { useState, useContext, useEffect } from 'react'
 import EventContext from '../contexts/EventContext'
 import UserContext from '../contexts/UserContext'

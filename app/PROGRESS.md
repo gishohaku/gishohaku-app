@@ -94,3 +94,31 @@
 - 次のアクション:
   - `npx tsc --noEmit` で新規コンポーネント群の型チェック
   - フェーズ3: グループ1から段階的に import を置き換え
+
+## 2026-07-02 [フェーズ3] グループ1置き換え完了
+
+- やったこと:
+  - グループ1(8ファイル)の `from 'sancho'` を `./common/...` に置換:
+    CircleCopyButton.tsx, withUser.tsx, BookEdit.tsx, CircleJoin.tsx, LiveNow.tsx, ImageUploader.tsx, CheckButton.tsx, BookList.tsx
+  - `npx tsc --noEmit` 実行 → エラー0件
+  - dev サーバーで `/gishohaku13/books` を Playwright で再スクリーンショットし、フェーズ1の before と比較
+- 結果:
+  - 型チェック: エラーなし
+  - スクリーンショット: before/after でピクセル差なし(目視一致)。コンソールエラーも sancho 由来分(LoginSheet未移行)のみで新規エラーなし
+  - git commit 39a7e96 で共通コンポーネント一式+グループ1をコミット
+- 次のアクション:
+  - グループ2(BookCell.tsx → CircleSelect.tsx → Mypage.tsx → archive/index.tsx → Header.tsx)
+
+## 2026-07-02 [フェーズ3] グループ2置き換え完了
+
+- やったこと:
+  - グループ2(5ファイル)の import を置換: BookCell.tsx, CircleSelect.tsx, Mypage.tsx, archive/index.tsx, Header.tsx
+  - `npx tsc --noEmit` 実行 → エラー0件
+  - dev サーバーで `/`(Header), `/archive`(List/ListItem), `/gishohaku13/circles/1`(CircleSelect/BookCell) を再スクリーンショットしフェーズ1 before と比較
+- 結果:
+  - 型チェック: エラーなし
+  - home / archive: before/after でピクセル差なし
+  - circle_detail: フェーズ1と同一の Server Error オーバーレイ(ダミー Firebase 認証情報による `FirebaseError: client is offline` が getInitialProps 内で未処理例外になる、既知の制限。sancho 移行とは無関係、既存動作を変更していないことを確認)
+  - Mypage.tsx は認証必須のためスクリーンショット未取得(型チェックとコードレビューで代替。フェーズ5で再度記録)
+- 次のアクション:
+  - グループ3(reset_password.tsx → sign_in.tsx → sign_up.tsx → BookForm.tsx → CircleForm.tsx)

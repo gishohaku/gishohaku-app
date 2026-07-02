@@ -4,11 +4,8 @@ import { media, colors } from '../../utils/style'
 import SectionHeader from '../../components/SectionHeder'
 
 import { jsx, css } from '@emotion/core'
-import {
-  List,
-  ListItem,
-  IconChevronRight,
-} from 'sancho'
+import { List, ListItem } from '../../components/common/List'
+import { IconChevronRight } from '../../components/common/icons'
 
 const noDecoration = css`
   text-decoration: none;

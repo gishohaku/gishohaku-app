@@ -2,7 +2,9 @@
 import { jsx, css } from '@emotion/core'
 import { useContext } from 'react'
 import Link from 'next/link'
-import { Container, IconChevronRight, List, ListItem, IconLogOut } from 'sancho'
+import { Container } from '../components/common/Container'
+import { List, ListItem } from '../components/common/List'
+import { IconChevronRight, IconLogOut } from '../components/common/icons'
 
 import { firebase } from '../utils/firebase'
 import withUser from '../withUser'
