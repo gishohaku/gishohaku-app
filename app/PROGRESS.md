@@ -189,3 +189,55 @@
   - grep 検証(package.json/package-lock.jsonにsanchoが残っていないか)
   - 動作確認(CircleSelectのページ送り、CheckButtonのトグル)
   - バンドルサイズ比較・完了報告
+
+## 2026-07-02 [フェーズ5] grep検証・最終ビルド・バンドルサイズ比較
+
+- やったこと:
+  - `grep -rn "from 'sancho'" src/`、`grep -n "sancho" package.json`、`grep -n "sancho" package-lock.json` を実行
+  - Sheet 修正を反映したクリーンビルドを再実行(`.next` 削除 → `npm run build`)
+  - `.next` サイズを再計測
+  - `docker build --build-arg project_id=dummy --build-arg api_key=dummy .` を試行
+- 結果:
+  - grep 検証: **3箇所とも 0件**(sancho は src・package.json・package-lock.json のいずれにも残っていない)
+  - ビルド: 成功
+  - バンドルサイズ: **91M → 65M**(約29%削減)。First Load JS shared: **303kB → 268kB**(約11.5%削減)
+  - Docker 検証: Docker Desktop のデーモンが起動しておらず(`dockerDesktopLinuxEngine` に接続不可)実行できなかった。Node16 でのクリーンビルド(`npm ci` → `npm run build`)は成功しているため、Dockerfile と同一の手順は満たしている。Docker実行そのものは未検証としてユーザーに報告する
+- 次のアクション:
+  - 動作確認(Sheet開閉は確認済み。CircleSelect/CheckButtonはダミーFirebaseのため未検証、理由を記録して完了報告へ)
+
+## 2026-07-02 [フェーズ6] 完了報告
+
+### 変更概要
+- 変更ファイル数: 43ファイル(+2174/-5426行、うち大半は package-lock.json の削減分)
+- 作成した共通コンポーネント(`src/components/common/`):
+  - `theme.ts`, `colorUtils.ts`, `formStyles.ts`
+  - `Button.tsx`, `IconButton.tsx`, `Spinner.tsx`
+  - `Input.tsx`, `TextArea.tsx`, `Select.tsx`, `Check.tsx`, `InputGroup.tsx`, `InputGroupContext.tsx`
+  - `Text.tsx`, `Alert.tsx`, `List.tsx`(List/ListItem)
+  - `Sheet.tsx`, `Menu.tsx`(MenuList/MenuItem), `Popover.tsx`(ResponsivePopover)
+  - `icons/IconBase.tsx`, `icons/index.tsx`(17種のFeatherアイコン、うち計画の25種に含まれなかった IconMenu / IconMoreVertical / IconArrowUp / IconArrowDown / IconAlertOctagon を追加調査の上で実装)
+  - 既存 `common/Container.tsx` は sancho の Container と値が完全一致していたため変更せず再利用
+- sancho は `package.json` dependencies から削除、`npm install` で **533パッケージ削減**
+- `@types/react-dom` を devDependencies に追加(sancho 経由の間接依存が消えたことによるビルドエラーの修正)
+
+### 既知の見た目差分(許容したもの)
+- `sign_in` / `sign_up` / `reset_password`: pixelmatch で 0.3〜1.2% の差分。クロップ画像で目視確認した結果、構造・色・文言の相違はなく、文字エッジのサブピクセルレベルの誤差と判断(許容)
+- `home` / `archive` / `circle_list` / `book_list`: pixelmatch で **完全一致(0%)**
+- Sheet(LoginSheet/Header メニュー)は sancho のようなスワイプジェスチャーでの開閉には非対応。クリック/ESC/オーバーレイクリックのみで開閉(計画で許容されている簡略化)
+- BookCell.tsx の並べ替えメニュー(ResponsivePopover)はモバイル時のボトムシート自動切り替えを省略し、常時アンカー型ドロップダウンとして表示(影響は書籍並べ替えUIのみで軽微)
+
+### 未検証項目とその理由
+- `/mypage`、BookForm.tsx、CircleForm.tsx(サークル/頒布物の編集画面): 認証必須のため、ダミー Firebase 認証情報の環境ではスクリーンショット・実クリック動作確認ができなかった。型チェック(`tsc --noEmit`)とコードレビュー(props一致の確認)で代替
+- CircleSelect のページ送り(IconChevronLeft/Right)、CheckButton のトグル(IconCheck/IconHeart): 実データ(Firestore)が必要なページのため、ダミー環境では対象UIが描画されず動作確認不可。コンポーネント単体の実装(props・スタイル)はコードレビュー済み
+- Docker ビルド検証: Docker Desktop のデーモンが起動しておらず未実施。Node16 ネイティブ環境での `npm ci` → `npm run build` は成功を確認済み(Dockerfile と同一コマンド)
+
+### バンドルサイズ増減
+- `.next` ディレクトリ: **91M → 65M**(約29%削減)
+- First Load JS shared by all: **303kB → 268kB**(約11.5%削減)
+
+### その他の副産物
+- `InputGroup` の CSS セレクタを sancho の `:first-child` から `:first-of-type` に変更したことで、フェーズ1 baseline で出ていた「pseudo class ":first-child" is potentially unsafe...」という console 警告が解消
+- Sheet 実装で react-spring/react-gesture-responder を使わず CSS transition ベースにしたことで、sancho 削除後に react-spring が transitive dependency ごと消えても問題が起きない構成にできた
+- `engines: "14"` と Dockerfile の Node16 の不整合は本作業のスコープ外(計画通り、別途修正提案として報告)
+
+作業ブランチ `remove_sancho` に全コミット済み。PR作成の要否はユーザーに確認する。
