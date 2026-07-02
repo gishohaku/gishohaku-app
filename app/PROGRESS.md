@@ -150,3 +150,42 @@
   - フェーズ3(段階的置き換え全4グループ)完了
 - 次のアクション:
   - フェーズ4: package.json から sancho を削除し、クリーンインストール・ビルド確認
+
+## 2026-07-02 [フェーズ4] sancho 完全削除
+
+- やったこと:
+  - `grep -rn "from 'sancho'" src/` → 0件(前フェーズで確認済み、変更なし)
+  - `package.json` の dependencies から `"sancho": "^3.5.6"` を削除
+  - Node 16 で `npm install --legacy-peer-deps` 実行 → package-lock.json 更新
+  - クリーンビルド確認: `.next`/`node_modules` を削除して `npm ci --legacy-peer-deps` → `API_KEY=dummy PROJECT_ID=dummy npm run build`
+- 結果・つまずき・対応(エラー対応ルールに基づき記録):
+  - 1回目のクリーンビルドで型エラー発生:
+    ```
+    ./src/components/Portal.tsx:2:22
+    Type error: Could not find a declaration file for module 'react-dom'.
+    ```
+  - 原因: `@types/react-dom` が package.json に明示されておらず、sancho の依存関係経由で間接的に入っていた型定義パッケージだったため、sancho 削除で消失した
+  - 対処(1回目で解決): devDependencies に `"@types/react-dom": "^16.9.0"`(react-dom 本体のバージョン `^16.9.0` に合わせた)を追加 → `npm install --legacy-peer-deps` → ビルド成功
+  - **sancho 削除による依存パッケージ削減**: `npm install` で **533パッケージ削除**(react-spring, react-gesture-responder, touchable-hook, @reach/*, open-color, color 等の sancho 経由の transitive dependency 含む)。脆弱性警告も 112件→70件に減少
+  - `node_modules/sancho`, `node_modules/react-spring` が存在しないことを確認
+- 次のアクション:
+  - フェーズ5: 検証(スクリーンショット比較、grep検証、動作確認、バンドルサイズ比較)
+
+## 2026-07-02 [フェーズ5] 検証 — Sheet の重大バグを発見・修正
+
+- やったこと:
+  - dev サーバーを Node16 + 新 node_modules で再起動して起動確認
+  - フェーズ1と同一条件(1280x800, Playwright)で `app/.sancho-migration/after/` に全ページのスクリーンショットを再取得
+  - `pixelmatch` を導入し、before/after を全ページ定量比較
+- 結果:
+  - 初回比較で `archive` ページに **明確な見た目崩れ** を発見: 本来非表示のはずの `LoginSheet`(「この機能を利用するにはログインしてください。」+ログイン/会員登録ボタン)が、ページ中央に**インライン表示されてしまっていた**(sancho版では発生しない、新実装 `common/Sheet.tsx` 固有の不具合)
+  - **原因調査**: Playwright の `fullPage: true` スクリーンショットは撮影時に一時的にビューポート高さをページ全体に拡張する。このとき `position: fixed` + `transform: translateY(100%)`(要素自身の高さ分だけオフセット)という閉じた状態の実装だと、要素の実際の高さが小さい(約123px)ため、拡張されたビューポート内では十分にオフスクリーンにならず、ページ中ほどに見えてしまっていた。sancho 版の Sheet は同種の transform 制御に加えて `visibility: hidden`(閉時)を併用しており、これが安全側に働いていたため発生していなかった
+  - **修正**: `src/components/common/Sheet.tsx` のオーバーレイ/パネル両方に `visibility: ${isOpen ? 'visible' : 'hidden'}` を追加(sancho の実装パターンに合わせる)
+  - 修正後に再スクリーンショット・再 pixelmatch を実行 → `home` / `circle_list` / `book_list` は **diffPixels=0(完全一致)**。`archive` も崩れは解消(残差分はテキストのアンチエイリアス起因の微差のみであることをクロップ画像で目視確認、同一ページを2回連続撮影した self-diff が 0 であることも確認しノイズでなく決定論的だが視覚的には識別不能な誤差と判断)
+  - `sign_in` / `sign_up` / `reset_password` は pixelmatch で 0.3〜1.2% の差分が残るが、クロップ画像で目視確認した限り**構造・色・文言に相違なし**(文字エッジの1px以下のサブピクセル差と推測)。**許容する差分**として記録
+- 判断・メモ:
+  - この Sheet の可視性バグは pixelmatch による定量比較なしでは見逃していた可能性が高い。目視だけのチェックでは気づきにくいレベルの、しかし実害のある崩れだった
+- 次のアクション:
+  - grep 検証(package.json/package-lock.jsonにsanchoが残っていないか)
+  - 動作確認(CircleSelectのページ送り、CheckButtonのトグル)
+  - バンドルサイズ比較・完了報告

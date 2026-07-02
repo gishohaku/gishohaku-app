@@ -118,8 +118,10 @@ export const Sheet: React.FC<Props> = ({
           z-index: ${zIndices.overlay};
           background: ${background.overlay};
           opacity: ${isOpen ? 1 : 0};
+          visibility: ${isOpen ? 'visible' : 'hidden'};
           pointer-events: ${isOpen ? 'auto' : 'none'};
-          transition: opacity 0.2s cubic-bezier(0.35, 0, 0.25, 1);
+          transition: opacity 0.2s cubic-bezier(0.35, 0, 0.25, 1),
+            visibility 0.2s;
         `}
       />
       <div
@@ -131,9 +133,11 @@ export const Sheet: React.FC<Props> = ({
             position: fixed;
             z-index: ${zIndices.modal};
             outline: none;
+            visibility: ${isOpen ? 'visible' : 'hidden'};
             pointer-events: ${isOpen ? 'auto' : 'none'};
             transform: ${isOpen ? 'translate(0, 0)' : closedTransform[position]};
-            transition: transform 0.25s cubic-bezier(0.35, 0, 0.25, 1);
+            transition: transform 0.25s cubic-bezier(0.35, 0, 0.25, 1),
+              visibility 0.25s;
           `,
           positionStyles(position),
         ]}
