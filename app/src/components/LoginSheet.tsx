@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React from 'react'
 import { jsx, css } from '@emotion/core'
-import { Sheet, Button } from 'sancho'
+import { Sheet } from './common/Sheet'
+import { Button } from './common/Button'
 
 interface Props {
   onRequestClose: () => void

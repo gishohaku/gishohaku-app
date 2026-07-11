@@ -13,16 +13,11 @@ import CheckButton from '../components/CheckButton'
 import Lightbox from 'react-image-lightbox'
 import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import UserContext from '../contexts/UserContext'
-import {
-  ResponsivePopover,
-  MenuList,
-  MenuItem,
-  IconButton,
-  IconMoreVertical,
-  IconArrowUp,
-  IconArrowDown,
-  Button,
-} from 'sancho'
+import { ResponsivePopover } from './common/Popover'
+import { MenuList, MenuItem } from './common/Menu'
+import { IconButton } from './common/IconButton'
+import { IconMoreVertical, IconArrowUp, IconArrowDown } from './common/icons'
+import { Button } from './common/Button'
 import { media } from '../utils/style'
 import Contents from './Contents'
 

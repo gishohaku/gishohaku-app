@@ -8,5 +8,6 @@ functions/package.json
 functions/yarn.lock
 
 app/out
+app/.sancho-migration
 .DS_Store
 *.csv

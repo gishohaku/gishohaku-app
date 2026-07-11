@@ -4,7 +4,7 @@ import UserContext from './contexts/UserContext'
 import Loader from './components/Loader'
 import MessageBox from './components/MessageBox'
 import Link from 'next/link'
-import { Button } from 'sancho'
+import { Button } from './components/common/Button'
 import { jsx, css } from '@emotion/core'
 import { useRouter } from 'next/router'
 

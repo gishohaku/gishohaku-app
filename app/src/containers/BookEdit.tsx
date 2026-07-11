@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import { Button } from 'sancho'
+import { Button } from '../components/common/Button'
 
 import BookForm from '../components/BookForm'
 import Loader from '../components/Loader'

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { IconCheck, IconHeart } from 'sancho'
+import { IconCheck, IconHeart } from './common/icons'
 
 interface Props {
   isChecked: boolean

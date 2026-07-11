@@ -4,7 +4,7 @@ import { useState, useCallback, useContext } from 'react'
 
 import UserContext from '../contexts/UserContext'
 import EventContext from '../contexts/EventContext'
-import { Button } from 'sancho'
+import { Button } from './common/Button'
 import { db } from '../utils/firebase'
 
 const useCircleCopy = (fromCircleId: string, toCircleId: string) => {

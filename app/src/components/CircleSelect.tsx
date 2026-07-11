@@ -1,5 +1,7 @@
 /** @jsx jsx */
-import { Select, IconButton, IconChevronLeft, IconChevronRight } from 'sancho'
+import { Select } from './common/Select'
+import { IconButton } from './common/IconButton'
+import { IconChevronLeft, IconChevronRight } from './common/icons'
 import { useRouter } from 'next/router'
 import { jsx, css } from '@emotion/core'
 import { useCallback, useContext } from 'react'
