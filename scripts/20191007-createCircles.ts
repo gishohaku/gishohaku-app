@@ -2,7 +2,6 @@ import fs from 'fs'
 import csv from 'csv-parser'
 import admin from 'firebase-admin'
 import Circle from '../app/utils/circle'
-import { firestore } from 'firebase-functions';
 
 admin.initializeApp({
   projectId: process.env.PROJECT_ID,
