@@ -96,3 +96,34 @@
 - **Node22 対応**: root `package.json` の `firebase-admin` を ^11→^13(13.10.0, Node18-22 対応)、`firebase-functions` ^4→^6、typescript ^4.9→^5.6 に更新。`runscript`(=tsx)スクリプト追加。
 - **検証(実行なし、ユーザー指示)**: `tsc --noEmit`(esModuleInterop/bundler/esnext/es2022)で3スクリプトを静的チェック → **exit 0**。import 解決(`../app/src/utils/circle` の default interface、firebase-admin default)・型・DryRun 実装すべて OK。実行(dry-run 含む)はしていない。
 - **完了**: 全フェーズのアップグレード完了。残: README 最終化・総合報告。
+
+## 2026-07-18 [総合検証・完了]
+- **README 最終化**: バージョン表(React19/Tailwind4/Firebase11/Emotion11/TS5)、Node 自動切替(nvm/.node-version)手順、**エラー確認方法**(ビルド/開発/本番/デプロイ別)、スクリプト DryRun 手順を反映。
+- **クリーンビルド**: `npm ci --legacy-peer-deps`(lock 整合)→ `npm run build` 成功。
+- **Docker ビルド(デプロイ経路検証)**: `docker build`(node:22-alpine, npm ci, next build)完走・イメージ生成成功。
+- **本番サーバ起動検証**: コンテナを `docker run`(next start, Cloud Run 相当)→ /・/sign_in・/gishohaku1/circles すべて **200**。イメージは検証後クリーンアップ。
+- **正規ポート**: `npm run dev` は 3000 が既定(config 未変更)。検証用の一時起動のみ 4321 を使用(3000 は Docker が占有中のため)。
+
+## 最終到達バージョン
+| 対象 | 変更前 | 変更後 |
+|---|---|---|
+| Node.js | 16/14/10.15.2(不整合) | **22.23.1**(統一) |
+| Next.js | 10.2.3 | **15.5.20**(Pages Router) |
+| React | 16.13.1 | **19.2.7** |
+| Emotion | 10 | **11**(SWC + jsxImportSource) |
+| Firebase(client) | 8.6.7 | **11.10.0**(compat) |
+| Tailwind CSS | 2 | **4.3.3** |
+| TypeScript | 3.4/4.9 | **5.9** |
+| firebase-admin(scripts) | 11 | **13.10.0** |
+
+## スコープ外(将来の follow-up)に putback
+- `<Link legacyBehavior>` は非推奨(将来削除)。new Link API(`<a>` 除去)への移行は別作業。
+- Firebase の完全モジュラー化(compat 脱却)は別作業。
+- App Router 化はスコープ外(Pages Router 維持)。
+- `functions/` の Node バージョン(engines 14)は本作業の直接対象外。
+- Dockerfile CMD の `-p` 重複(`next start -p $PORT -p 8080`)は動作上無害(既存)。
+- 依存の脆弱性(npm audit)の積み残しは本作業で新規増加分以外は未対応。
+- `marked`/`axios`/`qs`/`immer` 等の非 React ライブラリは動作維持のため最小限のまま(必要時にバージョンアップ)。
+
+## 既知の見た目差分(許容)
+- スクショ pixelmatch: 全ページ 0.02〜0.14%(AA・dev バッジ程度)。code-of-conduct のみ高さ +10px(MDX 余白の微差)。**層崩れなし**。
