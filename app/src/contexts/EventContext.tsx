@@ -11,7 +11,7 @@ export const getEventId = (router: NextRouter): EventId => {
   return 'gishohaku13'
 }
 
-export const EventProvider: React.FC<{
+export const EventProvider: FCC<{
   initialId: EventId
 }> = ({ initialId, children }) => {
   const [eventId, setEventId] = useState<EventId>(initialId)

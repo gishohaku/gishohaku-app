@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx, css } from '@emotion/react'
 import { Sheet } from './common/Sheet'
@@ -13,7 +13,7 @@ const buttonLink = css`
   text-decoration: none;
 `
 
-const LoginSheet: React.SFC<Props> = ({ onRequestClose, isOpen }) => {
+const LoginSheet: FCC<Props> = ({ onRequestClose, isOpen }) => {
   return (
     <div>
       {/* SheetはwrapするdivがないとSSRで死ぬ */}

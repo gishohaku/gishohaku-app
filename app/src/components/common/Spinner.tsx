@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css, keyframes } from '@emotion/react'
 import { Size } from './theme'
 
@@ -16,7 +16,7 @@ const sizeStyles: Record<Size, ReturnType<typeof css>> = {
   xl: css({ width: '1.5rem', height: '1.5rem' }),
 }
 
-export const Spinner: React.FC<{ size?: Size; className?: string }> = ({
+export const Spinner: FCC<{ size?: Size; className?: string }> = ({
   size = 'md',
   className,
 }) => {

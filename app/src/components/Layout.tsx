@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { colors, media } from '../utils/style'
 
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
 import Head from 'next/head'
 
-const Layout: React.FC<any> = (props) => {
+const Layout: FCC<any> = (props) => {
   const { eventId } = useContext(EventContext)
   return (
     <>

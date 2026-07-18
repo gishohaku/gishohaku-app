@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { jsx } from '@emotion/react'

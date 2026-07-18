@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 import { jsx } from '@emotion/react'
 import styled from '@emotion/styled'
@@ -25,7 +25,7 @@ interface Props {
 
 const width = 252
 
-const CircleCell: React.FC<Props> = ({
+const CircleCell: FCC<Props> = ({
   circle,
   userStars,
   addStar,

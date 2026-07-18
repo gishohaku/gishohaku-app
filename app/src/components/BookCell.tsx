@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
 import { jsx, css } from '@emotion/react'
@@ -82,7 +82,7 @@ const useCheckSubmission = (isOwner: boolean, bookId: string) => {
   return !loading && !submission
 }
 
-const BookCell: React.SFC<Props> = ({
+const BookCell: FCC<Props> = ({
   book,
   editable = false,
   moveNext,

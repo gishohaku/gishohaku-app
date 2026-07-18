@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
 import { media, colors } from '../../utils/style'
 import TextBlock from '../../components/atoms/TextBlock'
@@ -8,7 +8,7 @@ import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
-const LinkButton: React.SFC<{
+const LinkButton: FCC<{
   href: string
   className?: string
 }> = ({ href, children, className }) => (
@@ -166,7 +166,7 @@ const Hero = () => (
   </div>
 )
 
-const Award: React.SFC<{
+const Award: FCC<{
   title: string
   book: string
   circle: string
@@ -256,7 +256,7 @@ const Award: React.SFC<{
   )
 }
 
-const Sponsor: React.SFC<{
+const Sponsor: FCC<{
   image: string
   name: string
   role: string
@@ -336,7 +336,7 @@ const Sponsor: React.SFC<{
   )
 }
 
-const Staff: React.SFC<{
+const Staff: FCC<{
   name: string
   imageUrl: string
   twitter: string
@@ -378,7 +378,7 @@ const Staff: React.SFC<{
   )
 }
 
-const Printing: React.SFC<{
+const Printing: FCC<{
   name: string
   imageUrl: string
   linkUrl: string

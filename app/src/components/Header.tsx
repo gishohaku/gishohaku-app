@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
 import logo from '../images/shortLogo.svg'
@@ -84,7 +84,7 @@ const useShyHeader = () => {
   return { isHeaderVisible }
 }
 
-const Header: React.FC<any> = () => {
+const Header: FCC<any> = () => {
   const { eventId } = useContext(EventContext)
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)

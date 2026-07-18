@@ -39,3 +39,15 @@
 - 結果: Node16 で `npm install --legacy-peer-deps` 成功（593 pkg 削除/48 追加。Emotion10 の依存ツリー整理）。`API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。next 10.2.3 / react 16.13.1 / @emotion/react 11.14.0。**First Load JS 269kB**（回帰比較基準）。
 - 判断・メモ: Emotion を先に単独で上げ、Next/React はまだ据え置き。既知良好プラットフォームで72ファイルの置換を検証できた。
 - 次のアクション: React18/19 + Next10→15 + Firebase compat + Tailwind4 へ。
+
+## 2026-07-18 [C3: Next 10→15 + React 16→18(→19は次段)]
+- **計画との差分**: 中間 major を1段ずつ踏まず、**目標(Next15/React18)へ協調アップグレード**した。理由: 中間バージョンの組合せ(Next12+React16+…)は依存インストール性が悪く、codemod と既知破壊的変更リストで一括対応する方が実務上確実。findDOMNode 削除の影響を避けるため React は一旦 18 に留め、19 化は次段(C4)に隔離する。
+- やったこと:
+  - package.json: next→15.5.20 / react,react-dom→18.3.1 / @types/react(-dom)→18 / @next/mdx→15 / @mdx-js/loader,react→3 / formik→2.4.6 / react-remove-scroll→2.6 / typescript→5.9 / next-images・react-helmet・request・@sentry/browser・babel-plugin-emotion 削除。firebase(8)・tailwind(2) は据え置き(C4/Task4)。
+  - next.config.js: next-images 除去 → `images.disableStaticImages:true` + webpack asset/resource ルールで画像を URL 文字列解決(使用箇所ゼロ変更)。`exportPathMap` 削除(SSR 運用のため production 無効)。`compiler.emotion:true` 追加。env/MDX 維持。
+  - `React.SFC`→`React.FC`(削除済み型)、さらに `React.FC`→children 込みの自前型 `FCC`(src/types/react-children.d.ts で定義)へ一括置換。React18 の暗黙 children 削除に対応(定義側=`props.children`, 消費側=JSX 両方)。
+  - Emotion: classic pragma `/** @jsx jsx */`(70ファイル) → automatic runtime `/** @jsxImportSource @emotion/react */` に一括変換。`src/.babelrc` 削除して **SWC** 化(`compiler.emotion`)。
+  - 個別型修正: emotion css の falsy 条件(`error ? x : undefined`)、Formik エラー表示の `as string` cast、`book.ts` の delete を any cast、`gishohaku5` の next/image に alt 追加。
+- 結果: `npx tsc --noEmit` **0エラー**。`API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。全ルート SSR(`ƒ Dynamic`)。First Load JS **281kB**。
+- 判断・メモ: BSD sed が `\b` 非対応で Toast の置換のみ取りこぼし→個別修正。unused な `jsx` import は残置(noUnusedLocals=false のため無害)。
+- 次のアクション: dev 起動 + after スクショ比較で層崩れ確認 → C4(React19+findDOMNode系) → Firebase compat / Tailwind4。

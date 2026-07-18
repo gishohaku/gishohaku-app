@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import firebase from 'firebase/app'
 import Link from 'next/link'
 
@@ -17,7 +17,7 @@ import EventContext from '../contexts/EventContext'
 import CircleCopyButton from '../components/CircleCopyButton'
 import { db } from '../utils/firebase'
 
-const Mypage: React.FC<{
+const Mypage: FCC<{
   user: firebase.User
   userData: User
 }> = ({ user, userData }) => {

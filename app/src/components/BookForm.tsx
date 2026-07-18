@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import firebase from 'firebase/app'
 import { Button } from './common/Button'
 import { InputGroup } from './common/InputGroup'
@@ -190,7 +190,7 @@ const CustomInput = ({
   <div>
     <Input type="text" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )
@@ -203,7 +203,7 @@ const CustomTextarea = ({
   <div>
     <TextArea {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )

@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx } from '@emotion/react'
 import { Text } from './Text'
@@ -10,7 +10,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 let uidCounter = 0
 
-export const Check: React.FC<Props> = ({
+export const Check: FCC<Props> = ({
   label,
   id,
   disabled,

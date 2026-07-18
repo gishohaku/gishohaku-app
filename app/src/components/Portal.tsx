@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 let container: Element | null = null
 
-export const Portal: React.FC = ({ children }) => {
+export const Portal: FCC = ({ children }) => {
   const [target] = useState<HTMLDivElement | null>(() => {
     if (typeof document === 'undefined') {
       return null

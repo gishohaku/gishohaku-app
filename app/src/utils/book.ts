@@ -56,8 +56,8 @@ export const refToId = (book: Book) => {
     },
   }
 
-  delete results.circleRef
-  delete results.circle!.ref
+  delete (results as any).circleRef
+  delete (results.circle as any).ref
 
   return results
 }

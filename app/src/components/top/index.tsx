@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Hero from './hero'
 import { jsx } from '@emotion/react'
 import Sections from './sections'

@@ -1,10 +1,10 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx, css } from '@emotion/react'
 import { Text } from './Text'
 import { spaces, background, fontSizes, mediaQueries, text as textColors } from './theme'
 
-export const List: React.FC<React.HTMLAttributes<HTMLElement>> = ({
+export const List: FCC<React.HTMLAttributes<HTMLElement>> = ({
   children,
   ...other
 }) => {
@@ -20,7 +20,7 @@ interface ListItemProps extends React.HTMLAttributes<HTMLElement> {
   component?: React.ElementType
 }
 
-export const ListItem: React.FC<ListItemProps> = ({
+export const ListItem: FCC<ListItemProps> = ({
   primary,
   secondary,
   contentBefore,

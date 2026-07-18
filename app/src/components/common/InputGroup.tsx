@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx, css } from '@emotion/react'
 import { Text } from './Text'
@@ -16,7 +16,7 @@ interface Props {
   className?: string
 }
 
-export const InputGroup: React.FC<Props> = ({
+export const InputGroup: FCC<Props> = ({
   id,
   label,
   children,

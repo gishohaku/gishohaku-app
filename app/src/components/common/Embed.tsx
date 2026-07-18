@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   className?: string
 }
 
-export const Embed: React.FC<Props> = ({
+export const Embed: FCC<Props> = ({
   children,
   width,
   height,

@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react'
 
 import { jsx, css } from '@emotion/react'
@@ -100,7 +100,7 @@ const Hero = () => {
           }
         `}
       >
-        <img with="100%" src={logo} alt="技術書同人誌博覧会" />
+        <img width="100%" src={logo} alt="技術書同人誌博覧会" />
       </div>
       <h1
         css={css`

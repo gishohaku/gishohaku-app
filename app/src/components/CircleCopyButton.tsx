@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 import { useState, useCallback, useContext } from 'react'
 
@@ -53,7 +53,7 @@ const useCircleCopy = (fromCircleId: string, toCircleId: string) => {
   }
 }
 
-const CircleCopyButton: React.FC = () => {
+const CircleCopyButton: FCC = () => {
   const { userData } = useContext(UserContext)
   const { eventId } = useContext(EventContext)
   if (eventId !== 'gishohaku2') return null

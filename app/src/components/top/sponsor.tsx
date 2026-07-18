@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 import { Embed } from '../common/Embed'
 import defaultImage from '../../images/sponsor.png'
@@ -13,7 +13,7 @@ interface Props {
   block?: boolean
 }
 
-const sponsor: React.FC<Props> = ({
+const sponsor: FCC<Props> = ({
   image,
   name,
   role,

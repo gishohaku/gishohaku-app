@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../../components/SectionHeder'

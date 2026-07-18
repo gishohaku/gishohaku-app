@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 import { Embed } from '../common/Embed'
 import LazyLoad from 'react-lazyload'
@@ -10,7 +10,7 @@ interface Props {
   url: string
 }
 
-const printing: React.FC<Props> = ({ image, name, url }) => {
+const printing: FCC<Props> = ({ image, name, url }) => {
   return (
     <a href={url} target="_blank" rel="noopner">
       <Embed

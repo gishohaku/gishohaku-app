@@ -1,11 +1,11 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
 import { media, colors } from '../utils/style'
 
 // TODO: move to style
 const keyColor = colors.primaryDarker
 
-const SectionHeader: React.FC<{
+const SectionHeader: FCC<{
   en: string
 }> = ({ children, en }) => {
   return (

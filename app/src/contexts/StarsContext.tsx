@@ -40,7 +40,7 @@ const defaultStars = {
   circleStars: [],
 }
 
-export const StarsProvider: React.FC = ({ children }) => {
+export const StarsProvider: FCC = ({ children }) => {
   const { user } = useContext(UserContext)
   const userId = (user && user.uid) || undefined
   const [userStars, setUserStars] = useState<UserStars>({

@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
 import produce from 'immer'
@@ -38,7 +38,7 @@ interface StarCount {
   count: number
 }
 
-const CircleDetail: React.FC<Props> = ({
+const CircleDetail: FCC<Props> = ({
   circle,
   books,
   editable,
@@ -223,7 +223,7 @@ const CircleDetail: React.FC<Props> = ({
   )
 }
 
-const BlankMessage: React.FC<{
+const BlankMessage: FCC<{
   circleName: string
 }> = ({ circleName }) => (
   <div

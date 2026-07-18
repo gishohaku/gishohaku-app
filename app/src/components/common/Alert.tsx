@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx, css } from '@emotion/react'
 import { Text } from './Text'
@@ -26,7 +26,7 @@ interface Props {
   className?: string
 }
 
-export const Alert: React.FC<Props> = ({
+export const Alert: FCC<Props> = ({
   title,
   subtitle,
   intent = 'info',

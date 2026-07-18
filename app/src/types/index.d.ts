@@ -7,5 +7,3 @@ declare module '*.png' {
   const content: any
   export default content
 }
-
-declare const Sentry: import('@sentry/browser').BrowserClient

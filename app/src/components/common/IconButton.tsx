@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
 import { jsx } from '@emotion/react'
 import { Button, ButtonProps } from './Button'

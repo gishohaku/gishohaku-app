@@ -118,7 +118,7 @@ const Index: NextPage<InitialProps> = (props) => {
   )
 }
 
-const CloseButton: React.FC<{
+const CloseButton: FCC<{
   onClick(): void
 }> = ({ onClick }) => {
   return (
@@ -131,7 +131,7 @@ const CloseButton: React.FC<{
   )
 }
 
-const CircleLink: React.FC<{
+const CircleLink: FCC<{
   book: Book
 }> = ({ book }) => {
   const circle = book.circle
@@ -148,7 +148,7 @@ const CircleLink: React.FC<{
   )
 }
 
-const BookItem: React.FC<{
+const BookItem: FCC<{
   book: Book
   onClick(): void
 }> = ({ book, onClick }) => {

@@ -1,66 +1,32 @@
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 })
-const withImages = require('next-images')
 
-// compose使う
-module.exports = withImages(
-  withMDX({
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-    env: {
-      API_KEY: process.env.API_KEY,
-      PROJECT_ID: process.env.PROJECT_ID,
-      SENTRY_DSN: process.env.SENTRY_DSN,
-    },
-    exportPathMap: (defaultPathMap) => {
-      delete defaultPathMap['/[eventId]/books']
-      delete defaultPathMap['/[eventId]/books/[id]']
-      delete defaultPathMap['/[eventId]/circles']
-      delete defaultPathMap['/[eventId]/circles/[id]']
-      delete defaultPathMap['/[eventId]/mypage']
-      delete defaultPathMap['/[eventId]/mypage/circle']
-      delete defaultPathMap['/[eventId]/mypage/join']
-      const pathMap = {
-        ...defaultPathMap,
-        '/gishohaku1/mypage': {
-          page: '/[eventId]/mypage',
-          query: { eventId: 'gishohaku1' },
-        },
-        '/gishohaku2/mypage': {
-          page: '/[eventId]/mypage',
-          query: { eventId: 'gishohaku2' },
-        },
-        '/gishohaku1/mypage/circle': {
-          page: '/[eventId]/mypage/circle',
-          query: { eventId: 'gishohaku1' },
-        },
-        '/gishohaku2/mypage/circle': {
-          page: '/[eventId]/mypage/circle',
-          query: { eventId: 'gishohaku2' },
-        },
-        '/gishohaku1/mypage/join': {
-          page: '/[eventId]/mypage/join',
-          query: { eventId: 'gishohaku1' },
-        },
-        '/gishohaku2/mypage/join': {
-          page: '/[eventId]/mypage/join',
-          query: { eventId: 'gishohaku2' },
-        },
-        '/gishohaku2/mypage/join': {
-          page: '/[eventId]/mypage/join',
-          query: { eventId: 'gishohaku2' },
-        },
-        '/gishohaku1/mypage/book_stars': {
-          page: '/[eventId]/mypage/book_stars',
-          query: { eventId: 'gishohaku1' },
-        },
-        '/gishohaku2/mypage/book_stars': {
-          page: '/[eventId]/mypage/book_stars',
-          query: { eventId: 'gishohaku2' },
-        },
-      }
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  // Emotion を SWC で変換する(jsxImportSource=@emotion/react の css prop に対応)
+  compiler: {
+    emotion: true,
+  },
+  env: {
+    API_KEY: process.env.API_KEY,
+    PROJECT_ID: process.env.PROJECT_ID,
+    SENTRY_DSN: process.env.SENTRY_DSN,
+  },
+  // next-images の代替: 画像 import を URL 文字列として解決する
+  // (Next 標準の静的画像 import(StaticImageData オブジェクト)を無効化し、
+  //  自前の asset/resource ルールで従来どおり文字列を返す)
+  images: {
+    disableStaticImages: true,
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif|svg|webp|avif|ico)$/i,
+      type: 'asset/resource',
+    })
+    return config
+  },
+}
 
-      return pathMap
-    },
-  }),
-)
+module.exports = withMDX(nextConfig)

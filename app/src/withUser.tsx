@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useContext, ComponentType } from 'react'
 import UserContext from './contexts/UserContext'
 import Loader from './components/Loader'

@@ -22,7 +22,7 @@ const AsnycCircleCell = ({ circleId }: any) => {
   ) : null
 }
 
-const BookStars: React.FC = () => {
+const BookStars: FCC = () => {
   const { eventId } = useContext(EventContext)
   const { userStars } = useContext(StarsContext)
   const circleStars = userStars[eventId].circleStars

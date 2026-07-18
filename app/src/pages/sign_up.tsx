@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react'
 import Link from 'next/link'
 import { jsx, css, Global } from '@emotion/react'
@@ -188,7 +188,7 @@ const CustomInput = ({
   <div>
     <Input type="text" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )

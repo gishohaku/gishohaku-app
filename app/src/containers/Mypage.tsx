@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 import { useContext } from 'react'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ const uidCss = css`
   font-size: 80%;
 `
 
-const Mypage: React.FC<Props> = ({ userData }) => {
+const Mypage: FCC<Props> = ({ userData }) => {
   const { eventId } = useContext(EventContext)
   const circleRef = userData.event && userData.event[eventId]
 
