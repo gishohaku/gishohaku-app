@@ -23,7 +23,7 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
       <MessageBox
         title="ログインが必要です。"
         description="このページを利用するにはログインが必要です。">
-        <Link href="/sign_in" passHref>
+        <Link legacyBehavior href="/sign_in" passHref>
           <Button
             component="a"
             onClick={() => {

@@ -554,7 +554,7 @@ export default () => {
             `}>
             当サイトへのリンクを掲載いただく際は、以下のバナーをご利用ください。
           </p>
-          <p
+          <div
             css={css`
               text-align: center;
               .banner {
@@ -585,7 +585,7 @@ export default () => {
                 （小サイズ：200×40ピクセル）
               </span>
             </div>
-          </p>
+          </div>
         </TextBlock>
       </section>
     </>

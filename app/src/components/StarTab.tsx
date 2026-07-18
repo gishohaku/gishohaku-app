@@ -37,12 +37,12 @@ const StarTab = () => {
         z-index: 101;
         top: 0;
       `}>
-      <Link href={`/${eventId}/mypage/circle_stars`}>
+      <Link legacyBehavior href={`/${eventId}/mypage/circle_stars`}>
         <Item isActive={pathname === '/[eventId]/mypage/circle_stars'}>
           チェックしたサークル
         </Item>
       </Link>
-      <Link href={`/${eventId}/mypage/book_stars`}>
+      <Link legacyBehavior href={`/${eventId}/mypage/book_stars`}>
         <Item isActive={pathname === '/[eventId]/mypage/book_stars'}>
           チェックした頒布物
         </Item>

@@ -51,3 +51,16 @@
 - 結果: `npx tsc --noEmit` **0エラー**。`API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。全ルート SSR(`ƒ Dynamic`)。First Load JS **281kB**。
 - 判断・メモ: BSD sed が `\b` 非対応で Toast の置換のみ取りこぼし→個別修正。unused な `jsx` import は残置(noUnusedLocals=false のため無害)。
 - 次のアクション: dev 起動 + after スクショ比較で層崩れ確認 → C4(React19+findDOMNode系) → Firebase compat / Tailwind4。
+
+## 2026-07-18 [C3 検証: dev + スクショ比較 + Next15 ランタイム修正]
+- dev 起動(Node22, port 4321): 全対象ページ 200。
+- **Next 15 の破壊的変更をランタイムで検出・修正**:
+  1. `<Link><a>` 禁止 → 全 `<Link>`(66箇所) に `legacyBehavior` 付与(<a>とスタイル保持で層崩れ回避)。/sign_in の 500 解消。
+  2. **Portal の hydration mismatch**: `useState` 初期化で即 portal 生成 → SSR(null)と不一致。マウント後(useEffect)生成に変更。これは before ベースラインの Sheet 警告の根本原因。Next15+React18 では dev で**エラーオーバーレイ化**する(スクショも汚す)ため修正必須だった。
+  3. **index.tsx banner の `<p>`>`<div>` 不正ネスト** → `<div>` に修正(他の gishohaku ページは元から div で問題なし。index のみ構造が異なっていた)。
+- **スクショ定量比較(pixelmatch, before=Next10 vs after=Next15, 1280x800/fullPage)**:
+  - top 0.27% / sign_in・sign_up・g1-circles・g1-books 0.09% / reset_password 0.09% / archive 0.05%。**いずれも AA・console バッジ程度の微差で層崩れなし**。
+  - code-of-conduct のみ高さ +10px(4819→4829, 0.2%)。MDX の軽微な余白差。実害なし。
+- 残る console: `legacyBehavior is deprecated` の**非推奨 warning のみ**(エラーではない。Next15 で動作は正常)。将来的な new Link 移行は follow-up。
+- `npx tsc --noEmit` 0エラー維持。
+- 検証用ポートは 4321(Docker が 3000/3100 占有のため)。**正規ポート 3000 は config 未変更で維持**。

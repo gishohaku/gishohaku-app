@@ -91,7 +91,7 @@ const Mypage: FCC<{
             `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-              <Link href={`/${eventId}/circles/${circle.id}`}>
+              <Link legacyBehavior href={`/${eventId}/circles/${circle.id}`}>
                 <a>こちら</a>
               </Link>
               。

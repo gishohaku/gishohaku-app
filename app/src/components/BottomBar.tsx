@@ -73,25 +73,25 @@ const BottomBar = () => {
           transition: padding-bottom 0.15s ease-out;
         `}>
         <span css={spacer} />
-        <Link href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} passHref>
+        <Link legacyBehavior href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} passHref>
           <a css={item}>
             <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>
           </a>
         </Link>
-        <Link href={`/${eventId}/circles`} passHref>
+        <Link legacyBehavior href={`/${eventId}/circles`} passHref>
           <a css={item}>
             <img src={groupWork} width={28} css={icon} />
             <div css={label}>サークル</div>
           </a>
         </Link>
-        <Link href={`/${eventId}/books`} passHref>
+        <Link legacyBehavior href={`/${eventId}/books`} passHref>
           <a css={item}>
             <img src={book} width={28} css={icon} />
             <div css={label}>頒布物</div>
           </a>
         </Link>
-        <Link href={`/${eventId}/mypage`} passHref>
+        <Link legacyBehavior href={`/${eventId}/mypage`} passHref>
           <a css={item}>
             <img src={person} width={28} css={icon} />
             <div css={label}>マイページ</div>

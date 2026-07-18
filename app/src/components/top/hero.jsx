@@ -130,7 +130,7 @@ const Hero = () => {
         @大田区産業プラザPiO
       </p>
       <p>
-        <Link href="/gishohaku1/circle-info" passHref>
+        <Link legacyBehavior href="/gishohaku1/circle-info" passHref>
           <a
             css={css`
               background-color: ${colors.accent};
@@ -175,7 +175,7 @@ const Hero = () => {
           </a>
         </Link>
 
-        <Link href="/gishohaku1/guest-info" passHref>
+        <Link legacyBehavior href="/gishohaku1/guest-info" passHref>
           <a
             css={css`
               background-color: ${colors.accent};

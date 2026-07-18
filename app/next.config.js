@@ -4,6 +4,9 @@ const withMDX = require('@next/mdx')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // このディレクトリ(app/)を出力トレースのルートにする
+  // (リポジトリルートと app/ に lockfile が両方あるための警告を回避)
+  outputFileTracingRoot: __dirname,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   // Emotion を SWC で変換する(jsxImportSource=@emotion/react の css prop に対応)
   compiler: {

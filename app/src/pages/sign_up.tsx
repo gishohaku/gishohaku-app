@@ -107,7 +107,7 @@ const SignUp: NextPage = () => {
                     line-height: 1.5;
                   `}>
                   登録することで、
-                  <Link href="/gishohaku1/privacy" passHref>
+                  <Link legacyBehavior href="/gishohaku1/privacy" passHref>
                     <a>利用規約/プライバシーポリシー</a>
                   </Link>
                   に同意するものとします
@@ -165,12 +165,12 @@ const SignUp: NextPage = () => {
             line-height: 1.5;
           `}>
           登録することで、
-          <Link href="/gishohaku1/privacy" passHref>
+          <Link legacyBehavior href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
           </Link>
           に同意するものとします
         </p>
-        <Link href="/sign_in">
+        <Link legacyBehavior href="/sign_in">
           <Button component="a" block variant="outline">
             すでに会員の方はこちら
           </Button>

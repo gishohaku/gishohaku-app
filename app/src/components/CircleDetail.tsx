@@ -102,7 +102,7 @@ const CircleDetail: FCC<Props> = ({
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
-            <Link href={`/${eventId}/circles/${circle.id}/edit`}>
+            <Link legacyBehavior href={`/${eventId}/circles/${circle.id}/edit`}>
               <a
                 css={css`
                   flex: 1;
@@ -211,7 +211,7 @@ const CircleDetail: FCC<Props> = ({
         ))}
         {books.length === 0 && <BlankMessage circleName={circle.name} />}
         {editable && (
-          <Link href={`/${eventId}/books/new`}>
+          <Link legacyBehavior href={`/${eventId}/books/new`}>
             <NewBookButton>
               <img src={editIcon} />
               頒布物を追加

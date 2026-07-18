@@ -29,7 +29,7 @@ export default () => {
       <section css={section}>
         <SectionHeader en="ARCHIVE">過去の開催回一覧</SectionHeader>
         <List>
-          <Link href="/gishohaku12" passHref>
+          <Link legacyBehavior href="/gishohaku12" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十二回 技術書同人誌博覧会"
@@ -38,7 +38,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku11" passHref>
+          <Link legacyBehavior href="/gishohaku11" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十一回 技術書同人誌博覧会"
@@ -47,7 +47,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku10" passHref>
+          <Link legacyBehavior href="/gishohaku10" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十回 技術書同人誌博覧会"
@@ -56,7 +56,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku9" passHref>
+          <Link legacyBehavior href="/gishohaku9" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第九回 技術書同人誌博覧会"
@@ -65,7 +65,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku8" passHref>
+          <Link legacyBehavior href="/gishohaku8" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第八回 技術書同人誌博覧会"
@@ -74,7 +74,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku7" passHref>
+          <Link legacyBehavior href="/gishohaku7" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第七回 技術書同人誌博覧会"
@@ -87,7 +87,7 @@ export default () => {
                 primary="第六回 技術書同人誌博覧会"
                 secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
               />
-          <Link href="/gishohaku5" passHref>
+          <Link legacyBehavior href="/gishohaku5" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第五回 技術書同人誌博覧会"
@@ -104,7 +104,7 @@ export default () => {
                 primary="第三回 技術書同人誌博覧会"
                 secondary="コロナウイルス感染症などの社会状況を鑑みて催行を中止しました"
               />
-          <Link href="/gishohaku2" passHref>
+          <Link legacyBehavior href="/gishohaku2" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第二回 技術書同人誌博覧会"
@@ -113,7 +113,7 @@ export default () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku1" passHref>
+          <Link legacyBehavior href="/gishohaku1" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第一回 技術書同人誌博覧会"

@@ -30,7 +30,7 @@ const Mypage: FCC<Props> = ({ userData }) => {
     <Container>
       <div className="bg-white mt-8 overflow-hidden rounded shadow">
         <List>
-          <Link href={`/${eventId}/mypage/circle_stars`} passHref>
+          <Link legacyBehavior href={`/${eventId}/mypage/circle_stars`} passHref>
             <a>
               <ListItem
                 primary="チェックしたサークル"
@@ -39,7 +39,7 @@ const Mypage: FCC<Props> = ({ userData }) => {
               />
             </a>
           </Link>
-          <Link href={`/${eventId}/mypage/book_stars`} passHref>
+          <Link legacyBehavior href={`/${eventId}/mypage/book_stars`} passHref>
             <a>
               <ListItem
                 primary="チェックした頒布物"
@@ -49,7 +49,7 @@ const Mypage: FCC<Props> = ({ userData }) => {
             </a>
           </Link>
           {circleRef && (
-            <Link href={`/${eventId}/mypage/circle`} passHref>
+            <Link legacyBehavior href={`/${eventId}/mypage/circle`} passHref>
               <a>
                 <ListItem
                   primary="サークル情報編集"

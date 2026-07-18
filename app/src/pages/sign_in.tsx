@@ -95,7 +95,7 @@ const SignIn: NextPage = () => {
                       css={css`
                         text-align: right;
                       `}>
-                      <Link href="/reset_password" passHref>
+                      <Link legacyBehavior href="/reset_password" passHref>
                         <a
                           css={css`
                             font-size: 12px;
@@ -159,12 +159,12 @@ const SignIn: NextPage = () => {
             margin-bottom: 32px;
           `}>
           登録することで、
-          <Link href="/gishohaku1/privacy" passHref>
+          <Link legacyBehavior href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
           </Link>
           に同意するものとします
         </p>
-        <Link href="/sign_up">
+        <Link legacyBehavior href="/sign_up">
           <Button component="a" block variant="outline">
             会員登録はこちら
           </Button>
