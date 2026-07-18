@@ -12,3 +12,4 @@ app/.sancho-migration
 app/.nextjs-migration
 .DS_Store
 *.csv
+*.tsbuildinfo
