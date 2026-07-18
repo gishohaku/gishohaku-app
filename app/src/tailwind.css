@@ -10,6 +10,8 @@
  * Tailwind v4 互換対応:
  * v4 は border/divide の既定色を gray-200 から currentColor に変更したため、
  * 色未指定の border が意図せず濃くなる。v3 と同じ見た目に戻す。
+ * 値は Tailwind v3 の gray-200 (#e5e7eb) を直接指定する
+ * (未定義になり得る CSS 変数に依存しないため)。
  */
 @layer base {
   *,
@@ -17,6 +19,6 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: #e5e7eb;
   }
 }
