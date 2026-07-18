@@ -7,6 +7,16 @@ import csv from 'csv-parser'
 import admin from 'firebase-admin'
 import Circle from '../app/src/utils/circle'
 
+// DryRun(既定 true): Firestore への書き込みは行わず、追加予定の内容をログ出力するだけ。
+// 実際に書き込むときのみ環境変数 DRY_RUN=false を明示的に指定する。
+// 例) DRY_RUN=false npx tsx scripts/20260428-createCircles.ts
+const DRY_RUN = process.env.DRY_RUN !== 'false'
+console.log(
+  DRY_RUN
+    ? '[DRY-RUN] Firestore へは書き込みません(追加予定をログ出力)。実書き込みは DRY_RUN=false を指定してください。'
+    : '[実行] DRY_RUN=false のため実際に Firestore へ書き込みます。',
+)
+
 admin.initializeApp({
   projectId: process.env.PROJECT_ID,
   databaseURL: process.env.DATABASE_URL,
@@ -40,8 +50,12 @@ fs.createReadStream('./data/entries-gishohaku13.csv')
         eventId: 'gishohaku13',
       }
 
-      const res = await db.collection('circles').add(circle)
-      console.log(res.id)
+      if (DRY_RUN) {
+        console.log('[DRY-RUN] 追加予定:', circle.booth, circle.name)
+      } else {
+        const res = await db.collection('circles').add(circle)
+        console.log(res.id)
+      }
       return circle
     })
 

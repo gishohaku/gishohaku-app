@@ -87,3 +87,12 @@
 - **v4 互換対応**: border 既定色が currentColor 化する破壊的変更に対し、`@layer base` で `border-color: var(--color-gray-200, currentColor)` を復元。
 - 結果: build 成功。**スクショ比較(Tailwind4/React19 vs Next10 baseline)**: top 0.02% / archive 0.05% / circles・books 0.09% / フォーム系 sign_in 0.11%・sign_up 0.13%・reset_password 0.14%(forms プラグインの微差)。**層崩れなし**。sign_in を目視確認し入力欄・ボタン正常。
 - 次のアクション: データスクリプト(DryRun 化含む) / 総合検証 / README 最終化。
+
+## 2026-07-18 [データスクリプト DryRun 化 + Node22 対応]
+- **DryRun 実装(ユーザー要件)**: `20260428-createCircles.ts` / `createInvitation.ts` / `sendCircleInvitation.ts` を**既定で DryRun**(Firestore 書き込み・メール送信をしない)に改修。`DRY_RUN=false` 明示時のみ実行。誤実行しても DB は変わらない。
+  - createCircles: `db.collection('circles').add()` を DryRun ガード(追加予定をログ)。
+  - createInvitation: `circleInvitations.add()` を DryRun ガード(作成予定をログ)。読み取り(get)は DB 非変更のため DryRun でも実行。
+  - sendCircleInvitation: DryRun 時は transporter を生成せず(SMTP 設定も不要)、`sendMail` をスキップして送信予定をログ。
+- **Node22 対応**: root `package.json` の `firebase-admin` を ^11→^13(13.10.0, Node18-22 対応)、`firebase-functions` ^4→^6、typescript ^4.9→^5.6 に更新。`runscript`(=tsx)スクリプト追加。
+- **検証(実行なし、ユーザー指示)**: `tsc --noEmit`(esModuleInterop/bundler/esnext/es2022)で3スクリプトを静的チェック → **exit 0**。import 解決(`../app/src/utils/circle` の default interface、firebase-admin default)・型・DryRun 実装すべて OK。実行(dry-run 含む)はしていない。
+- **完了**: 全フェーズのアップグレード完了。残: README 最終化・総合報告。
