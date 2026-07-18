@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { NextPage } from 'next'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 
 import { getBooks, perBookCount } from '../utils/functions'
 import Book from '../utils/book'

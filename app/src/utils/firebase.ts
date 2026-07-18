@@ -1,8 +1,8 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/storage'
-import 'firebase/functions'
-import 'firebase/auth'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
+import 'firebase/compat/storage'
+import 'firebase/compat/functions'
+import 'firebase/compat/auth'
 
 const apiKey = process.env.API_KEY
 const projectId = process.env.PROJECT_ID

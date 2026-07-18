@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import Link from 'next/link'
 
 import { jsx, css } from '@emotion/react'

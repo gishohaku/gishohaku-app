@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import { Button } from './common/Button'
 import { InputGroup } from './common/InputGroup'
 import { Input } from './common/Input'

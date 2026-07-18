@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { jsx, css, Global } from '@emotion/react'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from '../components/common/Container'
 import { NextRouter, useRouter } from 'next/router'
