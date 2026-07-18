@@ -10,36 +10,36 @@ import SEO from '../../components/SEO'
 
 <MdxContainer>
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" accept-charset="Shift_JIS">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" acceptCharset="Shift_JIS">
   <input type="hidden" name="cmd" value="_s-xclick" />
   <input type="hidden" name="hosted_button_id" value="3RBSNFCU9YYMA" />
   <table>
-    <tr>
-      <td>
-        <input type="hidden" name="on0" value="プランを選択してください"/>
-        プランを選択してください
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <select name="os0">
-          <option value="通常プラン" selected>
-            通常プラン（¥4,000／机1卓）
-          </option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="hidden" name="on1" value="サークル名を入力してください"/>
-        サークル名を入力してください
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="text" name="os1" maxLength="200" />
-      </td>
-    </tr>
+    <tbody>
+      <tr>
+        <td>
+          <input type="hidden" name="on0" value="プランを選択してください"/>
+          プランを選択してください
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <select name="os0" defaultValue="通常プラン">
+            <option value="通常プラン">通常プラン（¥4,000／机1卓）</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="hidden" name="on1" value="サークル名を入力してください"/>
+          サークル名を入力してください
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="os1" maxLength="200" />
+        </td>
+      </tr>
+    </tbody>
   </table>
   <input type="hidden" name="currency_code" value="JPY" />
   <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_paynow_LG.gif" border="0" name="submit" title="PayPalなら、オンラインで安全・簡単にお支払いが可能です。" alt="今すぐ購入" />
