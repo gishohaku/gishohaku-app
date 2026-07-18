@@ -64,3 +64,13 @@
 - 残る console: `legacyBehavior is deprecated` の**非推奨 warning のみ**(エラーではない。Next15 で動作は正常)。将来的な new Link 移行は follow-up。
 - `npx tsc --noEmit` 0エラー維持。
 - 検証用ポートは 4321(Docker が 3000/3100 占有のため)。**正規ポート 3000 は config 未変更で維持**。
+
+## 2026-07-18 [C4: React 18→19]
+- **findDOMNode 削除(React19)対応**: 使用ライブラリを調査 → `react-lazyload`(2.6.5)が findDOMNode 使用で破損確定。`react-image-lightbox`/`react-infinite-scroller` は findDOMNode 不使用。
+  - `react-lazyload` を**自前 `src/components/LazyLoad.tsx`(IntersectionObserver ベース)に置換**(4ファイル、`offset` 互換、SSR 整合)。依存削除。
+  - `react-image-lightbox`(peer ^16, 旧ライフサイクル)は findDOMNode/string ref 不使用のため据え置き。import は React19 で正常(books ページ 200)。**クリック時のライトボックス表示は実データ必要のため未検証**(代替: import 解決とページ描画で確認)。
+- package.json: react/react-dom→19.2.7 / @types/react(-dom)→19 / react-dropzone→14.4.1 / react-lazyload・@types/react-lazyload 削除。
+- React19 型修正: `useRef<string>()`→`useRef<string|undefined>(undefined)`(引数必須化, Check/InputGroup)、`cloneElement` の要素を `as ReactElement<any>` cast(IconButton/Popover)、react-dropzone14 の `accept` をオブジェクト形式へ(ImageUploader)。
+- 結果: `tsc --noEmit` 0エラー、`npm run build` 成功(First Load JS 294kB)。
+- **スクショ比較(React19 vs Next10 baseline)**: top 0.02% / sign_in等 0.09% / archive 0.05% / code-of-conduct のみ +10px。**層崩れなし**。残 console は legacyBehavior 非推奨 warning のみ。
+- 次のアクション: Firebase 8→compat / Tailwind 2→4。

@@ -17,7 +17,11 @@ const ImageUploader: FCC<Props> = ({ user, addUrl, size }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    accept: 'image/gif,image/jpeg,image/png,image/jpg',
+    accept: {
+      'image/gif': ['.gif'],
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+    },
     onDropAccepted: async (files) => {
       setUploading(true)
       const storageRef = firebase.storage().ref()

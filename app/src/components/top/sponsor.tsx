@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/react'
 import { Embed } from '../common/Embed'
 import defaultImage from '../../images/sponsor.png'
-import LazyLoad from 'react-lazyload'
+import LazyLoad from '../LazyLoad'
 import { media } from '../../utils/style'
 
 interface Props {

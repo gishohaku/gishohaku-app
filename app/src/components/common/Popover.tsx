@@ -32,7 +32,7 @@ export const ResponsivePopover: FCC<Props> = ({
     return () => document.removeEventListener('click', onDocClick)
   }, [isOpen])
 
-  const trigger = React.cloneElement(children, {
+  const trigger = React.cloneElement(children as React.ReactElement<any>, {
     onPress: () => setIsOpen((open) => !open),
     'aria-expanded': isOpen,
     'aria-haspopup': true,

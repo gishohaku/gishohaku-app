@@ -25,7 +25,7 @@ export const InputGroup: FCC<Props> = ({
   hideLabel,
   ...other
 }) => {
-  const uidRef = React.useRef<string>()
+  const uidRef = React.useRef<string | undefined>(undefined)
   if (!uidRef.current) {
     uidCounter += 1
     uidRef.current = id || `input-group-${uidCounter}`

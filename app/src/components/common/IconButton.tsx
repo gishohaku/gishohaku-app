@@ -35,7 +35,11 @@ export const IconButton = React.forwardRef<HTMLElement, Props>(
           }}>
           {label}
         </span>
-        {React.cloneElement(icon, { color, size, 'aria-hidden': true })}
+        {React.cloneElement(icon as React.ReactElement<any>, {
+          color,
+          size,
+          'aria-hidden': true,
+        })}
       </Button>
     )
   },

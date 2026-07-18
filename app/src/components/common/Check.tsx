@@ -16,7 +16,7 @@ export const Check: FCC<Props> = ({
   disabled,
   ...other
 }) => {
-  const uidRef = React.useRef<string>()
+  const uidRef = React.useRef<string | undefined>(undefined)
   if (!uidRef.current) {
     uidCounter += 1
     uidRef.current = id || `check-${uidCounter}`
