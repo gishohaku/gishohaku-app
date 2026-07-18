@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+/* v3 形式の JS 設定(content / theme.extend.colors)を引き継ぐ */
+@config '../tailwind.config.js';
+
+/* フォーム部品のスタイル(旧 plugins: [require('@tailwindcss/forms')] の代替) */
+@plugin '@tailwindcss/forms';
+
+/*
+ * Tailwind v4 互換対応:
+ * v4 は border/divide の既定色を gray-200 から currentColor に変更したため、
+ * 色未指定の border が意図せず濃くなる。v3 と同じ見た目に戻す。
+ */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

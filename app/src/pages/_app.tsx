@@ -6,7 +6,7 @@ import { EventProvider } from '../contexts/EventContext'
 import '../utils/firebase'
 import Layout from '../components/Layout'
 import ReactGA from 'react-ga'
-import 'tailwindcss/tailwind.css'
+import '../tailwind.css'
 
 // import * as Sentry from '@sentry/browser'
 

@@ -74,3 +74,16 @@
 - 結果: `tsc --noEmit` 0エラー、`npm run build` 成功(First Load JS 294kB)。
 - **スクショ比較(React19 vs Next10 baseline)**: top 0.02% / sign_in等 0.09% / archive 0.05% / code-of-conduct のみ +10px。**層崩れなし**。残 console は legacyBehavior 非推奨 warning のみ。
 - 次のアクション: Firebase 8→compat / Tailwind 2→4。
+
+## 2026-07-18 [Firebase 8→11 compat]
+- `firebase/app`・`firestore`・`storage`・`functions`・`auth` を `firebase/compat/*` に置換(11ファイル)。namespaced API(約75箇所)は不変。
+- firebase 11.10.0、tsc 0エラー、build 成功、dev で初期化・接続確認(ダミー project の PERMISSION_DENIED は想定通り=実 creds なら動作)。
+
+## 2026-07-18 [Tailwind 2→4]
+- package.json: tailwindcss→4.3.3 / `@tailwindcss/postcss`→4 追加 / `@tailwindcss/forms`→0.5.11 / `@tailwindcss/line-clamp` 削除(v4 コア内蔵) / autoprefixer 削除(v4 内蔵)。
+- postcss.config.js → `{ '@tailwindcss/postcss': {} }`。
+- tailwind.config.js: `purge`→`content`、`mode:'jit'`/`variants` 削除、`theme.extend.colors` 維持。
+- CSS エントリ `src/tailwind.css` 新設: `@import 'tailwindcss'` + `@config '../tailwind.config.js'` + `@plugin '@tailwindcss/forms'`。`_app.tsx` の `import 'tailwindcss/tailwind.css'` を差し替え。
+- **v4 互換対応**: border 既定色が currentColor 化する破壊的変更に対し、`@layer base` で `border-color: var(--color-gray-200, currentColor)` を復元。
+- 結果: build 成功。**スクショ比較(Tailwind4/React19 vs Next10 baseline)**: top 0.02% / archive 0.05% / circles・books 0.09% / フォーム系 sign_in 0.11%・sign_up 0.13%・reset_password 0.14%(forms プラグインの微差)。**層崩れなし**。sign_in を目視確認し入力欄・ボタン正常。
+- 次のアクション: データスクリプト(DryRun 化含む) / 総合検証 / README 最終化。
