@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Text } from './Text'
 import { InputGroupProvider } from './InputGroupContext'
 import { spaces, text, colors, fontSizes } from './theme'

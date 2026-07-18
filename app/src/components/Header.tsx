@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import logo from '../images/shortLogo.svg'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Sheet } from './common/Sheet'
 import { List, ListItem } from './common/List'
 import {

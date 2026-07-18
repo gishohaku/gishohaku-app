@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import marked from 'marked'
 

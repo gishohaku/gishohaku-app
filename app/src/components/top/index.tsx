@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import Hero from './hero'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import Sections from './sections'
 
 const Top = () => (

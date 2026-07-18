@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { spaces, background, text } from './theme'
 
 export const MenuList: React.FC<React.HTMLAttributes<HTMLElement>> = ({

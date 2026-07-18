@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Button } from '../components/common/Button'
 import { useRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'

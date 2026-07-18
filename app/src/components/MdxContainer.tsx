@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/react'
 import Contents from './MdxContents'
 import { Container } from './common/Container'
 

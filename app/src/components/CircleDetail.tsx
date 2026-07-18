@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import produce from 'immer'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'

@@ -1,4 +1,4 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import { alphaOf } from './colorUtils'
 import { colors, text, background, radii, Size, getInputSize } from './theme'
 

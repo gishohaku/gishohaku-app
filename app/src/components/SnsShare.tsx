@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import Book from '../utils/book'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'

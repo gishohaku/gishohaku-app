@@ -2,7 +2,7 @@
 import { colors, media } from '../utils/style'
 
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/react'
 import BottomBar from './BottomBar'
 import Header, { headerHeight } from './Header'
 import SEO from './SEO'

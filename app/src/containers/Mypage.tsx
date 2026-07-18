@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useContext } from 'react'
 import Link from 'next/link'
 import { Container } from '../components/common/Container'

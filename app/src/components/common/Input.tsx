@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { baseInputStyles, inputSizeStyles, errorInputStyles } from './formStyles'
 import { getButtonHeight, Size } from './theme'
 import { useInputGroup } from './InputGroupContext'

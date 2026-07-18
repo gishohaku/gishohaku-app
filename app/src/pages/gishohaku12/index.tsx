@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/react'
 import { media, colors } from '../../utils/style'
 import FluidBlock from '../../components/atoms/FluidBlock'
 import TextBlock from '../../components/atoms/TextBlock'

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useEffect, useRef } from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { RemoveScroll } from 'react-remove-scroll'
 import { Portal } from '../Portal'
 import { background, radii, spaces, zIndices, mediaQueries } from './theme'

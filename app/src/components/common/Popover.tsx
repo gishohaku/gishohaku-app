@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useState, useRef, useEffect } from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { background, radii, spaces, zIndices, colors } from './theme'
 import { alphaOf } from './colorUtils'
 

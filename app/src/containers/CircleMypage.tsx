@@ -2,7 +2,7 @@
 import firebase from 'firebase/app'
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../utils/circle'

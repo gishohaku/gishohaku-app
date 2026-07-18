@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 
 import placeIcon from './round-place.svg'
 import directionsIcon from './round-directions_run.svg'

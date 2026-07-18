@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { media, colors } from '../../utils/style'
 import SectionHeader from '../../components/SectionHeder'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { List, ListItem } from '../../components/common/List'
 import { IconChevronRight } from '../../components/common/icons'
 
