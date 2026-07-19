@@ -127,3 +127,20 @@
 
 ## 既知の見た目差分(許容)
 - スクショ pixelmatch: 全ページ 0.02〜0.14%(AA・dev バッジ程度)。code-of-conduct のみ高さ +10px(MDX 余白の微差)。**層崩れなし**。
+
+## 2026-07-19 [レビュー指摘対応: npm install の ERESOLVE 解消]
+- **事象**: 新規環境で `npm install`(オプション無し)が ERESOLVE で失敗。既存の `package-lock.json` は React 19 昇格前の解決(react-ga@2.7.0 = peer react ^15.6.2 || ^16.0)を保持しており、既存の `node_modules` を持つ環境では顕在化しなかった。
+- **原因の内訳**:
+  - `react-ga@^2.6.0`: peer が React 15/16 固定。**メンテ停止**。
+  - `react-image-lightbox@^5.1.0`: peer `react ^16.x`(実機は React 19 で動作確認済 = 前回レビュー④)。
+  - `react-infinite-scroller@^1.2.4`: peer が React 18 まで。React 19 未対応の宣言(実機動作は問題なし)。
+- **対応**:
+  - `react-ga` → **`react-ga4@^2.1.0` に置換**(GA4 対応かつ React 19 対応の後継)。`_app.tsx` の `initialize`/`pageview` を GA4 API に更新(`ReactGA.send({ hitType: 'pageview', page })`)。
+  - `react-image-lightbox` / `react-infinite-scroller` は npm `overrides` で peer(react/react-dom)を `$react`/`$react-dom` に上書き。両者とも実機で React 19 動作確認済のため実害なし。
+  - **`app/Dockerfile` の `npm ci --legacy-peer-deps` → `npm ci`** に修正(`--legacy-peer-deps` は不要になった)。
+  - `docs/version_up_nextjs_plan.md` のビルド手順も同期。
+- **検証**:
+  - `rm -rf node_modules package-lock.json && npm install`(オプション無し)成功。ERESOLVE 解消。
+  - `npx tsc --noEmit` 成功。
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build` 成功。First Load JS shared 304kB(既存基準内)。
+- **既知の注意**: 現状の `TRACKING_ID` は Universal Analytics ID(`UA-129667923-2`)で、UA 自体は 2023-07 にサンセット済み。`react-ga4` への置換で**インストール・ビルドは通る**が、GA4 の計測データを送るには `G-XXXXXXX` 形式の測定 ID への差し替えが別途必要。本 PR のスコープは install 失敗の解消までとし、GA4 移行(測定 ID 更新)は follow-up とする。

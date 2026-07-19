@@ -19,10 +19,10 @@
 - **プロジェクト用 Node と作業ツール用 Node を分離する**（sancho 計画の教訓）。Playwright など Node 18+ 前提のツールは、グローバルの Node を切り替えず `PATH="<toolのNode>:$PATH" npx ...` のようにコマンド単位でパスを前置して実行する。
 - ビルド手順は `app/Dockerfile` に従う（フェーズ進行に合わせて Dockerfile 側の Node も更新する）:
   ```
-  npm ci --legacy-peer-deps
+  npm ci
   API_KEY=<値> PROJECT_ID=<値> npm run build
   ```
-  - `--legacy-peer-deps` は peer 依存の衝突回避のため現状必要。フェーズが進んで依存が整合したら**外せるか検証し、外せた時点で Dockerfile からも外す**（外せない場合は理由を PROGRESS に記録して継続）。
+  - `--legacy-peer-deps` は **不要**（`react-ga` → `react-ga4` 置換と `react-image-lightbox` / `react-infinite-scroller` の `overrides` で React 19 と整合済み。2026-07-19 に Dockerfile からも撤去）。
   - `API_KEY` / `PROJECT_ID` は Firebase 用。**ダミー値でビルドが通ること**を前提とする（sancho 計画の実績: Firebase はビルド時に値を検証しない）。通らなくなったらユーザーに実値を依頼する。
 - `npm run dev`（= `next dev`）で `http://localhost:3000` が表示されることを各フェーズの受け入れ基準に含める。
 
