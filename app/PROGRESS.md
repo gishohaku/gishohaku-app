@@ -144,3 +144,13 @@
   - `npx tsc --noEmit` 成功。
   - `API_KEY=dummy PROJECT_ID=dummy npm run build` 成功。First Load JS shared 304kB(既存基準内)。
 - **既知の注意**: 現状の `TRACKING_ID` は Universal Analytics ID(`UA-129667923-2`)で、UA 自体は 2023-07 にサンセット済み。`react-ga4` への置換で**インストール・ビルドは通る**が、GA4 の計測データを送るには `G-XXXXXXX` 形式の測定 ID への差し替えが別途必要。本 PR のスコープは install 失敗の解消までとし、GA4 移行(測定 ID 更新)は follow-up とする。
+
+## 2026-07-19 [レビュー指摘対応: 計画外の副次修正 3件の記録]
+観点1(機械的変換 vs 要人間レビュー)の分類で「計画書に記載のない副次修正」として抽出された 3 件について、いずれも維持することとし、判断理由をここに残す。
+- **`app/src/components/top/hero.jsx` (with → width)**: 元は React に無視される無効属性(`with="100%"`)。React 19 で不明属性の扱いが厳しくなった際にコンソール警告になる可能性があり、実害のない改善として据え置き。差戻すと無効属性の復活になるため revert しない。
+- **`app/tsconfig.json` (`incremental: true` 追加)**: 2 回目以降の `next build` / `tsc --noEmit` を高速化する一般的設定。生成される `*.tsbuildinfo` は `.gitignore` で除外済み(b9e9fd2)。ビルド出力への影響なし。
+- **`app/docs/remove_sancho_plan_progress.md` (新規)**: 本バージョンアップ着手前に sancho 依存の削除ベースラインを整えた実作業の記録。Next 10→15 化のスタート地点(react 16.13.1 でグリーンビルド)を作るために不可欠だった作業のため、経緯として同梱。
+
+## 2026-07-19 [レビュー指摘対応: 未使用スクリプトの削除と Docker イメージ最適化]
+- **`scripts/addCache.ts` 削除**: 2019-07 の一括投入コミット(`ee80240`)以降 7 年間変更なし・参照ゼロ・ハードコードされた 1 ファイル分の `cacheControl` メタデータ更新用途のみの使い捨てスクリプト。ルート `package.json` に `firebase` が宣言されていない幽霊依存状態でもあった。React 19 化とは無関係の掃除だが、レビュー観点3(#1)で「firebase v11 化により実行時に壊れる可能性」として指摘されたため、実行実績・計画の両面から**削除**が最も安全と判断。
+- **`app/.dockerignore` 新設 + Dockerfile の `.next/cache` 除去**: `COPY . .` 前にローカルの `node_modules` / `.next` / `.git` / `.env*` / `docs` / `PROGRESS.md` などをコンテキストから除外(ビルドコンテキスト削減)。また `next build` 直後に `rm -rf .next/cache`(Next 15 で 103MB)を追加して Cloud Run イメージから不要キャッシュを排除。Next 10 → 15 でキャッシュサイズが約 1.75 倍(59MB→103MB)に拡大していたため、既存の設定不備が Next 15 化で相対的に効いてくる状況を解消。
