@@ -34,11 +34,12 @@ const LazyLoad = ({ children, offset = 0 }: Props) => {
     return () => io.disconnect()
   }, [visible, offset])
 
-  return (
-    <div className="lazyload-wrapper" ref={ref}>
-      {visible ? children : null}
-    </div>
-  )
+  // 可視化後は children を直接返す(ラッパー div を挟まない)。
+  // これは旧 react-lazyload と同じ挙動で、親の CSS が `& > *` のような
+  // 直接子セレクタを使っている(例: components/common/Embed.tsx)場合の
+  // レイアウト破壊を防ぐ。不可視の間だけ観察用の placeholder を出す。
+  if (visible) return <>{children}</>
+  return <div className="lazyload-placeholder" ref={ref} />
 }
 
 export default LazyLoad
