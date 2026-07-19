@@ -1,0 +1,25 @@
+# Local build/dev artifacts (Docker では npm ci + next build を再実行するため不要)
+node_modules
+.next
+.nextjs-migration
+
+# Version control
+.git
+.gitignore
+
+# Docker 自身
+Dockerfile
+.dockerignore
+
+# ローカル環境固有
+.env
+.env.*
+.DS_Store
+*.log
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Docs / scratchpad (ランタイムには不要)
+docs
+PROGRESS.md

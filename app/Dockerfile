@@ -14,7 +14,8 @@ RUN npm ci
 
 COPY . .
 
-RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build
+RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build \
+    && rm -rf .next/cache
 
 ENV NODE_ENV=production
 
