@@ -143,7 +143,13 @@ export const Sheet: FCC<Props> = ({
         ]}
         {...other}>
         <RemoveScroll enabled={isOpen} forwardProps>
-          <div css={{ background: background.layer, height: '100%' }}>
+          <div
+            css={{
+              background: background.layer,
+              height: '100%',
+              overflowY: 'auto',
+              overscrollBehavior: 'contain',
+            }}>
             {children}
           </div>
         </RemoveScroll>
