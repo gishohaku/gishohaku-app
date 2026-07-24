@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -10,11 +10,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY package.json package-lock.json ./
 
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 
 COPY . .
 
-RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build
+RUN API_KEY=${api_key} PROJECT_ID=${project_id} npm run build \
+    && rm -rf .next/cache
 
 ENV NODE_ENV=production
 

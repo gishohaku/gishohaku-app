@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 import { Embed } from '../common/Embed'
 import defaultImage from '../../images/sponsor.png'
-import LazyLoad from 'react-lazyload'
+import LazyLoad from '../LazyLoad'
 import { media } from '../../utils/style'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
   block?: boolean
 }
 
-const sponsor: React.FC<Props> = ({
+const sponsor: FCC<Props> = ({
   image,
   name,
   role,

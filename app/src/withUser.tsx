@@ -1,11 +1,11 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useContext, ComponentType } from 'react'
 import UserContext from './contexts/UserContext'
 import Loader from './components/Loader'
 import MessageBox from './components/MessageBox'
 import Link from 'next/link'
 import { Button } from './components/common/Button'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useRouter } from 'next/router'
 
 export const REDIRECT_TO_AFTER_LOGIN = 'REDIRECT_TO_AFTER_LOGIN'
@@ -23,7 +23,7 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
       <MessageBox
         title="ログインが必要です。"
         description="このページを利用するにはログインが必要です。">
-        <Link href="/sign_in" passHref>
+        <Link legacyBehavior href="/sign_in" passHref>
           <Button
             component="a"
             onClick={() => {

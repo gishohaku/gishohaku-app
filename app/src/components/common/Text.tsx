@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 import { fontSizes, text as textColors } from './theme'
 
 type Variant =
@@ -68,7 +68,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   htmlFor?: string
 }
 
-export const Text: React.FC<Props> = ({
+export const Text: FCC<Props> = ({
   variant = 'body',
   wrap = true,
   muted,

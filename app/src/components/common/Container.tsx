@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 
-export const Container: React.FC<{
+export const Container: FCC<{
   className?: string
 }> = ({ children, className }) => {
   return (

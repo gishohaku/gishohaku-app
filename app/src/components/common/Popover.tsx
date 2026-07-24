@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useState, useRef, useEffect } from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { background, radii, spaces, zIndices, colors } from './theme'
 import { alphaOf } from './colorUtils'
 
@@ -13,7 +13,7 @@ interface Props {
 // sancho の ResponsivePopover / Popper 相当を簡略化したもの。
 // モバイル時のボトムシート切り替えは行わず、常に画面内アンカー型の
 // ドロップダウンとして表示する(必要十分な操作性を優先)。
-export const ResponsivePopover: React.FC<Props> = ({
+export const ResponsivePopover: FCC<Props> = ({
   content,
   children,
   placement = 'bottom-end',
@@ -32,7 +32,7 @@ export const ResponsivePopover: React.FC<Props> = ({
     return () => document.removeEventListener('click', onDocClick)
   }, [isOpen])
 
-  const trigger = React.cloneElement(children, {
+  const trigger = React.cloneElement(children as React.ReactElement<any>, {
     onPress: () => setIsOpen((open) => !open),
     'aria-expanded': isOpen,
     'aria-haspopup': true,

@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Text } from './Text'
 import { InputGroupProvider } from './InputGroupContext'
 import { spaces, text, colors, fontSizes } from './theme'
@@ -16,7 +16,7 @@ interface Props {
   className?: string
 }
 
-export const InputGroup: React.FC<Props> = ({
+export const InputGroup: FCC<Props> = ({
   id,
   label,
   children,
@@ -25,7 +25,7 @@ export const InputGroup: React.FC<Props> = ({
   hideLabel,
   ...other
 }) => {
-  const uidRef = React.useRef<string>()
+  const uidRef = React.useRef<string | undefined>(undefined)
   if (!uidRef.current) {
     uidCounter += 1
     uidRef.current = id || `input-group-${uidCounter}`

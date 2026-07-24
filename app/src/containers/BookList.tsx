@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import { NextPage } from 'next'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 
 import { getBooks, perBookCount } from '../utils/functions'
 import Book from '../utils/book'
@@ -44,7 +44,7 @@ const Index: NextPage<InitialProps> = (props) => {
       <SEO title="頒布物一覧" />
       <div className="relative mt-12">
         <SectionHeader en="BOOKS">頒布物一覧</SectionHeader>
-        <Link href={`/${eventId}/mypage/book_stars`} passHref>
+        <Link legacyBehavior href={`/${eventId}/mypage/book_stars`} passHref>
           <a className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gishohaku6 rounded font-bold text-white py-2 px-4">
             チェックリスト
           </a>
@@ -118,7 +118,7 @@ const Index: NextPage<InitialProps> = (props) => {
   )
 }
 
-const CloseButton: React.FC<{
+const CloseButton: FCC<{
   onClick(): void
 }> = ({ onClick }) => {
   return (
@@ -131,13 +131,13 @@ const CloseButton: React.FC<{
   )
 }
 
-const CircleLink: React.FC<{
+const CircleLink: FCC<{
   book: Book
 }> = ({ book }) => {
   const circle = book.circle
   if (!circle) return null
   return (
-    <Link href={`/${book.eventId}/circles/${circle.id}`}>
+    <Link legacyBehavior href={`/${book.eventId}/circles/${circle.id}`}>
       <a className={`bg-white inline-block p-3 rounded`}>
         <span className="bg-red-500 text-white px-2 py-1 font-bold text-sm rounded mr-2">
           {circle.booth}
@@ -148,7 +148,7 @@ const CircleLink: React.FC<{
   )
 }
 
-const BookItem: React.FC<{
+const BookItem: FCC<{
   book: Book
   onClick(): void
 }> = ({ book, onClick }) => {

@@ -5,8 +5,8 @@ import { UserProvider } from '../contexts/UserContext'
 import { EventProvider } from '../contexts/EventContext'
 import '../utils/firebase'
 import Layout from '../components/Layout'
-import ReactGA from 'react-ga'
-import 'tailwindcss/tailwind.css'
+import ReactGA from 'react-ga4'
+import '../tailwind.css'
 
 // import * as Sentry from '@sentry/browser'
 
@@ -41,7 +41,6 @@ class MyApp extends App {
 
   componentDidMount() {
     ReactGA.initialize(TRACKING_ID, {
-      debug: process.env.NODE_ENV !== 'production',
       testMode: process.env.NODE_ENV !== 'production',
     })
   }
@@ -74,6 +73,8 @@ class MyApp extends App {
   }
 }
 
-Router.events.on('routeChangeComplete', (url: string) => ReactGA.pageview(url))
+Router.events.on('routeChangeComplete', (url: string) =>
+  ReactGA.send({ hitType: 'pageview', page: url }),
+)
 
 export default MyApp

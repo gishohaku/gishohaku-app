@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 import { Embed } from '../common/Embed'
-import LazyLoad from 'react-lazyload'
+import LazyLoad from '../LazyLoad'
 import { colors } from '../../utils/style'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   name: string
 }
 
-const banner: React.FC<Props> = ({ image, name }) => {
+const banner: FCC<Props> = ({ image, name }) => {
   return (
     <Embed
       width={200}

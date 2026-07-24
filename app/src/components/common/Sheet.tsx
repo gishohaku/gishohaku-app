@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useRef } from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { RemoveScroll } from 'react-remove-scroll'
 import { Portal } from '../Portal'
 import { background, radii, spaces, zIndices, mediaQueries } from './theme'
@@ -82,7 +82,7 @@ const positionStyles = (position: Position) => {
   }
 }
 
-export const Sheet: React.FC<Props> = ({
+export const Sheet: FCC<Props> = ({
   isOpen,
   onRequestClose,
   position = 'right',

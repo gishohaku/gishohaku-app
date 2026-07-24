@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { Text } from './Text'
 import { spaces } from './theme'
 
@@ -10,13 +10,13 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 let uidCounter = 0
 
-export const Check: React.FC<Props> = ({
+export const Check: FCC<Props> = ({
   label,
   id,
   disabled,
   ...other
 }) => {
-  const uidRef = React.useRef<string>()
+  const uidRef = React.useRef<string | undefined>(undefined)
   if (!uidRef.current) {
     uidCounter += 1
     uidRef.current = id || `check-${uidCounter}`

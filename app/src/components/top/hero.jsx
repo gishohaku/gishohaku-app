@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import Link from 'next/link'
 
 import logo from '../../images/logo.png'
@@ -100,7 +100,7 @@ const Hero = () => {
           }
         `}
       >
-        <img with="100%" src={logo} alt="技術書同人誌博覧会" />
+        <img width="100%" src={logo} alt="技術書同人誌博覧会" />
       </div>
       <h1
         css={css`
@@ -130,7 +130,7 @@ const Hero = () => {
         @大田区産業プラザPiO
       </p>
       <p>
-        <Link href="/gishohaku1/circle-info" passHref>
+        <Link legacyBehavior href="/gishohaku1/circle-info" passHref>
           <a
             css={css`
               background-color: ${colors.accent};
@@ -175,7 +175,7 @@ const Hero = () => {
           </a>
         </Link>
 
-        <Link href="/gishohaku1/guest-info" passHref>
+        <Link legacyBehavior href="/gishohaku1/guest-info" passHref>
           <a
             css={css`
               background-color: ${colors.accent};

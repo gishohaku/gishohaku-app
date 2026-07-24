@@ -1,12 +1,12 @@
-/** @jsx jsx */
-import firebase from 'firebase/app'
+/** @jsxImportSource @emotion/react */
+import firebase from 'firebase/compat/app'
 import { Button } from './common/Button'
 import { InputGroup } from './common/InputGroup'
 import { Input } from './common/Input'
 import { TextArea } from './common/TextArea'
 import { Select } from './common/Select'
 import { Text } from './common/Text'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Formik, Field, FieldProps } from 'formik'
 import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'
 import ImageUploader from './ImageUploader'
@@ -189,7 +189,7 @@ const CustomInput = ({
   <div>
     <Input type="text" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )
@@ -202,7 +202,7 @@ const CustomTextarea = ({
   <div>
     <TextArea {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )

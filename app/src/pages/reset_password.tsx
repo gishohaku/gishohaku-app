@@ -1,9 +1,9 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react'
 import { NextPage } from 'next'
 
-import { jsx, css } from '@emotion/core'
-import firebase from 'firebase/app'
+import { jsx, css } from '@emotion/react'
+import firebase from 'firebase/compat/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from '../components/common/Container'
 import { useRouter } from 'next/router'
@@ -96,7 +96,7 @@ const CustomInput = ({
   <div>
     <Input type="text" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )

@@ -1,6 +1,6 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import LazyLoad from 'react-lazyload'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
+import LazyLoad from './LazyLoad'
 
 interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl: string
@@ -11,7 +11,7 @@ interface ImageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   onClick?: () => void
 }
 
-const ImageBox: React.FC<ImageBoxProps> = (props) => {
+const ImageBox: FCC<ImageBoxProps> = (props) => {
   const { imageUrl, size, width, noBorder, ...otherProps } = props
   return (
     <span

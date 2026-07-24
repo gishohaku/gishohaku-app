@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 import { Button } from '../components/common/Button'
 import { useRouter } from 'next/router'
 import { useContext, useState, useEffect } from 'react'
@@ -13,7 +13,7 @@ import { db, functions } from '../utils/firebase'
 import Circle from '../utils/circle'
 import { useToast } from '../components/Toast'
 
-const Join: React.FC = () => {
+const Join: FCC = () => {
   const { eventId } = useContext(EventContext)
   const toast = useToast()
   const router = useRouter()

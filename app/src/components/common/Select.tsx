@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { inputSizeStyles, errorInputStyles, focusShadow } from './formStyles'
 import { alphaOf } from './colorUtils'
 import { colors, text, getButtonHeight, Size } from './theme'
@@ -11,7 +11,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   inputSize?: Size
 }
 
-export const Select: React.FC<Props> = ({
+export const Select: FCC<Props> = ({
   inputSize = 'md',
   multiple,
   id,
@@ -50,7 +50,7 @@ export const Select: React.FC<Props> = ({
               outline: 0;
             }
           `,
-          error && errorInputStyles,
+          error ? errorInputStyles : undefined,
         ]}
         {...other}
       />

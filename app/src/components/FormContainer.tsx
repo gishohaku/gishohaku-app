@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 
-const FormContainer: React.FC = (props) => {
+const FormContainer: FCC = (props) => {
   return (
     <div
       css={css`

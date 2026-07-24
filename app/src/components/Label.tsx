@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 
-const Label: React.FC<{
+const Label: FCC<{
   text: string
   color?: string
   backgroundColor?: string

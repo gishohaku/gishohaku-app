@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import marked from 'marked'
 
@@ -82,7 +82,7 @@ const useCheckSubmission = (isOwner: boolean, bookId: string) => {
   return !loading && !submission
 }
 
-const BookCell: React.SFC<Props> = ({
+const BookCell: FCC<Props> = ({
   book,
   editable = false,
   moveNext,
@@ -151,7 +151,7 @@ const BookCell: React.SFC<Props> = ({
               margin-bottom: 12px;
             }
           `}>
-          <Link href={`/${eventId}/books/${book.id}`} key={book.id} passHref>
+          <Link legacyBehavior href={`/${eventId}/books/${book.id}`} key={book.id} passHref>
             <BookLink>
               <BookTitle>{book.title}</BookTitle>
             </BookLink>
@@ -217,7 +217,7 @@ const BookCell: React.SFC<Props> = ({
               css={css`
                 position: relative;
               `}>
-              <Link href={`/${eventId}/books/${book.id}/submit`} passHref>
+              <Link legacyBehavior href={`/${eventId}/books/${book.id}/submit`} passHref>
                 <a css={css(button)}>見本誌の提出</a>
               </Link>
               {notSubmitted && (
@@ -238,7 +238,7 @@ const BookCell: React.SFC<Props> = ({
               )}
             </div>
           )}
-          <Link href={`/${eventId}/books/${book.id}/edit`} passHref>
+          <Link legacyBehavior href={`/${eventId}/books/${book.id}/edit`} passHref>
             <a css={button}>編集</a>
           </Link>
           {(!isFirst || !isLast) && (

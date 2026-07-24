@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 
-const Loader: React.FC = (props: any) => {
+const Loader: FCC = (props: any) => {
   return (
     <div
       css={css`

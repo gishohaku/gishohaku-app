@@ -1,8 +1,8 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react'
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
-import firebase from 'firebase/app'
+import { jsx, css, Global } from '@emotion/react'
+import firebase from 'firebase/compat/app'
 import SectionHeader from '../components/gishohaku1/SectionHeader'
 import { Container } from '../components/common/Container'
 import { useRouter } from 'next/router'
@@ -107,7 +107,7 @@ const SignUp: NextPage = () => {
                     line-height: 1.5;
                   `}>
                   登録することで、
-                  <Link href="/gishohaku1/privacy" passHref>
+                  <Link legacyBehavior href="/gishohaku1/privacy" passHref>
                     <a>利用規約/プライバシーポリシー</a>
                   </Link>
                   に同意するものとします
@@ -165,12 +165,12 @@ const SignUp: NextPage = () => {
             line-height: 1.5;
           `}>
           登録することで、
-          <Link href="/gishohaku1/privacy" passHref>
+          <Link legacyBehavior href="/gishohaku1/privacy" passHref>
             <a>利用規約/プライバシーポリシー</a>
           </Link>
           に同意するものとします
         </p>
-        <Link href="/sign_in">
+        <Link legacyBehavior href="/sign_in">
           <Button component="a" block variant="outline">
             すでに会員の方はこちら
           </Button>
@@ -188,7 +188,7 @@ const CustomInput = ({
   <div>
     <Input type="text" {...field} {...props} />
     {touched[field.name] && errors[field.name] && (
-      <div className="error">{errors[field.name]}</div>
+      <div className="error">{errors[field.name] as string}</div>
     )}
   </div>
 )

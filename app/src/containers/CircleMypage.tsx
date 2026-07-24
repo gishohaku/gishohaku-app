@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import firebase from 'firebase/app'
+/** @jsxImportSource @emotion/react */
+import firebase from 'firebase/compat/app'
 import Link from 'next/link'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useEffect, useState, useContext } from 'react'
 
 import Circle from '../utils/circle'
@@ -17,7 +17,7 @@ import EventContext from '../contexts/EventContext'
 import CircleCopyButton from '../components/CircleCopyButton'
 import { db } from '../utils/firebase'
 
-const Mypage: React.FC<{
+const Mypage: FCC<{
   user: firebase.User
   userData: User
 }> = ({ user, userData }) => {
@@ -91,7 +91,7 @@ const Mypage: React.FC<{
             `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-              <Link href={`/${eventId}/circles/${circle.id}`}>
+              <Link legacyBehavior href={`/${eventId}/circles/${circle.id}`}>
                 <a>こちら</a>
               </Link>
               。

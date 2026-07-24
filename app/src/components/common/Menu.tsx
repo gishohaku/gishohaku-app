@@ -1,9 +1,9 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { spaces, background, text } from './theme'
 
-export const MenuList: React.FC<React.HTMLAttributes<HTMLElement>> = ({
+export const MenuList: FCC<React.HTMLAttributes<HTMLElement>> = ({
   children,
   ...other
 }) => {
@@ -26,7 +26,7 @@ interface MenuItemProps extends React.HTMLAttributes<HTMLElement> {
   onPress?: (e: React.SyntheticEvent) => void
 }
 
-export const MenuItem: React.FC<MenuItemProps> = ({
+export const MenuItem: FCC<MenuItemProps> = ({
   contentBefore,
   onPress,
   onClick,

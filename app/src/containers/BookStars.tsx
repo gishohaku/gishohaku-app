@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useContext } from 'react'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Container } from '../components/common/Container'
 import BookCell from '../components/BookCell'
 import withUser from '../withUser'
@@ -15,7 +15,7 @@ const AsnycBookCell = ({ bookId }: any) => {
   return book ? <BookCell book={book} /> : null
 }
 
-const BookStars: React.FC = () => {
+const BookStars: FCC = () => {
   const { eventId } = useContext(EventContext)
   const { userStars } = useContext(StarsContext)
   const bookStars = userStars[eventId].bookStars

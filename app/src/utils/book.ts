@@ -1,5 +1,5 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
 
 import { EventId } from './event'
 
@@ -56,8 +56,8 @@ export const refToId = (book: Book) => {
     },
   }
 
-  delete results.circleRef
-  delete results.circle!.ref
+  delete (results as any).circleRef
+  delete (results.circle as any).ref
 
   return results
 }

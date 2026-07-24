@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 
 const contents = css`
   h2 {
@@ -95,7 +95,7 @@ const contents = css`
   }
 `
 
-const Contents: React.FC<any> = (props) => {
+const Contents: FCC<any> = (props) => {
   return <div css={contents}>{props.children}</div>
 }
 

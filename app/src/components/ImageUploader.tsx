@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { useDropzone } from 'react-dropzone'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useState } from 'react'
 import { IconUpload } from './common/icons'
 import { firebase } from '../utils/firebase'
@@ -12,12 +12,16 @@ interface Props {
   size?: 'square' | 'circlecut'
 }
 
-const ImageUploader: React.FC<Props> = ({ user, addUrl, size }) => {
+const ImageUploader: FCC<Props> = ({ user, addUrl, size }) => {
   const [isUploading, setUploading] = useState(false)
 
   const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    accept: 'image/gif,image/jpeg,image/png,image/jpg',
+    accept: {
+      'image/gif': ['.gif'],
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+    },
     onDropAccepted: async (files) => {
       setUploading(true)
       const storageRef = firebase.storage().ref()

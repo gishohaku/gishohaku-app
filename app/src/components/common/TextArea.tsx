@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { baseInputStyles, inputSizeStyles, errorInputStyles } from './formStyles'
 import { Size } from './theme'
 import { useInputGroup } from './InputGroupContext'
@@ -20,7 +20,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
           baseInputStyles,
           inputSizeStyles(inputSize),
           { overflow: 'auto', resize: 'vertical' },
-          error && errorInputStyles,
+          error ? errorInputStyles : undefined,
         ]}
         {...other}
       />

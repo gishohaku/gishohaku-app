@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { Button, ButtonProps } from './Button'
 import { getButtonHeight } from './theme'
 
@@ -35,7 +35,11 @@ export const IconButton = React.forwardRef<HTMLElement, Props>(
           }}>
           {label}
         </span>
-        {React.cloneElement(icon, { color, size, 'aria-hidden': true })}
+        {React.cloneElement(icon as React.ReactElement<any>, {
+          color,
+          size,
+          'aria-hidden': true,
+        })}
       </Button>
     )
   },

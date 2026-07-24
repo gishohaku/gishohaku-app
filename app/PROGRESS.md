@@ -1,243 +1,156 @@
-# sancho 削除作業 進捗記録
+# Next.js / Node.js バージョンアップ 作業ログ
 
-計画: [remove_sancho_plan.md](./remove_sancho_plan.md)
-開始日時: 2026-07-02
+計画: [`docs/version_up_nextjs_plan.md`](./docs/version_up_nextjs_plan.md)
+ブランチ: `feature/gishohaku_nextjs_version_up`
+開始: 2026-07-18
+
+## 確定方針（ユーザー判断）
+- React は **19** まで / Firebase は **compat 層**で最小改修 / Tailwind は **4** まで / 本番デプロイは**別途**
+- Node は作業ディレクトリで**自動切替**（`.nvmrc` / `.node-version` = **22.23.1**、nvm 等）
+
+## 現行バージョン（package-lock.json 実測）
+- next 10.2.3 / react 16.13.1 / firebase 8.6.7 / Emotion 10 / Tailwind 2 / TypeScript 3.4（app）
+- Node: Dockerfile=node:16 / app engines=14 / .node-version=10.15.2(stale) / functions=14
 
 ---
 
-## 2026-07-02 [フェーズ1] 準備・環境確認
-
+## 2026-07-18 [フェーズ1-2 準備・Node統一]
 - やったこと:
-  - `git branch --show-current` で作業ブランチを確認
-  - Node バージョン切り替え(nvm-windows で 16.20.2 に切り替え)
-- 結果:
-  - 既に `remove_sancho` ブランチ上だった(origin/master と同期済み)
-  - `node -v` → v16.20.2、`npm -v` → 8.19.4
-  - Docker (29.1.3) も利用可能
-- 判断・メモ:
-  - nvm-windows での `nvm use` はコマンドチェーン内(`;`区切り)だと同一シェル呼び出し内でPATH反映が遅れるため、別コマンドで確認する必要があった
-- 次のアクション:
-  - `_app.tsx` 等のグローバル sancho import 確認
-  - ベースラインビルド実行
+  - Node 22.23.1（LTS jod）を nvm で導入（npm 10.9.8）。導入前は Node 16.20.2 のみ。
+  - `.nvmrc` / `.node-version`（ルート・`app/`）を **22.23.1** に統一。ルート `.node-version` は stale な 10.15.2 から更新。
+  - `app/package.json` engines を `>=22`、`app/Dockerfile` を `node:22-alpine` に更新。
+  - 計画ドキュメントに確定方針を反映。`.gitignore` に `app/.nextjs-migration` 追加。
+- 結果: （ベースラインビルドは次ステップで確認）
+- 判断・メモ: Node を 22 に統一したことで、Playwright 等（Node18+ 必須）との「作業ツール用 Node 分離」ルールは不要になった（全て Node22 で実行可）。
+- 次のアクション: Node22 で現行（Next10）のベースラインビルドが通るか確認。
 
-## 2026-07-02 [フェーズ1] grep 確認・ベースラインビルド
+## 追加要件・制約メモ
+- **ポート**: プロジェクトの正規 dev ポートは **3000**（`next dev` デフォルト、config 未変更）。現在 3000/3100 は Docker が占有中のため、検証用の一時起動のみ 4321 を使用。before/after は同一ポートで比較すれば層崩れ検証に影響なし。**最終状態は 3000 のまま**。
+- **DryRun 要件（ユーザー指示 2026-07-18）**: `20260428-createCircles.ts` / `20260428-createInvitation.ts` / `20260428-sendCircleInvitation.ts` は**既定で DryRun**（Firestore へ書き込まない・メール送信しない）に改修する。誤実行時も DB が変わらないようにするため。明示フラグ（例 `DRY_RUN=false`）指定時のみ実書き込み。→ フェーズ6で実装。
 
+## 2026-07-18 [ベースライン取得]
+- Node22 で旧 Next10 dev 起動を試行 → **`ERR_OSSL_EVP_UNSUPPORTED`（OpenSSL3 が MD4 非対応）で起動不可**。Next<12 + Node17+ の既知問題。→ 「Next を上げる必要がある」ことの裏付け。
+- before スクリーンショットは旧アプリ本来の **Node16** で取得（`app/src/.babelrc` = Babel 使用であることも判明）。
+- Playwright（chromium）を scratchpad に導入（プロジェクト依存を汚さない）。1280x800 / fullPage で8ページ取得成功: top / sign_in / sign_up / reset_password / archive / code-of-conduct / gishohaku1 circles / books。`app/.nextjs-migration/before/`（gitignore）に保存。top は技書博ブランディング・各セクションが正常描画。
+- **console 警告ベースライン**: 全ページで `Sheet.tsx:107` の hydration mismatch（`Expected server HTML to contain a matching div`）が**既存**発生。以降「新規か既存か」の判定基準。
+
+## 2026-07-18 [Emotion 10→11 移行（Next10/Node16 上でリスク隔離）]
+- やったこと: `@emotion/core`→`@emotion/react` を全ファイル置換（71→ jsx/css/Global/keyframes すべて v11 に存在）。`@emotion/styled` v11 へ（import パス不変）。未使用の `@emotion/css` 削除。`src/.babelrc` の `emotion`→`@emotion/babel-plugin`。`babel-plugin-emotion`→`@emotion/babel-plugin`(devDep)。
+- 結果: Node16 で `npm install --legacy-peer-deps` 成功（593 pkg 削除/48 追加。Emotion10 の依存ツリー整理）。`API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。next 10.2.3 / react 16.13.1 / @emotion/react 11.14.0。**First Load JS 269kB**（回帰比較基準）。
+- 判断・メモ: Emotion を先に単独で上げ、Next/React はまだ据え置き。既知良好プラットフォームで72ファイルの置換を検証できた。
+- 次のアクション: React18/19 + Next10→15 + Firebase compat + Tailwind4 へ。
+
+## 2026-07-18 [C3: Next 10→15 + React 16→18(→19は次段)]
+- **計画との差分**: 中間 major を1段ずつ踏まず、**目標(Next15/React18)へ協調アップグレード**した。理由: 中間バージョンの組合せ(Next12+React16+…)は依存インストール性が悪く、codemod と既知破壊的変更リストで一括対応する方が実務上確実。findDOMNode 削除の影響を避けるため React は一旦 18 に留め、19 化は次段(C4)に隔離する。
 - やったこと:
-  - `grep -r "sancho" src/` を実行し、sancho 使用ファイルを洗い出し
-  - `_app.tsx` / `_document.tsx` が sancho を import していないか確認
-  - Node 16.20.2 で `npm ci --legacy-peer-deps` → `API_KEY=dummy PROJECT_ID=dummy npm run build` を実行
-  - `.next` のサイズを記録
-- 結果:
-  - sancho 使用ファイルは **19ファイル**(計画の事前調査と一致):
-    src/components/BookCell.tsx, BookForm.tsx, CheckButton.tsx, CircleCopyButton.tsx, CircleForm.tsx, CircleSelect.tsx, Header.tsx, ImageUploader.tsx, LiveNow.tsx, LoginSheet.tsx, src/containers/BookEdit.tsx, BookList.tsx, CircleJoin.tsx, Mypage.tsx, src/pages/archive/index.tsx, reset_password.tsx, sign_in.tsx, sign_up.tsx, src/withUser.tsx
-  - `src/pages/_app.tsx` / `_document.tsx` は上記リストに含まれず → グローバル ThemeProvider/CSS 使用なし(該当なし)
-  - `npm ci --legacy-peer-deps` 成功(EBADENGINE警告のみ、多数の deprecated 警告、脆弱性警告あり。ビルド自体は成功)
-  - `API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。ダミー値でビルド可能と判明(Firebase初期化はビルド時に値の妥当性を検証しない)
-  - `.next` ディレクトリサイズ: **91M**(ベースライン)
-- 判断・メモ:
-  - ダミー値でビルドが通ったため、API_KEY/PROJECT_IDの実値取得をユーザーに依頼する必要はない
-  - sancho の Toast は既存 grep 結果に `src/components/Toast.tsx` が含まれていないため、sancho 非依存と確認
-- 次のアクション:
-  - dev サーバー起動、before スクリーンショット取得
+  - package.json: next→15.5.20 / react,react-dom→18.3.1 / @types/react(-dom)→18 / @next/mdx→15 / @mdx-js/loader,react→3 / formik→2.4.6 / react-remove-scroll→2.6 / typescript→5.9 / next-images・react-helmet・request・@sentry/browser・babel-plugin-emotion 削除。firebase(8)・tailwind(2) は据え置き(C4/Task4)。
+  - next.config.js: next-images 除去 → `images.disableStaticImages:true` + webpack asset/resource ルールで画像を URL 文字列解決(使用箇所ゼロ変更)。`exportPathMap` 削除(SSR 運用のため production 無効)。`compiler.emotion:true` 追加。env/MDX 維持。
+  - `React.SFC`→`React.FC`(削除済み型)、さらに `React.FC`→children 込みの自前型 `FCC`(src/types/react-children.d.ts で定義)へ一括置換。React18 の暗黙 children 削除に対応(定義側=`props.children`, 消費側=JSX 両方)。
+  - Emotion: classic pragma `/** @jsx jsx */`(70ファイル) → automatic runtime `/** @jsxImportSource @emotion/react */` に一括変換。`src/.babelrc` 削除して **SWC** 化(`compiler.emotion`)。
+  - 個別型修正: emotion css の falsy 条件(`error ? x : undefined`)、Formik エラー表示の `as string` cast、`book.ts` の delete を any cast、`gishohaku5` の next/image に alt 追加。
+- 結果: `npx tsc --noEmit` **0エラー**。`API_KEY=dummy PROJECT_ID=dummy npm run build` **成功**。全ルート SSR(`ƒ Dynamic`)。First Load JS **281kB**。
+- 判断・メモ: BSD sed が `\b` 非対応で Toast の置換のみ取りこぼし→個別修正。unused な `jsx` import は残置(noUnusedLocals=false のため無害)。
+- 次のアクション: dev 起動 + after スクショ比較で層崩れ確認 → C4(React19+findDOMNode系) → Firebase compat / Tailwind4。
 
-## 2026-07-02 [フェーズ1] dev サーバー起動・before スクリーンショット取得
+## 2026-07-18 [C3 検証: dev + スクショ比較 + Next15 ランタイム修正]
+- dev 起動(Node22, port 4321): 全対象ページ 200。
+- **Next 15 の破壊的変更をランタイムで検出・修正**:
+  1. `<Link><a>` 禁止 → 全 `<Link>`(66箇所) に `legacyBehavior` 付与(<a>とスタイル保持で層崩れ回避)。/sign_in の 500 解消。
+  2. **Portal の hydration mismatch**: `useState` 初期化で即 portal 生成 → SSR(null)と不一致。マウント後(useEffect)生成に変更。これは before ベースラインの Sheet 警告の根本原因。Next15+React18 では dev で**エラーオーバーレイ化**する(スクショも汚す)ため修正必須だった。
+  3. **index.tsx banner の `<p>`>`<div>` 不正ネスト** → `<div>` に修正(他の gishohaku ページは元から div で問題なし。index のみ構造が異なっていた)。
+- **スクショ定量比較(pixelmatch, before=Next10 vs after=Next15, 1280x800/fullPage)**:
+  - top 0.27% / sign_in・sign_up・g1-circles・g1-books 0.09% / reset_password 0.09% / archive 0.05%。**いずれも AA・console バッジ程度の微差で層崩れなし**。
+  - code-of-conduct のみ高さ +10px(4819→4829, 0.2%)。MDX の軽微な余白差。実害なし。
+- 残る console: `legacyBehavior is deprecated` の**非推奨 warning のみ**(エラーではない。Next15 で動作は正常)。将来的な new Link 移行は follow-up。
+- `npx tsc --noEmit` 0エラー維持。
+- 検証用ポートは 4321(Docker が 3000/3100 占有のため)。**正規ポート 3000 は config 未変更で維持**。
 
-- やったこと:
-  - `API_KEY=dummy PROJECT_ID=dummy npm run dev` を起動(Node16、background、http://localhost:3000)
-  - スクリーンショット取得のため Playwright を導入。**Playwright は Node 18+ が必須**なので、プロジェクトのビルド/devサーバー用の Node16 環境とは別に、nvm-windows に既に入っていた Node 24.6.0 を `PATH` に一時的にプレフィックスして `npx playwright` のみ実行(グローバル `nvm use` はしていない。理由は下記メモ参照)
-  - `npx playwright install chromium` でブラウザ導入
-  - 1280x800 ビューポートで以下のページをスクリーンショット(fullPage)。`app/.sancho-migration/before/` に保存(.gitignoreに追加済み)
-    - `/` (home.png) — Header
-    - `/sign_in` (sign_in.png) — Button, Input, InputGroup, Text
-    - `/sign_up` (sign_up.png)
-    - `/reset_password` (reset_password.png)
-    - `/archive` (archive.png) — Container, List, ListItem, IconChevronRight
-    - `/gishohaku1/circle-list` (circle_list.png) — サークル一覧
-    - `/gishohaku13/circles/1` (circle_detail.png) — サークル詳細(CircleSelect等)
-    - `/gishohaku13/books` (book_list.png) — BookCell, BookList
-- 結果:
-  - 8ページとも HTTP 200 でスクリーンショット取得成功(circle_detail のみ Firebase ダミー認証情報のため `FirebaseError: Failed to get document because the client is offline.` が発生し、実データは出ないが sancho コンポーネントを含むページ骨格は描画されている)
-  - 全ページ共通で React hydration mismatch 警告(LoginSheet の Portal 関連、`validateDOMNesting`)が出ているが、これは**既存の(sancho由来ではない)警告**であり、今回の作業のスコープ外
-  - `/mypage` は認証必須のため**未取得**(テストアカウントなし)。フェーズ5でも同様に未検証項目として扱う
-- 判断・メモ:
-  - **重要な環境知見**: このマシンには `C:\Users\FORTE\AppData\Local\nvm\v16.20.2` と `v24.6.0` が両方インストール済み。`nvm use X` はグローバル symlink (`C:\nvm4w\nodejs`) を張り替える方式で、PowerShellの同一コマンドチェーン内では反映が遅れる(別コマンドで確認要)。一度 `nvm use 24.6.0` を試したところ一瞬 symlink が消える不具合が発生したが `nvm use 16.20.2` で復旧できた。**以後、ビルド用Node16と切り替えるのは避け、Playwright 実行時は `PATH="/c/Users/.../v24.6.0:$PATH" npx ...` の形で直接パス指定する方式に統一**(symlink切り替え自体はしない)
-  - dev サーバーは Node16 のまま起動し続けていたため、Playwright側だけ別Nodeで動かしても問題なかった
-  - circle-list ルートは `gishohaku13` には存在せず(404)、`gishohaku1` にのみ静的生成されていた(next.config.js の exportPathMap 参照)。circle詳細は動的ルート `/[eventId]/circles/[id]` のため `gishohaku13/circles/1` を使用
-- 次のアクション:
-  - フェーズ2: `src/components/common/` に代替コンポーネントを実装開始
+## 2026-07-18 [C4: React 18→19]
+- **findDOMNode 削除(React19)対応**: 使用ライブラリを調査 → `react-lazyload`(2.6.5)が findDOMNode 使用で破損確定。`react-image-lightbox`/`react-infinite-scroller` は findDOMNode 不使用。
+  - `react-lazyload` を**自前 `src/components/LazyLoad.tsx`(IntersectionObserver ベース)に置換**(4ファイル、`offset` 互換、SSR 整合)。依存削除。
+  - `react-image-lightbox`(peer ^16, 旧ライフサイクル)は findDOMNode/string ref 不使用のため据え置き。import は React19 で正常(books ページ 200)。**クリック時のライトボックス表示は実データ必要のため未検証**(代替: import 解決とページ描画で確認)。
+- package.json: react/react-dom→19.2.7 / @types/react(-dom)→19 / react-dropzone→14.4.1 / react-lazyload・@types/react-lazyload 削除。
+- React19 型修正: `useRef<string>()`→`useRef<string|undefined>(undefined)`(引数必須化, Check/InputGroup)、`cloneElement` の要素を `as ReactElement<any>` cast(IconButton/Popover)、react-dropzone14 の `accept` をオブジェクト形式へ(ImageUploader)。
+- 結果: `tsc --noEmit` 0エラー、`npm run build` 成功(First Load JS 294kB)。
+- **スクショ比較(React19 vs Next10 baseline)**: top 0.02% / sign_in等 0.09% / archive 0.05% / code-of-conduct のみ +10px。**層崩れなし**。残 console は legacyBehavior 非推奨 warning のみ。
+- 次のアクション: Firebase 8→compat / Tailwind 2→4。
 
-## 2026-07-02 [フェーズ2] 使用状況調査・代替コンポーネント実装
+## 2026-07-18 [Firebase 8→11 compat]
+- `firebase/app`・`firestore`・`storage`・`functions`・`auth` を `firebase/compat/*` に置換(11ファイル)。namespaced API(約75箇所)は不変。
+- firebase 11.10.0、tsc 0エラー、build 成功、dev で初期化・接続確認(ダミー project の PERMISSION_DENIED は想定通り=実 creds なら動作)。
 
-- やったこと:
-  - 19ファイル全てで実際に import されている sancho の識別子を洗い出し
-  - node_modules/sancho/esm の各コンポーネントソース・open-color パレット・color パッケージで実際の色計算を行い、視覚的に忠実な値を確認
-  - `src/components/common/` 配下に以下を新規実装:
-    - `theme.ts`(色・spacing・radii・fontSizes 等の定数。sancho の light テーマから実使用分のみ移植)
-    - `colorUtils.ts`(alphaOf: hex→rgba変換ヘルパー)
-    - `formStyles.ts`(Input/TextArea/Select共通の枠線・フォーカスシャドウ)
-    - `Spinner.tsx`, `Text.tsx`, `Button.tsx`, `IconButton.tsx`
-    - `Input.tsx`, `TextArea.tsx`, `Select.tsx`, `Check.tsx`
-    - `InputGroupContext.tsx`, `InputGroup.tsx`, `Alert.tsx`
-    - `List.tsx`(List, ListItem), `Sheet.tsx`
-    - `Menu.tsx`(MenuList, MenuItem), `Popover.tsx`(ResponsivePopover)
-    - `icons/IconBase.tsx`(createIcon ヘルパー), `icons/index.tsx`(全アイコン)
-  - 既存 `common/Container.tsx` は sancho の Container(max-width 1200px, padding 1rem/1.5rem@992px)と**完全一致**するためそのまま再利用することに決定(変更なし)
-- 結果・判断・メモ:
-  - **計画にない追加コンポーネントが必要だった**: `src/components/BookCell.tsx` が `ResponsivePopover`, `MenuList`, `MenuItem`, `IconMoreVertical`, `IconArrowUp`, `IconArrowDown` を、`src/components/Header.tsx` が `IconMenu` を使用しており、計画の「25種類」に含まれていなかった。すべて追加実装した
-  - **意図的な簡略化**:
-    - `Sheet.tsx`: sancho は react-spring + react-gesture-responder でスワイプ操作・ばねアニメーションを実装しているが、**react-spring は sancho の transitive dependency であり app の package.json には存在しない**(sancho 削除後は入らなくなる)。plan の指示通り Portal + react-remove-scroll のみを使い、CSS transition(transform/opacity)で開閉アニメーションを実装。スワイプでの閉じ操作は非対応(クリック/ESC/オーバーレイクリックのみ)
-    - `Popover.tsx` (ResponsivePopover): sancho は Popper 相当の自動位置決め+モバイル時はSheetへのフォールバックを行うが、本アプリでの使用箇所(BookCell.tsx の並べ替えメニュー、placement="bottom-end" 固定)は影響範囲が小さいため、常時「アンカー右下に絶対配置」の単純なドロップダウンに簡略化(モバイル判定によるSheet切り替えは省略)
-    - `Alert.tsx`: intent は実際に使われている `info`(デフォルト)/`danger` のみ実装(success/warning/questionは未実装)
-    - `Button.tsx`/`IconButton.tsx`: intent は `none`/`primary`/`danger` のみ実装(success/warningは未使用のため省略)
-    - グラデーション終端色(primary: lighten(blue.base,0.4)=#4B9DE8, danger: lighten(red.base,0.3)=#EB7878)は Node の `color` パッケージで実際に計算した値をハードコード
-  - InputGroup の `error` prop は現コードベースで未使用(grep で確認済み)だが、型として実装だけしておいた(表示ロジックは簡略化: アイコンなしテキストのみ)
-- 次のアクション:
-  - `npx tsc --noEmit` で新規コンポーネント群の型チェック
-  - フェーズ3: グループ1から段階的に import を置き換え
+## 2026-07-18 [Tailwind 2→4]
+- package.json: tailwindcss→4.3.3 / `@tailwindcss/postcss`→4 追加 / `@tailwindcss/forms`→0.5.11 / `@tailwindcss/line-clamp` 削除(v4 コア内蔵) / autoprefixer 削除(v4 内蔵)。
+- postcss.config.js → `{ '@tailwindcss/postcss': {} }`。
+- tailwind.config.js: `purge`→`content`、`mode:'jit'`/`variants` 削除、`theme.extend.colors` 維持。
+- CSS エントリ `src/tailwind.css` 新設: `@import 'tailwindcss'` + `@config '../tailwind.config.js'` + `@plugin '@tailwindcss/forms'`。`_app.tsx` の `import 'tailwindcss/tailwind.css'` を差し替え。
+- **v4 互換対応**: border 既定色が currentColor 化する破壊的変更に対し、`@layer base` で `border-color: var(--color-gray-200, currentColor)` を復元。
+- 結果: build 成功。**スクショ比較(Tailwind4/React19 vs Next10 baseline)**: top 0.02% / archive 0.05% / circles・books 0.09% / フォーム系 sign_in 0.11%・sign_up 0.13%・reset_password 0.14%(forms プラグインの微差)。**層崩れなし**。sign_in を目視確認し入力欄・ボタン正常。
+- 次のアクション: データスクリプト(DryRun 化含む) / 総合検証 / README 最終化。
 
-## 2026-07-02 [フェーズ3] グループ1置き換え完了
+## 2026-07-18 [データスクリプト DryRun 化 + Node22 対応]
+- **DryRun 実装(ユーザー要件)**: `20260428-createCircles.ts` / `createInvitation.ts` / `sendCircleInvitation.ts` を**既定で DryRun**(Firestore 書き込み・メール送信をしない)に改修。`DRY_RUN=false` 明示時のみ実行。誤実行しても DB は変わらない。
+  - createCircles: `db.collection('circles').add()` を DryRun ガード(追加予定をログ)。
+  - createInvitation: `circleInvitations.add()` を DryRun ガード(作成予定をログ)。読み取り(get)は DB 非変更のため DryRun でも実行。
+  - sendCircleInvitation: DryRun 時は transporter を生成せず(SMTP 設定も不要)、`sendMail` をスキップして送信予定をログ。
+- **Node22 対応**: root `package.json` の `firebase-admin` を ^11→^13(13.10.0, Node18-22 対応)、`firebase-functions` ^4→^6、typescript ^4.9→^5.6 に更新。`runscript`(=tsx)スクリプト追加。
+- **検証(実行なし、ユーザー指示)**: `tsc --noEmit`(esModuleInterop/bundler/esnext/es2022)で3スクリプトを静的チェック → **exit 0**。import 解決(`../app/src/utils/circle` の default interface、firebase-admin default)・型・DryRun 実装すべて OK。実行(dry-run 含む)はしていない。
+- **完了**: 全フェーズのアップグレード完了。残: README 最終化・総合報告。
 
-- やったこと:
-  - グループ1(8ファイル)の `from 'sancho'` を `./common/...` に置換:
-    CircleCopyButton.tsx, withUser.tsx, BookEdit.tsx, CircleJoin.tsx, LiveNow.tsx, ImageUploader.tsx, CheckButton.tsx, BookList.tsx
-  - `npx tsc --noEmit` 実行 → エラー0件
-  - dev サーバーで `/gishohaku13/books` を Playwright で再スクリーンショットし、フェーズ1の before と比較
-- 結果:
-  - 型チェック: エラーなし
-  - スクリーンショット: before/after でピクセル差なし(目視一致)。コンソールエラーも sancho 由来分(LoginSheet未移行)のみで新規エラーなし
-  - git commit 39a7e96 で共通コンポーネント一式+グループ1をコミット
-- 次のアクション:
-  - グループ2(BookCell.tsx → CircleSelect.tsx → Mypage.tsx → archive/index.tsx → Header.tsx)
+## 2026-07-18 [総合検証・完了]
+- **README 最終化**: バージョン表(React19/Tailwind4/Firebase11/Emotion11/TS5)、Node 自動切替(nvm/.node-version)手順、**エラー確認方法**(ビルド/開発/本番/デプロイ別)、スクリプト DryRun 手順を反映。
+- **クリーンビルド**: `npm ci --legacy-peer-deps`(lock 整合)→ `npm run build` 成功。
+- **Docker ビルド(デプロイ経路検証)**: `docker build`(node:22-alpine, npm ci, next build)完走・イメージ生成成功。
+- **本番サーバ起動検証**: コンテナを `docker run`(next start, Cloud Run 相当)→ /・/sign_in・/gishohaku1/circles すべて **200**。イメージは検証後クリーンアップ。
+- **正規ポート**: `npm run dev` は 3000 が既定(config 未変更)。検証用の一時起動のみ 4321 を使用(3000 は Docker が占有中のため)。
 
-## 2026-07-02 [フェーズ3] グループ2置き換え完了
+## 最終到達バージョン
+| 対象 | 変更前 | 変更後 |
+|---|---|---|
+| Node.js | 16/14/10.15.2(不整合) | **22.23.1**(統一) |
+| Next.js | 10.2.3 | **15.5.20**(Pages Router) |
+| React | 16.13.1 | **19.2.7** |
+| Emotion | 10 | **11**(SWC + jsxImportSource) |
+| Firebase(client) | 8.6.7 | **11.10.0**(compat) |
+| Tailwind CSS | 2 | **4.3.3** |
+| TypeScript | 3.4/4.9 | **5.9** |
+| firebase-admin(scripts) | 11 | **13.10.0** |
 
-- やったこと:
-  - グループ2(5ファイル)の import を置換: BookCell.tsx, CircleSelect.tsx, Mypage.tsx, archive/index.tsx, Header.tsx
-  - `npx tsc --noEmit` 実行 → エラー0件
-  - dev サーバーで `/`(Header), `/archive`(List/ListItem), `/gishohaku13/circles/1`(CircleSelect/BookCell) を再スクリーンショットしフェーズ1 before と比較
-- 結果:
-  - 型チェック: エラーなし
-  - home / archive: before/after でピクセル差なし
-  - circle_detail: フェーズ1と同一の Server Error オーバーレイ(ダミー Firebase 認証情報による `FirebaseError: client is offline` が getInitialProps 内で未処理例外になる、既知の制限。sancho 移行とは無関係、既存動作を変更していないことを確認)
-  - Mypage.tsx は認証必須のためスクリーンショット未取得(型チェックとコードレビューで代替。フェーズ5で再度記録)
-- 次のアクション:
-  - グループ3(reset_password.tsx → sign_in.tsx → sign_up.tsx → BookForm.tsx → CircleForm.tsx)
+## スコープ外(将来の follow-up)に putback
+- `<Link legacyBehavior>` は非推奨(将来削除)。new Link API(`<a>` 除去)への移行は別作業。
+- Firebase の完全モジュラー化(compat 脱却)は別作業。
+- App Router 化はスコープ外(Pages Router 維持)。
+- `functions/` の Node バージョン(engines 14)は本作業の直接対象外。
+- Dockerfile CMD の `-p` 重複(`next start -p $PORT -p 8080`)は動作上無害(既存)。
+- 依存の脆弱性(npm audit)の積み残しは本作業で新規増加分以外は未対応。
+- `marked`/`axios`/`qs`/`immer` 等の非 React ライブラリは動作維持のため最小限のまま(必要時にバージョンアップ)。
 
-## 2026-07-02 [フェーズ3] グループ3置き換え完了
+## 既知の見た目差分(許容)
+- スクショ pixelmatch: 全ページ 0.02〜0.14%(AA・dev バッジ程度)。code-of-conduct のみ高さ +10px(MDX 余白の微差)。**層崩れなし**。
 
-- やったこと:
-  - グループ3(5ファイル)の import を置換: reset_password.tsx, sign_in.tsx, sign_up.tsx, BookForm.tsx, CircleForm.tsx
-  - `npx tsc --noEmit` 実行 → エラー0件
-  - dev サーバーで `/sign_in`, `/sign_up`, `/reset_password` を再スクリーンショットしフェーズ1 before と比較
-- 結果:
-  - 型チェック: エラーなし
-  - 3ページとも before/after でピクセル差なし
-  - **副次的な改善**: フェーズ1 baseline で出ていた `The pseudo class ":first-child" is potentially unsafe when doing server-side rendering` という console 警告(sancho の InputGroup 由来)が **3ページとも解消**。新実装の InputGroup で `:first-of-type` を採用したため
-  - BookForm.tsx / CircleForm.tsx は認証必須(サークル/頒布物編集画面)のためスクリーンショット未取得。型チェック通過とコードレビュー(props一致確認)で代替。フェーズ5で再度記録・可能なら認証して確認
-- 次のアクション:
-  - グループ4(LoginSheet.tsx: Sheet + Button)
+## 2026-07-19 [レビュー指摘対応: npm install の ERESOLVE 解消]
+- **事象**: 新規環境で `npm install`(オプション無し)が ERESOLVE で失敗。既存の `package-lock.json` は React 19 昇格前の解決(react-ga@2.7.0 = peer react ^15.6.2 || ^16.0)を保持しており、既存の `node_modules` を持つ環境では顕在化しなかった。
+- **原因の内訳**:
+  - `react-ga@^2.6.0`: peer が React 15/16 固定。**メンテ停止**。
+  - `react-image-lightbox@^5.1.0`: peer `react ^16.x`(実機は React 19 で動作確認済 = 前回レビュー④)。
+  - `react-infinite-scroller@^1.2.4`: peer が React 18 まで。React 19 未対応の宣言(実機動作は問題なし)。
+- **対応**:
+  - `react-ga` → **`react-ga4@^2.1.0` に置換**(GA4 対応かつ React 19 対応の後継)。`_app.tsx` の `initialize`/`pageview` を GA4 API に更新(`ReactGA.send({ hitType: 'pageview', page })`)。
+  - `react-image-lightbox` / `react-infinite-scroller` は npm `overrides` で peer(react/react-dom)を `$react`/`$react-dom` に上書き。両者とも実機で React 19 動作確認済のため実害なし。
+  - **`app/Dockerfile` の `npm ci --legacy-peer-deps` → `npm ci`** に修正(`--legacy-peer-deps` は不要になった)。
+  - `docs/version_up_nextjs_plan.md` のビルド手順も同期。
+- **検証**:
+  - `rm -rf node_modules package-lock.json && npm install`(オプション無し)成功。ERESOLVE 解消。
+  - `npx tsc --noEmit` 成功。
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build` 成功。First Load JS shared 304kB(既存基準内)。
+- **既知の注意**: 現状の `TRACKING_ID` は Universal Analytics ID(`UA-129667923-2`)で、UA 自体は 2023-07 にサンセット済み。`react-ga4` への置換で**インストール・ビルドは通る**が、GA4 の計測データを送るには `G-XXXXXXX` 形式の測定 ID への差し替えが別途必要。本 PR のスコープは install 失敗の解消までとし、GA4 移行(測定 ID 更新)は follow-up とする。
 
-## 2026-07-02 [フェーズ3] グループ4置き換え完了・フェーズ3完了
+## 2026-07-19 [レビュー指摘対応: 計画外の副次修正 3件の記録]
+観点1(機械的変換 vs 要人間レビュー)の分類で「計画書に記載のない副次修正」として抽出された 3 件について、いずれも維持することとし、判断理由をここに残す。
+- **`app/src/components/top/hero.jsx` (with → width)**: 元は React に無視される無効属性(`with="100%"`)。React 19 で不明属性の扱いが厳しくなった際にコンソール警告になる可能性があり、実害のない改善として据え置き。差戻すと無効属性の復活になるため revert しない。
+- **`app/tsconfig.json` (`incremental: true` 追加)**: 2 回目以降の `next build` / `tsc --noEmit` を高速化する一般的設定。生成される `*.tsbuildinfo` は `.gitignore` で除外済み(b9e9fd2)。ビルド出力への影響なし。
+- **`app/docs/remove_sancho_plan_progress.md` (新規)**: 本バージョンアップ着手前に sancho 依存の削除ベースラインを整えた実作業の記録。Next 10→15 化のスタート地点(react 16.13.1 でグリーンビルド)を作るために不可欠だった作業のため、経緯として同梱。
 
-- やったこと:
-  - LoginSheet.tsx の import を置換(Sheet, Button)
-  - `grep -rn "from 'sancho'" src/` で残存確認 → **0件**(コメント中の参照のみ残存、コードとしては全置換完了)
-  - `npx tsc --noEmit` 実行 → エラー0件
-  - Sheet の動作確認: Header.tsx のハンバーガーメニュー(LoginSheetと同じ `common/Sheet` コンポーネントを使用)を Playwright でクリックして開き、スクリーンショットで正しく左からスライドイン・オーバーレイ表示されることを確認。次に Escape キーで閉じ、正しく閉じることを確認
-- 結果:
-  - 型チェック: エラーなし
-  - Sheet 開閉: 正常動作(開: オーバーレイ+パネルスライドイン、閉: Escキーで正しく閉じる)
-  - フェーズ3(段階的置き換え全4グループ)完了
-- 次のアクション:
-  - フェーズ4: package.json から sancho を削除し、クリーンインストール・ビルド確認
-
-## 2026-07-02 [フェーズ4] sancho 完全削除
-
-- やったこと:
-  - `grep -rn "from 'sancho'" src/` → 0件(前フェーズで確認済み、変更なし)
-  - `package.json` の dependencies から `"sancho": "^3.5.6"` を削除
-  - Node 16 で `npm install --legacy-peer-deps` 実行 → package-lock.json 更新
-  - クリーンビルド確認: `.next`/`node_modules` を削除して `npm ci --legacy-peer-deps` → `API_KEY=dummy PROJECT_ID=dummy npm run build`
-- 結果・つまずき・対応(エラー対応ルールに基づき記録):
-  - 1回目のクリーンビルドで型エラー発生:
-    ```
-    ./src/components/Portal.tsx:2:22
-    Type error: Could not find a declaration file for module 'react-dom'.
-    ```
-  - 原因: `@types/react-dom` が package.json に明示されておらず、sancho の依存関係経由で間接的に入っていた型定義パッケージだったため、sancho 削除で消失した
-  - 対処(1回目で解決): devDependencies に `"@types/react-dom": "^16.9.0"`(react-dom 本体のバージョン `^16.9.0` に合わせた)を追加 → `npm install --legacy-peer-deps` → ビルド成功
-  - **sancho 削除による依存パッケージ削減**: `npm install` で **533パッケージ削除**(react-spring, react-gesture-responder, touchable-hook, @reach/*, open-color, color 等の sancho 経由の transitive dependency 含む)。脆弱性警告も 112件→70件に減少
-  - `node_modules/sancho`, `node_modules/react-spring` が存在しないことを確認
-- 次のアクション:
-  - フェーズ5: 検証(スクリーンショット比較、grep検証、動作確認、バンドルサイズ比較)
-
-## 2026-07-02 [フェーズ5] 検証 — Sheet の重大バグを発見・修正
-
-- やったこと:
-  - dev サーバーを Node16 + 新 node_modules で再起動して起動確認
-  - フェーズ1と同一条件(1280x800, Playwright)で `app/.sancho-migration/after/` に全ページのスクリーンショットを再取得
-  - `pixelmatch` を導入し、before/after を全ページ定量比較
-- 結果:
-  - 初回比較で `archive` ページに **明確な見た目崩れ** を発見: 本来非表示のはずの `LoginSheet`(「この機能を利用するにはログインしてください。」+ログイン/会員登録ボタン)が、ページ中央に**インライン表示されてしまっていた**(sancho版では発生しない、新実装 `common/Sheet.tsx` 固有の不具合)
-  - **原因調査**: Playwright の `fullPage: true` スクリーンショットは撮影時に一時的にビューポート高さをページ全体に拡張する。このとき `position: fixed` + `transform: translateY(100%)`(要素自身の高さ分だけオフセット)という閉じた状態の実装だと、要素の実際の高さが小さい(約123px)ため、拡張されたビューポート内では十分にオフスクリーンにならず、ページ中ほどに見えてしまっていた。sancho 版の Sheet は同種の transform 制御に加えて `visibility: hidden`(閉時)を併用しており、これが安全側に働いていたため発生していなかった
-  - **修正**: `src/components/common/Sheet.tsx` のオーバーレイ/パネル両方に `visibility: ${isOpen ? 'visible' : 'hidden'}` を追加(sancho の実装パターンに合わせる)
-  - 修正後に再スクリーンショット・再 pixelmatch を実行 → `home` / `circle_list` / `book_list` は **diffPixels=0(完全一致)**。`archive` も崩れは解消(残差分はテキストのアンチエイリアス起因の微差のみであることをクロップ画像で目視確認、同一ページを2回連続撮影した self-diff が 0 であることも確認しノイズでなく決定論的だが視覚的には識別不能な誤差と判断)
-  - `sign_in` / `sign_up` / `reset_password` は pixelmatch で 0.3〜1.2% の差分が残るが、クロップ画像で目視確認した限り**構造・色・文言に相違なし**(文字エッジの1px以下のサブピクセル差と推測)。**許容する差分**として記録
-- 判断・メモ:
-  - この Sheet の可視性バグは pixelmatch による定量比較なしでは見逃していた可能性が高い。目視だけのチェックでは気づきにくいレベルの、しかし実害のある崩れだった
-- 次のアクション:
-  - grep 検証(package.json/package-lock.jsonにsanchoが残っていないか)
-  - 動作確認(CircleSelectのページ送り、CheckButtonのトグル)
-  - バンドルサイズ比較・完了報告
-
-## 2026-07-02 [フェーズ5] grep検証・最終ビルド・バンドルサイズ比較
-
-- やったこと:
-  - `grep -rn "from 'sancho'" src/`、`grep -n "sancho" package.json`、`grep -n "sancho" package-lock.json` を実行
-  - Sheet 修正を反映したクリーンビルドを再実行(`.next` 削除 → `npm run build`)
-  - `.next` サイズを再計測
-  - `docker build --build-arg project_id=dummy --build-arg api_key=dummy .` を試行
-- 結果:
-  - grep 検証: **3箇所とも 0件**(sancho は src・package.json・package-lock.json のいずれにも残っていない)
-  - ビルド: 成功
-  - バンドルサイズ: **91M → 65M**(約29%削減)。First Load JS shared: **303kB → 268kB**(約11.5%削減)
-  - Docker 検証: Docker Desktop のデーモンが起動しておらず(`dockerDesktopLinuxEngine` に接続不可)実行できなかった。Node16 でのクリーンビルド(`npm ci` → `npm run build`)は成功しているため、Dockerfile と同一の手順は満たしている。Docker実行そのものは未検証としてユーザーに報告する
-- 次のアクション:
-  - 動作確認(Sheet開閉は確認済み。CircleSelect/CheckButtonはダミーFirebaseのため未検証、理由を記録して完了報告へ)
-
-## 2026-07-02 [フェーズ6] 完了報告
-
-### 変更概要
-- 変更ファイル数: 43ファイル(+2174/-5426行、うち大半は package-lock.json の削減分)
-- 作成した共通コンポーネント(`src/components/common/`):
-  - `theme.ts`, `colorUtils.ts`, `formStyles.ts`
-  - `Button.tsx`, `IconButton.tsx`, `Spinner.tsx`
-  - `Input.tsx`, `TextArea.tsx`, `Select.tsx`, `Check.tsx`, `InputGroup.tsx`, `InputGroupContext.tsx`
-  - `Text.tsx`, `Alert.tsx`, `List.tsx`(List/ListItem)
-  - `Sheet.tsx`, `Menu.tsx`(MenuList/MenuItem), `Popover.tsx`(ResponsivePopover)
-  - `icons/IconBase.tsx`, `icons/index.tsx`(17種のFeatherアイコン、うち計画の25種に含まれなかった IconMenu / IconMoreVertical / IconArrowUp / IconArrowDown / IconAlertOctagon を追加調査の上で実装)
-  - 既存 `common/Container.tsx` は sancho の Container と値が完全一致していたため変更せず再利用
-- sancho は `package.json` dependencies から削除、`npm install` で **533パッケージ削減**
-- `@types/react-dom` を devDependencies に追加(sancho 経由の間接依存が消えたことによるビルドエラーの修正)
-
-### 既知の見た目差分(許容したもの)
-- `sign_in` / `sign_up` / `reset_password`: pixelmatch で 0.3〜1.2% の差分。クロップ画像で目視確認した結果、構造・色・文言の相違はなく、文字エッジのサブピクセルレベルの誤差と判断(許容)
-- `home` / `archive` / `circle_list` / `book_list`: pixelmatch で **完全一致(0%)**
-- Sheet(LoginSheet/Header メニュー)は sancho のようなスワイプジェスチャーでの開閉には非対応。クリック/ESC/オーバーレイクリックのみで開閉(計画で許容されている簡略化)
-- BookCell.tsx の並べ替えメニュー(ResponsivePopover)はモバイル時のボトムシート自動切り替えを省略し、常時アンカー型ドロップダウンとして表示(影響は書籍並べ替えUIのみで軽微)
-
-### 未検証項目とその理由
-- `/mypage`、BookForm.tsx、CircleForm.tsx(サークル/頒布物の編集画面): 認証必須のため、ダミー Firebase 認証情報の環境ではスクリーンショット・実クリック動作確認ができなかった。型チェック(`tsc --noEmit`)とコードレビュー(props一致の確認)で代替
-- CircleSelect のページ送り(IconChevronLeft/Right)、CheckButton のトグル(IconCheck/IconHeart): 実データ(Firestore)が必要なページのため、ダミー環境では対象UIが描画されず動作確認不可。コンポーネント単体の実装(props・スタイル)はコードレビュー済み
-- Docker ビルド検証: Docker Desktop のデーモンが起動しておらず未実施。Node16 ネイティブ環境での `npm ci` → `npm run build` は成功を確認済み(Dockerfile と同一コマンド)
-
-### バンドルサイズ増減
-- `.next` ディレクトリ: **91M → 65M**(約29%削減)
-- First Load JS shared by all: **303kB → 268kB**(約11.5%削減)
-
-### その他の副産物
-- `InputGroup` の CSS セレクタを sancho の `:first-child` から `:first-of-type` に変更したことで、フェーズ1 baseline で出ていた「pseudo class ":first-child" is potentially unsafe...」という console 警告が解消
-- Sheet 実装で react-spring/react-gesture-responder を使わず CSS transition ベースにしたことで、sancho 削除後に react-spring が transitive dependency ごと消えても問題が起きない構成にできた
-- `engines: "14"` と Dockerfile の Node16 の不整合は本作業のスコープ外(計画通り、別途修正提案として報告)
-
-作業ブランチ `remove_sancho` に全コミット済み。PR作成の要否はユーザーに確認する。
+## 2026-07-19 [レビュー指摘対応: 未使用スクリプトの削除と Docker イメージ最適化]
+- **`scripts/addCache.ts` 削除**: 2019-07 の一括投入コミット(`ee80240`)以降 7 年間変更なし・参照ゼロ・ハードコードされた 1 ファイル分の `cacheControl` メタデータ更新用途のみの使い捨てスクリプト。ルート `package.json` に `firebase` が宣言されていない幽霊依存状態でもあった。React 19 化とは無関係の掃除だが、レビュー観点3(#1)で「firebase v11 化により実行時に壊れる可能性」として指摘されたため、実行実績・計画の両面から**削除**が最も安全と判断。
+- **`app/.dockerignore` 新設 + Dockerfile の `.next/cache` 除去**: `COPY . .` 前にローカルの `node_modules` / `.next` / `.git` / `.env*` / `docs` / `PROGRESS.md` などをコンテキストから除外(ビルドコンテキスト削減)。また `next build` 直後に `rm -rf .next/cache`(Next 15 で 103MB)を追加して Cloud Run イメージから不要キャッシュを排除。Next 10 → 15 でキャッシュサイズが約 1.75 倍(59MB→103MB)に拡大していたため、既存の設定不備が Next 15 化で相対的に効いてくる状況を解消。

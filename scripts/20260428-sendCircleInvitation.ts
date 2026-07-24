@@ -4,6 +4,11 @@ import csvParser from "csv-parser";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
+// DryRun(既定 true): 実際のメール送信は行わず、送信予定内容をログ出力するだけ。
+// 実送信するときのみ環境変数 DRY_RUN=false を明示的に指定する。
+// 例) DRY_RUN=false npx tsx scripts/20260428-sendCircleInvitation.ts
+const DRY_RUN = process.env.DRY_RUN !== "false";
+
 const projectRoot = process.cwd();
 const envPath = path.resolve(projectRoot, "../.env");
 
@@ -138,7 +143,13 @@ function isValidEmail(email: string): boolean {
 }
 
 async function main(): Promise<void> {
-  if (!fs.existsSync(envPath)) {
+  console.log(
+    DRY_RUN
+      ? "[DRY-RUN] メールは送信しません(送信予定内容をログ出力します)。実送信するには DRY_RUN=false を指定してください。"
+      : "[実行] DRY_RUN=false のため実際にメールを送信します。",
+  );
+
+  if (!DRY_RUN && !fs.existsSync(envPath)) {
     throw new Error(`.envファイルが見つかりません: ${envPath}`);
   }
 
@@ -148,17 +159,20 @@ async function main(): Promise<void> {
 
   const rows = await readCsvRows();
 
-  const transporter = nodemailer.createTransport({
-    host: requireEnv("SMTP_HOST"),
-    port: Number(process.env.SMTP_PORT ?? 587),
-    secure: false,
-    auth: {
-      user: requireEnv("SMTP_USER"),
-      pass: requireEnv("SMTP_PASS"),
-    },
-  });
+  // 実送信時のみ SMTP トランスポートを構築する(DryRun では SMTP 設定を要求しない)
+  const transporter = DRY_RUN
+    ? null
+    : nodemailer.createTransport({
+        host: requireEnv("SMTP_HOST"),
+        port: Number(process.env.SMTP_PORT ?? 587),
+        secure: false,
+        auth: {
+          user: requireEnv("SMTP_USER"),
+          pass: requireEnv("SMTP_PASS"),
+        },
+      });
 
-  const fromAddress = requireEnv("MAIL_FROM");
+  const fromAddress = DRY_RUN ? "" : requireEnv("MAIL_FROM");
   const fromName = process.env.MAIL_FROM_NAME ?? "技術書同人誌博覧会";
   const cc = process.env.MAIL_CC;
 
@@ -181,6 +195,13 @@ async function main(): Promise<void> {
     }
 
     const body = buildBody(row);
+
+    if (DRY_RUN || !transporter) {
+      console.log(
+        `[DRY-RUN] 送信予定: ${row.circleNumber} ${row.circleName} <${row.email}>`,
+      );
+      continue;
+    }
 
     console.log(
       `送信中... ${row.circleNumber} ${row.circleName} <${row.email}>`,
@@ -208,7 +229,9 @@ async function main(): Promise<void> {
     // break;
   }
 
-  console.log("すべての送信処理が完了しました");
+  console.log(
+    DRY_RUN ? "[DRY-RUN] 送信予定の確認が完了しました" : "すべての送信処理が完了しました",
+  );
 }
 
 main().catch((error) => {

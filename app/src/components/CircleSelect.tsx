@@ -1,9 +1,9 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { Select } from './common/Select'
 import { IconButton } from './common/IconButton'
 import { IconChevronLeft, IconChevronRight } from './common/icons'
 import { useRouter } from 'next/router'
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { useCallback, useContext } from 'react'
 import EventContext from '../contexts/EventContext'
 
@@ -1294,7 +1294,7 @@ const container = css`
   top: 0;
 `
 
-const CircleSelect: React.FC<Props> = ({ circleId, starIds }) => {
+const CircleSelect: FCC<Props> = ({ circleId, starIds }) => {
   const router = useRouter()
   const { eventId } = useContext(EventContext)
   const circles = {

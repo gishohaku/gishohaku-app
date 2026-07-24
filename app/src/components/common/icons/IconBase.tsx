@@ -8,7 +8,7 @@ export interface IconProps extends React.SVGAttributes<SVGElement> {
 
 export const createIcon = (
   paths: React.ReactNode,
-): React.FC<IconProps> => ({
+): FCC<IconProps> => ({
   color,
   size = 'md',
   ...other

@@ -1,9 +1,9 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
 import produce from 'immer'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import circleTumbnail from '../images/circle.png'
 import editIcon from '../images/edit.svg'
@@ -38,7 +38,7 @@ interface StarCount {
   count: number
 }
 
-const CircleDetail: React.FC<Props> = ({
+const CircleDetail: FCC<Props> = ({
   circle,
   books,
   editable,
@@ -102,7 +102,7 @@ const CircleDetail: React.FC<Props> = ({
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
-            <Link href={`/${eventId}/circles/${circle.id}/edit`}>
+            <Link legacyBehavior href={`/${eventId}/circles/${circle.id}/edit`}>
               <a
                 css={css`
                   flex: 1;
@@ -211,7 +211,7 @@ const CircleDetail: React.FC<Props> = ({
         ))}
         {books.length === 0 && <BlankMessage circleName={circle.name} />}
         {editable && (
-          <Link href={`/${eventId}/books/new`}>
+          <Link legacyBehavior href={`/${eventId}/books/new`}>
             <NewBookButton>
               <img src={editIcon} />
               頒布物を追加
@@ -223,7 +223,7 @@ const CircleDetail: React.FC<Props> = ({
   )
 }
 
-const BlankMessage: React.FC<{
+const BlankMessage: FCC<{
   circleName: string
 }> = ({ circleName }) => (
   <div

@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 

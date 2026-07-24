@@ -7,7 +7,7 @@ interface Props {
   imageUrl?: string
 }
 
-const SEO: React.FC<Props> = ({ description, title, imageUrl }) => {
+const SEO: FCC<Props> = ({ description, title, imageUrl }) => {
   const metaTitle = [title, '技術書同人誌博覧会'].filter((o) => o).join(' | ')
   const metaDescription = [
     description,

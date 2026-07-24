@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import circleTumbnail from '../images/circle.png'
@@ -25,7 +25,7 @@ interface Props {
 
 const width = 252
 
-const CircleCell: React.FC<Props> = ({
+const CircleCell: FCC<Props> = ({
   circle,
   userStars,
   addStar,
@@ -53,7 +53,7 @@ const CircleCell: React.FC<Props> = ({
 
   return (
     <Container>
-      <Link href={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
+      <Link legacyBehavior href={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
         <CircleLink>
           <BoothNum>{circle.booth}</BoothNum>
           <ImageBox

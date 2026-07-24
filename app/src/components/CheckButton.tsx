@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+/** @jsxImportSource @emotion/react */
+import { jsx, css } from '@emotion/react'
 import { IconCheck, IconHeart } from './common/icons'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   onClick: (event: any) => void
 }
 
-const CheckButton: React.FC<Props> = ({ isChecked, onClick }) => {
+const CheckButton: FCC<Props> = ({ isChecked, onClick }) => {
   return (
     <div
       css={css`

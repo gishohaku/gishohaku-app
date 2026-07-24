@@ -1,8 +1,8 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { colors, media } from '../utils/style'
 
 import Link from 'next/link'
-import { jsx, css, Global } from '@emotion/core'
+import { jsx, css, Global } from '@emotion/react'
 import BottomBar from './BottomBar'
 import Header, { headerHeight } from './Header'
 import SEO from './SEO'
@@ -10,7 +10,7 @@ import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
 import Head from 'next/head'
 
-const Layout: React.FC<any> = (props) => {
+const Layout: FCC<any> = (props) => {
   const { eventId } = useContext(EventContext)
   return (
     <>
@@ -96,7 +96,7 @@ const Layout: React.FC<any> = (props) => {
 const MypageButton = () => {
   const { eventId } = useContext(EventContext)
   return (
-    <Link href={`/${eventId}/mypage/circle`}>
+    <Link legacyBehavior href={`/${eventId}/mypage/circle`}>
       <a
         css={css`
           position: fixed;

@@ -1,9 +1,9 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import Link from 'next/link'
 
 import logo from '../images/shortLogo.svg'
 
-import { jsx, css } from '@emotion/core'
+import { jsx, css } from '@emotion/react'
 import { Sheet } from './common/Sheet'
 import { List, ListItem } from './common/List'
 import {
@@ -84,7 +84,7 @@ const useShyHeader = () => {
   return { isHeaderVisible }
 }
 
-const Header: React.FC<any> = () => {
+const Header: FCC<any> = () => {
   const { eventId } = useContext(EventContext)
   const { user } = useContext(UserContext)
   const [isOpen, setOpen] = useState(false)
@@ -119,7 +119,7 @@ const Header: React.FC<any> = () => {
         onClick={() => setOpen(true)}>
         <IconMenu />
       </div>
-      <Link
+      <Link legacyBehavior
         href={`/${
           ['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4'].includes(
             eventId,
@@ -152,7 +152,7 @@ const Header: React.FC<any> = () => {
       </Link>
       <div className="ml-auto" css={hamburgerButton}>
         {user && (
-          <Link href={`/${eventId}/mypage/circle_stars`} passHref>
+          <Link legacyBehavior href={`/${eventId}/mypage/circle_stars`} passHref>
             <a className='block h-full'>
               <IconHeart />
             </a>
@@ -164,7 +164,7 @@ const Header: React.FC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link href="/gishohaku13" passHref>
+          <Link legacyBehavior href="/gishohaku13" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十三回 技術書同人誌博覧会"
@@ -174,7 +174,7 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku12" passHref>
+          <Link legacyBehavior href="/gishohaku12" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十二回 技術書同人誌博覧会"
@@ -184,7 +184,7 @@ const Header: React.FC<any> = () => {
               />
             </a>
           </Link>
-          <Link href="/gishohaku11" passHref>
+          <Link legacyBehavior href="/gishohaku11" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十一回 技術書同人誌博覧会"
@@ -195,7 +195,7 @@ const Header: React.FC<any> = () => {
             </a>
           </Link>
           <div css={divider} />
-          <Link href="/archive" passHref>
+          <Link legacyBehavior href="/archive" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="過去の開催回一覧"
