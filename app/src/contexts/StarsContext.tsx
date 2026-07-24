@@ -75,7 +75,7 @@ export const StarsProvider: FCC = ({ children }) => {
       const stars10 = await db.doc(`users/${userId}/stars/gishohaku10`).get()
       const stars11 = await db.doc(`users/${userId}/stars/gishohaku11`).get()
       const stars12 = await db.doc(`users/${userId}/stars/gishohaku12`).get()
-      const stars13 = await db.doc(`users/${userId}/stars/gishohaku12`).get()
+      const stars13 = await db.doc(`users/${userId}/stars/gishohaku13`).get()
 
       return {
         gishohaku1: { ...defaultStars, ...stars1.data() } as Stars,
@@ -90,7 +90,7 @@ export const StarsProvider: FCC = ({ children }) => {
         gishohaku10: { ...defaultStars, ...stars10.data() } as Stars,
         gishohaku11: { ...defaultStars, ...stars11.data() } as Stars,
         gishohaku12: { ...defaultStars, ...stars12.data() } as Stars,
-        gishohaku13: { ...defaultStars, ...stars12.data() } as Stars,
+        gishohaku13: { ...defaultStars, ...stars13.data() } as Stars,
       }
     }
 
