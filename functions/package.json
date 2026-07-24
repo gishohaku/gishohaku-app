@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^1.7.2",
-    "@slack/web-api": "^5.6.0",
-    "axios": "^0.19.0",
+    "@slack/web-api": "^8.0.0",
+    "axios": "^1.18.1",
     "firebase": "^8.7.0",
     "firebase-admin": "^9.10.0",
     "firebase-functions": "^3.14.1",
