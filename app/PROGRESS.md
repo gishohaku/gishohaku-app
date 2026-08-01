@@ -154,3 +154,15 @@
 ## 2026-07-19 [レビュー指摘対応: 未使用スクリプトの削除と Docker イメージ最適化]
 - **`scripts/addCache.ts` 削除**: 2019-07 の一括投入コミット(`ee80240`)以降 7 年間変更なし・参照ゼロ・ハードコードされた 1 ファイル分の `cacheControl` メタデータ更新用途のみの使い捨てスクリプト。ルート `package.json` に `firebase` が宣言されていない幽霊依存状態でもあった。React 19 化とは無関係の掃除だが、レビュー観点3(#1)で「firebase v11 化により実行時に壊れる可能性」として指摘されたため、実行実績・計画の両面から**削除**が最も安全と判断。
 - **`app/.dockerignore` 新設 + Dockerfile の `.next/cache` 除去**: `COPY . .` 前にローカルの `node_modules` / `.next` / `.git` / `.env*` / `docs` / `PROGRESS.md` などをコンテキストから除外(ビルドコンテキスト削減)。また `next build` 直後に `rm -rf .next/cache`(Next 15 で 103MB)を追加して Cloud Run イメージから不要キャッシュを排除。Next 10 → 15 でキャッシュサイズが約 1.75 倍(59MB→103MB)に拡大していたため、既存の設定不備が Next 15 化で相対的に効いてくる状況を解消。
+
+## 2026-07-28 [Issue #261 対応: engines の Node バージョン上限固定]
+- **背景**: Issue #261(サプライチェーン対策)より。allow-scripts 見送り時の派生提案。
+- **対応**: `app/package.json` の `engines.node` を `">=22"` → `">=22 <23"` に変更。Node の予期せぬメジャー上げ(Node 23/24 等)で `lightningcss` / `sharp` 等の native binary が壊れる事故を防ぐ。`.node-version` / `.nvmrc` (22.23.1) / `Dockerfile` (`node:22-alpine`) と整合。
+- **検証**: `npm install` 成功、`npx tsc --noEmit` グリーン、`API_KEY=dummy PROJECT_ID=dummy npm run build` 成功。
+- **`.npmrc` の `min-release-age` について**: Issue #261 のもう一つの提案(公開後 N 日未満のパッケージをブロック)は**現時点の npm には未実装**と判明したため本 PR では見送り。検証結果:
+  - npm 11.3(現行) / 11.5.2 / 11.11.0 / 11.18.0 で試験
+  - `min-release-age=<数値>` は `Unknown project config` 警告
+  - `min-release-age=7d` / `1s` などの期間文字列は内部で `before` config にマップされ「valid Date string を指定せよ」というエラー
+  - `before=<日付>` の別機能はあるが、これは「特定日時より前のリリースを install」する用途で「N日待つ」とは意味が異なる
+  - つまり pnpm の `minimum-release-age` / yarn 4 相当の機能は npm には未搭載
+  - 実装状況の再確認は Issue #261 に findings をコメントし、将来 npm に機能追加された時点で follow-up として再検討
