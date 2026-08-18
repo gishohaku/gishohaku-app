@@ -527,6 +527,11 @@ export default () => {
               linkUrl="https://www.shimaya.net/"
             />
             <Printing
+              name="K-9"
+              imageUrl="/static/printings/k9.gif"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
               name="日光企画"
               imageUrl="/static/printings/nikko-b.png"
               linkUrl="https://www.nikko-pc.com/"
@@ -540,6 +545,16 @@ export default () => {
               name="緑陽社"
               imageUrl="/static/printings/ryokuyousha.gif"
               linkUrl="https://www.ryokuyou.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="/static/printings/popls.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="/static/printings/neko.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
             />
           </div>
         </TextBlock>
