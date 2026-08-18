@@ -446,9 +446,62 @@ export default () => {
         </TextBlock>
       </section>
 
-      <section css={section}>
+      <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
+          <div
+            css={css`
+              margin-top: 16px;
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+              .sponsorlist.small .sponsor {
+                width: 175px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+            </div>
+            <div className="sponsorlist">
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+            </div>
+          </div>
           <p>
             技書博は協賛企業さまのご支援によって運営を継続させて頂いております。
             <br />スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。
@@ -456,6 +509,41 @@ export default () => {
           <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/431/85b06feb69847bd81874.html">
             技書博14 スポンサー募集要項
           </LinkButton>
+        </TextBlock>
+      </section>
+
+      <section css={section} id="printing">
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="/static/printings/nikko-b.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="/static/printings/eikou.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="緑陽社"
+              imageUrl="/static/printings/ryokuyousha.gif"
+              linkUrl="https://www.ryokuyou.co.jp/"
+            />
+          </div>
         </TextBlock>
       </section>
 
