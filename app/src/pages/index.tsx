@@ -484,8 +484,6 @@ export default () => {
                 image="/static/sponsors/sakura.png"
                 href="https://www.sakura.ad.jp/"
               />
-            </div>
-            <div className="sponsorlist">
               <Sponsor
                 name="株式会社しまや出版"
                 role="プリンティングサポーター"
