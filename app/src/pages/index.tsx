@@ -498,6 +498,12 @@ export default () => {
                 image="/static/sponsors/esa.png"
                 href="https://esa.io"
               />
+              <Sponsor
+                name="転職ドラフト"
+                role="ビールスポンサー<br />（懇親会）"
+                image="/static/sponsors/job-draft.png"
+                href="https://job-draft.jp/"
+              />
             </div>
           </div>
           <p>
