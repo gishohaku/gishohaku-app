@@ -164,6 +164,16 @@ const Header: FCC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
+          <Link legacyBehavior href="/gishohaku14" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十四回 技術書同人誌博覧会"
+                secondary="2026年09月13日 開催予定"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
+          </Link>
           <Link legacyBehavior href="/gishohaku13" passHref>
             <a css={noDecoration}>
               <ListItem
@@ -179,16 +189,6 @@ const Header: FCC<any> = () => {
               <ListItem
                 primary="第十二回 技術書同人誌博覧会"
                 secondary="2025年10月26日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
-          </Link>
-          <Link legacyBehavior href="/gishohaku11" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十一回 技術書同人誌博覧会"
-                secondary="2025年1月25日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
