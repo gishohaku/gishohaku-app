@@ -71,18 +71,18 @@ const SEO: FCC<Props> = ({ description, title, imageUrl }) => {
       <link
         rel="icon shortcut"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku13-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku14-icon.png'}
         type="image/png"
       />
       <link
         rel="apple-touch-icon"
         sizes="256x256"
-        href={'https://gishohaku.dev/static/gishohaku13-icon.png'}
+        href={'https://gishohaku.dev/static/gishohaku14-icon.png'}
         type="image/png"
       />
       <meta
         property="favicon"
-        content={'https://gishohaku.dev/static/gishohaku13-icon.png'}
+        content={'https://gishohaku.dev/static/gishohaku14-icon.png'}
         key="image"
       />
       <meta

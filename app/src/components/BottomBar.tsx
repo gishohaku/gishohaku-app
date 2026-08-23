@@ -73,7 +73,7 @@ const BottomBar = () => {
           transition: padding-bottom 0.15s ease-out;
         `}>
         <span css={spacer} />
-        <Link legacyBehavior href={eventId === 'gishohaku13' ? '/' : `/${eventId}`} passHref>
+        <Link legacyBehavior href={eventId === 'gishohaku14' ? '/' : `/${eventId}`} passHref>
           <a css={item}>
             <img src={home} width={28} css={icon} />
             <div css={label}>ホーム</div>
