@@ -87,8 +87,9 @@ const Layout: FCC<any> = (props) => {
         'gishohaku11',
         'gishohaku12',
         'gishohaku13',
+        'gishohaku14',
       ].includes(eventId) && <BottomBar />}
-      {/* {eventId === 'gishohaku13' && <MypageButton />} */}
+      {/* {eventId === 'gishohaku14' && <MypageButton />} */}
     </>
   )
 }
