@@ -428,6 +428,119 @@ TypeScript の型定義が `EventId` union に紐付いているため、`event.
 
 ---
 
+## ④ エラー時の切り戻し (ロールバック) 手順
+
+各手順で本実行 (`DRY_RUN=false`) 中に想定外のエラーが発生した場合や、DryRun で見落とした誤りに本実行後に気付いた場合の切り戻し方法をまとめます。**先に「どこまで進んだか」を確認**してから該当節に従ってください。
+
+### 進捗判定チェックリスト
+
+- Firebase コンソール → Firestore → `circles` コレクションで `eventId == gishohaku<N>` の件数を確認
+- 上記に該当ドキュメントがある場合、任意の 1 件を開いて `circleInvitations` サブコレクションに招待ドキュメントがあるか確認
+- SMTP プロバイダの送信ログ (Sendgrid / SES / Postfix 等) で送信履歴を確認
+
+### 4-1. 手順0 (フロントエンド登録 PR) 失敗時
+
+**症状**: PR マージ後のデプロイでビルド失敗、または本番反映後に \`/gishohaku<N>/circles\` 等がエラー。
+
+**切り戻し**:
+1. GitHub の PR を **Revert** ボタンで自動リバート PR を作成 → マージ → 再デプロイ
+2. Cloud Run で**手動で 1 世代前のリビジョンにトラフィックを 100% ロールバック**（Firebase 管理画面 → Cloud Run → リビジョン → 過去リビジョンを選択 → 「トラフィックの管理」）
+3. 原因を修正した新規 PR を作成し直す
+
+> **注意**: この段階ではまだ Firestore にデータを入れていないため、DB 側のクリーンアップは不要。
+
+### 4-2. 手順1 (createCircles) 失敗時
+
+**症状**: 一部サークルのみ Firestore に作成された（並列非同期実装のため、失敗時に部分的な書き込みが残る可能性あり）。
+
+**切り戻し**:
+1. Firebase コンソール → Firestore → `circles` コレクション → `eventId == gishohaku<N>` でフィルタして**該当ドキュメントを全件削除**
+2. 削除方法:
+    - 少数（〜数十件）: コンソール上で個別に削除
+    - 多数: `firebase-admin` を使った削除スクリプトを別途作成、または本スクリプトを一時的に「削除モード」に改造して実行
+3. 削除完了後、原因（CSV 誤り / 権限 / ネットワーク 等）を修正して手順1 の DryRun からやり直し
+
+> **参考: 全件削除の一時スクリプト例**
+> ```ts
+> // scripts/temporary-delete-circles-gishohaku<N>.ts
+> import admin from 'firebase-admin'
+> admin.initializeApp({ projectId: process.env.PROJECT_ID })
+> const db = admin.firestore()
+> ;(async () => {
+>   const snap = await db.collection('circles').where('eventId', '==', 'gishohaku<N>').get()
+>   console.log(`削除対象: ${snap.size}件`)
+>   const batch = db.batch()
+>   snap.docs.forEach(d => batch.delete(d.ref))
+>   await batch.commit()
+>   console.log('削除完了')
+> })()
+> ```
+> **必ず DryRun 相当のログ確認 → 明示的な `DRY_RUN=false` で実行の 2 段階を踏むこと**。実行後はスクリプトを削除（証跡は git 履歴に残る）。
+
+### 4-3. 手順2 (createInvitation) 失敗時
+
+**症状**: 一部サークルにのみ招待トークンが発行された。**このスクリプトは冪等ではない**（再実行すると同じサークルに追加の招待が作られる）ため、必ずクリーンアップしてから再実行する。
+
+**切り戻し**:
+1. Firebase コンソールで各 `circles/{docId}/circleInvitations` サブコレクションの**全招待ドキュメントを削除**
+2. 削除方法（`firebase-admin` スクリプト例）:
+    ```ts
+    // scripts/temporary-delete-invitations-gishohaku<N>.ts
+    ;(async () => {
+      const circles = await db.collection('circles').where('eventId', '==', 'gishohaku<N>').get()
+      for (const circle of circles.docs) {
+        const invs = await circle.ref.collection('circleInvitations').get()
+        for (const inv of invs.docs) {
+          await inv.ref.delete()
+        }
+        console.log(`${circle.data().booth}: ${invs.size}件削除`)
+      }
+    })()
+    ```
+3. 削除完了後、手順2 の DryRun からやり直し
+4. **新しいトークンが発行されるため、手順3 (mail CSV 作成) もやり直しが必要**
+
+### 4-4. 手順5 (sendCircleInvitation) 失敗時
+
+**症状パターン別**:
+
+**A. 送信途中でネットワーク切断・SMTP エラー等で停止**
+- スクリプトは順次処理 (for-of + await) のため、**停止した時点で送信済みの件数はログで判別可能**
+- 対処:
+  1. `tee` ログを確認し、最後に「送信完了」が出ているサークル番号を特定
+  2. **未送信分だけを含む差分 CSV** (`mail-gishohaku<N>-remaining.csv`) を作成
+  3. スクリプトの `csvPath` を差分 CSV に一時的に書き換えて `DRY_RUN=false` で実行
+  4. スクリプトの `csvPath` を元に戻す（差分 CSV は退避後に削除）
+
+**B. 誤った本文で全件送信してしまった**
+- **メールは取り消し不可**
+- 対処:
+  1. 誤送信の事実を認め、**訂正メールを別途配信**（同じ mail CSV で `template` だけ差し替えて再送）
+  2. サークル代表者への Discord / X (Twitter) 経由でも案内
+  3. ポストモーテムを記録し、原因を再発防止（DryRun ログの目視項目強化 / テスト送信の観点追加 等）
+
+**C. `[SKIP]` されたサークルの手動フォロー**
+- `invitation-output-gishohaku<N>.log` から該当サークルの `loginUrl` を抽出
+- Discord DM / X (Twitter) 等でログイン URL を個別送付
+
+### 4-5. 手順6 (CircleSelect データ反映) 失敗時
+
+**症状**: CI ビルド失敗、または反映後にサークル詳細ページで前後遷移が壊れる。
+
+**切り戻し**:
+1. 該当 PR を Revert してデプロイ → **手順0 マージ時点の状態 (空配列)** に戻す
+2. `CircleSelect` の前後遷移だけが機能しない状態になるが、サークル一覧・詳細表示自体は正常動作するため**本番影響は限定的**
+3. データ抽出（Python スニペット）からやり直して修正 PR を再提出
+
+### 4-6. 共通: 判断に迷った時の原則
+
+1. **メール送信済みの取り消しは不可** → 送信前 (`sendCircleInvitation` DryRun 時点) までは完全巻き戻し可能。ここが最後の砦
+2. **サービス停止 vs データ不整合** → イベント直前は「サークル代表者がサークル情報を登録できない」ほうが致命的なので、**Firestore の一部データ不整合を許容してでもフロントを稼働させる**判断もあり
+3. **ロールバック実施は運営リード (fumiyasac 氏等) の合意を取ってから** → 単独判断で削除操作を進めない
+4. **すべての切り戻し操作前に Firebase コンソールから該当コレクションを export** して現状スナップショットを退避
+
+---
+
 ## 補足: よくあるハマりどころ
 
 | 症状 | 原因 | 対処 |
