@@ -695,6 +695,38 @@ export default () => {
           </div>
         </TextBlock>
       </section>
+
+      <section css={section} id="special-thanks">
+        <SectionHeader en="SPECIAL THANKS">相互協力</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              margin-top: 16px;
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="MOL MARKET"
+                role="相互協力"
+                image="/static/sponsors/molmarket.png"
+                href="https://www.chemicaldaily.co.jp/molmarket"
+              />
+            </div>
+          </div>
+        </TextBlock>
+      </section>
     </>
   )
 }
