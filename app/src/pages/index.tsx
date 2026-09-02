@@ -163,8 +163,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://gishohaku.connpass.com/event/389491/">
-          技書博14にサークル参加する
+        <LinkButton href="https://gishohaku.connpass.com/event/393530/">
+          技書博14に一般参加する
         </LinkButton>
       </div>
     </div>
@@ -691,6 +691,38 @@ export default () => {
               <span className="banner-caption">
                 （小サイズ：200×40ピクセル）
               </span>
+            </div>
+          </div>
+        </TextBlock>
+      </section>
+
+      <section css={section} id="special-thanks">
+        <SectionHeader en="SPECIAL THANKS">相互協力</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              margin-top: 16px;
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="MOL MARKET"
+                role="相互協力"
+                image="/static/sponsors/molmarket.png"
+                href="https://www.chemicaldaily.co.jp/molmarket"
+              />
             </div>
           </div>
         </TextBlock>
