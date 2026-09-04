@@ -1341,6 +1341,9 @@ const gishohaku14Circles = [
 { id: 'KLJ0RZMjZqyY4fCgzQSm', name: '株式会社化学工業日報社', booth: 'か-03'},
 { id: 'poIFEZRagxe46qTIWOWT', name: '翔泳社技術書編集部', booth: 'か-04'},
 { id: '7crxUIEuK4nCYgJbSXAb', name: 'マイナビ出版', booth: 'か-05'},
+{ id: 'B4Tl1FJ3RwZXe3c49nKm', name: 'さくらインターネット株式会社', booth: 'き-01'},
+{ id: 'YhJ3PPbG1pi2wQ3sv49U', name: 'プリザンター Users Group', booth: 'き-02'},
+{ id: 'uBtCzRUq3faj3YLBYXsO', name: '株式会社しまや出版', booth: 'き-03'},
 { id: '8ASV2lgiRrlnia5Cfvoo', name: '株式会社コロナ社', booth: 'き-04'},
 { id: '82lWxxxoDquKrfJn1v8U', name: 'まことのこと研究所', booth: 'く-01'},
 { id: 'nyP2SFrGCEqu3CuJzrw9', name: '良能技研', booth: 'く-02'},
@@ -1370,6 +1373,9 @@ const gishohaku14Circles = [
 { id: 'QLvKm6MOcsFGgaRwXja8', name: 'こくだランド', booth: 'さ-04'},
 { id: '971APORrTdPql5S7gd6W', name: '備中絡繰製造所', booth: 'さ-05'},
 { id: '4Z9rY8tQJ2ERznNW69vI', name: 'tenteroring project', booth: 'さ-06'},
+{ id: 'r8Hvv1i0BPzxtXBDvHj7', name: '小江戸らぐ', booth: 'さ-07'},
+{ id: 'bhXmD8vRtoGY8fqbuovq', name: 'もえじら組', booth: 'さ-08'},
+{ id: 'p1cBN4OzJVzs5c87lHur', name: 'D.M Entry Point', booth: 'さ-09'},
 ]
 
 const container = css`
