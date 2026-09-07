@@ -558,6 +558,11 @@ export default () => {
               linkUrl="https://www.popls.co.jp/"
             />
             <Printing
+              name="PICO"
+              imageUrl="/static/printings/pico.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
               name="ねこのしっぽ"
               imageUrl="/static/printings/neko.gif"
               linkUrl="https://www.shippo.co.jp/neko/"
