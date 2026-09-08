@@ -485,7 +485,7 @@ export default () => {
                 href="https://www.sakura.ad.jp/"
               />
               <Sponsor
-                name="株式会社インプリム"
+                name="プリザンター（株式会社インプリム）"
                 role="サポーター"
                 image="/static/sponsors/pleasanter.png"
                 href="https://pleasanter.org/"
