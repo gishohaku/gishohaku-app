@@ -164,7 +164,7 @@ const Header: FCC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link legacyBehavior href="/gishohaku14" passHref>
+          <Link legacyBehavior href="/" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十四回 技術書同人誌博覧会"
