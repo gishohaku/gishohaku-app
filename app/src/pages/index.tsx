@@ -446,6 +446,19 @@ export default () => {
         </TextBlock>
       </section>
 
+      <section css={section} id="circle">
+        <SectionHeader en="CIRCLE">サークル参加者への案内</SectionHeader>
+        <TextBlock>
+          <p>
+            サークル参加される方に向けたご案内資料です。
+          </p>
+          <LinkButton href="https://gishohaku.notion.site/">
+            技書博ポータル
+            <small>（サークル向けの手続き案内・諸情報）</small>
+          </LinkButton>
+        </TextBlock>
+      </section>
+
       <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
