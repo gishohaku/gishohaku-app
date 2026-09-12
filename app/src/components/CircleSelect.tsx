@@ -1311,7 +1311,7 @@ const gishohaku14Circles = [
 { id: 'on86DJnnTg29rYLrnM2m', name: 'なにがし堂', booth: 'う-05'},
 { id: 'TlwqpOj6MqHUh5CcedcC', name: 'Auth屋', booth: 'う-06'},
 { id: 'KXZcAJoqumm6OpXyS8ic', name: '脆弱性診断研究会', booth: 'う-07'},
-{ id: 'CCi9wBGdbaRYKmMGptoV', name: 'Seurity for Beginners', booth: 'う-08'},
+{ id: 'CCi9wBGdbaRYKmMGptoV', name: 'Security for Beginners', booth: 'う-08'},
 { id: '9IlXaH3dLvxrCnNaclRz', name: 'のみぞーん', booth: 'う-09'},
 { id: 'RCqPJJfBEyOMa9jdysxw', name: 'にっしー', booth: 'う-10'},
 { id: 'NRnsv0kObaB1uYTQVjp2', name: '卒業文集編集委員会', booth: 'え-01'},
