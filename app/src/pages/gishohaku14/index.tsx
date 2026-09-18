@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
-import { media, colors } from '../utils/style'
-import FluidBlock from '../components/atoms/FluidBlock'
-import TextBlock from '../components/atoms/TextBlock'
-import SectionHeader from '../components/SectionHeder'
-import placeIcon from '../components/top/round-place.svg'
-import directionsIcon from '../components/top/round-directions_run.svg'
+import { media, colors } from '../../utils/style'
+import FluidBlock from '../../components/atoms/FluidBlock'
+import TextBlock from '../../components/atoms/TextBlock'
+import SectionHeader from '../../components/SectionHeder'
+import placeIcon from '../../components/top/round-place.svg'
+import directionsIcon from '../../components/top/round-directions_run.svg'
 
 const keyColor = colors.primaryDarker
 
@@ -82,7 +82,7 @@ const Hero = () => (
           height: auto;
         }
       `}
-      src="/static/gishohaku15-logo.png"
+      src="/static/gishohaku14-logo.png"
       width={280}
       height={280}
     />
@@ -122,7 +122,7 @@ const Hero = () => (
             }
           }
         `}>
-        <small>第十五回</small>技術書同人誌博覧会
+        <small>第十四回</small>技術書同人誌博覧会
       </h1>
       <div
         css={css`
@@ -138,7 +138,7 @@ const Hero = () => (
             font-size: 28px;
           }
         `}>
-        2027.05.15 <small>Sat. 11:00~16:00</small>
+        2026.09.13 <small>Sun. 11:00~16:00</small>
       </div>
       <div
         css={css`
@@ -163,8 +163,8 @@ const Hero = () => (
             }
           }
         `}>
-        <LinkButton href="https://gishohaku.connpass.com/event/402867/">
-          技書博15にサークル参加する
+        <LinkButton href="https://gishohaku.connpass.com/event/393530/">
+          技書博14に一般参加する
         </LinkButton>
       </div>
     </div>
@@ -462,13 +462,131 @@ export default () => {
       <section css={section} id="sponsor">
         <SectionHeader en="SPONSOR">スポンサー</SectionHeader>
         <TextBlock>
+          <div
+            css={css`
+              margin-top: 16px;
+              text-align: center;
+              .sponsorlist {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-content: flex-start;
+                align-items: flex-start;
+                margin: 12px 0;
+                gap: 12px 0;
+              }
+              .sponsorlist .sponsor:hover {
+                filter: drop-shadow(1px 3px 3px rgba(243, 183, 174, 0.4));
+              }
+              .sponsorlist.small .sponsor {
+                width: 175px;
+              }
+              .sponsorlist.small .sponsor .sponsor-image {
+                width: 160px;
+                height: 160px;
+              }
+              .sponsorlist.small .sponsor-image img {
+                max-width: 120px;
+                max-height: 110px;
+              }
+            `}>
+            <div className="sponsorlist">
+              <Sponsor
+                name="さくらインターネット株式会社"
+                role="サポーター"
+                image="/static/sponsors/sakura.png"
+                href="https://www.sakura.ad.jp/"
+              />
+              <Sponsor
+                name="プリザンター（株式会社インプリム）"
+                role="サポーター"
+                image="/static/sponsors/pleasanter.png"
+                href="https://pleasanter.org/"
+              />
+              <Sponsor
+                name="株式会社しまや出版"
+                role="プリンティングサポーター"
+                image="/static/sponsors/shimaya.png"
+                href="https://www.shimaya.net/"
+              />
+            </div>
+            <div className="sponsorlist small">
+              <Sponsor
+                name="esa"
+                role="ツールサポーター"
+                image="/static/sponsors/esa.png"
+                href="https://esa.io"
+              />
+              <Sponsor
+                name="転職ドラフト"
+                role="ビールスポンサー<br />（懇親会）"
+                image="/static/sponsors/job-draft.png"
+                href="https://job-draft.jp/"
+              />
+            </div>
+          </div>
           <p>
             技書博は協賛企業さまのご支援によって運営を継続させて頂いております。
             <br />スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。
           </p>
           <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/431/85b06feb69847bd81874.html">
-            技書博15 スポンサー募集要項
+            技書博14 スポンサー募集要項
           </LinkButton>
+        </TextBlock>
+      </section>
+
+      <section css={section} id="printing">
+        <SectionHeader en="PRINTING">バックアップ印刷所</SectionHeader>
+        <TextBlock>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              align-content: flex-start;
+              align-items: flex-start;
+            `}>
+            <Printing
+              name="しまや出版"
+              imageUrl="/static/printings/shimaya.png"
+              linkUrl="https://www.shimaya.net/"
+            />
+            <Printing
+              name="K-9"
+              imageUrl="/static/printings/k9.gif"
+              linkUrl="https://www.k-k9.jp/"
+            />
+            <Printing
+              name="日光企画"
+              imageUrl="/static/printings/nikko-b.png"
+              linkUrl="https://www.nikko-pc.com/"
+            />
+            <Printing
+              name="栄光"
+              imageUrl="/static/printings/eikou.gif"
+              linkUrl="http://www.eikou.com/"
+            />
+            <Printing
+              name="緑陽社"
+              imageUrl="/static/printings/ryokuyousha.gif"
+              linkUrl="https://www.ryokuyou.co.jp/"
+            />
+            <Printing
+              name="ポプルス"
+              imageUrl="/static/printings/popls.jpg"
+              linkUrl="https://www.popls.co.jp/"
+            />
+            <Printing
+              name="PICO"
+              imageUrl="/static/printings/pico.gif"
+              linkUrl="http://www.pico-net.com/doujinshi/"
+            />
+            <Printing
+              name="ねこのしっぽ"
+              imageUrl="/static/printings/neko.gif"
+              linkUrl="https://www.shippo.co.jp/neko/"
+            />
+          </div>
         </TextBlock>
       </section>
 

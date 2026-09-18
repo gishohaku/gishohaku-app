@@ -167,8 +167,18 @@ const Header: FCC<any> = () => {
           <Link legacyBehavior href="/" passHref>
             <a css={noDecoration}>
               <ListItem
+                primary="第十五回 技術書同人誌博覧会"
+                secondary="2027年05月15日 開催予定"
+                contentAfter={<IconChevronRight />}
+                onClick={() => setOpen(false)}
+              />
+            </a>
+          </Link>
+          <Link legacyBehavior href="/gishohaku14" passHref>
+            <a css={noDecoration}>
+              <ListItem
                 primary="第十四回 技術書同人誌博覧会"
-                secondary="2026年09月13日 開催予定"
+                secondary="2026年09月13日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />
