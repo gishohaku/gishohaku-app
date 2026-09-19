@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
-import Book from '../utils/book'
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 
 export enum SnsShareSize {
   Small,
@@ -21,11 +19,6 @@ const SnsShare: FCC<Props> = (props) => {
     }
     const parent_js = document.getElementsByTagName('script')[0]
 
-    const facebook_js = document.createElement('script')
-    facebook_js.id = 'facebook-js'
-    facebook_js.src = '//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v18.0'
-    parent_js.parentNode!.insertBefore(facebook_js, parent_js)
-
     const twitter_js = document.createElement('script')
     twitter_js.id = 'twitter-wjs'
     twitter_js.src = '//platform.twitter.com/widgets.js'
@@ -37,24 +30,16 @@ const SnsShare: FCC<Props> = (props) => {
     parent_js.parentNode!.insertBefore(hatena_js, parent_js)
   }, [props])
 
-  const { asPath } = useRouter()
-  const currentUrl = 'https://gishohaku.dev' + asPath
-
   return (
     <div
       css={css`
         .twitter-share-button,
-        .fb-share-button,
         .hatena-bookmark-button-frame {
           vertical-align: top;
           margin-right: 4px;
           display: inline-block;
         }
-        .fb-share-button > span {
-          vertical-align: top !important;
-        }
       `}>
-      <div id="fb-root"></div>
       <a
         href="https://twitter.com/share?ref_src=twsrc%5Etfw"
         className="twitter-share-button"
@@ -65,23 +50,6 @@ const SnsShare: FCC<Props> = (props) => {
         data-show-count="false">
         Twitterで共有
       </a>
-
-      <div
-        className="fb-share-button"
-        data-href={currentUrl}
-        data-layout="button"
-        data-size={props.size == SnsShareSize.Small ? 'small' : 'large'}>
-        <a
-          target="_blank"
-          href={
-            'https://www.facebook.com/sharer/sharer.php?u=' +
-            encodeURIComponent(currentUrl) +
-            '&amp;src=sdkpreparse'
-          }
-          className="fb-xfbml-parse-ignore">
-          Facebookで共有
-        </a>
-      </div>
       <a
         href="http://b.hatena.ne.jp/entry/"
         className="hatena-bookmark-button"
