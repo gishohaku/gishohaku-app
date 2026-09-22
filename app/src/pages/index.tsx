@@ -466,7 +466,7 @@ export default () => {
             技書博は協賛企業さまのご支援によって運営を継続させて頂いております。
             <br />スポンサーメニューをご確認いただき、お申し込みくださいますと幸いです。
           </p>
-          <LinkButton href="https://esa-pages.io/p/sharing/13039/posts/431/85b06feb69847bd81874.html">
+          <LinkButton href="https://docs.google.com/presentation/d/1jbrtBF6lsYnk0tobR-e-1NTYqdZBpg30f_iFybB5WZA/edit">
             技書博15 スポンサー募集要項
           </LinkButton>
         </TextBlock>
