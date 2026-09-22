@@ -533,7 +533,7 @@ export type CricleCategory = keyof typeof categories1 |
   keyof typeof categories13 |
   keyof typeof categories14 |
   keyof typeof categories15
-export type CriclePlan = keyof typeof plans
+export type CirclePlan = keyof typeof plans
 
 export const allCategories: {
   [key in CricleCategory]: string
@@ -564,7 +564,7 @@ export default interface Circle {
   image: string
   imageMonochro: string
   category: CricleCategory
-  plan: CriclePlan
+  plan: CirclePlan
   twitter: string
   booth: string
   website: string

@@ -8,7 +8,7 @@ import { Select } from './common/Select'
 import { Text } from './common/Text'
 import { jsx, css } from '@emotion/react'
 import { Formik, Field, FieldProps } from 'formik'
-import Circle, { categoriesByEvent, plans, CriclePlan } from '../utils/circle'
+import Circle, { categoriesByEvent, plans, CirclePlan } from '../utils/circle'
 import ImageUploader from './ImageUploader'
 import ImageBox from './ImageBox'
 import { useContext } from 'react'
@@ -138,7 +138,7 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                 disabled>
                 <option>選択してください</option>
                 {Object.keys(plans).map((key) => {
-                  const planKey = key as CriclePlan
+                  const planKey = key as CirclePlan
                   const label = plans[planKey]
                   return (
                     <option value={key} key={key}>
