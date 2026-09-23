@@ -36,6 +36,7 @@ const mapUrl: {
   gishohaku12: '/static/gishohaku12-layout.png',
   gishohaku13: '/static/gishohaku13-layout.png',
   gishohaku14: '/static/gishohaku14-layout.png',
+  gishohaku15: '',
 }
 
 const appealUrl: {
@@ -55,6 +56,7 @@ const appealUrl: {
   gishohaku12: 'https://docs.google.com/presentation/d/e/2PACX-1vR3DN1qESCRjENKn_dxb8JbDpc75BJ9c-f5_M8jlxlJs-SMJfEh21ZmbxxjqibEo3eV7xbiMQ_Ej7Jj/pub',
   gishohaku13: 'https://docs.google.com/presentation/d/e/2PACX-1vQYyVOnQBdw2XR7OAQ47XGb9zCXYwTc8Z69SO_ccNGVtYQdnhe7OpkCnioQlWyfp-7Kn2L-Y1A1szb9/pub',
   gishohaku14: 'https://docs.google.com/presentation/d/e/2PACX-1vR8Fx9WxL-swr6NACIKPk4sVU5tQp31u4XkJsV7Vaaa-Kku1hkfkC37FdqeoluC2ls6Pm2LbXqKQfBN/pub',
+  gishohaku15: '',
 }
 
 const Index: NextPage<InitialProps> = (props) => {

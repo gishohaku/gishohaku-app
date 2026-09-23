@@ -164,11 +164,11 @@ const Header: FCC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link legacyBehavior href="/" passHref>
+          <Link legacyBehavior href="/gishohaku14" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十四回 技術書同人誌博覧会"
-                secondary="2026年09月13日 開催予定"
+                secondary="2026年09月13日 開催"
                 contentAfter={<IconChevronRight />}
                 onClick={() => setOpen(false)}
               />

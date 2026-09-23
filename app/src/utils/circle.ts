@@ -493,6 +493,8 @@ const categories14 = {
   'その他': 'その他',
 }
 
+const categories15 = {}
+
 export const categoriesByEvent = {
   gishohaku1: categories1,
   gishohaku2: categories2,
@@ -508,6 +510,7 @@ export const categoriesByEvent = {
   gishohaku12: categories12,
   gishohaku13: categories13,
   gishohaku14: categories14,
+  gishohaku15: categories15,
 }
 
 export const plans = {
@@ -528,8 +531,9 @@ export type CricleCategory = keyof typeof categories1 |
   keyof typeof categories11 |
   keyof typeof categories12 |
   keyof typeof categories13 |
-  keyof typeof categories14
-export type CriclePlan = keyof typeof plans
+  keyof typeof categories14 |
+  keyof typeof categories15
+export type CirclePlan = keyof typeof plans
 
 export const allCategories: {
   [key in CricleCategory]: string
@@ -548,6 +552,7 @@ export const allCategories: {
   ...categories12,
   ...categories13,
   ...categories14,
+  ...categories15,
 }
 
 export default interface Circle {
@@ -559,7 +564,7 @@ export default interface Circle {
   image: string
   imageMonochro: string
   category: CricleCategory
-  plan: CriclePlan
+  plan: CirclePlan
   twitter: string
   booth: string
   website: string
