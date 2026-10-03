@@ -87,37 +87,12 @@ const CircleForm = ({ onSubmit, user, circle }: Props) => {
                     />
                   )}
                 </div>
-                <div>
-                  <Text css={smallGray}>グレースケール</Text>
-                  {values.imageMonochro ? (
-                    <ImageBox
-                      imageUrl={values.imageMonochro}
-                      size="circlecut"
-                      width={180}
-                      onClick={() => {
-                        if (confirm('画像を削除しますか？')) {
-                          setFieldValue('imageMonochro', '')
-                        }
-                      }}
-                    />
-                  ) : (
-                    <ImageUploader
-                      user={user}
-                      size="circlecut"
-                      addUrl={(url: string) => {
-                        setFieldValue('imageMonochro', url)
-                      }}
-                    />
-                  )}
-                </div>
               </div>
               <Text css={smallGray}>
                 ※推奨サイズ: 横635px
                 縦903px。最大1MBまで、jpg/gif/pngのいずれかの形式でアップロードしてください。
                 <br />
                 ※この画像はWebサイトのサークル一覧として表示されるほか、公式パンフレットのサークルカットとして印刷されます。
-                <br />
-                ※グレースケール版を登録されていない場合は、運営事務局にて自動変換いたします。
                 <br />
                 ※サークルカットのテンプレートは
                 <a
