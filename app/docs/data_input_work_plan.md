@@ -24,13 +24,12 @@
 
 - Firebaseコンソール → Firestore → `circles`コレクションで`eventId == gishohaku<N>`の件数を確認する
 - 該当ドキュメントがある場合、任意の1件を開いて`circleInvitations`サブコレクションに招待ドキュメントがあるかを確認する
-- SMTPプロバイダの送信ログ（Sendgrid / SES / Postfix等）で送信履歴を確認する
 
 ### 切り戻し判断の原則
 
 1. 送信済みメールは取り消せない。`sendCircleInvitation`のDryRun時点までが可逆な最終ポイントになる
 2. イベント直前は「サークル代表者がサークル情報を登録できない」ほうが致命的なので、Firestoreの一部データ不整合を許容してでもフロントを稼働させる判断もあり得る
-3. ロールバックの実施判断は単独で進めず、運営の合意を取ってから着手する
+3. ロールバックの実施判断は単独で進めず、運営リードの合意を取ってから着手する
 4. 切り戻し操作の前に、Firebaseコンソールから該当コレクションをexportして現状のスナップショットを退避しておく
 
 ---
@@ -133,24 +132,6 @@ Excel for Macで保存形式に`CSV UTF-8`がない場合は、Excelを更新す
 2. 手順Aの2〜5と同じ整形作業を行う
 3. `ファイル` → `ダウンロード` → `カンマ区切り形式 (.csv)`を選択する。GoogleスプレッドシートからのCSVエクスポートは常にUTF-8（BOMなし）で保存される
 4. ダウンロードした`.csv`を`scripts/data/`配下に配置する
-
-#### 手順C: コマンドラインで一括変換する
-
-`xlsx`パッケージ（SheetJS）のCLIツール`xlsx-cli`を使うとGUIを開かずに変換できる。
-
-```bash
-# 一度だけインストール
-npm install -g xlsx-cli
-
-# 変換（先頭シートを CSV に出力）
-xlsx --output=./scripts/data/entries-gishohaku14.csv ./path/to/received.xlsx
-```
-
-Pythonが使える環境であれば次のワンライナーでも変換できる:
-
-```bash
-python3 -c "import pandas as pd; pd.read_excel('./received.xlsx', sheet_name=0).to_csv('./scripts/data/entries-gishohaku14.csv', index=False, encoding='utf-8')"
-```
 
 #### 変換後の必須チェック
 
@@ -533,10 +514,10 @@ CIビルドが失敗する、または反映後にサークル詳細ページで
 
 ### 事後対応
 
-- [ ] 送信ログを保存する（`tee`などで残す）
-- [ ] `data/invitation-output-gishohaku<N>.log`と`data/mail-gishohaku<N>.csv`を安全な場所へ退避する（機密情報を含むためリポジトリにコミットしない。`.gitignore`にパターンが含まれていることも確認する）
-- [ ] Firebaseコンソールで`circles` / `circleInvitations`の件数を最終確認する
-- [ ] 参加者から「メールが届かない」等の問い合わせがあった場合に備えて、送信済みリストやエラー行リストを別途保存する
+- 送信ログを保存する（`tee`などで残す）
+- `data/invitation-output-gishohaku<N>.log`と`data/mail-gishohaku<N>.csv`を安全な場所へ退避する（機密情報を含むためリポジトリにコミットしない。`.gitignore`にパターンが含まれていることも確認する）
+- Firebaseコンソールで`circles` / `circleInvitations`の件数を最終確認する
+- 参加者から「メールが届かない」等の問い合わせがあった場合に備えて、送信済みリストやエラー行リストを別途保存する
 
 ---
 
@@ -550,6 +531,3 @@ CIビルドが失敗する、または反映後にサークル詳細ページで
 | `sendCircleInvitation`で全件`[SKIP]`になる | ヘッダー行がデータ行として読まれている、または列順が違う | CSVの1行目にヘッダーがあること、列順を「メールCSV」の順に修正 |
 | 同じサークルに2通目の招待メールが届いた | `createInvitation`を複数回実行してトークンが重複発行された | Firestoreの`circleInvitations`を確認し古いトークンを無効化する（Issue #16の未対応事項） |
 | `Could not load the default credentials`エラー | `GOOGLE_APPLICATION_CREDENTIALS`未設定かつADCも未設定 | 環境変数にJSONパスを設定するか`gcloud auth application-default login`を実行する |
-| `/gishohaku<N>/circles`がSSR 500 | フロントエンドで新`eventId`が`userStars`等に未登録 | 手順0のStarsContext / EventId / mapUrl等の登録漏れを確認。ホットフィックスPRで追加する |
-| サークル情報更新画面がclient-side exception | `categoriesByEvent[gishohaku<N>]`が未定義で`Object.keys(undefined)` | 手順0の`app/src/utils/circle.ts`に`categories<N>`が登録されているか確認 |
-| Cloud Buildのビルドが`TS7034 / TS7005 implicit any[]`で失敗 | `gishohaku<N>Circles`が空配列のまま放置されている | 手順6で実データを投入する。緊急時は型注釈`const gishohaku<N>Circles: {id: string; name: string; booth: string}[] = []`で回避可能 |
