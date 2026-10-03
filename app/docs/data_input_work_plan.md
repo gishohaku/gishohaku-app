@@ -113,7 +113,7 @@ A-02,インフラ探検隊,インフラタンケンタイ,infra/etc,hanako@examp
 
 サークル応募フォームや事前アンケートの一次データは Excel や Google スプレッドシート（`.xls` / `.xlsx`）で受領するケースが多く、そのままでは `csv-parser` で読み込めない。次のいずれかの手順で UTF-8 の CSV に変換してから `scripts/data/` 配下に配置する。
 
-#### 手順 A: Excel（macOS / Windows）で変換する
+#### 手順A: Excel（macOS / Windows）で変換する
 
 1. 該当 XLS / XLSX ファイルを Excel で開く
 2. 不要なシート・行・列を削除する（`csv-parser` は先頭シートしか読まないため、対象データが 2 番目以降のシートにある場合は対象シートを 1 番目に移動するか別ファイルに保存する）
@@ -125,16 +125,16 @@ A-02,インフラ探検隊,インフラタンケンタイ,infra/etc,hanako@examp
 6. `ファイル` → `名前を付けて保存` → ファイル形式に `CSV UTF-8 (コンマ区切り) (.csv)` を選んで保存する。「CSV（コンマ区切り）」を選ぶと SJIS で保存され `csv-parser` で日本語が化けるので注意
 7. 保存した `.csv` を `scripts/data/entries-gishohaku<N>.csv`（または `mail-gishohaku<N>.csv`）にリネームして配置する
 
-Excel for Mac で保存形式に `CSV UTF-8` がない場合は、Excel を更新するか手順 B（Google スプレッドシート経由）を使う。
+Excel for Mac で保存形式に `CSV UTF-8` がない場合は、Excel を更新するか手順B（Google スプレッドシート経由）を使う。
 
-#### 手順 B: Google スプレッドシートで変換する（推奨）
+#### 手順B: Google スプレッドシートで変換する（推奨）
 
 1. XLS / XLSX ファイルを Google ドライブにアップロードし、Google スプレッドシートで開く
-2. 手順 A の 2〜5 と同じ整形作業を行う
+2. 手順A の 2〜5 と同じ整形作業を行う
 3. `ファイル` → `ダウンロード` → `カンマ区切り形式 (.csv)` を選択する。Google スプレッドシートからの CSV エクスポートは常に UTF-8（BOM なし）で保存される
 4. ダウンロードした `.csv` を `scripts/data/` 配下に配置する
 
-#### 手順 C: コマンドラインで一括変換する
+#### 手順C: コマンドラインで一括変換する
 
 `xlsx` パッケージ（SheetJS）の CLI ツール `xlsx-cli` を使うと GUI を開かずに変換できる。
 
@@ -252,7 +252,7 @@ DRY_RUN=false npx tsx 20260428-sendCircleInvitation.ts
 
 新しい回（例: `gishohaku14`）に更新する場合の推奨フロー。
 
-### 手順 0. Next.js フロントエンドへの新イベント登録（必須先行）
+### 手順0. Next.js フロントエンドへの新イベント登録
 
 データ投入（手順1 以降）を実施する前に、必ずこのフェーズを完了させる。フロントエンドが新しい `eventId` を認識していない状態で Firestore にデータを投入すると、次の不具合が発生する。
 
@@ -305,7 +305,7 @@ PR マージ後のデプロイでビルド失敗が起きた場合、または�
 
 ### 事前準備
 
-- [ ] スクリプトの複製（必須）: 既存の `20260428-*.ts` を直接編集せず、作業日付を先頭に付けた新ファイル名でコピーする。以降は複製先を編集する
+- [ ] スクリプトの複製: 既存の `20260428-*.ts` を直接編集せず、作業日付を先頭に付けた新ファイル名でコピーする。以降は複製先を編集する
     - 命名規則: `<YYYYMMDD>-<元のスクリプト名>.ts`（`YYYYMMDD` は実行日。例: 2026-09-01 に作業するなら `20260901-`）
     - コピー対象は 3 ファイルすべて:
       ```bash
@@ -321,7 +321,7 @@ PR マージ後のデプロイでビルド失敗が起きた場合、または�
     - `createCircles.ts`: `circle.eventId`、CSV パス `./data/entries-gishohaku13.csv`
     - `createInvitation.ts`: `where("eventId", "==", "gishohaku13")`、実行後のログ出力 URL の `gishohaku13`
     - `sendCircleInvitation.ts`: `csvPath` の `./data/mail-gishohaku13.csv`、メール本文テンプレート内の `gishohaku13` 表記、告知 URL（懇親会 connpass、一般参加募集 connpass、Notion のイベントページ、印刷所ページ、フリーペーパー企画ブログ 等）を新回のものに差し替える
-- [ ] フロントエンド登録 PR が本番デプロイ済みであること（手順0 を必ず完了させておく）
+- [ ] フロントエンド登録 PR が本番デプロイ済みであること（手順0 を完了させておく）
 - [ ] カテゴリ定義を確認する。`app/src/utils/circle.ts` の `categories<N>` を CSV データに合わせて確認する（手順0 で対応済みだが、応募フォームで新規カテゴリが追加された場合は再確認する）
 - [ ] `data/entries-gishohaku<N>.csv` を作成する（前述の「エントリー CSV」の形式）
 - [ ] リポジトリルートの `.env` に SMTP と Firebase の環境変数を設定する（機密情報のためコミット禁止）
@@ -490,9 +490,9 @@ DryRun 相当のログ確認 → 明示的な `DRY_RUN=false` で実行、の 2 
 - `invitation-output-gishohaku<N>.log` から該当サークルの `loginUrl` を抽出する
 - Discord DM や X（Twitter）等でログイン URL を個別送付する
 
-### 手順6. CircleSelect にサークル配置データを反映（必須）
+### 手順6. CircleSelect にサークル配置データを反映
 
-手順1（`createCircles.ts`）実行により Firestore の docId が確定したので、手順0 で空配列スタブとして仮登録した `gishohaku<N>Circles` に実データを投入する。この対応を怠ると TypeScript ビルドエラー（`TS7034` / `TS7005: implicit any[]`）で Cloud Build が失敗することがあるため、必ず実施する。
+手順1（`createCircles.ts`）実行により Firestore の docId が確定したので、手順0 で空配列スタブとして仮登録した `gishohaku<N>Circles` に実データを投入する。この対応を怠ると TypeScript ビルドエラー（`TS7034` / `TS7005: implicit any[]`）で Cloud Build が失敗することがあるため、本手順も忘れずに実施する。
 
 1. 手順3 で作成した `mail-gishohaku<N>.csv`（`loginUrl` に `circleId=<docId>` を含む）から docId を抽出する
 
