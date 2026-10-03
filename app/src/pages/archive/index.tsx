@@ -29,11 +29,29 @@ export default () => {
       <section css={section}>
         <SectionHeader en="ARCHIVE">過去の開催回一覧</SectionHeader>
         <List>
+          <Link legacyBehavior href="/gishohaku14" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十四回 技術書同人誌博覧会"
+                secondary="2026年9月13日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
+          <Link legacyBehavior href="/gishohaku13" passHref>
+            <a css={noDecoration}>
+              <ListItem
+                primary="第十三回 技術書同人誌博覧会"
+                secondary="2026年5月10日 開催"
+                contentAfter={<IconChevronRight />}
+              />
+            </a>
+          </Link>
           <Link legacyBehavior href="/gishohaku12" passHref>
             <a css={noDecoration}>
               <ListItem
                 primary="第十二回 技術書同人誌博覧会"
-                secondary="2025年10月26日 開催予定"
+                secondary="2025年10月26日 開催"
                 contentAfter={<IconChevronRight />}
               />
             </a>
