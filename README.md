@@ -24,14 +24,14 @@
 
 ### Node.js バージョンの切り替え（作業ディレクトリで自動）
 
-このリポジトリでは Node のバージョンを `.node-version` / `.nvmrc`（ともに **22.23.1**）で固定しています。`app/package.json` の `engines`（**`">=22 <23"`** で 22 系のみ許可）と `app/Dockerfile`（`node:22-alpine`）も揃えてあります。Node の予期せぬメジャー上げによる native binary(`lightningcss` / `sharp` 等)の破損を防ぐため、23 以上は明示的に許可していません。
+このリポジトリでは Node のバージョンを `.node-version` / `.nvmrc`（ともに **22.23.4**）で固定しています。`app/package.json` の `engines`（**`">=22 <23"`** で 22 系のみ許可）と `app/Dockerfile`（`node:22.23.4-alpine`）も揃えてあります。Node の予期せぬメジャー上げによる native binary(`lightningcss` / `sharp` 等)の破損を防ぐため、23 以上は明示的に許可していません。
 
 - **[nodenv](https://github.com/nodenv/nodenv) / [Volta](https://volta.sh/) / [fnm](https://github.com/Schniz/fnm) / [mise](https://mise.jdx.dev/)**: `.node-version` を読み、ディレクトリ移動時に自動で 22 系へ切り替わります（推奨）。
 - **[nvm](https://github.com/nvm-sh/nvm)**: 作業ディレクトリで `nvm use`（`.nvmrc` を参照）を実行します。`cd` で自動切替したい場合は、`~/.zshrc` に nvm 公式の [zsh 自動 `nvm use` フック](https://github.com/nvm-sh/nvm#zsh)を追加してください。
 
 ```shell
 # 初回のみ: 対象バージョンを導入
-$ nvm install     # .nvmrc の 22.23.1 を導入
+$ nvm install     # .nvmrc の 22.23.4 を導入
 # 以降、このディレクトリで
 $ nvm use         # 22 系に切り替え
 $ node -v         # v22.x であることを確認
@@ -97,7 +97,7 @@ $ open http://localhost:3000
 
 デプロイは Google Cloud Build で行っている（`cloudbuild.yaml`）。
 
-1. `app/Dockerfile`（`node:22-alpine`）で Docker イメージをビルドし、`API_KEY` / `PROJECT_ID` をビルド引数として渡す
+1. `app/Dockerfile`（`node:22.23.4-alpine`）で Docker イメージをビルドし、`API_KEY` / `PROJECT_ID` をビルド引数として渡す
 2. `gcr.io/gishohaku/gishohaku-app` に push
 3. Cloud Run（`asia-northeast1`）へ deploy
 4. Firebase Hosting を deploy（`**` を Cloud Run に rewrite）
