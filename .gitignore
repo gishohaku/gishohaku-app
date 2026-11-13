@@ -4,6 +4,9 @@ dist/functions
 .firebase
 .firebaserc
 .envrc
+.env
+.env.*
+!.env.example
 functions/package.json
 functions/yarn.lock
 
@@ -13,3 +16,8 @@ app/.nextjs-migration
 .DS_Store
 *.csv
 *.tsbuildinfo
+
+# scripts/data/ 配下に生成される招待発行ログ / メール送信ログ
+# (invitation-output-gishohaku<N>.log / send-log-gishohaku<N>.log 等)
+# いずれも招待トークン・サークル代表者メールアドレス等の機密情報を含む
+scripts/data/*.log
