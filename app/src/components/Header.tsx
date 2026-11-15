@@ -119,7 +119,7 @@ const Header: FCC<any> = () => {
         onClick={() => setOpen(true)}>
         <IconMenu />
       </div>
-      <Link legacyBehavior
+      <Link
         href={`/${
           ['gishohaku1', 'gishohaku2', 'gishohaku3', 'gishohaku4'].includes(
             eventId,
@@ -127,35 +127,34 @@ const Header: FCC<any> = () => {
             ? eventId
             : ''
         }`}
-        passHref>
-        <a
-          css={css`
-            padding: 13px;
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.08);
-            }
+        css={css`
+          padding: 13px;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.08);
+          }
 
-            &:active {
-              background-color: rgba(0, 0, 0, 0.12);
-            }
-          `}>
-          <img
-            src={logo}
-            width={80}
-            css={css`
-              display: block;
-              pointer-events: none;
-            `}
-            alt="技術書同人誌博覧会"
-          />
-        </a>
+          &:active {
+            background-color: rgba(0, 0, 0, 0.12);
+          }
+        `}>
+
+        <img
+          src={logo}
+          width={80}
+          css={css`
+            display: block;
+            pointer-events: none;
+          `}
+          alt="技術書同人誌博覧会"
+        />
+
       </Link>
       <div className="ml-auto" css={hamburgerButton}>
         {user && (
-          <Link legacyBehavior href={`/${eventId}/mypage/circle_stars`} passHref>
-            <a className='block h-full'>
-              <IconHeart />
-            </a>
+          <Link href={`/${eventId}/mypage/circle_stars`} className='block h-full'>
+
+            <IconHeart />
+
           </Link>
         )}
       </div>
@@ -164,44 +163,44 @@ const Header: FCC<any> = () => {
         onRequestClose={() => setOpen(false)}
         isOpen={isOpen}>
         <List>
-          <Link legacyBehavior href="/gishohaku14" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十四回 技術書同人誌博覧会"
-                secondary="2026年09月13日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/gishohaku14" css={noDecoration}>
+
+            <ListItem
+              primary="第十四回 技術書同人誌博覧会"
+              secondary="2026年09月13日 開催"
+              contentAfter={<IconChevronRight />}
+              onClick={() => setOpen(false)}
+            />
+
           </Link>
-          <Link legacyBehavior href="/gishohaku13" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十三回 技術書同人誌博覧会"
-                secondary="2026年05月10日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/gishohaku13" css={noDecoration}>
+
+            <ListItem
+              primary="第十三回 技術書同人誌博覧会"
+              secondary="2026年05月10日 開催"
+              contentAfter={<IconChevronRight />}
+              onClick={() => setOpen(false)}
+            />
+
           </Link>
-          <Link legacyBehavior href="/gishohaku12" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="第十二回 技術書同人誌博覧会"
-                secondary="2025年10月26日 開催"
-                contentAfter={<IconChevronRight />}
-                onClick={() => setOpen(false)}
-              />
-            </a>
+          <Link href="/gishohaku12" css={noDecoration}>
+
+            <ListItem
+              primary="第十二回 技術書同人誌博覧会"
+              secondary="2025年10月26日 開催"
+              contentAfter={<IconChevronRight />}
+              onClick={() => setOpen(false)}
+            />
+
           </Link>
           <div css={divider} />
-          <Link legacyBehavior href="/archive" passHref>
-            <a css={noDecoration}>
-              <ListItem
-                primary="過去の開催回一覧"
-                contentAfter={<IconChevronRight />}
-              />
-            </a>
+          <Link href="/archive" css={noDecoration}>
+
+            <ListItem
+              primary="過去の開催回一覧"
+              contentAfter={<IconChevronRight />}
+            />
+
           </Link>
           <div css={divider} />
           <a
@@ -282,7 +281,7 @@ const Header: FCC<any> = () => {
         </div>
       </Sheet>
     </header>
-  )
+  );
 }
 
 export default Header

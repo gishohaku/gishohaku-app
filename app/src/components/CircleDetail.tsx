@@ -102,32 +102,31 @@ const CircleDetail: FCC<Props> = ({
         {editable ? (
           <div style={{ display: 'flex' }}>
             <CheckCount count={starCount} />
-            <Link legacyBehavior href={`/${eventId}/circles/${circle.id}/edit`}>
-              <a
-                css={css`
-                  flex: 1;
-                  margin-left: auto;
-                  border: 1px solid #2a5773;
-                  text-decoration: none;
-                  padding: 6px 20px;
-                  border-radius: 4px;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #2a5773;
-                  transition: all 0.2s ease;
-                  white-space: nowrap;
-                  display: block;
-                  cursor: pointer;
-                  text-align: center;
-                  margin-left: 8px;
+            <Link href={`/${eventId}/circles/${circle.id}/edit`} css={css`
+              flex: 1;
+              margin-left: auto;
+              border: 1px solid #2a5773;
+              text-decoration: none;
+              padding: 6px 20px;
+              border-radius: 4px;
+              font-size: 15px;
+              font-weight: 600;
+              color: #2a5773;
+              transition: all 0.2s ease;
+              white-space: nowrap;
+              display: block;
+              cursor: pointer;
+              text-align: center;
+              margin-left: 8px;
 
-                  &:hover {
-                    background-color: #2a5773;
-                    color: white;
-                  }
-                `}>
+              &:hover {
+                background-color: #2a5773;
+                color: white;
+              }
+            `}>
+              
                 編集
-              </a>
+              
             </Link>
           </div>
         ) : (
@@ -211,7 +210,7 @@ const CircleDetail: FCC<Props> = ({
         ))}
         {books.length === 0 && <BlankMessage circleName={circle.name} />}
         {editable && (
-          <Link legacyBehavior href={`/${eventId}/books/new`}>
+          <Link href={`/${eventId}/books/new`}>
             <NewBookButton>
               <img src={editIcon} />
               頒布物を追加
@@ -220,7 +219,7 @@ const CircleDetail: FCC<Props> = ({
         )}
       </BooksContainer>
     </Container>
-  )
+  );
 }
 
 const BlankMessage: FCC<{
@@ -284,7 +283,7 @@ const BooksContainer = styled.div`
   }
 `
 
-const NewBookButton = styled.a`
+const NewBookButton = styled.div`
   display: block;
   background-color: white;
   margin-bottom: 24px;

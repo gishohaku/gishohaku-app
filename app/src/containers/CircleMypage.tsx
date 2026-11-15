@@ -91,8 +91,8 @@ const Mypage: FCC<{
             `}>
             <p>
               このページはサークル参加者専用のページです。シェア用のページは
-              <Link legacyBehavior href={`/${eventId}/circles/${circle.id}`}>
-                <a>こちら</a>
+              <Link href={`/${eventId}/circles/${circle.id}`}>
+                こちら
               </Link>
               。
             </p>
@@ -108,7 +108,7 @@ const Mypage: FCC<{
         setBooks={setBooks}
       />
     </>
-  )
+  );
 }
 
 export default withUser(Mypage)

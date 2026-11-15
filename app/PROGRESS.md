@@ -243,3 +243,29 @@
   - Playwright 系ファイル（`tools/`, `before/`）はすべて gitignore 配下のため、コミット対象には含めない。将来再現する際は本 PROGRESS のセットアップ手順をたどる形でよい。
   - `--no-save` 指定で tools/package.json に依存は書かれないが、必要になれば個別インストールで復元できる（最小構成を優先）。
 - **次のアクション**: **フェーズ2（`next/link` の `legacyBehavior` 全件除去）に着手**。Next 15 のまま先行実施。
+
+## 2026-11-15 [フェーズ2] `next/link` の `legacyBehavior` 全件除去（Next 15 のまま先行実施）
+- **やったこと**: 公式 codemod で機械置換 + bail-out 箇所を手動修正。Next 15 のままで型・ビルド・pixelmatch を検証。
+- **codemod 実行**: `npx @next/codemod@latest new-link ./src`
+  - 結果: 15 ファイル修正、0 エラー、0 skipped
+  - **bail-out**: 8 箇所で `@next-codemod-error` コメントを挿入（子要素が `<a>` かどうか判定できなかったため）
+- **手動修正方針**（bail-out 8 箇所の分類と対応）:
+  | 件数 | パターン | 対応 |
+  |---|---|---|
+  | 3 | `styled.a` 子コンポーネント（`NewBookButton`/`CircleLink`/`BookLink`）| `styled.a` → `styled.div` に変更。外側 Link が `<a>` を生成するため入れ子アンカー回避。各コンポーネントは Link 内でのみ使われていることを grep で確認済 |
+  | 3 | `<Button component="a">` （`withUser.tsx` / `sign_in.tsx` / `sign_up.tsx`）| `component="span"` に変更。外側 Link が `<a>` を生成 |
+  | 2 | `styled.div` 子コンポーネント（`StarTab.tsx` の `Item`）| 変更不要。`@next-codemod-error` コメントのみ削除 |
+- **検証**:
+  - `grep -rn "legacyBehavior" app/src` → 0 件
+  - `grep -rn "@next-codemod-error" app/src` → 0 件
+  - `npx tsc --noEmit` → エラー 0
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build` → 成功、**First Load JS shared 304 kB（ベースラインと同値）**、`_app` チャンクが 11150898→3fd09aa9 にハッシュ変化（内容差分あり）、`reset_password` 312→311kB、`sign_up` 1.7→1.68kB（微減）
+  - **pixelmatch 比較（before vs after-link-migration）: 18/18 完全一致**。視覚的回帰ゼロ
+  - **dev console の `legacyBehavior` deprecation 警告: 多数 → 0** に解消
+  - Firestore `PERMISSION_DENIED`（想定内のダミー ID 由来）は before と同数の 5 件、新規 warn/error なし
+- **変更統計**: 15 ファイル / +376 / -377 行
+- **判断・メモ**:
+  - `styled.a → styled.div` は Link の内部に閉じたコンポーネントなので影響なし。もし今後 Link 外で単独の `<a>` として使う必要が出た場合は再設計が必要（コメントは付けず、必要になった時点で判断）。
+  - `Button component="span"` も見た目同一。Button 内部ロジックは `component || 'div'` のフォールバックのため span でも問題ない。
+  - このフェーズを Next 15 のまま済ませたことで、Next 16 引き上げ時にリンクまわりの切り分けができる状態になった。
+- **次のアクション**: フェーズ2 コミット → フェーズ3（Next.js 16 本体の引き上げ）。
