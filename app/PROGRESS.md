@@ -220,3 +220,26 @@
   - 計画書フェーズ1 の「現行バージョン実測」「影響箇所の再生成」「ビルドベースライン」「`.gitignore` 追加」は完了。
   - Playwright 系作業は別途ユーザー確認を経て進める想定。
 - **次のアクション**: フェーズ1 のコミット（PROGRESS・`.gitignore`）→ Playwright セットアップ方針のユーザー確認 → フェーズ2（`legacyBehavior` 全件除去）。
+
+## 2026-11-15 [フェーズ1 追補] Playwright セットアップと before スクリーンショット取得
+- **やったこと**: ユーザー判断（フル機械比較を採用）を受けて、Playwright + pixelmatch のセットアップ、before スクリーンショット取得、self-diff ノイズ基準の確認、dev console 警告のベースライン記録。
+- **セットアップ**:
+  - 配置: `app/.nextjs-16-migration/tools/`（`.gitignore` 配下、ephemeral）。app/ の `devDependencies` を汚さず分離。
+  - 依存: `playwright@1.56.1` / `pixelmatch@5.3.0` / `pngjs@7.0.0`（`npm install --no-save`）。
+  - ブラウザ: `npx playwright install chromium`（Chromium Headless Shell 159.0.8154.6、約 100MB）。Firefox/WebKit は入れない。
+  - スクリプト:
+    - `capture.mjs`: 9 ページ × desktop(1280x800)/mobile(375x812) の 2 viewport で fullPage 取得
+    - `compare.mjs`: pixelmatch で機械比較、threshold=0.1、サイズ違い/欠損も判定、diff PNG を `_diff/` へ保存
+- **取得対象**（認証不要ページ 9 件 × 2 viewport = **18 枚**）:
+  - `/`, `/sign_in`, `/sign_up`, `/reset_password`, `/archive`, `/gishohaku1/circles`, `/gishohaku1/books`, `/code-of-conduct`, `/harassment-case-study`
+  - 認証必須ページ（mypage 系）・サークル編集系はユーザー手動確認に委ねる。
+- **self-diff 結果**: Next 15 のまま 2 回続けて capture して pixelmatch 比較 → **18/18 完全一致（non-OK 0）**。ノイズ 0 のクリーンなベースライン。以降の after 取得で検出される差分は実変更と判定できる。
+- **dev console 警告ベースライン**（`API_KEY=dummy PROJECT_ID=dummy npm run dev`）:
+  - 📌 **`legacyBehavior` is deprecated**: Next 15 時点で既に deprecation 警告が多数出ている。**これはフェーズ2 で全件除去する対象**。警告ゼロが after の判定基準になる。
+  - 📌 Firestore `PERMISSION_DENIED` (code=7): ダミー PROJECT_ID で API 未有効のため発生。**既存の運用上想定内**で Next 16 とは無関係。after でも同じ警告が出るのは許容。
+  - その他の新規警告・エラーなし。
+- **ベースライン保存先**: `app/.nextjs-16-migration/before/`（gitignore 下）。消さないよう注意。
+- **判断・メモ**:
+  - Playwright 系ファイル（`tools/`, `before/`）はすべて gitignore 配下のため、コミット対象には含めない。将来再現する際は本 PROGRESS のセットアップ手順をたどる形でよい。
+  - `--no-save` 指定で tools/package.json に依存は書かれないが、必要になれば個別インストールで復元できる（最小構成を優先）。
+- **次のアクション**: **フェーズ2（`next/link` の `legacyBehavior` 全件除去）に着手**。Next 15 のまま先行実施。
