@@ -166,3 +166,57 @@
   - `before=<日付>` の別機能はあるが、これは「特定日時より前のリリースを install」する用途で「N日待つ」とは意味が異なる
   - つまり pnpm の `minimum-release-age` / yarn 4 相当の機能は npm には未搭載
   - 実装状況の再確認は Issue #261 に findings をコメントし、将来 npm に機能追加された時点で follow-up として再検討
+
+---
+
+# Next.js 15 → 16 バージョンアップ作業（2026-11-15 開始）
+
+計画書: [`docs/version_up_nextjs_16_plan.md`](./docs/version_up_nextjs_16_plan.md)
+作業ブランチ: `feature/upgrade-next-js-ver-16`
+
+## 2026-11-15 [フェーズ1] 準備・ベースライン取得
+- **やったこと**: 計画書の作成、`.gitignore` に `app/.nextjs-16-migration` を追加、現行バージョン実測、`legacyBehavior` 使用箇所の再生成、Next 15 ベースラインビルド取得
+- **開始時点の環境**:
+  - ブランチ: `feature/upgrade-next-js-ver-16`（clean）
+  - Node: v22.23.5（nvm で切り替え。シェル初期状態は v16.17.1 だったため `nvm use 22.23.5` を明示）
+  - npm: v10.9.9
+- **現行バージョン実測（`app/package-lock.json`）**:
+  | 対象 | バージョン |
+  |---|---|
+  | next | 15.5.28 |
+  | react / react-dom | 19.2.7 |
+  | @next/mdx | 15.5.20 |
+  | @mdx-js/react / @mdx-js/loader | 3.1.1 |
+  | remark-gfm | 4.0.1 |
+  | firebase | 11.10.0 |
+  | tailwindcss | 4.3.3 |
+  | typescript | 5.9.3 |
+- **`legacyBehavior` 使用箇所一覧（計 45 件 / 15 ファイル）**:
+  - `app/src/withUser.tsx:26`
+  - `app/src/components/top/hero.jsx:133,178`
+  - `app/src/components/CircleDetail.tsx:105,214`
+  - `app/src/components/CircleCell.tsx:56`
+  - `app/src/components/BottomBar.tsx:76,82,88,94`
+  - `app/src/components/StarTab.tsx:40,45`
+  - `app/src/components/Layout.tsx:101`
+  - `app/src/components/Header.tsx:122,155,167,177,187,198`
+  - `app/src/components/BookCell.tsx:154,220,241`
+  - `app/src/containers/BookList.tsx:47,140`
+  - `app/src/containers/Mypage.tsx:33,42,52`
+  - `app/src/containers/CircleMypage.tsx:94`
+  - `app/src/pages/archive/index.tsx:32,41,50,59,68,77,86,95,108,125,134`
+  - `app/src/pages/sign_in.tsx:98,162,167`
+  - `app/src/pages/sign_up.tsx:110,168,173`
+  - **計画との差分なし**（計画書の「約 15 ファイル」と一致）。
+- **`next/image` 使用箇所**: `app/src/pages/gishohaku5/index.tsx:3` のみ（1 ファイル、`width`/`height`/`src`/`alt` のみ）。計画書通り。
+- **ベースラインビルド（Next 15.5.28）**:
+  - コマンド: `API_KEY=dummy PROJECT_ID=dummy npm run build`
+  - 結果: 成功
+  - `.next` サイズ: **114MB**（うち `.next/static` 2.2MB、`.next/server` 2.8MB）
+  - **First Load JS shared: 304 kB**（`framework` 59.7kB / `main` 37.1kB / `_app` 200kB / その他 7.23kB）
+  - 判定: フェーズ6 のバンドルサイズ比較基準として採用。
+- **スクリーンショット・console 警告ベースライン**: Playwright が未導入・既存の capture スクリプトも無いため、フェーズ2 入りの直前にセットアップしてから before 取得を行う（before/after の時間差を小さくするため）。計画書フェーズ1 のうちこの 2 項目のみ**次フェーズ冒頭に繰り越し**。
+- **判断・メモ**:
+  - 計画書フェーズ1 の「現行バージョン実測」「影響箇所の再生成」「ビルドベースライン」「`.gitignore` 追加」は完了。
+  - Playwright 系作業は別途ユーザー確認を経て進める想定。
+- **次のアクション**: フェーズ1 のコミット（PROGRESS・`.gitignore`）→ Playwright セットアップ方針のユーザー確認 → フェーズ2（`legacyBehavior` 全件除去）。
