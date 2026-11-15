@@ -75,25 +75,25 @@ const BottomBar = () => {
         <span css={spacer} />
         <Link href={eventId === 'gishohaku15' ? '/' : `/${eventId}`} css={item}>
 
-          <img src={home} width={28} css={icon} />
+          <img src={home.src} width={28} css={icon} />
           <div css={label}>ホーム</div>
 
         </Link>
         <Link href={`/${eventId}/circles`} css={item}>
 
-          <img src={groupWork} width={28} css={icon} />
+          <img src={groupWork.src} width={28} css={icon} />
           <div css={label}>サークル</div>
 
         </Link>
         <Link href={`/${eventId}/books`} css={item}>
 
-          <img src={book} width={28} css={icon} />
+          <img src={book.src} width={28} css={icon} />
           <div css={label}>頒布物</div>
 
         </Link>
         <Link href={`/${eventId}/mypage`} css={item}>
 
-          <img src={person} width={28} css={icon} />
+          <img src={person.src} width={28} css={icon} />
           <div css={label}>マイページ</div>
 
         </Link>

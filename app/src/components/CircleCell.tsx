@@ -63,7 +63,7 @@ const CircleCell: FCC<Props> = ({
                 width: 504,
                 height: 710,
                 aspect: 'crop',
-              }) || circleTumbnail
+              }) || circleTumbnail.src
             }
             noBorder
           />

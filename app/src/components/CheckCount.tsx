@@ -29,7 +29,7 @@ const CheckCount: FCC<Props> = ({ count }) => {
           width: 22px;
         }
       `}>
-      <img src={check} />
+      <img src={check.src} />
       <span>{count}</span>
     </div>
   )

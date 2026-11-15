@@ -378,3 +378,50 @@
 
 本作業ブランチ: `feature/upgrade-next-js-ver-16`
 コミット履歴: `1f9cd34`（計画書+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump）→ 本コミット（フェーズ4-7）
+
+## 2026-11-15 [追補] Turbopack 退避の putback を解消（@next/mdx 文字列指定 + 画像 StaticImageData 移行）
+ユーザー要望により、フェーズ3 で putback した「Turbopack デフォルト化で @next/mdx の serializable エラー」の恒久対応を実施。参考リンク: https://nextjsjp.org/docs/app/guides/mdx / https://suekichi-system.com/blog/nextjs-static-export-mdx-blog
+
+### 対応内容
+- **`@next/mdx` の remark プラグインを文字列指定に**
+  - `next.config.js`: `remarkPlugins: [remarkGfm]`（関数参照、async dynamic import）→ `remarkPlugins: ['remark-gfm']`（文字列）
+  - async wrapper（`module.exports = async () => { ... }`）も不要になり、同期的な通常 config に戻す
+  - Turbopack は Rust 側でプラグインを解決するため関数参照を渡せず、文字列名で指定する必要がある
+- **画像 import を StaticImageData に移行**
+  - Turbopack は `images.disableStaticImages: true` も `webpack(config)` の `asset/resource` ルールも無視する → 画像 import が常に `StaticImageData` オブジェクト (`{src, width, height}`) を返す
+  - その結果、既存の `<img src={logo}>` が `src="[object Object]"` にレンダリングされ画像表示が壊れていた（Turbopack 切替時の pixelmatch で初回検出: 18/18 すべてに 0.02〜0.78% の差分）
+  - `.nextjs-16-migration/tools/migrate-image-src.mjs` を作成して **19 ファイル** を機械置換:
+    - `src={<name>}` → `src={<name>.src}`
+    - `|| <name>`（ImageBox の fallback URL）→ `|| <name>.src`
+  - 置換対象: `defaultImage` / `placeIcon` / `directionsIcon` / `logo` / `circleTumbnail` / `editIcon` / `book` / `groupWork` / `home` / `person` / `check`
+- **`next.config.js` のクリーンアップ**
+  - `images.disableStaticImages: true` 削除
+  - `webpack(config)` の `asset/resource` カスタムルール削除（Turbopack が呼ばない上、Next 16 ネイティブの StaticImageData で代替済み）
+  - コメントを「Turbopack 時代の画像運用」を説明する内容に更新
+- **`package.json` の scripts を Next 16 デフォルトに戻す**
+  - `"dev": "next dev --webpack"` → `"dev": "next dev"`
+  - `"build": "next build --webpack"` → `"build": "next build"`
+- **`next-env.d.ts`**: Next 16 build 実行時に `/// <reference types="next/image-types/global" />` が自動追加（StaticImageData の型解決用）
+
+### 検証結果
+- `npx tsc --noEmit` → エラー 0
+- `npm run build`（= `next build`, Turbopack） → `✓ Compiled successfully in 3.6s`。警告・エラーなし
+  - **`.next` サイズ: 121MB (webpack) → 52MB (Turbopack)** = 43%・約 **-57%**
+  - ビルド時間: 5.8s → 3.0〜3.6s（約 -40%）
+- `npm run dev`（= `next dev`, Turbopack）で全ページ 200 OK
+- `curl http://localhost:3000/` の HTML 内に `[object Object]` 残存ゼロ、画像は `/_next/static/media/<hash>.svg` など正しい URL で出力
+- **pixelmatch 比較（before[Next 15] vs after-turbopack-final[Next 16 Turbopack]）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ
+- dev console の `legacyBehavior` 警告: 0 維持 / Firestore `PERMISSION_DENIED`: 5（ダミー ID 由来、想定内）/ Formik `<Formik render>` deprecation: 既存事項（Next 16 の browser log 転送で可視化、スコープ外）
+- **Docker build** `gishohaku-app-turbo-local` も成功（Dockerfile 無変更、Cloud Build 経路に影響なし）。イメージはテスト後に削除
+
+### 再更新
+- `README.md`: 環境表の Next.js 行を「16 系（Pages Router / Turbopack）」に、scripts 表と注記を Turbopack 運用に合わせて書換
+- このフェーズで putback リストから「Turbopack 完全対応」を除外
+
+### 残っている putback（本作業スコープ外）
+- 既存の `npm audit` 9件（nanoid / qs。Next 16 新規発生ではない）
+- First Load JS の数値比較（Next 16 build 出力が kB 非表示化、`--analyze` 併用は別課題）
+- Formik `<Formik render>` deprecation（Next 16 の browser log 転送で可視化されただけ。Formik 側の積み残し）
+
+### 最終コミット履歴
+`1f9cd34`（計画+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump, webpack 退避）→ `a98e517`（フェーズ4-7 + README）→ 本コミット（Turbopack 完全対応）

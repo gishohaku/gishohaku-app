@@ -12,7 +12,7 @@
 | 対象 | バージョン |
 |---|---|
 | Node.js | 22 (LTS jod) |
-| Next.js | 16 系（Pages Router / webpack ビルド） |
+| Next.js | 16 系（Pages Router / Turbopack） |
 | React | 19 系 |
 | Emotion | 11 系 |
 | Firebase (client) | 11 系（compat 層） |
@@ -76,12 +76,12 @@ $ open http://localhost:3000
 
 | コマンド | 内容 |
 |---|---|
-| `npm run dev` | 開発サーバー起動（`next dev --webpack`, http://localhost:3000） |
-| `npm run build` | 本番ビルド（`next build --webpack`） |
+| `npm run dev` | 開発サーバー起動（`next dev`, http://localhost:3000, Turbopack） |
+| `npm run build` | 本番ビルド（`next build`, Turbopack） |
 | `npm run start` | ビルド成果物を起動（`next start -p $PORT`） |
 | `npm run format` | Prettier による整形 |
 
-> Next.js 16 から Turbopack が `next dev` / `next build` 双方のデフォルトになったが、本アプリは `@next/mdx` + `remark-gfm`（async import）が Turbopack の serializable options 要件を満たさないため、スクリプトで `--webpack` を明示して webpack に固定している。Turbopack 完全対応は後続課題。
+> Next.js 16 から Turbopack が `next dev` / `next build` 双方のデフォルトで、本アプリもそれに乗っている。`@next/mdx` の `remarkPlugins` は Turbopack の serializable options 要件に合わせて**文字列指定**（例: `['remark-gfm']`）にしている。画像 import は Next 標準の `StaticImageData` を利用し、`<img src={logo.src}>` のように `.src` プロパティを参照する（`app/next.config.js` 側で特別な設定は不要）。
 >
 > ポート 3000 が別プロセス（Docker 等）で使われている場合は `npm run dev -- -p <別ポート>` で起動できます。
 

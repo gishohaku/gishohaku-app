@@ -84,7 +84,7 @@ const CircleDetail: FCC<Props> = ({
               width: 504,
               height: 710,
               aspect: 'crop',
-            }) || circleTumbnail
+            }) || circleTumbnail.src
           }
         />
         <div style={{ marginTop: 8 }}>
@@ -212,7 +212,7 @@ const CircleDetail: FCC<Props> = ({
         {editable && (
           <Link href={`/${eventId}/books/new`}>
             <NewBookButton>
-              <img src={editIcon} />
+              <img src={editIcon.src} />
               頒布物を追加
             </NewBookButton>
           </Link>

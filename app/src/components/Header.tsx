@@ -139,7 +139,7 @@ const Header: FCC<any> = () => {
         `}>
 
         <img
-          src={logo}
+          src={logo.src}
           width={80}
           css={css`
             display: block;
