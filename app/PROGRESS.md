@@ -269,3 +269,36 @@
   - `Button component="span"` も見た目同一。Button 内部ロジックは `component || 'div'` のフォールバックのため span でも問題ない。
   - このフェーズを Next 15 のまま済ませたことで、Next 16 引き上げ時にリンクまわりの切り分けができる状態になった。
 - **次のアクション**: フェーズ2 コミット → フェーズ3（Next.js 16 本体の引き上げ）。
+
+## 2026-11-15 [フェーズ3] Next.js 16 本体引き上げ
+- **やったこと**: `@next/codemod upgrade latest` で next / @next/mdx / react を 16/19.3 に bump。Turbopack 下で `@next/mdx` の `remarkPlugins`（async import の remark-gfm）が serializable でないビルドエラーが出たため、webpack 退避方針で確定。
+- **バージョン変化**:
+  | 対象 | 旧 | 新 |
+  |---|---|---|
+  | next | 15.5.28 | **16.4.6** |
+  | @next/mdx | 15.5.20 | **16.4.6** |
+  | react / react-dom | 19.2.7 | 19.3.1 |
+  | @types/react / @types/react-dom | ^19.2.0 | 19.3.0 (package.json `overrides` にも固定) |
+  | tsconfig `jsx` | `preserve` | **`react-jsx`**（Next 16 が自動書換） |
+  | tsconfig `moduleResolution` | `node` | **`bundler`**（Next 16 が自動書換） |
+  | next-env.d.ts | `routes.d.ts` 参照 | `.next/dev/types/{routes,root-params}.d.ts` を import（Next 16 が自動書換） |
+- **破壊的変更に遭遇した点**:
+  - 🔴 **Turbopack がビルドでもデフォルト化** → `@next/mdx` loader の `options` （非シリアライズな関数を含む `remarkPlugins`）で Rust 側のシリアライズに失敗。公式メッセージ: `Error: loader @next/mdx/mdx-js-loader.js for match "{*,next-mdx-rule}" does not have serializable options. Ensure that options passed are plain JavaScript objects and values.`
+  - 📘 判断: 計画書フェーズ3 の第一候補（**`--webpack` 退避**）を採用。`package.json` の scripts を `next dev --webpack` / `next build --webpack` に変更。`next.config.js` の `webpack(config)` カスタム（画像 import を URL 文字列化する `asset/resource` ルール）もそのまま維持できる。
+  - 📘 Turbopack 完全対応は putback: `@next/mdx` の remarkPlugins を Turbopack で動かすには Rust 製 remark プラグインか別経路が必要。GFM 表の描画互換性を優先し、webpack で据え置く。将来 `@next/mdx` が Turbopack 向けの serializable 構成を提供したら再検討。
+- **その他 Next 16 由来の自動追加**:
+  - `app/AGENTS.md` を Next 16 の `next dev` が自動生成（node_modules 側のドキュメント参照を促す agent 向け注意書き）。削除しても再生成されるため**コミット対象に含める**。
+- **検証結果**:
+  - `npx tsc --noEmit` → エラー 0
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build`（= `next build --webpack`） → `✓ Compiled successfully in 5.8s`。全ルート生成完了。`.next` サイズ **121MB**（Next 15 の 114MB → +7MB、約 +6%。Next 16 で dev types 等が増えたため）。
+    - ⚠️ 補足: Next 16 のビルド出力は各ルートの kB/First Load JS を表示しなくなった（フォーマット変更）。詳細な First Load JS 計測が必要なら `--analyze` 併用が別途必要。本フェーズは成功判定のみ採用。
+  - `npm run dev` で全ページ 200 OK を返す
+  - **pixelmatch 比較（before[Next15] vs after-next16）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ
+  - dev console の `legacyBehavior` 警告: 引き続き 0
+  - 📘 **Next 16 の新機能で `[browser]` プレフィックス付き browser console 転送**が有効化され、既存の Formik `<Formik render>` deprecation 警告がサーバーログに可視化。これは **既存の Formik 側の積み残し**で Next 16 の回帰ではない（Next 15 時点から browser 側で出ていた）。本作業スコープ外として putback。
+- **判断・メモ**:
+  - 計画書との差分: `@next/mdx` は stable 16.4.6 が出ていたため「canary 採用の判断」は不要だった。計画書フェーズ3 の 1-1 節 C は解消。
+  - tsconfig 変更は Next 16 の推奨で、Emotion の jsx pragma 記述を持つファイルは pragma が tsconfig より優先されるため影響なし（ビルドで実証）。
+  - `next-env.d.ts` の変更は自動生成ファイル。手を入れる必要なし。
+  - `--webpack` 退避により Cloud Build 経路（`Dockerfile` が `npm run build` を叩く）も自動的に webpack で動く。Dockerfile 側の変更は不要。
+- **次のアクション**: フェーズ3 コミット → フェーズ4（周辺追随・微調整）→ フェーズ5（scripts 動作確認）→ フェーズ6（総合検証）→ フェーズ7（README 更新・完了報告）。
