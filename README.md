@@ -12,7 +12,7 @@
 | 対象 | バージョン |
 |---|---|
 | Node.js | 22 (LTS jod) |
-| Next.js | 15 系（Pages Router） |
+| Next.js | 16 系（Pages Router / webpack ビルド） |
 | React | 19 系 |
 | Emotion | 11 系 |
 | Firebase (client) | 11 系（compat 層） |
@@ -20,7 +20,7 @@
 | TypeScript | 5 系 |
 | パッケージマネージャ | npm |
 
-> バージョンアップの経緯・方針は [`app/docs/version_up_nextjs_plan.md`](./app/docs/version_up_nextjs_plan.md)、作業ログは [`app/PROGRESS.md`](./app/PROGRESS.md) を参照してください。
+> バージョンアップの経緯・方針は [`app/docs/version_up_nextjs_plan.md`](./app/docs/version_up_nextjs_plan.md)（10→15）と [`app/docs/version_up_nextjs_16_plan.md`](./app/docs/version_up_nextjs_16_plan.md)（15→16）、作業ログは [`app/PROGRESS.md`](./app/PROGRESS.md) を参照してください。
 
 ### Node.js バージョンの切り替え（作業ディレクトリで自動）
 
@@ -76,11 +76,13 @@ $ open http://localhost:3000
 
 | コマンド | 内容 |
 |---|---|
-| `npm run dev` | 開発サーバー起動（`next dev`, http://localhost:3000） |
-| `npm run build` | 本番ビルド（`next build`） |
+| `npm run dev` | 開発サーバー起動（`next dev --webpack`, http://localhost:3000） |
+| `npm run build` | 本番ビルド（`next build --webpack`） |
 | `npm run start` | ビルド成果物を起動（`next start -p $PORT`） |
 | `npm run format` | Prettier による整形 |
 
+> Next.js 16 から Turbopack が `next dev` / `next build` 双方のデフォルトになったが、本アプリは `@next/mdx` + `remark-gfm`（async import）が Turbopack の serializable options 要件を満たさないため、スクリプトで `--webpack` を明示して webpack に固定している。Turbopack 完全対応は後続課題。
+>
 > ポート 3000 が別プロセス（Docker 等）で使われている場合は `npm run dev -- -p <別ポート>` で起動できます。
 
 ### エラーの確認方法（どこを見ればよいか）

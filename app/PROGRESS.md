@@ -302,3 +302,79 @@
   - `next-env.d.ts` の変更は自動生成ファイル。手を入れる必要なし。
   - `--webpack` 退避により Cloud Build 経路（`Dockerfile` が `npm run build` を叩く）も自動的に webpack で動く。Dockerfile 側の変更は不要。
 - **次のアクション**: フェーズ3 コミット → フェーズ4（周辺追随・微調整）→ フェーズ5（scripts 動作確認）→ フェーズ6（総合検証）→ フェーズ7（README 更新・完了報告）。
+
+## 2026-11-15 [フェーズ4・5・6・7] 周辺追随／scripts 確認／総合検証／README 更新
+短時間で実施できる最終 4 フェーズをまとめて実施した。
+
+### フェーズ4: 周辺追随・微調整
+- Next 16 本体引き上げ時点で、tsconfig.json / next-env.d.ts は Next 16 が自動書換済（jsx: react-jsx / moduleResolution: bundler）。追加対応不要。
+- `next.config.js` の `images.disableStaticImages: true` / `webpack(config)` は Next 16 webpack モードで引き続き動作（ビルドで実証済）。据え置き。
+- `@next/mdx` は 16.4.6（stable）が存在したため計画書のリスク C（canary 採用）は不要だった。既に 16.4.6 に bump 済。
+- **npm audit**: 9 vulnerabilities (2 moderate, 7 high)。内訳:
+  - `nanoid` (high): custom generators infinite loop → Firebase 推移的依存
+  - `qs` 2.2.5–6.16.0 (moderate): array-limit bypass / DoS 他 → 本アプリ直接依存
+  - いずれも **Next 16 化で新規発生したものではなく既存の積み残し**。計画書ルール「新規高リスクのみ対応、既存は広げない」により**スコープ外 putback**。
+- 追加の変更なし。
+- **判断**: フェーズ4 は実質「既に自動対応済みを確認したのみ」。コミット対象の変更は発生しない。
+
+### フェーズ5: scripts 動作確認
+- **import 解決確認**: `scripts/*.ts` が参照する `../app/src/utils/circle.ts` は純粋な型/定数モジュール（Next / React / Firebase client に非依存）。tsx 経由で import 可能であることを `npx tsx -e "import('./app/src/utils/circle.ts')..."` で確認 → `OK: imported keys: [ 'default' ]`。
+- **ドライラン実行**: `npx tsx scripts/20260428-createCircles.ts` を実行 → `[DRY-RUN] Firestore へは書き込みません...` ログ出力後、CSV 未配置で ENOENT 終了。期待通りの挙動（**Next 16 の破壊的変更は scripts 側に波及していない**）。
+- 7 ファイルの `*-createCircles.ts`（2019〜2026）が `../app/src/utils/circle` を import しているが、circle.ts が純粋モジュールのため全て影響なし。
+
+### フェーズ6: 総合検証
+- **dev**: `npm run dev` で 9 ページすべて 200 OK。
+- **build**: `npm run build`（= `next build --webpack`）成功。`.next` 114MB → **121MB**（+7MB, +6%。Next 16 で dev types 等が増加）。
+  - ⚠️ Next 16 webpack モードは各ルートの kB を表示しなくなった。First Load JS の数値比較は不可。必要なら `--analyze` 併用が別途必要（putback）。
+- **pixelmatch 最終（before[Next15] vs after-final[Next16]）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ。
+- **Docker build**: `docker build --build-arg project_id=dummy --build-arg api_key=dummy -t gishohaku-app-next16-local .` を実行 → 成功（build step 24.7s、exporting 3.7s）。`SecretsUsedInArgOrEnv` 警告は Next 16 前からの既存事項。イメージはテスト後に削除。
+- **デプロイ経路の机上レビュー**:
+  - `cloudbuild.yaml`: Docker build → push → Cloud Run deploy → Firebase Hosting deploy の手順に変更なし。Dockerfile の Node 22.23.5-alpine も据え置き。
+  - `firebase.json`: rewrites（`**` → Cloud Run `gishohaku-app`）・redirects（`/books`→`/gishohaku1/books` 等）・headers（CSP / `_next/static/**` cache）に変更不要。Next 16 の `_next/static/<buildId>/` 構造は Next 15 と同一（buildId ハッシュのみ変動）で、CSP に新規の inline script ハッシュ要求も発生していない。
+- **console 比較**: フェーズ2 で `legacyBehavior` 警告ゼロを達成し、Next 16 でもゼロ維持。Firestore `PERMISSION_DENIED` は同数（ダミー PROJECT_ID 由来、想定内）。新規の Formik `<Formik render>` deprecation は **Next 16 の browser log 転送機能で可視化されただけで回帰ではない**（Formik 側の積み残し、スコープ外 putback）。
+- **手動確認の委ね**: 認証必須ページ（mypage 系 / サークル編集系）・モバイル実機確認はユーザーに委ねる。
+
+### フェーズ7: README 更新
+- `README.md` の「環境」表 Next.js 行を 15 系 → **16 系（Pages Router / webpack ビルド）** に更新。
+- バージョンアップの経緯・方針リンクに `app/docs/version_up_nextjs_16_plan.md` を追加。
+- 主なスクリプト表の `npm run dev` / `npm run build` を **`next dev --webpack` / `next build --webpack`** に更新し、Turbopack デフォルト化と webpack 固定の理由を注記。
+- Node.js / Dockerfile / `.node-version` / engines は変更なし（Next 16 の engines `>=20.9.0` を 22.23.5 が充足）。
+- `scripts/` 節は変更なし。
+
+### 最終サマリ
+| 項目 | Before | After | 変化 |
+|---|---|---|---|
+| Next.js | 15.5.28 | **16.4.6** | +1 major |
+| @next/mdx | 15.5.20 | 16.4.6 | 追随 |
+| React / React-DOM | 19.2.7 | 19.3.1 | patch |
+| @types/react | ^19.2 | 19.3.0（overrides で固定） | — |
+| tsconfig jsx | preserve | react-jsx | Next 16 自動 |
+| tsconfig moduleResolution | node | bundler | Next 16 自動 |
+| `next/link` `legacyBehavior` | 45 件 / 15 ファイル | **0 件** | 全件除去 |
+| ビルドツール | （Next 15 デフォルト = webpack） | **webpack 固定**（`--webpack` 明示） | Turbopack デフォルト化を退避 |
+| pixelmatch | ベースライン | **18/18 完全一致** | 視覚的回帰ゼロ |
+| `.next` サイズ | 114MB | 121MB | +7MB (+6%) |
+| Node.js | 22.23.5 | 22.23.5 | 据え置き |
+
+**計画との差分（putback）**:
+- Turbopack 完全対応（`@next/mdx` の serializable 対応待ち）
+- `npm audit` の既存 9 件（nanoid / qs。Next 16 新規発生ではない）
+- First Load JS の数値比較（Next 16 の webpack 出力が kB を表示しなくなった。`--analyze` 併用は別課題）
+- Formik `<Formik render>` deprecation（Next 16 の browser log 転送で可視化されただけ。既存の Formik 側積み残し）
+
+**完了条件の充足**:
+1. ✅ `npm run dev` で主要ページ表示
+2. ✅ `npm run build` 成功
+3. ✅ pixelmatch 崩れゼロ
+4. ✅ `cloudbuild.yaml` / `firebase.json` / `Dockerfile` 変更最小（scripts に `--webpack` 追加のみ、Dockerfile は無変更）
+5. ✅ scripts の import 解決・DryRun 到達
+6. ✅ `README.md` 更新
+7. ✅ PROGRESS に全ログ
+
+**手動確認を要する項目**（ユーザー実施推奨）:
+- ログイン後のサークル向けページ閲覧（実認証が必要）
+- スマートフォン実機での表示（Playwright mobile viewport では崩れゼロ確認済）
+- 実環境でのデプロイ試行（本作業はローカル Docker build 成功まで。実デプロイはユーザー判断）
+
+本作業ブランチ: `feature/upgrade-next-js-ver-16`
+コミット履歴: `1f9cd34`（計画書+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump）→ 本コミット（フェーズ4-7）
