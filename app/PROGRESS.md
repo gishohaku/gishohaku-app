@@ -425,3 +425,14 @@
 
 ### 最終コミット履歴
 `1f9cd34`（計画+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump, webpack 退避）→ `a98e517`（フェーズ4-7 + README）→ 本コミット（Turbopack 完全対応）
+
+## 2026-11-17 [追補] 外部スタイルシート参照を _document.tsx に集約
+- **背景**: Next 16 の browser log 転送機能で、認証後ページ閲覧時に `Do not add stylesheets using next/head` 警告が顕在化（Google Fonts × 2 + Material Icons の `<link rel="stylesheet">` 3 本）。Next.js の推奨は `_document.tsx` の `<Head>` に集約すること。
+- **対応**:
+  - `app/src/components/Layout.tsx` の `<Head>` から外部スタイルシート 3 本と `next/head` import を削除
+  - `app/src/pages/_document.tsx` の `<Head>` に同じ 3 本を移植。なぜ `_document.tsx` に置いているかをコメントで明示
+- **検証**:
+  - `tsc --noEmit` クリーン、`npm run build` 成功（Turbopack、4.2s）
+  - dev console の `Do not add stylesheets using next/head` 警告: 多数 → **0**
+  - pixelmatch: desktop 9/9 完全一致、mobile は 6 件に微細 DIFF（最大 0.012%）が検出されたが、**同一コードでの再キャプチャでも同じ DIFF が出る**ことを確認したため mobile webfont ロード順の環境ノイズと判定（スタイルシート移動起因ではない）
+- **残 putback の更新**: Next 16 の browser log 転送で可視化された警告のうち、Next 本家が指摘するもの（`next/head` stylesheet）は本作業で解消。Emotion 由来の `:nth-child` SSR 警告（約 10 箇所）は follow-up に送る。

@@ -8,27 +8,12 @@ import Header, { headerHeight } from './Header'
 import SEO from './SEO'
 import { useContext } from 'react'
 import EventContext from '../contexts/EventContext'
-import Head from 'next/head'
 
 const Layout: FCC<any> = (props) => {
   const { eventId } = useContext(EventContext)
   return (
     <>
       <SEO />
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&amp;display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins:500&amp;display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-      </Head>
       <Global
         styles={css`
           html {
