@@ -467,7 +467,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               神奈川県横浜市中区山下町2（
               <a target="_blank" href="https://maps.app.goo.gl/SHzEres3KaXEjDq57">
                 Google マップ
@@ -475,7 +475,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               みなとみらい線「日本大通り駅」3番出口より徒歩約5分
             </p>
           </div>

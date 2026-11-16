@@ -53,7 +53,7 @@ const CircleCell: FCC<Props> = ({
 
   return (
     <Container>
-      <Link legacyBehavior href={`/${eventId}/circles/${circle.id}`} key={circle.id} passHref>
+      <Link href={`/${eventId}/circles/${circle.id}`} key={circle.id}>
         <CircleLink>
           <BoothNum>{circle.booth}</BoothNum>
           <ImageBox
@@ -63,7 +63,7 @@ const CircleCell: FCC<Props> = ({
                 width: 504,
                 height: 710,
                 aspect: 'crop',
-              }) || circleTumbnail
+              }) || circleTumbnail.src
             }
             noBorder
           />
@@ -79,7 +79,7 @@ const CircleCell: FCC<Props> = ({
         onClick={onCheckClick}
       />
     </Container>
-  )
+  );
 }
 
 export default CircleCell
@@ -104,7 +104,7 @@ const Container = styled.div`
   }
 `
 
-const CircleLink = styled.a`
+const CircleLink = styled.div`
   text-decoration: none;
   display: inline-block;
   max-width: ${width}px;

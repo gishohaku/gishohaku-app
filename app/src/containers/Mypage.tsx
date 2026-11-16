@@ -30,33 +30,33 @@ const Mypage: FCC<Props> = ({ userData }) => {
     <Container>
       <div className="bg-white mt-8 overflow-hidden rounded shadow">
         <List>
-          <Link legacyBehavior href={`/${eventId}/mypage/circle_stars`} passHref>
-            <a>
-              <ListItem
-                primary="チェックしたサークル"
-                secondary="チェックをつけたサークルを確認できます"
-                contentAfter={<IconChevronRight />}
-              />
-            </a>
+          <Link href={`/${eventId}/mypage/circle_stars`}>
+
+            <ListItem
+              primary="チェックしたサークル"
+              secondary="チェックをつけたサークルを確認できます"
+              contentAfter={<IconChevronRight />}
+            />
+
           </Link>
-          <Link legacyBehavior href={`/${eventId}/mypage/book_stars`} passHref>
-            <a>
-              <ListItem
-                primary="チェックした頒布物"
-                secondary="チェックをつけた頒布物が確認できます"
-                contentAfter={<IconChevronRight />}
-              />
-            </a>
+          <Link href={`/${eventId}/mypage/book_stars`}>
+
+            <ListItem
+              primary="チェックした頒布物"
+              secondary="チェックをつけた頒布物が確認できます"
+              contentAfter={<IconChevronRight />}
+            />
+
           </Link>
           {circleRef && (
-            <Link legacyBehavior href={`/${eventId}/mypage/circle`} passHref>
-              <a>
-                <ListItem
-                  primary="サークル情報編集"
-                  secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
-                  contentAfter={<IconChevronRight />}
-                />
-              </a>
+            <Link href={`/${eventId}/mypage/circle`}>
+
+              <ListItem
+                primary="サークル情報編集"
+                secondary="サークル情報の編集、頒布物の登録、見本誌の提出、チェック数の確認を行えます"
+                contentAfter={<IconChevronRight />}
+              />
+
             </Link>
           )}
         </List>
@@ -81,7 +81,7 @@ const Mypage: FCC<Props> = ({ userData }) => {
         ({userData.uid})
       </div>
     </Container>
-  )
+  );
 }
 
 export default withUser(Mypage)

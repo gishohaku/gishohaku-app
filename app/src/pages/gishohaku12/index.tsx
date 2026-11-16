@@ -531,7 +531,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               埼玉県さいたま市大宮区桜木町1-7-5（
               <a target="_blank" href="https://maps.app.goo.gl/YySEtAYeVX137UoQA">
                 Google マップ
@@ -539,7 +539,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               JR「大宮駅」西口より徒歩約3分
             </p>
           </div>

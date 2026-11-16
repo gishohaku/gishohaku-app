@@ -405,7 +405,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               東京都中央区日本橋浜町1-1-12（
               <a target="_blank" href="https://goo.gl/maps/8b45soYqMvtZK2498">
                 Google マップ
@@ -413,7 +413,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               JR総武線 馬喰町駅 徒歩8分
               <br />
               都営地下鉄 新宿線 浜町駅 A1出口より徒歩2分

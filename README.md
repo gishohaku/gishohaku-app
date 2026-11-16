@@ -12,7 +12,7 @@
 | 対象 | バージョン |
 |---|---|
 | Node.js | 22 (LTS jod) |
-| Next.js | 15 系（Pages Router） |
+| Next.js | 16 系（Pages Router / Turbopack） |
 | React | 19 系 |
 | Emotion | 11 系 |
 | Firebase (client) | 11 系（compat 層） |
@@ -20,7 +20,7 @@
 | TypeScript | 5 系 |
 | パッケージマネージャ | npm |
 
-> バージョンアップの経緯・方針は [`app/docs/version_up_nextjs_plan.md`](./app/docs/version_up_nextjs_plan.md)、作業ログは [`app/PROGRESS.md`](./app/PROGRESS.md) を参照してください。
+> バージョンアップの経緯・方針は [`app/docs/version_up_nextjs_plan.md`](./app/docs/version_up_nextjs_plan.md)（10→15）と [`app/docs/version_up_nextjs_16_plan.md`](./app/docs/version_up_nextjs_16_plan.md)（15→16）、作業ログは [`app/PROGRESS.md`](./app/PROGRESS.md) を参照してください。
 
 ### Node.js バージョンの切り替え（作業ディレクトリで自動）
 
@@ -76,11 +76,13 @@ $ open http://localhost:3000
 
 | コマンド | 内容 |
 |---|---|
-| `npm run dev` | 開発サーバー起動（`next dev`, http://localhost:3000） |
-| `npm run build` | 本番ビルド（`next build`） |
+| `npm run dev` | 開発サーバー起動（`next dev`, http://localhost:3000, Turbopack） |
+| `npm run build` | 本番ビルド（`next build`, Turbopack） |
 | `npm run start` | ビルド成果物を起動（`next start -p $PORT`） |
 | `npm run format` | Prettier による整形 |
 
+> Next.js 16 から Turbopack が `next dev` / `next build` 双方のデフォルトで、本アプリもそれに乗っている。`@next/mdx` の `remarkPlugins` は Turbopack の serializable options 要件に合わせて**文字列指定**（例: `['remark-gfm']`）にしている。画像 import は Next 標準の `StaticImageData` を利用し、`<img src={logo.src}>` のように `.src` プロパティを参照する（`app/next.config.js` 側で特別な設定は不要）。
+>
 > ポート 3000 が別プロセス（Docker 等）で使われている場合は `npm run dev -- -p <別ポート>` で起動できます。
 
 ### エラーの確認方法（どこを見ればよいか）

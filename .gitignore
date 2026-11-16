@@ -10,6 +10,7 @@ functions/yarn.lock
 app/out
 app/.sancho-migration
 app/.nextjs-migration
+app/.nextjs-16-migration
 .DS_Store
 *.csv
 *.tsbuildinfo

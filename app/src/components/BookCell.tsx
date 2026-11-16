@@ -151,7 +151,7 @@ const BookCell: FCC<Props> = ({
               margin-bottom: 12px;
             }
           `}>
-          <Link legacyBehavior href={`/${eventId}/books/${book.id}`} key={book.id} passHref>
+          <Link href={`/${eventId}/books/${book.id}`} key={book.id}>
             <BookLink>
               <BookTitle>{book.title}</BookTitle>
             </BookLink>
@@ -217,8 +217,8 @@ const BookCell: FCC<Props> = ({
               css={css`
                 position: relative;
               `}>
-              <Link legacyBehavior href={`/${eventId}/books/${book.id}/submit`} passHref>
-                <a css={css(button)}>見本誌の提出</a>
+              <Link href={`/${eventId}/books/${book.id}/submit`} css={css(button)}>
+                見本誌の提出
               </Link>
               {notSubmitted && (
                 <span
@@ -238,8 +238,8 @@ const BookCell: FCC<Props> = ({
               )}
             </div>
           )}
-          <Link legacyBehavior href={`/${eventId}/books/${book.id}/edit`} passHref>
-            <a css={button}>編集</a>
+          <Link href={`/${eventId}/books/${book.id}/edit`} css={button}>
+            編集
           </Link>
           {(!isFirst || !isLast) && (
             <ResponsivePopover
@@ -351,7 +351,7 @@ const BookCell: FCC<Props> = ({
         />
       )}
     </Container>
-  )
+  );
 }
 
 export default BookCell
@@ -372,7 +372,7 @@ const ImagesContainer = styled.div`
   -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 `
-const BookLink = styled.a`
+const BookLink = styled.div`
   text-decoration: none;
   display: inline-block;
   width: 100%;

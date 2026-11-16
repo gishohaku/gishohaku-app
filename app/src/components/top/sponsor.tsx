@@ -57,7 +57,7 @@ const sponsor: FCC<Props> = ({
                 max-height: 100%;
                 margin: 0 auto;
               `}
-              src={image || defaultImage}
+              src={image || defaultImage.src}
             />
           </a>
         </LazyLoad>
