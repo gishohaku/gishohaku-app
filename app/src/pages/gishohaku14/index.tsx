@@ -432,10 +432,97 @@ const section = css`
   }
 `
 
+type ReportItem = {
+  title: string
+  // 画像を足すときは public/static 配下に置き、'/static/...' のパスを入れる（1〜3枚）
+  images: string[]
+}
+
+const reportItems: ReportItem[] = [
+  { title: '準備開始・準備中', images: [] },
+  { title: '開始', images: [] },
+  { title: '午前中の様子', images: [] },
+  { title: 'お昼ゴハン・ランチ', images: [] },
+  { title: 'イベント', images: [] },
+  { title: '主な展示', images: [] },
+  { title: 'スポンサー', images: [] },
+  { title: '終了', images: [] },
+  { title: '懇親会', images: [] },
+]
+
+const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
+  <div
+    css={css`
+      margin-top: 32px;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    `}>
+    <h3
+      css={css`
+        font-size: 18px;
+        font-weight: bold;
+        color: #364493;
+        border-left: 4px solid #364493;
+        padding-left: 10px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+      `}>
+      {title}
+    </h3>
+    {images.length > 0 && (
+      <div
+        css={css`
+          display: flex;
+          gap: 8px;
+          @media ${media.small} {
+            flex-direction: column;
+          }
+        `}>
+        {images.map((src) => (
+          <img
+            key={src}
+            src={src}
+            alt={title}
+            css={css`
+              flex: 1 1 0;
+              min-width: 0;
+              max-width: 400px;
+              height: auto;
+              border: 1px solid #d5d7d0;
+              @media ${media.small} {
+                flex: none;
+                width: 100%;
+                max-width: 100%;
+              }
+            `}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+)
+
 export default () => {
   return (
     <>
-      <Hero />
+      {/* Hero と開催レポートを1つにまとめ、後続セクションの背景色の交互表示（nth-child）がずれないようにする */}
+      <div>
+        <Hero />
+        <section
+          css={css`
+            ${section};
+            background-color: #f7f8fa;
+          `}
+          id="report">
+          <SectionHeader en="REPORT">開催レポート</SectionHeader>
+          <TextBlock>
+            {reportItems.map((item) => (
+              <ReportBlock key={item.title} {...item} />
+            ))}
+          </TextBlock>
+        </section>
+      </div>
       <section css={section}  id="about">
         <SectionHeader en="ABOUT">技書博とは？</SectionHeader>
         <TextBlock>
