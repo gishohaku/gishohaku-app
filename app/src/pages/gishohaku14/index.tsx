@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
+import { useState } from 'react'
+import Lightbox from 'react-image-lightbox'
 import { media, colors } from '../../utils/style'
 import FluidBlock from '../../components/atoms/FluidBlock'
 import TextBlock from '../../components/atoms/TextBlock'
@@ -432,10 +434,122 @@ const section = css`
   }
 `
 
+type ReportItem = {
+  title: string
+  // 画像を足すときは public/static 配下に置き、'/static/...' のパスを入れる（1〜3枚）
+  images: string[]
+}
+
+const reportItems: ReportItem[] = [
+  { title: '準備', images: ['/static/NZ8_3876.JPG', '/static/NZ8_3880_mask.jpg', '/static/NZ8_3934_mask.jpg',] },
+  { title: '開始', images: ['/static/NZ8_3958_mask.jpg', '/static/NZ8_3960_mask.jpg',] },
+  { title: '会場の様子', images: ['/static/NZ8_3992_mask.jpg', '/static/NZ8_3994_mask.jpg', '/static/NZ8_3996_mask.jpg',] },
+  { title: 'スポンサー', images: ['/static/NZ8_3997_mask.jpg', '/static/NZ8_3998_mask.jpg', '/static/NZ8_4332_mask.jpg',] },
+  { title: 'ランチ', images: ['/static/NZ8_4026.JPG', '/static/NZ8_4060.JPG', '/static/NZ8_4059.JPG',] },
+  { title: '企画展示', images: ['/static/NZ8_4041_mask.jpg', '/static/NZ8_4047.JPG', '/static/NZ8_4073.JPG',] },
+  { title: '懇親会', images: ['/static/NZ8_4404.JPG', '/static/NZ8_4422_mask.jpg',] },
+]
+
+const ReportBlock: FCC<ReportItem> = ({ title, images }) => {
+  // 拡大表示中の画像の番号（null なら閉じている）。前へ/次へは同じ項目の中だけ
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  return (
+  <div
+    css={css`
+      margin-top: 32px;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    `}>
+    <h3
+      css={css`
+        font-size: 18px;
+        font-weight: bold;
+        color: #364493;
+        line-height: 1.4;
+        margin-bottom: 12px;
+      `}>
+      {title}
+    </h3>
+    {images.length > 0 && (
+      <div
+        css={css`
+          display: flex;
+          gap: 8px;
+          @media ${media.small} {
+            flex-direction: column;
+          }
+        `}>
+        {images.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt={title}
+            onClick={() => setLightboxIndex(index)}
+            css={css`
+              flex: 1 1 0;
+              min-width: 0;
+              max-width: 400px;
+              height: auto;
+              border: 1px solid #d5d7d0;
+              cursor: pointer;
+              @media ${media.small} {
+                flex: none;
+                width: 100%;
+                max-width: 100%;
+              }
+            `}
+          />
+        ))}
+      </div>
+    )}
+    {lightboxIndex !== null && (
+      <Lightbox
+        animationDuration={100}
+        mainSrc={images[lightboxIndex]}
+        nextSrc={
+          images.length > 1
+            ? images[(lightboxIndex + 1) % images.length]
+            : undefined
+        }
+        prevSrc={
+          images.length > 1
+            ? images[(lightboxIndex + images.length - 1) % images.length]
+            : undefined
+        }
+        onCloseRequest={() => setLightboxIndex(null)}
+        onMovePrevRequest={() =>
+          setLightboxIndex((lightboxIndex + images.length - 1) % images.length)
+        }
+        onMoveNextRequest={() =>
+          setLightboxIndex((lightboxIndex + 1) % images.length)
+        }
+      />
+    )}
+  </div>
+  )
+}
+
 export default () => {
   return (
     <>
-      <Hero />
+      {/* Hero と開催レポートを1つにまとめ、後続セクションの背景色の交互表示（nth-child）がずれないようにする */}
+      <div>
+        <Hero />
+        <section
+          css={css`
+            ${section};
+            background-color: #f7f8fa;
+          `}
+          id="report">
+          <SectionHeader en="REPORT">開催レポート</SectionHeader>
+          <TextBlock>
+            {reportItems.map((item) => (
+              <ReportBlock key={item.title} {...item} />
+            ))}
+          </TextBlock>
+        </section>
+      </div>
       <section css={section}  id="about">
         <SectionHeader en="ABOUT">技書博とは？</SectionHeader>
         <TextBlock>
