@@ -441,13 +441,13 @@ type ReportItem = {
 }
 
 const reportItems: ReportItem[] = [
-  { title: '準備', images: ['/static/NZ8_3876.JPG', '/static/NZ8_3880_mask.JPG', '/static/NZ8_3934_mask.JPG',] },
-  { title: '開始', images: ['/static/NZ8_3958_mask.JPG', '/static/NZ8_3960_mask.JPG',] },
-  { title: '会場の様子', images: ['/static/NZ8_3992_mask.JPG', '/static/NZ8_3994_mask.JPG', '/static/NZ8_3996_mask.JPG',] },
-  { title: 'スポンサー', images: ['/static/NZ8_3997_mask.JPG', '/static/NZ8_3998_mask.JPG', '/static/NZ8_4332_mask.JPG',] },
+  { title: '準備', images: ['/static/NZ8_3876.JPG', '/static/NZ8_3880_mask.jpg', '/static/NZ8_3934_mask.jpg',] },
+  { title: '開始', images: ['/static/NZ8_3958_mask.jpg', '/static/NZ8_3960_mask.jpg',] },
+  { title: '会場の様子', images: ['/static/NZ8_3992_mask.jpg', '/static/NZ8_3994_mask.jpg', '/static/NZ8_3996_mask.jpg',] },
+  { title: 'スポンサー', images: ['/static/NZ8_3997_mask.jpg', '/static/NZ8_3998_mask.jpg', '/static/NZ8_4332_mask.jpg',] },
   { title: 'ランチ', images: ['/static/NZ8_4026.JPG', '/static/NZ8_4060.JPG', '/static/NZ8_4059.JPG',] },
-  { title: '企画展示', images: ['/static/NZ8_4041_mask.JPG', '/static/NZ8_4047.JPG', '/static/NZ8_4073.JPG',] },
-  { title: '懇親会', images: ['/static/NZ8_4404.JPG', '/static/NZ8_4422_mask.JPG',] },
+  { title: '企画展示', images: ['/static/NZ8_4041_mask.jpg', '/static/NZ8_4047.JPG', '/static/NZ8_4073.JPG',] },
+  { title: '懇親会', images: ['/static/NZ8_4404.JPG', '/static/NZ8_4422_mask.jpg',] },
 ]
 
 const ReportBlock: FCC<ReportItem> = ({ title, images }) => {
