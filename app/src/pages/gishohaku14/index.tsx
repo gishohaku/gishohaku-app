@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, jsx } from '@emotion/react'
+import { useState } from 'react'
+import Lightbox from 'react-image-lightbox'
 import { media, colors } from '../../utils/style'
 import FluidBlock from '../../components/atoms/FluidBlock'
 import TextBlock from '../../components/atoms/TextBlock'
@@ -448,7 +450,10 @@ const reportItems: ReportItem[] = [
   { title: '懇親会', images: ['/static/NZ8_4404.JPG', '/static/NZ8_4422_mask.JPG',] },
 ]
 
-const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
+const ReportBlock: FCC<ReportItem> = ({ title, images }) => {
+  // 拡大表示中の画像の番号（null なら閉じている）。前へ/次へは同じ項目の中だけ
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  return (
   <div
     css={css`
       margin-top: 32px;
@@ -475,17 +480,19 @@ const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
             flex-direction: column;
           }
         `}>
-        {images.map((src) => (
+        {images.map((src, index) => (
           <img
             key={src}
             src={src}
             alt={title}
+            onClick={() => setLightboxIndex(index)}
             css={css`
               flex: 1 1 0;
               min-width: 0;
               max-width: 400px;
               height: auto;
               border: 1px solid #d5d7d0;
+              cursor: pointer;
               @media ${media.small} {
                 flex: none;
                 width: 100%;
@@ -496,8 +503,32 @@ const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
         ))}
       </div>
     )}
+    {lightboxIndex !== null && (
+      <Lightbox
+        animationDuration={100}
+        mainSrc={images[lightboxIndex]}
+        nextSrc={
+          images.length > 1
+            ? images[(lightboxIndex + 1) % images.length]
+            : undefined
+        }
+        prevSrc={
+          images.length > 1
+            ? images[(lightboxIndex + images.length - 1) % images.length]
+            : undefined
+        }
+        onCloseRequest={() => setLightboxIndex(null)}
+        onMovePrevRequest={() =>
+          setLightboxIndex((lightboxIndex + images.length - 1) % images.length)
+        }
+        onMoveNextRequest={() =>
+          setLightboxIndex((lightboxIndex + 1) % images.length)
+        }
+      />
+    )}
   </div>
-)
+  )
+}
 
 export default () => {
   return (
