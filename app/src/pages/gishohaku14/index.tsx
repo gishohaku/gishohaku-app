@@ -439,15 +439,13 @@ type ReportItem = {
 }
 
 const reportItems: ReportItem[] = [
-  { title: '準備開始・準備中', images: [] },
-  { title: '開始', images: [] },
-  { title: '午前中の様子', images: [] },
-  { title: 'お昼ゴハン・ランチ', images: [] },
-  { title: 'イベント', images: [] },
-  { title: '主な展示', images: [] },
-  { title: 'スポンサー', images: [] },
-  { title: '終了', images: [] },
-  { title: '懇親会', images: [] },
+  { title: '準備', images: ['/static/NZ8_3876.JPG', '/static/NZ8_3880_mask.JPG', '/static/NZ8_3934_mask.JPG',] },
+  { title: '開始', images: ['/static/NZ8_3958_mask.JPG', '/static/NZ8_3960_mask.JPG',] },
+  { title: '会場の様子', images: ['/static/NZ8_3992_mask.JPG', '/static/NZ8_3994_mask.JPG', '/static/NZ8_3996_mask.JPG',] },
+  { title: 'スポンサー', images: ['/static/NZ8_3997_mask.JPG', '/static/NZ8_3998_mask.JPG', '/static/NZ8_4332_mask.JPG',] },
+  { title: 'ランチ', images: ['/static/NZ8_4026.JPG', '/static/NZ8_4060.JPG', '/static/NZ8_4059.JPG',] },
+  { title: '企画展示', images: ['/static/NZ8_4041_mask.JPG', '/static/NZ8_4047.JPG', '/static/NZ8_4073.JPG',] },
+  { title: '懇親会', images: ['/static/NZ8_4404.JPG', '/static/NZ8_4422_mask.JPG',] },
 ]
 
 const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
