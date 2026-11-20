@@ -461,8 +461,6 @@ const ReportBlock: FCC<ReportItem> = ({ title, images }) => (
         font-size: 18px;
         font-weight: bold;
         color: #364493;
-        border-left: 4px solid #364493;
-        padding-left: 10px;
         line-height: 1.4;
         margin-bottom: 12px;
       `}>
