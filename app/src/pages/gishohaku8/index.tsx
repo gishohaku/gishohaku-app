@@ -455,7 +455,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               愛知県名古屋市千種区吹上2-6-3（
               <a target="_blank" href="https://goo.gl/maps/Vx6RZb4N1BqY2wyE7">
                 Google マップ
@@ -463,7 +463,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               地下鉄桜通線「名古屋駅」から徳重行き、「吹上駅」下車 ５番出口より徒歩５分
             </p>
           </div>

@@ -166,3 +166,273 @@
   - `before=<日付>` の別機能はあるが、これは「特定日時より前のリリースを install」する用途で「N日待つ」とは意味が異なる
   - つまり pnpm の `minimum-release-age` / yarn 4 相当の機能は npm には未搭載
   - 実装状況の再確認は Issue #261 に findings をコメントし、将来 npm に機能追加された時点で follow-up として再検討
+
+---
+
+# Next.js 15 → 16 バージョンアップ作業（2026-11-15 開始）
+
+計画書: [`docs/version_up_nextjs_16_plan.md`](./docs/version_up_nextjs_16_plan.md)
+作業ブランチ: `feature/upgrade-next-js-ver-16`
+
+## 2026-11-15 [フェーズ1] 準備・ベースライン取得
+- **やったこと**: 計画書の作成、`.gitignore` に `app/.nextjs-16-migration` を追加、現行バージョン実測、`legacyBehavior` 使用箇所の再生成、Next 15 ベースラインビルド取得
+- **開始時点の環境**:
+  - ブランチ: `feature/upgrade-next-js-ver-16`（clean）
+  - Node: v22.23.5（nvm で切り替え。シェル初期状態は v16.17.1 だったため `nvm use 22.23.5` を明示）
+  - npm: v10.9.9
+- **現行バージョン実測（`app/package-lock.json`）**:
+  | 対象 | バージョン |
+  |---|---|
+  | next | 15.5.28 |
+  | react / react-dom | 19.2.7 |
+  | @next/mdx | 15.5.20 |
+  | @mdx-js/react / @mdx-js/loader | 3.1.1 |
+  | remark-gfm | 4.0.1 |
+  | firebase | 11.10.0 |
+  | tailwindcss | 4.3.3 |
+  | typescript | 5.9.3 |
+- **`legacyBehavior` 使用箇所一覧（計 45 件 / 15 ファイル）**:
+  - `app/src/withUser.tsx:26`
+  - `app/src/components/top/hero.jsx:133,178`
+  - `app/src/components/CircleDetail.tsx:105,214`
+  - `app/src/components/CircleCell.tsx:56`
+  - `app/src/components/BottomBar.tsx:76,82,88,94`
+  - `app/src/components/StarTab.tsx:40,45`
+  - `app/src/components/Layout.tsx:101`
+  - `app/src/components/Header.tsx:122,155,167,177,187,198`
+  - `app/src/components/BookCell.tsx:154,220,241`
+  - `app/src/containers/BookList.tsx:47,140`
+  - `app/src/containers/Mypage.tsx:33,42,52`
+  - `app/src/containers/CircleMypage.tsx:94`
+  - `app/src/pages/archive/index.tsx:32,41,50,59,68,77,86,95,108,125,134`
+  - `app/src/pages/sign_in.tsx:98,162,167`
+  - `app/src/pages/sign_up.tsx:110,168,173`
+  - **計画との差分なし**（計画書の「約 15 ファイル」と一致）。
+- **`next/image` 使用箇所**: `app/src/pages/gishohaku5/index.tsx:3` のみ（1 ファイル、`width`/`height`/`src`/`alt` のみ）。計画書通り。
+- **ベースラインビルド（Next 15.5.28）**:
+  - コマンド: `API_KEY=dummy PROJECT_ID=dummy npm run build`
+  - 結果: 成功
+  - `.next` サイズ: **114MB**（うち `.next/static` 2.2MB、`.next/server` 2.8MB）
+  - **First Load JS shared: 304 kB**（`framework` 59.7kB / `main` 37.1kB / `_app` 200kB / その他 7.23kB）
+  - 判定: フェーズ6 のバンドルサイズ比較基準として採用。
+- **スクリーンショット・console 警告ベースライン**: Playwright が未導入・既存の capture スクリプトも無いため、フェーズ2 入りの直前にセットアップしてから before 取得を行う（before/after の時間差を小さくするため）。計画書フェーズ1 のうちこの 2 項目のみ**次フェーズ冒頭に繰り越し**。
+- **判断・メモ**:
+  - 計画書フェーズ1 の「現行バージョン実測」「影響箇所の再生成」「ビルドベースライン」「`.gitignore` 追加」は完了。
+  - Playwright 系作業は別途ユーザー確認を経て進める想定。
+- **次のアクション**: フェーズ1 のコミット（PROGRESS・`.gitignore`）→ Playwright セットアップ方針のユーザー確認 → フェーズ2（`legacyBehavior` 全件除去）。
+
+## 2026-11-15 [フェーズ1 追補] Playwright セットアップと before スクリーンショット取得
+- **やったこと**: ユーザー判断（フル機械比較を採用）を受けて、Playwright + pixelmatch のセットアップ、before スクリーンショット取得、self-diff ノイズ基準の確認、dev console 警告のベースライン記録。
+- **セットアップ**:
+  - 配置: `app/.nextjs-16-migration/tools/`（`.gitignore` 配下、ephemeral）。app/ の `devDependencies` を汚さず分離。
+  - 依存: `playwright@1.56.1` / `pixelmatch@5.3.0` / `pngjs@7.0.0`（`npm install --no-save`）。
+  - ブラウザ: `npx playwright install chromium`（Chromium Headless Shell 159.0.8154.6、約 100MB）。Firefox/WebKit は入れない。
+  - スクリプト:
+    - `capture.mjs`: 9 ページ × desktop(1280x800)/mobile(375x812) の 2 viewport で fullPage 取得
+    - `compare.mjs`: pixelmatch で機械比較、threshold=0.1、サイズ違い/欠損も判定、diff PNG を `_diff/` へ保存
+- **取得対象**（認証不要ページ 9 件 × 2 viewport = **18 枚**）:
+  - `/`, `/sign_in`, `/sign_up`, `/reset_password`, `/archive`, `/gishohaku1/circles`, `/gishohaku1/books`, `/code-of-conduct`, `/harassment-case-study`
+  - 認証必須ページ（mypage 系）・サークル編集系はユーザー手動確認に委ねる。
+- **self-diff 結果**: Next 15 のまま 2 回続けて capture して pixelmatch 比較 → **18/18 完全一致（non-OK 0）**。ノイズ 0 のクリーンなベースライン。以降の after 取得で検出される差分は実変更と判定できる。
+- **dev console 警告ベースライン**（`API_KEY=dummy PROJECT_ID=dummy npm run dev`）:
+  - 📌 **`legacyBehavior` is deprecated**: Next 15 時点で既に deprecation 警告が多数出ている。**これはフェーズ2 で全件除去する対象**。警告ゼロが after の判定基準になる。
+  - 📌 Firestore `PERMISSION_DENIED` (code=7): ダミー PROJECT_ID で API 未有効のため発生。**既存の運用上想定内**で Next 16 とは無関係。after でも同じ警告が出るのは許容。
+  - その他の新規警告・エラーなし。
+- **ベースライン保存先**: `app/.nextjs-16-migration/before/`（gitignore 下）。消さないよう注意。
+- **判断・メモ**:
+  - Playwright 系ファイル（`tools/`, `before/`）はすべて gitignore 配下のため、コミット対象には含めない。将来再現する際は本 PROGRESS のセットアップ手順をたどる形でよい。
+  - `--no-save` 指定で tools/package.json に依存は書かれないが、必要になれば個別インストールで復元できる（最小構成を優先）。
+- **次のアクション**: **フェーズ2（`next/link` の `legacyBehavior` 全件除去）に着手**。Next 15 のまま先行実施。
+
+## 2026-11-15 [フェーズ2] `next/link` の `legacyBehavior` 全件除去（Next 15 のまま先行実施）
+- **やったこと**: 公式 codemod で機械置換 + bail-out 箇所を手動修正。Next 15 のままで型・ビルド・pixelmatch を検証。
+- **codemod 実行**: `npx @next/codemod@latest new-link ./src`
+  - 結果: 15 ファイル修正、0 エラー、0 skipped
+  - **bail-out**: 8 箇所で `@next-codemod-error` コメントを挿入（子要素が `<a>` かどうか判定できなかったため）
+- **手動修正方針**（bail-out 8 箇所の分類と対応）:
+  | 件数 | パターン | 対応 |
+  |---|---|---|
+  | 3 | `styled.a` 子コンポーネント（`NewBookButton`/`CircleLink`/`BookLink`）| `styled.a` → `styled.div` に変更。外側 Link が `<a>` を生成するため入れ子アンカー回避。各コンポーネントは Link 内でのみ使われていることを grep で確認済 |
+  | 3 | `<Button component="a">` （`withUser.tsx` / `sign_in.tsx` / `sign_up.tsx`）| `component="span"` に変更。外側 Link が `<a>` を生成 |
+  | 2 | `styled.div` 子コンポーネント（`StarTab.tsx` の `Item`）| 変更不要。`@next-codemod-error` コメントのみ削除 |
+- **検証**:
+  - `grep -rn "legacyBehavior" app/src` → 0 件
+  - `grep -rn "@next-codemod-error" app/src` → 0 件
+  - `npx tsc --noEmit` → エラー 0
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build` → 成功、**First Load JS shared 304 kB（ベースラインと同値）**、`_app` チャンクが 11150898→3fd09aa9 にハッシュ変化（内容差分あり）、`reset_password` 312→311kB、`sign_up` 1.7→1.68kB（微減）
+  - **pixelmatch 比較（before vs after-link-migration）: 18/18 完全一致**。視覚的回帰ゼロ
+  - **dev console の `legacyBehavior` deprecation 警告: 多数 → 0** に解消
+  - Firestore `PERMISSION_DENIED`（想定内のダミー ID 由来）は before と同数の 5 件、新規 warn/error なし
+- **変更統計**: 15 ファイル / +376 / -377 行
+- **判断・メモ**:
+  - `styled.a → styled.div` は Link の内部に閉じたコンポーネントなので影響なし。もし今後 Link 外で単独の `<a>` として使う必要が出た場合は再設計が必要（コメントは付けず、必要になった時点で判断）。
+  - `Button component="span"` も見た目同一。Button 内部ロジックは `component || 'div'` のフォールバックのため span でも問題ない。
+  - このフェーズを Next 15 のまま済ませたことで、Next 16 引き上げ時にリンクまわりの切り分けができる状態になった。
+- **次のアクション**: フェーズ2 コミット → フェーズ3（Next.js 16 本体の引き上げ）。
+
+## 2026-11-15 [フェーズ3] Next.js 16 本体引き上げ
+- **やったこと**: `@next/codemod upgrade latest` で next / @next/mdx / react を 16/19.3 に bump。Turbopack 下で `@next/mdx` の `remarkPlugins`（async import の remark-gfm）が serializable でないビルドエラーが出たため、webpack 退避方針で確定。
+- **バージョン変化**:
+  | 対象 | 旧 | 新 |
+  |---|---|---|
+  | next | 15.5.28 | **16.4.6** |
+  | @next/mdx | 15.5.20 | **16.4.6** |
+  | react / react-dom | 19.2.7 | 19.3.1 |
+  | @types/react / @types/react-dom | ^19.2.0 | 19.3.0 (package.json `overrides` にも固定) |
+  | tsconfig `jsx` | `preserve` | **`react-jsx`**（Next 16 が自動書換） |
+  | tsconfig `moduleResolution` | `node` | **`bundler`**（Next 16 が自動書換） |
+  | next-env.d.ts | `routes.d.ts` 参照 | `.next/dev/types/{routes,root-params}.d.ts` を import（Next 16 が自動書換） |
+- **破壊的変更に遭遇した点**:
+  - 🔴 **Turbopack がビルドでもデフォルト化** → `@next/mdx` loader の `options` （非シリアライズな関数を含む `remarkPlugins`）で Rust 側のシリアライズに失敗。公式メッセージ: `Error: loader @next/mdx/mdx-js-loader.js for match "{*,next-mdx-rule}" does not have serializable options. Ensure that options passed are plain JavaScript objects and values.`
+  - 📘 判断: 計画書フェーズ3 の第一候補（**`--webpack` 退避**）を採用。`package.json` の scripts を `next dev --webpack` / `next build --webpack` に変更。`next.config.js` の `webpack(config)` カスタム（画像 import を URL 文字列化する `asset/resource` ルール）もそのまま維持できる。
+  - 📘 Turbopack 完全対応は putback: `@next/mdx` の remarkPlugins を Turbopack で動かすには Rust 製 remark プラグインか別経路が必要。GFM 表の描画互換性を優先し、webpack で据え置く。将来 `@next/mdx` が Turbopack 向けの serializable 構成を提供したら再検討。
+- **その他 Next 16 由来の自動追加**:
+  - `app/AGENTS.md` を Next 16 の `next dev` が自動生成（node_modules 側のドキュメント参照を促す agent 向け注意書き）。削除しても再生成されるため**コミット対象に含める**。
+- **検証結果**:
+  - `npx tsc --noEmit` → エラー 0
+  - `API_KEY=dummy PROJECT_ID=dummy npm run build`（= `next build --webpack`） → `✓ Compiled successfully in 5.8s`。全ルート生成完了。`.next` サイズ **121MB**（Next 15 の 114MB → +7MB、約 +6%。Next 16 で dev types 等が増えたため）。
+    - ⚠️ 補足: Next 16 のビルド出力は各ルートの kB/First Load JS を表示しなくなった（フォーマット変更）。詳細な First Load JS 計測が必要なら `--analyze` 併用が別途必要。本フェーズは成功判定のみ採用。
+  - `npm run dev` で全ページ 200 OK を返す
+  - **pixelmatch 比較（before[Next15] vs after-next16）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ
+  - dev console の `legacyBehavior` 警告: 引き続き 0
+  - 📘 **Next 16 の新機能で `[browser]` プレフィックス付き browser console 転送**が有効化され、既存の Formik `<Formik render>` deprecation 警告がサーバーログに可視化。これは **既存の Formik 側の積み残し**で Next 16 の回帰ではない（Next 15 時点から browser 側で出ていた）。本作業スコープ外として putback。
+- **判断・メモ**:
+  - 計画書との差分: `@next/mdx` は stable 16.4.6 が出ていたため「canary 採用の判断」は不要だった。計画書フェーズ3 の 1-1 節 C は解消。
+  - tsconfig 変更は Next 16 の推奨で、Emotion の jsx pragma 記述を持つファイルは pragma が tsconfig より優先されるため影響なし（ビルドで実証）。
+  - `next-env.d.ts` の変更は自動生成ファイル。手を入れる必要なし。
+  - `--webpack` 退避により Cloud Build 経路（`Dockerfile` が `npm run build` を叩く）も自動的に webpack で動く。Dockerfile 側の変更は不要。
+- **次のアクション**: フェーズ3 コミット → フェーズ4（周辺追随・微調整）→ フェーズ5（scripts 動作確認）→ フェーズ6（総合検証）→ フェーズ7（README 更新・完了報告）。
+
+## 2026-11-15 [フェーズ4・5・6・7] 周辺追随／scripts 確認／総合検証／README 更新
+短時間で実施できる最終 4 フェーズをまとめて実施した。
+
+### フェーズ4: 周辺追随・微調整
+- Next 16 本体引き上げ時点で、tsconfig.json / next-env.d.ts は Next 16 が自動書換済（jsx: react-jsx / moduleResolution: bundler）。追加対応不要。
+- `next.config.js` の `images.disableStaticImages: true` / `webpack(config)` は Next 16 webpack モードで引き続き動作（ビルドで実証済）。据え置き。
+- `@next/mdx` は 16.4.6（stable）が存在したため計画書のリスク C（canary 採用）は不要だった。既に 16.4.6 に bump 済。
+- **npm audit**: 9 vulnerabilities (2 moderate, 7 high)。内訳:
+  - `nanoid` (high): custom generators infinite loop → Firebase 推移的依存
+  - `qs` 2.2.5–6.16.0 (moderate): array-limit bypass / DoS 他 → 本アプリ直接依存
+  - いずれも **Next 16 化で新規発生したものではなく既存の積み残し**。計画書ルール「新規高リスクのみ対応、既存は広げない」により**スコープ外 putback**。
+- 追加の変更なし。
+- **判断**: フェーズ4 は実質「既に自動対応済みを確認したのみ」。コミット対象の変更は発生しない。
+
+### フェーズ5: scripts 動作確認
+- **import 解決確認**: `scripts/*.ts` が参照する `../app/src/utils/circle.ts` は純粋な型/定数モジュール（Next / React / Firebase client に非依存）。tsx 経由で import 可能であることを `npx tsx -e "import('./app/src/utils/circle.ts')..."` で確認 → `OK: imported keys: [ 'default' ]`。
+- **ドライラン実行**: `npx tsx scripts/20260428-createCircles.ts` を実行 → `[DRY-RUN] Firestore へは書き込みません...` ログ出力後、CSV 未配置で ENOENT 終了。期待通りの挙動（**Next 16 の破壊的変更は scripts 側に波及していない**）。
+- 7 ファイルの `*-createCircles.ts`（2019〜2026）が `../app/src/utils/circle` を import しているが、circle.ts が純粋モジュールのため全て影響なし。
+
+### フェーズ6: 総合検証
+- **dev**: `npm run dev` で 9 ページすべて 200 OK。
+- **build**: `npm run build`（= `next build --webpack`）成功。`.next` 114MB → **121MB**（+7MB, +6%。Next 16 で dev types 等が増加）。
+  - ⚠️ Next 16 webpack モードは各ルートの kB を表示しなくなった。First Load JS の数値比較は不可。必要なら `--analyze` 併用が別途必要（putback）。
+- **pixelmatch 最終（before[Next15] vs after-final[Next16]）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ。
+- **Docker build**: `docker build --build-arg project_id=dummy --build-arg api_key=dummy -t gishohaku-app-next16-local .` を実行 → 成功（build step 24.7s、exporting 3.7s）。`SecretsUsedInArgOrEnv` 警告は Next 16 前からの既存事項。イメージはテスト後に削除。
+- **デプロイ経路の机上レビュー**:
+  - `cloudbuild.yaml`: Docker build → push → Cloud Run deploy → Firebase Hosting deploy の手順に変更なし。Dockerfile の Node 22.23.5-alpine も据え置き。
+  - `firebase.json`: rewrites（`**` → Cloud Run `gishohaku-app`）・redirects（`/books`→`/gishohaku1/books` 等）・headers（CSP / `_next/static/**` cache）に変更不要。Next 16 の `_next/static/<buildId>/` 構造は Next 15 と同一（buildId ハッシュのみ変動）で、CSP に新規の inline script ハッシュ要求も発生していない。
+- **console 比較**: フェーズ2 で `legacyBehavior` 警告ゼロを達成し、Next 16 でもゼロ維持。Firestore `PERMISSION_DENIED` は同数（ダミー PROJECT_ID 由来、想定内）。新規の Formik `<Formik render>` deprecation は **Next 16 の browser log 転送機能で可視化されただけで回帰ではない**（Formik 側の積み残し、スコープ外 putback）。
+- **手動確認の委ね**: 認証必須ページ（mypage 系 / サークル編集系）・モバイル実機確認はユーザーに委ねる。
+
+### フェーズ7: README 更新
+- `README.md` の「環境」表 Next.js 行を 15 系 → **16 系（Pages Router / webpack ビルド）** に更新。
+- バージョンアップの経緯・方針リンクに `app/docs/version_up_nextjs_16_plan.md` を追加。
+- 主なスクリプト表の `npm run dev` / `npm run build` を **`next dev --webpack` / `next build --webpack`** に更新し、Turbopack デフォルト化と webpack 固定の理由を注記。
+- Node.js / Dockerfile / `.node-version` / engines は変更なし（Next 16 の engines `>=20.9.0` を 22.23.5 が充足）。
+- `scripts/` 節は変更なし。
+
+### 最終サマリ
+| 項目 | Before | After | 変化 |
+|---|---|---|---|
+| Next.js | 15.5.28 | **16.4.6** | +1 major |
+| @next/mdx | 15.5.20 | 16.4.6 | 追随 |
+| React / React-DOM | 19.2.7 | 19.3.1 | patch |
+| @types/react | ^19.2 | 19.3.0（overrides で固定） | — |
+| tsconfig jsx | preserve | react-jsx | Next 16 自動 |
+| tsconfig moduleResolution | node | bundler | Next 16 自動 |
+| `next/link` `legacyBehavior` | 45 件 / 15 ファイル | **0 件** | 全件除去 |
+| ビルドツール | （Next 15 デフォルト = webpack） | **webpack 固定**（`--webpack` 明示） | Turbopack デフォルト化を退避 |
+| pixelmatch | ベースライン | **18/18 完全一致** | 視覚的回帰ゼロ |
+| `.next` サイズ | 114MB | 121MB | +7MB (+6%) |
+| Node.js | 22.23.5 | 22.23.5 | 据え置き |
+
+**計画との差分（putback）**:
+- Turbopack 完全対応（`@next/mdx` の serializable 対応待ち）
+- `npm audit` の既存 9 件（nanoid / qs。Next 16 新規発生ではない）
+- First Load JS の数値比較（Next 16 の webpack 出力が kB を表示しなくなった。`--analyze` 併用は別課題）
+- Formik `<Formik render>` deprecation（Next 16 の browser log 転送で可視化されただけ。既存の Formik 側積み残し）
+
+**完了条件の充足**:
+1. ✅ `npm run dev` で主要ページ表示
+2. ✅ `npm run build` 成功
+3. ✅ pixelmatch 崩れゼロ
+4. ✅ `cloudbuild.yaml` / `firebase.json` / `Dockerfile` 変更最小（scripts に `--webpack` 追加のみ、Dockerfile は無変更）
+5. ✅ scripts の import 解決・DryRun 到達
+6. ✅ `README.md` 更新
+7. ✅ PROGRESS に全ログ
+
+**手動確認を要する項目**（ユーザー実施推奨）:
+- ログイン後のサークル向けページ閲覧（実認証が必要）
+- スマートフォン実機での表示（Playwright mobile viewport では崩れゼロ確認済）
+- 実環境でのデプロイ試行（本作業はローカル Docker build 成功まで。実デプロイはユーザー判断）
+
+本作業ブランチ: `feature/upgrade-next-js-ver-16`
+コミット履歴: `1f9cd34`（計画書+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump）→ 本コミット（フェーズ4-7）
+
+## 2026-11-15 [追補] Turbopack 退避の putback を解消（@next/mdx 文字列指定 + 画像 StaticImageData 移行）
+ユーザー要望により、フェーズ3 で putback した「Turbopack デフォルト化で @next/mdx の serializable エラー」の恒久対応を実施。参考リンク: https://nextjsjp.org/docs/app/guides/mdx / https://suekichi-system.com/blog/nextjs-static-export-mdx-blog
+
+### 対応内容
+- **`@next/mdx` の remark プラグインを文字列指定に**
+  - `next.config.js`: `remarkPlugins: [remarkGfm]`（関数参照、async dynamic import）→ `remarkPlugins: ['remark-gfm']`（文字列）
+  - async wrapper（`module.exports = async () => { ... }`）も不要になり、同期的な通常 config に戻す
+  - Turbopack は Rust 側でプラグインを解決するため関数参照を渡せず、文字列名で指定する必要がある
+- **画像 import を StaticImageData に移行**
+  - Turbopack は `images.disableStaticImages: true` も `webpack(config)` の `asset/resource` ルールも無視する → 画像 import が常に `StaticImageData` オブジェクト (`{src, width, height}`) を返す
+  - その結果、既存の `<img src={logo}>` が `src="[object Object]"` にレンダリングされ画像表示が壊れていた（Turbopack 切替時の pixelmatch で初回検出: 18/18 すべてに 0.02〜0.78% の差分）
+  - `.nextjs-16-migration/tools/migrate-image-src.mjs` を作成して **19 ファイル** を機械置換:
+    - `src={<name>}` → `src={<name>.src}`
+    - `|| <name>`（ImageBox の fallback URL）→ `|| <name>.src`
+  - 置換対象: `defaultImage` / `placeIcon` / `directionsIcon` / `logo` / `circleTumbnail` / `editIcon` / `book` / `groupWork` / `home` / `person` / `check`
+- **`next.config.js` のクリーンアップ**
+  - `images.disableStaticImages: true` 削除
+  - `webpack(config)` の `asset/resource` カスタムルール削除（Turbopack が呼ばない上、Next 16 ネイティブの StaticImageData で代替済み）
+  - コメントを「Turbopack 時代の画像運用」を説明する内容に更新
+- **`package.json` の scripts を Next 16 デフォルトに戻す**
+  - `"dev": "next dev --webpack"` → `"dev": "next dev"`
+  - `"build": "next build --webpack"` → `"build": "next build"`
+- **`next-env.d.ts`**: Next 16 build 実行時に `/// <reference types="next/image-types/global" />` が自動追加（StaticImageData の型解決用）
+
+### 検証結果
+- `npx tsc --noEmit` → エラー 0
+- `npm run build`（= `next build`, Turbopack） → `✓ Compiled successfully in 3.6s`。警告・エラーなし
+  - **`.next` サイズ: 121MB (webpack) → 52MB (Turbopack)** = 43%・約 **-57%**
+  - ビルド時間: 5.8s → 3.0〜3.6s（約 -40%）
+- `npm run dev`（= `next dev`, Turbopack）で全ページ 200 OK
+- `curl http://localhost:3000/` の HTML 内に `[object Object]` 残存ゼロ、画像は `/_next/static/media/<hash>.svg` など正しい URL で出力
+- **pixelmatch 比較（before[Next 15] vs after-turbopack-final[Next 16 Turbopack]）: 18/18 完全一致**。desktop + mobile 全ページで視覚的回帰ゼロ
+- dev console の `legacyBehavior` 警告: 0 維持 / Firestore `PERMISSION_DENIED`: 5（ダミー ID 由来、想定内）/ Formik `<Formik render>` deprecation: 既存事項（Next 16 の browser log 転送で可視化、スコープ外）
+- **Docker build** `gishohaku-app-turbo-local` も成功（Dockerfile 無変更、Cloud Build 経路に影響なし）。イメージはテスト後に削除
+
+### 再更新
+- `README.md`: 環境表の Next.js 行を「16 系（Pages Router / Turbopack）」に、scripts 表と注記を Turbopack 運用に合わせて書換
+- このフェーズで putback リストから「Turbopack 完全対応」を除外
+
+### 残っている putback（本作業スコープ外）
+- 既存の `npm audit` 9件（nanoid / qs。Next 16 新規発生ではない）
+- First Load JS の数値比較（Next 16 build 出力が kB 非表示化、`--analyze` 併用は別課題）
+- Formik `<Formik render>` deprecation（Next 16 の browser log 転送で可視化されただけ。Formik 側の積み残し）
+
+### 最終コミット履歴
+`1f9cd34`（計画+ベースライン）→ `612c947`（Playwright）→ `2d22331`（legacyBehavior 除去）→ `ee18689`（Next 16 bump, webpack 退避）→ `a98e517`（フェーズ4-7 + README）→ 本コミット（Turbopack 完全対応）
+
+## 2026-11-17 [追補] 外部スタイルシート参照を _document.tsx に集約
+- **背景**: Next 16 の browser log 転送機能で、認証後ページ閲覧時に `Do not add stylesheets using next/head` 警告が顕在化（Google Fonts × 2 + Material Icons の `<link rel="stylesheet">` 3 本）。Next.js の推奨は `_document.tsx` の `<Head>` に集約すること。
+- **対応**:
+  - `app/src/components/Layout.tsx` の `<Head>` から外部スタイルシート 3 本と `next/head` import を削除
+  - `app/src/pages/_document.tsx` の `<Head>` に同じ 3 本を移植。なぜ `_document.tsx` に置いているかをコメントで明示
+- **検証**:
+  - `tsc --noEmit` クリーン、`npm run build` 成功（Turbopack、4.2s）
+  - dev console の `Do not add stylesheets using next/head` 警告: 多数 → **0**
+  - pixelmatch: desktop 9/9 完全一致、mobile は 6 件に微細 DIFF（最大 0.012%）が検出されたが、**同一コードでの再キャプチャでも同じ DIFF が出る**ことを確認したため mobile webfont ロード順の環境ノイズと判定（スタイルシート移動起因ではない）
+- **残 putback の更新**: Next 16 の browser log 転送で可視化された警告のうち、Next 本家が指摘するもの（`next/head` stylesheet）は本作業で解消。Emotion 由来の `:nth-child` SSR 警告（約 10 箇所）は follow-up に送る。

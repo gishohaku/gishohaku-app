@@ -224,7 +224,7 @@ const Sections = () => (
             margin-top: 12px;
           `}>
           <p css={withIcon}>
-            <img src={placeIcon} alt="住所" />
+            <img src={placeIcon.src} alt="住所" />
             東京都大田区南蒲田1丁目20-20（
             <a href="https://www.google.com/maps?ll=35.55876,139.724151&z=16&t=m&hl=ja-JP&gl=JP&mapclient=embed&cid=9945236205239848880">
               Google マップ
@@ -232,7 +232,7 @@ const Sections = () => (
             ）
           </p>
           <p css={withIcon}>
-            <img src={directionsIcon} alt="アクセス" />
+            <img src={directionsIcon.src} alt="アクセス" />
             京浜急行「京急蒲田」駅より徒歩約3分
             <br />
             JR京浜東北線、東急池上・多摩川線「蒲田」駅より徒歩約13分

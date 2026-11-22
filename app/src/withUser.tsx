@@ -23,9 +23,9 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
       <MessageBox
         title="ログインが必要です。"
         description="このページを利用するにはログインが必要です。">
-        <Link legacyBehavior href="/sign_in" passHref>
+        <Link href="/sign_in">
           <Button
-            component="a"
+            component="span"
             onClick={() => {
               localStorage.setItem(REDIRECT_TO_AFTER_LOGIN, router.asPath)
             }}
@@ -37,7 +37,7 @@ const withUser = (WrappedComponent: ComponentType<any>) => (props: any) => {
           </Button>
         </Link>
       </MessageBox>
-    )
+    );
   }
 
   return <WrappedComponent user={user} userData={userData} {...props} />

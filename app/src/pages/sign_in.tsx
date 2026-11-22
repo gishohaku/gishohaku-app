@@ -95,14 +95,15 @@ const SignIn: NextPage = () => {
                       css={css`
                         text-align: right;
                       `}>
-                      <Link legacyBehavior href="/reset_password" passHref>
-                        <a
-                          css={css`
-                            font-size: 12px;
-                            margin-top: 2px;
-                          `}>
+                      <Link
+                        href="/reset_password"
+                        css={css`
+                          font-size: 12px;
+                          margin-top: 2px;
+                        `}>
+                        
                           パスワードをお忘れの方はこちら
-                        </a>
+                        
                       </Link>
                     </div>
                   </>
@@ -117,7 +118,7 @@ const SignIn: NextPage = () => {
                   ログイン
                 </Button>
               </Form>
-            )
+            );
           }}
         />
         <Text variant="h6" muted style={{ marginTop: 32 }}>
@@ -159,19 +160,19 @@ const SignIn: NextPage = () => {
             margin-bottom: 32px;
           `}>
           登録することで、
-          <Link legacyBehavior href="/gishohaku1/privacy" passHref>
-            <a>利用規約/プライバシーポリシー</a>
+          <Link href="/gishohaku1/privacy">
+            利用規約/プライバシーポリシー
           </Link>
           に同意するものとします
         </p>
-        <Link legacyBehavior href="/sign_up">
-          <Button component="a" block variant="outline">
+        <Link href="/sign_up">
+          <Button component="span" block variant="outline">
             会員登録はこちら
           </Button>
         </Link>
       </Container>
     </>
-  )
+  );
 }
 
 const CustomInput = ({

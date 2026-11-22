@@ -767,7 +767,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               東京都大田区南蒲田1-20-20（
               <a target="_blank" href="https://goo.gl/maps/2J282yVtzG3T5f398">
                 Google マップ
@@ -775,7 +775,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               京浜急行「京急蒲田」駅東口より徒歩約3分
             </p>
           </div>

@@ -514,7 +514,7 @@ export default () => {
               margin-top: 8px;
             `}>
             <p css={withIcon}>
-              <img src={placeIcon} alt="住所" />
+              <img src={placeIcon.src} alt="住所" />
               東京都台東区花川戸2-6-5（
               <a target="_blank" href="https://goo.gl/maps/uhe7NUtw36Vz5yAQ8">
                 Google マップ
@@ -522,7 +522,7 @@ export default () => {
               ）
             </p>
             <p css={withIcon}>
-              <img src={directionsIcon} alt="アクセス" />
+              <img src={directionsIcon.src} alt="アクセス" />
               東京メトロ 銀座線・東武伊勢崎線「浅草」駅より徒歩約5分
               <br />
               都営浅草線「浅草」駅より徒歩約8分
